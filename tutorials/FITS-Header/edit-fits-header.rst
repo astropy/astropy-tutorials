@@ -6,32 +6,36 @@ Tutorial : Edit a FITS header
 Here is how to edit a FITS header by hand. In this example we're going 
 to change the header so that the correct object is listed. 
 
-This tutorial uses ``astropy.io.fits``, which is the version of 
-``pyfits`` included in ``astropy``. If you already know how to 
-manipulate FITS files with pyfits, then you probably know how to to 
-this already.
+This tutorial uses ``astropy.io.fits``, which was formerly released 
+separately as ``pyfits``. If you have used `pyfits` to manipulate 
+FITS files then you may already be familiar with this functionality.
 
-``astropy.io.fits`` has lots of flexibility in how to read FITS files and 
-headers, but most of the time, the convenience functions will be 
-adequate for your needs. The process is only a few lines in total and 
-we begin with::
+``astropy.io.fits`` provides a lot of flexibility for reading FITS 
+files and headers, but most of the time the convenience functions are
+the easiest way to access the data::
 
-    import astropy.io.fits as pyfits
-    data, hdr = pyfits.getdata("inputfile.fits",header=True)
+    from astropy.io import fits
+    data, header = fits.getdata("inputfile.fits", header=True, ext=0)
 
-For naming consistency we can use the ``import...as...`` notation. This 
-means we can refer to the function ``astropy.io.fits.getdata()`` by the 
-alias ``pyfits.getdata()`` and by using this convention we can also 
-easily use code or examples that refer to the standalone pyfits package. 
+The import line simply imports the `fits` subpackage into our local
+namespace and allows us to access the functions and classes as
+`fits.name_of_function()`. For example, to access the `getdata()`
+function, we _don't_ have to do `astropy.io.fits.getdata()` and can
+instead simple use `fits.getdata()`.
 
-``pyfits.getdata()`` reads the data and header from a FITS file on disk 
-(inputfile.fits, in this case). Note that you have to have header=True 
-to get both the header and the actual data array (a dedicated function 
-to get just the header exists, but getdata() can get both the data and 
-the header, so it's the most useful command to remember). The data is 
-now stored in a ``numpy`` array as data and the header is in something 
-like a dictionary. Now let's change the header to give it the correct 
-object::
+``fits.getdata()`` reads the data and header from a FITS file on disk 
+(inputfile.fits, in this case). Note that you have to specify the keyword
+argument `header=True` to get both the header and the actual data array. 
+The FITS file could contain multiple HDU's (extensions), so we also specify
+that we want to read data from the 0th extension (`ext=0`). There is also a 
+dedicated function for reading just the header 
+(`getheader('filename.fits',hdu_number)`), but `getdata()` can get both the 
+data and the header, so it is a useful command to remember. Since the primary
+HDU of a FITS file must contain image data, the data is now stored in a 
+``numpy`` array. The header is stored in an object that acts like a standard
+Python dictionary. 
+
+Now let's change the header to give it the correct object::
 
     hdr['OBJECT'] = "M31"
 
