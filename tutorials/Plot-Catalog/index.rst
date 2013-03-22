@@ -73,9 +73,24 @@ If we try to just use `ascii.read()` on this data (truncated with
        ('', '00 04 02.84 -64 10 35.6', '1.01201', '-64.18', '15.79', '0.07', '14.83', '0.07', '14.01', '0.05', '13.37', '0.03', '12.94', '0.03', '12.18', '0.24', '9.16', 'null', 'L1\xce\xb3', '', 'Kirkpatrick et al. 2010', '', '', '', '', '', '', '', '', '', '', 'Kirkpatrick et al. 2010', '', '')],
       dtype=[('col1', 'S4'), ('col2', 'S23'), ('col3', 'S7'), ('col4', 'S6'), ('col5', 'S16'), ('col6', 'S5'), ('col7', 'S5'), ('col8', 'S5'), ('col9', 'S5'), ('col10', 'S5'), ('col11', 'S15'), ('col12', 'S6'), ('col13', 'S5'), ('col14', 'S6'), ('col15', 'S5'), ('col16', 'S6'), ('col17', 'S4'), ('col18', 'S6'), ('col19', 'S13'), ('col20', 'S14'), ('col21', 'S23'), ('col22', 'S13'), ('col23', 'S11'), ('col24', 'S9'), ('col25', 'S12'), ('col26', 'S10'), ('col27', 'S8'), ('col28', 'S6'), ('col29', 'S22'), ('col30', 'S6'), ('col31', 'S15'), ('col32', 'S23'), ('col33', 'S9'), ('col34', 'S4')])
 
-What happened? The column names are just `col1`, `col2`, etc., the default names if `ascii.read()` is unable to parse out column names. So we know it failed to read the column names, but also notice that the first row of data are actually the column names! A few things are causing problemsd here: there are two header lines and the header lines are not denoted by comment characters. We can get around this problem by specifying the `header_start` keyword to the `ascii.read()` function::
+What happened? The column names are just `col1`, `col2`, etc., the
+default names if `ascii.read()` is unable to parse out column
+names. So we know it failed to read the column names, but also notice
+that the first row of data are actually the column names! A few things
+are causing problemsd here: there are two header lines and the header
+lines are not denoted by comment characters. We can get around this
+problem by specifying the `header_start` keyword to the `ascii.read()`
+function::
 
-    >>>
+    >>> ascii.read("Young-Objects-Compilation.csv", header_start=1, data_end=3)
+    <Table rows=2 names=('Name','Designation','RA','Dec','Jmag','J_unc','Hmag','H_unc','Kmag','K_unc','W1','W1_unc','W2','W2_unc','W3','W3_unc','W4','W4_unc','Spectral Type','Spectra (FITS)','Opt Spec Refs','NIR Spec Refs','pm_ra (mas)','pm_ra_unc','pm_dec (mas)','pm_dec_unc','pi (mas)','pi_unc','radial velocity (km/s)','rv_unc','Astrometry Refs','Discovery Refs','Group/Age','Note')>
+    array([ ('Name', 'Designation', 'RA', 'Dec', 'Jmag', 'J_unc', 'Hmag', 'H_unc', 'Kmag', 'K_unc', 'W1', 'W1_unc', 'W2', 'W2_unc', 'W3', 'W3_unc', 'W4', 'W4_unc', 'Spectral Type', 'Spectra (FITS)', 'Opt Spec Refs', 'NIR Spec Refs', 'pm_ra (mas)', 'pm_ra_unc', 'pm_dec (mas)', 'pm_dec_unc', 'pi (mas)', 'pi_unc', 'radial velocity (km/s)', 'rv_unc', 'Astrometry Refs', 'Discovery Refs', 'Group/Age', 'Note'),
+       ('', '00 04 02.84 -64 10 35.6', '1.01201', '-64.18', '15.79', '0.07', '14.83', '0.07', '14.01', '0.05', '13.37', '0.03', '12.94', '0.03', '12.18', '0.24', '9.16', 'null', 'L1\xce\xb3', '', 'Kirkpatrick et al. 2010', '', '', '', '', '', '', '', '', '', '', 'Kirkpatrick et al. 2010', '', '')],
+      dtype=[('Name', 'S4'), ('Designation', 'S23'), ('RA', 'S7'), ('Dec', 'S6'), ('Jmag', 'S5'), ('J_unc', 'S5'), ('Hmag', 'S5'), ('H_unc', 'S5'), ('Kmag', 'S5'), ('K_unc', 'S5'), ('W1', 'S5'), ('W1_unc', 'S6'), ('W2', 'S5'), ('W2_unc', 'S6'), ('W3', 'S5'), ('W3_unc', 'S6'), ('W4', 'S4'), ('W4_unc', 'S6'), ('Spectral Type', 'S13'), ('Spectra (FITS)', 'S14'), ('Opt Spec Refs', 'S23'), ('NIR Spec Refs', 'S13'), ('pm_ra (mas)', 'S11'), ('pm_ra_unc', 'S9'), ('pm_dec (mas)', 'S12'), ('pm_dec_unc', 'S10'), ('pi (mas)', 'S8'), ('pi_unc', 'S6'), ('radial velocity (km/s)', 'S22'), ('rv_unc', 'S6'), ('Astrometry Refs', 'S15'), ('Discovery Refs', 'S23'), ('Group/Age', 'S9'), ('Note', 'S4')])
 
-TODO: Header starts on line 1, not 0 - how to fix that?
-TODO: By default, reads everything in as strings -- why? (header_start, data_start)
+Great -- now the columns have the correct names, but there is still a problem: all of the columns have string data types, and the column names are still included as a row in the table. This is because by default the data are assumed to start on the second (index 1) line. Instead, we can specify `data_start=2`::
+
+    >>> ascii.read("Young-Objects-Compilation.csv", header_start=1, data_start=2, data_end=3)
+    <Table rows=1 names=('Name','Designation','RA','Dec','Jmag','J_unc','Hmag','H_unc','Kmag','K_unc','W1','W1_unc','W2','W2_unc','W3','W3_unc','W4','W4_unc','Spectral Type','Spectra (FITS)','Opt Spec Refs','NIR Spec Refs','pm_ra (mas)','pm_ra_unc','pm_dec (mas)','pm_dec_unc','pi (mas)','pi_unc','radial velocity (km/s)','rv_unc','Astrometry Refs','Discovery Refs','Group/Age','Note')>
+    array([ ('', '00 04 02.84 -64 10 35.6', 1.01201, -64.18, 15.79, 0.07, 14.83, 0.07, 14.01, 0.05, 13.37, 0.03, 12.94, 0.03, 12.18, 0.24, 9.16, 'null', 'L1\xce\xb3', '', 'Kirkpatrick et al. 2010', '', '', '', '', '', '', '', '', '', '', 'Kirkpatrick et al. 2010', '', '')],
+      dtype=[('Name', 'S1'), ('Designation', 'S23'), ('RA', '<f8'), ('Dec', '<f8'), ('Jmag', '<f8'), ('J_unc', '<f8'), ('Hmag', '<f8'), ('H_unc', '<f8'), ('Kmag', '<f8'), ('K_unc', '<f8'), ('W1', '<f8'), ('W1_unc', '<f8'), ('W2', '<f8'), ('W2_unc', '<f8'), ('W3', '<f8'), ('W3_unc', '<f8'), ('W4', '<f8'), ('W4_unc', 'S4'), ('Spectral Type', 'S4'), ('Spectra (FITS)', 'S1'), ('Opt Spec Refs', 'S23'), ('NIR Spec Refs', 'S1'), ('pm_ra (mas)', 'S1'), ('pm_ra_unc', 'S1'), ('pm_dec (mas)', 'S1'), ('pm_dec_unc', 'S1'), ('pi (mas)', 'S1'), ('pi_unc', 'S1'), ('radial velocity (km/s)', 'S1'), ('rv_unc', 'S1'), ('Astrometry Refs', 'S1'), ('Discovery Refs', 'S23'), ('Group/Age', 'S1'), ('Note', 'S1')])
