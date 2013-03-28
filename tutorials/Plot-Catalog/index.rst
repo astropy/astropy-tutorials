@@ -1,4 +1,4 @@
-B0;95;cRead in catalog information from a text file and plot some parameters
+Read in catalog information from a text file and plot some parameters
 =====================================================================
 
 Astropy provides functionality for reading in and manipulating tabular
