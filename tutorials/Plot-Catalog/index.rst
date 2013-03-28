@@ -93,7 +93,142 @@ names are still included as a row in the table. This is because by
 default the data are assumed to start on the second (index 1)
 line. Instead, we can specify `data_start=2`::
 
-    >>> ascii.read("Young-Objects-Compilation.csv", header_start=1, data_start=2, data_end=3)
+    >>> t = ascii.read("Young-Objects-Compilation.csv", header_start=1, data_start=2)
+    >>> t
     <Table rows=1 names=('Name','Designation','RA','Dec','Jmag','J_unc','Hmag','H_unc','Kmag','K_unc','W1','W1_unc','W2','W2_unc','W3','W3_unc','W4','W4_unc','Spectral Type','Spectra (FITS)','Opt Spec Refs','NIR Spec Refs','pm_ra (mas)','pm_ra_unc','pm_dec (mas)','pm_dec_unc','pi (mas)','pi_unc','radial velocity (km/s)','rv_unc','Astrometry Refs','Discovery Refs','Group/Age','Note')>
     array([ ('', '00 04 02.84 -64 10 35.6', 1.01201, -64.18, 15.79, 0.07, 14.83, 0.07, 14.01, 0.05, 13.37, 0.03, 12.94, 0.03, 12.18, 0.24, 9.16, 'null', 'L1\xce\xb3', '', 'Kirkpatrick et al. 2010', '', '', '', '', '', '', '', '', '', '', 'Kirkpatrick et al. 2010', '', '')],
-      dtype=[('Name', 'S1'), ('Designation', 'S23'), ('RA', '<f8'), ('Dec', '<f8'), ('Jmag', '<f8'), ('J_unc', '<f8'), ('Hmag', '<f8'), ('H_unc', '<f8'), ('Kmag', '<f8'), ('K_unc', '<f8'), ('W1', '<f8'), ('W1_unc', '<f8'), ('W2', '<f8'), ('W2_unc', '<f8'), ('W3', '<f8'), ('W3_unc', '<f8'), ('W4', '<f8'), ('W4_unc', 'S4'), ('Spectral Type', 'S4'), ('Spectra (FITS)', 'S1'), ('Opt Spec Refs', 'S23'), ('NIR Spec Refs', 'S1'), ('pm_ra (mas)', 'S1'), ('pm_ra_unc', 'S1'), ('pm_dec (mas)', 'S1'), ('pm_dec_unc', 'S1'), ('pi (mas)', 'S1'), ('pi_unc', 'S1'), ('radial velocity (km/s)', 'S1'), ('rv_unc', 'S1'), ('Astrometry Refs', 'S1'), ('Discovery Refs', 'S23'), ('Group/Age', 'S1'), ('Note', 'S1')])
+    ...
+      dtype=[('Name', 'S24'), ('Designation', 'S25'), ('RA', 'S9'), ('Dec', 'S6'), ('Jmag', '<f8'), ('J_unc', 'S4'), ('Hmag', '<f8'), ('H_unc', 'S4'), ('Kmag', '<f8'), ('K_unc', 'S4'), ('W1', '<f8'), ('W1_unc', '<f8'), ('W2', '<f8'), ('W2_unc', '<f8'), ('W3', '<f8'), ('W3_unc', 'S4'), ('W4', '<f8'), ('W4_unc', 'S4'), ('Spectral Type', 'S6'), ('Spectra (FITS)', 'S1'), ('Opt Spec Refs', 'S26'), ('NIR Spec Refs', 'S23'), ('pm_ra (mas)', 'S7'), ('pm_ra_unc', 'S6'), ('pm_dec (mas)', 'S7'), ('pm_dec_unc', 'S6'), ('pi (mas)', 'S4'), ('pi_unc', 'S4'), ('radial velocity (km/s)', 'S1'), ('rv_unc', 'S1'), ('Astrometry Refs', 'S19'), ('Discovery Refs', 'S23'), ('Group/Age', 'S1'), ('Note', 'S38')])
+
+Some of the columns are now float type ('<f8'), but some that we know
+should be numeric are still strings (e.g., `RA`). If we look at that
+column, notice there are some missing values::
+
+    >>> t["RA"]
+    <Column name='RA' units=None format=None description=None>
+    array(['1.01201', '6.92489', '8.23267', '9.42942', '11.33929', '', '', '',
+       '21.19163', '21.52750', '25.49263', '', '35.47892', '35.97767',
+       '36.33113', '38.50388', '40.29797', '43.49917', '45.83510',
+       '50.79175', '', '54.89674', '58.84738', '59.36229', '61.61156',
+       '65.28003', '69.11621', '70.90670', '75.35025', '', '', '83.56645',
+       '', '92.22016', '103.20213', '108.15775', '', '155.52038',
+       '155.70088', '165.54097', '', '212.83879', '', '', '236.94663',
+       '237.96821', '238.24608', '239.45881', '243.92723', '', '261.50029',
+       '293.98312', '299.19583', '300.20171', '', '303.46467', '321.71000',
+       '', '', '332.05679', '333.43715', '342.47273', '', '350.72079'],
+      dtype='|S9')
+
+The default behavior is to make the whole column a string data type
+because not all of the values can be converted to a numeric type. We
+don't want that! Instead, we can specifically request that any missing
+value ('') be replaced with a 'nan' value (`np.nan`)::
+
+    >>> t = ascii.read("Young-Objects-Compilation.csv", header_start=1, data_start=2, fill_values=('',np.nan))
+    >>> t["RA"]
+    <MaskedColumn name='RA' units=None format=None description=None>
+    masked_array(data = [1.01201 6.92489 8.23267 9.42942 11.33929 -- -- -- 21.19163 21.5275
+    25.49263 -- 35.47892 35.97767 36.33113 38.50388 40.29797 43.49917 45.8351
+    50.79175 -- 54.89674 58.84738 59.36229 61.61156 65.28003 69.11621 70.9067
+    75.35025 -- -- 83.56645 -- 92.22016 103.20213 108.15775 -- 155.52038
+    155.70088 165.54097 -- 212.83879 -- -- 236.94663 237.96821 238.24608
+    239.45881 243.92723 -- 261.50029 293.98312 299.19583 300.20171 --
+    303.46467 321.71 -- -- 332.05679 333.43715 342.47273 -- 350.72079],
+             mask = [False False False False False  True  True  True False False False  True
+             False False False False False False False False  True False False False
+             False False False False False  True  True False  True False False False
+             True False False False  True False  True  True False False False False
+             False  True False False False False  True False False  True  True False
+             False False  True False],
+       fill_value = 1e+20)
+    >>> np.array(t["RA"])
+    array([   1.01201,    6.92489,    8.23267,    9.42942,   11.33929,
+              nan,        nan,        nan,   21.19163,   21.5275 ,
+         25.49263,        nan,   35.47892,   35.97767,   36.33113,
+         38.50388,   40.29797,   43.49917,   45.8351 ,   50.79175,
+              nan,   54.89674,   58.84738,   59.36229,   61.61156,
+         65.28003,   69.11621,   70.9067 ,   75.35025,        nan,
+              nan,   83.56645,        nan,   92.22016,  103.20213,
+        108.15775,        nan,  155.52038,  155.70088,  165.54097,
+              nan,  212.83879,        nan,        nan,  236.94663,
+        237.96821,  238.24608,  239.45881,  243.92723,        nan,
+        261.50029,  293.98312,  299.19583,  300.20171,        nan,
+        303.46467,  321.71   ,        nan,        nan,  332.05679,
+        333.43715,  342.47273,        nan,  350.72079])
+
+Now when we request a column with missing data, we get a
+`MaskedColumn` object, with the missing values masked out by an
+associated boolean array. Let's recap what we've done so far, then
+make some plots with the data. Our data file has an extra line above
+the column names, so we use the `header_start` keyword to tell it to
+start from line 1 instead of line 0 (remember Python is
+0-indexed!). We then used had to specify that the data starts on line
+2 using the `data_start` keyword. Finally, some columns have missing
+values, which we want to replace with NaN values. We use the
+`fill_values` keyword to specify we want to replace any '' with a
+`numpy.nan` object.::
+
+    data = ascii.read("Young-Objects-Compilation.csv", header_start=1, data_start=2, fill_values=('',np.nan))
+
+.. Note::
+
+    If you are using ipython, try starting your interpreter with the
+    `--pylab` flag, e.g. `ipython --pylab`. If you do that, you don't
+    have to import numpy or matplotlib, and can drop all of the `plt.`
+    calls below (e.g., you can just type `scatter(x,y)`).
+
+Now that we have our data loaded, let's plot up a color-magnitude
+diagram::
+
+    >>> import matplotlib.pyplot as plt
+    >>> plt.figure()
+    >>> plt.scatter(data["Jmag"] - data["Kmag"], data["Jmag"])
+    >>> plt.ylim(reversed(plt.ylim()))
+    >>> plt.ylabel('$J$ mag')
+    >>> plt.xlabel('$J-K_S$')
+    >>> plt.show()
+
+Here we simply make a scatter plot of the J-K color on the x-axis
+against the J magnitude on the y-axis. We use a trick to flip the
+y-axis `plt.ylim(reversed(plt.ylim()))`. Called with no arguments,
+`plt.ylim()` will return a tuple with the axis bounds, e.g. (0,
+10). Calling the function _with_ arguments will set the limits of the
+axis, so we simply set the limits to be the reverse of whatever they
+were before. Using this `pylab`-style plotting is convenient for
+making quick plots and interactive use, but is not great if you need
+more control over your figures.
+
+As a final example, we will plot the angular positions from the
+catalog on a 2D projection of the sky. Instead of using `pylab`-style
+plotting, we'll take a more object-oriented approach. We'll start by
+creating a `Figure` object and adding a single subplot to the
+figure. We can specify a projection with the `projection` keyword; in
+this example we will use a Mollweide projection.::
+
+    >>> fig = plt.figure()
+    >>> ax = fig.add_subplot(111, projection="mollweide")
+
+Now the axis object, `ax`, knows to expect angular coordinate
+values. An important fact is that it expects the values to be in
+_radians_, and it expects the azimuthal angle values to be between
+(-180º,180º). This is (currently) not customizable, so we have to
+coerce our RA data to conform to these rules! `astropy` provides a
+coordinate class for handling angular values,
+`astropy.coordinates.Angle`. We can convert our column of RA values to
+radians, and set the bounds in one list comprehension::
+
+    >>> import astropy.coordinates as coord
+    >>> ra_radians = [coord.Angle(val, unit=u.degree, bounds=(-180,180)).radians
+                         for val in data['RA']]
+    >>> dec_radians = [coord.Angle(val, unit=u.degree).radians
+                         for val in data['Dec']]
+    >>> ax.scatter(ra_radians, dec_radians)
+
+By default, matplotlib will add degree ticklabels, so let's change the
+horizontal (x) tick labels to be in units of hours, and display a grid::
+
+    >>> ax1.set_xticklabels(['14h','16h','18h','20h','22h','0h','2h','4h','6h','8h','10h'])
+    >>> ax1.grid(True)
+
+Finally, we can save the figure as a pdf::
+
+    >>> fig.savefig("map.pdf")
