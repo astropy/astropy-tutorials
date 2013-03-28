@@ -1,4 +1,4 @@
-Read in catalog information from a text file and plot some parameters
+B0;95;cRead in catalog information from a text file and plot some parameters
 =====================================================================
 
 Astropy provides functionality for reading in and manipulating tabular
@@ -169,12 +169,11 @@ values, which we want to replace with NaN values. We use the
 
     data = ascii.read("Young-Objects-Compilation.csv", header_start=1, data_start=2, fill_values=('',np.nan))
 
-.. Note::
-
-    If you are using ipython, try starting your interpreter with the
-    `--pylab` flag, e.g. `ipython --pylab`. If you do that, you don't
-    have to import numpy or matplotlib, and can drop all of the `plt.`
-    calls below (e.g., you can just type `scatter(x,y)`).
+    .. Note::
+       If you are using ipython, try starting your interpreter with the
+       `--pylab` flag, e.g. `ipython --pylab`. If you do that, you don't
+       have to import numpy or matplotlib, and can drop all of the `plt.`
+       calls below (e.g., you can just type `scatter(x,y)`).
 
 Now that we have our data loaded, let's plot up a color-magnitude
 diagram::
