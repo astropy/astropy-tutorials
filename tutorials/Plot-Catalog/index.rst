@@ -87,7 +87,11 @@ function::
        ('', '00 04 02.84 -64 10 35.6', '1.01201', '-64.18', '15.79', '0.07', '14.83', '0.07', '14.01', '0.05', '13.37', '0.03', '12.94', '0.03', '12.18', '0.24', '9.16', 'null', 'L1\xce\xb3', '', 'Kirkpatrick et al. 2010', '', '', '', '', '', '', '', '', '', '', 'Kirkpatrick et al. 2010', '', '')],
       dtype=[('Name', 'S4'), ('Designation', 'S23'), ('RA', 'S7'), ('Dec', 'S6'), ('Jmag', 'S5'), ('J_unc', 'S5'), ('Hmag', 'S5'), ('H_unc', 'S5'), ('Kmag', 'S5'), ('K_unc', 'S5'), ('W1', 'S5'), ('W1_unc', 'S6'), ('W2', 'S5'), ('W2_unc', 'S6'), ('W3', 'S5'), ('W3_unc', 'S6'), ('W4', 'S4'), ('W4_unc', 'S6'), ('Spectral Type', 'S13'), ('Spectra (FITS)', 'S14'), ('Opt Spec Refs', 'S23'), ('NIR Spec Refs', 'S13'), ('pm_ra (mas)', 'S11'), ('pm_ra_unc', 'S9'), ('pm_dec (mas)', 'S12'), ('pm_dec_unc', 'S10'), ('pi (mas)', 'S8'), ('pi_unc', 'S6'), ('radial velocity (km/s)', 'S22'), ('rv_unc', 'S6'), ('Astrometry Refs', 'S15'), ('Discovery Refs', 'S23'), ('Group/Age', 'S9'), ('Note', 'S4')])
 
-Great -- now the columns have the correct names, but there is still a problem: all of the columns have string data types, and the column names are still included as a row in the table. This is because by default the data are assumed to start on the second (index 1) line. Instead, we can specify `data_start=2`::
+Great -- now the columns have the correct names, but there is still a
+problem: all of the columns have string data types, and the column
+names are still included as a row in the table. This is because by
+default the data are assumed to start on the second (index 1)
+line. Instead, we can specify `data_start=2`::
 
     >>> ascii.read("Young-Objects-Compilation.csv", header_start=1, data_start=2, data_end=3)
     <Table rows=1 names=('Name','Designation','RA','Dec','Jmag','J_unc','Hmag','H_unc','Kmag','K_unc','W1','W1_unc','W2','W2_unc','W3','W3_unc','W4','W4_unc','Spectral Type','Spectra (FITS)','Opt Spec Refs','NIR Spec Refs','pm_ra (mas)','pm_ra_unc','pm_dec (mas)','pm_dec_unc','pi (mas)','pi_unc','radial velocity (km/s)','rv_unc','Astrometry Refs','Discovery Refs','Group/Age','Note')>
