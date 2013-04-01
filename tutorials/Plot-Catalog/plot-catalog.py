@@ -37,7 +37,7 @@ plt.show() #show the figure if needed
 
 #convert RA and Dec to radians for matplotlib projection. which wants radians, but shows degrees
 ra_radians = [coord.Angle(val, unit=u.degree, bounds=(-180,180)).radians
-                for val in data['RA'] if val !='']
+                for val in data['RA'] if val != '']
 #converts RA from degrees to radians, ranging from -pi to pi cause that's what matplotlib wants.
 #Use coord.Angle class because it takes 'bounds' argument
 #and only do it if RA is not blank.

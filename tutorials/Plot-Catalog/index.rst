@@ -119,55 +119,20 @@ column, notice there are some missing values::
       dtype='|S9')
 
 The default behavior is to make the whole column a string data type
-because not all of the values can be converted to a numeric type. We
-don't want that! Instead, we can specifically request that any missing
-value ('') be replaced with a 'nan' value (`np.nan`)::
+because not all of the values can be converted to a numeric type. In
+this case, that doesn't hurt us because we will be passing each RA
+value in to the `astropy.coordinates.Angle` object and this will
+automatically parse it for us.
 
-    >>> t = ascii.read("Young-Objects-Compilation.csv", header_start=1, data_start=2, fill_values=('',np.nan))
-    >>> t["RA"]
-    <MaskedColumn name='RA' units=None format=None description=None>
-    masked_array(data = [1.01201 6.92489 8.23267 9.42942 11.33929 -- -- -- 21.19163 21.5275
-    25.49263 -- 35.47892 35.97767 36.33113 38.50388 40.29797 43.49917 45.8351
-    50.79175 -- 54.89674 58.84738 59.36229 61.61156 65.28003 69.11621 70.9067
-    75.35025 -- -- 83.56645 -- 92.22016 103.20213 108.15775 -- 155.52038
-    155.70088 165.54097 -- 212.83879 -- -- 236.94663 237.96821 238.24608
-    239.45881 243.92723 -- 261.50029 293.98312 299.19583 300.20171 --
-    303.46467 321.71 -- -- 332.05679 333.43715 342.47273 -- 350.72079],
-             mask = [False False False False False  True  True  True False False False  True
-             False False False False False False False False  True False False False
-             False False False False False  True  True False  True False False False
-             True False False False  True False  True  True False False False False
-             False  True False False False False  True False False  True  True False
-             False False  True False],
-       fill_value = 1e+20)
-    >>> np.array(t["RA"])
-    array([   1.01201,    6.92489,    8.23267,    9.42942,   11.33929,
-              nan,        nan,        nan,   21.19163,   21.5275 ,
-         25.49263,        nan,   35.47892,   35.97767,   36.33113,
-         38.50388,   40.29797,   43.49917,   45.8351 ,   50.79175,
-              nan,   54.89674,   58.84738,   59.36229,   61.61156,
-         65.28003,   69.11621,   70.9067 ,   75.35025,        nan,
-              nan,   83.56645,        nan,   92.22016,  103.20213,
-        108.15775,        nan,  155.52038,  155.70088,  165.54097,
-              nan,  212.83879,        nan,        nan,  236.94663,
-        237.96821,  238.24608,  239.45881,  243.92723,        nan,
-        261.50029,  293.98312,  299.19583,  300.20171,        nan,
-        303.46467,  321.71   ,        nan,        nan,  332.05679,
-        333.43715,  342.47273,        nan,  350.72079])
+Let's recap what we've done so far, then make some plots with the
+data. Our data file has an extra line above the column names, so we
+use the `header_start` keyword to tell it to start from line 1 instead
+of line 0 (remember Python is 0-indexed!). We then used had to specify
+that the data starts on line 2 using the `data_start`
+keyword. Finally, we note some columns have missing values which force
+those columns to be string typed.::
 
-Now when we request a column with missing data, we get a
-`MaskedColumn` object, with the missing values masked out by an
-associated boolean array. Let's recap what we've done so far, then
-make some plots with the data. Our data file has an extra line above
-the column names, so we use the `header_start` keyword to tell it to
-start from line 1 instead of line 0 (remember Python is
-0-indexed!). We then used had to specify that the data starts on line
-2 using the `data_start` keyword. Finally, some columns have missing
-values, which we want to replace with NaN values. We use the
-`fill_values` keyword to specify we want to replace any '' with a
-`numpy.nan` object.::
-
-    data = ascii.read("Young-Objects-Compilation.csv", header_start=1, data_start=2, fill_values=('',np.nan))
+    data = ascii.read("Young-Objects-Compilation.csv", header_start=1, data_start=2)
 
 .. Note::
     If you are using ipython, try starting your interpreter with the
@@ -217,9 +182,9 @@ radians, and set the bounds in one list comprehension::
 
     >>> import astropy.coordinates as coord
     >>> ra_radians = [coord.Angle(val, unit=u.degree, bounds=(-180,180)).radians
-                         for val in data['RA']]
+                         for val in data['RA'] if val != '']
     >>> dec_radians = [coord.Angle(val, unit=u.degree).radians
-                         for val in data['Dec']]
+                         for val in data['Dec'] if val != '']
     >>> ax.scatter(ra_radians, dec_radians)
 
 By default, matplotlib will add degree ticklabels, so let's change the
