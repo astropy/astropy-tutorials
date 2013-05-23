@@ -133,8 +133,8 @@ that are defined in your file ``spectra_utils.py``::
     a = func(param1, param2, ...)
 
 You will recognize that python does not make a difference between modules that come
-with python (e.g. `glob`), external modules (e.g. `numpy` or `astropy`) and moduls
-that you write yourself. The syntax to import those moduls or functions
+with python (e.g. `glob`), external modules (e.g. `numpy` or `astropy`) and modules
+that you write yourself. The syntax to import those modules or functions
 is the same in all cases, provided that the directory where your module is
 defined is in the search path (`more about python modules and the search path
 <http://docs.python.org/2/tutorial/modules.html>`_).
@@ -262,13 +262,14 @@ than two lines::
    </div>
 
 The UVES pipeline that was used to reduce the data that we use in the this example
-employs a fixed wavelength grid (see excersice above),
+employs a fixed wavelength grid (see excercise above),
 thus the ``wavelength`` is the same for all spectra.
 This makes it easy to define an array that can hold the fluxes of all
 observations. Then, we loop over the list of all filenames and fill this array
 with data::
 
     flux = np.zeros((len(filelist), len(wavelength)))
+    # date comes as string with 23 characters (dtype = 'S23')
     date = np.zeros((len(filelist)), dtype = 'S23')
 
     for i, fname in enumerate(filelist):
@@ -285,11 +286,10 @@ keV. How many nm is 0.65 keV?
 offers a framework that can take
 care of this book-keeping and propagate the units through many (but not all)
 mathematical operations (e.g. addition, division, multiplication). 
-Furthermore, there is
-`astropy.constants <http://docs.astropy.org/en/v0.2.1/constants/index.html>`_,
-which supplies the values of
+Furthermore, 
+`astropy.constants <http://docs.astropy.org/en/v0.2.1/constants/index.html>`_  supplies the values of
 many physical and astronomical constants.
-The easiest way to add a unit to a number is by multiplication::
+The easiest way to attach a unit to a number is by multiplication::
 
     import astropy.units as u
     from astropy.constants.si import c, G, M_sun, R_sun
@@ -576,7 +576,7 @@ Publication ready output
 
 Tables
 ^^^^^^
-We will calculate the equivalent width in Angstroem of the emission line
+We will calculate the equivalent width in Angstroems of the emission line
 for the first spectrum::
 
     ew = fcaII[0,:] - 1.
@@ -683,7 +683,7 @@ way::
 
    </div>
 
-Second, we will make a little more advanced plot. For each spectrum we calculate
+Next, we will make a more advanced plot. For each spectrum we calculate
 the difference to the mean flux::
 
     fmean = np.mean(fcaII, axis=0)
@@ -704,7 +704,7 @@ and there is no proper labelling::
 
 
 In the following, we will plot the spectra from both nights separately.
-Also, we will pass the ``extend`` keyword to ``ax.imshow`` which takes care
+Also, we will pass the ``extent`` keyword to ``ax.imshow`` which takes care
 of the axis::
 
     ind1 = delta_p < 1 * u.dimensionless_unscaled
@@ -730,7 +730,7 @@ improved:
 
 * Introduce an offset on the y-axis to reduce the amount of white space.
 * Stricly speaking, the image shown is not quite the right scale because the
-   ``extend`` keyword gives the edges of the image shown, while ``x`` and
+   ``extent`` keyword gives the edges of the image shown, while ``x`` and
    ``delta_p`` contain the bin mid-points.
 * Use a grey scale instead of color to save publication charges.
 * Add labels to the axis.
@@ -791,7 +791,7 @@ The following code addresses these points::
    <p class="flip6">Click to Show/Hide Solution</p> <div class="panel6">
 
 Clearly, I did not develop this code for scratch.
-The `matplotlib gallary <http://matplotlib.org/gallery.html>`_ is my
+The `matplotlib gallery <http://matplotlib.org/gallery.html>`_ is my
 preferred place to look for plotting solutions.
 
 .. raw:: html
