@@ -36,7 +36,7 @@ data array. There is also a dedicated function for reading just the
 header (`getheader('filename.fits',hdu_number)`), but `getdata()` can 
 get both the data and the header, so it is a useful command to 
 remember. Since the primary HDU of a FITS file must contain image data, 
-the data is now stored in a ``numpy`` array. The header is stored in an 
+the data is now stored in a `numpy` array. The header is stored in an 
 object that acts like a standard Python dictionary. 
 
 Now let's change the header to give it the correct object::
@@ -46,7 +46,7 @@ Now let's change the header to give it the correct object::
 Finally, we have to write out the FITS file. Again, the convenience 
 function for this is the most useful command to remember::
     
-    fits.writeto('outputfile.fits',data,hdr)
+    fits.writeto('outputfile.fits', data, hdr)
 
 That's it; you're done. 
 
@@ -57,17 +57,17 @@ The first complication is that the FITS file you're examining and
 editing might have multiple HDU's (extensions), in which case you can 
 specify the extension like this::
 
-    data,hdr = fits.getdata("inputfile.fits",ext=2,header=True)
+    data, hdr = fits.getdata("inputfile.fits", ext=2, header=True)
 
 This will get you the data and header associated with the 2nd extension 
-in the FITS file. Without specifiying a number, getdata() will get the 
+in the FITS file. Without specifying a number, getdata() will get the 
 0th extension (equivalent to saying `ext=0`).
 
 The second complication is if you want to overwrite an existing FITS 
 file. By default, writeto() won't let you do this, and you need to 
-explicitly give it persmission::
-    
-    fits.writeto('outputfile.fits',data,hdr,clobber=True)
+explicitly give it permission::
+ 
+    fits.writeto('outputfile.fits', data, hdr, clobber=True)
 
 The complete code for the above example is included below for reference.
 
