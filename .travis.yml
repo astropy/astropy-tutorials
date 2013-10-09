@@ -1,0 +1,21 @@
+notifications:
+  email:
+    - adrianmpw@gmail.com
+
+  on_success: change
+  on_failure: always
+
+language: python
+
+branches:
+  only:
+    - production
+
+before_install:
+  - pip install ipython
+
+install:
+  - make html
+
+script:
+  - bash -x ./travis_deploy.sh
