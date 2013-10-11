@@ -7,6 +7,10 @@ notifications:
 
 language: python
 
+env:
+  global:
+    secure: "D7IDvqBqXACCvggyikeP/5DcRNMht3U8zJL4B2+PEwk9uSGmPv2hFmN+khNusvjl1v1GPuw1Y+nxjYz/3rUbPYzBhjgasFIO7KLJIuyiMVD7OKxCQ5kHo2RsThNi6b+bwLh6fBJNmhadrypiNarbPkVkIw78urw1HpZdAAmPSDk="
+
 branches:
   only:
     - production

@@ -18,25 +18,25 @@ if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then
     git remote add $GH_REMOTE https://${GH_TOKEN}@github.com/$GH_ACCOUNT/$GH_REPOSITORY.git
 
     git config --global user.email ${GH_EMAIL}
-        git config --global user.name "Adrian Price-Whelan"
+    git config --global user.name "Adrian Price-Whelan"
 
-        # Create a new "orphaned" branch -- we don't need history for
-        # the built products
+    # Create a new "orphaned" branch -- we don't need history for
+    # the built products
     git checkout --orphan $GH_PAGESBRANCH
 
-        # This will delete all of the git-managed files here, but not
-        # the results of the build
-        git rm -rf .
-        # Copy the built files to the root
-        cp -r html/* .
+    # This will delete all of the git-managed files here, but not
+    # the results of the build
+    git rm -rf .
+    # Copy the built files to the root
+    cp -r html/* .
 
-        # Delete the original location of the built files
-        rm -rf build
-        # We need to tell github this is not a Jekyll document
-        touch .nojekyll
-        git add .nojekyll
-        git add *
-        git commit -m "Generated from sources"
+    # Delete the original location of the built files
+    rm -rf build
+    # We need to tell github this is not a Jekyll document
+    touch .nojekyll
+    git add .nojekyll
+    git add *
+    git commit -m "Generated from sources"
 
     echo "Push to gh-pages branch"
     git push -f $GH_REMOTE $GH_PAGESBRANCH
