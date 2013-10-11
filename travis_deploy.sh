@@ -3,7 +3,8 @@
 # Stop at the first error
 set -e
 
-GH_ACCOUNT=astropy
+#GH_ACCOUNT=astropy
+GH_ACCOUNT=adrn
 GH_REPOSITORY=astropy-tutorials
 GH_REMOTE=live
 GH_PAGESBRANCH=gh-pages
