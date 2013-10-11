@@ -17,6 +17,7 @@ branches:
 
 before_install:
   - pip install ipython
+  - pip install jinja2
 
 install:
   - make html
