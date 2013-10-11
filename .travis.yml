@@ -16,8 +16,7 @@ branches:
     - production
 
 before_install:
-  - pip install ipython
-  - pip install jinja2
+  - pip install ipython[all]
 
 install:
   - make html
