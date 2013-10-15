@@ -6,12 +6,12 @@ from astropy import cosmology
 
 def calc_distance(cosmo, redshift):
     """Calculate distances given a cosmology and redshifts"""
-    LumDist = cosmo.luminosity_distance(redshift)
-    AngDist = cosmo.angular_diameter_distance(redshift)
-    ComovingDist = cosmo.comoving_distance(redshift)
+    lum_dist = cosmo.luminosity_distance(redshift)
+    ang_dist = cosmo.angular_diameter_distance(redshift)
+    comoving_dist = cosmo.comoving_distance(redshift)
     lookback = cosmo.lookback_time(redshift)
     print "redshift\tluminosity\tang. diameter\tcomoving\tlookback time"
-    for z,dL,dA,dC,t in zip(redshift,LumDist,AngDist,ComovingDist,lookback):
+    for z,dL,dA,dC,t in zip(redshift,lum_dist,ang_dist,comoving_dist,lookback):
         print "%8.2f\t%8.2f\t%8.2f\t%8.2f\t%8.2f"%(z,dL,dA,dC,t)
     print
 
