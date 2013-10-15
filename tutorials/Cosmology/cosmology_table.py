@@ -4,7 +4,7 @@ Convert redshift to Mpc, given various cosmologies.
 import numpy as np
 from astropy import cosmology
 
-def calc_distance(cosmo,redshift):
+def calc_distance(cosmo, redshift):
     """Calculate distances given a cosmology and redshifts"""
     LumDist = cosmo.luminosity_distance(redshift)
     AngDist = cosmo.angular_diameter_distance(redshift)
