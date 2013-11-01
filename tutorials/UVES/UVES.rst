@@ -1,10 +1,10 @@
-Analyzing UVES Spectrocopy with Astropy
+Analyzing UVES Spectroscopy with Astropy
 =======================================
 
 This tutorial follows my real live data analysis of MN Lup and the code developed
 below is taken (with only minor modifications) from the code that I used to
 actually prepare the publication. The plots that will be developed below
-appear in very similar form in the article submitted to ApJ.
+appear in very similar form in the article published in ApJ.
 
 I will update this page with a proper reference once the article is accepted ;-)
 
@@ -150,7 +150,7 @@ defined is in the search path (`more about python modules and the search path
     #) You can mark code in some editor, copy it to the clipboard and then
        type ``%paste`` in ipython.
     #) You type ``%cpaste`` in ipython you can paste code (e.g. with the
-       mouse) and ipython will correct the leading number of whitespaces and
+       mouse) and ipython will correct the leading number of white spaces and
        ignore empty lines.
           
     These two tricks can be used with any type of code, but are particularly useful
@@ -199,7 +199,7 @@ than two lines::
         date_obs = header['Date-OBS']
         return wavelength, flux, date_obs
 
-.. admonition::  Excercise
+.. admonition::  Exercise
 
     Try to find out how you can read the help for this function from the
     command line.
@@ -280,7 +280,7 @@ with data::
 Units and constants in astropy
 ------------------------------
 Often, one has to keep track of the units for certain values. Was the wavelength
-given in Angstroem or in nm? In X-ray observations, a common unit of wavelength is
+given in Angstrom or in nm? In X-ray observations, a common unit of wavelength is
 keV. How many nm is 0.65 keV?
 `astropy.units <http://docs.astropy.org/en/v0.2.1/units/index.html>`_
 offers a framework that can take
@@ -387,7 +387,7 @@ This is how it can be done::
 
 .. admonition::  Exercise
 
-    Spectrocopically, MN Lup is classified as spctral type M0 V, thus
+    Spectroscopically, MN Lup is classified as spectral type M0 V, thus
     the gravitational acceleration on the surface :math:`\log(g)` 
     should be comparable to the sun.
     (For non-stellar astronomers: Conventionally, all values are given
@@ -426,7 +426,7 @@ spectroscopically estimated surface gravity::
             return array_of_dopplershifts
 
     You can test if you function works by calculating the a Dopplershift
-    of the following wavelenghts relative to :math:`H_\alpha`::
+    of the following wavelengths relative to :math:`H_\alpha`::
 
         waveclosetoHa = np.array([6562.,6563,6565.]) * u.AA
         print wave2doppler(waveclosetoHa, 656.489 * u.nm)
@@ -546,7 +546,7 @@ The following function will do that::
         Parameters
         ----------
         w : 1 dim np.ndarray
-            array of wanvelenghts
+            array of wavelengths
         flux : np.ndarray of shape (N, len(w))
             array of flux values for different spectra in the series
         cont : list of lists
@@ -558,12 +558,12 @@ The following function will do that::
         #index of the region we want to return
         indrange = (w > cont[0][0]) & (w < cont[1][1])
         # make a flux array of shape
-        # (nuber of spectra, number of pointsin indrange)
+        # (number of spectra, number of points in indrange)
         f = np.zeros((flux.shape[0], indrange.sum()))
         for i in range(flux.shape[0]):
             # fit polynomial of second order to the continuum region
             linecoeff = np.polyfit(w[indcont], flux[i, indcont],2)
-            # devide the flux by the polynomial and put the result in our
+            # divide the flux by the polynomial and put the result in our
             # new flux array
             f[i,:] = flux[i,indrange]/np.polyval(linecoeff, w[indrange])
         return w[indrange], f
@@ -576,7 +576,7 @@ Publication ready output
 
 Tables
 ^^^^^^
-We will calculate the equivalent width in Angstroems of the emission line
+We will calculate the equivalent width in Angstroms of the emission line
 for the first spectrum::
 
     ew = fcaII[0,:] - 1.
@@ -615,7 +615,7 @@ and ask the internet. Here, I mainly want to illustrate that Astropy can be
 used in real-live data analysis.
 Thus, I do not explain every step in the plotting in detail.
 The plots we produce below appear in very
-similar form in Guenther et al. 2013 (ApJ, submitted).
+similar form in Guenther et al. 2013 (ApJ, 771, 70).
 
 In both cases we want the x-axis to show the Doppler shift expressed in units
 of the rotational velocity. In this way, features that are rotationally
@@ -642,7 +642,7 @@ First, we will show the line profile::
    :align: center
 
 
-.. admonition::  Excercise
+.. admonition::  Exercise
 
     The plot above shows only a single spectrum. Plot all spectra into a single
     plot and introduce a sensible offset between them, so that we can follow
@@ -692,7 +692,7 @@ the difference to the mean flux::
 
 In the following simple plot, we can already see features moving through the line.
 However, the axis scales are not right, the gap between both nights is not visible
-and there is no proper labelling::
+and there is no proper labeling::
 
     fig = plt.figure(figsize = (4,3))
     ax = fig.add_subplot(1,1,1)
@@ -732,7 +732,7 @@ improved:
 * Strictly speaking, the image shown is not quite the right scale because the
    ``extent`` keyword gives the edges of the image shown, while ``x`` and
    ``delta_p`` contain the bin mid-points.
-* Use a grey scale instead of color to save publication charges.
+* Use a gray scale instead of color to save publication charges.
 * Add labels to the axis.
 
 The following code addresses these points::
