@@ -4,6 +4,7 @@
 GH_ACCOUNT=adrn
 GH_REPOSITORY=astropy-tutorials
 GH_PAGESBRANCH=gh-pages
+GH_REMOTE=origin
 
 git branch -d gh-pages
 
@@ -28,4 +29,4 @@ git commit -m "Generated from sources"
 # #git push -f $GH_REMOTE $GH_PAGESBRANCH
 
 git checkout master
-git branch -d gh-pages
+git branch -D gh-pages
