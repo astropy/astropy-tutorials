@@ -22,7 +22,7 @@ git checkout --orphan $GH_PAGESBRANCH
 # # Copy the built files to the root
 # cp -r html/* .
 
-git add *
+git add *.html
 git commit -m "Generated from sources"
 
 # echo "Push to gh-pages branch"
