@@ -27,5 +27,5 @@ git commit -m "Generated from sources"
 # echo "Push to gh-pages branch"
 # #git push -f $GH_REMOTE $GH_PAGESBRANCH
 
-git branch -d gh-pages
 git checkout master
+git branch -d gh-pages
