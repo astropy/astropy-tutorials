@@ -46,12 +46,12 @@ class BuildTutorials(Command):
         for root, dirs, files in os.walk(current_directory):
             for filename in files:
                 base,ext = os.path.splitext(filename)
-                if ext.lower() == ".ipynb" and "checkpoint" not in base:
+                if ext.lower() == ".ipynb" and \
+                   "checkpoint" not in base and \
+                   os.path.exists(os.path.join(root, "published")):
                     app.output_base = os.path.join(html_base,base)
                     app.notebooks = [os.path.join(root,filename)]
                     app.start()
-
-        return
 
 class RunNotes(Command):
 
