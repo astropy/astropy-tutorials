@@ -66,7 +66,7 @@ class BuildTutorials(Command):
 
             # read metadata from .yml file
             with open(os.path.join(path,"metadata.yml")) as f:
-                meta = yaml.load(f.read())
+                meta = yaml.safe_load(f.read())
 
             if not meta["published"]:
                 continue
