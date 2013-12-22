@@ -17,22 +17,26 @@ read -p "Are you sure you want to do this? [y/n] " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
+    # build the notebooks
+    python setup.py run
+    python setup.py build
+
+    # remove the old gh-pages branch
     git branch -d gh-pages
 
     # Create a new "orphaned" branch -- we don't need history for
     # the built products
     git checkout --orphan $GH_PAGESBRANCH
 
-    # # build the notebooks
-    python setup.py run
-    python setup.py build
+    # Copy the built files to a tmp location
+    cp -R html _tmp
 
-    # This will delete all of the git-managed files here, but not
-    # the results of the build
+    # This will delete all of the git-managed files here
     git rm -rf .
 
-    # # Copy the built files to the root
-    cp -r html/* .
+    # Now copy the html back into here
+    cp _tmp/*.html .
+    rm -rf _tmp
 
     git add *.html
     git commit -m "Generated from sources"
@@ -41,5 +45,6 @@ then
     git push -f $GH_REMOTE $GH_PAGESBRANCH
 
     git checkout master
+    git clean -f
     git branch -D gh-pages
 fi
