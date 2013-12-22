@@ -12,11 +12,15 @@ from setuptools import setup, Command
 import shutil
 import sys
 import tempfile
+# protect for 2.* vs. 3.*
+try:
+    from configparser import SafeConfigParser
+except ImportError:
+    from ConfigParser import SafeConfigParser
 
 # Third-party
 from IPython.nbconvert.nbconvertapp import NbConvertApp
 from runipy.notebook_runner import NotebookRunner
-import yaml
 
 """ TODO: custom css needs to overload
 div.input_prompt
@@ -64,11 +68,12 @@ class BuildTutorials(Command):
             if not os.path.isdir(path):
                 continue
 
-            # read metadata from .yml file
-            with open(os.path.join(path,"metadata.yml")) as f:
-                meta = yaml.safe_load(f.read())
+            # read metadata from config file
+            config = SafeConfigParser()
+            config.read(os.path.join(path,"metadata.cfg"))
 
-            if not meta["published"]:
+            is_published = config.getboolean("config", "published")
+            if not is_published:
                 continue
 
             for filename in os.listdir(path):
@@ -80,7 +85,7 @@ class BuildTutorials(Command):
 
                     index_listing = dict()
                     index_listing["link_path"] = "{}.html".format(base)
-                    index_listing["link_name"] = meta["link_name"]
+                    index_listing["link_name"] = config.get("config", "link_name")
                     index_list.append(index_listing)
 
         # Make an index of all notes
