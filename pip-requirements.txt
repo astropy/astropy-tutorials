@@ -1,4 +1,3 @@
-pyyaml
 IPython>=1.1
 runipy>=0.0.4
 astropy>=0.3
