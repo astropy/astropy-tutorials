@@ -89,7 +89,7 @@ class BuildTutorials(Command):
                     index_list.append(index_listing)
 
         # Make an index of all notes
-        f = open(os.path.join(current_directory,'index.html'), 'w')
+        f = open(os.path.join(current_directory,'html','index.html'), 'w')
         f.write("<html>\n  <body>\n")
 
         f.write("    <h1>Tutorials:</h1>\n")
