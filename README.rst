@@ -35,14 +35,16 @@ All files used by the tutorial -- e.g., example data files, the iPython notebook
 
 Create a new notebook file, and write away! Remember to place any extra files used by the tutorial in the directory with the notebook file.
 
-You will also need to create a tutorial metadata file in the same directory. The metadata file contains any extra information about the tutorial you may want to add and must be a `YAML <www.yaml.org>`_ file. YAML is a very simple, human readable markup language based on key-value pairs separater by a colon. This file must contain, at minimum, the following fields:
+You will also need to create a tutorial metadata file in the same directory. The metadata file contains any extra information about the tutorial you may want to add and must be named `metadata.cfg`. The file is just a plain text configuration file containing key-value pairs separated by a colon. This file must contain, at minimum, the following fields:
 
-- author
 - link_name (the name of the link which will appear in the list of tutorials)
+- author
 - date (month year, e.g. 'July 2013')
 
-An example of one of these files can be found `here <https://github.com/adrn/astropy-tutorials/blob/master/tutorials/FITS-Header/metadata.yml>`_.
+An example of one of these files can be found `here <https://github.com/adrn/astropy-tutorials/blob/master/tutorials/FITS-Header/metadata.cfg>`_.
 
-When you feel like your tutorial is complete, you will file a pull request against the main `astropy-tutorials` repository. You'll need to push this local branch up to your fork of the repository on github (by default, named 'origin')::
+When you feel like your tutorial is complete, push your local branch up to your fork of the repository on github (by default, named 'origin')::
 
     git push origin Spectral-Line-Fitting
+
+Then you will file a pull request against the main `astropy-tutorials` repository for review.
