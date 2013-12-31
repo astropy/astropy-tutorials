@@ -1,8 +1,5 @@
 #!/bin/bash
 
-#GH_ACCOUNT=astropy
-GH_ACCOUNT=adrn
-GH_REPOSITORY=astropy-tutorials
 GH_PAGESBRANCH=gh-pages
 GH_REMOTE=origin
 
