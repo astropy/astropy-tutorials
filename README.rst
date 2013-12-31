@@ -33,7 +33,7 @@ All files used by the tutorial -- e.g., example data files, the iPython notebook
     cd tutorials/Spectral-Line-Fitting
     ipython notebook --pylab=inline
 
-Create a new notebook file, and write away! Remember to place any extra files used by the tutorial in the directory with the notebook file.
+Create a new notebook file, and write away! Remember to place any extra files used by the tutorial in the directory with the notebook file, and place them under git version control.
 
 You will also need to create a tutorial metadata file in the same directory. The metadata file contains any extra information about the tutorial you may want to add and must be named `metadata.cfg`. The file is just a plain text configuration file containing key-value pairs separated by a colon. This file must contain, at minimum, the following fields:
 
