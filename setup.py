@@ -37,6 +37,9 @@ li
 # A template for the index page
 INDEX_TEMPLATE= """
 <html>
+  <head>
+  <title>Astropy Templates Index</title>
+  </head>
   <body>
     <h1>Tutorials:</h1>
     <ul>
