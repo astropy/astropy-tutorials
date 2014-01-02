@@ -18,9 +18,7 @@ try:
 except ImportError:
     from ConfigParser import SafeConfigParser
 
-# Third-party
-from IPython.nbconvert.nbconvertapp import NbConvertApp
-from runipy.notebook_runner import NotebookRunner
+
 
 """ TODO: custom css needs to overload
 div.input_prompt
@@ -36,6 +34,21 @@ ul
 li
 """
 
+# A template for the index page
+INDEX_TEMPLATE= """
+<html>
+  <head>
+  <title>Astropy Templates Index</title>
+  </head>
+  <body>
+    <h1>Tutorials:</h1>
+    <ul>
+{entries}
+    </ul>
+  </body>
+</html>
+"""[1:-1]
+
 class BuildTutorials(Command):
 
     user_options = []
@@ -50,6 +63,7 @@ class BuildTutorials(Command):
         """ Build the tutorials (iPython notebook files) located in tutorials/*
             into static HTML pages.
         """
+        from IPython.nbconvert.nbconvertapp import NbConvertApp
 
         current_directory = os.getcwd()
         html_base = os.path.join(current_directory,"html")
@@ -89,17 +103,11 @@ class BuildTutorials(Command):
                     index_list.append(index_listing)
 
         # Make an index of all notes
-        f = open(os.path.join(current_directory,'html','index.html'), 'w')
-        f.write("<html>\n  <body>\n")
-
-        f.write("    <h1>Tutorials:</h1>\n")
-        f.write("    <ul>\n")
+        entries = []
         for page in index_list:
-            f.write('      <li><a href="{0[link_path]}">{0[link_name]}</a></li>\n'.format(page))
-        f.write('    </ul>\n')
-
-        f.write('  </body>\n</html>')
-        f.close()
+            entries.append('      <li><a href="{0[link_path]}">{0[link_name]}</a></li>'.format(page))
+        with open(os.path.join(current_directory,'html','index.html'), 'w') as f:
+            f.write(INDEX_TEMPLATE.format(entries='\n'.join(entries)))
 
 class RunNotes(Command):
 
@@ -113,6 +121,7 @@ class RunNotes(Command):
 
     def run(self):
         """ Run the tutorial notebooks so the line numbers make sense. """
+        from runipy.notebook_runner import NotebookRunner
 
         current_directory = os.getcwd()
 
@@ -127,4 +136,6 @@ class RunNotes(Command):
                     r.run_notebook(skip_exceptions=True)
                     r.save_notebook(filename)
 
-setup(name='astropy-tutorials', cmdclass={'run':RunNotes, 'build': BuildTutorials})
+setup(name='astropy-tutorials',
+      cmdclass={'run':RunNotes, 'build': BuildTutorials},
+      setup_requires=['ipython>=1.1', 'runipy>=0.0.4'])
