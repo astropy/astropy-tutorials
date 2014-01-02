@@ -18,9 +18,7 @@ try:
 except ImportError:
     from ConfigParser import SafeConfigParser
 
-# Third-party
-from IPython.nbconvert.nbconvertapp import NbConvertApp
-from runipy.notebook_runner import NotebookRunner
+
 
 """ TODO: custom css needs to overload
 div.input_prompt
@@ -50,6 +48,7 @@ class BuildTutorials(Command):
         """ Build the tutorials (iPython notebook files) located in tutorials/*
             into static HTML pages.
         """
+        from IPython.nbconvert.nbconvertapp import NbConvertApp
 
         current_directory = os.getcwd()
         html_base = os.path.join(current_directory,"html")
@@ -113,6 +112,7 @@ class RunNotes(Command):
 
     def run(self):
         """ Run the tutorial notebooks so the line numbers make sense. """
+        from runipy.notebook_runner import NotebookRunner
 
         current_directory = os.getcwd()
 
@@ -127,4 +127,6 @@ class RunNotes(Command):
                     r.run_notebook(skip_exceptions=True)
                     r.save_notebook(filename)
 
-setup(name='astropy-tutorials', cmdclass={'run':RunNotes, 'build': BuildTutorials})
+setup(name='astropy-tutorials',
+      cmdclass={'run':RunNotes, 'build': BuildTutorials},
+      setup_requires=['ipython>=1.1', 'runipy>=0.0.4'])
