@@ -28,6 +28,7 @@ then
     # Copy the built files to a tmp location
     cp -R html _tmp
     cp -R css _tmp/css
+    cp -R images _tmp/images
 
     # This will delete all of the git-managed files here
     git rm -rf .
