@@ -35,7 +35,7 @@ li
 """
 
 # A template for the index page
-with open("html/index_template.html") as f:
+with open("templates/index_template.html") as f:
     INDEX_TEMPLATE = f.read()
 
 class BuildTutorials(Command):
