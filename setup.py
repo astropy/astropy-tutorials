@@ -19,22 +19,6 @@ try:
 except ImportError:
     from ConfigParser import SafeConfigParser
 
-
-
-""" TODO: custom css needs to overload
-div.input_prompt
-div.input_area
-div.output_area
-code
-pre
-div.cell
-h1
-h2
-h3
-ul
-li
-"""
-
 # A template for the index page
 with open("templates/index_template.html") as f:
     INDEX_TEMPLATE = f.read()
