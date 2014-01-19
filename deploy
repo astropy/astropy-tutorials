@@ -19,7 +19,7 @@ then
     python setup.py build
 
     # remove the old gh-pages branch
-    git branch -d gh-pages
+    git branch -D gh-pages
 
     # Create a new "orphaned" branch -- we don't need history for
     # the built products
