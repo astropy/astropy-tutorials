@@ -39,15 +39,16 @@ INDEX_TEMPLATE= """
 <html>
   <head>
   <title>Astropy Templates Index</title>
+  <link rel="stylesheet" type="text/css" href="css/style.css" />
   </head>
   <body>
-    <h1>Tutorials:</h1>
+    <h1>Astropy tutorials:</h1>
     <ul>
 {entries}
     </ul>
   </body>
 </html>
-"""[1:-1]
+"""
 
 class BuildTutorials(Command):
 
