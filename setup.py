@@ -35,20 +35,8 @@ li
 """
 
 # A template for the index page
-INDEX_TEMPLATE= """
-<html>
-  <head>
-  <title>Astropy Templates Index</title>
-  <link rel="stylesheet" type="text/css" href="css/style.css" />
-  </head>
-  <body>
-    <h1>Astropy tutorials:</h1>
-    <ul>
-{entries}
-    </ul>
-  </body>
-</html>
-"""
+with open("html/index_template.html") as f:
+    INDEX_TEMPLATE = f.read()
 
 class BuildTutorials(Command):
 
