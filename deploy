@@ -19,7 +19,11 @@ then
     python setup.py build
 
     # remove the old gh-pages branch
-    git branch -D gh-pages
+    OUTPUT=`git branch -D gh-pages`
+    if [[ $OUTPUT == *fatal* ]]
+    then
+        echo "Error deleting gh-pages branch.";
+    fi
 
     # Create a new "orphaned" branch -- we don't need history for
     # the built products
