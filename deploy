@@ -23,6 +23,7 @@ then
     if [[ $OUTPUT == *fatal* ]]
     then
         echo "Error deleting gh-pages branch.";
+        exit;
     fi
 
     # Create a new "orphaned" branch -- we don't need history for
