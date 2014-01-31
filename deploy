@@ -43,6 +43,8 @@ then
     rm -rf _tmp
 
     git add *.html
+    git add images
+    git add css
     git commit -m "Generated from sources"
 
     read -p "Are you sure you want to push to live gh-pages? [y/n] " -n 1 -r
