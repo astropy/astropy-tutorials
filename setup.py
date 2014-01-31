@@ -51,6 +51,10 @@ class BuildTutorials(Command):
         app.initialize()
         app.export_format = 'html'
 
+        template_path = os.path.join(tutorials_base, 'templates')
+        app.config.Exporter.template_path = ['templates', template_path]
+        app.config.Exporter.template_file = 'astropy'
+
         # walk through each directory in tutorials/ to find all .ipynb file
         index_list = []
         for tutorial_name in os.listdir(tutorials_base):
