@@ -12,6 +12,7 @@ from setuptools import setup, Command
 import shutil
 import sys
 import tempfile
+from distutils import log
 # protect for 2.* vs. 3.*
 try:
     from configparser import SafeConfigParser
@@ -64,6 +65,8 @@ class BuildTutorials(Command):
             into static HTML pages.
         """
         from IPython.nbconvert.nbconvertapp import NbConvertApp
+
+        check_ipython_version()
 
         current_directory = os.getcwd()
         html_base = os.path.join(current_directory,"html")
@@ -123,6 +126,8 @@ class RunNotes(Command):
         """ Run the tutorial notebooks so the line numbers make sense. """
         from runipy.notebook_runner import NotebookRunner
 
+        check_ipython_version()
+
         current_directory = os.getcwd()
 
         # walk through each directory in tutorials/ to find all .ipynb file
@@ -135,6 +140,22 @@ class RunNotes(Command):
                     r = NotebookRunner(filename, pylab=True)
                     r.run_notebook(skip_exceptions=True)
                     r.save_notebook(filename)
+
+
+def check_ipython_version():
+    """
+    This is necessary as a workaround because they will build fine for ipython
+    1.1, just with titles "[]".  Also, 1.2/2.0 wasn't out yet when this was
+    written, so we don't want to force the upgrade if you just want to look to
+    make sure the notebooks build.
+    """
+    import IPython
+    if IPython.version_info < (1, 2, 0, ''):
+        log.warn('Your version of IPython is  <= 1.1.x, so the html titles on '
+                 'notebooks will come out wrong. Please update IPython if you '
+                 'plan to actually deploy to the web site (possibly to the dev '
+                 'version).')
+
 
 setup(name='astropy-tutorials',
       cmdclass={'run':RunNotes, 'build': BuildTutorials},
