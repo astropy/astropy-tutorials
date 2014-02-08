@@ -151,10 +151,10 @@ def check_ipython_version():
     """
     import IPython
     if IPython.version_info < (1, 2, 0, ''):
-        log.warn('Your version of IPython is  <= 1.1.x, so the html titles on '
-                 'notebooks will come out wrong. Please update IPython if you '
-                 'plan to actually deploy to the web site (possibly to the dev '
-                 'version).')
+        log.warn('WARNING: Your version of IPython is  <= 1.1.x, so the html
+                 'titles on notebooks will come out wrong. Please update '
+                 'IPython if you plan to actually deploy to the web site '
+                 '(possibly to the dev version).')
 
 
 setup(name='astropy-tutorials',
