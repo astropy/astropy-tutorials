@@ -6,8 +6,6 @@ below is taken (with only minor modifications) from the code that I used to
 actually prepare the publication. The plots that will be developed below
 appear in very similar form in the article published in ApJ.
 
-I will update this page with a proper reference once the article is accepted ;-)
-
 The examples below depend on each other and the plots in the last section make
 use of things calculated in the earlier sections. Thus, if you need to restart
 your python session in the course of this tutorial, please execute all the code
