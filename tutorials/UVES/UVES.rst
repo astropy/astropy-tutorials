@@ -1,12 +1,10 @@
-Analyzing UVES Spectrocopy with Astropy
+Analyzing UVES Spectroscopy with Astropy
 =======================================
 
 This tutorial follows my real live data analysis of MN Lup and the code developed
 below is taken (with only minor modifications) from the code that I used to
 actually prepare the publication. The plots that will be developed below
-appear in very similar form in the article submitted to ApJ.
-
-I will update this page with a proper reference once the article is accepted ;-)
+appear in very similar form in the article published in ApJ.
 
 The examples below depend on each other and the plots in the last section make
 use of things calculated in the earlier sections. Thus, if you need to restart
@@ -14,8 +12,8 @@ your python session in the course of this tutorial, please execute all the code
 again.
 
 Also, this tutorial works best if you follow along and execute the code shown
-on your own comupter. The page is already quite long and I do not include the
-output you would see on your screen in this decument.
+on your own computer. The page is already quite long and I do not include the
+output you would see on your screen in this document.
 
 .. toctree::
 
@@ -115,7 +113,7 @@ Now, we do not want to repeat this process for every single file by hand,
 so let us define a function that takes the filename as input and returns
 the wavelength and flux arrays and the time of the observation.
 In python, functions are created with the ``def`` statements.
-All lines that have an itendation level below the `def` statement are part
+All lines that have an indentation level below the `def` statement are part
 of the function. Functions can (but do not have to) return values using
 the ``return`` statement.
 
@@ -150,7 +148,7 @@ defined is in the search path (`more about python modules and the search path
     #) You can mark code in some editor, copy it to the clipboard and then
        type ``%paste`` in ipython.
     #) You type ``%cpaste`` in ipython you can paste code (e.g. with the
-       mouse) and ipython will correct the leading number of whitespaces and
+       mouse) and ipython will correct the leading number of white spaces and
        ignore empty lines.
           
     These two tricks can be used with any type of code, but are particularly useful
@@ -163,7 +161,7 @@ defined is in the search path (`more about python modules and the search path
 
 So, after all this discussion, we can now define a function that automates the
 loading of a single spectrum using the commands we developed above. Even if
-this function is fairly short, we still add some documenation to the header,
+this function is fairly short, we still add some documentation to the header,
 so that we can look up what parameters it needs when we come back to this
 project a while later. Personally, I comment every function that is longer
 than two lines::
@@ -199,7 +197,7 @@ than two lines::
         date_obs = header['Date-OBS']
         return wavelength, flux, date_obs
 
-.. admonition::  Excercise
+.. admonition::  Exercise
 
     Try to find out how you can read the help for this function from the
     command line.
@@ -217,7 +215,7 @@ than two lines::
 
    </div>
 
-.. admonition::  Excercise
+.. admonition::  Exercise
 
     The dataset of UVES spectra should have been taken using all the same setup.
     Write a function that returns the exposure time (``EXPTIME``),
@@ -262,7 +260,7 @@ than two lines::
    </div>
 
 The UVES pipeline that was used to reduce the data that we use in the this example
-employs a fixed wavelength grid (see excercise above),
+employs a fixed wavelength grid (see exercise above),
 thus the ``wavelength`` is the same for all spectra.
 This makes it easy to define an array that can hold the fluxes of all
 observations. Then, we loop over the list of all filenames and fill this array
@@ -280,7 +278,7 @@ with data::
 Units and constants in astropy
 ------------------------------
 Often, one has to keep track of the units for certain values. Was the wavelength
-given in Angstroem or in nm? In X-ray observations, a common unit of wavelength is
+given in Angstrom or in nm? In X-ray observations, a common unit of wavelength is
 keV. How many nm is 0.65 keV?
 `astropy.units <http://docs.astropy.org/en/v0.2.1/units/index.html>`_
 offers a framework that can take
@@ -296,7 +294,7 @@ The easiest way to attach a unit to a number is by multiplication::
 
     wavelength = wavelength * u.AA
 
-    # Let's define some constants we need for the excersices further down
+    # Let's define some constants we need for the exercises further down
     # Again, we multiply the value with a unit here
     heliocentric = -23. * u.km/u.s
     v_rad = -4.77 * u.km / u.s  # Strassmeier et al. (2005)
@@ -385,12 +383,12 @@ This is how it can be done::
     wavelength.to(u.keV, equivalencies=u.spectral())
     wavelength.to(u.Hz, equivalencies=u.spectral())
 
-.. admonition::  Excercise
+.. admonition::  Exercise
 
-    Spectrocopically, MN Lup is classified as spctral type M0 V, thus
+    Spectroscopically, MN Lup is classified as spectral type M0 V, thus
     the gravitational acceleration on the surface :math:`\log(g)` 
     should be comparable to the sun.
-    (For non-stellar astronomers: Conventionlly, all values are given
+    (For non-stellar astronomers: Conventionally, all values are given
     in the cgs system. The value for the sun is :math:`\log(g) = 4.4`.)
    
     Calculate :math:`\log(g)` for MN Lup with the values for the mass
@@ -413,12 +411,12 @@ spectroscopically estimated surface gravity::
    </div>
 
 
-.. admonition::  Excercise
+.. admonition::  Exercise
 
     Write a function that turns a wavelength scale into a velocity scale.
-    We want to input a wavelengths array and the rest wavelength of a spectal
+    We want to input a wavelengths array and the rest wavelength of a spectral
     line. We need this function later to show the red- and blueshift of the
-    spectrum relativ to the the Ca II H line. Use the following definition
+    spectrum relative to the the Ca II H line. Use the following definition
     to make sure the that code below can use it later::
 
         def wave2doppler(wavelength_array, wavelength_line):
@@ -426,7 +424,7 @@ spectroscopically estimated surface gravity::
             return array_of_dopplershifts
 
     You can test if you function works by calculating the a Dopplershift
-    of the following wavelenghts relative to :math:`H_\alpha`::
+    of the following wavelengths relative to :math:`H_\alpha`::
 
         waveclosetoHa = np.array([6562.,6563,6565.]) * u.AA
         print wave2doppler(waveclosetoHa, 656.489 * u.nm)
@@ -449,12 +447,12 @@ spectroscopically estimated surface gravity::
 
    </div>
 
-.. admonition::  Excercise
+.. admonition::  Exercise
 
     Write a function that takes a wavelength array and the rest wavelength of
     a spectral line as input, turns it into a Doppler shift (you can use
-    the function from the last excercise),
-    subtracts the radial velicty of MN Lup (4.77 km/s) and expresses
+    the function from the last exercise),
+    subtracts the radial velocity of MN Lup (4.77 km/s) and expresses
     the resulting velocity in units of vsini.
     We need this function later to show the red- and blueshift of the
     spectrum relative to the Ca II H line. Use the following definition
@@ -485,8 +483,8 @@ provides methods to convert times and dates between different
 systems and formats. Since the ESO fits headers already contain the time of the
 observation in different systems, we could just read the keyword in the time
 system we like, but we will use ``astropy.time`` to make this conversion here.
-``astropy.time.Time`` will parse many common imput formats (strings, floats), but
-unless the format is umambiguous the format needs to be specified (e.g. a number
+``astropy.time.Time`` will parse many common input formats (strings, floats), but
+unless the format is unambiguous the format needs to be specified (e.g. a number
 could mean JD or MJD or year). Also, the time system needs to be given (e.g. UTC).
 Below are several examples, initialized from different header keywords::
 
@@ -516,7 +514,7 @@ Times can also be initialized from arrays and we can calculate time differences:
 Now, we want to express the time difference between the individual spectra of
 MN Lup in rotational periods. While the unit of ``delta_t`` is days, unfortunately
 ``astropy.time.Time`` and ``astropy.units.Quantity`` objects do not work together
-yet, so we will have to convert from one to the other explictly::
+yet, so we will have to convert from one to the other explicitly::
 
     delta_p = delta_t.val * u.day / period
 
@@ -546,7 +544,7 @@ The following function will do that::
         Parameters
         ----------
         w : 1 dim np.ndarray
-            array of wanvelenghts
+            array of wavelengths
         flux : np.ndarray of shape (N, len(w))
             array of flux values for different spectra in the series
         cont : list of lists
@@ -558,12 +556,12 @@ The following function will do that::
         #index of the region we want to return
         indrange = (w > cont[0][0]) & (w < cont[1][1])
         # make a flux array of shape
-        # (nuber of spectra, number of pointsin indrange)
+        # (number of spectra, number of points in indrange)
         f = np.zeros((flux.shape[0], indrange.sum()))
         for i in range(flux.shape[0]):
-            # fit polynom of second order to the continuum region
+            # fit polynomial of second order to the continuum region
             linecoeff = np.polyfit(w[indcont], flux[i, indcont],2)
-            # devide the flux by the polynom and put the result in our
+            # divide the flux by the polynomial and put the result in our
             # new flux array
             f[i,:] = flux[i,indrange]/np.polyval(linecoeff, w[indrange])
         return w[indrange], f
@@ -576,7 +574,7 @@ Publication ready output
 
 Tables
 ^^^^^^
-We will calculate the equivalent width in Angstroems of the emission line
+We will calculate the equivalent width in Angstroms of the emission line
 for the first spectrum::
 
     ew = fcaII[0,:] - 1.
@@ -610,12 +608,12 @@ Plots
 We will make two plots. The plotting is done with
 `matplotlib <http://matplotlib.org>`_, and does not involve Astropy itself.
 Plotting is introduced in :ref:`plotting-and-images` and more details on
-plotting can be found there. When in doubt, use the seach engine of your choice
+plotting can be found there. When in doubt, use the search engine of your choice
 and ask the internet. Here, I mainly want to illustrate that Astropy can be
 used in real-live data analysis.
 Thus, I do not explain every step in the plotting in detail.
 The plots we produce below appear in very
-similar form in Guenther et al. 2013 (ApJ, submitted).
+similar form in Guenther et al. 2013 (ApJ, 771, 70).
 
 In both cases we want the x-axis to show the Doppler shift expressed in units
 of the rotational velocity. In this way, features that are rotationally
@@ -642,7 +640,7 @@ First, we will show the line profile::
    :align: center
 
 
-.. admonition::  Excercise
+.. admonition::  Exercise
 
     The plot above shows only a single spectrum. Plot all spectra into a single
     plot and introduce a sensible offset between them, so that we can follow
@@ -692,7 +690,7 @@ the difference to the mean flux::
 
 In the following simple plot, we can already see features moving through the line.
 However, the axis scales are not right, the gap between both nights is not visible
-and there is no proper labelling::
+and there is no proper labeling::
 
     fig = plt.figure(figsize = (4,3))
     ax = fig.add_subplot(1,1,1)
@@ -729,10 +727,10 @@ Now, this plot is already much better, but there are still some things that can 
 improved:
 
 * Introduce an offset on the y-axis to reduce the amount of white space.
-* Stricly speaking, the image shown is not quite the right scale because the
+* Strictly speaking, the image shown is not quite the right scale because the
    ``extent`` keyword gives the edges of the image shown, while ``x`` and
    ``delta_p`` contain the bin mid-points.
-* Use a grey scale instead of color to save publication charges.
+* Use a gray scale instead of color to save publication charges.
 * Add labels to the axis.
 
 The following code addresses these points::
@@ -780,7 +778,7 @@ The following code addresses these points::
    :scale: 100%
    :align: center
 
-.. admonition::  Excercise
+.. admonition::  Exercise
 
     Understand the code for the last plot. Some of the commands used are
     already pretty advanced stuff. Remember, any internet search engine can be
