@@ -1,0 +1,122 @@
+/* Ripped from the main astropy website */
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+#wrapper{
+    margin:0 auto;
+    max-width:960px;
+    padding:0 10px;
+    min-width: 320px; /* min-width of whole site */
+
+    line-height: 1.25em;
+    font-size: 14px;
+    color:#333;
+    font-family: 'Open Sans', sans-serif;
+}
+
+section a{
+    color: #FF5000;
+    text-decoration: none;
+}
+section a, section svg{
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+section a:hover{
+    color:#333;
+}
+
+section p {
+    margin-bottom: 10px;
+    margin-top: 10px;
+    line-height: 1.5em;
+}
+
+strong {
+    font-weight: bold;
+}
+
+section{
+    border-bottom: 1px #efefef solid;
+    padding: 30px 0 30px;
+    clear: both;
+}
+
+section:first-of-type{
+    margin-top:42px;
+}
+
+section:last-of-type{
+    border-bottom: 0px;
+}
+
+section *:last-child{
+    margin-bottom: 0px;
+}
+
+/* nav */
+nav{
+    line-height: 42px;
+    height: 46px;
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:100%;
+    background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #222222),color-stop(0.89, #333333));
+    background-image: -o-linear-gradient(bottom, #222222 0%, #333333 89%);
+    background-image: -moz-linear-gradient(bottom, #222222 0%, #333333 89%);
+    background-image: -webkit-linear-gradient(bottom, #222222 0%, #333333 89%);
+    background-image: -ms-linear-gradient(bottom, #222222 0%, #333333 89%);
+    background-image: linear-gradient(to bottom, #222222 0%, #333333 89%);
+}
+
+nav > *{
+    display:inline-block;
+    vertical-align:middle;
+}
+
+nav img{
+    float: left;
+    margin-left: 20px;
+    margin-top: 5px;
+}
+
+nav ul{
+    max-width:960px;
+    margin:0 auto;
+}
+
+nav ul li{
+    display:inline;
+    list-style: none;
+    margin: 10px;
+}
+
+
+nav li a, nav li a:link{
+    color:white;
+    text-decoration: none;
+}
+nav li a:hover{
+    color:#FF5000;
+    text-decoration: none;
+}
+
+nav li a.active{
+    color:#FF5000;
+}
+
+nav .pull-right{
+    float: right;
+    margin-right:10px;
+}
+
+/*
+    IPython overrides
+*/

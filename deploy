@@ -3,23 +3,41 @@
 GH_PAGESBRANCH=gh-pages
 GH_REMOTE=origin
 
-echo "[WARNING] This script will remove the local gh-pages branch,"
+echo "*****************************************************************"
+echo "WARNING! This script will remove the local gh-pages branch,"
 echo "build the notebook files into HTML, then push to remote gh-pages"
 echo "located here: $GH_REMOTE/gh-pages."
 echo
 echo "Make sure you have no uncommitted changes in your master branch"
 echo "as these may be overwritten!"
 echo
-read -p "Are you sure you want to do this? [y/n] " -n 1 -r
+read -p "Are you sure you want to do this? [y/N] " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
-    # build the notebooks
-    python setup.py run
-    python setup.py build
+    # first run the notebooks
+    OUTPUT=`python setup.py run`
+    if [[ $OUTPUT == *ERROR* ]]
+    then
+        echo "Error running notebook files!";
+        exit;
+    fi
+
+    # then convert the notebooks to HTML
+    OUTPUT=`python setup.py build`
+    if [[ $OUTPUT == *ERROR* ]]
+    then
+        echo "Error converting notebook files to HTML!";
+        exit;
+    fi
 
     # remove the old gh-pages branch
-    git branch -d gh-pages
+    OUTPUT=`git branch -D gh-pages`
+    if [[ $OUTPUT == *fatal* ]]
+    then
+        echo "Error deleting gh-pages branch.";
+        exit;
+    fi
 
     # Create a new "orphaned" branch -- we don't need history for
     # the built products
@@ -32,16 +50,37 @@ then
     git rm -rf .
 
     # Now copy the html back into here
-    cp _tmp/*.html .
+    cp -R _tmp/* .
     rm -rf _tmp
 
     git add *.html
+    git add images
+    git add css
     git commit -m "Generated from sources"
 
-    echo "Push to gh-pages branch"
-    git push -f $GH_REMOTE $GH_PAGESBRANCH
+    read -p "Would you like to preview the rendered HTML? [y/N] " -n 1 -r
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        echo "\n\n"
+        open index.html
+    else
+        echo "\n"
+    fi
 
-    git checkout master
-    git clean -f
-    git branch -D gh-pages
+    read -p "Are you sure you want to push to live gh-pages? [y/N] " -n 1 -r
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        echo "\n"
+        echo "Pushing to gh-pages branch"
+        git push -f $GH_REMOTE $GH_PAGESBRANCH
+
+        git checkout -f master
+        git clean -f
+        git branch -D gh-pages
+    else
+        echo "\n"
+        echo "You're now in an orphaned test deploy branch."
+        echo "To get back to normal you can run the following:"
+        echo "    git checkout -f master"
+        echo "    git clean -f"
+        echo "    git branch -D gh-pages"
+    fi
 fi

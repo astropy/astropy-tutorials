@@ -19,36 +19,9 @@ try:
 except ImportError:
     from ConfigParser import SafeConfigParser
 
-
-
-""" TODO: custom css needs to overload
-div.input_prompt
-div.input_area
-div.output_area
-code
-pre
-div.cell
-h1
-h2
-h3
-ul
-li
-"""
-
 # A template for the index page
-INDEX_TEMPLATE= """
-<html>
-  <head>
-  <title>Astropy Templates Index</title>
-  </head>
-  <body>
-    <h1>Tutorials:</h1>
-    <ul>
-{entries}
-    </ul>
-  </body>
-</html>
-"""[1:-1]
+with open("templates/index_template.html") as f:
+    INDEX_TEMPLATE = f.read()
 
 class BuildTutorials(Command):
 
@@ -77,6 +50,10 @@ class BuildTutorials(Command):
         app = NbConvertApp()
         app.initialize()
         app.export_format = 'html'
+
+        template_path = os.path.join(tutorials_base, 'templates')
+        app.config.Exporter.template_path = ['templates', template_path]
+        app.config.Exporter.template_file = 'astropy'
 
         # walk through each directory in tutorials/ to find all .ipynb file
         index_list = []
