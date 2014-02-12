@@ -18,7 +18,7 @@
         <a href="http://www.astropy.org">
             <img src="images/astropy_word_32.png" style="vertical-align: middle;"/>
         </a>
-        <li><a href="/">tutorials</a></li>
+        <li><a href="http://tutorials.astropy.org/">tutorials</a></li>
     </nav>
 
     {{ super() }}
