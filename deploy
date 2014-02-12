@@ -14,9 +14,21 @@ read -p "Are you sure you want to do this? [y/n] " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
-    # build the notebooks
-    python setup.py run
-    python setup.py build
+    # first run the notebooks
+    OUTPUT=`python setup.py run`
+    if [[ $OUTPUT == *ERROR* ]]
+    then
+        echo "Error running notebook files!";
+        exit;
+    fi
+
+    # then convert the notebooks to HTML
+    OUTPUT=`python setup.py build`
+    if [[ $OUTPUT == *ERROR* ]]
+    then
+        echo "Error converting notebook files to HTML!";
+        exit;
+    fi
 
     # remove the old gh-pages branch
     OUTPUT=`git branch -D gh-pages`
