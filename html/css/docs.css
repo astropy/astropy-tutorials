@@ -629,11 +629,6 @@ form.well {
 -------------------------------------------------- */
 @media (max-width: 480px) {
 
-  /* Reduce padding above jumbotron */
-  body {
-    padding-top: 70px;
-  }
-
   /* Change up some type stuff */
   h2 {
     margin-top: 27px;
@@ -722,10 +717,11 @@ form.well {
 
 @media (max-width: 768px) {
 
+  /* This was in the version copied from the main site, but it mucks up the ipython notebooks */ 
   /* Remove any padding from the body */
-  body {
+  /*body {
     padding-top: 0;
-  }
+  }*/
 
   /* Jumbotron buttons */
   .jumbotron .btn {
@@ -800,10 +796,11 @@ form.well {
 
 @media (min-width: 768px) and (max-width: 980px) {
 
+  /* This was in the version copied from the main site, but it mucks up the ipython notebooks */ 
   /* Remove any padding from the body */
-  body {
+  /*body {
     padding-top: 0;
-  }
+  }*/
 
   /* Scale down the jumbotron content */
   .jumbotron h1 {

@@ -120,3 +120,26 @@ nav .pull-right{
 /*
     IPython overrides
 */
+
+/* Tweaks to make a bit more responsive in conjuction with astropy scheme */
+
+@media (max-width: 355px) {
+
+    #wrapper {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    body {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    .text_cell_render {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+}
+
+
