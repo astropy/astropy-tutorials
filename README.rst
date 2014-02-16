@@ -58,7 +58,7 @@ For tutorial authors
 
 If your tutorial includes large data files (where large means >~ 1 MB), we don't want them in the astropy/astropy-tutorials git repository, as that will drastically slow down cloning the repository.  Instead, we encourage use of the `astropy.utils.download_files` function, and will host data files on the http://data.astropy.org server.  To make this easy, use the following procedure when you have large data files.
 
-* When writing your tutorial, just include the files in your tutorial's directory (e.g., ``tutorials/My-tutorial-name/mydatafile.fits``).  Those who are reviwing your tutorial will have to download them, but they would need them anyway, so it's ok. *IMPORTANT*: when you add or modify data files, make sure the only thing in that commit involves the data files.  That is, do *not* edit your notebook and add/change data files in the same commit.  This will make it much easier to remove the data files when your tutorial is actually merged.
+* When writing your tutorial, just include the files in your tutorial's directory (e.g., ``tutorials/My-tutorial-name/mydatafile.fits``).  Those who are reviewing your tutorial will have to download them, but they would need them anyway, so it's ok. *IMPORTANT*: when you add or modify data files, make sure the only thing in that commit involves the data files.  That is, do *not* edit your notebook and add/change data files in the same commit.  This will make it much easier to remove the data files when your tutorial is actually merged.
 
 * To actually access your data files in the notebook, do something like this at the top of the notebook::
 
@@ -84,4 +84,4 @@ If this above procedure is followed, you only need to do these steps when mergin
 
 1. Do ``git rebase -i`` and delete the commits that include the data files
 2. Upload the data files to http://data.astropy.org/tutorials/My-tutorial-name/
-3. update the `tutorialpath` variable.
+3. Update the `tutorialpath` variable.
