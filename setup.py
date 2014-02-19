@@ -114,9 +114,7 @@ class RunNotes(Command):
                 base,ext = os.path.splitext(filename)
                 if ext.lower() == ".ipynb" and "checkpoint" not in base:
                     os.chdir(root)
-                    r = NotebookRunner(filename, pylab=True)
-                    # TODO: Once this PR is merged - https://github.com/paulgb/runipy/pull/15
-                    #r = NotebookRunner(filename, mpl_inline=True)
+                    r = NotebookRunner(filename, mpl_inline=True)
                     r.run_notebook(skip_exceptions=True)
                     r.save_notebook(filename)
 
