@@ -114,7 +114,7 @@ class RunNotes(Command):
                 base,ext = os.path.splitext(filename)
                 if ext.lower() == ".ipynb" and "checkpoint" not in base:
                     os.chdir(root)
-                    r = NotebookRunner(filename, pylab=True)
+                    r = NotebookRunner(filename, mpl_inline=True)
                     r.run_notebook(skip_exceptions=True)
                     r.save_notebook(filename)
 

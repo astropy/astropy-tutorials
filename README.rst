@@ -31,7 +31,7 @@ Next we'll create a new directory in `tutorials/` with the same name as the bran
 All files used by the tutorial -- e.g., example data files, the iPython notebook file itself -- should go in this directory. Now you can start writing the tutorial! Simply change directories into this new path and start up an iPython notebook server::
 
     cd tutorials/Spectral-Line-Fitting
-    ipython notebook --pylab=inline
+    ipython notebook --matplotlib inline
 
 Create a new notebook file, and write away! Remember to place any extra files used by the tutorial in the directory with the notebook file, and place them under git version control.
 
