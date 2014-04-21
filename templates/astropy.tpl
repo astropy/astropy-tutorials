@@ -1,4 +1,4 @@
-{%- extends 'html_full.tpl' -%}
+{%- extends 'full.tpl' -%}
 
 {% block header %}
 <meta name="viewport" content="width=device-width, initial-scale=1" />
