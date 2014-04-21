@@ -37,7 +37,7 @@ def walk_through_tutorials(only_published=True):
 
     if not os.path.exists(tutorials_base):
         err = ("Can't find 'tutorials' path! You must run this script from the"
-               "top-level astropy-tutorials directory.")
+               " top-level astropy-tutorials directory.")
         raise IOError(err)
 
     # walk through each directory in tutorials/ to find all .ipynb file
@@ -63,6 +63,7 @@ def run_notebooks():
     """ Run the tutorial notebooks. """
 
     from runipy.notebook_runner import NotebookRunner
+    _orig_path = os.getcwd()
 
     # walk through each directory in tutorials/ to find all .ipynb file
     for tutorial_filename,nb in walk_through_tutorials(only_published=True):
@@ -83,6 +84,8 @@ def run_notebooks():
         r = NotebookRunner(nb, mpl_inline=True)
         r.run_notebook(skip_exceptions=True)
         write(r.nb, open(output_filename, 'w'), 'json')
+
+    os.chdir(_orig_path)
 
 def convert_notebooks():
     """ Convert the tutorials (IPython notebook files) located in tutorials/*
@@ -120,7 +123,7 @@ def convert_notebooks():
 
         index_listing = dict()
         index_listing["link_path"] = "{}.html".format(cleanbase)
-        index_listing["link_name"] = config.get("config", "link_name")
+        index_listing["link_name"] = nb['metadata']['link_name']
         index_list.append(index_listing)
 
     # Make an index of all notes
