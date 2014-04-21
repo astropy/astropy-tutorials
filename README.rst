@@ -25,9 +25,9 @@ Dependencies
 
 To deploy the notebooks, you will need:
 
-    IPython
-    Astropy
-    runipy
-    pandoc
+* IPython
+* Astropy
+* runipy
+* pandoc
 
-_Note, all except pandoc can be `pip` installed. To install `pandoc`, follow the instructions here: http://johnmacfarlane.net/pandoc/installing.html_.
+*Note, all except pandoc can be `pip` installed. To install `pandoc`, follow the instructions here: http://johnmacfarlane.net/pandoc/installing.html*.
