@@ -119,6 +119,8 @@ class RunNotes(Command):
             for filename in files:
                 base,ext = os.path.splitext(filename)
                 if ext.lower() == ".ipynb" and "checkpoint" not in base:
+                    # prepend _run_ to the notebook names to create new files
+                    #   so the user isn't left with a bunch of modified files.
                     output_file = "_run_{}".format(filename)
                     os.chdir(root)
                     notebook = read(open(filename), 'json')
