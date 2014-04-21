@@ -9,4 +9,4 @@ To actually deploy the tutorials, just run the deploy script:
 
     ./deploy
 
-and follow the prompts. By default, the script takes the tutorials in the master branch, runs them, converts them to HTML, and pushes to the `gh-pages` branch. __If you have any uncomitted changes in your master branch the deploy script will wipe them!__
+and follow the prompts. By default, the script takes the tutorials in the master branch, runs them, converts them to HTML, and pushes to the `gh-pages` branch. **If you have any uncomitted changes in your master branch the deploy script will wipe them!**
