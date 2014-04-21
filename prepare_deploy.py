@@ -24,17 +24,15 @@ from astropy import log as logger
 with open("templates/index_template.html") as f:
     INDEX_TEMPLATE = f.read()
 
-def run_notebooks():
-    """ Run the tutorial notebooks. """
-
-    from runipy.notebook_runner import NotebookRunner
-    from IPython.nbformat.current import read, write
+def walk_through_tutorials(only_published=True):
+    """ Generator for walking through the tutorials directory structure.
+        This returns tuples of (full_tutorial_path, tutorial_name) for
+        each tutorial. If published is set to True, this will only return
+        the published tutorials.
+    """
 
     current_directory = os.getcwd()
     tutorials_base = os.path.join(current_directory,'tutorials')
-    output_path = os.path.join(current_directory, 'run_tutorials')
-    if not os.path.exists(output_path):
-        os.mkdir(output_path)
 
     if not os.path.exists(tutorials_base):
         err = ("Can't find 'tutorials' path! You must run this script from the"
@@ -42,7 +40,6 @@ def run_notebooks():
         raise IOError(err)
 
     # walk through each directory in tutorials/ to find all .ipynb file
-    index_list = []
     for tutorial_name in os.listdir(tutorials_base):
         tutorial_path = os.path.join(tutorials_base, tutorial_name)
         if not os.path.isdir(tutorial_path):
@@ -58,95 +55,101 @@ def run_notebooks():
         except cp.NoOptionError:
             is_published = False
 
-        if not is_published:
-            logger.debug("Tutorial {} not published, skipping..."\
-                         .format(tutorial_name))
+        if not is_published and only_published:
             continue
-        else:
-            logger.info("Tutorial {} will be published"\
-                         .format(tutorial_name))
 
         for filename in os.listdir(tutorial_path):
             base,ext = os.path.splitext(filename)
 
+            if ext.lower() == ".ipynb" and "checkpoint" not in base:
+                yield os.path.join(tutorial_path, filename)
+
+def run_notebooks():
+    """ Run the tutorial notebooks. """
+
+    from runipy.notebook_runner import NotebookRunner
+    from IPython.nbformat.current import read, write
+
+    # walk through each directory in tutorials/ to find all .ipynb file
+    for tutorial_filename in walk_through_tutorials(only_published=True):
+        path,filename = os.path.split(tutorial_filename)
+
+        if filename.startswith("_run_"):
+            continue
+
+        # notebook file
+        nb_filename = filename
+        output_filename = os.path.join(path,"_run_{}"
+                                       .format(filename))
+
+        # prepend _run_ to the notebook names to create new files
+        #   so the user isn't left with a bunch of modified files.
+        os.chdir(path)
+        notebook = read(open(nb_filename), 'json')
+        r = NotebookRunner(notebook, mpl_inline=True)
+        r.run_notebook(skip_exceptions=True)
+        write(r.nb, open(output_filename, 'w'), 'json')
+
+def convert_notebooks():
+    """ Convert the tutorials (IPython notebook files) located in tutorials/*
+        into static HTML pages.
+    """
+    from IPython.nbconvert.nbconvertapp import NbConvertApp
+
+    current_directory = os.getcwd()
+    html_base = os.path.join(current_directory,"html")
+    if not os.path.exists(html_base):
+        os.mkdir(html_base)
+    tutorials_base = os.path.join(current_directory,'tutorials')
+
+    app = NbConvertApp()
+    app.initialize()
+    app.export_format = 'html'
+
+    template_path = os.path.join(tutorials_base, 'templates')
+    app.config.Exporter.template_path = ['templates', template_path]
+    app.config.Exporter.template_file = 'astropy'
+
+    # walk through each directory in tutorials/ to find all .ipynb file
+    index_list = []
+    for tutorial_name in os.listdir(tutorials_base):
+        path = os.path.join(tutorials_base, tutorial_name)
+        if not os.path.isdir(path):
+            continue
+
+        # read metadata from config file
+        config = SafeConfigParser()
+        config.read(os.path.join(path,"metadata.cfg"))
+
+        is_published = config.getboolean("config", "published")
+        if not is_published:
+            continue
+
+        for filename in os.listdir(path):
+            base,ext = os.path.splitext(filename)
             if ext.lower() == ".ipynb" \
-                and not filename.startswith("_run_") \
-                and "checkpoint" not in base:
+                    and filename.startswith("_run_") \
+                    and "checkpoint" not in base:
 
-                # notebook file
-                nb_filename = os.path.join(tutorial_path,filename)
-                output_filename = os.path.join(tutorial_path,"_run_{}"
-                                               .format(filename))
+                # remove _run_ from base filename
+                cleanbase = base[5:]
 
-                # prepend _run_ to the notebook names to create new files
-                #   so the user isn't left with a bunch of modified files.
-                notebook = read(open(nb_filename), 'json')
-                r = NotebookRunner(notebook, mpl_inline=True)
-                r.run_notebook(skip_exceptions=True)
-                write(r.nb, open(output_filename, 'w'), 'json')
+                app.output_base = os.path.join(html_base,cleanbase)
+                app.notebooks = [os.path.join(path,filename)]
+                app.start()
+                sys.exit(0)
 
-    def run(self):
-        """ Build the tutorials (iPython notebook files) located in tutorials/*
-            into static HTML pages.
-        """
-        from IPython.nbconvert.nbconvertapp import NbConvertApp
+                index_listing = dict()
+                index_listing["link_path"] = "{}.html".format(cleanbase)
+                index_listing["link_name"] = config.get("config", "link_name")
+                index_list.append(index_listing)
 
-        check_ipython_version()
-
-        current_directory = os.getcwd()
-        html_base = os.path.join(current_directory,"html")
-        if not os.path.exists(html_base):
-            os.mkdir(html_base)
-        tutorials_base = os.path.join(current_directory,'tutorials')
-
-        app = NbConvertApp()
-        app.initialize()
-        app.export_format = 'html'
-
-        template_path = os.path.join(tutorials_base, 'templates')
-        app.config.Exporter.template_path = ['templates', template_path]
-        app.config.Exporter.template_file = 'astropy'
-
-        # walk through each directory in tutorials/ to find all .ipynb file
-        index_list = []
-        for tutorial_name in os.listdir(tutorials_base):
-            path = os.path.join(tutorials_base, tutorial_name)
-            if not os.path.isdir(path):
-                continue
-
-            # read metadata from config file
-            config = SafeConfigParser()
-            config.read(os.path.join(path,"metadata.cfg"))
-
-            is_published = config.getboolean("config", "published")
-            if not is_published:
-                continue
-
-            for filename in os.listdir(path):
-                base,ext = os.path.splitext(filename)
-                if ext.lower() == ".ipynb" \
-                        and filename.startswith("_run_") \
-                        and "checkpoint" not in base:
-
-                    # remove _run_ from base filename
-                    cleanbase = base[5:]
-
-                    app.output_base = os.path.join(html_base,cleanbase)
-                    app.notebooks = [os.path.join(path,filename)]
-                    app.start()
-                    sys.exit(0)
-
-                    index_listing = dict()
-                    index_listing["link_path"] = "{}.html".format(cleanbase)
-                    index_listing["link_name"] = config.get("config", "link_name")
-                    index_list.append(index_listing)
-
-        # Make an index of all notes
-        entries = []
-        for page in index_list:
-            entries.append('      <li><a href="{0[link_path]}">{0[link_name]}</a></li>'.format(page))
-        with open(os.path.join(current_directory,'html','index.html'), 'w') as f:
-            f.write(INDEX_TEMPLATE.format(entries='\n'.join(entries)))
+    # Make an index of all notes
+    entries = []
+    for page in index_list:
+        entries.append('      <li><a href="{0[link_path]}">{0[link_name]}</a></li>'.format(page))
+    with open(os.path.join(current_directory,'html','index.html'), 'w') as f:
+        f.write(INDEX_TEMPLATE.format(entries='\n'.join(entries)))
 
 
 if __name__ == "__main__":
