@@ -86,6 +86,8 @@ def run_notebooks():
         #   so the user isn't left with a bunch of modified files.
         os.chdir(path)
         notebook = read(open(nb_filename), 'json')
+        print(notebook.keys())
+        return
         r = NotebookRunner(notebook, mpl_inline=True)
         r.run_notebook(skip_exceptions=True)
         write(r.nb, open(output_filename, 'w'), 'json')
@@ -100,49 +102,34 @@ def convert_notebooks():
     html_base = os.path.join(current_directory,"html")
     if not os.path.exists(html_base):
         os.mkdir(html_base)
-    tutorials_base = os.path.join(current_directory,'tutorials')
+    template_path = os.path.join(current_directory, 'templates')
 
     app = NbConvertApp()
-    app.initialize()
+    app.initialize(argv=[]) # hack
     app.export_format = 'html'
-
-    template_path = os.path.join(tutorials_base, 'templates')
     app.config.Exporter.template_path = ['templates', template_path]
     app.config.Exporter.template_file = 'astropy'
 
     # walk through each directory in tutorials/ to find all .ipynb file
     index_list = []
-    for tutorial_name in os.listdir(tutorials_base):
-        path = os.path.join(tutorials_base, tutorial_name)
-        if not os.path.isdir(path):
+    for tutorial_filename in walk_through_tutorials(only_published=True):
+        path,filename = os.path.split(tutorial_filename)
+
+        if not filename.startswith("_run_"):
             continue
 
-        # read metadata from config file
-        config = SafeConfigParser()
-        config.read(os.path.join(path,"metadata.cfg"))
+        # remove _run_ from base filename
+        base = os.path.splitext(filename)[0]
+        cleanbase = base.lstrip("_run_")
 
-        is_published = config.getboolean("config", "published")
-        if not is_published:
-            continue
+        app.output_base = os.path.join(html_base,cleanbase)
+        app.notebooks = [os.path.join(path,filename)]
+        app.start()
 
-        for filename in os.listdir(path):
-            base,ext = os.path.splitext(filename)
-            if ext.lower() == ".ipynb" \
-                    and filename.startswith("_run_") \
-                    and "checkpoint" not in base:
-
-                # remove _run_ from base filename
-                cleanbase = base[5:]
-
-                app.output_base = os.path.join(html_base,cleanbase)
-                app.notebooks = [os.path.join(path,filename)]
-                app.start()
-                sys.exit(0)
-
-                index_listing = dict()
-                index_listing["link_path"] = "{}.html".format(cleanbase)
-                index_listing["link_name"] = config.get("config", "link_name")
-                index_list.append(index_listing)
+        index_listing = dict()
+        index_listing["link_path"] = "{}.html".format(cleanbase)
+        index_listing["link_name"] = config.get("config", "link_name")
+        index_list.append(index_listing)
 
     # Make an index of all notes
     entries = []
@@ -162,6 +149,11 @@ if __name__ == "__main__":
     parser.add_argument("-q", "--quiet", action="store_true", dest="quiet",
                         default=False, help="Be quiet! (default = False)")
 
+    parser.add_argument("--run", action="store_true", dest="run",
+                        default=False, help="Run the notebooks.")
+    parser.add_argument("--convert", action="store_true", dest="convert",
+                        default=False, help="NBConvert the notebooks.")
+
     args = parser.parse_args()
 
     # Set logger level based on verbose flags
@@ -172,4 +164,8 @@ if __name__ == "__main__":
     else:
         logger.setLevel('INFO')
 
-    run_notebooks()
+    if args.run:
+        run_notebooks()
+
+    if args.convert:
+        convert_notebooks()
