@@ -19,6 +19,7 @@ except ImportError:
     cp = ConfigParser
 
 from astropy import log as logger
+from IPython.nbformat.current import read, write
 
 # A template for the index page
 with open("templates/index_template.html") as f:
@@ -46,49 +47,40 @@ def walk_through_tutorials(only_published=True):
             # skip files / things that are not directories
             continue
 
-        # read metadata from config file
-        config = cp.SafeConfigParser()
-        config.read(os.path.join(tutorial_path,"metadata.cfg"))
-
-        try:
-            is_published = config.getboolean("config", "published")
-        except cp.NoOptionError:
-            is_published = False
-
-        if not is_published and only_published:
-            continue
-
         for filename in os.listdir(tutorial_path):
             base,ext = os.path.splitext(filename)
 
             if ext.lower() == ".ipynb" and "checkpoint" not in base:
-                yield os.path.join(tutorial_path, filename)
+                full_filename = os.path.join(tutorial_path, filename)
+                notebook = read(open(full_filename), 'json')
+                is_published = notebook['metadata'].get('published', False)
+                if not is_published and only_published:
+                    continue
+
+                yield full_filename,notebook
 
 def run_notebooks():
     """ Run the tutorial notebooks. """
 
     from runipy.notebook_runner import NotebookRunner
-    from IPython.nbformat.current import read, write
 
     # walk through each directory in tutorials/ to find all .ipynb file
-    for tutorial_filename in walk_through_tutorials(only_published=True):
+    for tutorial_filename,nb in walk_through_tutorials(only_published=True):
         path,filename = os.path.split(tutorial_filename)
 
         if filename.startswith("_run_"):
             continue
 
+        logger.info("Running tutorial: {}".format(filename))
+
         # notebook file
-        nb_filename = filename
         output_filename = os.path.join(path,"_run_{}"
                                        .format(filename))
 
         # prepend _run_ to the notebook names to create new files
         #   so the user isn't left with a bunch of modified files.
         os.chdir(path)
-        notebook = read(open(nb_filename), 'json')
-        print(notebook.keys())
-        return
-        r = NotebookRunner(notebook, mpl_inline=True)
+        r = NotebookRunner(nb, mpl_inline=True)
         r.run_notebook(skip_exceptions=True)
         write(r.nb, open(output_filename, 'w'), 'json')
 
@@ -112,7 +104,7 @@ def convert_notebooks():
 
     # walk through each directory in tutorials/ to find all .ipynb file
     index_list = []
-    for tutorial_filename in walk_through_tutorials(only_published=True):
+    for tutorial_filename,nb in walk_through_tutorials(only_published=True):
         path,filename = os.path.split(tutorial_filename)
 
         if not filename.startswith("_run_"):
