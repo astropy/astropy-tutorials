@@ -78,8 +78,7 @@ repository for review.
 Data Files
 ----------
 
-For tutorial authors
-^^^^^^^^^^^^^^^^^^^^
+### For tutorial authors
 
 If your tutorial includes large data files (where large means >~ 1 MB), we
 don't want them in the astropy/astropy-tutorials git repository, as that will
@@ -118,8 +117,8 @@ when you have large data files.
   ``'http://data.astropy.org/tutorials/My-tutorial-name/'``.
 
 
-For repository maintainers
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+### For repository maintainers
+
 If this above procedure is followed, you only need to do these steps when merging your pull request:
 
 1. Do ``git rebase -i`` and delete the commits that include the data files
