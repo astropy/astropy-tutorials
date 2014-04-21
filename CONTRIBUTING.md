@@ -99,11 +99,11 @@ when you have large data files.
 * To actually access your data files in the notebook, do something like this at
   the top of the notebook:
 
-    from astropy.utils.data import download_file
+      from astropy.utils.data import download_file
 
-    tutorialpath = ''
-    mydatafilename1 = download_file(tutorialpath + 'mydatafile1.fits', cache=True)
-    mydatafilename2 = download_file(tutorialpath + 'mydatafile2.dat', cache=True)
+      tutorialpath = ''
+      mydatafilename1 = download_file(tutorialpath + 'mydatafile1.fits', cache=True)
+      mydatafilename2 = download_file(tutorialpath + 'mydatafile2.dat', cache=True)
 
   And then use them like this:
 
