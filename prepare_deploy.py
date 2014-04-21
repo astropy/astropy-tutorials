@@ -143,10 +143,11 @@ if __name__ == "__main__":
     parser.add_argument("-q", "--quiet", action="store_true", dest="quiet",
                         default=False, help="Be quiet! (default = False)")
 
-    parser.add_argument("--run", action="store_true", dest="run",
-                        default=False, help="Run the notebooks.")
-    parser.add_argument("--convert", action="store_true", dest="convert",
-                        default=False, help="NBConvert the notebooks.")
+    parser.add_argument('action', nargs='+', choices=['run', 'convert'],
+                        help='The action(s) to take when running the script. '
+                             '"run" means to just run the notebooks, while '
+                             '"convert" will use nbconvert to turn them to '
+                             'convert them to HTML.')
 
     args = parser.parse_args()
 
@@ -158,8 +159,8 @@ if __name__ == "__main__":
     else:
         logger.setLevel('INFO')
 
-    if args.run:
-        run_notebooks()
-
-    if args.convert:
-        convert_notebooks()
+    for action in args.action:
+        if action == 'run':
+            run_notebooks()
+        elif action == 'convert':
+            convert_notebooks()
