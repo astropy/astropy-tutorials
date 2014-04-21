@@ -30,4 +30,4 @@ To deploy the notebooks, you will need:
 * runipy
 * pandoc
 
-*Note, all except pandoc can be `pip` installed. To install `pandoc`, follow the instructions here: http://johnmacfarlane.net/pandoc/installing.html*.
+*Note, all except pandoc can be pip installed. To install pandoc, follow the instructions here: http://johnmacfarlane.net/pandoc/installing.html*.
