@@ -109,7 +109,8 @@ def convert_notebooks():
     index_list = []
     for tutorial_filename,nb in walk_through_tutorials(only_published=True):
         path,filename = os.path.split(tutorial_filename)
-
+        print(nb['metadata'])
+        continue
         if not filename.startswith("_run_"):
             continue
 
