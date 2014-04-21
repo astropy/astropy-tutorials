@@ -72,13 +72,18 @@ class BuildTutorials(Command):
 
             for filename in os.listdir(path):
                 base,ext = os.path.splitext(filename)
-                if ext.lower() == ".ipynb" and "checkpoint" not in base:
+                if ext.lower() == ".ipynb" \
+                        and filename.startswith("_run_") \
+                        and "checkpoint" not in base:
                     app.output_base = os.path.join(html_base,base)
                     app.notebooks = [os.path.join(path,filename)]
                     app.start()
 
+                    # remove _run_ from base filename
+                    cleanbase = base[5:]
+
                     index_listing = dict()
-                    index_listing["link_path"] = "{}.html".format(base)
+                    index_listing["link_path"] = "{}.html".format(cleanbase)
                     index_listing["link_name"] = config.get("config", "link_name")
                     index_list.append(index_listing)
 
@@ -102,6 +107,7 @@ class RunNotes(Command):
     def run(self):
         """ Run the tutorial notebooks so the line numbers make sense. """
         from runipy.notebook_runner import NotebookRunner
+        from IPython.nbformat.current import read, write
 
         check_ipython_version()
 
@@ -113,11 +119,12 @@ class RunNotes(Command):
             for filename in files:
                 base,ext = os.path.splitext(filename)
                 if ext.lower() == ".ipynb" and "checkpoint" not in base:
+                    output_file = "_run_{}".format(filename)
                     os.chdir(root)
-                    r = NotebookRunner(filename, mpl_inline=True)
+                    notebook = read(open(filename), 'json')
+                    r = NotebookRunner(notebook, mpl_inline=True)
                     r.run_notebook(skip_exceptions=True)
-                    r.save_notebook(filename)
-
+                    write(r.nb, open(output_file, 'w'), 'json')
 
 def check_ipython_version():
     """
@@ -136,4 +143,4 @@ def check_ipython_version():
 
 setup(name='astropy-tutorials',
       cmdclass={'run':RunNotes, 'build': BuildTutorials},
-      setup_requires=['ipython>=1.1', 'runipy>=0.0.4'])
+      setup_requires=['ipython>=1.1', 'runipy>=0.0.8'])
