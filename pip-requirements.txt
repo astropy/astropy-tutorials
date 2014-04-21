@@ -1,3 +1,2 @@
-IPython>=1.1
-runipy>=0.0.8
+IPython>=2.0
 astropy>=0.3
