@@ -123,7 +123,7 @@ def convert_notebooks():
 
         index_listing = dict()
         index_listing["link_path"] = "{}.html".format(cleanbase)
-        index_listing["link_name"] = nb['metadata']['link_name']
+        index_listing["link_name"] = nb['metadata']['name']
         index_list.append(index_listing)
 
     # Make an index of all notes
