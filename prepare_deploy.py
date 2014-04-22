@@ -113,8 +113,9 @@ def convert_notebooks(selected_nb_re=None):
 
     # walk through each directory in tutorials/ to find all .ipynb file
     index_list = []
+    re_str = ('_run_' + selected_nb_re) if selected_nb_re else None
     for tutorial_filename,nb in walk_through_tutorials(only_published=True,
-                                selected_nb_re=selected_nb_re):
+                                selected_nb_re=re_str):
         path,filename = os.path.split(tutorial_filename)
         if not filename.startswith("_run_"):
             continue
