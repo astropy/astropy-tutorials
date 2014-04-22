@@ -6,12 +6,12 @@
 
 #wrapper{
     margin:0 auto;
-    max-width:960px;
+    max-width:900px;
     padding:0 10px;
     min-width: 320px; /* min-width of whole site */
 
     line-height: 1.25em;
-    font-size: 14px;
+    font-size: 16px;
     color:#333;
     font-family: 'Open Sans', sans-serif;
 }
