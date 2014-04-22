@@ -6,8 +6,9 @@
 
 #wrapper{
     margin:0 auto;
-    max-width:900px;
+
     padding:0 10px;
+    max-width: 900px;
     min-width: 320px; /* min-width of whole site */
 
     line-height: 1.25em;
@@ -142,4 +143,7 @@ nav .pull-right{
 
 }
 
+.container {
+    max-width: 900px;
+}
 
