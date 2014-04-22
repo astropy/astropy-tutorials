@@ -55,7 +55,7 @@ def walk_through_tutorials(only_published=True, selected_nb_re=None):
             if ext.lower() == ".ipynb" and "checkpoint" not in base:
                 full_filename = os.path.join(tutorial_path, filename)
                 notebook = read(open(full_filename), 'json')
-                is_published = notebook['metadata'].get('published', False)
+                is_published = notebook['metadata']['astropy-tutorials'].get('published', False)
                 if not is_published and only_published:
                     continue
 
@@ -130,7 +130,7 @@ def convert_notebooks(selected_nb_re=None):
 
         index_listing = dict()
         index_listing["link_path"] = "{}.html".format(cleanbase)
-        index_listing["link_name"] = nb['metadata']['link_name']
+        index_listing["link_name"] = nb['metadata']['astropy-tutorials']['link_name']
         index_list.append(index_listing)
 
     # Make an index of all notes
