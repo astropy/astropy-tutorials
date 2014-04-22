@@ -3,3 +3,6 @@ html/
 runipy-*
 IPython-*
 tutorials/*/_run_*
+tutorials/*/*.fits
+tutorials/*/*.pdf
+tutorials/*/*.png
