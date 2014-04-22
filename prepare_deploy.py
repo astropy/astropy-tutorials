@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-""" Build all notebook files into  """
+""" Build all notebook files into HTML pages. """
 
 from __future__ import division, print_function
 
