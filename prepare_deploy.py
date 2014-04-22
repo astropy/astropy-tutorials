@@ -43,7 +43,7 @@ def walk_through_tutorials(only_published=True, selected_nb_re=None):
         raise IOError(err)
 
     # walk through each directory in tutorials/ to find all .ipynb file
-    for tutorial_name in sorted(os.listdir(tutorials_base)):
+    for tutorial_name in os.listdir(tutorials_base):
         tutorial_path = os.path.join(tutorials_base, tutorial_name)
         if not os.path.isdir(tutorial_path):
             # skip files / things that are not directories
@@ -135,8 +135,9 @@ def convert_notebooks(selected_nb_re=None):
 
     # Make an index of all notes
     entries = []
-    for page in index_list:
+    for page in sorted(index_list, key=lambda x: x['link_name']): # sort on tutorial name
         entries.append('      <li><a href="{0[link_path]}">{0[link_name]}</a></li>'.format(page))
+
     with open(os.path.join(current_directory,'html','index.html'), 'w') as f:
         f.write(INDEX_TEMPLATE.format(entries='\n'.join(entries)))
 
