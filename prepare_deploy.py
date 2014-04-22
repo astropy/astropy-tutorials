@@ -43,7 +43,7 @@ def walk_through_tutorials(only_published=True, selected_nb_re=None):
         raise IOError(err)
 
     # walk through each directory in tutorials/ to find all .ipynb file
-    for tutorial_name in os.listdir(tutorials_base):
+    for tutorial_name in sorted(os.listdir(tutorials_base)):
         tutorial_path = os.path.join(tutorials_base, tutorial_name)
         if not os.path.isdir(tutorial_path):
             # skip files / things that are not directories
