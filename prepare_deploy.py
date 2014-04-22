@@ -7,6 +7,7 @@ from __future__ import division, print_function
 
 # Standard library
 import os
+import re
 import sys
 import shutil
 
@@ -25,12 +26,13 @@ from IPython.nbformat.current import read, write
 with open("templates/index_template.html") as f:
     INDEX_TEMPLATE = f.read()
 
-def walk_through_tutorials(only_published=True):
+def walk_through_tutorials(only_published=True, selected_nb_re=None):
     """ Generator for walking through the tutorials directory structure.
         This returns tuples of (full_tutorial_path, tutorial_name) for
         each tutorial. If published is set to True, this will only return
         the published tutorials.
     """
+    nbre = re.compile(selected_nb_re) if selected_nb_re else None
 
     current_directory = os.getcwd()
     tutorials_base = os.path.join(current_directory,'tutorials')
@@ -57,16 +59,20 @@ def walk_through_tutorials(only_published=True):
                 if not is_published and only_published:
                     continue
 
+                if nbre and nbre.match(base) is None:
+                    continue
+
                 yield full_filename,notebook
 
-def run_notebooks():
+def run_notebooks(selected_nb_re=None):
     """ Run the tutorial notebooks. """
-
     from runipy.notebook_runner import NotebookRunner
+
     _orig_path = os.getcwd()
 
     # walk through each directory in tutorials/ to find all .ipynb file
-    for tutorial_filename,nb in walk_through_tutorials(only_published=True):
+    for tutorial_filename,nb in walk_through_tutorials(only_published=True,
+                                selected_nb_re=selected_nb_re):
         path,filename = os.path.split(tutorial_filename)
 
         if filename.startswith("_run_"):
@@ -87,7 +93,7 @@ def run_notebooks():
 
     os.chdir(_orig_path)
 
-def convert_notebooks():
+def convert_notebooks(selected_nb_re=None):
     """ Convert the tutorials (IPython notebook files) located in tutorials/*
         into static HTML pages.
     """
@@ -107,7 +113,8 @@ def convert_notebooks():
 
     # walk through each directory in tutorials/ to find all .ipynb file
     index_list = []
-    for tutorial_filename,nb in walk_through_tutorials(only_published=True):
+    for tutorial_filename,nb in walk_through_tutorials(only_published=True,
+                                selected_nb_re=selected_nb_re):
         path,filename = os.path.split(tutorial_filename)
         if not filename.startswith("_run_"):
             continue
@@ -142,11 +149,16 @@ if __name__ == "__main__":
                         default=False, help="Be chatty! (default = False)")
     parser.add_argument("-q", "--quiet", action="store_true", dest="quiet",
                         default=False, help="Be quiet! (default = False)")
+    parser.add_argument("-n", "--nameregex", default=None,
+                        help="A regular expression to select the names of the "
+                             "notebooks to be processed.  If not given, all "
+                             "notebooks will be used.")
 
-    parser.add_argument("--run", action="store_true", dest="run",
-                        default=False, help="Run the notebooks.")
-    parser.add_argument("--convert", action="store_true", dest="convert",
-                        default=False, help="NBConvert the notebooks.")
+    parser.add_argument('action', nargs='+', choices=['run', 'convert'],
+                        help='The action(s) to take when running the script. '
+                             '"run" means to just run the notebooks, while '
+                             '"convert" will use nbconvert to turn them to '
+                             'convert them to HTML.')
 
     args = parser.parse_args()
 
@@ -158,8 +170,8 @@ if __name__ == "__main__":
     else:
         logger.setLevel('INFO')
 
-    if args.run:
-        run_notebooks()
-
-    if args.convert:
-        convert_notebooks()
+    for action in args.action:
+        if action == 'run':
+            run_notebooks(args.nameregex)
+        elif action == 'convert':
+            convert_notebooks(args.nameregex)
