@@ -3,6 +3,8 @@
 {% block header %}
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+<title></title>
+
 {{ super() }}
 
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:200,300,400italic,400,700' rel='stylesheet' type='text/css' />
@@ -24,4 +26,5 @@
     {{ super() }}
 
 </div>
+
 {%- endblock body %}
