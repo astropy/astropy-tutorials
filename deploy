@@ -16,7 +16,7 @@ echo
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
     # first run the notebooks
-    OUTPUT=`python setup.py run`
+    OUTPUT=`python prepare_deploy.py run`
     if [[ $OUTPUT == *ERROR* ]]
     then
         echo "Error running notebook files!";
@@ -24,7 +24,7 @@ then
     fi
 
     # then convert the notebooks to HTML
-    OUTPUT=`python setup.py build`
+    OUTPUT=`python prepare_deploy.py convert`
     if [[ $OUTPUT == *ERROR* ]]
     then
         echo "Error converting notebook files to HTML!";

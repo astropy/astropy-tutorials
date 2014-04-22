@@ -4,17 +4,16 @@ Contributing
 Overview
 --------
 
-Each tutorial is essentially an `iPython notebook
-<http://ipython.org/notebook.html>`_ file. The notebooks are each saved in a
-separate directory within the `tutorials` subdirectory in this project. Let's
-look in `FITS-Header
-<https://github.com/astropy/astropy-tutorials/tree/master/tutorials/FITS-Header>`_
-as an example. There is a single iPython notebook file that contains the text
+Each tutorial is essentially an [IPython notebook](http://ipython.org/notebook.html)
+file. The notebooks are each saved in a separate directory within the `tutorials`
+subdirectory in this project. Let's look in [FITS-Header]
+(https://github.com/astropy/astropy-tutorials/tree/master/tutorials/FITS-Header)
+as an example. There is a single IPython notebook file that contains the text
 and code for the tutorial, and a FITS file used in the tutorial. The notebook
-file is automatically run and converted into a static HTML page (`example
-<http://tutorials.astropy.org/FITS-header.html>`_), which is then displayed in
-the tutorial listing on http://tutorials.astropy.org. Each tutorial also has a
-file containing metadata about the tutorial such as the author's name, month
+file is automatically run and converted into a static HTML page ([example]
+(http://tutorials.astropy.org/FITS-header.html)), which is then displayed in
+the tutorial listing on http://tutorials.astropy.org. Each tutorial notebook
+file also contains metadata about the tutorial such as the author's name, month
 and year it was written, and any other information that should be associated
 with the tutorial.
 
@@ -23,9 +22,8 @@ Procedure
 
 If you are unfamiliar with git, you should first get familiar with git and
 github. There are a number of resources available for learning git, but a good
-place to start is with the `github interactive tutorial
-<http://try.github.io/>`_. You should also get familiar with using pull
-requests and forks on github:
+place to start is with the [github interactive tutorial](http://try.github.io/).
+You should also get familiar with using pull requests and forks on github:
 https://help.github.com/articles/using-pull-requests
 
 To create and contribute a new tutorial, you will first need to fork the
@@ -36,19 +34,19 @@ machine (replace <GITHUB USERNAME> with your github username)::
 
 Next, create a branch in your local repository with the name of the tutorial
 you'd like to contribute. Let's imagine we're adding a tutorial to demonstrate
-spectral line fitting -- we might call it `Spectral-Line-Fitting`::
+spectral line fitting -- we might call it `Spectral-Line-Fitting`:
 
     git checkout -b Spectral-Line-Fitting
 
 Next we'll create a new directory in `tutorials/` with the same name as the
-branch::
+branch:
 
     mkdir tutorials/Spectral-Line-Fitting
 
-All files used by the tutorial -- e.g., example data files, the iPython
+All files used by the tutorial -- e.g., example data files, the IPython
 notebook file itself -- should go in this directory. Now you can start writing
 the tutorial! Simply change directories into this new path and start up an
-iPython notebook server::
+IPython notebook server:
 
     cd tutorials/Spectral-Line-Fitting
     ipython notebook --matplotlib inline
@@ -57,21 +55,19 @@ Create a new notebook file, and write away! Remember to place any extra files
 used by the tutorial in the directory with the notebook file, and place them
 under git version control.
 
-You will also need to create a tutorial metadata file in the same directory.
-The metadata file contains any extra information about the tutorial you may
-want to add and must be named `metadata.cfg`. The file is just a plain text
-configuration file containing key-value pairs separated by a colon. This file
+You will also need to edit the notebook file metadata. The metadata contains
+any extra information about the tutorial you may want to add. The metadata
 must contain, at minimum, the following fields:
 
 - link_name (the name of the link which will appear in the list of tutorials)
 - author
 - date (month year, e.g. 'July 2013')
 
-An example of one of these files can be found `here
-<https://github.com/adrn/astropy-tutorials/blob/master/tutorials/FITS-Header/metadata.cfg>`_.
+An example of one of these files can be found [here]
+(https://github.com/adrn/astropy-tutorials/blob/master/tutorials/FITS-Header/FITS-header.ipynb).
 
 When you feel like your tutorial is complete, push your local branch up to your
-fork of the repository on github (by default, named 'origin')::
+fork of the repository on github (by default, named 'origin'):
 
     git push origin Spectral-Line-Fitting
 
@@ -82,8 +78,7 @@ repository for review.
 Data Files
 ----------
 
-For tutorial authors
-^^^^^^^^^^^^^^^^^^^^
+### For tutorial authors
 
 If your tutorial includes large data files (where large means >~ 1 MB), we
 don't want them in the astropy/astropy-tutorials git repository, as that will
@@ -95,35 +90,35 @@ when you have large data files.
 * When writing your tutorial, just include the files in your tutorial's
   directory (e.g., ``tutorials/My-tutorial-name/mydatafile.fits``).  Those who
   are reviewing your tutorial will have to download them, but they would need
-  them anyway, so it's ok. *IMPORTANT*: when you add or modify data files, make
+  them anyway, so it's ok. _IMPORTANT_: when you add or modify data files, make
   sure the only thing in that commit involves the data files.  That is, do
-  *not* edit your notebook and add/change data files in the same commit.  This
+  _not_ edit your notebook and add/change data files in the same commit.  This
   will make it much easier to remove the data files when your tutorial is
   actually merged.
 
 * To actually access your data files in the notebook, do something like this at
-  the top of the notebook::
+  the top of the notebook:
 
-	from astropy.utils.data import download_file
+      from astropy.utils.data import download_file
 
-	tutorialpath = ''
-	mydatafilename1 = download_file(tutorialpath + 'mydatafile1.fits', cache=True)
-	mydatafilename2 = download_file(tutorialpath + 'mydatafile2.dat', cache=True)
+      tutorialpath = ''
+      mydatafilename1 = download_file(tutorialpath + 'mydatafile1.fits', cache=True)
+      mydatafilename2 = download_file(tutorialpath + 'mydatafile2.dat', cache=True)
 
-  And then use them like this::
+  And then use them like this:
 
-    fits.open(mydatafilename1)
-    ...
-    with open(mydatafilename2) as f:
-        ...
+      fits.open(mydatafilename1)
+      ...
+      with open(mydatafilename2) as f:
+          ...
 
   If you do this, the only change necessary on merging your notebook will be to
   set `tutorialpath` to
   ``'http://data.astropy.org/tutorials/My-tutorial-name/'``.
 
 
-For repository maintainers
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+### For repository maintainers
+
 If this above procedure is followed, you only need to do these steps when merging your pull request:
 
 1. Do ``git rebase -i`` and delete the commits that include the data files
