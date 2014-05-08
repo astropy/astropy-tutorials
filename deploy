@@ -1,19 +1,17 @@
 #!/bin/bash
 
+GH_PAGESBRANCH=gh-pages
 GH_REMOTE=origin
 
-if [[ -z "$1" ]]; then
-    GH_PAGESBRANCH=gh-pages
-else
-    GH_PAGESBRANCH="$1"
-fi
+# get current git branch name - should throw an error if in a detached state
+current_branch_name="$(git symbolic-ref --short HEAD)"
 
-echo "*********************************************************************"
-echo "WARNING! This script will remove the local branch '$GH_PAGESBRANCH',"
+echo "*****************************************************************"
+echo "WARNING! This script will remove the local gh-pages branch,"
 echo "build the notebook files into HTML, then push to remote gh-pages"
-echo "located here: $GH_REMOTE/$GH_PAGESBRANCH."
+echo "located here: $GH_REMOTE/gh-pages."
 echo
-echo "Make sure you have no uncommitted changes in your master branch"
+echo "Make sure you have no uncommitted changes in your current branch"
 echo "as these may be overwritten!"
 echo
 read -p "Are you sure you want to do this? [y/N] " -n 1 -r
@@ -36,11 +34,11 @@ then
         exit;
     fi
 
-    # remove the old gh-pages branch
-    OUTPUT=`git branch -D gh-pages`
+    # remove the old $GH_PAGESBRANCH branch
+    OUTPUT=`git branch -D $GH_PAGESBRANCH`
     if [[ $OUTPUT == *fatal* ]]
     then
-        echo "Error deleting gh-pages branch.";
+        echo "Error deleting branch '$GH_PAGESBRANCH'.";
         exit;
     fi
 
@@ -71,21 +69,21 @@ then
         echo "\n"
     fi
 
-    read -p "Are you sure you want to push to live gh-pages? [y/N] " -n 1 -r
+    read -p "Are you sure you want to push to the remote branch '$GH_PAGESBRANCH'? [y/N] " -n 1 -r
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         echo "\n"
-        echo "Pushing to gh-pages branch"
+        echo "Pushing to $GH_PAGESBRANCH"
         git push -f $GH_REMOTE $GH_PAGESBRANCH
 
-        git checkout -f master
+        git checkout -f current_branch_name
         git clean -f
-        git branch -D gh-pages
+        git branch -D $GH_PAGESBRANCH
     else
         echo "\n"
         echo "You're now in an orphaned test deploy branch."
         echo "To get back to normal you can run the following:"
-        echo "    git checkout -f master"
+        echo "    git checkout -f current_branch_name"
         echo "    git clean -f"
-        echo "    git branch -D gh-pages"
+        echo "    git branch -D $GH_PAGESBRANCH"
     fi
 fi
