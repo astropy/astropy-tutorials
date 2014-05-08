@@ -53,7 +53,6 @@ def walk_through_tutorials(only_published=True, selected_nb_re=None):
             base,ext = os.path.splitext(filename)
 
             if ext.lower() == ".ipynb" and "checkpoint" not in base:
-                print(filename)
                 full_filename = os.path.join(tutorial_path, filename)
                 notebook = read(open(full_filename), 'json')
                 is_published = notebook['metadata']['astropy-tutorials'].get('published', False)
