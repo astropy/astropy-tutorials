@@ -1,12 +1,17 @@
 #!/bin/bash
 
-GH_PAGESBRANCH=gh-pages
 GH_REMOTE=origin
 
-echo "*****************************************************************"
-echo "WARNING! This script will remove the local gh-pages branch,"
+if [[ -z "$1" ]]; then
+    GH_PAGESBRANCH=gh-pages
+else
+    GH_PAGESBRANCH="$1"
+fi
+
+echo "*********************************************************************"
+echo "WARNING! This script will remove the local branch '$GH_PAGESBRANCH',"
 echo "build the notebook files into HTML, then push to remote gh-pages"
-echo "located here: $GH_REMOTE/gh-pages."
+echo "located here: $GH_REMOTE/$GH_PAGESBRANCH."
 echo
 echo "Make sure you have no uncommitted changes in your master branch"
 echo "as these may be overwritten!"
