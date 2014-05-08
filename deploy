@@ -75,14 +75,14 @@ then
         echo "Pushing to $GH_PAGESBRANCH"
         git push -f $GH_REMOTE $GH_PAGESBRANCH
 
-        git checkout -f current_branch_name
+        git checkout -f $current_branch_name
         git clean -f
         git branch -D $GH_PAGESBRANCH
     else
         echo "\n"
         echo "You're now in an orphaned test deploy branch."
         echo "To get back to normal you can run the following:"
-        echo "    git checkout -f current_branch_name"
+        echo "    git checkout -f $current_branch_name"
         echo "    git clean -f"
         echo "    git branch -D $GH_PAGESBRANCH"
     fi
