@@ -28,7 +28,7 @@
 # You can also deploy your own backend outside of matplotlib by
 # referring to the module name (which must be in the PYTHONPATH) as
 # 'module://my_backend'
-backend      : MacOSX
+# backend      : MacOSX
 
 # if you are runing pyplot inside a GUI and your backend choice
 # conflicts, we will automatically try and find a compatible one for
@@ -113,7 +113,7 @@ font.family          : monospace
 # settings for axes and ticks. Special text sizes can be defined
 # relative to font.size, using the following values: xx-small, x-small,
 # small, medium, large, x-large, xx-large, larger, or smaller
-font.size           : 10.0
+font.size           : 14.0
 # font.serif          : Bitstream Vera Serif, New Century Schoolbook, Century Schoolbook L, Utopia, ITC Bookman, Bookman, Nimbus Roman No9 L, Times New Roman, Times, Palatino, Charter, serif
 #font.sans-serif     : Bitstream Vera Sans, Lucida Grande, Verdana, Geneva, Lucid, Arial, Helvetica, Avant Garde, sans-serif
 #font.cursive        : Apple Chancery, Textile, Zapf Chancery, Sand, cursive
@@ -219,10 +219,10 @@ axes.color_cycle    : 348ABD, 7A68A6, A60628, 467821, CF4457, 188487, E24A33
                       # A60628 : red
                       # CF4457 : pink
                       # 467821 : green
-                                            
-                                            
-                                            
-                                            
+
+
+
+
                                             # color cycle for plot lines
                                             # as list of string colorspecs:
                                             # single letter, long name, or
@@ -273,8 +273,8 @@ legend.fancybox      : True  # if True, use a rounded box for the
 
 ### FIGURE
 # See http://matplotlib.sourceforge.net/api/figure_api.html#matplotlib.figure.Figure
-figure.figsize   : 11, 8    # figure size in inches
-#figure.dpi       : 80      # figure dots per inch
+figure.figsize   : 8, 6    # figure size in inches
+# figure.dpi       : 150      # figure dots per inch
 figure.facecolor : 0.85    # figure facecolor; 0.75 is scalar gray
 figure.edgecolor : 0.50   # figure edgecolor
 
@@ -322,7 +322,7 @@ figure.subplot.hspace  : 0.5    # the amount of height reserved for white space 
 # the default savefig params can be different from the display params
 # Eg, you may want a higher resolution, or to make the figure
 # background white
-#savefig.dpi       : 100      # figure dots per inch
+savefig.dpi       : 72      # figure dots per inch
 #savefig.facecolor : white    # figure facecolor when saving
 #savefig.edgecolor : white    # figure edgecolor when saving
 #savefig.extension : auto     # what extension to use for savefig('foo'), or 'auto'
