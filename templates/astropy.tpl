@@ -27,9 +27,9 @@
 
 </div>
 
+<!-- This javascript hides tracebacks, but inserts a button to
+     let the user toggle showing the full traceback. -->
 <script type='text/javascript'>
-    // $('.output_pyerr').html('...');
-
     var parent = $('.output_pyerr');
     var b = $("<button></button><br>").appendTo(parent);
     b.attr('name', 'toggle_err');
