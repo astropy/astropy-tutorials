@@ -16,14 +16,14 @@ Test deploy
 
 If you'd instead like to test running and converting the notebooks, use the `prepare_deploy.py`script. You can run the notebook files with:
 
-    python prepare_deploy run
+    python prepare_deploy.py run
 
 and convert them with:
 
-    python prepare_deploy convert
+    python prepare_deploy.py convert
 
 or combine the commands:
 
-    python prepare_deploy run convert
+    python prepare_deploy.py run convert
 
 The converted html files will appear in the `html` path.
