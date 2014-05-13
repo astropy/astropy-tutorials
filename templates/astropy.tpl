@@ -38,6 +38,9 @@
 
     $('button[name=toggle_err]').click(function() {
         $(this).parent().children('pre').toggle();
+        $(this).parent().parent().children('.prompt').toggle();
+        $(this).parent().parent().children('.prompt').toggle();
+        //$(this).parent().parent().children('.prompt').show();
     });
 
     $('.output_pyerr pre').hide();
