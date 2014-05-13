@@ -27,4 +27,23 @@
 
 </div>
 
+<!-- This javascript hides tracebacks, but inserts a button to
+     let the user toggle showing the full traceback. -->
+<script type='text/javascript'>
+    var parent = $('.output_pyerr');
+    var b = $("<button></button><br>").appendTo(parent);
+    b.attr('name', 'toggle_err');
+    b.html('Show/hide full traceback');
+    b.attr("class", "btn");
+
+    $('button[name=toggle_err]').click(function() {
+        $(this).parent().children('pre').toggle();
+        $(this).parent().parent().children('.prompt').toggle();
+        $(this).parent().parent().children('.prompt').toggle();
+    });
+
+    $('.output_pyerr pre').hide();
+
+</script>
+
 {%- endblock body %}
