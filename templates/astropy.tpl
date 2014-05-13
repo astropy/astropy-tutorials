@@ -27,4 +27,21 @@
 
 </div>
 
+<script type='text/javascript'>
+    // $('.output_pyerr').html('...');
+
+    var parent = $('.output_pyerr');
+    var b = $("<button></button><br>").appendTo(parent);
+    b.attr('name', 'toggle_err');
+    b.html('Show/hide full traceback');
+    b.attr("class", "btn");
+
+    $('button[name=toggle_err]').click(function() {
+        $(this).parent().children('pre').toggle();
+    });
+
+    $('.output_pyerr pre').hide();
+
+</script>
+
 {%- endblock body %}
