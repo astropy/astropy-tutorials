@@ -142,12 +142,17 @@ def convert_notebooks(selected_nb_re=None):
         index_listing = dict()
         index_listing["link_path"] = "{}.html".format(cleanbase)
         index_listing["link_name"] = nb['metadata']['astropy-tutorials']['link_name']
+        index_listing["description"] = nb['metadata']['astropy-tutorials']['description']
         index_list.append(index_listing)
 
     # Make an index of all notes
     entries = []
     for page in sorted(index_list, key=lambda x: x['link_name']): # sort on tutorial name
-        entries.append('      <li><a href="{0[link_path]}">{0[link_name]}</a></li>'.format(page))
+        entry_html = "<li>"
+        entry_html += "<a href='{0[link_path]}''>{0[link_name]}</a>".format(page)
+        entry_html += "<br/><span>{0[description]}</span>".format(page)
+        entry_html += "</li>"
+        entries.append(entry_html)
 
     with open(os.path.join(current_directory,'html','index.html'), 'w') as f:
         f.write(INDEX_TEMPLATE.format(entries='\n'.join(entries)))
