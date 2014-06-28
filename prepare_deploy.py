@@ -128,6 +128,17 @@ def convert_notebooks(selected_nb_re=None):
         app.notebooks = [os.path.join(path,filename)]
         app.start()
 
+        # HACK to set title and other things in rendered notebook
+        html_filename = "{}.html".format(os.path.join(html_base,cleanbase))
+        with open(html_filename, 'rb') as f:
+            html_file_data = f.read()
+
+        with open(html_filename, 'wb') as f:
+            html_file_data = html_file_data.decode("utf-8")
+            html_file_data = html_file_data.replace("{title}",
+                                nb['metadata']['astropy-tutorials']['link_name'])
+            f.write(html_file_data.encode("utf8"))
+
         index_listing = dict()
         index_listing["link_path"] = "{}.html".format(cleanbase)
         index_listing["link_name"] = nb['metadata']['astropy-tutorials']['link_name']
