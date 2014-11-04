@@ -1,4 +1,4 @@
-/* Ripped from the main astropy website */
+/* Ripped from the main astropy website with some modifications*/
 /* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
    License: none (public domain)
@@ -50,7 +50,7 @@ table {
 
 body{
     line-height: 1.25em;
-    font-size: 14px;
+    font-size: 16px;
     color:#333;
     font-family: 'Open Sans', sans-serif;
 }
@@ -79,18 +79,19 @@ a:hover{
 }
 
 h1{
-    font-size: 24px;
+    font-size: 28px;
+    font-weight: bold;
     margin-top: 10px;
     margin-bottom: 20px;
 }
 
 h2{
-    font-size: 20px;
+    font-size: 24px;
     margin-bottom: 10px;
 }
 
 h3{
-    font-size: 16px;
+    font-size: 20px;
     margin: 20px 0px 10px 0px;
     
 }
@@ -288,7 +289,7 @@ nav .pull-right{
     font-size: 12pt;
 }
 
-li {
+.tutorials li {
     padding-top: 10px;
     padding-bottom: 10px;
 }
