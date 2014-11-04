@@ -109,7 +109,7 @@ strong{
 
 section{
     border-bottom: 1px #efefef solid;
-    padding: 30px 0 30px;
+    padding: 20px 0 20px;
     clear: both;
 }
 
@@ -292,4 +292,5 @@ nav .pull-right{
 .tutorials li {
     padding-top: 10px;
     padding-bottom: 10px;
+    margin-bottom: 0;
 }
