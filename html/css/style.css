@@ -238,12 +238,14 @@ nav ul{
 nav ul li{
     display:inline;
     list-style: none;
-    margin: 10px;
+    display: block;
+    margin: 0;
 }
 
-
 nav li a, nav li a:link{
-    color:white;
+    color:#fff;
+    font-size: 22px;
+    font-weight: 300;
 }
 nav li a:hover{
     color:#FF5000;
