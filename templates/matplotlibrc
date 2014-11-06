@@ -202,6 +202,7 @@ axes.edgecolor      : black   # axes edge color
 axes.linewidth      : 1        # edge linewidth
 axes.grid           : True     # display grid or not
 axes.titlesize      : x-large  # fontsize of the axes title
+axes.labelweight     : bold
 axes.labelsize      : large    # fontsize of the x any y labels
 axes.labelcolor     : black
 axes.axisbelow      : True     # whether axis gridlines and ticks are below
