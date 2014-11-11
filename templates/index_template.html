@@ -8,7 +8,6 @@
 
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:200,300,400italic,400,700' rel='stylesheet' type='text/css' />
 <link rel="stylesheet" type="text/css" href="css/style.css" />
-<!--<link rel="stylesheet" type="text/css" href="../css/jquery.sidr.light.css" />-->
 
 
 <title>Astropy Tutorials</title>
@@ -20,11 +19,13 @@
 <body>
 
 <div id="wrapper">
-    <nav style="font-size: 140%; color: #fff; font-weight: 300;">
-        <a href="http://www.astropy.org">
-            <img src="images/astropy_word_32.png" style="vertical-align: middle;"/>
-        </a>
-        <li><a href="http://tutorials.astropy.org/">tutorials</a></li>
+    <nav>
+        <a href="http://www.astropy.org"><img src="images/astropy_word_32.png"/></a>
+        <div id="navigation">
+            <ul>
+                <li style="margin-top: 7px"><a href="http://tutorials.astropy.org">Tutorials</a></li>
+            </ul>
+        </div>
     </nav>
     <section>
 
@@ -35,14 +36,16 @@
     </section>
     <section class="tutorials">
 
-    <h2>Tutorial Index</h2>
+    <h2>List of Tutorials</h2>
     <ul>
 {entries}
     </ul>
 
     </section>
 
-    <section> 
+    <section class="contributing">
+
+    <h2>Contributing</h2> 
 
         <p>We welcome <b>feedback</b> and improvements to these tutorials via the <a href="https://github.com/astropy/astropy-tutorials">Astropy Tutorials repo on Github</a>. If you find a typo or would like to clarify some text, please either <a href="https://github.com/astropy/astropy-tutorials/issues/new">create an issue</a> or make the change yourself and then submit a pull request directly to the <a href="https://github.com/astropy/astropy-tutorials">repository</a>. Questions and/or comments about the tutorials are welcome on the <a href="https://groups.google.com/forum/#!forum/astropy-dev">astropy-dev</a> mailing list.</p>
 
