@@ -135,8 +135,8 @@ def convert_notebooks(selected_nb_re=None):
 
         with open(html_filename, 'wb') as f:
             html_file_data = html_file_data.decode("utf-8")
-            html_file_data = html_file_data.replace("{title}",
-                                nb['metadata']['astropy-tutorials']['link_name'])
+            html_file_data = html_file_data.replace("{title}",nb['metadata']['astropy-tutorials']['link_name'])
+            html_file_data = html_file_data.replace("{pageurl}","{}.html".format(cleanbase))
             f.write(html_file_data.encode("utf8"))
 
         index_listing = dict()
