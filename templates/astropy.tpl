@@ -26,7 +26,15 @@
     </nav>
 
     {{ super() }}
-
+	<div style="top:0px; border:1px">
+    <table border="1" align="center">
+     <tr height="100%">
+      <td height="100%" width="100%" valign="middle" align="center">
+	  <a href="https://github.com/astropy/astropy-tutorials/tree/master/tutorials/{pageurl}">Edit on Github  <img src="images/gitlogo.png" height=40px width=40px/></a>
+      </td>
+     </tr>
+    </table>
+  </div>
 </div>
 
 <!-- This javascript hides tracebacks, but inserts a button to
