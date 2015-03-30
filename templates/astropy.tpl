@@ -32,7 +32,7 @@
     <table border="1" align="center">
      <tr height="100%">
       <td height="100%" width="100%" valign="middle" align="center">
-	  <a href="https://github.com/astropy/astropy-tutorials/tree/master/tutorials/{abspageurl}">Edit on Github  <img src="images/gitlogo.png" height=40px width=40px/></a>
+	  <a href="https://github.com/astropy/astropy-tutorials/tree/master/tutorials/{abspageurl}">Edit on Github  <img src="https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png" height=25px width=25px/></a>
       </td>
      </tr>
     </table>
