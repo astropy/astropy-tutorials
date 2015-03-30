@@ -28,15 +28,18 @@
     {{ super() }}
 	
 	<!-- Edit on Github link -->
-	<div style="top:0px; border:1px">
-    <table border="1" align="center">
-     <tr height="100%">
-      <td height="100%" width="100%" valign="middle" align="center">
-	  <a href="https://github.com/astropy/astropy-tutorials/tree/master/tutorials/{abspageurl}">Edit on Github  <img src="https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png" height=25px width=25px/></a>
-      </td>
-     </tr>
-    </table>
-  </div>
+	<div>
+		<table border="1" align="center" cellpadding="7%">
+		 <tr height="100%">
+		  <td height="25" width="100%" valign="middle" align="center">
+		  <a href="https://github.com/astropy/astropy-tutorials/tree/master/tutorials/{abspageurl}">Edit on Github  <img src="https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png" height=100% width=25px/></a>
+		  </td>
+		 </tr>
+		</table>
+	</div>
+	
+  <br>
+  <br>
   
   <!--Disqus Comment Section -->
 	
@@ -58,6 +61,7 @@
 			s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
 			(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
 		}());
+	</script>
 	<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
 	
 	<!--End of comments section-->
