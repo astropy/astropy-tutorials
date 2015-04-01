@@ -28,14 +28,8 @@
     {{ super() }}
 	
 	<!-- Edit on Github link -->
-	<div>
-		<table border="1" align="center" cellpadding="7%">
-		 <tr height="100%">
-		  <td height="25" width="100%" valign="middle" align="center">
+	<div style='margin-top:15px;text-align:center;'>
 		  <a href="https://github.com/astropy/astropy-tutorials/tree/master/tutorials/{abspageurl}">Edit on Github  <img src="https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png" height=100% width=25px/></a>
-		  </td>
-		 </tr>
-		</table>
 	</div>
 	
   <br>
