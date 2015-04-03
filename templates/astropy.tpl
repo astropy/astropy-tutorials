@@ -27,17 +27,25 @@
 
     {{ super() }}
 	
+	<!-- Author and Date Information -->
+	
+	<div class="clearfix" style='margin-top:20px;'>
+		<ul>
+			<span style="float: left;"><b>Author: </b>{author}</span> 
+			<span style="float: right;"><b>Date Created: </b> {date}</span>
+		</ul>
+	</div>
+	
 	<!-- Edit on Github link -->
-	<div style='margin-top:15px;text-align:center;'>
+	
+	<div id="github_edit" style='margin-top:15px;text-align:center;'>
 		  <a href="https://github.com/astropy/astropy-tutorials/tree/master/tutorials/{abspageurl}">Edit on Github  <img src="https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png" height=100% width=25px/></a>
 	</div>
 	
-  <br>
-  <br>
-  
+
   <!--Disqus Comment Section -->
 	
-	<div id="disqus_thread"></div>
+	<div id="disqus_thread" style='margin-top:50px;'></div>
 	<script type="text/javascript">
 		/* * * CONFIGURATION VARIABLES * * */
 		var disqus_shortname = 'astropytutorials'; //registered short name of astropy tutorials 
