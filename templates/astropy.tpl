@@ -40,7 +40,7 @@
 	<div id="disqus_thread"></div>
 	<script type="text/javascript">
 		/* * * CONFIGURATION VARIABLES * * */
-		var disqus_shortname = '<forum shortname>'; //required <forum shortname> with short name of astropy  
+		var disqus_shortname = 'astropytutorials'; //registered short name of astropy tutorials 
 		var disqus_identifier= '{pageurl}';
 		var disqus_url = 'http://www.astropy.org/astropy-tutorials/{pageurl}';
 		/* * * DON'T EDIT BELOW THIS LINE * * */
