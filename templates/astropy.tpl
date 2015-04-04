@@ -24,23 +24,19 @@
             </ul>
         </div>
     </nav>
-
-    {{ super() }}
 	
-	<!-- Author and Date Information -->
 	
-	<div class="clearfix" style='margin-top:20px;'>
+	<!-- Author and Date Information & Edit on Github Link-->
+	
+	<div class="clearfix" style='margin-top:25px;margin-left:12%;'>
 		<ul>
 			<span style="float: left;"><b>Author: </b>{author}</span> 
-			<span style="float: right;"><b>Date Created: </b> {date}</span>
+			<span style="float: right"><a href="https://github.com/astropy/astropy-tutorials/tree/master/tutorials/{abspageurl}">Edit on Github  <img src="https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png" height=100% width=25px/></a></span>
+			<br><span style="float: left;"><b>Date Created: </b> {date}</span>
 		</ul>
 	</div>
 	
-	<!-- Edit on Github link -->
-	
-	<div id="github_edit" style='margin-top:15px;text-align:center;'>
-		  <a href="https://github.com/astropy/astropy-tutorials/tree/master/tutorials/{abspageurl}">Edit on Github  <img src="https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png" height=100% width=25px/></a>
-	</div>
+    {{ super() }}
 	
 
   <!--Disqus Comment Section -->
