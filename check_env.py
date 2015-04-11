@@ -13,6 +13,7 @@ from astropy import log as logger
 def check_environment(tutorial=None):
     error=False
     enter=False
+    warnings=False
     logger.info("Running Environment Tests...")
     _orig_path = os.getcwd()
     tutorials_base = os.path.join(_orig_path,'tutorials')
@@ -26,15 +27,22 @@ def check_environment(tutorial=None):
                     data=json.load(data_file)
                     for pkgname in data:
                         for subinfo in data[pkgname]:
-                            if(not minversion(pkgname,subinfo)):
-                                logger.error("Package "+pkgname+" doesn't satisfy requirements of Tutorial: "+tutorial_name)
-                                error=True
+                            if subinfo=='min_version':
+                                if(not minversion(pkgname,data[pkgname][subinfo])):
+                                    logger.error("Package "+pkgname+" doesn't satisfy requirements of Tutorial: "+tutorial_name)
+                                    error=True
+                            elif subinfo=='pref_version':
+                                if(not minversion(pkgname,data[pkgname][subinfo])):
+                                    logger.warning("Please upgrade Package "+pkgname+" to version "+data[pkgname][subinfo]+" for Tutorial: "+tutorial_name)
+                                    warnings=True
             except:
                 logger.error("Environment Check Failed ! requirements.json not found");
 
     if enter==False:
         logger.error("Wrong tutorial name entered !")
         return
+    if warnings==True:
+        logger.warning("Please resolve the above warnings soon")
     if error==False:
         logger.info("Environment Check Passed")
     else:
@@ -109,7 +117,7 @@ def resolve_name(name):
     return ret
 
 
-def minversion(module, version, inclusive=True, version_path='__version__'):
+def minversion(module, version,inclusive=True, version_path='__version__'):
     """
     Returns `True` if the specified Python module satisfies a minimum version
     requirement, and `False` if not.
@@ -146,7 +154,6 @@ def minversion(module, version, inclusive=True, version_path='__version__'):
     >>> minversion(astropy, '0.4.4')
     True
     """
-
     if isinstance(module, types.ModuleType):
         module_name = module.__name__
     elif isinstance(module, six.string_types):
@@ -169,7 +176,6 @@ def minversion(module, version, inclusive=True, version_path='__version__'):
         from pkg_resources import parse_version
     except ImportError:
         from distutils.version import LooseVersion as parse_version
-
     if inclusive:
         return parse_version(have_version) >= parse_version(version)
     else:
