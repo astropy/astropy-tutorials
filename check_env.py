@@ -10,47 +10,57 @@ import six
 
 from astropy import log as logger
 
+
 def check_environment(tutorial=None):
-    error=False
-    enter=False
-    warnings=False
+    error = False
+    enter = False
+    warnings = False
     logger.info("Running Environment Tests...")
     _orig_path = os.getcwd()
-    tutorials_base = os.path.join(_orig_path,'tutorials')
-    for tutorial_name in os.listdir(tutorials_base) :
-        if (tutorial_name==tutorial or tutorial==None):
-            enter=True
+    tutorials_base = os.path.join(_orig_path, 'tutorials')
+    for tutorial_name in os.listdir(tutorials_base):
+        if (tutorial_name == tutorial or tutorial is None):
+            enter = True
             tutorial_path = os.path.join(tutorials_base, tutorial_name)
             try:
-                with open((tutorial_path+"/requirements.json")) as data_file:
-                    data=json.load(data_file)
+                with open((tutorial_path + "/requirements.json")) as data_file:
+                    data = json.load(data_file)
                     for pkgname in data:
                         for subinfo in data[pkgname]:
-                            if subinfo=='min_version':
-                                if(not minversion(pkgname,data[pkgname][subinfo])):
-                                    logger.error("Package "+pkgname+" doesn't satisfy requirements of Tutorial: "+tutorial_name)
-                                    error=True
-                            elif subinfo=='pref_version':
-                                if(not minversion(pkgname,data[pkgname][subinfo])):
-                                    logger.warning("Please upgrade Package "+pkgname+" to version "+data[pkgname][subinfo]+" for Tutorial: "+tutorial_name)
-                                    warnings=True
+                            if subinfo == 'min_version':
+                                if(not minversion(pkgname, data[pkgname][subinfo])):
+                                    logger.error(
+                                        "Package " +
+                                        pkgname +
+                                        " doesn't satisfy requirements of Tutorial: " +
+                                        tutorial_name)
+                                    error = True
+                            elif subinfo == 'pref_version':
+                                if(not minversion(pkgname, data[pkgname][subinfo])):
+                                    logger.warning(
+                                        "Please upgrade Package " +
+                                        pkgname +
+                                        " to version " +
+                                        data[pkgname][subinfo] +
+                                        " for Tutorial: " +
+                                        tutorial_name)
+                                    warnings = True
             except IOError:
-                logger.error("Environment Check Failed ! requirements.json not found");
+                logger.error(
+                    "Environment Check Failed ! requirements.json not found")
 
-    if enter==False:
+    if not enter:
         logger.error("Wrong tutorial name entered !")
         return
-    if warnings==True:
+    if warnings:
         logger.warning("Please resolve the above warnings soon")
-    if error==False:
+    if not error:
         logger.info("Environment Check Passed")
     else:
         logger.info("Please resolve the above errors to continue!")
 
 
-
-
-#ripped off from astropy.utils.introspection
+# ripped off from astropy.utils.introspection
 
 
 def resolve_name(name):
@@ -115,7 +125,7 @@ def resolve_name(name):
     return ret
 
 
-def minversion(module, version,inclusive=True, version_path='__version__'):
+def minversion(module, version, inclusive=True, version_path='__version__'):
     """
     Returns `True` if the specified Python module satisfies a minimum version
     requirement, and `False` if not.
@@ -185,7 +195,7 @@ if __name__ == "__main__":
 
     # Define parser object
     parser = ArgumentParser(description="Checking environment for tutorials")
-    parser.add_argument("-n","--nameregex", default=None,
+    parser.add_argument("-n", "--nameregex", default=None,
                         help="A regular expression to select the names of the "
                              "notebooks to be processed.  If not given, all "
                              "notebooks will be used.")
