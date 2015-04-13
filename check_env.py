@@ -21,9 +21,8 @@ def check_environment(tutorial=None):
         if (tutorial_name==tutorial or tutorial==None):
             enter=True
             tutorial_path = os.path.join(tutorials_base, tutorial_name)
-            os.chdir(tutorial_path)
             try:
-                with open("requirements.json") as data_file:
+                with open((tutorial_path+"/requirements.json")) as data_file:
                     data=json.load(data_file)
                     for pkgname in data:
                         for subinfo in data[pkgname]:
@@ -35,7 +34,7 @@ def check_environment(tutorial=None):
                                 if(not minversion(pkgname,data[pkgname][subinfo])):
                                     logger.warning("Please upgrade Package "+pkgname+" to version "+data[pkgname][subinfo]+" for Tutorial: "+tutorial_name)
                                     warnings=True
-            except:
+            except IOError:
                 logger.error("Environment Check Failed ! requirements.json not found");
 
     if enter==False:
@@ -48,7 +47,6 @@ def check_environment(tutorial=None):
     else:
         logger.info("Please resolve the above errors to continue!")
 
-    os.chdir(_orig_path)
 
 
 
