@@ -48,13 +48,14 @@ def check_environment(tutorial=None):
                     data = json.load(data_file)
                     # Check for all the packages to be imported
                     for pkgname in data:
-                        for subinfo in data[pkgname]:  # Check for versioning
+                        # Check for versioning
+                        for subinfo in data[pkgname]:
                             if subinfo == 'min_version':
                                 if(not minversion(pkgname, data[pkgname][subinfo])):
                                     logger.error(
                                         "Package " +
                                         pkgname +
-                                        " doesn't satisfy requirements of Tutorial: " +
+                                        " is either missing or is out of date to run Tutorial: " +
                                         tutorial_name)
                                     error = True
                                     #Package is Missing
@@ -74,19 +75,24 @@ def check_environment(tutorial=None):
                     "Environment Check Failed ! requirements.json not found")
 
     if not enter:
-        logger.error("Wrong tutorial name entered !")
-        # Tutorial name passed to the function is absent from the repository
+        logger.error(
+            "Tutorial " +
+            tutorial +
+            " is either missing or does not exist ")
+        # Tutorial name passed to the function is absent from the
+        # repository
         return
-    if warnings:
-        logger.warning("Please resolve the above warnings soon")
-    if not error:
+    elif warnings:
+        logger.warning("Environment Check passed with warnings")
+    elif not error and not warnings:
         logger.info("Environment Check Passed")
-    else:
+    elif error:
         logger.info("Please resolve the above errors to continue!")
 
+'''
+Functions resolve_name() and minversion()copied from astropy.utils.introspection
 
-# Functions resolve_name() and minversion()copied from
-# astropy.utils.introspection
+'''
 
 
 def resolve_name(name):
