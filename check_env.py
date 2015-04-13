@@ -1,3 +1,20 @@
+'''
+Environment check script for Astropy tutorials:
+This script checks to if the python environement in the user's computer is safe for running all or a single tutorial.
+The requirements are present in requirements.json files in the respective tutorial folders.
+
+To run this script type,
+
+$_ python check_env.py -n <tutorial_name>
+
+or
+
+$_ python prepare_deploy.py check -n <tutorial_name>
+
+
+If tutorial name is not provided the environement for all tutorials will be checked
+
+'''
 from __future__ import (absolute_import, division, print_function,
                         unicode_literals)
 # Standard library
@@ -13,20 +30,25 @@ from astropy import log as logger
 
 def check_environment(tutorial=None):
     error = False
-    enter = False
     warnings = False
+    # enter checks if the tutorial name passed by user exists in the repository
+    enter = False
     logger.info("Running Environment Tests...")
     _orig_path = os.getcwd()
     tutorials_base = os.path.join(_orig_path, 'tutorials')
     for tutorial_name in os.listdir(tutorials_base):
         if (tutorial_name == tutorial or tutorial is None):
             enter = True
-            tutorial_path = os.path.join(tutorials_base, tutorial_name)
+            tutorial_path = os.path.join(
+                tutorials_base,
+                tutorial_name)  # Path to tutorial folder
             try:
                 with open((tutorial_path + "/requirements.json")) as data_file:
+                    # Import data from json file
                     data = json.load(data_file)
+                    # Check for all the packages to be imported
                     for pkgname in data:
-                        for subinfo in data[pkgname]:
+                        for subinfo in data[pkgname]:  # Check for versioning
                             if subinfo == 'min_version':
                                 if(not minversion(pkgname, data[pkgname][subinfo])):
                                     logger.error(
@@ -35,6 +57,7 @@ def check_environment(tutorial=None):
                                         " doesn't satisfy requirements of Tutorial: " +
                                         tutorial_name)
                                     error = True
+                                    #Package is Missing
                             elif subinfo == 'pref_version':
                                 if(not minversion(pkgname, data[pkgname][subinfo])):
                                     logger.warning(
@@ -45,12 +68,14 @@ def check_environment(tutorial=None):
                                         " for Tutorial: " +
                                         tutorial_name)
                                     warnings = True
+                                    # Out of date package is present
             except IOError:
                 logger.error(
                     "Environment Check Failed ! requirements.json not found")
 
     if not enter:
         logger.error("Wrong tutorial name entered !")
+        # Tutorial name passed to the function is absent from the repository
         return
     if warnings:
         logger.warning("Please resolve the above warnings soon")
@@ -60,7 +85,8 @@ def check_environment(tutorial=None):
         logger.info("Please resolve the above errors to continue!")
 
 
-# ripped off from astropy.utils.introspection
+# Functions resolve_name() and minversion()copied from
+# astropy.utils.introspection
 
 
 def resolve_name(name):
@@ -190,6 +216,7 @@ def minversion(module, version, inclusive=True, version_path='__version__'):
         return parse_version(have_version) > parse_version(version)
 
 
+# Accept Command line arguments
 if __name__ == "__main__":
     from argparse import ArgumentParser
 
@@ -201,4 +228,4 @@ if __name__ == "__main__":
                              "notebooks will be used.")
 
     args = parser.parse_args()
-    check_environment(args.nameregex)
+    check_environment(args.nameregex)  # name passed to check_env function
