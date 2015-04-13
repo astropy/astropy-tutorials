@@ -71,6 +71,7 @@ def check_environment(tutorial=None):
                                     warnings = True
                                     # Out of date package is present
             except IOError:
+                error = True
                 logger.error(
                     "Environment Check Failed ! requirements.json not found")
 
