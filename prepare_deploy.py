@@ -177,7 +177,9 @@ if __name__ == "__main__":
                         help='The action(s) to take when running the script. '
                              '"run" means to just run the notebooks, while '
                              '"convert" will use nbconvert to turn them to '
-                             'convert them to HTML.')
+                             'convert them to HTML.'
+                             '"check" will use check_env.py to check the '
+                             'environment for any missing or outdated packages')
 
     args = parser.parse_args()
 
