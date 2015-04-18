@@ -6,8 +6,17 @@ GH_REMOTE=origin
 # get current git branch name - should throw an error if in a detached state
 current_branch_name="$(git symbolic-ref --short HEAD)"
 
+giveup_message () {
+    echo "\n"
+    echo "You're now in an orphaned test deploy branch."
+    echo "To get back to normal you can run the following:"
+    echo "    git checkout -f $current_branch_name"
+    echo "    git clean -f"
+    echo "    git branch -D $GH_PAGESBRANCH" 
+}
+
 echo "*****************************************************************"
-echo "WARNING! This script will remove the local gh-pages branch,"
+echo "WARNING! This script will remove the local $GH_PAGESBRANCH branch,"
 echo "build the notebook files into HTML, then push to remote gh-pages"
 echo "located here: $GH_REMOTE/gh-pages."
 echo
@@ -63,27 +72,36 @@ then
 
     read -p "Would you like to preview the rendered HTML? [y/N] " -n 1 -r
     if [[ $REPLY =~ ^[Yy]$ ]]; then
-        echo "\n\n"
+        echo
+        echo
         open index.html
     else
-        echo "\n"
+        echo
     fi
 
-    read -p "Are you sure you want to push to the remote branch '$GH_PAGESBRANCH'? [y/N] " -n 1 -r
+    read -p "Are you sure you want to push to the remote branch '$GH_PAGESBRANCH' on the remote '$GH_REMOTE'? [y/N] " -n 1 -r
     if [[ $REPLY =~ ^[Yy]$ ]]; then
-        echo "\n"
-        echo "Pushing to $GH_PAGESBRANCH"
+        echo
+        git ls-remote --exit-code $GH_REMOTE > /dev/null 2> /dev/null
+        while [[ $? != 0 ]]
+        do
+            read -p "Could not communicate with remote '$GH_REMOTE'.  Enter an alternate remote name (or 'quit' to give up):" -r
+            if [[ $REPLY = "quit" ]]; then
+                giveup_message
+                exit  
+            fi
+            GH_REMOTE=$REPLY
+
+            git ls-remote --exit-code $GH_REMOTE > /dev/null 2> /dev/null
+        done
+
+        echo "Pushing to '$GH_PAGESBRANCH' on remote '$GH_REMOTE'"
         git push -f $GH_REMOTE $GH_PAGESBRANCH
 
         git checkout -f $current_branch_name
         git clean -f
         git branch -D $GH_PAGESBRANCH
     else
-        echo "\n"
-        echo "You're now in an orphaned test deploy branch."
-        echo "To get back to normal you can run the following:"
-        echo "    git checkout -f $current_branch_name"
-        echo "    git clean -f"
-        echo "    git branch -D $GH_PAGESBRANCH"
+        giveup_message
     fi
 fi
