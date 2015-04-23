@@ -65,13 +65,15 @@ IPython notebook server:
     cd tutorials/Spectral-Line-Fitting
     ipython notebook --matplotlib inline
 
-Create a new notebook file, and write away! Remember to place any extra files
+Create a new notebook file, and write away! (Following the Content Guidelines above.) 
+Remember to place any extra files
 used by the tutorial in the directory with the notebook file, and place them
 under git version control.
 
-You will also need to edit the notebook file metadata. The metadata contains
-any extra information about the tutorial you may want to add. The metadata
-must contain, at minimum, the following fields:
+You will also need to edit the notebook file metadata. 
+(IPython notebook --> edit menu --> edit notebook metadata)
+The metadata contains any extra information about the tutorial you may want to add. 
+The metadata must contain, at minimum, the following fields:
 
 - link_name (the name of the link which will appear in the list of tutorials)
 - author
