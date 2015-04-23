@@ -1,0 +1,89 @@
+#!/bin/bash
+
+GH_PAGESBRANCH=gh-pages
+GH_REMOTE=origin
+
+# get current git branch name - should throw an error if in a detached state
+current_branch_name="$(git symbolic-ref --short HEAD)"
+
+echo "*****************************************************************"
+echo "WARNING! This script will remove the local gh-pages branch,"
+echo "build the notebook files into HTML, then push to remote gh-pages"
+echo "located here: $GH_REMOTE/gh-pages."
+echo
+echo "Make sure you have no uncommitted changes in your current branch"
+echo "as these may be overwritten!"
+echo
+read -p "Are you sure you want to do this? [y/N] " -n 1 -r
+echo
+if [[ $REPLY =~ ^[Yy]$ ]]
+then
+    # first run the notebooks
+    OUTPUT=`python prepare_deploy.py run`
+    if [[ $OUTPUT == *ERROR* ]]
+    then
+        echo "Error running notebook files!";
+        exit;
+    fi
+
+    # then convert the notebooks to HTML
+    OUTPUT=`python prepare_deploy.py convert`
+    if [[ $OUTPUT == *ERROR* ]]
+    then
+        echo "Error converting notebook files to HTML!";
+        exit;
+    fi
+
+    # remove the old $GH_PAGESBRANCH branch
+    OUTPUT=`git branch -D $GH_PAGESBRANCH`
+    if [[ $OUTPUT == *fatal* ]]
+    then
+        echo "Error deleting branch '$GH_PAGESBRANCH'.";
+        exit;
+    fi
+
+    # Create a new "orphaned" branch -- we don't need history for
+    # the built products
+    git checkout --orphan $GH_PAGESBRANCH
+
+    # Copy the built files to a tmp location
+    cp -R html _tmp
+
+    # This will delete all of the git-managed files here
+    git rm -rf .
+
+    # Now copy the html back into here
+    cp -R _tmp/* .
+    rm -rf _tmp
+
+    git add *.html
+    git add images
+    git add css
+    git commit -m "Generated from sources"
+
+    read -p "Would you like to preview the rendered HTML? [y/N] " -n 1 -r
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        echo "\n\n"
+        open index.html
+    else
+        echo "\n"
+    fi
+
+    read -p "Are you sure you want to push to the remote branch '$GH_PAGESBRANCH'? [y/N] " -n 1 -r
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        echo "\n"
+        echo "Pushing to $GH_PAGESBRANCH"
+        git push -f $GH_REMOTE $GH_PAGESBRANCH
+
+        git checkout -f $current_branch_name
+        git clean -f
+        git branch -D $GH_PAGESBRANCH
+    else
+        echo "\n"
+        echo "You're now in an orphaned test deploy branch."
+        echo "To get back to normal you can run the following:"
+        echo "    git checkout -f $current_branch_name"
+        echo "    git clean -f"
+        echo "    git branch -D $GH_PAGESBRANCH"
+    fi
+fi

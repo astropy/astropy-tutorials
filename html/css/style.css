@@ -1,0 +1,300 @@
+/* Ripped from the main astropy website with some modifications*/
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+body {
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+body{
+    line-height: 1.25em;
+    font-size: 16px;
+    color:#333;
+    font-family: 'Open Sans', sans-serif;
+}
+
+#wrapper{
+    margin:0 auto;
+    max-width:960px; 
+    padding:0 10px;
+    min-width: 320px; /* min-width of whole site */
+}
+
+a{
+    color: #FF5000;
+    text-decoration: none;
+}
+a, svg{
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+a:hover{
+    color:#333;
+}
+
+h1{
+    font-size: 28px;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+h2{
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+h3{
+    font-size: 20px;
+    margin: 20px 0px 10px 0px;
+    
+}
+
+p{
+    margin-bottom: 10px;
+    margin-top: 10px;
+    line-height: 1.5em;
+}
+
+strong{
+    font-weight: bold;
+
+}
+
+section{
+    border-bottom: 1px #efefef solid;
+    padding: 20px 0 20px;
+    clear: both;
+}
+
+section:first-of-type{
+    margin-top:42px;
+}
+
+section:last-of-type{
+    border-bottom: 0px;
+}
+
+section *:last-child{
+    margin-bottom: 0px;
+}
+
+ul li{
+    list-style-type: square;
+    list-style-position: outside;
+    list-style-color:  #FF5000;
+    line-height: 1.5em;
+    margin-bottom:0.5em;
+    margin-left: 30px;
+}
+
+ul li:last-child{
+    margin-bottom: 0px;
+}
+
+cite{
+    font-family: monospace;
+}
+
+pre{
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    padding: 10px;
+    color: black;
+    font-family: Monaco, Andale Mono, Courier New, monospace;
+    webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    margin-bottom: 5px;
+}
+
+.button{
+    padding: 8px;
+    display: inline-block;
+    background-image: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    color-stop(0, #FC9468),
+    color-stop(0.89, #FF5100)
+    );
+    background-image: -o-linear-gradient(bottom, #FC9468 0%, #FF5100 89%);
+    background-image: -moz-linear-gradient(bottom, #FC9468 0%, #FF5100 89%);
+    background-image: -webkit-linear-gradient(bottom, #FC9468 0%, #FF5100 89%);
+    background-image: -ms-linear-gradient(bottom, #FC9468 0%, #FF5100 89%);
+    background-image: linear-gradient(to bottom, #FC9468 0%, #FF5100 89%);
+}
+
+a.button, .button a{
+    color: white;
+}
+
+
+p .button{
+    padding-top:0px;
+    padding-bottom:0px;
+    padding-right:4px;
+    padding-left:4px;
+}
+
+.button:hover{
+    cursor: pointer;
+    background-image: -webkit-gradient(
+        linear,
+        left top,
+        left bottom,
+        color-stop(0, #FFA47D),
+        color-stop(1, #FF7D45)
+    );
+    background-image: -o-linear-gradient(bottom, #FFA47D 0%, #FF7D45 100%);
+    background-image: -moz-linear-gradient(bottom, #FFA47D 0%, #FF7D45 100%);
+    background-image: -webkit-linear-gradient(bottom, #FFA47D 0%, #FF7D45 100%);
+    background-image: -ms-linear-gradient(bottom, #FFA47D 0%, #FF7D45 100%);
+    background-image: linear-gradient(to bottom, #FFA47D 0%, #FF7D45 100%);
+}
+
+
+.right{
+    float: right;
+}
+
+/* nav */
+nav{
+    line-height: 42px;
+    position:absolute;
+    left:0px;
+    top:0px;
+    width:100%;
+    background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0, #222222),color-stop(0.89, #333333));
+    background-image: -o-linear-gradient(bottom, #222222 0%, #333333 89%);
+    background-image: -moz-linear-gradient(bottom, #222222 0%, #333333 89%);
+    background-image: -webkit-linear-gradient(bottom, #222222 0%, #333333 89%);
+    background-image: -ms-linear-gradient(bottom, #222222 0%, #333333 89%);
+    background-image: linear-gradient(to bottom, #222222 0%, #333333 89%);
+}
+
+nav > *{
+    display:inline-block;
+    vertical-align:top;
+}
+
+nav img{
+    float: left;
+    margin-left: 20px;
+    margin-top: 5px;
+}
+
+nav ul{
+    max-width:960px;
+    margin: 0;  
+    padding: 0;
+}
+
+nav ul li{
+    display:inline;
+    list-style: none;
+    display: block;
+    margin: 0;
+}
+
+nav li a, nav li a:link{
+    color:#fff;
+    font-size: 22px;
+    font-weight: 300;
+}
+nav li a:hover{
+    color:#FF5000;
+}
+
+nav li a.active{
+    color:#FF5000;
+}
+
+nav .pull-right{
+    float: right;
+    margin-right:10px;
+}
+
+
+/*
+    IPython overrides
+*/
+
+/* Tweaks to make a bit more responsive in conjuction with astropy scheme */
+
+@media (max-width: 355px) {
+
+    #wrapper {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    body {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+    .text_cell_render {
+        padding-left: 0px;
+        padding-right: 0px;
+    }
+
+}
+
+.container {
+    max-width: 900px;
+    font-size: 12pt;
+}
+
+.tutorials li {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 0;
+}
+
+
+/*
+    Notebook styling
+*/
+
+#notebook p {
+    font-size: 16px;
+    line-height: 20px;
+}
+
+#notebook code, pre{
+    padding:0 3px 2px;
+    font-family: monospace;
+    word-wrap: break-word;
+}
+
+#notebook pre {
+    font-size:14px;
+    line-height: 17px;
+}

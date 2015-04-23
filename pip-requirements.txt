@@ -1,0 +1,2 @@
+IPython>=2.0
+astropy>=0.3
