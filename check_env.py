@@ -1,9 +1,9 @@
 '''
-Environment check script for Astropy tutorials:
-This script checks to if the python environement in the user's computer is safe for running all or a single tutorial.
+Environment checking script for Astropy tutorials:
+This script checks to see if the python environement in the user's computer is safe for running all the tutroials or a specific tutorial.
 The requirements are present in requirements.json files in the respective tutorial folders.
 
-To run this script type,
+To run this script ,type the following from the main astropy-tutorials directory,
 
 $_ python check_env.py -n <tutorial_name>
 
@@ -12,7 +12,7 @@ or
 $_ python prepare_deploy.py check -n <tutorial_name>
 
 
-If tutorial name is not provided the environement for all tutorials will be checked
+If a specific tutorial name is not provided, the environement will be checked for all tutorials
 
 '''
 from __future__ import (absolute_import, division, print_function,
@@ -24,6 +24,7 @@ import inspect
 import sys
 import types
 import six
+
 
 from astropy import log as logger
 
