@@ -3,7 +3,7 @@ Environment checking script for Astropy tutorials:
 This script checks to see if the python environement in the user's computer is safe for running all the tutroials or a specific tutorial.
 The requirements are present in requirements.json files in the respective tutorial folders.
 
-To run this script ,type the following from the main astropy-tutorials directory,
+To run this script ,type the following commands from the main astropy-tutorials directory,
 
 $_ python check_env.py -n <tutorial_name>
 
@@ -26,13 +26,19 @@ import types
 import six
 
 
-from astropy import log as logger
+try:
+    from astropy import log as logger
+except ImportError:
+    import logging
+    logging.error(
+        '"astropy" package is missing from the Python environement \n Head over to www.astropy.org to read the installation instructions.')
+    quit()
 
 
 def check_environment(tutorial=None):
     error = False
     warnings = False
-    # enter checks if the tutorial name passed by user exists in the repository
+    # 'enter' checks if the tutorial name passed by user exists in the repository
     enter = False
     logger.info("Running Environment Tests...")
     _orig_path = os.getcwd()
