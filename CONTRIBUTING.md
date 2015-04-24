@@ -17,6 +17,25 @@ file also contains metadata about the tutorial such as the author's name, month
 and year it was written, and any other information that should be associated
 with the tutorial.
 
+Content Guidelines
+--------
+Narrative:
+- Please read through the other tutorials to get a sense of the desired tone and length. We want to demo ~2-3 functionalities of a given package.
+- Use the first-person inclusive plural ("we"). For example, "We are going to make a plot which..", "Above, we did it the hard way, but here is the easier  way..."
+- Avoid belitting words such as "obviously" and "just". For example, "we just have to do this one thing."
+- Include brief explanations and descriptions
+- Include links to relevant documentation
+- Include Exercises at the end
+- Include approximate time to complete
+
+Code:
+- Demonstrate good commenting practice
+- Demonstrate best practices of variable names
+- As much as possible, comply with [PEP8](https://www.python.org/dev/peps/pep-0008/)
+
+Description:
+- Compile a list of the functions and packages the tutorial demonstartes and include a short a description with the pull request. 
+
 Procedure
 ---------
 
@@ -51,13 +70,15 @@ IPython notebook server:
     cd tutorials/Spectral-Line-Fitting
     ipython notebook --matplotlib inline
 
-Create a new notebook file, and write away! Remember to place any extra files
+Create a new notebook file, and write away! (Following the Content Guidelines above.) 
+Remember to place any extra files
 used by the tutorial in the directory with the notebook file, and place them
 under git version control.
 
-You will also need to edit the notebook file metadata. The metadata contains
-any extra information about the tutorial you may want to add. The metadata
-must contain, at minimum, the following fields:
+You will also need to edit the notebook file metadata. 
+(IPython notebook --> edit menu --> edit notebook metadata)
+The metadata contains any extra information about the tutorial you may want to add. 
+The metadata must contain, at minimum, the following fields:
 
 - link_name (the name of the link which will appear in the list of tutorials)
 - author
