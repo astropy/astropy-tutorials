@@ -33,6 +33,9 @@ Code:
 - Demonstrate best practices of variable names
 - As much as possible, comply with [PEP8](https://www.python.org/dev/peps/pep-0008/)
 
+Description:
+- Compile a list of the functions and packages the tutorial demonstartes and include a short a description with the pull request. 
+
 Procedure
 ---------
 
