@@ -23,13 +23,18 @@ import json
 import inspect
 import sys
 import types
-import six
-
 
 try:
     from astropy import log as logger
 except ImportError:
     import logging as logger
+
+try:
+    import six
+except ImportError:
+    logger.error("Python library 'six' is missing and is required to run this script.\
+    \nFor more information visit https://pypi.python.org/pypi/six")
+    quit()
 
 
 def check_environment(tutorial=None):
