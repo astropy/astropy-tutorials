@@ -28,6 +28,7 @@ try:
     from astropy import log as logger
 except ImportError:
     import logging as logger
+    #If astropy is not present, use Python's native logger
 
 try:
     import six
@@ -35,6 +36,7 @@ except ImportError:
     logger.error("Python library 'six' is missing and is required to run this script.\
     \nFor more information visit https://pypi.python.org/pypi/six")
     quit()
+    #six is required for checking the versions. If not present, stop immediately
 
 
 def check_environment(tutorial=None):
