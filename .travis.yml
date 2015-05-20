@@ -13,4 +13,3 @@ install:
 
 script:
     - python prepare_deploy.py run
-
