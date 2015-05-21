@@ -15,7 +15,7 @@ export CONDA_INSTALL="conda install --yes python=$PYTHON_VERSION numpy=$NUMPY_VE
 $CONDA_INSTALL pytest Cython jinja2 psutil
 
 # TUTORIALS DEPENDENCIES
-$CONDA_INSTALL ipython ipython-notebook
+$CONDA_INSTALL ipython ipython-notebook runipy
 
 # OPTIONAL DEPENDENCIES
 $CONDA_INSTALL scipy h5py matplotlib pyyaml
