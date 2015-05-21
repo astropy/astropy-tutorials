@@ -11,8 +11,11 @@ conda install --yes numpy=$NUMPY_VERSION
 # versions are always explicitly specified.
 export CONDA_INSTALL="conda install --yes python=$PYTHON_VERSION numpy=$NUMPY_VERSION astropy=$ASTROPY_VERSION"
 
-# CORE DEPENDENCIES
+# ASTROPY CORE DEPENDENCIES
 $CONDA_INSTALL pytest Cython jinja2 psutil
+
+# TUTORIALS DEPENDENCIES
+$CONDA_INSTALL ipython
 
 # OPTIONAL DEPENDENCIES
 $CONDA_INSTALL scipy h5py matplotlib pyyaml
