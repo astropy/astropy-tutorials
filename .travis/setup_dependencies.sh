@@ -9,7 +9,7 @@ conda install --yes numpy=$NUMPY_VERSION
 
 # Now set up shortcut to conda install command to make sure the Python and Numpy
 # versions are always explicitly specified.
-export CONDA_INSTALL="conda install --yes python=$PYTHON_VERSION numpy=$NUMPY_VERSION"
+export CONDA_INSTALL="conda install --yes python=$PYTHON_VERSION numpy=$NUMPY_VERSION astropy=$ASTROPY_VERSION"
 
 # CORE DEPENDENCIES
 $CONDA_INSTALL pytest Cython jinja2 psutil

@@ -7,6 +7,7 @@ env:
     global:
         - NUMPY_VERSION=1.9
         - PYTHON_VERSION=2.7
+        - ASTROPY_VERSION=1.0.2
 
 install:
     - source .travis/setup_environment.sh
