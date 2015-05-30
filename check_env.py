@@ -24,23 +24,20 @@ import json
 try:
     import astropy
 except ImportError:
-    import logging as logger
-    logger.error("'Astropy' package is missing and is a core dependency to run this script.\
-    \nFor more information visit http://www.astropy.org/")
-    quit()
+    raise ImportError("'Astropy' package is missing and is a core dependency "
+                      "to run this script. For more information visit "
+                      "http://www.astropy.org/")
     #Astropy is necessary to run tutorials of astropy. If not present, stop immediately
-
-
-from astropy import log as logger
 
 try:
     import six
 except ImportError:
-    logger.error("Python library 'six' is missing and is required to run this script.\
-    \nFor more information visit https://pypi.python.org/pypi/six")
-    quit()
+    raise ImportError("'Six' package is missing and is a core dependency "
+                      "to run this script. For more information visit "
+                      "https://pypi.python.org/pypi/six/")
     #six is required for checking the versions. If not present, stop immediately
 
+from astropy import log as logger
 
 def check_environment(tutorial=None):
     error = False
