@@ -31,7 +31,7 @@
 	<div class="clearfix" style='margin-top:25px;margin-left:12%;'>
 		<ul>
 			<span style="float: left;"><b>Author: </b>{author}</span> 
-			<span style="float: right"><a href="https://github.com/astropy/astropy-tutorials/tree/master/tutorials/{abspageurl}">Edit on Github  <img src="https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png" height=100% width=25px/></a></span>
+			<span style="float: right"><a href="https://github.com/astropy/astropy-tutorials/tree/master/tutorials/{abspageurl}">Edit this tutorial on GitHub <img src="https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png" height="25px" width="25px" /></a></span>
 			<br><span style="float: left;"><b>Date Created: </b> {date}</span>
 		</ul>
 	</div>
