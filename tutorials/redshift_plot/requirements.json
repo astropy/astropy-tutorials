@@ -1,0 +1,8 @@
+{
+    "astropy": {
+        "min_version": "0.4"
+    }, 
+    "matplotlib": {
+        "min_version": "1.0"
+    }
+}
