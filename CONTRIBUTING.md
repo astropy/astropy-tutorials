@@ -30,7 +30,9 @@ Narrative:
 
 Code:
 - Demonstrate good commenting practice
-- Demonstrate best practices of variable names
+- Demonstrate best practices of variable names. 
+   - Variables should be all lower case with words separated by underscores.
+   - Variable names should be descriptive. E.g., galaxy_mass, u_mag.
 - As much as possible, comply with [PEP8](https://www.python.org/dev/peps/pep-0008/)
 
 Description:
