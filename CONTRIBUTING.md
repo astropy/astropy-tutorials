@@ -87,7 +87,13 @@ The metadata must contain, at minimum, the following fields:
 - date (month year, e.g. 'July 2013')
 
 An example of one of these files can be found [here]
-(https://github.com/astropy/astropy-tutorials/blob/master/tutorials/FITS-header/FITS-header.ipynb).
+(https://github.com/astropy/astropy-tutorials/blob/master/tutorials/FITS-header/FITS-header.ipynb) (be sure to hit the "raw" button to see the metadata).
+
+You will also need to specify any python packages that the tutorial depends on.
+Almost always this will include a specific version of `astropy`, and perhaps other affiliated packages.
+You do this by placing a file called `requirements.json` in the directory that contains the tutorial notebook file.
+To see in example of that, have a look at [this one]
+(https://github.com/astropy/astropy-tutorials/blob/master/tutorials/FITS-header/requirements.json).
 
 When you feel like your tutorial is complete, push your local branch up to your
 fork of the repository on github (by default, named 'origin'):
