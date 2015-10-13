@@ -1,7 +1,10 @@
 #!/bin/bash
 
-GH_PAGESBRANCH=gh-pages
-GH_REMOTE=origin
+# this conditional assignment means you can do things like:
+# GH_REMOTE=myremote ./deploy
+# to set these to something othere than the default
+: ${GH_PAGESBRANCH=gh-pages}
+: ${GH_REMOTE=origin}
 
 # get current git branch name - should throw an error if in a detached state
 current_branch_name="$(git symbolic-ref --short HEAD)"
