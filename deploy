@@ -117,7 +117,13 @@ then
         done
 
         echo "Pushing to '$GH_PAGESBRANCH' on remote '$GH_REMOTE'"
-        git push -f $GH_REMOTE $GH_PAGESBRANCH
+        if [ "$INTERACTIVE" = true ] ; then
+            git push -f $GH_REMOTE $GH_PAGESBRANCH
+        else
+            # we do this with nothing to stdout because otherwise it might reveal secret tokens
+            git push -f --quiet $GH_REMOTE $GH_PAGESBRANCH >/dev/null 2>&1
+            echo "Silent push finished."
+        fi
 
         git checkout -f $CURRENT_BRANCH_NAME
         git clean -f
