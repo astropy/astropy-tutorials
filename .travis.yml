@@ -11,9 +11,18 @@ env:
         - NUMPY_VERSION=1.9
         - PYTHON_VERSION=2.7
         - ASTROPY_VERSION=1.0.2
+        - GH_REF: github.com/astropy/astropy-tutorials.git
+        - secure: "NBZlEg//sDYvJikqXESLsx/WA1Nj7fAH2mJfI8ZVMnolvyjJuLdEMxxEYFP8t6U/iieSSrgUkgP94yy5Oq6iJRjj7ThGCdcjgvgWTQCzoQgEVDc5SzdJGyGs30VC+8t7GTobzMe086HX16SJRvsIumqXdmRcJjAdMCyhMUxLoUg="
 
 install:
     - source .travis/setup_environment.sh
 
 script:
     - python prepare_deploy.py run
+
+deploy:
+    provider: script
+    script: ./travis_deploy
+    on:
+        repo: astropy/astropy-tutorials
+        branch: master

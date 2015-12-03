@@ -2,20 +2,38 @@
 
 # this conditional assignment means you can do things like:
 # GH_REMOTE=myremote ./deploy
-# to set these to something othere than the default
+# to set these to something other than the default
+
+# branches and remote for pushing to github
 : ${GH_PAGESBRANCH=gh-pages}
 : ${GH_REMOTE=origin}
 
-# get current git branch name - should throw an error if in a detached state
-current_branch_name="$(git symbolic-ref --short HEAD)"
+# if not interactive, automatically "yes" things but don't show anything
+: ${INTERACTIVE=true}
+: ${CURRENT_BRANCH_NAME="$(git symbolic-ref --quiet --short HEAD)"}
+
+if [ -z "$CURRENT_BRANCH_NAME" ]; then 
+    echo "Could not determine current branch.  Cannot continue with deployment." 
+    exit 1
+fi
 
 giveup_message () {
     echo "\n"
     echo "You're now in an orphaned test deploy branch."
     echo "To get back to normal you can run the following:"
-    echo "    git checkout -f $current_branch_name"
+    echo "    git checkout -f $CURRENT_BRANCH_NAME"
     echo "    git clean -f"
     echo "    git branch -D $GH_PAGESBRANCH" 
+}
+
+promptifinteractive () {
+    # first argument is message, second is non-interactive answer, all others passed to read
+    if [ "$INTERACTIVE" = true ] ; then
+        read -p "$1" -r "${@:3}" 
+    else
+        echo $1 $2
+        REPLY=$2
+    fi
 }
 
 echo "*****************************************************************"
@@ -26,7 +44,7 @@ echo
 echo "Make sure you have no uncommitted changes in your current branch"
 echo "as these may be overwritten!"
 echo
-read -p "Are you sure you want to do this? [y/N] " -n 1 -r
+promptifinteractive "Are you sure you want to do this? [y/N] " y -n 1
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
@@ -73,7 +91,7 @@ then
     git add css
     git commit -m "Generated from sources"
 
-    read -p "Would you like to preview the rendered HTML? [y/N] " -n 1 -r
+    promptifinteractive "Would you like to preview the rendered HTML? [y/N] " N -n 1
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         echo
         echo
@@ -82,13 +100,13 @@ then
         echo
     fi
 
-    read -p "Are you sure you want to push to the remote branch '$GH_PAGESBRANCH' on the remote '$GH_REMOTE'? [y/N] " -n 1 -r
+    promptifinteractive "Are you sure you want to push to the remote branch '$GH_PAGESBRANCH' on the remote '$GH_REMOTE'? [y/N] " y -n 1
     if [[ $REPLY =~ ^[Yy]$ ]]; then
         echo
         git ls-remote --exit-code $GH_REMOTE > /dev/null 2> /dev/null
         while [[ $? != 0 ]]
         do
-            read -p "Could not communicate with remote '$GH_REMOTE'.  Enter an alternate remote name (or 'quit' to give up):" -r
+            promptifinteractive "Could not communicate with remote '$GH_REMOTE'.  Enter an alternate remote name (or 'quit' to give up):" quit
             if [[ $REPLY = "quit" ]]; then
                 giveup_message
                 exit  
@@ -99,9 +117,15 @@ then
         done
 
         echo "Pushing to '$GH_PAGESBRANCH' on remote '$GH_REMOTE'"
-        git push -f $GH_REMOTE $GH_PAGESBRANCH
+        if [ "$INTERACTIVE" = true ] ; then
+            git push -f $GH_REMOTE $GH_PAGESBRANCH
+        else
+            # we do this with nothing to stdout because otherwise it might reveal secret tokens
+            git push -f --quiet $GH_REMOTE $GH_PAGESBRANCH >/dev/null 2>&1
+            echo "Silent push finished."
+        fi
 
-        git checkout -f $current_branch_name
+        git checkout -f $CURRENT_BRANCH_NAME
         git clean -f
         git branch -D $GH_PAGESBRANCH
     else
