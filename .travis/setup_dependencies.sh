@@ -18,5 +18,4 @@ $CONDA_INSTALL pytest Cython jinja2 psutil
 $CONDA_INSTALL ipython ipython-notebook runipy
 
 # OPTIONAL DEPENDENCIES
-$CONDA_INSTALL scipy h5py matplotlib pyyaml
-pip install beautifulsoup4
+$CONDA_INSTALL scipy h5py matplotlib pyyaml beautifulsoup4
