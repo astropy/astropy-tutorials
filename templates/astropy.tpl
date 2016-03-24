@@ -5,6 +5,10 @@
 
 <title>{title}</title>
 
+<!-- Google analytics -->
+<!-- Note that this will *not* work locally - it only works for the actual deployed copy, for which ../js leads to astropy.org/js -->
+<script src="../js/analytics.js"></script>
+
 {{ super() }}
 
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:200,300,400italic,400,700' rel='stylesheet' type='text/css' />
