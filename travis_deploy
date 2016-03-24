@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# The key element here is using ``travis encrypt GH_TOKEN=<github personal token>``
+# and then adding the resulting secure key/value pair to .travis.yml .  For security,
+# probably best to use an account that only has access to this specific repo, not 
+# someone's personal token with general access to all of their stuff.
+
+echo "Adding deployment remote"
+git remote add deploy "https://${GH_TOKEN}@${GH_REF}"
+
+export CURRENT_BRANCH_NAME="$(git rev-parse HEAD)"
+export INTERACTIVE=false 
+export GH_REMOTE=deploy
+export GH_PAGESBRANCH="test-gh-pages"  # remove this to get deployment on the "real branch"
+./deploy

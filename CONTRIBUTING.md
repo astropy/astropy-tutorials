@@ -7,7 +7,7 @@ Overview
 Each tutorial is essentially an [IPython notebook](http://ipython.org/notebook.html)
 file. The notebooks are each saved in a separate directory within the `tutorials`
 subdirectory in this project. Let's look in [FITS-Header]
-(https://github.com/astropy/astropy-tutorials/tree/master/tutorials/FITS-Header)
+(https://github.com/astropy/astropy-tutorials/tree/master/tutorials/FITS-header)
 as an example. There is a single IPython notebook file that contains the text
 and code for the tutorial, and a FITS file used in the tutorial. The notebook
 file is automatically run and converted into a static HTML page ([example]
@@ -16,6 +16,27 @@ the tutorial listing on http://tutorials.astropy.org. Each tutorial notebook
 file also contains metadata about the tutorial such as the author's name, month
 and year it was written, and any other information that should be associated
 with the tutorial.
+
+Content Guidelines
+--------
+Narrative:
+- Please read through the other tutorials to get a sense of the desired tone and length. We want to demo ~2-3 functionalities of a given package.
+- Use the first-person inclusive plural ("we"). For example, "We are going to make a plot which..", "Above, we did it the hard way, but here is the easier  way..."
+- Avoid belitting words such as "obviously" and "just". For example, "we just have to do this one thing."
+- Include brief explanations and descriptions
+- Include links to relevant documentation
+- Include Exercises at the end
+- Include approximate time to complete
+
+Code:
+- Demonstrate good commenting practice
+- Demonstrate best practices of variable names. 
+   - Variables should be all lower case with words separated by underscores.
+   - Variable names should be descriptive. E.g., galaxy_mass, u_mag.
+- As much as possible, comply with [PEP8](https://www.python.org/dev/peps/pep-0008/)
+
+Description:
+- Compile a list of the functions and packages the tutorial demonstartes and include a short a description with the pull request.
 
 Procedure
 ---------
@@ -51,20 +72,28 @@ IPython notebook server:
     cd tutorials/Spectral-Line-Fitting
     ipython notebook --matplotlib inline
 
-Create a new notebook file, and write away! Remember to place any extra files
+Create a new notebook file, and write away! (Following the Content Guidelines above.)
+Remember to place any extra files
 used by the tutorial in the directory with the notebook file, and place them
 under git version control.
 
-You will also need to edit the notebook file metadata. The metadata contains
-any extra information about the tutorial you may want to add. The metadata
-must contain, at minimum, the following fields:
+You will also need to edit the notebook file metadata.
+(IPython notebook --> edit menu --> edit notebook metadata)
+The metadata contains any extra information about the tutorial you may want to add.
+The metadata must contain, at minimum, the following fields:
 
 - link_name (the name of the link which will appear in the list of tutorials)
 - author
 - date (month year, e.g. 'July 2013')
 
 An example of one of these files can be found [here]
-(https://github.com/adrn/astropy-tutorials/blob/master/tutorials/FITS-Header/FITS-header.ipynb).
+(https://github.com/astropy/astropy-tutorials/blob/master/tutorials/FITS-header/FITS-header.ipynb) (be sure to hit the "raw" button to see the metadata).
+
+You will also need to specify any python packages that the tutorial depends on.
+Almost always this will include a specific version of `astropy`, and perhaps other affiliated packages.
+You do this by placing a file called `requirements.json` in the directory that contains the tutorial notebook file.
+To see in example of that, have a look at [this one]
+(https://github.com/astropy/astropy-tutorials/blob/master/tutorials/FITS-header/requirements.json).
 
 When you feel like your tutorial is complete, push your local branch up to your
 fork of the repository on github (by default, named 'origin'):
@@ -122,5 +151,5 @@ when you have large data files.
 If this above procedure is followed, you only need to do these steps when merging your pull request:
 
 1. Do ``git rebase -i`` and delete the commits that include the data files
-2. Upload the data files to http://data.astropy.org/tutorials/My-tutorial-name/
+2. Upload the data files to ``http://data.astropy.org/tutorials/My-tutorial-name/``
 3. Update the `tutorialpath` variable.

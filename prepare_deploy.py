@@ -10,6 +10,7 @@ import os
 import re
 import sys
 import shutil
+import check_env
 
 # protect for 2.* vs. 3.*
 try:
@@ -135,8 +136,11 @@ def convert_notebooks(selected_nb_re=None):
 
         with open(html_filename, 'wb') as f:
             html_file_data = html_file_data.decode("utf-8")
-            html_file_data = html_file_data.replace("{title}",
-                                nb['metadata']['astropy-tutorials']['link_name'])
+            html_file_data = html_file_data.replace("{title}",nb['metadata']['astropy-tutorials']['link_name'])
+            html_file_data = html_file_data.replace("{author}",nb['metadata']['astropy-tutorials']['author'])
+            html_file_data = html_file_data.replace("{date}",nb['metadata']['astropy-tutorials']['date'])
+            html_file_data = html_file_data.replace("{abspageurl}","{}".format(cleanbase))
+            html_file_data = html_file_data.replace("{pageurl}","{}.html".format(cleanbase))
             f.write(html_file_data.encode("utf8"))
 
         index_listing = dict()
@@ -172,11 +176,13 @@ if __name__ == "__main__":
                              "notebooks to be processed.  If not given, all "
                              "notebooks will be used.")
 
-    parser.add_argument('action', nargs='+', choices=['run', 'convert'],
+    parser.add_argument('action', nargs='+', choices=['run', 'convert','check'],
                         help='The action(s) to take when running the script. '
                              '"run" means to just run the notebooks, while '
                              '"convert" will use nbconvert to turn them to '
-                             'convert them to HTML.')
+                             'convert them to HTML.'
+                             '"check" will use check_env.py to check the '
+                             'environment for any missing or outdated packages')
 
     args = parser.parse_args()
 
@@ -193,3 +199,5 @@ if __name__ == "__main__":
             run_notebooks(args.nameregex)
         elif action == 'convert':
             convert_notebooks(args.nameregex)
+        elif action == 'check':
+            check_env.check_environment(args.nameregex)

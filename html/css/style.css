@@ -1,27 +1,52 @@
-/* Ripped from the main astropy website */
+/* Ripped from the main astropy website with some modifications*/
 /* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
    License: none (public domain)
 */
 
-#wrapper{
-    margin:0 auto;
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+body {
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
 
-    padding:0 10px;
-    max-width: 900px;
-    min-width: 320px; /* min-width of whole site */
-
+body{
     line-height: 1.25em;
     font-size: 16px;
     color:#333;
     font-family: 'Open Sans', sans-serif;
 }
 
-section a{
+#wrapper{
+    margin:0 auto;
+    max-width:960px; 
+    padding:0 10px;
+    min-width: 320px; /* min-width of whole site */
+}
+
+a{
     color: #FF5000;
     text-decoration: none;
 }
-section a, section svg{
+a, svg{
     -webkit-transition: all 0.3s ease;
     -moz-transition: all 0.3s ease;
     -o-transition: all 0.3s ease;
@@ -29,23 +54,42 @@ section a, section svg{
     transition: all 0.3s ease;
 }
 
-section a:hover{
+a:hover{
     color:#333;
 }
 
-section p {
+h1{
+    font-size: 28px;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+h2{
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+h3{
+    font-size: 20px;
+    margin: 20px 0px 10px 0px;
+    
+}
+
+p{
     margin-bottom: 10px;
     margin-top: 10px;
     line-height: 1.5em;
 }
 
-strong {
+strong{
     font-weight: bold;
+
 }
 
 section{
     border-bottom: 1px #efefef solid;
-    padding: 30px 0 30px;
+    padding: 20px 0 20px;
     clear: both;
 }
 
@@ -61,10 +105,88 @@ section *:last-child{
     margin-bottom: 0px;
 }
 
+ul li{
+    list-style-type: square;
+    list-style-position: outside;
+    list-style-color:  #FF5000;
+    line-height: 1.5em;
+    margin-bottom:0.5em;
+    margin-left: 30px;
+}
+
+ul li:last-child{
+    margin-bottom: 0px;
+}
+
+cite{
+    font-family: monospace;
+}
+
+pre{
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    padding: 10px;
+    color: black;
+    font-family: Monaco, Andale Mono, Courier New, monospace;
+    webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    margin-bottom: 5px;
+}
+
+.button{
+    padding: 8px;
+    display: inline-block;
+    background-image: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    color-stop(0, #FC9468),
+    color-stop(0.89, #FF5100)
+    );
+    background-image: -o-linear-gradient(bottom, #FC9468 0%, #FF5100 89%);
+    background-image: -moz-linear-gradient(bottom, #FC9468 0%, #FF5100 89%);
+    background-image: -webkit-linear-gradient(bottom, #FC9468 0%, #FF5100 89%);
+    background-image: -ms-linear-gradient(bottom, #FC9468 0%, #FF5100 89%);
+    background-image: linear-gradient(to bottom, #FC9468 0%, #FF5100 89%);
+}
+
+a.button, .button a{
+    color: white;
+}
+
+
+p .button{
+    padding-top:0px;
+    padding-bottom:0px;
+    padding-right:4px;
+    padding-left:4px;
+}
+
+.button:hover{
+    cursor: pointer;
+    background-image: -webkit-gradient(
+        linear,
+        left top,
+        left bottom,
+        color-stop(0, #FFA47D),
+        color-stop(1, #FF7D45)
+    );
+    background-image: -o-linear-gradient(bottom, #FFA47D 0%, #FF7D45 100%);
+    background-image: -moz-linear-gradient(bottom, #FFA47D 0%, #FF7D45 100%);
+    background-image: -webkit-linear-gradient(bottom, #FFA47D 0%, #FF7D45 100%);
+    background-image: -ms-linear-gradient(bottom, #FFA47D 0%, #FF7D45 100%);
+    background-image: linear-gradient(to bottom, #FFA47D 0%, #FF7D45 100%);
+}
+
+
+.right{
+    float: right;
+}
+
 /* nav */
-nav {
+nav{
     line-height: 42px;
-    height: 46px;
     position:absolute;
     left:0px;
     top:0px;
@@ -79,7 +201,7 @@ nav {
 
 nav > *{
     display:inline-block;
-    vertical-align:middle;
+    vertical-align:top;
 }
 
 nav img{
@@ -90,23 +212,24 @@ nav img{
 
 nav ul{
     max-width:960px;
-    margin:0 auto;
+    margin: 0;  
+    padding: 0;
 }
 
 nav ul li{
     display:inline;
     list-style: none;
-    margin: 10px;
+    display: block;
+    margin: 0;
 }
 
-
 nav li a, nav li a:link{
-    color:white;
-    text-decoration: none;
+    color:#fff;
+    font-size: 22px;
+    font-weight: 300;
 }
 nav li a:hover{
     color:#FF5000;
-    text-decoration: none;
 }
 
 nav li a.active{
@@ -117,6 +240,7 @@ nav .pull-right{
     float: right;
     margin-right:10px;
 }
+
 
 /*
     IPython overrides
@@ -148,7 +272,33 @@ nav .pull-right{
     font-size: 12pt;
 }
 
-li {
+.tutorials li {
     padding-top: 10px;
     padding-bottom: 10px;
+    margin-bottom: 0;
+}
+
+
+/*
+    Notebook styling
+*/
+
+#notebook p {
+    font-size: 16px;
+    line-height: 20px;
+}
+
+#notebook code, pre{
+    padding:0 3px 2px;
+    font-family: monospace;
+    word-wrap: break-word;
+}
+
+#notebook pre {
+    font-size:14px;
+    line-height: 17px;
+}
+
+#notebook sub {
+    line-height: 1;
 }

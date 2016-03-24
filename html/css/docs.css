@@ -3,6 +3,10 @@
 /*
   Bootstrap's documentation styles
   Special styles for presenting Bootstrap's documentation and examples
+
+  Note: if you want to make specific modifications for the tutorials' notebooks, 
+  it's probably better to go into the style.css (look for the #notebook selectors).
+  That way we can mostly keep them in one place.
 */
 
 
