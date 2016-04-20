@@ -6,3 +6,4 @@ tutorials/*/_run_*
 tutorials/*/*.fits
 tutorials/*/*.pdf
 tutorials/*/*.png
+*.pyc
