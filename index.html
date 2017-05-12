@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="description" content="Astropy. A Community Python Library for Astronomy." />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="shortcut icon" href="../favicon.ico" />
+
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:200,300,400italic,400,700' rel='stylesheet' type='text/css' />
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+
+
+<title>Astropy Tutorials</title>
+
+<!-- Google analytics -->
+<!-- Note that this will *not* work locally - it only works for the actual deployed copy, for which ../js leads to astropy.org/js -->
+<script src="../js/analytics.js"></script>
+</head>
+
+<body>
+
+<div id="wrapper">
+    <nav>
+        <a href="http://www.astropy.org"><img src="images/astropy_word_32.png"/></a>
+        <div id="navigation">
+            <ul>
+                <li style="margin-top: 7px"><a href="http://tutorials.astropy.org">Tutorials</a></li>
+            </ul>
+        </div>
+    </nav>
+    <section>
+
+    <h1> Astropy Tutorials</h1>
+        <p>The tutorials on this site walk through some typical software tasks and demonstrate the features in Astropy sub-packages in the context of a story or standard workflow. See the <a href="http://docs.astropy.org/">Astropy documentation</a> for a structured view of the functionality within the Astropy project.</p>
+
+
+    </section>
+    <section class="tutorials">
+
+    <h2>List of Tutorials</h2>
+    <ul>
+<li><a href='UVES.html''>Analyzing UVES Spectroscopy with Astropy</a><br/><span>This tutorial demonstrates the data analysis of MN Lup obtained with the UVES spectrograph on the VLT.</span></li>
+<li><a href='FITS-header.html''>Editing a FITS header</a><br/><span>Demonstrates how to read in, edit a FITS header, and then write it back out to disk using astropy.io.fits.</span></li>
+<li><a href='edshift_plot.html''>Making a plot with both redshift and universe age axes</a><br/><span>Demonstrates how to make a plot with both redshift and universe age axes, using astropy.cosmology and matplotlib.</span></li>
+<li><a href='plot-catalog.html''>Read and plot catalog information from a text file</a><br/><span>Demonstrates use of astropy.io.ascii for reading and writing ASCII data, astropy.coordinates and astropy.units for converting RA (as a sexagesimal angle) to decimal degrees, and matplotlib for making a color-magnitude diagram and on-sky locations in a mollweide projection.</span></li>
+<li><a href='Quantities.html''>Using Astropy Quantities for astrophysical calculations</a><br/><span>Demonstrates use of the astropy.units, astropy.constants, and the Quantity object for calculating the mass of a galaxy from its velocity dispersion and determining masses of molecular clouds from CO intensity maps. Includes use of matplotlib for making a histogram and an image with a colorbar. Also includes good practices for using quantities in functions you might distribute to other people.</span></li>
+<li><a href='Coordinates.html''>Using astropy.coordinates to Match Catalogs and Plan Observations</a><br/><span>Demonstrates use of astropy.coordinates for common tasks. Includes matching catalogs against each other, basic observing planning tasks, and basic usage of coordinates.</span></li>
+<li><a href='FITS-images.html''>Viewing and manipulating FITS images</a><br/><span>Demonstrates use of astropy.utils.data to download data; astropy.io.fits to open the file; matplotlib to view the image with different color scales and stretches and to make histrograms. Also includes method for simple image stacking.</span></li>
+<li><a href='FITS-tables.html''>Viewing and manipulating data from FITS tables</a><br/><span>astropy.utils.data to download the file, astropy.io.fits to open and view the file, matplotlib for making both 1D and 2D histograms of the data.</span></li>
+    </ul>
+
+    </section>
+
+    <section class="contributing">
+
+    <h2>Contributing</h2>
+
+        <p>We welcome <b>feedback</b> and improvements to these tutorials via the <a href="https://github.com/astropy/astropy-tutorials">Astropy Tutorials repo on Github</a>. If you find a typo or would like to clarify some text, please either <a href="https://github.com/astropy/astropy-tutorials/issues/new">create an issue</a> or make the change yourself and then submit a pull request directly to the <a href="https://github.com/astropy/astropy-tutorials">repository</a>. Questions and/or comments about the tutorials are welcome on the <a href="https://groups.google.com/forum/#!forum/astropy-dev">astropy-dev</a> mailing list.</p>
+
+        <p>If you are interested in <b>contributing</b> an ipython notebook as a tutorial, please check the <a href="https://github.com/astropy/astropy-tutorials/blob/master/README.md">README</a> or contact the <a href="https://groups.google.com/forum/#!forum/astropy-dev">developer list</a>. Also, if you have an idea for a tutorial or a tutorial request, please post to the <a href="https://groups.google.com/forum/#!forum/astropy-dev">developer list</a>. If you would like to contribute to this effort, but need some inspiration, check out the <a href="https://github.com/astropy/astropy-tutorials/issues?page=1&state=open">open issues</a>. This is a collaborative effort and we are looking for contributions and ideas from users like you!</p>
+
+</section>
+
+</div>
+
+</body>
+</html>
