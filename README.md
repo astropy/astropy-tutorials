@@ -9,16 +9,12 @@ Running Tutorials
 The easiest way to get started quickly is to use binder to run the tutorials in your web browser - when this loads, click the "tutorials" folder and you should see all the tutorials:
 [![Binder](http://mybinder.org/badge.svg)](http://mybinder.org/repo/astropy/astropy-tutorials)
 
-To run the tutorials *locally*, you need ipython installed.  If you have IPython 2.0, you
-can just start the notebook server in this directory:
+To run the tutorials *locally*, you need jupyter notebook installed:
 
-    ipython notebook --matplotlib=inline
-
-But if you have an older version, you first need to `cd` into the appropriate
-subdirectory before starting that command.
+    jupyter notebook
 
 The tutorials are initially empty of any output.  You can run them by pressing
-"Run All" under the "Cell" menu in the ipython notebook.
+"Run All" under the "Cell" menu in the notebook file.
 
 Dependencies
 ------------
