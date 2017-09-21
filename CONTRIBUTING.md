@@ -6,12 +6,10 @@ Overview
 
 Each tutorial is essentially an [IPython notebook](http://ipython.org/notebook.html)
 file. The notebooks are each saved in a separate directory within the `tutorials`
-subdirectory in this project. Let's look in [FITS-Header]
-(https://github.com/astropy/astropy-tutorials/tree/master/tutorials/FITS-header)
+subdirectory in this project. Let's look in [FITS-Header](https://github.com/astropy/astropy-tutorials/tree/master/tutorials/FITS-header/)
 as an example. There is a single IPython notebook file that contains the text
 and code for the tutorial, and a FITS file used in the tutorial. The notebook
-file is automatically run and converted into a static HTML page ([example]
-(http://tutorials.astropy.org/FITS-header.html)), which is then displayed in
+file is automatically run and converted into a static HTML page [example](http://tutorials.astropy.org/FITS-header.html), which is then displayed in
 the tutorial listing on http://tutorials.astropy.org. Each tutorial notebook
 file also contains metadata about the tutorial such as the author's name, month
 and year it was written, and any other information that should be associated
@@ -20,14 +18,21 @@ with the tutorial.
 Content Guidelines
 --------
 Narrative:
-- Please read through the other tutorials to get a sense of the desired tone and length. We want to demo ~2-3 functionalities of a given package.
+- Please read through the other tutorials to get a sense of the desired tone and length. 
 - Use the first-person inclusive plural ("we"). For example, "We are going to make a plot which..", "Above, we did it the hard way, but here is the easier  way..."
 - Avoid words such as "obviously","just", "simply", "easily". For example, "we just have to do this one thing."
 - Include brief explanations and descriptions
-- Include links to relevant documentation throughout
-- Include [Learning Outcomes](http://tll.mit.edu/help/intended-learning-outcomes) at the top.
-- Include Exercises at the end
-- [Optional] Include approximate time to complete
+ 
+Content:
+- Demo ~2-3 astro-relevant functions and 2-3 generic but commonly used functions (e.g., numpy, matplotlib)  
+- Roughly follow this progression:
+  - Intput/Output: read in some data 
+  - Analysis: do something insightful/useful 
+  - Visualization: make a pretty figure
+- Include relevant uses for these packages 
+  - [astropy.units](http://docs.astropy.org/en/stable/units/)
+  - [astropy.coordinates](http://docs.astropy.org/en/stable/coordinates/)
+  - [astroquery](https://astroquery.readthedocs.io/en/latest/)
 
 Code:
 - Demonstrate good commenting practice
@@ -67,7 +72,7 @@ branch:
 
 All files used by the tutorial -- e.g., example data files, the IPython
 notebook file itself -- should go in this directory. Now you can start writing
-the tutorial! Simply change directories into this new path and start up an
+the tutorial! Change directories into this new path and start up an
 IPython notebook server:
 
     cd tutorials/Spectral-Line-Fitting
@@ -87,14 +92,12 @@ The metadata must contain, at minimum, the following fields:
 - author
 - date (month year, e.g. 'July 2013')
 
-An example of one of these files can be found [here]
-(https://github.com/astropy/astropy-tutorials/blob/master/tutorials/FITS-header/FITS-header.ipynb) (be sure to hit the "raw" button to see the metadata).
+Here is an example of one of these files: [FITS-header.ipynb](https://github.com/astropy/astropy-tutorials/blob/master/tutorials/FITS-header/FITS-header.ipynb) (be sure to hit the "raw" button to see the metadata).
 
 You will also need to specify any python packages that the tutorial depends on.
 Almost always this will include a specific version of `astropy`, and perhaps other affiliated packages.
 You do this by placing a file called `requirements.json` in the directory that contains the tutorial notebook file.
-To see in example of that, have a look at [this one]
-(https://github.com/astropy/astropy-tutorials/blob/master/tutorials/FITS-header/requirements.json).
+To see in example of that, have a look at [requirements.json](https://github.com/astropy/astropy-tutorials/blob/master/tutorials/FITS-header/requirements.json).
 
 When you feel like your tutorial is complete, push your local branch up to your
 fork of the repository on github (by default, named 'origin'):
