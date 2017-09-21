@@ -1,0 +1,12 @@
+name: tutorials
+
+channels:
+  - astropy
+
+dependencies:
+  - python=3.6
+  - IPython=6.1.0
+  - astropy=2.0.2
+  - astroquery=0.3.6
+  - matplotlib=2.0.2
+  - numpy=1.13.1
