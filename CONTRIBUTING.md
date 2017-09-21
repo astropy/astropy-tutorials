@@ -20,11 +20,8 @@ Content Guidelines
 Narrative:
 - Please read through the other tutorials to get a sense of the desired tone and length. 
 - Use the first-person inclusive plural ("we"). For example, "We are going to make a plot which..", "Above, we did it the hard way, but here is the easier  way..."
-- Avoid belitting words such as "obviously" and "just". For example, "we just have to do this one thing."
+- Avoid words such as "obviously","just", "simply", "easily". For example, "we just have to do this one thing."
 - Include brief explanations and descriptions
-- Include links to relevant documentation, e.g. [astropy docs](http://docs.astropy.org/en/stable/index.html)
-- Include Exercises at the end
-- Include approximate time to complete
  
 Content:
 - Demo ~2-3 astro-relevant functions and 2-3 generic but commonly used functions (e.g., numpy, matplotlib)  
