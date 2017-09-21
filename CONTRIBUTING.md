@@ -24,9 +24,10 @@ Narrative:
 - Use the first-person inclusive plural ("we"). For example, "We are going to make a plot which..", "Above, we did it the hard way, but here is the easier  way..."
 - Avoid words such as "obviously","just", "simply", "easily". For example, "we just have to do this one thing."
 - Include brief explanations and descriptions
-- Include links to relevant documentation
+- Include links to relevant documentation throughout
+- Include [Learning Outcomes](http://tll.mit.edu/help/intended-learning-outcomes) at the top.
 - Include Exercises at the end
-- Include approximate time to complete
+- [Optional] Include approximate time to complete
 
 Code:
 - Demonstrate good commenting practice
