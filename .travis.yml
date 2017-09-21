@@ -10,6 +10,7 @@ env:
     global:
         - PYTHON_VERSION=3.6
         - SETUP_XVFB=True
+        - CONDA_ENVIRONMENT=conda-environment.yml
         - CONDA_DEPENDENCIES='jupyter notebook ipython runipy'
         - GH_REF: github.com/astropy/astropy-tutorials.git
         - secure: "NBZlEg//sDYvJikqXESLsx/WA1Nj7fAH2mJfI8ZVMnolvyjJuLdEMxxEYFP8t6U/iieSSrgUkgP94yy5Oq6iJRjj7ThGCdcjgvgWTQCzoQgEVDc5SzdJGyGs30VC+8t7GTobzMe086HX16SJRvsIumqXdmRcJjAdMCyhMUxLoUg="
@@ -19,8 +20,6 @@ install:
     - source ci-helpers/travis/setup_conda.sh
 
 script:
-    - conda env create -f conda-environment.yml -n tutorials
-    - source activate tutorials
     - python prepare_deploy.py run
 
 deploy:
