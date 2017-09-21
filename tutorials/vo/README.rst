@@ -1,1 +1,1 @@
-This directory contains tutorials related to `astropy.vo` package.
+This directory contains tutorials related to `astroquery.vo_conesearch` package.
