@@ -22,7 +22,7 @@ Content Guidelines
 Narrative:
 - Please read through the other tutorials to get a sense of the desired tone and length. We want to demo ~2-3 functionalities of a given package.
 - Use the first-person inclusive plural ("we"). For example, "We are going to make a plot which..", "Above, we did it the hard way, but here is the easier  way..."
-- Avoid belitting words such as "obviously" and "just". For example, "we just have to do this one thing."
+- Avoid words such as "obviously","just", "simply", "easily". For example, "we just have to do this one thing."
 - Include brief explanations and descriptions
 - Include links to relevant documentation
 - Include Exercises at the end
