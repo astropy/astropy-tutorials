@@ -37,29 +37,10 @@ AUTHOR_EMAIL = metadata.get('author_email', '')
 LICENSE = metadata.get('license', 'unknown')
 URL = metadata.get('url', 'http://astropy.org')
 
-# order of priority for long_description:
-#   (1) set in setup.cfg,
-#   (2) load LONG_DESCRIPTION.rst,
-#   (3) load README.rst,
-#   (4) package docstring
-readme_glob = 'README*'
-_cfg_long_description = metadata.get('long_description', '')
-if _cfg_long_description:
-    LONG_DESCRIPTION = _cfg_long_description
 
-elif os.path.exists('LONG_DESCRIPTION.rst'):
-    with open('LONG_DESCRIPTION.rst') as f:
-        LONG_DESCRIPTION = f.read()
-
-elif len(glob.glob(readme_glob)) > 0:
-    with open(glob.glob(readme_glob)[0]) as f:
-        LONG_DESCRIPTION = f.read()
-
-else:
-    # Get the long description from the package's docstring
-    __import__(PACKAGENAME)
-    package = sys.modules[PACKAGENAME]
-    LONG_DESCRIPTION = package.__doc__
+readme_glob = 'README.rst'
+with open('README.rst') as f:
+    LONG_DESCRIPTION = f.read()
 
 # Store the package name in a built-in variable so it's easy
 # to get from other parts of the setup infrastructure
@@ -78,10 +59,6 @@ if not RELEASE:
 # invoking any other functionality from distutils since it can potentially
 # modify distutils' behavior.
 cmdclassd = register_commands(PACKAGENAME, VERSION, RELEASE)
-
-# Freeze build information in version.py
-generate_version_py(PACKAGENAME, VERSION, RELEASE,
-                    get_debug_option(PACKAGENAME))
 
 # Treat everything in scripts except README* as a script to be installed
 scripts = [fname for fname in glob.glob(os.path.join('scripts', '*'))
