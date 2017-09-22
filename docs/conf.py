@@ -40,7 +40,7 @@ setup_cfg = dict(conf.items('metadata'))
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
-# exclude_patterns.append('path')
+exclude_patterns.append('**.ipynb_checkpoints')
 
 # This is added to the end of RST files - a good place to put substitutions to
 # be used globally.
@@ -59,13 +59,11 @@ copyright = '2013–{0}, {1}'.format(
 # |version| and |release|, also used in various other places throughout the
 # built documents.
 
-__import__(setup_cfg['package_name'])
-package = sys.modules[setup_cfg['package_name']]
-
 # The short X.Y version.
-version = package.__version__.split('-', 1)[0]
+version = setup_cfg['version'].split('-', 1)[0]
 # The full version, including alpha/beta/rc tags.
-release = package.__version__
+# release = package.__version__
+release = version
 
 
 # -- Options for HTML output --------------------------------------------------
@@ -130,21 +128,12 @@ man_pages = [('index', project.lower(), project + u' Documentation',
               [author], 1)]
 
 
-# -- Options for the edit_on_github extension ---------------------------------
-
-if eval(setup_cfg.get('edit_on_github')):
-    extensions += ['astropy_helpers.sphinx.ext.edit_on_github']
-
-    versionmod = __import__(setup_cfg['package_name'] + '.version')
-    edit_on_github_project = setup_cfg['github_project']
-    if versionmod.version.release:
-        edit_on_github_branch = "v" + versionmod.version.version
-    else:
-        edit_on_github_branch = "master"
-
-    edit_on_github_source_root = ""
-    edit_on_github_doc_root = "docs"
-
 # -- Resolving issue number to links in changelog -----------------------------
 github_issues_url = 'https://github.com/{0}/issues/'.format(setup_cfg['github_project'])
 
+# We require nbsphinx
+extensions += ['nbsphinx']
+extensions += ['IPython.sphinxext.ipython_console_highlighting']
+
+# TODO: remove this when errors in tutorials are updated to be static text
+nbsphinx_allow_errors = True
