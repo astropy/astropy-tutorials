@@ -1,9 +1,10 @@
 .ipynb_checkpoints/
-html/
+docs/_build/
 runipy-*
 IPython-*
-tutorials/*/_run_*
-tutorials/*/*.fits
-tutorials/*/*.pdf
-tutorials/*/*.png
+*.fits
+*.pdf
+*.png
+*.jpg
 *.pyc
+*.tex
