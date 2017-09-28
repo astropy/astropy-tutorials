@@ -139,3 +139,6 @@ nbsphinx_timeout = 600  # Time in seconds; use -1 for no timeout
 
 # TODO: remove this when errors in tutorials are updated to be static text
 nbsphinx_allow_errors = True
+
+# This hides the In[] and Out[] prompts
+nbsphinx_prompt_width = 0
