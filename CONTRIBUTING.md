@@ -17,32 +17,36 @@ with the tutorial.
 
 Content Guidelines
 --------
-Narrative:
-- Please read through the other tutorials to get a sense of the desired tone and length. 
-- Use the first-person inclusive plural ("we"). For example, "We are going to make a plot which..", "Above, we did it the hard way, but here is the easier  way..."
-- Avoid words such as "obviously","just", "simply", "easily". For example, "we just have to do this one thing."
-- Include brief explanations and descriptions
- 
-Content:
-- Demo ~2-3 astro-relevant functions and 2-3 generic but commonly used functions (e.g., numpy, matplotlib)  
+Content Overview:
+- Each tutorial should have 3-5 explicit [Learning Goals](http://tll.mit.edu/help/intended-learning-outcomes)  and demonstrate ~2-3 astro-relevant functions and 2-3 generic but commonly used functions (e.g., numpy, matplotlib)  
 - Roughly follow this progression:
   - Intput/Output: read in some data 
+    - use [astroquery](https://astroquery.readthedocs.io/en/latest/) where possible
   - Analysis: do something insightful/useful 
   - Visualization: make a pretty figure
-- Include relevant uses for these packages 
-  - [astropy.units](http://docs.astropy.org/en/stable/units/)
-  - [astropy.coordinates](http://docs.astropy.org/en/stable/coordinates/)
-  - [astroquery](https://astroquery.readthedocs.io/en/latest/)
-
+    - use [astropy.visualization](http://docs.astropy.org/en/stable/visualization/) 
+    
 Code:
 - Demonstrate good commenting practice
+  - add comments to bits of code which use concepts not included in Learning Goals
 - Demonstrate best practices of variable names. 
    - Variables should be all lower case with words separated by underscores.
    - Variable names should be descriptive. E.g., galaxy_mass, u_mag.
+- Use explicit print statements
 - As much as possible, comply with [PEP8](https://www.python.org/dev/peps/pep-0008/)
 
-Description:
-- Compile a list of the functions and packages the tutorial demonstartes and include a short a description with the pull request.
+Narrative:
+- Please read through the other tutorials to get a sense of the desired tone and length. 
+- Use [Markdown formatting](http://jupyter-notebook.readthedocs.io/en/latest/examples/Notebook/Working%20With%20Markdown%20Cells.html) in text cells for formatting, links, latex, and code snippets. 
+- Title should be short and descrictive
+- List all author's full names (comma separated) and link to github profile and/or ORCID id.
+- Include [Learning Goals](http://tll.mit.edu/help/intended-learning-outcomes) at the top as a bulleted list.
+- Include Keywords as a comma separated list of topics, packages, and functions demonstrated.
+- The first paragraph should give a brief overview of the entire tutorial including relevant astronomy concepts.
+- Use the first-person inclusive plural ("we"). For example, "We are going to make a plot which..", "Above, we did it the hard way, but here is the easier  way..."
+- Avoid words such as "obviously","just", "simply", "easily". For example, "we just have to do this one thing."
+- Use `<div class="alert alert-info">Note</div>` for Notes and `<div class="alert alert-warning">Warning</div>` for Warnings.
+
 
 Procedure
 ---------
