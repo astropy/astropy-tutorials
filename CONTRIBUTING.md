@@ -24,7 +24,7 @@ Content Overview:
     - use [astroquery](https://astroquery.readthedocs.io/en/latest/) where possible
   - Analysis: do something insightful/useful 
   - Visualization: make a pretty figure
-    - use [astropy.visualization](http://docs.astropy.org/en/stable/visualization/) 
+    - use [astropy.visualization](http://docs.astropy.org/en/stable/visualization/) where possible
     
 Code:
 - Demonstrate good commenting practice
@@ -32,26 +32,27 @@ Code:
 - Demonstrate best practices of variable names. 
    - Variables should be all lower case with words separated by underscores.
    - Variable names should be descriptive. E.g., galaxy_mass, u_mag.
-- Use explicit print statements
+- Use the print function explicitly to display information about variables
 - As much as possible, comply with [PEP8](https://www.python.org/dev/peps/pep-0008/)
 - Imports
-Do not import `*`. Import package and functions explicitly. 
-```python
-import numpy as np
-import matplotlib as mpl
-import astropy.units as u
-import astropy.coordinates as coord
-from astropy.io import fits
+  - Do not import `*`. Import package and functions explicitly. 
+  - Recommended import block and abbreviations
+    ```python
+    import numpy as np
+    import matplotlib as mpl
+    import astropy.units as u
+    import astropy.coordinates as coord
+    from astropy.io import fits
 
-%matplotlib inline # make plots display in notebooks
-```
+    %matplotlib inline # make plots display in notebooks
+    ```
 
 
 Narrative:
 - Please read through the other tutorials to get a sense of the desired tone and length. 
 - Use [Markdown formatting](http://jupyter-notebook.readthedocs.io/en/latest/examples/Notebook/Working%20With%20Markdown%20Cells.html) in text cells for formatting, links, latex, and code snippets. 
 - Title should be short and descrictive
-- List all author's full names (comma separated) and link to github profile and/or ORCID id.
+- List all author's full names (comma separated) and link to github profile and/or [ORCID](https://github.com/astropy/astropy-tutorials/pull/171) id.
 - Include [Learning Goals](http://tll.mit.edu/help/intended-learning-outcomes) at the top as a bulleted list.
 - Include Keywords as a comma separated list of topics, packages, and functions demonstrated.
 - The first paragraph should give a brief overview of the entire tutorial including relevant astronomy concepts.
