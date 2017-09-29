@@ -7,7 +7,7 @@ project (also on [github](https://github.com/astropy/astropy)).
 Running Tutorials
 -----------------
 The easiest way to get started quickly is to use binder to run the tutorials in your web browser - when this loads, click the "tutorials" folder and you should see all the tutorials:
-[![Binder](http://mybinder.org/badge.svg)](http://mybinder.org/repo/astropy/astropy-tutorials)
+[![Binder](http://mybinder.org/badge.svg)](https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master)
 
 To run the tutorials *locally*, you need jupyter notebook installed:
 
