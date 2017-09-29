@@ -44,6 +44,7 @@ Narrative:
 - Include Keywords as a comma separated list of topics, packages, and functions demonstrated.
 - The first paragraph should give a brief overview of the entire tutorial including relevant astronomy concepts.
 - Use the first-person inclusive plural ("we"). For example, "We are going to make a plot which..", "Above, we did it the hard way, but here is the easier  way..."
+- Section Headings should be in the imperative mood. For example, "Download the data."
 - Avoid words such as "obviously","just", "simply", "easily". For example, "we just have to do this one thing."
 - Use `<div class="alert alert-info">Note</div>` for Notes and `<div class="alert alert-warning">Warning</div>` for Warnings.
 
