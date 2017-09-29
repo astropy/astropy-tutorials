@@ -34,6 +34,18 @@ Code:
    - Variable names should be descriptive. E.g., galaxy_mass, u_mag.
 - Use explicit print statements
 - As much as possible, comply with [PEP8](https://www.python.org/dev/peps/pep-0008/)
+- Imports
+Do not import `*`. Import package and functions explicitly. 
+```python
+import numpy as np
+import matplotlib as mpl
+import astropy.units as u
+import astropy.coordinates as coord
+from astropy.io import fits
+
+%matplotlib inline # make plots display in notebooks
+```
+
 
 Narrative:
 - Please read through the other tutorials to get a sense of the desired tone and length. 
