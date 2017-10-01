@@ -40,6 +40,7 @@ Code:
     ```python
     import numpy as np
     import matplotlib as mpl
+    import matplotlib.pyplot as plt
     import astropy.units as u
     import astropy.coordinates as coord
     from astropy.io import fits
@@ -83,14 +84,10 @@ This tutorial goes from a downloading a data file, doing something to it, and vi
 Procedure
 ---------
 
-If you are unfamiliar with git, you should first get familiar with git and
-github. There are a number of resources available for learning git, but a good
-place to start is with the [github interactive tutorial](http://try.github.io/).
-You should also get familiar with using pull requests and forks on github:
-https://help.github.com/articles/using-pull-requests
+The process for contributing a tutorial includes the github [fork](https://help.github.com/articles/working-with-forks/), [branch, push, pull request](https://help.github.com/articles/proposing-changes-to-your-work-with-pull-requests/) workflow. 
 
-To create and contribute a new tutorial, you will first need to fork the
-astropy-tutorials repository on github and clone this fork locally to your
+To contribute a new tutorial, first fork the
+astropy-tutorials repository and clone it locally to your
 machine (replace <GITHUB USERNAME> with your github username)::
 
     git clone git@github.com:<GITHUB USERNAME>/astropy-tutorials.git
@@ -107,30 +104,19 @@ branch:
     mkdir tutorials/Spectral-Line-Fitting
 
 All files used by the tutorial -- e.g., example data files, the IPython
-notebook file itself -- should go in this directory. Now you can start writing
-the tutorial! Change directories into this new path and start up an
-IPython notebook server:
-
-    cd tutorials/Spectral-Line-Fitting
-    ipython notebook --matplotlib inline
-
-Create a new notebook file, and write away! (Following the Content Guidelines above.)
-Remember to place any extra files
-used by the tutorial in the directory with the notebook file, and place them
-under git version control.
+notebook file itself -- should go in this directory. 
 
 You will also need to edit the notebook file metadata.
 (IPython notebook --> edit menu --> edit notebook metadata)
-The metadata contains any extra information about the tutorial you may want to add.
 The metadata must contain, at minimum, the following fields:
 
 - link_name (the name of the link which will appear in the list of tutorials)
-- author
+- author list
 - date (month year, e.g. 'July 2013')
 
 Here is an example of one of these files: [FITS-header.ipynb](https://github.com/astropy/astropy-tutorials/blob/master/tutorials/FITS-header/FITS-header.ipynb) (be sure to hit the "raw" button to see the metadata).
 
-You will also need to specify any python packages that the tutorial depends on.
+Please specify any python packages that the tutorial depends on via the `requirements.json` file.
 Almost always this will include a specific version of `astropy`, and perhaps other affiliated packages.
 You do this by placing a file called `requirements.json` in the directory that contains the tutorial notebook file.
 To see in example of that, have a look at [requirements.json](https://github.com/astropy/astropy-tutorials/blob/master/tutorials/FITS-header/requirements.json).
@@ -140,9 +126,8 @@ fork of the repository on github (by default, named 'origin'):
 
     git push origin Spectral-Line-Fitting
 
-Then you will file a pull request against the main `astropy-tutorials`
-repository for review.
-
+[Open a pull request](https://help.github.com/articles/creating-a-pull-request/) against the main `astropy-tutorials`
+repository in order for the community to review the new tutorial.
 
 Data Files
 ----------
@@ -153,10 +138,9 @@ If your tutorial includes large data files (where large means >~ 1 MB), we
 don't want them in the astropy/astropy-tutorials git repository, as that will
 drastically slow down cloning the repository.  Instead, we encourage use of the
 `astropy.utils.download_files` function, and will host data files on the
-http://data.astropy.org server.  To make this easy, use the following procedure
-when you have large data files.
+http://data.astropy.org server. To do this, use the following procedure:
 
-* When writing your tutorial, just include the files in your tutorial's
+* When writing your tutorial, include the files in your tutorial's
   directory (e.g., ``tutorials/My-tutorial-name/mydatafile.fits``).  Those who
   are reviewing your tutorial will have to download them, but they would need
   them anyway, so it's ok. _IMPORTANT_: when you add or modify data files, make
