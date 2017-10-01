@@ -61,6 +61,24 @@ Narrative:
 - Avoid words such as "obviously","just", "simply", "easily". For example, "we just have to do this one thing."
 - Use `<div class="alert alert-info">Note</div>` for Notes and `<div class="alert alert-warning">Warning</div>` for Warnings.
 
+Template:
+# Doing a thing with things
+
+## Authors
+Jane Smith, Jose Jones
+
+## Leaning Goals
+- Query..
+- Calculate..
+- Display..
+
+## Keywords
+Example, example, example
+
+## Companion Content
+Carroll & Ostlie 10.3, Binney & Tremian 1.5
+
+This tutorial goes from a downloading a data file, doing something to it, and visualizing it.
 
 Procedure
 ---------
