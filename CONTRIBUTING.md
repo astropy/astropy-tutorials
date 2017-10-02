@@ -52,8 +52,8 @@ Code:
 Narrative:
 - Please read through the other tutorials to get a sense of the desired tone and length. 
 - Use [Markdown formatting](http://jupyter-notebook.readthedocs.io/en/latest/examples/Notebook/Working%20With%20Markdown%20Cells.html) in text cells for formatting, links, latex, and code snippets. 
-- Title should be short and descrictive
-- List all author's full names (comma separated) and link to github profile and/or [ORCID](https://github.com/astropy/astropy-tutorials/pull/171) id.
+- Title should be short yet descriptive and emphasize the learning goals of the tutorial. Try to make the title appeal to a broad audience and avoid referencing a specefic instrument, catalog, or anything wavelength dependent.
+- List all author's full names (comma separated) and link to github profile and/or [ORCID iD](https://orcid.org/).
 - Include [Learning Goals](http://tll.mit.edu/help/intended-learning-outcomes) at the top as a bulleted list.
 - Include Keywords as a comma separated list of topics, packages, and functions demonstrated.
 - The first paragraph should give a brief overview of the entire tutorial including relevant astronomy concepts.
@@ -77,12 +77,12 @@ Jane Smith, Jose Jones
 Example, example, example
 
 ## Companion Content
-Carroll & Ostlie 10.3, Binney & Tremian 1.5
+Carroll & Ostlie 10.3, Binney & Tremaine 1.5
 
-This tutorial goes from a downloading a data file, doing something to it, and visualizing it.
+In this tutorial, we download a data file, do something to it, and then visualize it.
 
-Procedure
----------
+Procedure for Contributing
+--------------------------
 
 The process for contributing a tutorial includes the github [fork](https://help.github.com/articles/working-with-forks/), [branch, push, pull request](https://help.github.com/articles/proposing-changes-to-your-work-with-pull-requests/) workflow. 
 
@@ -106,27 +106,15 @@ branch:
 All files used by the tutorial -- e.g., example data files, the IPython
 notebook file itself -- should go in this directory. 
 
-You will also need to edit the notebook file metadata.
-(IPython notebook --> edit menu --> edit notebook metadata)
-The metadata must contain, at minimum, the following fields:
-
-- link_name (the name of the link which will appear in the list of tutorials)
-- author list
-- date (month year, e.g. 'July 2013')
-
-Here is an example of one of these files: [FITS-header.ipynb](https://github.com/astropy/astropy-tutorials/blob/master/tutorials/FITS-header/FITS-header.ipynb) (be sure to hit the "raw" button to see the metadata).
-
-Please specify any python packages that the tutorial depends on via the `requirements.json` file.
-Almost always this will include a specific version of `astropy`, and perhaps other affiliated packages.
-You do this by placing a file called `requirements.json` in the directory that contains the tutorial notebook file.
+Specify the python packages the tutorial depends on via the `requirements.json` file.
+Place a file called `requirements.json` in the directory that contains the tutorial notebook file.
 To see in example of that, have a look at [requirements.json](https://github.com/astropy/astropy-tutorials/blob/master/tutorials/FITS-header/requirements.json).
 
-When you feel like your tutorial is complete, push your local branch up to your
-fork of the repository on github (by default, named 'origin'):
+Push the notebook and other files on the local branch up to your fork of the repository on github (by default, named 'origin'):
 
     git push origin Spectral-Line-Fitting
 
-[Open a pull request](https://help.github.com/articles/creating-a-pull-request/) against the main `astropy-tutorials`
+When the tutorial is ready for broader community feedback, [open a pull request](https://help.github.com/articles/creating-a-pull-request/) against the main `astropy-tutorials`
 repository in order for the community to review the new tutorial.
 
 Data Files
