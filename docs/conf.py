@@ -136,6 +136,7 @@ extensions += ['nbsphinx']
 extensions += ['IPython.sphinxext.ipython_console_highlighting']
 
 nbsphinx_timeout = 600  # Time in seconds; use -1 for no timeout
+nbsphinx_prompt_width = 0
 
 # TODO: remove this when errors in tutorials are updated to be static text
 nbsphinx_allow_errors = True
