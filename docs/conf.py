@@ -132,7 +132,7 @@ man_pages = [('index', project.lower(), project + u' Documentation',
 # -- Resolving issue number to links in changelog -----------------------------
 github_issues_url = 'https://github.com/{0}/issues/'.format(setup_cfg['github_project'])
 
-# We require nbsphinx
+# -- nbsphinx configuration ---------------------------------------------------
 extensions.append('nbsphinx')
 extensions.append('IPython.sphinxext.ipython_console_highlighting')
 
