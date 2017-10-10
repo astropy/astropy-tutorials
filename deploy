@@ -12,8 +12,8 @@
 : ${INTERACTIVE=true}
 : ${CURRENT_BRANCH_NAME="$(git symbolic-ref --quiet --short HEAD)"}
 
-if [ -z "$CURRENT_BRANCH_NAME" ]; then 
-    echo "Could not determine current branch.  Cannot continue with deployment." 
+if [ -z "$CURRENT_BRANCH_NAME" ]; then
+    echo "Could not determine current branch.  Cannot continue with deployment."
     exit 1
 fi
 
@@ -23,13 +23,13 @@ giveup_message () {
     echo "To get back to normal you can run the following:"
     echo "    git checkout -f $CURRENT_BRANCH_NAME"
     echo "    git clean -f"
-    echo "    git branch -D $GH_PAGESBRANCH" 
+    echo "    git branch -D $GH_PAGESBRANCH"
 }
 
 promptifinteractive () {
     # first argument is message, second is non-interactive answer, all others passed to read
     if [ "$INTERACTIVE" = true ] ; then
-        read -p "$1" -r "${@:3}" 
+        read -p "$1" -r "${@:3}"
     else
         echo $1 $2
         REPLY=$2
@@ -49,18 +49,10 @@ echo
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
     # first run the notebooks
-    OUTPUT=`python prepare_deploy.py run`
+    OUTPUT=`python setup.py build_sphinx`
     if [[ $OUTPUT == *ERROR* ]]
     then
         echo "Error running notebook files!";
-        exit;
-    fi
-
-    # then convert the notebooks to HTML
-    OUTPUT=`python prepare_deploy.py convert`
-    if [[ $OUTPUT == *ERROR* ]]
-    then
-        echo "Error converting notebook files to HTML!";
         exit;
     fi
 
@@ -77,7 +69,7 @@ then
     git checkout --orphan $GH_PAGESBRANCH
 
     # Copy the built files to a tmp location
-    cp -R html _tmp
+    cp -R docs/_build/html _tmp
 
     # This will delete all of the git-managed files here
     git rm -rf .
@@ -86,9 +78,7 @@ then
     cp -R _tmp/* .
     rm -rf _tmp
 
-    git add *.html
-    git add images
-    git add css
+    git add *
     git commit -m "Generated from sources"
 
     promptifinteractive "Would you like to preview the rendered HTML? [y/N] " N -n 1
@@ -109,7 +99,7 @@ then
             promptifinteractive "Could not communicate with remote '$GH_REMOTE'.  Enter an alternate remote name (or 'quit' to give up):" quit
             if [[ $REPLY = "quit" ]]; then
                 giveup_message
-                exit  
+                exit
             fi
             GH_REMOTE=$REPLY
 
