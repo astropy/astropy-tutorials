@@ -198,7 +198,9 @@
 .. raw:: html
 
     <hr width="75%" style="margin: 0 auto; margin-top: 16px; margin-bottom: 16px;" />
-    <p style="text-align: center; width: 100%; font-size:125%;"><a href="{{ nb_url }}">Source notebook</a></p>
+    <p style="text-align: center; width: 100%; font-size:125%;">
+        <a href="{{ nb_url }}">Source notebook</a>
+    </p>
 
 {{ super() }}
 {% endblock footer %}
