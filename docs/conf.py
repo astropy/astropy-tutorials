@@ -6,6 +6,7 @@
 import datetime
 import os
 import sys
+from os import path
 
 try:
     import astropy_helpers
@@ -140,3 +141,8 @@ nbsphinx_prompt_width = 0
 
 # TODO: remove this when errors in tutorials are updated to be static text
 nbsphinx_allow_errors = True
+
+import nbsphinx
+
+with open(path.join(path.dirname(__file__), '_static', 'astropy.tpl'), 'r') as f:
+    nbsphinx.RST_TEMPLATE = f.read()
