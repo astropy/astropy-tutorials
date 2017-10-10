@@ -190,14 +190,15 @@
     </script>
 {% endif %}
 
-{# This is where the custom astropy-tutorials stuff begins: #}
+{# This is where the custom astropy-tutorials modifications begin: #}
+{% set base_url = "https://github.com/astropy/astropy-tutorials/tree/master" %}
+{% set nb_name = "{0}.ipynb".format("_".join(resources.unique_key.split('_')[2:])) %}
+{% set nb_url = "/".join([base_url] + resources.unique_key.split('_')[:2] + [nb_name]) %}
+
 .. raw:: html
 
     <hr width="75%" style="margin: 0 auto; padding: 16px;" />
-
-{% set base_url = "https://github.com/astropy/astropy-tutorials/tree/master" %}
-{% set nb_name = "{0}.ipynb".format("_".join(resources.unique_key.split('_')[2:])) %}
-{{ "/".join([base_url] + resources.unique_key.split('_')[:2] + [nb_name]) }}
+    <p style="text-align: center; width: 100%; font-size:125%;"><a href="{{ nb_url }}">Source notebook</a></p>
 
 {{ super() }}
 {% endblock footer %}
