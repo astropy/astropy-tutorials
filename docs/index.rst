@@ -6,9 +6,11 @@ demonstrate the features in Astropy sub-packages in the context of a story or
 standard workflow. See the `Astropy documentation <http://docs.astropy.org/>`_
 for a structured view of the functionality within the Astropy project.
 
+List of tutorials
+-----------------
+
 .. toctree::
     :maxdepth: 1
-    :caption: List of tutorials
     :glob:
 
     tutorials/coordinates/coordinates.ipynb
