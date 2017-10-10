@@ -1,0 +1,1470 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Analyzing UVES Spectroscopy with Astropy &#8212; astropy-tutorials v3.0.dev</title>
+    <link rel="stylesheet" href="../../_static/bootstrap-astropy.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '3.0.dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/sidebar.js"></script>
+    <link rel="shortcut icon" href="../../_static/astropy_logo.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="VO Simple Cone Search Tutorial" href="../vo/conesearch.html" />
+    <link rel="prev" title="Make a plot with both redshift and universe age axes using astropy.cosmology" href="../redshift-plot/redshift-plot.html" />
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,600' rel='stylesheet' type='text/css'/>
+<script type="text/javascript" src="../../_static/copybutton.js"></script>
+
+
+  </head>
+  <body>
+<div class="topbar">
+  <a class="brand" title="Documentation Home" href="../../index.html"><span id="logotext1">astro</span><span id="logotext2">py</span><span id="logotext3">:tutorials</span></a>
+  <ul>
+    <li><a class="homelink" title="Astropy Homepage" href="http://www.astropy.org"></a></li>
+    <li><a title="General Index" href="../../genindex.html">Index</a></li>
+    <li><a title="Module Index" href="../../py-modindex.html">Modules</a></li>
+    <li>
+      
+      
+<form action="../../search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+      
+    </li>
+  </ul>
+</div>
+
+<div class="related">
+    <h3>Navigation</h3>
+    <ul>
+      <li class="right">
+	<a href="../vo/conesearch.html" title="VO Simple Cone Search Tutorial">
+	  next &raquo;
+	</a>
+      </li>
+      <li class="right">
+	<a href="../redshift-plot/redshift-plot.html" title="Make a plot with both redshift and universe age axes using astropy.cosmology">
+	  &laquo; previous
+	</a>
+	 |
+      </li>
+      <li>
+	<a href="../../index.html">astropy-tutorials v3.0.dev</a>
+	 &#187;
+      </li>
+      
+      <li>Analyzing UVES Spectroscopy with Astropy</li> 
+    </ul>
+</div>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput,
+div.nbinput div.prompt,
+div.nbinput div.input_area,
+div.nbinput div[class*=highlight],
+div.nbinput div[class*=highlight] pre,
+div.nboutput,
+div.nbinput div.prompt,
+div.nbinput div.output_area,
+div.nboutput div[class*=highlight],
+div.nboutput div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput,
+div.nboutput {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput,
+    div.nboutput {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput div.prompt pre {
+    color: #303F9F;
+}
+
+/* output prompt */
+div.nboutput div.prompt pre {
+    color: #D84315;
+}
+
+/* all prompts */
+div.nbinput div.prompt,
+div.nboutput div.prompt {
+    min-width: 0;
+    padding-top: 0.4em;
+    padding-right: 0.4em;
+    text-align: right;
+    flex: 0;
+}
+@media (max-width: 540px) {
+    div.nbinput div.prompt,
+    div.nboutput div.prompt {
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput div.prompt.empty {
+        padding: 0;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput div.prompt pre,
+div.nboutput div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput div.input_area,
+div.nboutput div.output_area {
+    padding: 0.4em;
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput div.input_area,
+    div.nboutput div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput div.input_area {
+    border: 1px solid #cfcfcf;
+    border-radius: 2px;
+    background: #f7f7f7;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.pngmath center alignment in output cells */
+div.nboutput div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-bold { font-weight: bold; }
+</style>
+<div class="section" id="Analyzing-UVES-Spectroscopy-with-Astropy">
+<h1>Analyzing UVES Spectroscopy with Astropy<a class="headerlink" href="#Analyzing-UVES-Spectroscopy-with-Astropy" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="Acknowledgments">
+<h2>Acknowledgments<a class="headerlink" href="#Acknowledgments" title="Permalink to this headline">¶</a></h2>
+<p>License: This tutorial is made available under the terms of the
+<a class="reference external" href="http://creativecommons.org/licenses/by/3.0/">Creative Commons Attribution 3.0
+License</a></p>
+<p>Authors: Moritz Guenther, Miguel de Val-Borro</p>
+<p>Copyright: 2013 - 2015 Moritz Guenther, Miguel de Val-Borro</p>
+<p>Based on observations made with ESO Telescopes at the La Silla Paranal
+Observatory under program ID 087.V0991(A).</p>
+<p>This tutorial follows my real live data analysis of MN Lup and the code
+developed below is taken (with only minor modifications) from the code
+that I used to actually prepare the publication. The plots that will be
+developed below appear in very similar form in the article published in
+<a class="reference external" href="http://adsabs.harvard.edu/abs/2013ApJ...771...70G">ApJ, 771, 1, 70</a>.</p>
+<p>The examples below depend on each other and the plots in the last
+section make use of things calculated in the earlier sections. Thus, if
+you need to restart your python session in the course of this tutorial,
+please execute all the code again.</p>
+<p>Also, this tutorial works best if you follow along and execute the code
+shown on your own computer. The page is already quite long and I do not
+include the output you would see on your screen in this document.</p>
+</div>
+<div class="section" id="Before-you-proceed">
+<h2>Before you proceed<a class="headerlink" href="#Before-you-proceed" title="Permalink to this headline">¶</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="c1"># Set up matplotlib and use a nicer set of plot parameters</span>
+<span class="kn">from</span> <span class="nn">astropy.visualization</span> <span class="kn">import</span> <span class="n">astropy_mpl_style</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="n">astropy_mpl_style</span><span class="p">)</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
+</div>
+</div>
+<p>Please download the tar file and extract the content by executing the
+python code below. Executing this block will download and extract a tar
+file with data necessary for this tutorial. By default it will run in
+whatever directory you have placed this notebook. If that’s some place
+you don’t want to fill with data files, change the <code class="docutils literal"><span class="pre">working_dir_path</span></code>
+variable.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">tarfile</span>
+<span class="kn">from</span> <span class="nn">astropy.utils.data</span> <span class="kn">import</span> <span class="n">download_file</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;http://data.astropy.org/tutorials/UVES/data_UVES.tar.gz&#39;</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">tarfile</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">download_file</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">cache</span><span class="o">=</span><span class="bp">True</span><span class="p">),</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;r|*&#39;</span><span class="p">)</span>
+<span class="n">working_dir_path</span> <span class="o">=</span> <span class="s1">&#39;.&#39;</span>  <span class="c1"># CHANGE TO WHEREVER YOU WANT THE DATA TO BE EXTRACTED</span>
+<span class="n">f</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">working_dir_path</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Scientific-background">
+<h2>Scientific background<a class="headerlink" href="#Scientific-background" title="Permalink to this headline">¶</a></h2>
+<p>In this tutorial we analyze data from MN Lup, a T Tauri star in the
+Taurus-Auriga star forming region located at a distance of about 140 pc.
+MN Lup has been observed simultaneously with XMM-Newton and the UVES
+spectrograph on the VLT. MN Lup is suspected to be a classical T Tauri
+star, that is accreting mass from a circumstellar disk. MN Lup has been
+Doppler imaged by <a class="reference external" href="http://adsabs.harvard.edu/abs/2005A%26A...440.1105S">Strassmeier et al.
+2005</a> with a
+very similar UVES setup and those authors claim an rotationally
+modulated accretion spot.</p>
+<p>In the X-ray data we find moderate indications for accretion. In this
+tutorial we analyze (some of) the UVES data to search for rotationally
+modulated features in the emission line profiles, which could be due to
+an accretion spot on the stellar surface.</p>
+</div>
+<div class="section" id="Reading-the-data">
+<h2>Reading the data<a class="headerlink" href="#Reading-the-data" title="Permalink to this headline">¶</a></h2>
+<p>A previous astropy tutorial already covered <a class="reference external" href="../FITS-header.html">handling FITS
+files</a> and WCS transformations, so the
+explanation here is only very brief. Check the <a class="reference external" href="http://docs.astropy.org">astropy
+documentation</a> or the other two tutorials
+for more details:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">glob</span> <span class="kn">import</span> <span class="n">glob</span>
+<span class="kn">import</span> <span class="nn">os</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">astropy.wcs</span> <span class="kn">import</span> <span class="n">WCS</span>
+<span class="kn">from</span> <span class="nn">astropy.io</span> <span class="kn">import</span> <span class="n">fits</span>
+
+<span class="c1"># os.path.join is a platform-independent way to join two directories</span>
+<span class="n">globpath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">working_dir_path</span><span class="p">,</span> <span class="s1">&#39;UVES/*.fits&#39;</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">globpath</span><span class="p">)</span>
+<span class="c1"># glob searches through directories similar to the Unix shell</span>
+<span class="n">filelist</span> <span class="o">=</span> <span class="n">glob</span><span class="p">(</span><span class="n">globpath</span><span class="p">)</span>
+
+<span class="c1"># sort alphabetically - given the way the filenames are</span>
+<span class="c1"># this also sorts in time</span>
+<span class="n">filelist</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+./UVES/*.fits
+</pre></div></div>
+</div>
+<p>Read the first fits file in the list and check what is in there:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">sp</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">filelist</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">sp</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Filename: ./UVES/r.UVES.2011-08-11T232352.266-A01_0000.fits
+No.    Name      Ver    Type      Cards   Dimensions   Format
+  0  PRIMARY       1 PrimaryHDU     609   (42751,)   float32
+</pre></div></div>
+</div>
+<p>We see that the data is given as the primary image and all other info is
+part of the primary header. So, we can extract the WCS from that header
+to get the wavelength coordinate. If you see warnings about a
+non-standard RADECSYS, don’t worry about this - the WCS will still work,
+it just doesn’t fully conform to the WCS standard.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">header</span> <span class="o">=</span> <span class="n">sp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">header</span>
+
+<span class="n">wcs</span> <span class="o">=</span> <span class="n">WCS</span><span class="p">(</span><span class="n">header</span><span class="p">)</span>
+<span class="c1">#make index array</span>
+<span class="n">index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">header</span><span class="p">[</span><span class="s1">&#39;NAXIS1&#39;</span><span class="p">])</span>
+
+<span class="n">wavelength</span> <span class="o">=</span> <span class="n">wcs</span><span class="o">.</span><span class="n">wcs_pix2world</span><span class="p">(</span><span class="n">index</span><span class="p">[:,</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">wavelength</span><span class="o">.</span><span class="n">shape</span>
+<span class="c1">#Ahh, this has the wrong dimension. So we flatten it.</span>
+<span class="n">wavelength</span> <span class="o">=</span> <span class="n">wavelength</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p>The flux is contained in the primary image.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">flux</span> <span class="o">=</span> <span class="n">sp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Making-code-reusable-as-a-function">
+<h2>Making code reusable as a function<a class="headerlink" href="#Making-code-reusable-as-a-function" title="Permalink to this headline">¶</a></h2>
+<p>Now, we do not want to repeat this process for every single file by
+hand, so let us define a function that takes the filename as input and
+returns the wavelength and flux arrays and the time of the observation.
+In python, functions are created with the <code class="docutils literal"><span class="pre">def</span></code> statements. All lines
+that have an indentation level below the <code class="docutils literal"><span class="pre">def</span></code> statement are part of
+the function. Functions can (but do not have to) return values using the
+<code class="docutils literal"><span class="pre">return</span></code> statement.</p>
+<p>If a function <code class="docutils literal"><span class="pre">func</span></code> is contained in a file called
+<code class="docutils literal"><span class="pre">spectra_utils.py</span></code> in the current directory, then this file can be
+imported into a python session in order to use the function <code class="docutils literal"><span class="pre">func</span></code>
+with the following command</p>
+<p><code class="docutils literal"><span class="pre">import</span> <span class="pre">spectra_utils</span> <span class="pre">a</span> <span class="pre">=</span> <span class="pre">spectra_utils.func(param1,</span> <span class="pre">param2,</span> <span class="pre">...)</span></code></p>
+<p>Alternatively, you can import just one (or a few) of many different
+functions that are defined in your file <code class="docutils literal"><span class="pre">spectra_utils.py</span></code>:</p>
+<p><code class="docutils literal"><span class="pre">from</span> <span class="pre">spectra_utils</span> <span class="pre">import</span> <span class="pre">func</span> <span class="pre">a</span> <span class="pre">=</span> <span class="pre">func(param1,</span> <span class="pre">param2,</span> <span class="pre">...)</span></code></p>
+<p>You will recognize that python does not make a difference between
+modules that come with python (e.g. <code class="docutils literal"><span class="pre">glob</span></code>), external modules (e.g.
+<code class="docutils literal"><span class="pre">numpy</span></code> or <code class="docutils literal"><span class="pre">astropy</span></code>) and modules that you write yourself. The
+syntax to import those modules or functions is the same in all cases,
+provided that the directory where your module is defined is in the
+search path <a class="reference external" href="http://docs.python.org/2/tutorial/modules.html">more about python modules and the search
+path</a>.</p>
+<p>Once you used <code class="docutils literal"><span class="pre">import</span> <span class="pre">spectra_utils</span></code> python will not monitor the
+source file. If you change the source code of <code class="docutils literal"><span class="pre">func</span></code> in the file, you
+need to <code class="docutils literal"><span class="pre">reload(spectra_utils)</span></code> to load the new version of <code class="docutils literal"><span class="pre">func</span></code>.</p>
+<p>So, after all this discussion, we can now define a function that
+automates the loading of a single spectrum using the commands we
+developed above. Even if this function is fairly short, we still add
+some documentation to the header, so that we can look up what parameters
+it needs when we come back to this project a while later. Personally, I
+comment every function that is longer than two lines.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="k">def</span> <span class="nf">read_spec</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Read a UVES spectrum from the ESO pipeline</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    filename : string</span>
+<span class="sd">    name of the fits file with the data</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    wavelength : np.ndarray</span>
+<span class="sd">    wavelength (in Ang)</span>
+<span class="sd">    flux : np.ndarray</span>
+<span class="sd">    flux (in erg/s/cm**2)</span>
+<span class="sd">    date_obs : string</span>
+<span class="sd">    time of observation</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">sp</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+    <span class="n">header</span> <span class="o">=</span> <span class="n">sp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">header</span>
+
+    <span class="n">wcs</span> <span class="o">=</span> <span class="n">WCS</span><span class="p">(</span><span class="n">header</span><span class="p">)</span>
+    <span class="c1">#make index array</span>
+    <span class="n">index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">header</span><span class="p">[</span><span class="s1">&#39;NAXIS1&#39;</span><span class="p">])</span>
+
+    <span class="n">wavelength</span> <span class="o">=</span> <span class="n">wcs</span><span class="o">.</span><span class="n">wcs_pix2world</span><span class="p">(</span><span class="n">index</span><span class="p">[:,</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">],</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="n">wavelength</span> <span class="o">=</span> <span class="n">wavelength</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+    <span class="n">flux</span> <span class="o">=</span> <span class="n">sp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
+
+    <span class="n">date_obs</span> <span class="o">=</span> <span class="n">header</span><span class="p">[</span><span class="s1">&#39;Date-OBS&#39;</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">wavelength</span><span class="p">,</span> <span class="n">flux</span><span class="p">,</span> <span class="n">date_obs</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="Exercise">
+<h3>Exercise<a class="headerlink" href="#Exercise" title="Permalink to this headline">¶</a></h3>
+<p>Try to find out how you can read the help for this function from the
+command line.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">help</span><span class="p">(</span><span class="n">read_spec</span><span class="p">)</span>
+<span class="c1"># or</span>
+read_spec<span class="o">?</span>
+<span class="c1"># In the IPython notebook, the easiest way to see the help for a function is to type read_spec&lt;TAB&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Help on function read_spec in module __main__:
+
+read_spec(filename)
+    Read a UVES spectrum from the ESO pipeline
+
+    Parameters
+    ----------
+    filename : string
+    name of the fits file with the data
+
+    Returns
+    -------
+    wavelength : np.ndarray
+    wavelength (in Ang)
+    flux : np.ndarray
+    flux (in erg/s/cm**2)
+    date_obs : string
+    time of observation
+
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="Exercise">
+<h3>Exercise<a class="headerlink" href="#Exercise" title="Permalink to this headline">¶</a></h3>
+<p>The dataset of UVES spectra should have been taken using all the same
+setup. Write a function that returns the exposure time (<code class="docutils literal"><span class="pre">EXPTIME</span></code>),
+the wavelength zero point (<code class="docutils literal"><span class="pre">CRVAL1</span></code>), and the arm used (UVES has a red
+and a blue arm - see keyword <code class="docutils literal"><span class="pre">HIERARCH</span> <span class="pre">ESO</span> <span class="pre">INS</span> <span class="pre">PATH</span></code>). Then check that
+all exposures have the same setup.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="k">def</span> <span class="nf">read_setup</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Get setup for UVES spectrum from the ESO pipeline</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    filename : string</span>
+<span class="sd">    name of the fits file with the data</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    exposure_time : float</span>
+<span class="sd">    wavelength_zero_point : float</span>
+<span class="sd">    optical_arm : string</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">sp</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">filelist</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">header</span> <span class="o">=</span> <span class="n">sp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">header</span>
+
+    <span class="k">return</span> <span class="n">header</span><span class="p">[</span><span class="s1">&#39;EXPTIME&#39;</span><span class="p">],</span> <span class="n">header</span><span class="p">[</span><span class="s1">&#39;CRVAL1&#39;</span><span class="p">],</span> <span class="n">header</span><span class="p">[</span><span class="s1">&#39;HIERARCH ESO INS PATH&#39;</span><span class="p">]</span>
+
+<span class="c1"># Let&#39;s just print the setup on the screen</span>
+<span class="c1"># We&#39;ll see if it&#39;s all the same.</span>
+<span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">filelist</span><span class="p">:</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">read_setup</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(1200.0013, 3732.05623191818, &#39;BLUE&#39;)
+(1200.0013, 3732.05623191818, &#39;BLUE&#39;)
+(1200.0013, 3732.05623191818, &#39;BLUE&#39;)
+(1200.0013, 3732.05623191818, &#39;BLUE&#39;)
+(1200.0013, 3732.05623191818, &#39;BLUE&#39;)
+(1200.0013, 3732.05623191818, &#39;BLUE&#39;)
+(1200.0013, 3732.05623191818, &#39;BLUE&#39;)
+(1200.0013, 3732.05623191818, &#39;BLUE&#39;)
+(1200.0013, 3732.05623191818, &#39;BLUE&#39;)
+(1200.0013, 3732.05623191818, &#39;BLUE&#39;)
+(1200.0013, 3732.05623191818, &#39;BLUE&#39;)
+(1200.0013, 3732.05623191818, &#39;BLUE&#39;)
+(1200.0013, 3732.05623191818, &#39;BLUE&#39;)
+(1200.0013, 3732.05623191818, &#39;BLUE&#39;)
+(1200.0013, 3732.05623191818, &#39;BLUE&#39;)
+(1200.0013, 3732.05623191818, &#39;BLUE&#39;)
+(1200.0013, 3732.05623191818, &#39;BLUE&#39;)
+(1200.0013, 3732.05623191818, &#39;BLUE&#39;)
+(1200.0013, 3732.05623191818, &#39;BLUE&#39;)
+(1200.0013, 3732.05623191818, &#39;BLUE&#39;)
+(1200.0013, 3732.05623191818, &#39;BLUE&#39;)
+(1200.0013, 3732.05623191818, &#39;BLUE&#39;)
+(1200.0013, 3732.05623191818, &#39;BLUE&#39;)
+(1200.0013, 3732.05623191818, &#39;BLUE&#39;)
+(1200.0013, 3732.05623191818, &#39;BLUE&#39;)
+</pre></div></div>
+</div>
+<p>The UVES pipeline that was used to reduce the data that we use in the
+this example employs a fixed wavelength grid (see exercise above), thus
+the <code class="docutils literal"><span class="pre">wavelength</span></code> is the same for all spectra. This makes it easy to
+define an array that can hold the fluxes of all observations. Then, we
+loop over the list of all filenames and fill this array with data.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">flux</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">filelist</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">wavelength</span><span class="p">)))</span>
+<span class="c1"># date comes as string with 23 characters (dtype = &#39;S23&#39;)</span>
+<span class="n">date</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">filelist</span><span class="p">)),</span> <span class="n">dtype</span> <span class="o">=</span> <span class="s1">&#39;U23&#39;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">fname</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">filelist</span><span class="p">):</span>
+    <span class="n">w</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">date_obs</span> <span class="o">=</span> <span class="n">read_spec</span><span class="p">(</span><span class="n">fname</span><span class="p">)</span>
+    <span class="n">flux</span><span class="p">[</span><span class="n">i</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">f</span>
+    <span class="n">date</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">date_obs</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="Units-and-constants-in-astropy">
+<h2>Units and constants in astropy<a class="headerlink" href="#Units-and-constants-in-astropy" title="Permalink to this headline">¶</a></h2>
+<p>Often, one has to keep track of the units for certain values. Was the
+wavelength given in Angstrom or in nm? In X-ray observations, a common
+unit of wavelength is keV. How many nm is 0.65 keV?
+<code class="docutils literal"><span class="pre">`astropy.units</span></code> &lt;<a class="reference external" href="http://docs.astropy.org/en/stable/units/index.html">http://docs.astropy.org/en/stable/units/index.html</a>&gt;`__
+offers a framework that can take care of this book-keeping and propagate
+the units through many (but not all) mathematical operations (e.g.
+addition, division, multiplication). Furthermore,
+<code class="docutils literal"><span class="pre">`astropy.constants</span></code> &lt;<a class="reference external" href="http://docs.astropy.org/en/stable/constants/index.html">http://docs.astropy.org/en/stable/constants/index.html</a>&gt;`__
+supplies the values of many physical and astronomical constants. The
+easiest way to attach a unit to a number is by multiplication.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">astropy.units</span> <span class="kn">as</span> <span class="nn">u</span>
+<span class="kn">from</span> <span class="nn">astropy.constants.si</span> <span class="kn">import</span> <span class="n">c</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">M_sun</span><span class="p">,</span> <span class="n">R_sun</span>
+
+<span class="n">wavelength</span> <span class="o">=</span> <span class="n">wavelength</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">AA</span>
+
+<span class="c1"># Let&#39;s define some constants we need for the exercises further down</span>
+<span class="c1"># Again, we multiply the value with a unit here</span>
+<span class="n">heliocentric</span> <span class="o">=</span> <span class="o">-</span><span class="mf">23.</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">km</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">s</span>
+<span class="n">v_rad</span> <span class="o">=</span> <span class="o">-</span><span class="mf">4.77</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">km</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span>  <span class="c1"># Strassmeier et al. (2005)</span>
+<span class="n">R_MN_Lup</span> <span class="o">=</span> <span class="mf">0.9</span> <span class="o">*</span> <span class="n">R_sun</span>      <span class="c1"># Strassmeier et al. (2005)</span>
+<span class="n">M_MN_Lup</span> <span class="o">=</span> <span class="mf">0.6</span> <span class="o">*</span> <span class="n">M_sun</span>      <span class="c1"># Strassmeier et al. (2005)</span>
+<span class="n">vsini</span> <span class="o">=</span> <span class="mf">74.6</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">km</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span>   <span class="c1"># Strassmeier et al. (2005)</span>
+<span class="n">period</span> <span class="o">=</span> <span class="mf">0.439</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">day</span>      <span class="c1"># Strassmeier et al. (2005)</span>
+
+<span class="n">inclination</span> <span class="o">=</span> <span class="mf">45.</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">degree</span> <span class="c1"># Strassmeier et al. (2005)</span>
+<span class="c1"># All numpy trigonometric functions expect the input in radian.</span>
+<span class="c1"># So far, astropy does not know this, so we need to convert the</span>
+<span class="c1"># angle manually</span>
+<span class="n">incl</span> <span class="o">=</span> <span class="n">inclination</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">radian</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Now, we can use those variables in our calculations. MN Lup is a T Tauri
+star (TTS), which is possibly surrounded by an accretion disk. In the
+spectra we will be looking for signatures of accretion. We expect those
+accretion signatures to appear close to the free-fall velocity v that a
+mass m reaches, when it hits the stellar surface. We can calculate the
+infall speed using simple energy conservation.</p>
+<div class="math">
+<p><img src="../../_images/math/2763935f27b018b4d12458c20fcfbc38dc3a3925.png" alt="E_{kin}  =  E_{grav}"/></p>
+</div><div class="math">
+<p><img src="../../_images/math/cb6b9b0fc0303bdc4c244ca0a93f2c18bacd8627.png" alt="\frac{1}{2} m v^2  =  G \frac{m M_*}{R_*}"/></p>
+</div><p>So, let us calculate the free-fall velocity for MN Lup.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">v_accr</span> <span class="o">=</span> <span class="p">(</span><span class="mf">2.</span><span class="o">*</span> <span class="n">G</span> <span class="o">*</span> <span class="n">M_MN_Lup</span><span class="o">/</span><span class="n">R_MN_Lup</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span>
+<span class="k">print</span><span class="p">(</span><span class="n">v_accr</span><span class="p">)</span>
+<span class="c1"># Maybe astronomers prefer it in the traditional cgs system?</span>
+<span class="k">print</span><span class="p">(</span><span class="n">v_accr</span><span class="o">.</span><span class="n">cgs</span><span class="p">)</span>
+<span class="c1"># Or in some really obscure unit?</span>
+<span class="kn">from</span> <span class="nn">astropy.units</span> <span class="kn">import</span> <span class="n">imperial</span>
+<span class="k">print</span><span class="p">(</span><span class="n">v_accr</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">imperial</span><span class="o">.</span><span class="n">yd</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">hour</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+504329.2809002659 m / s
+50432928.09002659 cm / s
+1985548350.0010464 yd / h
+</pre></div></div>
+</div>
+<p>How does the accretion velocity relate to the rotational velocity?</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">v_rot</span> <span class="o">=</span> <span class="n">vsini</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">incl</span><span class="p">)</span>
+<span class="n">v_accr</span> <span class="o">/</span> <span class="n">v_rot</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>Out[13]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="math">
+<p><img src="../../_images/math/51ef4d89c7355b658b7c83fa3bc23a943a208572.png" alt="$4780.3573 \; \mathrm{\frac{m}{km}}$"/></p>
+</div></div>
+</div>
+<p>Oh, what is that? The seconds are gone, but <code class="docutils literal"><span class="pre">astropy.quantity</span></code> objects
+keep their different length units unless told otherwise.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="p">(</span><span class="n">v_accr</span> <span class="o">/</span> <span class="n">v_rot</span><span class="p">)</span><span class="o">.</span><span class="n">decompose</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>Out[14]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="math">
+<p><img src="../../_images/math/f851c4e5f79f41b76b402d13648e44ca11ca41b6.png" alt="$4.7803573 \; \mathrm{}$"/></p>
+</div></div>
+</div>
+<p>The reason for this is that it is not uncommon to use different length
+units in a single constant, e.g. the Hubble constant is commonly given
+in “km/ (s Mpc)”. “km” and “Mpc” are both units of length, but generally
+you do <em>not</em> want to shorten this to “1/s”.</p>
+<p>We can now use the <code class="docutils literal"><span class="pre">astropy.units</span></code> mechanism to correct the wavelength
+scale to the heliocentric velocity scale.</p>
+<p><img class="math" src="../../_images/math/04f5b138849f9b4bdd9d3ffe18e10e5d217d244e.png" alt="\lambda_{heliocentric} = \lambda_{bariocentric} * (1 + \frac{v_{helio}}{c})"/></p>
+<p>Naively, we could try:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">wavelength</span> <span class="o">=</span> <span class="n">wavelength</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.</span> <span class="o">+</span> <span class="n">heliocentric</span><span class="o">/</span><span class="n">c</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>However, this fails, because <code class="docutils literal"><span class="pre">heliocentric/c</span></code> is in units of “km/m”
+and <code class="docutils literal"><span class="pre">1.</span></code> is just a number. From the notation above, it is not clear
+what we actually want. Do we ask for the value of
+<code class="docutils literal"><span class="pre">heliocentric/c</span> <span class="pre">+</span> <span class="pre">1.</span></code> or do we want to simplify the units of
+<code class="docutils literal"><span class="pre">heliocentric/c</span></code> and after that add <code class="docutils literal"><span class="pre">1.</span></code>? There are several ways to
+make the instruction precise, but one is to explicitly add
+<code class="docutils literal"><span class="pre">u.dimensionless_unscaled</span></code> to <code class="docutils literal"><span class="pre">1.</span></code> to tell astropy that this number
+is dimensionless and does not carry any scaling.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">wavelength</span> <span class="o">=</span> <span class="n">wavelength</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="o">+</span> <span class="n">heliocentric</span><span class="o">/</span><span class="n">c</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>I want to mention one more feature here (check out
+<code class="docutils literal"><span class="pre">`astropy.units</span></code> &lt;<a class="reference external" href="http://docs.astropy.org/en/stable/units/index.html">http://docs.astropy.org/en/stable/units/index.html</a>&gt;`__
+for more): The ability to convert the spectral axis to frequencies or
+energies. Normally, a unit of length is not equivalent to a unit of
+energy or to a frequency, but this conversion makes sense for the
+wavelength of a spectrum. This is how it can be done:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">wavelength</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">keV</span><span class="p">,</span> <span class="n">equivalencies</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">spectral</span><span class="p">())</span>
+<span class="n">wavelength</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">Hz</span><span class="p">,</span> <span class="n">equivalencies</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">spectral</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>Out[17]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="math">
+<p><img src="../../_images/math/167da5d2e4a4a4497a914739bcdebf379bafcd8c.png" alt="$[8.0341357 \times 10^{14},~8.0340719 \times 10^{14},~8.0340081 \times 10^{14},~\dots, 5.9971542 \times 10^{14},~5.9971186 \times 10^{14},~5.9970831 \times 10^{14}] \; \mathrm{Hz}$"/></p>
+</div></div>
+</div>
+<div class="section" id="Exercise">
+<h3>Exercise<a class="headerlink" href="#Exercise" title="Permalink to this headline">¶</a></h3>
+<p>Spectroscopically, MN Lup is classified as spectral type M0 V, thus the
+gravitational acceleration on the surface <img class="math" src="../../_images/math/14f603b4e82ffa5c626d05416b9a9a435f9add04.png" alt="\log(g)"/> should be
+comparable to the sun. (For non-stellar astronomers: Conventionally, all
+values are given in the cgs system. The value for the sun is
+<img class="math" src="../../_images/math/b5ab934890fcf15f6293d4a3458544a7bfc1c945.png" alt="\log(g) = 4.4"/>.)</p>
+<p>Calculate <img class="math" src="../../_images/math/14f603b4e82ffa5c626d05416b9a9a435f9add04.png" alt="\log(g)"/> for MN Lup with the values for the mass and
+radius given above. Those values were determined from evolutionary
+tracks. Check if the <img class="math" src="../../_images/math/14f603b4e82ffa5c626d05416b9a9a435f9add04.png" alt="\log(g)"/> is consistent with the value
+expected from spectroscopy.</p>
+<p>The values from evolutionary tracks are indeed consistent with the
+spectroscopically estimated surface gravity.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="k">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">((</span><span class="n">G</span><span class="o">*</span><span class="n">M_MN_Lup</span><span class="o">/</span><span class="n">R_MN_Lup</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">second</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+4.3077338588081275
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="Exercise">
+<h3>Exercise<a class="headerlink" href="#Exercise" title="Permalink to this headline">¶</a></h3>
+<p>Write a function that turns a wavelength scale into a velocity scale. We
+want to input a wavelengths array and the rest wavelength of a spectral
+line. We need this function later to show the red- and blueshift of the
+spectrum relative to the the Ca II H line. Use the following definition
+to make sure that the code below can use it later. You can test if your
+function works by calculating the a Dopplershift of the following
+wavelengths relative to <img class="math" src="../../_images/math/f17fb9a7a395448ab64f12706653f83b6b3d997f.png" alt="H_\alpha"/>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">waveclosetoHa</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">6562.</span><span class="p">,</span><span class="mi">6563</span><span class="p">,</span><span class="mf">6565.</span><span class="p">])</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">AA</span>
+</pre></div>
+</div>
+</div>
+<p>I get -132, -86 and +5 km/s.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="c1"># This function uses the Doppler equivalency between wavelength and velocity</span>
+<span class="kn">import</span> <span class="nn">astropy.units</span> <span class="kn">as</span> <span class="nn">u</span>
+<span class="k">def</span> <span class="nf">wave2doppler</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">w0</span><span class="p">):</span>
+    <span class="n">w0_equiv</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">doppler_optical</span><span class="p">(</span><span class="n">w0</span><span class="p">)</span>
+    <span class="n">w_equiv</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">km</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">,</span> <span class="n">equivalencies</span><span class="o">=</span><span class="n">w0_equiv</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">w_equiv</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">wave2doppler</span><span class="p">(</span><span class="n">waveclosetoHa</span><span class="p">,</span> <span class="mf">656.489</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">nm</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">km</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[-131.9748242   -86.30879506    5.0232632 ] km / s
+</pre></div></div>
+</div>
+</div>
+<div class="section" id="Exercise">
+<h3>Exercise<a class="headerlink" href="#Exercise" title="Permalink to this headline">¶</a></h3>
+<p>Write a function that takes a wavelength array and the rest wavelength
+of a spectral line as input, turns it into a Doppler shift (you can use
+the function from the last exercise), subtracts the radial velocity of
+MN Lup (4.77 km/s) and expresses the resulting velocity in units of
+vsini. We need this function later to show the red- and blueshift of the
+spectrum relative to the Ca II H line. Use the following definition to
+make sure the that code below can use it later.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="k">def</span> <span class="nf">w2vsini</span><span class="p">(</span><span class="n">wavelength_array</span><span class="p">,</span> <span class="n">wavelength_line</span><span class="p">):</span>
+    <span class="c1"># .. replace this with your implementation ..</span>
+    <span class="k">return</span> <span class="n">array_of_shifts_in_vsini</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="k">def</span> <span class="nf">w2vsini</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">w0</span><span class="p">):</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">wave2doppler</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">w0</span><span class="p">)</span> <span class="o">-</span> <span class="mf">4.77</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">km</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">s</span>
+    <span class="k">return</span> <span class="n">v</span> <span class="o">/</span> <span class="n">vsini</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="Converting-times">
+<h2>Converting times<a class="headerlink" href="#Converting-times" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal"><span class="pre">`astropy.time</span></code> &lt;<a class="reference external" href="http://docs.astropy.org/en/stable/time/index.html">http://docs.astropy.org/en/stable/time/index.html</a>&gt;`__
+provides methods to convert times and dates between different systems
+and formats. Since the ESO fits headers already contain the time of the
+observation in different systems, we could just read the keyword in the
+time system we like, but we will use <code class="docutils literal"><span class="pre">astropy.time</span></code> to make this
+conversion here. <code class="docutils literal"><span class="pre">astropy.time.Time</span></code> will parse many common input
+formats (strings, floats), but unless the format is unambiguous the
+format needs to be specified (e.g. a number could mean JD or MJD or
+year). Also, the time system needs to be given (e.g. UTC). Below are
+several examples, initialized from different header keywords.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">astropy.time</span> <span class="kn">import</span> <span class="n">Time</span>
+<span class="n">t1</span> <span class="o">=</span> <span class="n">Time</span><span class="p">(</span><span class="n">header</span><span class="p">[</span><span class="s1">&#39;MJD-Obs&#39;</span><span class="p">],</span> <span class="n">format</span> <span class="o">=</span> <span class="s1">&#39;mjd&#39;</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="s1">&#39;utc&#39;</span><span class="p">)</span>
+<span class="n">t2</span> <span class="o">=</span> <span class="n">Time</span><span class="p">(</span><span class="n">header</span><span class="p">[</span><span class="s1">&#39;Date-Obs&#39;</span><span class="p">],</span> <span class="n">scale</span> <span class="o">=</span> <span class="s1">&#39;utc&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Times can be expressed in different formats.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [24]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">t1</span>
+<span class="n">t1</span><span class="o">.</span><span class="n">isot</span>
+<span class="n">t2</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>Out[24]:
+</pre></div>
+</div>
+<div class="output_area highlight-none"><div class="highlight"><pre>
+<span></span>&lt;Time object: scale=&#39;utc&#39; format=&#39;isot&#39; value=2011-08-11T23:23:52.266&gt;
+</pre></div>
+</div>
+</div>
+<p>or be converted to a different time system.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [25]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">t1</span><span class="o">.</span><span class="n">tt</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>Out[25]:
+</pre></div>
+</div>
+<div class="output_area highlight-none"><div class="highlight"><pre>
+<span></span>&lt;Time object: scale=&#39;tt&#39; format=&#39;mjd&#39; value=55784.97567650852&gt;
+</pre></div>
+</div>
+</div>
+<p>Times can also be initialized from arrays and we can calculate time
+differences.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [26]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">obs_times</span> <span class="o">=</span> <span class="n">Time</span><span class="p">(</span><span class="n">date</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="s1">&#39;utc&#39;</span><span class="p">)</span>
+<span class="n">delta_t</span> <span class="o">=</span> <span class="n">obs_times</span> <span class="o">-</span> <span class="n">Time</span><span class="p">(</span><span class="n">date</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">scale</span> <span class="o">=</span> <span class="s1">&#39;utc&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Now, we want to express the time difference between the individual
+spectra of MN Lup in rotational periods. While the unit of <code class="docutils literal"><span class="pre">delta_t</span></code>
+is days, unfortunately <code class="docutils literal"><span class="pre">astropy.time.Time</span></code> and
+<code class="docutils literal"><span class="pre">astropy.units.Quantity</span></code> objects do not work together yet, so we will
+have to convert from one to the other explicitly.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [27]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">delta_p</span> <span class="o">=</span> <span class="n">delta_t</span><span class="o">.</span><span class="n">value</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">day</span> <span class="o">/</span> <span class="n">period</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Normalize-the-flux-to-the-local-continuum">
+<h2>Normalize the flux to the local continuum<a class="headerlink" href="#Normalize-the-flux-to-the-local-continuum" title="Permalink to this headline">¶</a></h2>
+<p>In this example we want to look at the time evolution of a single
+specific emission line in the spectrum. In order to estimate the
+equivalent width or make reasonable plots we need to normalize the flux
+to the local continuum. In this specific case the emission line is
+bright and the continuum can be described reasonably by a second-order
+polynomial.</p>
+<p>So, we define two regions left and right of the emission line, where we
+fit the polynomial. Looking at the figure, <code class="docutils literal"><span class="pre">[3925*u.AA,</span> <span class="pre">3930*u.AA]</span></code>
+and <code class="docutils literal"><span class="pre">[3938*u.AA,</span> <span class="pre">3945*u.AA]</span></code> seem right for that. Then, we normalize
+the flux by this polynomial.</p>
+<p>The following function will do that:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [28]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="k">def</span> <span class="nf">region_around_line</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">flux</span><span class="p">,</span> <span class="n">cont</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;cut out and normalize flux around a line</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    w : 1 dim np.ndarray</span>
+<span class="sd">    array of wavelengths</span>
+<span class="sd">    flux : np.ndarray of shape (N, len(w))</span>
+<span class="sd">    array of flux values for different spectra in the series</span>
+<span class="sd">    cont : list of lists</span>
+<span class="sd">    wavelengths for continuum normalization [[low1,up1],[low2, up2]]</span>
+<span class="sd">    that described two areas on both sides of the line</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="c1">#index is true in the region where we fit the polynomial</span>
+    <span class="n">indcont</span> <span class="o">=</span> <span class="p">((</span><span class="n">w</span> <span class="o">&gt;</span> <span class="n">cont</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">w</span> <span class="o">&lt;</span> <span class="n">cont</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]))</span> <span class="o">|</span><span class="p">((</span><span class="n">w</span> <span class="o">&gt;</span> <span class="n">cont</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">w</span> <span class="o">&lt;</span> <span class="n">cont</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]))</span>
+    <span class="c1">#index of the region we want to return</span>
+    <span class="n">indrange</span> <span class="o">=</span> <span class="p">(</span><span class="n">w</span> <span class="o">&gt;</span> <span class="n">cont</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">w</span> <span class="o">&lt;</span> <span class="n">cont</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+    <span class="c1"># make a flux array of shape</span>
+    <span class="c1"># (number of spectra, number of points in indrange)</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">flux</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">indrange</span><span class="o">.</span><span class="n">sum</span><span class="p">()))</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">flux</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+        <span class="c1"># fit polynomial of second order to the continuum region</span>
+        <span class="n">linecoeff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">w</span><span class="p">[</span><span class="n">indcont</span><span class="p">],</span> <span class="n">flux</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">indcont</span><span class="p">],</span><span class="mi">2</span><span class="p">)</span>
+        <span class="c1"># divide the flux by the polynomial and put the result in our</span>
+        <span class="c1"># new flux array</span>
+        <span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">flux</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">indrange</span><span class="p">]</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">linecoeff</span><span class="p">,</span> <span class="n">w</span><span class="p">[</span><span class="n">indrange</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">w</span><span class="p">[</span><span class="n">indrange</span><span class="p">],</span> <span class="n">f</span>
+
+<span class="n">wcaII</span><span class="p">,</span> <span class="n">fcaII</span> <span class="o">=</span> <span class="n">region_around_line</span><span class="p">(</span><span class="n">wavelength</span><span class="p">,</span> <span class="n">flux</span><span class="p">,</span>
+    <span class="p">[[</span><span class="mi">3925</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">AA</span><span class="p">,</span> <span class="mi">3930</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">AA</span><span class="p">],[</span><span class="mi">3938</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">AA</span><span class="p">,</span> <span class="mi">3945</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">AA</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Publication-ready-output">
+<h2>Publication ready output<a class="headerlink" href="#Publication-ready-output" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="Tables">
+<h3>Tables<a class="headerlink" href="#Tables" title="Permalink to this headline">¶</a></h3>
+<p>We will calculate the equivalent width in Angstroms of the emission line
+for the first spectrum.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [29]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">ew</span> <span class="o">=</span> <span class="n">fcaII</span><span class="p">[</span><span class="mi">0</span><span class="p">,:]</span> <span class="o">-</span> <span class="mf">1.</span>
+<span class="n">ew</span> <span class="o">=</span> <span class="n">ew</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">wcaII</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">AA</span><span class="p">)</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">ew</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+20.2123821434
+</pre></div></div>
+</div>
+<p>Using <code class="docutils literal"><span class="pre">numpy</span></code> array notation we can actually process all spectra at
+once.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [30]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">delta_lam</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">wcaII</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">AA</span><span class="p">)</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+<span class="n">ew</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">fcaII</span> <span class="o">-</span> <span class="mf">1.</span><span class="p">)[:,:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">delta_lam</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Now, we want to generate a LaTeX table of the observation times, period
+and equivalent width that we can directly paste into our manuscript. To
+do so, we first collect all the columns and make an
+<code class="docutils literal"><span class="pre">astropy.table.Table</span></code> object. (Please check
+<code class="docutils literal"><span class="pre">`astropy.table</span></code> &lt;<a class="reference external" href="http://docs.astropy.org/en/stable/table/index.html">http://docs.astropy.org/en/stable/table/index.html</a>&gt;`__
+or <code class="docutils literal"><span class="pre">tabular-data</span></code> for more details on <code class="docutils literal"><span class="pre">Table</span></code>). So, here is the
+code:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [31]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">astropy.table</span> <span class="kn">import</span> <span class="n">Column</span><span class="p">,</span> <span class="n">Table</span>
+<span class="kn">from</span> <span class="nn">astropy.io</span> <span class="kn">import</span> <span class="n">ascii</span>
+
+<span class="n">datecol</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Obs Date&#39;</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">date</span><span class="p">)</span>
+<span class="n">pcol</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;phase&#39;</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">delta_p</span><span class="p">,</span> <span class="n">format</span> <span class="o">=</span> <span class="s1">&#39;{:.1f}&#39;</span><span class="p">)</span>
+<span class="n">ewcol</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;EW&#39;</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">ew</span><span class="p">,</span> <span class="n">format</span> <span class="o">=</span> <span class="s1">&#39;{:.1f}&#39;</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">AA&#39;</span><span class="p">)</span>
+<span class="n">tab</span> <span class="o">=</span> <span class="n">Table</span><span class="p">((</span><span class="n">datecol</span><span class="p">,</span> <span class="n">pcol</span><span class="p">,</span> <span class="n">ewcol</span><span class="p">))</span>
+<span class="c1"># latexdicts[&#39;AA&#39;] contains the style specifics for A&amp;A (\hline etc.)</span>
+<span class="n">tab</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">working_dir_path</span><span class="p">,</span> <span class="s1">&#39;EWtab.tex&#39;</span><span class="p">),</span> <span class="n">latexdict</span> <span class="o">=</span> <span class="n">ascii</span><span class="o">.</span><span class="n">latexdicts</span><span class="p">[</span><span class="s1">&#39;AA&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Plots">
+<h3>Plots<a class="headerlink" href="#Plots" title="Permalink to this headline">¶</a></h3>
+<p>We will make two plots. The plotting is done with
+<code class="docutils literal"><span class="pre">`matplotlib</span></code> &lt;<a class="reference external" href="http://matplotlib.org">http://matplotlib.org</a>&gt;`__, and does not involve Astropy
+itself. Plotting is introduced in <code class="docutils literal"><span class="pre">plotting-and-images</span></code> and more
+details on plotting can be found there. When in doubt, use the search
+engine of your choice and ask the internet. Here, I mainly want to
+illustrate that Astropy can be used in real-live data analysis. Thus, I
+do not explain every step in the plotting in detail. The plots we
+produce below appear in very similar form in Guenther et al. 2013 (ApJ,
+771, 70).</p>
+<p>In both cases we want the x-axis to show the Doppler shift expressed in
+units of the rotational velocity. In this way, features that are
+rotationally modulated will stick out between -1 and +1.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [32]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">x</span> <span class="o">=</span> <span class="n">w2vsini</span><span class="p">(</span><span class="n">wcaII</span><span class="p">,</span> <span class="mf">393.366</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">nm</span><span class="p">)</span><span class="o">.</span><span class="n">decompose</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p>First, we will show the line profile.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [33]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="c1"># set reasonable figsize for 1-column figures</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fcaII</span><span class="p">[</span><span class="mi">0</span><span class="p">,:],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">drawstyle</span><span class="o">=</span><span class="s1">&#39;steps-mid&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="o">+</span><span class="mi">3</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;line shift [v sin(i)]&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;flux&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Ca II H line in MN Lup&#39;</span><span class="p">)</span>
+<span class="c1"># when using this interface, we need to explicitly call the draw routine</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/tutorials_UVES_UVES_91_0.png" src="../../_images/tutorials_UVES_UVES_91_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="Exercise">
+<h3>Exercise<a class="headerlink" href="#Exercise" title="Permalink to this headline">¶</a></h3>
+<p>The plot above shows only a single spectrum. Plot all spectra into a
+single plot and introduce a sensible offset between them, so that we can
+follow the time evolution of the line.</p>
+<p>There are clearly several ways to produce a well looking plot. Here is
+one way.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [34]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">yshift</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">((</span><span class="n">fcaII</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span> <span class="o">*</span> <span class="mf">0.5</span>
+<span class="c1">#shift the second night up by a little more</span>
+<span class="n">yshift</span><span class="p">[:]</span> <span class="o">+=</span> <span class="mf">1.5</span>
+<span class="n">yshift</span><span class="p">[</span><span class="mi">13</span><span class="p">:]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">25</span><span class="p">):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fcaII</span><span class="p">[</span><span class="n">i</span><span class="p">,:]</span><span class="o">+</span><span class="n">yshift</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="s1">&#39;k&#39;</span><span class="p">)</span>
+
+<span class="c1">#separately show the mean line profile in a different color</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">fcaII</span><span class="p">,</span> <span class="n">axis</span> <span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="o">-</span><span class="mf">2.5</span><span class="p">,</span><span class="o">+</span><span class="mf">2.5</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;line shift [$v </span><span class="se">\\</span><span class="s1">sin i$]&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;flux&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Ca II H line in MN Lup&#39;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">bottom</span> <span class="o">=</span> <span class="mf">0.15</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/tutorials_UVES_UVES_95_0.png" src="../../_images/tutorials_UVES_UVES_95_0.png" />
+</div>
+</div>
+<p>Next, we will make a more advanced plot. For each spectrum we calculate
+the difference to the mean flux.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [35]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">fmean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">fcaII</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">fdiff</span> <span class="o">=</span> <span class="n">fcaII</span> <span class="o">-</span> <span class="n">fmean</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,:]</span>
+</pre></div>
+</div>
+</div>
+<p>In the following simple plot, we can already see features moving through
+the line. However, the axis scales are not right, the gap between both
+nights is not visible and there is no proper labeling.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [36]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">fdiff</span><span class="p">,</span> <span class="n">aspect</span> <span class="o">=</span> <span class="s2">&quot;auto&quot;</span><span class="p">,</span> <span class="n">origin</span> <span class="o">=</span> <span class="s1">&#39;lower&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/tutorials_UVES_UVES_99_0.png" src="../../_images/tutorials_UVES_UVES_99_0.png" />
+</div>
+</div>
+<p>In the following, we will plot the spectra from both nights separately.
+Also, we will pass the <code class="docutils literal"><span class="pre">extent</span></code> keyword to <code class="docutils literal"><span class="pre">ax.imshow</span></code> which takes
+care of the axis.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [37]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">ind1</span> <span class="o">=</span> <span class="n">delta_p</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span>
+<span class="n">ind2</span> <span class="o">=</span> <span class="n">delta_p</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">ind</span> <span class="ow">in</span> <span class="p">[</span><span class="n">ind1</span><span class="p">,</span> <span class="n">ind2</span><span class="p">]:</span>
+    <span class="n">im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">fdiff</span><span class="p">[</span><span class="n">ind</span><span class="p">,:],</span> <span class="n">extent</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">delta_p</span><span class="p">[</span><span class="n">ind</span><span class="p">]),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">delta_p</span><span class="p">[</span><span class="n">ind</span><span class="p">])),</span> <span class="n">aspect</span> <span class="o">=</span> <span class="s2">&quot;auto&quot;</span><span class="p">,</span> <span class="n">origin</span> <span class="o">=</span> <span class="s1">&#39;lower&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">delta_p</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">delta_p</span><span class="p">)])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="o">-</span><span class="mf">1.9</span><span class="p">,</span><span class="mf">1.9</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/tutorials_UVES_UVES_101_0.png" src="../../_images/tutorials_UVES_UVES_101_0.png" />
+</div>
+</div>
+<p>Now, this plot is already much better, but there are still some things
+that can be improved:</p>
+<ul class="simple">
+<li>Introduce an offset on the y-axis to reduce the amount of white
+space.</li>
+<li>Strictly speaking, the image shown is not quite the right scale
+because the <code class="docutils literal"><span class="pre">extent</span></code> keyword gives the edges of the image shown,
+while <code class="docutils literal"><span class="pre">x</span></code> and <code class="docutils literal"><span class="pre">delta_p</span></code> contain the bin mid-points.</li>
+<li>Use a gray scale instead of color to save publication charges.</li>
+<li>Add labels to the axis.</li>
+</ul>
+<p>The following code addresses these points.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [38]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="c1"># shift a little for plotting purposes</span>
+<span class="n">pplot</span> <span class="o">=</span> <span class="n">delta_p</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span><span class="o">.</span><span class="n">value</span>
+<span class="n">pplot</span><span class="p">[</span><span class="n">ind2</span><span class="p">]</span> <span class="o">-=</span> <span class="mf">1.5</span>
+<span class="c1"># image goes from x1 to x2, but really x1 should be middle of first pixel</span>
+<span class="n">delta_t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">delta_p</span><span class="p">))</span><span class="o">/</span><span class="mf">2.</span>
+<span class="n">delta_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">/</span><span class="mf">2.</span>
+<span class="c1"># imshow does the normalization for plotting really well, but here I do it</span>
+<span class="c1"># by hand to ensure it goes -1,+1 (that makes color bar look good)</span>
+<span class="n">fdiff</span> <span class="o">=</span> <span class="n">fdiff</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">fdiff</span><span class="p">))</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">ind</span> <span class="ow">in</span> <span class="p">[</span><span class="n">ind1</span><span class="p">,</span> <span class="n">ind2</span><span class="p">]:</span>
+    <span class="n">im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">fdiff</span><span class="p">[</span><span class="n">ind</span><span class="p">,:],</span>
+    <span class="n">extent</span> <span class="o">=</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">-</span><span class="n">delta_x</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="n">delta_x</span><span class="p">,</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">pplot</span><span class="p">[</span><span class="n">ind</span><span class="p">])</span><span class="o">-</span><span class="n">delta_t</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">pplot</span><span class="p">[</span><span class="n">ind</span><span class="p">])</span><span class="o">+</span><span class="n">delta_t</span><span class="p">),</span>
+    <span class="n">aspect</span> <span class="o">=</span> <span class="s2">&quot;auto&quot;</span><span class="p">,</span> <span class="n">origin</span> <span class="o">=</span> <span class="s1">&#39;lower&#39;</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">cm</span><span class="o">.</span><span class="n">Greys_r</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">pplot</span><span class="p">)</span><span class="o">-</span><span class="n">delta_t</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">pplot</span><span class="p">)</span><span class="o">+</span><span class="n">delta_t</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="o">-</span><span class="mf">1.9</span><span class="p">,</span><span class="mf">1.9</span><span class="p">])</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;vel in $v</span><span class="se">\\</span><span class="s1">sin i$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_locator</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">MaxNLocator</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+
+<span class="k">def</span> <span class="nf">pplot</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">pos</span><span class="p">):</span>
+    <span class="s1">&#39;The two args are the value and tick position&#39;</span>
+    <span class="s1">&#39;Function to make tick labels look good.&#39;</span>
+    <span class="k">if</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="mf">0.5</span><span class="p">:</span>
+        <span class="n">yreal</span> <span class="o">=</span> <span class="n">y</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">yreal</span> <span class="o">=</span> <span class="n">y</span> <span class="o">+</span> <span class="mf">1.5</span>
+    <span class="k">return</span> <span class="n">yreal</span>
+
+<span class="n">formatter</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">FuncFormatter</span><span class="p">(</span><span class="n">pplot</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">yaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">formatter</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;period&#39;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">left</span> <span class="o">=</span> <span class="mf">0.15</span><span class="p">,</span> <span class="n">bottom</span> <span class="o">=</span> <span class="mf">0.15</span><span class="p">,</span> <span class="n">right</span> <span class="o">=</span> <span class="mf">0.99</span><span class="p">,</span> <span class="n">top</span> <span class="o">=</span> <span class="mf">0.99</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/tutorials_UVES_UVES_103_0.png" src="../../_images/tutorials_UVES_UVES_103_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="Exercise">
+<h3>Exercise<a class="headerlink" href="#Exercise" title="Permalink to this headline">¶</a></h3>
+<p>Understand the code for the last plot. Some of the commands used are
+already pretty advanced stuff. Remember, any internet search engine can
+be your friend.</p>
+<p>Clearly, I did not develop this code for scratch. The <a class="reference external" href="http://matplotlib.org/gallery.html">matplotlib
+gallery</a> is my preferred place to
+look for plotting solutions.</p>
+</div>
+</div>
+<div class="section" id="Contributing-to-Astropy">
+<h2>Contributing to Astropy<a class="headerlink" href="#Contributing-to-Astropy" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://astropy.org">Astropy</a> is an open-source and
+community-developed Python package, which means that is only as good as
+the contribution of the astronomical community. Clearly, there will
+always people who have more fun writing code and others who have more
+fun using it. However, if you find a bug and do not report it, then it
+is unlikely to be fixed. If you wish for a specific feature, then you
+can either implement it and contribute it or at least fill in a feature
+request.</p>
+<p>If you want to get help or discuss issues with other Astropy users, you
+can sign up for the <a class="reference external" href="http://mail.scipy.org/mailman/listinfo/astropy">astropy mailing
+list</a>. Alternatively,
+the <a class="reference external" href="http://groups.google.com/group/astropy-dev">astropy-dev</a> list is
+where you should go to discuss more technical aspects of Astropy with
+the developers.</p>
+<p>If you have come across something that you believe is a bug, please open
+a ticket in the Astropy <a class="reference external" href="http://github.com/astropy/astropy/issues">issue
+tracker</a>, and we will look
+into it promptly.</p>
+<p>Please try to include an example that demonstrates the issue and will
+allow the developers to reproduce and fix the problem. If you are seeing
+a crash then frequently it will help to include the full Python stack
+trace as well as information about your operating system (e.g. MacOSX
+version or Linux version).</p>
+<hr width="75%" style="margin: 0 auto; margin-top: 16px; margin-bottom: 16px;" />
+<p style="text-align: center; width: 100%; font-size:125%;">
+    <a href="https://github.com/astropy/astropy-tutorials/tree/master/docs//tutorials/UVES/UVES.ipynb">Source notebook</a>
+</p>
+<hr width="75%" style="margin: 0 auto; margin-top: 16px; margin-bottom: 16px;" /></div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><h3>Page Contents</h3>
+<ul>
+<li><a class="reference internal" href="#">Analyzing UVES Spectroscopy with Astropy</a><ul>
+<li><a class="reference internal" href="#Acknowledgments">Acknowledgments</a></li>
+<li><a class="reference internal" href="#Before-you-proceed">Before you proceed</a></li>
+<li><a class="reference internal" href="#Scientific-background">Scientific background</a></li>
+<li><a class="reference internal" href="#Reading-the-data">Reading the data</a></li>
+<li><a class="reference internal" href="#Making-code-reusable-as-a-function">Making code reusable as a function</a><ul>
+<li><a class="reference internal" href="#Exercise">Exercise</a></li>
+<li><a class="reference internal" href="#Exercise">Exercise</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#Units-and-constants-in-astropy">Units and constants in astropy</a><ul>
+<li><a class="reference internal" href="#Exercise">Exercise</a></li>
+<li><a class="reference internal" href="#Exercise">Exercise</a></li>
+<li><a class="reference internal" href="#Exercise">Exercise</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#Converting-times">Converting times</a></li>
+<li><a class="reference internal" href="#Normalize-the-flux-to-the-local-continuum">Normalize the flux to the local continuum</a></li>
+<li><a class="reference internal" href="#Publication-ready-output">Publication ready output</a><ul>
+<li><a class="reference internal" href="#Tables">Tables</a></li>
+<li><a class="reference internal" href="#Plots">Plots</a></li>
+<li><a class="reference internal" href="#Exercise">Exercise</a></li>
+<li><a class="reference internal" href="#Exercise">Exercise</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#Contributing-to-Astropy">Contributing to Astropy</a></li>
+</ul>
+</li>
+</ul>
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+<footer class="footer">
+  <p class="pull-right">
+    <a href="../../_sources/tutorials/UVES/UVES.ipynb.txt"
+       rel="nofollow">Page Source</a> &nbsp;
+    <a href="#">Back to Top</a></p>
+  <p>
+    &copy; Copyright 2013–2017, The Astropy Developers.<br/>
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.6.3. &nbsp;
+    Last built 10 Oct 2017. <br/>
+  </p>
+</footer>
+  </body>
+</html>

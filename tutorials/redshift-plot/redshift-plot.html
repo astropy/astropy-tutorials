@@ -1,0 +1,818 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Make a plot with both redshift and universe age axes using astropy.cosmology &#8212; astropy-tutorials v3.0.dev</title>
+    <link rel="stylesheet" href="../../_static/bootstrap-astropy.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '3.0.dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/sidebar.js"></script>
+    <link rel="shortcut icon" href="../../_static/astropy_logo.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Analyzing UVES Spectroscopy with Astropy" href="../UVES/UVES.html" />
+    <link rel="prev" title="Using Astropy Quantities for astrophysical calculations" href="../quantities/quantities.html" />
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,600' rel='stylesheet' type='text/css'/>
+<script type="text/javascript" src="../../_static/copybutton.js"></script>
+
+
+  </head>
+  <body>
+<div class="topbar">
+  <a class="brand" title="Documentation Home" href="../../index.html"><span id="logotext1">astro</span><span id="logotext2">py</span><span id="logotext3">:tutorials</span></a>
+  <ul>
+    <li><a class="homelink" title="Astropy Homepage" href="http://www.astropy.org"></a></li>
+    <li><a title="General Index" href="../../genindex.html">Index</a></li>
+    <li><a title="Module Index" href="../../py-modindex.html">Modules</a></li>
+    <li>
+      
+      
+<form action="../../search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+      
+    </li>
+  </ul>
+</div>
+
+<div class="related">
+    <h3>Navigation</h3>
+    <ul>
+      <li class="right">
+	<a href="../UVES/UVES.html" title="Analyzing UVES Spectroscopy with Astropy">
+	  next &raquo;
+	</a>
+      </li>
+      <li class="right">
+	<a href="../quantities/quantities.html" title="Using Astropy Quantities for astrophysical calculations">
+	  &laquo; previous
+	</a>
+	 |
+      </li>
+      <li>
+	<a href="../../index.html">astropy-tutorials v3.0.dev</a>
+	 &#187;
+      </li>
+      
+      <li>Make a plot with both redshift and universe age axes using astropy.cosmology</li> 
+    </ul>
+</div>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput,
+div.nbinput div.prompt,
+div.nbinput div.input_area,
+div.nbinput div[class*=highlight],
+div.nbinput div[class*=highlight] pre,
+div.nboutput,
+div.nbinput div.prompt,
+div.nbinput div.output_area,
+div.nboutput div[class*=highlight],
+div.nboutput div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput,
+div.nboutput {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput,
+    div.nboutput {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput div.prompt pre {
+    color: #303F9F;
+}
+
+/* output prompt */
+div.nboutput div.prompt pre {
+    color: #D84315;
+}
+
+/* all prompts */
+div.nbinput div.prompt,
+div.nboutput div.prompt {
+    min-width: 0;
+    padding-top: 0.4em;
+    padding-right: 0.4em;
+    text-align: right;
+    flex: 0;
+}
+@media (max-width: 540px) {
+    div.nbinput div.prompt,
+    div.nboutput div.prompt {
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput div.prompt.empty {
+        padding: 0;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput div.prompt pre,
+div.nboutput div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput div.input_area,
+div.nboutput div.output_area {
+    padding: 0.4em;
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput div.input_area,
+    div.nboutput div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput div.input_area {
+    border: 1px solid #cfcfcf;
+    border-radius: 2px;
+    background: #f7f7f7;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.pngmath center alignment in output cells */
+div.nboutput div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-bold { font-weight: bold; }
+</style>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="c1"># Set up matplotlib and use a nicer set of plot parameters</span>
+<span class="kn">from</span> <span class="nn">astropy.visualization</span> <span class="kn">import</span> <span class="n">astropy_mpl_style</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="n">astropy_mpl_style</span><span class="p">)</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
+</div>
+</div>
+<div class="section" id="Make-a-plot-with-both-redshift-and-universe-age-axes-using-astropy.cosmology">
+<h1>Make a plot with both redshift and universe age axes using astropy.cosmology<a class="headerlink" href="#Make-a-plot-with-both-redshift-and-universe-age-axes-using-astropy.cosmology" title="Permalink to this headline">¶</a></h1>
+<p>Each redshift corresponds to an age of the universe, so if you’re
+plotting some quantity against redshift, it’s often useful show the
+universe age too. The relationship between the two changes depending the
+type of cosmology you assume, which is where <code class="docutils literal"><span class="pre">astropy.cosmology</span></code> comes
+in. In this tutorial we’ll show how to use the tools in
+<code class="docutils literal"><span class="pre">astropy.cosmology</span></code> to make a plot like this:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
+<span class="n">Image</span><span class="p">(</span><span class="n">filename</span><span class="o">=</span><span class="s2">&quot;ang_dist.png&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>Out[2]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/tutorials_redshift-plot_redshift-plot_2_0.png" src="../../_images/tutorials_redshift-plot_redshift-plot_2_0.png" />
+</div>
+</div>
+<p>We start with a cosmology object. We will make a flat cosmology (which
+means that the curvature density <img class="math" src="../../_images/math/95f8f5a45836358f8425fa0e675cf13bafc619e9.png" alt="\Omega_k=0"/>) with a hubble
+parameter of <img class="math" src="../../_images/math/1a93a30c440e5bca69ed0c97794d48aeb29af001.png" alt="70"/> km/s/Mpc and matter density <img class="math" src="../../_images/math/129d59d3232909759f06ebf570fe735cd35930be.png" alt="\Omega_M=0.3"/>
+at redshift 0. The <code class="docutils literal"><span class="pre">FlatLambdaCDM</span></code> cosmology then automatically infers
+that the dark energy density <img class="math" src="../../_images/math/9bd896ebb06d3ced30a2d41801665d46c2308f9c.png" alt="\Omega_\Lambda"/> must <img class="math" src="../../_images/math/478e541a099c2fa857ce03482e8e3558e6b227d8.png" alt="=0.7"/>,
+because <img class="math" src="../../_images/math/e53efeca8113460ae21a61055703638ec495c903.png" alt="\Omega_M + \Omega_\Lambda + \Omega_k = 1"/>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">astropy.cosmology</span> <span class="kn">import</span> <span class="n">FlatLambdaCDM</span>
+
+<span class="c1"># In this case we just need to define the matter density</span>
+<span class="c1"># and hubble parameter at z=0.</span>
+
+<span class="c1"># Note the default units for the hubble parameter H0 are km/s/Mpc.</span>
+<span class="c1"># You can also pass an astropy `Quantity` with the units specified.</span>
+
+<span class="n">cosmo</span> <span class="o">=</span> <span class="n">FlatLambdaCDM</span><span class="p">(</span><span class="n">H0</span><span class="o">=</span><span class="mi">70</span><span class="p">,</span> <span class="n">Om0</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Note that we could instead use one of the built-in cosmologies, like
+<code class="docutils literal"><span class="pre">WMAP9</span></code> or <code class="docutils literal"><span class="pre">Planck13</span></code>, in which case we would just redefine the
+<code class="docutils literal"><span class="pre">cosmo</span></code> variable.</p>
+<p>Now we need an example quantity to plot versus redshift. Let’s use the
+angular diameter distance, which is the physical transverse distance
+(the size of a galaxy, say) corresponding to a fixed angular separation
+on the sky. To calculate the angular diameter distance for a range of
+redshifts:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="n">zvals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+<span class="n">dist</span> <span class="o">=</span> <span class="n">cosmo</span><span class="o">.</span><span class="n">angular_diameter_distance</span><span class="p">(</span><span class="n">zvals</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">ModuleNotFoundError</span>                       Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-4-5c45e1ec484b&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-intense-fg ansi-bold">      1</span> <span class="ansi-green-fg">import</span> numpy <span class="ansi-green-fg">as</span> np
+<span class="ansi-green-intense-fg ansi-bold">      2</span> zvals <span class="ansi-blue-fg">=</span> np<span class="ansi-blue-fg">.</span>arange<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">,</span> <span class="ansi-cyan-fg">6</span><span class="ansi-blue-fg">,</span> <span class="ansi-cyan-fg">0.1</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">----&gt; 3</span><span class="ansi-red-fg"> </span>dist <span class="ansi-blue-fg">=</span> cosmo<span class="ansi-blue-fg">.</span>angular_diameter_distance<span class="ansi-blue-fg">(</span>zvals<span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg">~/anaconda/envs/tutorials-dev/lib/python3.6/site-packages/astropy/cosmology/core.py</span> in <span class="ansi-cyan-fg">angular_diameter_distance</span><span class="ansi-blue-fg">(self, z)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1255</span>             z <span class="ansi-blue-fg">=</span> np<span class="ansi-blue-fg">.</span>asarray<span class="ansi-blue-fg">(</span>z<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1256</span>
+<span class="ansi-green-fg">-&gt; 1257</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>comoving_transverse_distance<span class="ansi-blue-fg">(</span>z<span class="ansi-blue-fg">)</span> <span class="ansi-blue-fg">/</span> <span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">1.</span> <span class="ansi-blue-fg">+</span> z<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1258</span>
+<span class="ansi-green-intense-fg ansi-bold">   1259</span>     <span class="ansi-green-fg">def</span> luminosity_distance<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> z<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">~/anaconda/envs/tutorials-dev/lib/python3.6/site-packages/astropy/cosmology/core.py</span> in <span class="ansi-cyan-fg">comoving_transverse_distance</span><span class="ansi-blue-fg">(self, z)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1192</span>         &#34;&#34;&#34;
+<span class="ansi-green-intense-fg ansi-bold">   1193</span>
+<span class="ansi-green-fg">-&gt; 1194</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>_comoving_transverse_distance_z1z2<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">,</span> z<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1195</span>
+<span class="ansi-green-intense-fg ansi-bold">   1196</span>     <span class="ansi-green-fg">def</span> _comoving_transverse_distance_z1z2<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> z1<span class="ansi-blue-fg">,</span> z2<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">~/anaconda/envs/tutorials-dev/lib/python3.6/site-packages/astropy/cosmology/core.py</span> in <span class="ansi-cyan-fg">_comoving_transverse_distance_z1z2</span><span class="ansi-blue-fg">(self, z1, z2)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1221</span>
+<span class="ansi-green-intense-fg ansi-bold">   1222</span>         Ok0 <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>_Ok0
+<span class="ansi-green-fg">-&gt; 1223</span><span class="ansi-red-fg">         </span>dc <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>_comoving_distance_z1z2<span class="ansi-blue-fg">(</span>z1<span class="ansi-blue-fg">,</span> z2<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1224</span>         <span class="ansi-green-fg">if</span> Ok0 <span class="ansi-blue-fg">==</span> <span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">   1225</span>             <span class="ansi-green-fg">return</span> dc
+
+<span class="ansi-green-fg">~/anaconda/envs/tutorials-dev/lib/python3.6/site-packages/astropy/cosmology/core.py</span> in <span class="ansi-cyan-fg">_comoving_distance_z1z2</span><span class="ansi-blue-fg">(self, z1, z2)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1163</span>         &#34;&#34;&#34;
+<span class="ansi-green-intense-fg ansi-bold">   1164</span>
+<span class="ansi-green-fg">-&gt; 1165</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">from</span> scipy<span class="ansi-blue-fg">.</span>integrate <span class="ansi-green-fg">import</span> quad
+<span class="ansi-green-intense-fg ansi-bold">   1166</span>         f = lambda z1, z2: quad(self._inv_efunc_scalar, z1, z2,
+<span class="ansi-green-intense-fg ansi-bold">   1167</span>                              args=self._inv_efunc_scalar_args)[0]
+
+<span class="ansi-red-fg">ModuleNotFoundError</span>: No module named &#39;scipy&#39;
+</pre></div></div>
+</div>
+<p>Note that we passed an array of redshifts to
+<code class="docutils literal"><span class="pre">cosmo.angular_diameter_distance</span></code> and it produced a corresponding
+array of distance values, one for each redshift. Let’s plot them:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;xtick.major&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;ytick.major&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;xtick.minor&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;ytick.minor&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;axes&#39;</span><span class="p">,</span> <span class="n">grid</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;xtick.major&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;xtick.minor&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;ytick.major&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;ytick.minor&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rc</span><span class="p">(</span><span class="s1">&#39;lines&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">zvals</span><span class="p">,</span> <span class="n">dist</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-5-4a79e3012f8c&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-intense-fg ansi-bold">     12</span> fig <span class="ansi-blue-fg">=</span> plt<span class="ansi-blue-fg">.</span>figure<span class="ansi-blue-fg">(</span>figsize<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">6</span><span class="ansi-blue-fg">,</span><span class="ansi-cyan-fg">4</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     13</span> ax <span class="ansi-blue-fg">=</span> fig<span class="ansi-blue-fg">.</span>add_subplot<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">111</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">---&gt; 14</span><span class="ansi-red-fg"> </span>ax<span class="ansi-blue-fg">.</span>plot<span class="ansi-blue-fg">(</span>zvals<span class="ansi-blue-fg">,</span> dist<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">;</span>
+
+<span class="ansi-red-fg">NameError</span>: name &#39;dist&#39; is not defined
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/tutorials_redshift-plot_redshift-plot_8_1.png" src="../../_images/tutorials_redshift-plot_redshift-plot_8_1.png" />
+</div>
+</div>
+<p>To check the units of the angular diameter distance, take a look at the
+unit attribute:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">dist</span><span class="o">.</span><span class="n">unit</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-6-41b435a9b711&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>dist<span class="ansi-blue-fg">.</span>unit
+
+<span class="ansi-red-fg">NameError</span>: name &#39;dist&#39; is not defined
+</pre></div></div>
+</div>
+<p>Now let’s put some age labels on the top axis. We’re going to pick a
+series of round age values where we want to place axis ticks. You may
+need to tweak these depending on your redshift range to get nice, evenly
+spaced ticks.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">astropy.units</span> <span class="kn">as</span> <span class="nn">u</span>
+<span class="n">ages</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">13</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">Gyr</span>
+</pre></div>
+</div>
+</div>
+<p>To link the redshift and age axes, we have to find the redshift
+corresponding to each age. The function <code class="docutils literal"><span class="pre">z_at_value</span></code> does this for us.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">astropy.cosmology</span> <span class="kn">import</span> <span class="n">z_at_value</span>
+<span class="n">ageticks</span> <span class="o">=</span> <span class="p">[</span><span class="n">z_at_value</span><span class="p">(</span><span class="n">cosmo</span><span class="o">.</span><span class="n">age</span><span class="p">,</span> <span class="n">age</span><span class="p">)</span> <span class="k">for</span> <span class="n">age</span> <span class="ow">in</span> <span class="n">ages</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">ModuleNotFoundError</span>                       Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-8-6c9b7e5a067f&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-intense-fg ansi-bold">      1</span> <span class="ansi-green-fg">from</span> astropy<span class="ansi-blue-fg">.</span>cosmology <span class="ansi-green-fg">import</span> z_at_value
+<span class="ansi-green-fg">----&gt; 2</span><span class="ansi-red-fg"> </span>ageticks <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">[</span>z_at_value<span class="ansi-blue-fg">(</span>cosmo<span class="ansi-blue-fg">.</span>age<span class="ansi-blue-fg">,</span> age<span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">for</span> age <span class="ansi-green-fg">in</span> ages<span class="ansi-blue-fg">]</span>
+
+<span class="ansi-green-fg">&lt;ipython-input-8-6c9b7e5a067f&gt;</span> in <span class="ansi-cyan-fg">&lt;listcomp&gt;</span><span class="ansi-blue-fg">(.0)</span>
+<span class="ansi-green-intense-fg ansi-bold">      1</span> <span class="ansi-green-fg">from</span> astropy<span class="ansi-blue-fg">.</span>cosmology <span class="ansi-green-fg">import</span> z_at_value
+<span class="ansi-green-fg">----&gt; 2</span><span class="ansi-red-fg"> </span>ageticks <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">[</span>z_at_value<span class="ansi-blue-fg">(</span>cosmo<span class="ansi-blue-fg">.</span>age<span class="ansi-blue-fg">,</span> age<span class="ansi-blue-fg">)</span> <span class="ansi-green-fg">for</span> age <span class="ansi-green-fg">in</span> ages<span class="ansi-blue-fg">]</span>
+
+<span class="ansi-green-fg">~/anaconda/envs/tutorials-dev/lib/python3.6/site-packages/astropy/cosmology/funcs.py</span> in <span class="ansi-cyan-fg">z_at_value</span><span class="ansi-blue-fg">(func, fval, zmin, zmax, ztol, maxfun)</span>
+<span class="ansi-green-intense-fg ansi-bold">    114</span>     universes<span class="ansi-blue-fg">,</span> but <span class="ansi-green-fg">not</span> <span class="ansi-green-fg">in</span> closed universes<span class="ansi-blue-fg">.</span>
+<span class="ansi-green-intense-fg ansi-bold">    115</span>     &#34;&#34;&#34;
+<span class="ansi-green-fg">--&gt; 116</span><span class="ansi-red-fg">     </span><span class="ansi-green-fg">from</span> scipy<span class="ansi-blue-fg">.</span>optimize <span class="ansi-green-fg">import</span> fminbound
+<span class="ansi-green-intense-fg ansi-bold">    117</span>
+<span class="ansi-green-intense-fg ansi-bold">    118</span>     fval_zmin <span class="ansi-blue-fg">=</span> func<span class="ansi-blue-fg">(</span>zmin<span class="ansi-blue-fg">)</span>
+
+<span class="ansi-red-fg">ModuleNotFoundError</span>: No module named &#39;scipy&#39;
+</pre></div></div>
+</div>
+<p>Now we make the second axes, and set the tick positions using these
+values.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">zvals</span><span class="p">,</span> <span class="n">dist</span><span class="p">)</span>
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">twiny</span><span class="p">()</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">ageticks</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-9-097b4accfb69&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-intense-fg ansi-bold">      1</span> fig <span class="ansi-blue-fg">=</span> plt<span class="ansi-blue-fg">.</span>figure<span class="ansi-blue-fg">(</span>figsize<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">6</span><span class="ansi-blue-fg">,</span><span class="ansi-cyan-fg">4</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">      2</span> ax <span class="ansi-blue-fg">=</span> fig<span class="ansi-blue-fg">.</span>add_subplot<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">111</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">----&gt; 3</span><span class="ansi-red-fg"> </span>ax<span class="ansi-blue-fg">.</span>plot<span class="ansi-blue-fg">(</span>zvals<span class="ansi-blue-fg">,</span> dist<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">      4</span> ax2 <span class="ansi-blue-fg">=</span> ax<span class="ansi-blue-fg">.</span>twiny<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">      5</span> ax2<span class="ansi-blue-fg">.</span>set_xticks<span class="ansi-blue-fg">(</span>ageticks<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">;</span>
+
+<span class="ansi-red-fg">NameError</span>: name &#39;dist&#39; is not defined
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/tutorials_redshift-plot_redshift-plot_16_1.png" src="../../_images/tutorials_redshift-plot_redshift-plot_16_1.png" />
+</div>
+</div>
+<p>We have ticks on the top axis at the correct ages, but they’re labelled
+with the redshift, not the age. Fix this by setting the tick labels by
+hand.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">zvals</span><span class="p">,</span> <span class="n">dist</span><span class="p">)</span>
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">twiny</span><span class="p">()</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">ageticks</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">([</span><span class="s1">&#39;{:g}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">age</span><span class="p">)</span> <span class="k">for</span> <span class="n">age</span> <span class="ow">in</span> <span class="n">ages</span><span class="o">.</span><span class="n">value</span><span class="p">]);</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-10-4d247180f488&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-intense-fg ansi-bold">      1</span> fig <span class="ansi-blue-fg">=</span> plt<span class="ansi-blue-fg">.</span>figure<span class="ansi-blue-fg">(</span>figsize<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">6</span><span class="ansi-blue-fg">,</span><span class="ansi-cyan-fg">4</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">      2</span> ax <span class="ansi-blue-fg">=</span> fig<span class="ansi-blue-fg">.</span>add_subplot<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">111</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">----&gt; 3</span><span class="ansi-red-fg"> </span>ax<span class="ansi-blue-fg">.</span>plot<span class="ansi-blue-fg">(</span>zvals<span class="ansi-blue-fg">,</span> dist<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">      4</span> ax2 <span class="ansi-blue-fg">=</span> ax<span class="ansi-blue-fg">.</span>twiny<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">      5</span> ax2<span class="ansi-blue-fg">.</span>set_xticks<span class="ansi-blue-fg">(</span>ageticks<span class="ansi-blue-fg">)</span>
+
+<span class="ansi-red-fg">NameError</span>: name &#39;dist&#39; is not defined
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/tutorials_redshift-plot_redshift-plot_18_1.png" src="../../_images/tutorials_redshift-plot_redshift-plot_18_1.png" />
+</div>
+</div>
+<p>We need to make sure the top and bottom axes have the same redshift
+limits. They may not line up properly in the above plot, for example,
+depending on your setup (the age of the universe should be ~13 Gyr at
+z=0).</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">zvals</span><span class="p">,</span> <span class="n">dist</span><span class="p">)</span>
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">twiny</span><span class="p">()</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">ageticks</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">([</span><span class="s1">&#39;{:g}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">age</span><span class="p">)</span> <span class="k">for</span> <span class="n">age</span> <span class="ow">in</span> <span class="n">ages</span><span class="o">.</span><span class="n">value</span><span class="p">])</span>
+<span class="n">zmin</span><span class="p">,</span> <span class="n">zmax</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">5.9</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">zmin</span><span class="p">,</span> <span class="n">zmax</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">zmin</span><span class="p">,</span> <span class="n">zmax</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-11-95a4f0dd6cef&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-intense-fg ansi-bold">      1</span> fig <span class="ansi-blue-fg">=</span> plt<span class="ansi-blue-fg">.</span>figure<span class="ansi-blue-fg">(</span>figsize<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">6</span><span class="ansi-blue-fg">,</span><span class="ansi-cyan-fg">4</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">      2</span> ax <span class="ansi-blue-fg">=</span> fig<span class="ansi-blue-fg">.</span>add_subplot<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">111</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">----&gt; 3</span><span class="ansi-red-fg"> </span>ax<span class="ansi-blue-fg">.</span>plot<span class="ansi-blue-fg">(</span>zvals<span class="ansi-blue-fg">,</span> dist<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">      4</span> ax2 <span class="ansi-blue-fg">=</span> ax<span class="ansi-blue-fg">.</span>twiny<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">      5</span> ax2<span class="ansi-blue-fg">.</span>set_xticks<span class="ansi-blue-fg">(</span>ageticks<span class="ansi-blue-fg">)</span>
+
+<span class="ansi-red-fg">NameError</span>: name &#39;dist&#39; is not defined
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/tutorials_redshift-plot_redshift-plot_20_1.png" src="../../_images/tutorials_redshift-plot_redshift-plot_20_1.png" />
+</div>
+</div>
+<p>We’re almost done. We just need to label all the axes, and add some
+minor ticks. Let’s also tweak the y axis limits to avoid putting labels
+right near the top of the plot.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">zvals</span><span class="p">,</span> <span class="n">dist</span><span class="p">)</span>
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">twiny</span><span class="p">()</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">ageticks</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">([</span><span class="s1">&#39;{:g}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">age</span><span class="p">)</span> <span class="k">for</span> <span class="n">age</span> <span class="ow">in</span> <span class="n">ages</span><span class="o">.</span><span class="n">value</span><span class="p">])</span>
+<span class="n">zmin</span><span class="p">,</span> <span class="n">zmax</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">5.9</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">zmin</span><span class="p">,</span> <span class="n">zmax</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">zmin</span><span class="p">,</span> <span class="n">zmax</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Time since Big Bang (Gyr)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Redshift&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Angular diameter distance (Mpc)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1890</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">minorticks_on</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-12-2392126eb877&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-intense-fg ansi-bold">      1</span> fig <span class="ansi-blue-fg">=</span> plt<span class="ansi-blue-fg">.</span>figure<span class="ansi-blue-fg">(</span>figsize<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">6</span><span class="ansi-blue-fg">,</span><span class="ansi-cyan-fg">4</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">      2</span> ax <span class="ansi-blue-fg">=</span> fig<span class="ansi-blue-fg">.</span>add_subplot<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">111</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">----&gt; 3</span><span class="ansi-red-fg"> </span>ax<span class="ansi-blue-fg">.</span>plot<span class="ansi-blue-fg">(</span>zvals<span class="ansi-blue-fg">,</span> dist<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">      4</span> ax2 <span class="ansi-blue-fg">=</span> ax<span class="ansi-blue-fg">.</span>twiny<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">      5</span> ax2<span class="ansi-blue-fg">.</span>set_xticks<span class="ansi-blue-fg">(</span>ageticks<span class="ansi-blue-fg">)</span>
+
+<span class="ansi-red-fg">NameError</span>: name &#39;dist&#39; is not defined
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/tutorials_redshift-plot_redshift-plot_22_1.png" src="../../_images/tutorials_redshift-plot_redshift-plot_22_1.png" />
+</div>
+</div>
+<p>Now for comparison, let’s add the angular diameter distance for a
+different cosmology, from the Planck 2013 results. And then finally, we
+save the figure to a png file.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">astropy.cosmology</span> <span class="kn">import</span> <span class="n">Planck13</span>
+<span class="n">dist2</span> <span class="o">=</span> <span class="n">Planck13</span><span class="o">.</span><span class="n">angular_diameter_distance</span><span class="p">(</span><span class="n">zvals</span><span class="p">)</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">zvals</span><span class="p">,</span> <span class="n">dist2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Planck 2013&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">zvals</span><span class="p">,</span> <span class="n">dist</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span>
+        <span class="s1">&#39;$h=0.7,\ \Omega_M=0.3,\ \Omega_\Lambda=0.7$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">frameon</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s1">&#39;lower right&#39;</span><span class="p">)</span>
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">twiny</span><span class="p">()</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">ageticks</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">([</span><span class="s1">&#39;{:g}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">age</span><span class="p">)</span> <span class="k">for</span> <span class="n">age</span> <span class="ow">in</span> <span class="n">ages</span><span class="o">.</span><span class="n">value</span><span class="p">])</span>
+<span class="n">zmin</span><span class="p">,</span> <span class="n">zmax</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">5.9</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">zmin</span><span class="p">,</span> <span class="n">zmax</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">zmin</span><span class="p">,</span> <span class="n">zmax</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Time since Big Bang (Gyr)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Redshift&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Angular diameter distance (Mpc)&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">minorticks_on</span><span class="p">()</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1890</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s1">&#39;ang_dist.png&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">bbox_inches</span><span class="o">=</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">ModuleNotFoundError</span>                       Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-13-ff090b2a6a29&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-intense-fg ansi-bold">      1</span> <span class="ansi-green-fg">from</span> astropy<span class="ansi-blue-fg">.</span>cosmology <span class="ansi-green-fg">import</span> Planck13
+<span class="ansi-green-fg">----&gt; 2</span><span class="ansi-red-fg"> </span>dist2 <span class="ansi-blue-fg">=</span> Planck13<span class="ansi-blue-fg">.</span>angular_diameter_distance<span class="ansi-blue-fg">(</span>zvals<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">      3</span>
+<span class="ansi-green-intense-fg ansi-bold">      4</span> fig <span class="ansi-blue-fg">=</span> plt<span class="ansi-blue-fg">.</span>figure<span class="ansi-blue-fg">(</span>figsize<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">6</span><span class="ansi-blue-fg">,</span><span class="ansi-cyan-fg">4</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">      5</span> ax <span class="ansi-blue-fg">=</span> fig<span class="ansi-blue-fg">.</span>add_subplot<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">111</span><span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg">~/anaconda/envs/tutorials-dev/lib/python3.6/site-packages/astropy/cosmology/core.py</span> in <span class="ansi-cyan-fg">angular_diameter_distance</span><span class="ansi-blue-fg">(self, z)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1255</span>             z <span class="ansi-blue-fg">=</span> np<span class="ansi-blue-fg">.</span>asarray<span class="ansi-blue-fg">(</span>z<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1256</span>
+<span class="ansi-green-fg">-&gt; 1257</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>comoving_transverse_distance<span class="ansi-blue-fg">(</span>z<span class="ansi-blue-fg">)</span> <span class="ansi-blue-fg">/</span> <span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">1.</span> <span class="ansi-blue-fg">+</span> z<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1258</span>
+<span class="ansi-green-intense-fg ansi-bold">   1259</span>     <span class="ansi-green-fg">def</span> luminosity_distance<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> z<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">~/anaconda/envs/tutorials-dev/lib/python3.6/site-packages/astropy/cosmology/core.py</span> in <span class="ansi-cyan-fg">comoving_transverse_distance</span><span class="ansi-blue-fg">(self, z)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1192</span>         &#34;&#34;&#34;
+<span class="ansi-green-intense-fg ansi-bold">   1193</span>
+<span class="ansi-green-fg">-&gt; 1194</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>_comoving_transverse_distance_z1z2<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">,</span> z<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1195</span>
+<span class="ansi-green-intense-fg ansi-bold">   1196</span>     <span class="ansi-green-fg">def</span> _comoving_transverse_distance_z1z2<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> z1<span class="ansi-blue-fg">,</span> z2<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">~/anaconda/envs/tutorials-dev/lib/python3.6/site-packages/astropy/cosmology/core.py</span> in <span class="ansi-cyan-fg">_comoving_transverse_distance_z1z2</span><span class="ansi-blue-fg">(self, z1, z2)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1221</span>
+<span class="ansi-green-intense-fg ansi-bold">   1222</span>         Ok0 <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>_Ok0
+<span class="ansi-green-fg">-&gt; 1223</span><span class="ansi-red-fg">         </span>dc <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>_comoving_distance_z1z2<span class="ansi-blue-fg">(</span>z1<span class="ansi-blue-fg">,</span> z2<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1224</span>         <span class="ansi-green-fg">if</span> Ok0 <span class="ansi-blue-fg">==</span> <span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">   1225</span>             <span class="ansi-green-fg">return</span> dc
+
+<span class="ansi-green-fg">~/anaconda/envs/tutorials-dev/lib/python3.6/site-packages/astropy/cosmology/core.py</span> in <span class="ansi-cyan-fg">_comoving_distance_z1z2</span><span class="ansi-blue-fg">(self, z1, z2)</span>
+<span class="ansi-green-intense-fg ansi-bold">   1163</span>         &#34;&#34;&#34;
+<span class="ansi-green-intense-fg ansi-bold">   1164</span>
+<span class="ansi-green-fg">-&gt; 1165</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">from</span> scipy<span class="ansi-blue-fg">.</span>integrate <span class="ansi-green-fg">import</span> quad
+<span class="ansi-green-intense-fg ansi-bold">   1166</span>         f = lambda z1, z2: quad(self._inv_efunc_scalar, z1, z2,
+<span class="ansi-green-intense-fg ansi-bold">   1167</span>                              args=self._inv_efunc_scalar_args)[0]
+
+<span class="ansi-red-fg">ModuleNotFoundError</span>: No module named &#39;scipy&#39;
+</pre></div></div>
+</div>
+<p><code class="docutils literal"><span class="pre">bbox_inches='tight'</span></code> automatically trims any whitespace from around
+the plot edges.</p>
+<p>And we’re done!</p>
+<div class="section" id="Exercise">
+<h2>Exercise<a class="headerlink" href="#Exercise" title="Permalink to this headline">¶</a></h2>
+<p>Well, almost done. Notice that we calculated the times on the upper axis
+using the original cosmology, not the new cosmology based on the Planck
+2013 results. So strictly speaking, this axis applies only to the
+original cosmology, although the difference between the two is small. As
+an exercise, you can try plot two different upper axes, slightly offset
+from each other, to show the times corresponding to each cosmology. Take
+a look at the first answer to <a class="reference external" href="http://stackoverflow.com/questions/7733693/matplotlib-overlay-plots-with-different-scales">this question on Stack
+Overflow</a>
+for some hints on how to go about this.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>
+</pre></div>
+</div>
+</div>
+<hr width="75%" style="margin: 0 auto; margin-top: 16px; margin-bottom: 16px;" />
+<p style="text-align: center; width: 100%; font-size:125%;">
+    <a href="https://github.com/astropy/astropy-tutorials/tree/master/docs//tutorials/redshift-plot/redshift-plot.ipynb">Source notebook</a>
+</p>
+<hr width="75%" style="margin: 0 auto; margin-top: 16px; margin-bottom: 16px;" /></div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><h3>Page Contents</h3>
+<ul>
+<li><a class="reference internal" href="#">Make a plot with both redshift and universe age axes using astropy.cosmology</a><ul>
+<li><a class="reference internal" href="#Exercise">Exercise</a></li>
+</ul>
+</li>
+</ul>
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+<footer class="footer">
+  <p class="pull-right">
+    <a href="../../_sources/tutorials/redshift-plot/redshift-plot.ipynb.txt"
+       rel="nofollow">Page Source</a> &nbsp;
+    <a href="#">Back to Top</a></p>
+  <p>
+    &copy; Copyright 2013–2017, The Astropy Developers.<br/>
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.6.3. &nbsp;
+    Last built 10 Oct 2017. <br/>
+  </p>
+</footer>
+  </body>
+</html>

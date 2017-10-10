@@ -1,0 +1,673 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Viewing and manipulating data from FITS tables &#8212; astropy-tutorials v3.0.dev</title>
+    <link rel="stylesheet" href="../../_static/bootstrap-astropy.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../../',
+        VERSION:     '3.0.dev',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true,
+        SOURCELINK_SUFFIX: '.txt'
+      };
+    </script>
+    <script type="text/javascript" src="../../_static/jquery.js"></script>
+    <script type="text/javascript" src="../../_static/underscore.js"></script>
+    <script type="text/javascript" src="../../_static/doctools.js"></script>
+    <script type="text/javascript" src="../../_static/sidebar.js"></script>
+    <link rel="shortcut icon" href="../../_static/astropy_logo.ico"/>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Read in catalog information from a text file and plot some parameters" href="../plot-catalog/plot-catalog.html" />
+    <link rel="prev" title="Viewing and manipulating FITS images" href="../FITS-images/FITS-images.html" />
+<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:200,600' rel='stylesheet' type='text/css'/>
+<script type="text/javascript" src="../../_static/copybutton.js"></script>
+
+
+  </head>
+  <body>
+<div class="topbar">
+  <a class="brand" title="Documentation Home" href="../../index.html"><span id="logotext1">astro</span><span id="logotext2">py</span><span id="logotext3">:tutorials</span></a>
+  <ul>
+    <li><a class="homelink" title="Astropy Homepage" href="http://www.astropy.org"></a></li>
+    <li><a title="General Index" href="../../genindex.html">Index</a></li>
+    <li><a title="Module Index" href="../../py-modindex.html">Modules</a></li>
+    <li>
+      
+      
+<form action="../../search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <input type="hidden" name="check_keywords" value="yes" />
+  <input type="hidden" name="area" value="default" />
+</form>
+      
+    </li>
+  </ul>
+</div>
+
+<div class="related">
+    <h3>Navigation</h3>
+    <ul>
+      <li class="right">
+	<a href="../plot-catalog/plot-catalog.html" title="Read in catalog information from a text file and plot some parameters">
+	  next &raquo;
+	</a>
+      </li>
+      <li class="right">
+	<a href="../FITS-images/FITS-images.html" title="Viewing and manipulating FITS images">
+	  &laquo; previous
+	</a>
+	 |
+      </li>
+      <li>
+	<a href="../../index.html">astropy-tutorials v3.0.dev</a>
+	 &#187;
+      </li>
+      
+      <li>Viewing and manipulating data from FITS tables</li> 
+    </ul>
+</div>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  
+<style>
+/* CSS for nbsphinx extension */
+
+/* remove conflicting styling from Sphinx themes */
+div.nbinput,
+div.nbinput div.prompt,
+div.nbinput div.input_area,
+div.nbinput div[class*=highlight],
+div.nbinput div[class*=highlight] pre,
+div.nboutput,
+div.nbinput div.prompt,
+div.nbinput div.output_area,
+div.nboutput div[class*=highlight],
+div.nboutput div[class*=highlight] pre {
+    background: none;
+    border: none;
+    padding: 0 0;
+    margin: 0;
+    box-shadow: none;
+}
+
+/* avoid gaps between output lines */
+div.nboutput div[class*=highlight] pre {
+    line-height: normal;
+}
+
+/* input/output containers */
+div.nbinput,
+div.nboutput {
+    display: -webkit-flex;
+    display: flex;
+    align-items: flex-start;
+    margin: 0;
+    width: 100%;
+}
+@media (max-width: 540px) {
+    div.nbinput,
+    div.nboutput {
+        flex-direction: column;
+    }
+}
+
+/* input container */
+div.nbinput {
+    padding-top: 5px;
+}
+
+/* last container */
+div.nblast {
+    padding-bottom: 5px;
+}
+
+/* input prompt */
+div.nbinput div.prompt pre {
+    color: #303F9F;
+}
+
+/* output prompt */
+div.nboutput div.prompt pre {
+    color: #D84315;
+}
+
+/* all prompts */
+div.nbinput div.prompt,
+div.nboutput div.prompt {
+    min-width: 0;
+    padding-top: 0.4em;
+    padding-right: 0.4em;
+    text-align: right;
+    flex: 0;
+}
+@media (max-width: 540px) {
+    div.nbinput div.prompt,
+    div.nboutput div.prompt {
+        text-align: left;
+        padding: 0.4em;
+    }
+    div.nboutput div.prompt.empty {
+        padding: 0;
+    }
+}
+
+/* disable scrollbars on prompts */
+div.nbinput div.prompt pre,
+div.nboutput div.prompt pre {
+    overflow: hidden;
+}
+
+/* input/output area */
+div.nbinput div.input_area,
+div.nboutput div.output_area {
+    padding: 0.4em;
+    -webkit-flex: 1;
+    flex: 1;
+    overflow: auto;
+}
+@media (max-width: 540px) {
+    div.nbinput div.input_area,
+    div.nboutput div.output_area {
+        width: 100%;
+    }
+}
+
+/* input area */
+div.nbinput div.input_area {
+    border: 1px solid #cfcfcf;
+    border-radius: 2px;
+    background: #f7f7f7;
+}
+
+/* override MathJax center alignment in output cells */
+div.nboutput div[class*=MathJax] {
+    text-align: left !important;
+}
+
+/* override sphinx.ext.pngmath center alignment in output cells */
+div.nboutput div.math p {
+    text-align: left;
+}
+
+/* standard error */
+div.nboutput div.output_area.stderr {
+    background: #fdd;
+}
+
+/* ANSI colors */
+.ansi-black-fg { color: #3E424D; }
+.ansi-black-bg { background-color: #3E424D; }
+.ansi-black-intense-fg { color: #282C36; }
+.ansi-black-intense-bg { background-color: #282C36; }
+.ansi-red-fg { color: #E75C58; }
+.ansi-red-bg { background-color: #E75C58; }
+.ansi-red-intense-fg { color: #B22B31; }
+.ansi-red-intense-bg { background-color: #B22B31; }
+.ansi-green-fg { color: #00A250; }
+.ansi-green-bg { background-color: #00A250; }
+.ansi-green-intense-fg { color: #007427; }
+.ansi-green-intense-bg { background-color: #007427; }
+.ansi-yellow-fg { color: #DDB62B; }
+.ansi-yellow-bg { background-color: #DDB62B; }
+.ansi-yellow-intense-fg { color: #B27D12; }
+.ansi-yellow-intense-bg { background-color: #B27D12; }
+.ansi-blue-fg { color: #208FFB; }
+.ansi-blue-bg { background-color: #208FFB; }
+.ansi-blue-intense-fg { color: #0065CA; }
+.ansi-blue-intense-bg { background-color: #0065CA; }
+.ansi-magenta-fg { color: #D160C4; }
+.ansi-magenta-bg { background-color: #D160C4; }
+.ansi-magenta-intense-fg { color: #A03196; }
+.ansi-magenta-intense-bg { background-color: #A03196; }
+.ansi-cyan-fg { color: #60C6C8; }
+.ansi-cyan-bg { background-color: #60C6C8; }
+.ansi-cyan-intense-fg { color: #258F8F; }
+.ansi-cyan-intense-bg { background-color: #258F8F; }
+.ansi-white-fg { color: #C5C1B4; }
+.ansi-white-bg { background-color: #C5C1B4; }
+.ansi-white-intense-fg { color: #A1A6B2; }
+.ansi-white-intense-bg { background-color: #A1A6B2; }
+
+.ansi-bold { font-weight: bold; }
+</style>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">astropy.io</span> <span class="kn">import</span> <span class="n">fits</span>
+<span class="kn">from</span> <span class="nn">astropy.table</span> <span class="kn">import</span> <span class="n">Table</span>
+<span class="kn">from</span> <span class="nn">matplotlib.colors</span> <span class="kn">import</span> <span class="n">LogNorm</span>
+
+<span class="c1"># Set up matplotlib and use a nicer set of plot parameters</span>
+<span class="kn">from</span> <span class="nn">astropy.visualization</span> <span class="kn">import</span> <span class="n">astropy_mpl_style</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="n">astropy_mpl_style</span><span class="p">)</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
+</div>
+</div>
+<p>The following line is needed to download the example FITS files used in
+this tutorial.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="kn">from</span> <span class="nn">astropy.utils.data</span> <span class="kn">import</span> <span class="n">download_file</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="Viewing-and-manipulating-data-from-FITS-tables">
+<h1>Viewing and manipulating data from FITS tables<a class="headerlink" href="#Viewing-and-manipulating-data-from-FITS-tables" title="Permalink to this headline">¶</a></h1>
+<p>FITS files can often contain large amount of multi-dimensional data and
+tables.</p>
+<p>In this particular example, I will open a FITS file from a Chandra
+observation of the Galactic Center. The file contains a list of events
+with x and y coordinates, energy, and various other pieces of
+information.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">event_filename</span> <span class="o">=</span> <span class="n">download_file</span><span class="p">(</span><span class="s1">&#39;http://data.astropy.org/tutorials/FITS-tables/chandra_events.fits&#39;</span><span class="p">,</span>
+                               <span class="n">cache</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="Opening-the-FITS-file-and-viewing-table-contents">
+<h2>Opening the FITS file and viewing table contents<a class="headerlink" href="#Opening-the-FITS-file-and-viewing-table-contents" title="Permalink to this headline">¶</a></h2>
+<p>Since the file is big, I will open with <code class="docutils literal"><span class="pre">memmap=True</span></code> to prevent RAM
+storage issues.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">hdu_list</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">event_filename</span><span class="p">,</span> <span class="n">memmap</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">hdu_list</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Filename: /Users/adrian/.astropy/cache/download/py3/26e9900d731d08997d99ada3973f4592
+No.    Name      Ver    Type      Cards   Dimensions   Format
+  0  PRIMARY       1 PrimaryHDU      30   ()
+  1  EVENTS        1 BinTableHDU    890   483964R x 19C   [1D, 1I, 1I, 1J, 1I, 1I, 1I, 1I, 1E, 1E, 1E, 1E, 1J, 1J, 1E, 1J, 1I, 1I, 32X]
+  2  GTI           3 BinTableHDU     28   1R x 2C   [1D, 1D]
+  3  GTI           2 BinTableHDU     28   1R x 2C   [1D, 1D]
+  4  GTI           1 BinTableHDU     28   1R x 2C   [1D, 1D]
+  5  GTI           0 BinTableHDU     28   1R x 2C   [1D, 1D]
+  6  GTI           6 BinTableHDU     28   1R x 2C   [1D, 1D]
+</pre></div></div>
+</div>
+<p>I’m interested in reading EVENTS, which contains information about each
+X-ray photon that hit the detector.</p>
+<p>To find out what information the table contains, I will print the column
+names.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="k">print</span><span class="p">(</span><span class="n">hdu_list</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+ColDefs(
+    name = &#39;time&#39;; format = &#39;1D&#39;; unit = &#39;s&#39;
+    name = &#39;ccd_id&#39;; format = &#39;1I&#39;
+    name = &#39;node_id&#39;; format = &#39;1I&#39;
+    name = &#39;expno&#39;; format = &#39;1J&#39;
+    name = &#39;chipx&#39;; format = &#39;1I&#39;; unit = &#39;pixel&#39;
+    name = &#39;chipy&#39;; format = &#39;1I&#39;; unit = &#39;pixel&#39;
+    name = &#39;tdetx&#39;; format = &#39;1I&#39;; unit = &#39;pixel&#39;
+    name = &#39;tdety&#39;; format = &#39;1I&#39;; unit = &#39;pixel&#39;
+    name = &#39;detx&#39;; format = &#39;1E&#39;; unit = &#39;pixel&#39;
+    name = &#39;dety&#39;; format = &#39;1E&#39;; unit = &#39;pixel&#39;
+    name = &#39;x&#39;; format = &#39;1E&#39;; unit = &#39;pixel&#39;
+    name = &#39;y&#39;; format = &#39;1E&#39;; unit = &#39;pixel&#39;
+    name = &#39;pha&#39;; format = &#39;1J&#39;; unit = &#39;adu&#39;; null = 0
+    name = &#39;pha_ro&#39;; format = &#39;1J&#39;; unit = &#39;adu&#39;; null = 0
+    name = &#39;energy&#39;; format = &#39;1E&#39;; unit = &#39;eV&#39;
+    name = &#39;pi&#39;; format = &#39;1J&#39;; unit = &#39;chan&#39;; null = 0
+    name = &#39;fltgrade&#39;; format = &#39;1I&#39;
+    name = &#39;grade&#39;; format = &#39;1I&#39;
+    name = &#39;status&#39;; format = &#39;32X&#39;
+)
+</pre></div></div>
+</div>
+<p>Now I’ll we’ll take this data and convert it into an <a class="reference external" href="http://docs.astropy.org/en/stable/table/">astropy
+table</a>. While it is
+possible to access FITS tables directly from the <code class="docutils literal"><span class="pre">.data</span></code> attribute,
+using
+<a class="reference external" href="http://docs.astropy.org/en/stable/api/astropy.table.Table.html#astropy.table.Table">Table</a>
+tends to make a variety of common tasks more convenient.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">evt_data</span> <span class="o">=</span> <span class="n">Table</span><span class="p">(</span><span class="n">hdu_list</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>For example, a preview of the table is easily viewed by simply running a
+cell with the table as the last line:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">evt_data</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>Out[8]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+&lt;Table length=483964&gt;
+<table id="table4632362288" class="table-striped table-bordered table-condensed">
+<thead><tr><th>time</th><th>ccd_id</th><th>node_id</th><th>expno</th><th>chipx</th><th>chipy</th><th>tdetx</th><th>tdety</th><th>detx</th><th>dety</th><th>x</th><th>y</th><th>pha</th><th>pha_ro</th><th>energy</th><th>pi</th><th>fltgrade</th><th>grade</th><th>status [32]</th></tr></thead>
+<thead><tr><th>float64</th><th>int16</th><th>int16</th><th>int32</th><th>int16</th><th>int16</th><th>int16</th><th>int16</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>int32</th><th>int32</th><th>float32</th><th>int32</th><th>int16</th><th>int16</th><th>bool</th></tr></thead>
+<tr><td>238623220.909</td><td>3</td><td>3</td><td>68</td><td>920</td><td>8</td><td>5124</td><td>3981</td><td>5095.64</td><td>4139.0</td><td>4168.07</td><td>5087.77</td><td>3548</td><td>3534</td><td>13874.7</td><td>951</td><td>16</td><td>4</td><td>False .. False</td></tr>
+<tr><td>238623220.909</td><td>3</td><td>1</td><td>68</td><td>437</td><td>237</td><td>4895</td><td>3498</td><td>4865.57</td><td>4621.18</td><td>3662.2</td><td>4915.93</td><td>667</td><td>629</td><td>2621.19</td><td>180</td><td>64</td><td>2</td><td>False .. False</td></tr>
+<tr><td>238623220.909</td><td>3</td><td>2</td><td>68</td><td>719</td><td>289</td><td>4843</td><td>3780</td><td>4814.83</td><td>4340.25</td><td>3935.22</td><td>4832.55</td><td>3033</td><td>2875</td><td>12119.0</td><td>831</td><td>8</td><td>3</td><td>False .. False</td></tr>
+<tr><td>238623220.909</td><td>3</td><td>0</td><td>68</td><td>103</td><td>295</td><td>4837</td><td>3164</td><td>4807.36</td><td>4954.38</td><td>3324.46</td><td>4897.28</td><td>831</td><td>773</td><td>3253.04</td><td>223</td><td>0</td><td>0</td><td>False .. False</td></tr>
+<tr><td>238623220.909</td><td>3</td><td>1</td><td>68</td><td>498</td><td>314</td><td>4818</td><td>3559</td><td>4788.99</td><td>4560.33</td><td>3713.63</td><td>4832.73</td><td>3612</td><td>3439</td><td>14214.4</td><td>974</td><td>64</td><td>2</td><td>False .. False</td></tr>
+<tr><td>238623220.909</td><td>3</td><td>3</td><td>68</td><td>791</td><td>469</td><td>4663</td><td>3852</td><td>4635.45</td><td>4268.05</td><td>3985.85</td><td>4645.93</td><td>500</td><td>438</td><td>1952.72</td><td>134</td><td>0</td><td>0</td><td>False .. False</td></tr>
+<tr><td>238623220.909</td><td>3</td><td>3</td><td>68</td><td>894</td><td>839</td><td>4293</td><td>3955</td><td>4266.64</td><td>4165.32</td><td>4044.55</td><td>4267.6</td><td>835</td><td>713</td><td>3267.53</td><td>224</td><td>0</td><td>0</td><td>False .. False</td></tr>
+<tr><td>238623220.909</td><td>3</td><td>3</td><td>68</td><td>857</td><td>941</td><td>4191</td><td>3918</td><td>4164.81</td><td>4202.23</td><td>3995.94</td><td>4170.82</td><td>975</td><td>804</td><td>3817.04</td><td>262</td><td>0</td><td>0</td><td>False .. False</td></tr>
+<tr><td>238623220.909</td><td>3</td><td>3</td><td>68</td><td>910</td><td>959</td><td>4173</td><td>3971</td><td>4146.99</td><td>4149.36</td><td>4046.34</td><td>4146.91</td><td>576</td><td>446</td><td>2252.73</td><td>155</td><td>0</td><td>0</td><td>False .. False</td></tr>
+<tr><td>238623220.909</td><td>3</td><td>3</td><td>68</td><td>961</td><td>962</td><td>4170</td><td>4022</td><td>4144.13</td><td>4098.5</td><td>4096.52</td><td>4138.09</td><td>1572</td><td>1354</td><td>6154.11</td><td>422</td><td>0</td><td>0</td><td>False .. False</td></tr>
+<tr><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr>
+<tr><td>238672393.55</td><td>1</td><td>3</td><td>15723</td><td>933</td><td>199</td><td>4933</td><td>5040</td><td>4902.91</td><td>3082.5</td><td>5212.5</td><td>4766.23</td><td>1222</td><td>1181</td><td>4819.83</td><td>331</td><td>0</td><td>0</td><td>False .. False</td></tr>
+<tr><td>238672393.55</td><td>1</td><td>2</td><td>15723</td><td>596</td><td>412</td><td>4720</td><td>4703</td><td>4691.51</td><td>3418.99</td><td>4853.51</td><td>4595.8</td><td>3142</td><td>3020</td><td>12536.9</td><td>859</td><td>10</td><td>6</td><td>False .. False</td></tr>
+<tr><td>238672393.55</td><td>1</td><td>3</td><td>15723</td><td>1000</td><td>608</td><td>4524</td><td>5107</td><td>4494.71</td><td>3015.72</td><td>5230.89</td><td>4353.02</td><td>658</td><td>585</td><td>2599.57</td><td>179</td><td>0</td><td>0</td><td>False .. False</td></tr>
+<tr><td>238672393.55</td><td>1</td><td>1</td><td>15723</td><td>270</td><td>917</td><td>4215</td><td>4377</td><td>4188.33</td><td>3743.6</td><td>4472.07</td><td>4134.22</td><td>3861</td><td>3463</td><td>15535.8</td><td>1024</td><td>16</td><td>4</td><td>False .. False</td></tr>
+<tr><td>238672393.55</td><td>1</td><td>0</td><td>15723</td><td>232</td><td>988</td><td>4144</td><td>4339</td><td>4117.61</td><td>3781.88</td><td>4425.75</td><td>4068.49</td><td>1680</td><td>1499</td><td>6653.08</td><td>456</td><td>0</td><td>0</td><td>False .. False</td></tr>
+<tr><td>238672393.591</td><td>0</td><td>1</td><td>15723</td><td>366</td><td>103</td><td>3164</td><td>4766</td><td>3140.9</td><td>3356.32</td><td>4733.68</td><td>3048.57</td><td>3621</td><td>3602</td><td>14362.5</td><td>984</td><td>0</td><td>0</td><td>False .. False</td></tr>
+<tr><td>238672393.591</td><td>0</td><td>3</td><td>15723</td><td>937</td><td>646</td><td>3707</td><td>4195</td><td>3681.21</td><td>3925.55</td><td>4231.84</td><td>3651.97</td><td>3717</td><td>3486</td><td>14654.0</td><td>1004</td><td>8</td><td>3</td><td>False .. False</td></tr>
+<tr><td>238672393.591</td><td>0</td><td>1</td><td>15723</td><td>406</td><td>687</td><td>3748</td><td>4726</td><td>3723.4</td><td>3396.25</td><td>4762.42</td><td>3631.72</td><td>1676</td><td>1536</td><td>6652.83</td><td>456</td><td>0</td><td>0</td><td>False .. False</td></tr>
+<tr><td>238672393.591</td><td>0</td><td>1</td><td>15723</td><td>354</td><td>870</td><td>3931</td><td>4778</td><td>3906.07</td><td>3344.77</td><td>4834.99</td><td>3807.08</td><td>2436</td><td>2165</td><td>9672.88</td><td>663</td><td>16</td><td>4</td><td>False .. False</td></tr>
+<tr><td>238672393.632</td><td>6</td><td>1</td><td>15723</td><td>384</td><td>821</td><td>3259</td><td>2523</td><td>3230.92</td><td>5596.85</td><td>2519.22</td><td>3401.03</td><td>491</td><td>356</td><td>1875.94</td><td>129</td><td>0</td><td>0</td><td>False .. False</td></tr>
+</table></div>
+</div>
+<p>We can extract data from the table by referencing the column name.. For
+example, I’ll make a histogram for the energy of each photon, giving us
+a sense for the spectrum (folded with the detector’s efficiency).</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">energy_hist</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">evt_data</span><span class="p">[</span><span class="s1">&#39;energy&#39;</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/tutorials_FITS-tables_FITS-tables_18_0.png" src="../../_images/tutorials_FITS-tables_FITS-tables_18_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="Making-a-2-D-histogram-with-some-table-data">
+<h2>Making a 2-D histogram with some table data<a class="headerlink" href="#Making-a-2-D-histogram-with-some-table-data" title="Permalink to this headline">¶</a></h2>
+<p>I will make an image by binning the x and y coordinates of the events
+into a 2-D histogram.</p>
+<p>This particular observation spans five CCD chips. First we determine the
+events that only fell on the main (ACIS-I) chips, which have number ids
+0, 1, 2, and 3.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">ii</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">in1d</span><span class="p">(</span><span class="n">evt_data</span><span class="p">[</span><span class="s1">&#39;ccd_id&#39;</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">ii</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>Out[10]:
+</pre></div>
+</div>
+<div class="output_area highlight-none"><div class="highlight"><pre>
+<span></span>434858
+</pre></div>
+</div>
+</div>
+<div class="section" id="Method-1:-Use-numpy-to-make-a-2-D-histogram-and-imshow-to-display-it">
+<h3>Method 1: Use numpy to make a 2-D histogram and imshow to display it<a class="headerlink" href="#Method-1:-Use-numpy-to-make-a-2-D-histogram-and-imshow-to-display-it" title="Permalink to this headline">¶</a></h3>
+<p>This method allowed me to create an image without stretching</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">NBINS</span> <span class="o">=</span> <span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+
+<span class="n">img_zero</span><span class="p">,</span> <span class="n">yedges</span><span class="p">,</span> <span class="n">xedges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram2d</span><span class="p">(</span><span class="n">evt_data</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">][</span><span class="n">ii</span><span class="p">],</span> <span class="n">evt_data</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">][</span><span class="n">ii</span><span class="p">],</span> <span class="n">NBINS</span><span class="p">)</span>
+
+<span class="n">extent</span> <span class="o">=</span> <span class="p">[</span><span class="n">xedges</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">xedges</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">yedges</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">yedges</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img_zero</span><span class="p">,</span> <span class="n">extent</span><span class="o">=</span><span class="n">extent</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gist_yarg&#39;</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+
+<span class="c1"># To see more color maps</span>
+<span class="c1"># http://wiki.scipy.org/Cookbook/Matplotlib/Show_colormaps</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>Out[11]:
+</pre></div>
+</div>
+<div class="output_area highlight-none"><div class="highlight"><pre>
+<span></span>&lt;matplotlib.text.Text at 0x11d2e2f28&gt;
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/tutorials_FITS-tables_FITS-tables_25_1.png" src="../../_images/tutorials_FITS-tables_FITS-tables_25_1.png" />
+</div>
+</div>
+</div>
+<div class="section" id="Method-2:-Use-hist2d-with-a-log-normal-color-scheme">
+<h3>Method 2: Use hist2d with a log-normal color scheme<a class="headerlink" href="#Method-2:-Use-hist2d-with-a-log-normal-color-scheme" title="Permalink to this headline">¶</a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">NBINS</span> <span class="o">=</span> <span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">img_zero_mpl</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist2d</span><span class="p">(</span><span class="n">evt_data</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">][</span><span class="n">ii</span><span class="p">],</span> <span class="n">evt_data</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">][</span><span class="n">ii</span><span class="p">],</span> <span class="n">NBINS</span><span class="p">,</span>
+                          <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="n">LogNorm</span><span class="p">())</span>
+
+<span class="n">cbar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">ticks</span><span class="o">=</span><span class="p">[</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">3.0</span><span class="p">,</span><span class="mf">6.0</span><span class="p">])</span>
+<span class="n">cbar</span><span class="o">.</span><span class="n">ax</span><span class="o">.</span><span class="n">set_yticklabels</span><span class="p">([</span><span class="s1">&#39;1&#39;</span><span class="p">,</span><span class="s1">&#39;3&#39;</span><span class="p">,</span><span class="s1">&#39;6&#39;</span><span class="p">])</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>Out[12]:
+</pre></div>
+</div>
+<div class="output_area highlight-none"><div class="highlight"><pre>
+<span></span>&lt;matplotlib.text.Text at 0x112c650f0&gt;
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../../_images/tutorials_FITS-tables_FITS-tables_27_1.png" src="../../_images/tutorials_FITS-tables_FITS-tables_27_1.png" />
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="Close-the-FITS-file">
+<h2>Close the FITS file<a class="headerlink" href="#Close-the-FITS-file" title="Permalink to this headline">¶</a></h2>
+<p>When you’re done using a FITS file, it’s often a good idea to close it.
+That way you can be sure it won’t continue using up excess memory or
+file handles on your computer. (This happens automatically when you
+close Python, but you never know how long that might be…)</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span><span class="n">hdu_list</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="Exercises">
+<h2>Exercises<a class="headerlink" href="#Exercises" title="Permalink to this headline">¶</a></h2>
+<p>Make a scatter plot of the same data you histogrammed above. The
+<a class="reference external" href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.scatter">plt.scatter</a>
+function is your friend for this. What are the pros and cons of doing
+this?</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>
+</pre></div>
+</div>
+</div>
+<p>Try the same with the
+<a class="reference external" href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.hexbin">plt.hexbin</a>
+plotting function. Which do you think looks better for this kind of
+data?</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>
+</pre></div>
+</div>
+</div>
+<p>Choose an energy range to make a slice of the FITS table, then plot it.
+How does the image change with different energy ranges?</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none"><div class="highlight"><pre>
+<span></span>In [14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3"><div class="highlight"><pre>
+<span></span>
+</pre></div>
+</div>
+</div>
+<hr width="75%" style="margin: 0 auto; margin-top: 16px; margin-bottom: 16px;" />
+<p style="text-align: center; width: 100%; font-size:125%;">
+    <a href="https://github.com/astropy/astropy-tutorials/tree/master/docs//tutorials/FITS-tables/FITS-tables.ipynb">Source notebook</a>
+</p>
+<hr width="75%" style="margin: 0 auto; margin-top: 16px; margin-bottom: 16px;" /></div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><h3>Page Contents</h3>
+<ul>
+<li><a class="reference internal" href="#">Viewing and manipulating data from FITS tables</a><ul>
+<li><a class="reference internal" href="#Opening-the-FITS-file-and-viewing-table-contents">Opening the FITS file and viewing table contents</a></li>
+<li><a class="reference internal" href="#Making-a-2-D-histogram-with-some-table-data">Making a 2-D histogram with some table data</a><ul>
+<li><a class="reference internal" href="#Method-1:-Use-numpy-to-make-a-2-D-histogram-and-imshow-to-display-it">Method 1: Use numpy to make a 2-D histogram and imshow to display it</a></li>
+<li><a class="reference internal" href="#Method-2:-Use-hist2d-with-a-log-normal-color-scheme">Method 2: Use hist2d with a log-normal color scheme</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#Close-the-FITS-file">Close the FITS file</a></li>
+<li><a class="reference internal" href="#Exercises">Exercises</a></li>
+</ul>
+</li>
+</ul>
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+<footer class="footer">
+  <p class="pull-right">
+    <a href="../../_sources/tutorials/FITS-tables/FITS-tables.ipynb.txt"
+       rel="nofollow">Page Source</a> &nbsp;
+    <a href="#">Back to Top</a></p>
+  <p>
+    &copy; Copyright 2013–2017, The Astropy Developers.<br/>
+    Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.6.3. &nbsp;
+    Last built 10 Oct 2017. <br/>
+  </p>
+</footer>
+  </body>
+</html>

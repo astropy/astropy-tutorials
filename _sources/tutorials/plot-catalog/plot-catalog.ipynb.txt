@@ -1,0 +1,457 @@
+{
+ "cells": [
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import numpy as np\n",
+    "\n",
+    "# Set up matplotlib and use a nicer set of plot parameters\n",
+    "from astropy.visualization import astropy_mpl_style\n",
+    "import matplotlib.pyplot as plt\n",
+    "plt.style.use(astropy_mpl_style)\n",
+    "%matplotlib inline"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# Read in catalog information from a text file and plot some parameters"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Astropy provides functionality for reading in and manipulating tabular\n",
+    "data through the `astropy.table` subpackage. An additional set of\n",
+    "tools for reading and writing ASCII data are provided with the\n",
+    "`astropy.io.ascii` subpackage, but fundamentally use the classes and\n",
+    "methods implemented in `astropy.table`.\n",
+    "\n",
+    "We'll start by importing the `ascii` subpackage:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from astropy.io import ascii"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "For many cases, it is sufficient to use the `ascii.read('filename')` \n",
+    "function as a black box for reading data from table-formatted text \n",
+    "files. By default, this function will try to figure out how your \n",
+    "data is formatted/delimited (by default, `guess=True`). For example, \n",
+    "if your data are:\n",
+    "\n",
+    "    # name,ra,dec\n",
+    "    BLG100,17:51:00.0,-29:59:48\n",
+    "    BLG101,17:53:40.2,-29:49:52\n",
+    "    BLG102,17:56:20.2,-29:30:51\n",
+    "    BLG103,17:56:20.2,-30:06:22\n",
+    "    ...\n",
+    "\n",
+    "(see _simple_table.csv_)\n",
+    "\n",
+    "`ascii.read()` will return a `Table` object:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "tbl = ascii.read(\"simple_table.csv\")\n",
+    "tbl"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "The header names are automatically parsed from the top of the file,\n",
+    "and the delimiter is inferred from the rest of the file -- awesome! \n",
+    "We can access the columns directly from their names as 'keys' of the\n",
+    "table object:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "tbl[\"ra\"]"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "If we want to then convert the first RA (as a sexagesimal angle) to\n",
+    "decimal degrees, for example, we can pluck out the first (0th) item in\n",
+    "the column and use the `coordinates` subpackage to parse the string:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import astropy.coordinates as coord\n",
+    "import astropy.units as u\n",
+    "\n",
+    "first_row = tbl[0] # get the first (0th) row\n",
+    "ra = coord.Angle(first_row[\"ra\"], unit=u.hour) # create an Angle object\n",
+    "ra.degree # convert to degrees"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Now let's look at a case where this breaks, and we have to specify some\n",
+    "more options to the `read()` function. Our data may look a bit messier::\n",
+    "\n",
+    "    ,,,,2MASS Photometry,,,,,,WISE Photometry,,,,,,,,Spectra,,,,Astrometry,,,,,,,,,,,\n",
+    "    Name,Designation,RA,Dec,Jmag,J_unc,Hmag,H_unc,Kmag,K_unc,W1,W1_unc,W2,W2_unc,W3,W3_unc,W4,W4_unc,Spectral Type,Spectra (FITS),Opt Spec Refs,NIR Spec Refs,pm_ra (mas),pm_ra_unc,pm_dec (mas),pm_dec_unc,pi (mas),pi_unc,radial velocity (km/s),rv_unc,Astrometry Refs,Discovery Refs,Group/Age,Note\n",
+    "    ,00 04 02.84 -64 10 35.6,1.01201,-64.18,15.79,0.07,14.83,0.07,14.01,0.05,13.37,0.03,12.94,0.03,12.18,0.24,9.16,null,L1γ,,Kirkpatrick et al. 2010,,,,,,,,,,,Kirkpatrick et al. 2010,,\n",
+    "    PC 0025+04,00 27 41.97 +05 03 41.7,6.92489,5.06,16.19,0.09,15.29,0.10,14.96,0.12,14.62,0.04,14.14,0.05,12.24,null,8.89,null,M9.5β,,Mould et al. 1994,,0.0105,0.0004,-0.0008,0.0003,,,,,Faherty et al. 2009,Schneider et al. 1991,,,00 32 55.84 -44 05 05.8,8.23267,-44.08,14.78,0.04,13.86,0.03,13.27,0.04,12.82,0.03,12.49,0.03,11.73,0.19,9.29,null,L0γ,,Cruz et al. 2009,,0.1178,0.0043,-0.0916,0.0043,38.4,4.8,,,Faherty et al. 2012,Reid et al. 2008,,\n",
+    "    ...\n",
+    "\n",
+    "(see _Young-Objects-Compilation.csv_)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "If we try to just use `ascii.read()` on this data, it fails to parse the names out, and the column names become `col` followed by the number of the column:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "tbl = ascii.read(\"Young-Objects-Compilation.csv\")\n",
+    "tbl.colnames"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "What happened? The column names are just `col1`, `col2`, etc., the\n",
+    "default names if `ascii.read()` is unable to parse out column\n",
+    "names. We know it failed to read the column names, but also notice\n",
+    "that the first row of data are strings -- something else went wrong!"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "tbl[0]"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "A few things are causing problems here. First, there are two header \n",
+    "lines in the file and the header lines are not denoted by comment \n",
+    "characters. The first line is actually some meta data that we don't\n",
+    "care about, so we want to skip it. We can get around this problem by \n",
+    "specifying the `header_start` keyword to the `ascii.read()` function. \n",
+    "This keyword argument specifies the index of the row in the text file \n",
+    "to read the column names from:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "tbl = ascii.read(\"Young-Objects-Compilation.csv\", header_start=1)\n",
+    "tbl.colnames"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Great -- now the columns have the correct names, but there is still a\n",
+    "problem: all of the columns have string data types, and the column\n",
+    "names are still included as a row in the table. This is because by\n",
+    "default the data are assumed to start on the second row (index=1). \n",
+    "We can specify `data_start=2` to tell the reader that the data in\n",
+    "this file actually start on the 3rd (index=2) row:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "tbl = ascii.read(\"Young-Objects-Compilation.csv\", header_start=1, data_start=2)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Some of the columns have missing data, for example, some of the `RA` values are missing (denoted by -- when printed):"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "print(tbl['RA'])"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "This is called a __Masked column__ because some missing values are \n",
+    "masked out upon display. If we want to use this numeric data, we have\n",
+    "to tell `astropy` what to fill the missing values with. We can do this\n",
+    "with the `.filled()` method. For example, to fill all of the missing\n",
+    "values with `NaN`'s:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "tbl['RA'].filled(np.nan)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Let's recap what we've done so far, then make some plots with the\n",
+    "data. Our data file has an extra line above the column names, so we\n",
+    "use the `header_start` keyword to tell it to start from line 1 instead\n",
+    "of line 0 (remember Python is 0-indexed!). We then used had to specify\n",
+    "that the data starts on line 2 using the `data_start`\n",
+    "keyword. Finally, we note some columns have missing values."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "data = ascii.read(\"Young-Objects-Compilation.csv\", header_start=1, data_start=2)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Now that we have our data loaded, let's plot a color-magnitude diagram."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Here we simply make a scatter plot of the J-K color on the x-axis\n",
+    "against the J magnitude on the y-axis. We use a trick to flip the\n",
+    "y-axis `plt.ylim(reversed(plt.ylim()))`. Called with no arguments,\n",
+    "`plt.ylim()` will return a tuple with the axis bounds, \n",
+    "e.g. (0,10). Calling the function _with_ arguments will set the limits \n",
+    "of the axis, so we simply set the limits to be the reverse of whatever they\n",
+    "were before. Using this `pylab`-style plotting is convenient for\n",
+    "making quick plots and interactive use, but is not great if you need\n",
+    "more control over your figures."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "plt.scatter(data[\"Jmag\"] - data[\"Kmag\"], data[\"Jmag\"]) # plot J-K vs. J\n",
+    "plt.ylim(reversed(plt.ylim())) # flip the y-axis\n",
+    "plt.xlabel(\"$J-K_s$\", fontsize=20)\n",
+    "plt.ylabel(\"$J$\", fontsize=20)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "As a final example, we will plot the angular positions from the\n",
+    "catalog on a 2D projection of the sky. Instead of using `pylab`-style\n",
+    "plotting, we'll take a more object-oriented approach. We'll start by\n",
+    "creating a `Figure` object and adding a single subplot to the\n",
+    "figure. We can specify a projection with the `projection` keyword; in\n",
+    "this example we will use a Mollweide projection. Unfortunately, it is \n",
+    "highly non-trivial to make the matplotlib projection defined this way \n",
+    "follow the celestial convention of longitude/RA increasing to the left. \n",
+    "\n",
+    "The axis object, `ax`, knows to expect angular coordinate\n",
+    "values. An important fact is that it expects the values to be in\n",
+    "_radians_, and it expects the azimuthal angle values to be between\n",
+    "(-180º,180º). This is (currently) not customizable, so we have to\n",
+    "coerce our RA data to conform to these rules! `astropy` provides a\n",
+    "coordinate class for handling angular values, `astropy.coordinates.Angle`. \n",
+    "We can convert our column of RA values to radians, and wrap the \n",
+    "angle bounds using this class."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "ra = coord.Angle(data['RA'].filled(np.nan)*u.degree)\n",
+    "ra = ra.wrap_at(180*u.degree)\n",
+    "dec = coord.Angle(data['Dec'].filled(np.nan)*u.degree)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "fig = plt.figure(figsize=(8,6))\n",
+    "ax = fig.add_subplot(111, projection=\"mollweide\")\n",
+    "ax.scatter(ra.radian, dec.radian)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "By default, matplotlib will add degree ticklabels, so let's change the\n",
+    "horizontal (x) tick labels to be in units of hours, and display a grid"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "fig = plt.figure(figsize=(8,6))\n",
+    "ax = fig.add_subplot(111, projection=\"mollweide\")\n",
+    "ax.scatter(ra.radian, dec.radian)\n",
+    "ax.set_xticklabels(['14h','16h','18h','20h','22h','0h','2h','4h','6h','8h','10h'])\n",
+    "ax.grid(True)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "We can save this figure as a PDF using the `savefig` function:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "collapsed": true
+   },
+   "outputs": [],
+   "source": [
+    "fig.savefig(\"map.pdf\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Exercises"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Make the map figures as just above, but color the points by the `'Kmag'` column of the table."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Try making the maps again, but with each of the following projections: 'aitoff', 'hammer', 'lambert', and `None` (which is the same as not giving any projection).  Do any of them make the data seem easier to understand?"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": []
+  }
+ ],
+ "metadata": {
+  "astropy-tutorials": {
+   "author": "Adrian M. Price-Whelan <adrn@astro.columbia.edu> and Kelle Cruz <kellecruz@gmail.com>",
+   "date": "July 2013",
+   "description": "Demonstrates use of astropy.io.ascii for reading and writing ASCII data, astropy.coordinates and astropy.units for converting RA (as a sexagesimal angle) to decimal degrees, and matplotlib for making a color-magnitude diagram and on-sky locations in a mollweide projection.",
+   "link_name": "Read and plot catalog information from a text file",
+   "name": "",
+   "published": true
+  },
+  "kernelspec": {
+   "display_name": "Python [default]",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.5.2"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 1
+}
