@@ -133,8 +133,8 @@ man_pages = [('index', project.lower(), project + u' Documentation',
 github_issues_url = 'https://github.com/{0}/issues/'.format(setup_cfg['github_project'])
 
 # We require nbsphinx
-extensions += ['nbsphinx']
-extensions += ['IPython.sphinxext.ipython_console_highlighting']
+extensions.append('nbsphinx')
+extensions.append('IPython.sphinxext.ipython_console_highlighting')
 
 nbsphinx_timeout = 600  # Time in seconds; use -1 for no timeout
 nbsphinx_prompt_width = 0
