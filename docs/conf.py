@@ -6,6 +6,7 @@
 import datetime
 import os
 import sys
+from os import path
 
 try:
     import astropy_helpers
@@ -131,14 +132,17 @@ man_pages = [('index', project.lower(), project + u' Documentation',
 # -- Resolving issue number to links in changelog -----------------------------
 github_issues_url = 'https://github.com/{0}/issues/'.format(setup_cfg['github_project'])
 
-# We require nbsphinx
-extensions += ['nbsphinx']
-extensions += ['IPython.sphinxext.ipython_console_highlighting']
+# -- nbsphinx configuration ---------------------------------------------------
+extensions.append('nbsphinx')
+extensions.append('IPython.sphinxext.ipython_console_highlighting')
 
 nbsphinx_timeout = 600  # Time in seconds; use -1 for no timeout
+nbsphinx_prompt_width = 0
 
 # TODO: remove this when errors in tutorials are updated to be static text
 nbsphinx_allow_errors = True
 
-# This hides the In[] and Out[] prompts
-nbsphinx_prompt_width = 0
+import nbsphinx
+
+with open(path.join(path.dirname(__file__), '_static', 'astropy.tpl'), 'r') as f:
+    nbsphinx.RST_TEMPLATE = f.read()
