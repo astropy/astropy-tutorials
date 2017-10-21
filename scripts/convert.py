@@ -1,5 +1,5 @@
 # Standard library
-from os import path
+from os import path, walk
 
 # Third-party
 from astropy import log as logger
@@ -109,6 +109,12 @@ if __name__ == "__main__":
     vq_group.add_argument('-q', '--quiet', action='count', default=0,
                           dest='quietness')
 
+    parser.add_argument('--exec-only', default=False, action='store_true',
+                        dest='exec_only', help='Just execute the notebooks, '
+                                               'don\'t convert them as well. '
+                                               'This is useful for testing that'
+                                               ' the notebooks run.')
+
     parser.add_argument('-o', '--overwrite', action='store_true',
                         dest='overwrite', default=False,
                         help='Re-run and overwrite any existing executed '
@@ -137,17 +143,21 @@ if __name__ == "__main__":
     if path.isdir(args.nbfile_or_path):
         # It's a path, so we need to walk through recursively and find any
         # notebook files
+        for root, dirs, files in walk(args.nbfile_or_path):
+            for name in files:
+                _,ext = path.splitext(name)
 
-        # TODO:
+                if ext == '.ipynb':
+                    nbc = NBConverter(path.join(root, name))
+                    nbc.execute()
 
-        # nbc = NBConverter(args.nbfile_or_path)
-        # nbc.execute()
-        # nbc.convert()
-
-        pass
+                    if not args.exec_only:
+                        nbc.convert()
 
     else:
         # It's a single file, so convert it
         nbc = NBConverter(args.nbfile_or_path)
         nbc.execute()
-        nbc.convert()
+
+        if not args.exec_only:
+            nbc.convert()
