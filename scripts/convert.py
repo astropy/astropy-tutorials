@@ -1,5 +1,5 @@
 # Standard library
-from os import path, walk
+from os import path, walk, remove
 
 # Third-party
 from astropy import log as logger
@@ -65,9 +65,14 @@ class NBConverter(object):
 
             return self._executed_nb_path
 
-    def convert(self):
+    def convert(self, remove_executed=False):
         """
         Convert the executed notebook to a restructured text (RST) file.
+
+        Parameters
+        ----------
+        delete_executed : bool, optional
+            Controls whether to remove the executed notebook or not.
         """
 
         if not path.exists(self._executed_nb_path):
@@ -93,6 +98,9 @@ class NBConverter(object):
         writer = FilesWriter()
         output_file_path = writer.write(output, resources,
                                         notebook_name=self.nb_name)
+
+        if remove_executed: # optionally, clean up the executed notebook file
+            remove(self._executed_nb_path)
 
         return output_file_path
 
