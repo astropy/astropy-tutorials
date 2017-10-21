@@ -34,6 +34,11 @@ help:
 	@echo "  man        to make manual pages"
 	@echo "  changes    to make an overview of all changed/added/deprecated items"
 	@echo "  linkcheck  to check all external links for integrity"
+	@echo "  tutorials  to convert all tutorials to RST"
+
+tutorials:
+	python ../scripts/convert.py _static/tutorials/ --output-path=rst-tutorials -v \
+	--template=_static/astropy.tpl
 
 clean:
 	-rm -rf $(BUILDDIR)
