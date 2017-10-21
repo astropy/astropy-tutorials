@@ -1,5 +1,5 @@
 # Standard library
-from os import path, walk, remove
+from os import path, walk, remove, makedirs
 
 # Third-party
 from astropy import log as logger
@@ -14,7 +14,7 @@ IPYTHON_VERSION = 4
 
 class NBConverter(object):
 
-    def __init__(self, nb_path, output_path=None):
+    def __init__(self, nb_path, output_path=None, template_file=None):
         self.nb_path = path.abspath(nb_path)
         fn = path.basename(self.nb_path)
         self.path_only = path.dirname(self.nb_path)
@@ -24,6 +24,11 @@ class NBConverter(object):
             self.output_path = output_path
         else:
             self.output_path = self.path_only
+
+        if template_file is not None:
+            self.template_file = path.abspath(template_file)
+        else:
+            self.template_file = None
 
         # the executed notebook
         self._executed_nb_path = path.join(self.output_path,
@@ -93,9 +98,15 @@ class NBConverter(object):
         # path to store extra files, like plots generated
         resources['output_files_dir'] = path.join(self.output_path, 'nboutput')
 
+        #
+        resources['metadata'] = {'derp': 42}
+
         # Exports the notebook to RST
         logger.debug('Exporting notebook to RST...')
         exporter = RSTExporter()
+
+        if self.template_file:
+            exporter.template_file = self.template_file
         output, resources = exporter.from_filename(self._executed_nb_path,
                                                    resources=resources)
 
@@ -138,6 +149,10 @@ if __name__ == "__main__":
                              'top-level path to a directory containing '
                              'notebook files to process.')
 
+    parser.add_argument('--template', default=None, dest='template_file',
+                        help='The path to a jinja2 template file for the '
+                             'notebook to RST conversion.')
+
     parser.add_argument('--output-path', default=None, dest='output_path',
                         help='The path to save all executed or converted '
                              'notebook files. If not specified, the executed/'
@@ -159,6 +174,18 @@ if __name__ == "__main__":
         else: # anything >= 2
             logger.setLevel(logging.ERROR)
 
+    # make sure output path exists
+    output_path = args.output_path
+    if output_path is not None:
+        output_path = path.abspath(output_path)
+        makedirs(output_path, exist_ok=True)
+
+    # make sure the template file exists
+    template_file = args.template_file
+    if template_file is not None and not path.exists(template_file):
+        raise IOError("Couldn't find RST template file at {0}"
+                      .format(template_file))
+
     if path.isdir(args.nbfile_or_path):
         # It's a path, so we need to walk through recursively and find any
         # notebook files
@@ -174,7 +201,9 @@ if __name__ == "__main__":
                     continue
 
                 if ext == '.ipynb':
-                    nbc = NBConverter(full_path, output_path=args.output_path)
+                    nbc = NBConverter(full_path,
+                                      output_path=output_path,
+                                      template_file=template_file)
                     nbc.execute()
 
                     if not args.exec_only:
@@ -182,7 +211,9 @@ if __name__ == "__main__":
 
     else:
         # It's a single file, so convert it
-        nbc = NBConverter(args.nbfile_or_path, output_path=args.output_path)
+        nbc = NBConverter(args.nbfile_or_path,
+                          output_path=output_path,
+                          template_file=template_file)
         nbc.execute()
 
         if not args.exec_only:
