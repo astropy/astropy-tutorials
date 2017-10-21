@@ -159,6 +159,9 @@ if __name__ == "__main__":
                 if 'ipynb_checkpoints' in full_path: # skip checkpoint saves
                     continue
 
+                if name.startswith('exec'): # notebook already executed
+                    continue
+
                 if ext == '.ipynb':
                     nbc = NBConverter(full_path)
                     nbc.execute()
