@@ -14,14 +14,19 @@ IPYTHON_VERSION = 4
 
 class NBConverter(object):
 
-    def __init__(self, nb_path):
+    def __init__(self, nb_path, output_path=None):
         self.nb_path = path.abspath(nb_path)
         fn = path.basename(self.nb_path)
         self.path_only = path.dirname(self.nb_path)
         self.nb_name, _ = path.splitext(fn)
 
+        if output_path is not None:
+            self.output_path = output_path
+        else:
+            self.output_path = self.path_only
+
         # the executed notebook
-        self._executed_nb_path = path.join(self.path_only,
+        self._executed_nb_path = path.join(self.output_path,
                                            'exec_{0}'.format(fn))
 
         logger.info('Processing notebook {0} (in {1})'.format(fn,
@@ -86,7 +91,7 @@ class NBConverter(object):
         resources['unique_key'] = self.nb_name
 
         # path to store extra files, like plots generated
-        resources['output_files_dir'] = path.join(self.path_only, 'nboutput')
+        resources['output_files_dir'] = path.join(self.output_path, 'nboutput')
 
         # Exports the notebook to RST
         logger.debug('Exporting notebook to RST...')
@@ -133,6 +138,12 @@ if __name__ == "__main__":
                              'top-level path to a directory containing '
                              'notebook files to process.')
 
+    parser.add_argument('--output-path', default=None, dest='output_path',
+                        help='The path to save all executed or converted '
+                             'notebook files. If not specified, the executed/'
+                             'converted files will be in the same path as the '
+                             'source notebooks.')
+
     args = parser.parse_args()
 
     # Set logger level based on verbose flags
@@ -163,7 +174,7 @@ if __name__ == "__main__":
                     continue
 
                 if ext == '.ipynb':
-                    nbc = NBConverter(full_path)
+                    nbc = NBConverter(full_path, output_path=args.output_path)
                     nbc.execute()
 
                     if not args.exec_only:
@@ -171,7 +182,7 @@ if __name__ == "__main__":
 
     else:
         # It's a single file, so convert it
-        nbc = NBConverter(args.nbfile_or_path)
+        nbc = NBConverter(args.nbfile_or_path, output_path=args.output_path)
         nbc.execute()
 
         if not args.exec_only:
