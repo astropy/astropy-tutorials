@@ -135,10 +135,19 @@ if __name__ == "__main__":
             logger.setLevel(logging.ERROR)
 
     if path.isdir(args.nbfile_or_path):
-        # TODO: walk through
+        # It's a path, so we need to walk through recursively and find any
+        # notebook files
+
+        # TODO:
+
+        # nbc = NBConverter(args.nbfile_or_path)
+        # nbc.execute()
+        # nbc.convert()
+
         pass
 
     else:
+        # It's a single file, so convert it
         nbc = NBConverter(args.nbfile_or_path)
         nbc.execute()
         nbc.convert()
