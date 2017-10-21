@@ -154,9 +154,13 @@ if __name__ == "__main__":
         for root, dirs, files in walk(args.nbfile_or_path):
             for name in files:
                 _,ext = path.splitext(name)
+                full_path = path.join(root, name)
+
+                if 'ipynb_checkpoints' in full_path: # skip checkpoint saves
+                    continue
 
                 if ext == '.ipynb':
-                    nbc = NBConverter(path.join(root, name))
+                    nbc = NBConverter(full_path)
                     nbc.execute()
 
                     if not args.exec_only:
