@@ -15,8 +15,8 @@ List of tutorials
 
     rst-tutorials/*
 
-Contributing
-------------
+For contributors
+----------------
 
 We welcome feedback and improvements to these tutorials via the `Astropy
 Tutorials repo on Github <https://github.com/astropy/astropy-tutorials>`_. If
@@ -37,3 +37,11 @@ out the `open issues for new content
 <https://github.com/astropy/astropy-tutorials/labels/content-new>`_. This is a
 collaborative effort and we are looking for contributions and ideas from users
 like you!
+
+For developers
+--------------
+
+.. toctree::
+    :maxdepth: 1
+
+    dev
