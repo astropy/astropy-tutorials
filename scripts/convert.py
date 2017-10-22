@@ -96,10 +96,7 @@ class NBConverter(object):
         resources['unique_key'] = self.nb_name
 
         # path to store extra files, like plots generated
-        resources['output_files_dir'] = path.join(self.output_path, 'nboutput')
-
-        #
-        resources['metadata'] = {'derp': 42}
+        resources['output_files_dir'] = 'nboutput'
 
         # Exports the notebook to RST
         logger.debug('Exporting notebook to RST...')
