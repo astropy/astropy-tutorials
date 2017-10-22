@@ -1,0 +1,8 @@
+conda:
+  file: conda-environment.yml
+
+python:
+  setup_py_install: false
+
+formats:
+  - none
