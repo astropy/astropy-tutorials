@@ -50,15 +50,16 @@
 {% endblock stream %}
 
 {% block data_svg %}
-.. image:: {{ output.metadata.filenames['image/svg+xml'] | urlencode }}
+.. image:: {{ output.metadata.filenames['image/svg+xml'] | posix_path }}
 {% endblock data_svg %}
 
 {% block data_png %}
-.. image:: {{ output.metadata.filenames['image/png'] | urlencode }}
+.. image:: {{ output.metadata.filenames['image/png'] | posix_path }}
+
 {% endblock data_png %}
 
 {% block data_jpg %}
-.. image:: {{ output.metadata.filenames['image/jpeg'] | urlencode }}
+.. image:: {{ output.metadata.filenames['image/jpeg'] | posix_path }}
 {% endblock data_jpg %}
 
 {% block data_latex %}
