@@ -12,3 +12,5 @@ dependencies:
   - matplotlib=2.0.2
   - numpy=1.13.1
   - scipy=0.19 # needed for coordinates cross-matching
+  - pip:
+    - git+https://github.com/jupyter/nbconvert
