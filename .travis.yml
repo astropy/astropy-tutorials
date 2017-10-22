@@ -21,9 +21,12 @@ env:
         - EVENT_TYPE='pull_request push'
 
         - CONDA_ENVIRONMENT='conda-environment.yml'
-        - CONDA_DEPENDENCIES='jupyter ipython nbconvert'
+        - CONDA_DEPENDENCIES='jupyter ipython'
         - CONDA_CHANNELS='astropy-ci-extras astropy'
-        - PIP_DEPENDENCIES=''
+
+        # We need to install the master/latest version of nbconvert because it has support for
+        # allowing exceptions in individual cells:
+        - PIP_DEPENDENCIES='git+https://github.com/jupyter/nbconvert'
 
 # matrix:
 
