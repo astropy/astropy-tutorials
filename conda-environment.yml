@@ -5,10 +5,11 @@ channels:
 
 dependencies:
   - python=3.6
-  - jupyter=4.3
   - IPython=6.1.0
   - astropy=2.0
   - astroquery=0.3.6
   - matplotlib=2.0.2
   - numpy=1.13.1
   - scipy=0.19 # needed for coordinates cross-matching
+  - jupyter=1.0
+  - notebook=5.0
