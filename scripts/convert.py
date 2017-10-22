@@ -14,7 +14,8 @@ IPYTHON_VERSION = 4
 
 class NBConverter(object):
 
-    def __init__(self, nb_path, output_path=None, template_file=None):
+    def __init__(self, nb_path, output_path=None, template_file=None,
+                 overwrite=False):
         self.nb_path = path.abspath(nb_path)
         fn = path.basename(self.nb_path)
         self.path_only = path.dirname(self.nb_path)
@@ -29,6 +30,8 @@ class NBConverter(object):
             self.template_file = path.abspath(template_file)
         else:
             self.template_file = None
+
+        self.overwrite = overwrite
 
         # the executed notebook
         self._executed_nb_path = path.join(self.output_path,
@@ -54,6 +57,12 @@ class NBConverter(object):
             ``write=False``.
 
         """
+
+        if path.exists(self._executed_nb_path) and not self.overwrite:
+            logger.debug("Executed notebook already exists at {0}. Use "
+                         "overwrite=True or --overwrite (at cmd line) to re-run"
+                         .format(self._executed_nb_path))
+            return return self._executed_nb_path
 
         # Execute the notebook
         logger.debug('Executing notebook...')
@@ -116,6 +125,52 @@ class NBConverter(object):
             remove(self._executed_nb_path)
 
         return output_file_path
+
+def process_notebooks(nbfile_or_path, exec_only=False, **kwargs):
+    """
+    Execute and optionally convert the specified notebook file or directory of
+    notebook files.
+
+    This is a wrapper around the ``NBConverter`` class that does file handling.
+
+    Parameters
+    ----------
+    nbfile_or_path : str
+        Either a single notebook filename or a path containing notebook files.
+    exec_only : bool, optional
+        Just execute the notebooks, don't run them.
+    **kwargs
+        Any other keyword arguments are passed to the ``NBConverter`` init.
+
+    """
+    if path.isdir(nbfile_or_path):
+        # It's a path, so we need to walk through recursively and find any
+        # notebook files
+        for root, dirs, files in walk(nbfile_or_path):
+            for name in files:
+                _,ext = path.splitext(name)
+                full_path = path.join(root, name)
+
+                if 'ipynb_checkpoints' in full_path: # skip checkpoint saves
+                    continue
+
+                if name.startswith('exec'): # notebook already executed
+                    continue
+
+                if ext == '.ipynb':
+                    nbc = NBConverter(full_path, **kwargs)
+                    nbc.execute()
+
+                    if not exec_only:
+                        nbc.convert()
+
+    else:
+        # It's a single file, so convert it
+        nbc = NBConverter(nbfile_or_path, **kwargs)
+        nbc.execute()
+
+        if not exec_only:
+            nbc.convert()
 
 if __name__ == "__main__":
     from argparse import ArgumentParser
@@ -183,35 +238,6 @@ if __name__ == "__main__":
         raise IOError("Couldn't find RST template file at {0}"
                       .format(template_file))
 
-    if path.isdir(args.nbfile_or_path):
-        # It's a path, so we need to walk through recursively and find any
-        # notebook files
-        for root, dirs, files in walk(args.nbfile_or_path):
-            for name in files:
-                _,ext = path.splitext(name)
-                full_path = path.join(root, name)
-
-                if 'ipynb_checkpoints' in full_path: # skip checkpoint saves
-                    continue
-
-                if name.startswith('exec'): # notebook already executed
-                    continue
-
-                if ext == '.ipynb':
-                    nbc = NBConverter(full_path,
-                                      output_path=output_path,
-                                      template_file=template_file)
-                    nbc.execute()
-
-                    if not args.exec_only:
-                        nbc.convert()
-
-    else:
-        # It's a single file, so convert it
-        nbc = NBConverter(args.nbfile_or_path,
-                          output_path=output_path,
-                          template_file=template_file)
-        nbc.execute()
-
-        if not args.exec_only:
-            nbc.convert()
+    process_notebooks(args.nbfile_or_path, exec_only=args.exec_only,
+                      output_path=output_path, template_file=template_file,
+                      overwrite=args.overwrite)
