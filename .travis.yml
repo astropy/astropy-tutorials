@@ -1,29 +1,49 @@
 language: c
 
-sudo: false
-
 os:
     - linux
 
+sudo: false
+
+addons:
+    apt:
+        packages:
+            - graphviz
+            - texlive-latex-extra
+            - dvipng
+
 env:
     global:
+
         - PYTHON_VERSION=3.6
-        - SETUP_XVFB=True
-        - CONDA_ENVIRONMENT=conda-environment.yml
-        - CONDA_DEPENDENCIES='jupyter notebook ipython runipy'
-        - GH_REF: github.com/astropy/astropy-tutorials.git
-        - secure: "NBZlEg//sDYvJikqXESLsx/WA1Nj7fAH2mJfI8ZVMnolvyjJuLdEMxxEYFP8t6U/iieSSrgUkgP94yy5Oq6iJRjj7ThGCdcjgvgWTQCzoQgEVDc5SzdJGyGs30VC+8t7GTobzMe086HX16SJRvsIumqXdmRcJjAdMCyhMUxLoUg="
+        - NUMPY_VERSION=stable
+        - ASTROPY_VERSION=stable
+        - EVENT_TYPE='pull_request push'
+
+        - CONDA_ENVIRONMENT='conda-environment.yml'
+        - CONDA_DEPENDENCIES=''
+        - CONDA_CHANNELS='astropy-ci-extras astropy'
+        - PIP_DEPENDENCIES=''
+
+# matrix:
+
+#     # Don't wait for allowed failures
+#     fast_finish: true
+
+#     include:
+
+#         - os: linux
+#           env: SETUP_CMD='test --coverage'
 
 install:
-    - git clone git://github.com/astropy/ci-helpers.git
+
+    - git clone --depth 1 git://github.com/astropy/ci-helpers.git
     - source ci-helpers/travis/setup_conda.sh
 
 script:
-    - python prepare_deploy.py run
+   # - |
+   #   python scripts/convert.py docs/_static/tutorials/ -v
+   #   --output-path=docs/rst-tutorials
+   #   --template=docs/_static/astropy.tpl
+   - python scripts/convert.py docs/_static/tutorials/ --exec-only -v
 
-deploy:
-    provider: script
-    script: ./travis_deploy
-    on:
-        repo: astropy/astropy-tutorials
-        branch: master
