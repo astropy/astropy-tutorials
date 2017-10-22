@@ -10,6 +10,13 @@
     This tutorial was generated from an IPython notebook that can be downloaded `here
     <../_static/tutorials/{{ nb_name }}/{{ nb_name }}.ipynb>`_.
 
+    You can interact with a live version of the source notebook through binder:
+
+    |binder{{ nb_name }}|
+
+.. |binder{{ nb_name }}| image:: http://mybinder.org/badge.svg
+   :target: https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=docs/_static/tutorials/{{ nb_name }}/{{ nb_name }}.ipynb
+
 .. _{{nb_name}}:
 {% endblock %}
 
