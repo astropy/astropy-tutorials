@@ -62,7 +62,7 @@ class NBConverter(object):
             logger.debug("Executed notebook already exists at {0}. Use "
                          "overwrite=True or --overwrite (at cmd line) to re-run"
                          .format(self._executed_nb_path))
-            return return self._executed_nb_path
+            return self._executed_nb_path
 
         # Execute the notebook
         logger.debug('Executing notebook...')
