@@ -23,6 +23,7 @@ class NBConverter(object):
 
         if output_path is not None:
             self.output_path = output_path
+            makedirs(self.output_path, exist_ok=True)
         else:
             self.output_path = self.path_only
 
