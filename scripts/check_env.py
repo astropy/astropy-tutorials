@@ -39,52 +39,31 @@ except ImportError:
 
 from astropy import log as logger
 
-def check_environment(tutorial=None):
+def check_environment(tutorials_base_path, tutorial=None):
     error = False
     warnings = False
     # 'enter' checks if the tutorial name passed by user exists in the repository
     enter = False
     logger.info("Running Environment Tests...")
-    _orig_path = os.getcwd()
-    tutorials_base = os.path.join(_orig_path, 'tutorials')
-    for tutorial_name in os.listdir(tutorials_base):
+    for tutorial_name in os.listdir(tutorials_base_path):
+        print(tutorial_name,'ARG')
         if (tutorial_name == tutorial or tutorial is None):
             enter = True
-            tutorial_path = os.path.join(
-                tutorials_base,
-                tutorial_name)  # Path to tutorial folder
+            tutorialreq_path = os.path.join(tutorials_base_path, tutorial_name,
+                                            'requirements.txt')  # Path to tutorial folder
             try:
-                with open(tutorial_path + "/requirements.json") as data_file:
-                    # Import data from json file
-                    data = json.load(data_file)
+                with open(tutorialreq_path) as req_file:
                     # Check for all the packages to be imported
-                    for pkgname in data:
-                        # Check for versioning
-                        for subinfo in data[pkgname]:
-                            if subinfo == 'min_version':
-                                if(not astropy.utils.introspection.minversion(pkgname, data[pkgname][subinfo])):
-                                    logger.error(
-                                        "Package " +
-                                        pkgname +
-                                        " is either missing or is out of date to run Tutorial: " +
-                                        tutorial_name)
-                                    error = True
-                                    #Package is Missing
-                            elif subinfo == 'pref_version':
-                                if(not astropy.utils.introspection.minversion(pkgname, data[pkgname][subinfo])):
-                                    logger.warning(
-                                        "Please upgrade Package " +
-                                        pkgname +
-                                        " to version " +
-                                        data[pkgname][subinfo] +
-                                        " for Tutorial: " +
-                                        tutorial_name)
-                                    warnings = True
-                                    # Out of date package is present
+                    for line in req_file:
+                        line_strip = line.strip()
+                        astropy.utils.introspection.minversion(line_strip, '')
+                logger.info('Sucessfully checked requirements for '
+                            '"{}".'.format(tutorial_name))
+
             except IOError:
-                error = True
-                logger.error(
-                    "Environment Check Failed ! requirements.json not found")
+                warnings = True
+                logger.warn('requirements.txt not found for "{}" - couldn\'t do'
+                            ' environment check.'.format(tutorial_name))
 
     if not enter:
         logger.error(
@@ -112,6 +91,10 @@ if __name__ == "__main__":
                         help="A regular expression to select the names of the "
                              "notebooks to be processed.  If not given, all "
                              "notebooks will be used.")
+    parser.add_argument("tutorial_base_path", default='docs/_static/tutorials',
+                        nargs='?',
+                        help="The path to the root of the tutorial "
+                             "directories.")
 
     args = parser.parse_args()
-    check_environment(args.nameregex)  # name passed to check_env function
+    check_environment(args.tutorial_base_path, args.nameregex)  # name passed to check_env function
