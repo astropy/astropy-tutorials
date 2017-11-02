@@ -81,7 +81,8 @@ release = version
 html_theme_options = {
     'logotext1': 'astro',  # white,  semi-bold
     'logotext2': 'py',  # orange, light
-    'logotext3': ':tutorials'   # white,  light
+    'logotext3': ':tutorials',   # white,  light
+    'nosidebar': True
     }
 
 # Add any paths that contain custom themes here, relative to this directory.
