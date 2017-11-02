@@ -23,3 +23,15 @@ The tutorials are initially empty of any output.  You can run them by pressing
 
 See the conda environment file or pip requirements file for a list of
 dependencies.
+
+## Building the tutorial web pages
+
+To build all of the tutorials in the form they appear on the web site, you first
+convert the notebooks to sphinx, then run sphinx::
+
+  >>> python scripts/convert.py docs/_static/tutorials -v --exec-only
+  >>> cd docs
+  >>> make html
+
+For more detail on this, see the "Documentation for tutorials infrastructure
+developers" section of the generated sphinx docs.

@@ -1,5 +1,5 @@
-Documentation for developers
-============================
+Documentation for tutorials infrastructure developers
+=====================================================
 
 Overview
 --------
@@ -84,4 +84,3 @@ Marking a cell with an intentional error
 Edit the cell metadata of the cell in which you would like to raise an exception
 and add the following to the top-level JSON: ``"tags": ["raises-exception"]``
 This tag is recognized by the latest (master) version of nbconvert.
-
