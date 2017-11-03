@@ -15,7 +15,7 @@ IPYTHON_VERSION = 4
 class NBConverter(object):
 
     def __init__(self, nb_path, output_path=None, template_file=None,
-                 overwrite=False):
+                 overwrite=False, kernel_name=None):
         self.nb_path = path.abspath(nb_path)
         fn = path.basename(self.nb_path)
         self.path_only = path.dirname(self.nb_path)
@@ -40,6 +40,11 @@ class NBConverter(object):
 
         logger.info('Processing notebook {0} (in {1})'.format(fn,
                                                               self.path_only))
+
+        if kernel_name is None:
+            self.kernel_name = ExecutePreprocessor.kernel_name.default_value
+        else:
+            self.kernel_name = kernel_name
 
     def execute(self, write=True):
         """
@@ -66,8 +71,11 @@ class NBConverter(object):
             return self._executed_nb_path
 
         # Execute the notebook
-        logger.debug('Executing notebook...')
-        executor = ExecutePreprocessor(timeout=900, kernel_name='python3')
+        logger.debug('Executing notebook using kernel '
+                     '"{}"...'.format(self.kernel_name))
+        executor = ExecutePreprocessor(timeout=900,
+                                       kernel_name=self.kernel_name)
+
         with open(self.nb_path) as f:
             nb = nbformat.read(f, as_version=IPYTHON_VERSION)
 
@@ -197,7 +205,8 @@ if __name__ == "__main__":
                         help='Re-run and overwrite any existing executed '
                              'notebook or RST files.')
 
-    parser.add_argument('nbfile_or_path', default=None,
+    parser.add_argument('nbfile_or_path', default='tutorials/notebooks/',
+                        nargs='?',
                         help='Path to a specific notebook file, or the '
                              'top-level path to a directory containing '
                              'notebook files to process.')
@@ -211,6 +220,11 @@ if __name__ == "__main__":
                              'notebook files. If not specified, the executed/'
                              'converted files will be in the same path as the '
                              'source notebooks.')
+
+    parser.add_argument('--kernel-name', default='python3', dest='kernel_name',
+                        help='The name of the kernel to run the notebooks with.'
+                             ' Must be an available kernel from "jupyter '
+                             'kernelspec list".')
 
     args = parser.parse_args()
 
@@ -241,4 +255,4 @@ if __name__ == "__main__":
 
     process_notebooks(args.nbfile_or_path, exec_only=args.exec_only,
                       output_path=output_path, template_file=template_file,
-                      overwrite=args.overwrite)
+                      overwrite=args.overwrite, kernel_name=args.kernel_name)

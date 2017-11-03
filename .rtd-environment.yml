@@ -14,4 +14,4 @@ dependencies:
   - jupyter=1.0
   - notebook=5.0
   - pip:
-    - git+https://github.com/jupyter/nbconvert
+    - git+https://github.com/jupyter/nbconvert # this is really >=5.4, but at the time of adding this that wasn't yet available

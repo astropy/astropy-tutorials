@@ -23,3 +23,14 @@ The tutorials are initially empty of any output.  You can run them by pressing
 
 See the conda environment file or pip requirements file for a list of
 dependencies.
+
+## Building the tutorial web pages
+
+To build all of the tutorials in the form they appear on the web site, you just
+do the sphinx build as for a Python package::
+
+  >>> python setup.py build_docs
+
+For more information on this and other ways to execute the tutorials, see the
+"Documentation on tutorials infrastructure" section of the generated
+sphinx docs.

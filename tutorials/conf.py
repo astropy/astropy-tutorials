@@ -33,7 +33,7 @@ setup_cfg = dict(conf.items('metadata'))
 # -- General configuration ----------------------------------------------------
 
 # If your documentation needs a minimal Sphinx version, state it here.
-# needs_sphinx = '1.2'
+needs_sphinx = '1.4'  # needed for suppress_warnings
 
 # To perform a Sphinx version check that needs to be more specific than
 # major.minor, call `check_sphinx_version("x.y.z")` here.
@@ -81,7 +81,8 @@ release = version
 html_theme_options = {
     'logotext1': 'astro',  # white,  semi-bold
     'logotext2': 'py',  # orange, light
-    'logotext3': ':tutorials'   # white,  light
+    'logotext3': ':tutorials',   # white,  light
+    'nosidebar': True
     }
 
 # Add any paths that contain custom themes here, relative to this directory.
@@ -141,8 +142,12 @@ if _scripts_path not in sys.path:
     sys.path.insert(1, _scripts_path)
 
 from convert import process_notebooks
-nb_tutorials_path = os.path.join(_root, 'docs', '_static', 'tutorials')
-template_path = os.path.join(_root, 'docs', '_static', 'astropy.tpl')
-rst_output_path = os.path.join(_root, 'docs', 'rst-tutorials')
+nb_tutorials_path = os.path.join(_root, 'tutorials', 'notebooks')
+template_path = os.path.join(_root, 'tutorials', 'astropy.tpl')
+rst_output_path = os.path.join(_root, 'tutorials', 'rst-tutorials')
 process_notebooks(nb_tutorials_path, output_path=rst_output_path,
                   template_file=template_path)
+
+
+suppress_warnings = ['image.nonlocal_uri']
+html_static_path = ['notebooks']
