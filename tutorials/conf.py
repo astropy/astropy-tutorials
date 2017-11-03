@@ -150,3 +150,4 @@ process_notebooks(nb_tutorials_path, output_path=rst_output_path,
 
 
 suppress_warnings = ['image.nonlocal_uri']
+html_static_path = ['notebooks']
