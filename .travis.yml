@@ -48,5 +48,5 @@ script:
    #   python scripts/convert.py docs/_static/tutorials/ -v
    #   --output-path=docs/rst-tutorials
    #   --template=docs/_static/astropy.tpl
-   - python scripts/convert.py docs/_static/tutorials/ --exec-only -v
+   - python scripts/convert.py tutorials/notebooks --exec-only -v
 
