@@ -12,7 +12,7 @@ import nbformat
 
 IPYTHON_VERSION = 4
 
-class NBConverter(object):
+class NBTutorialsConverter(object):
 
     def __init__(self, nb_path, output_path=None, template_file=None,
                  overwrite=False, kernel_name=None):
@@ -140,7 +140,8 @@ def process_notebooks(nbfile_or_path, exec_only=False, **kwargs):
     Execute and optionally convert the specified notebook file or directory of
     notebook files.
 
-    This is a wrapper around the ``NBConverter`` class that does file handling.
+    This is a wrapper around the ``NBTutorialsConverter`` class that does file
+    handling.
 
     Parameters
     ----------
@@ -149,7 +150,8 @@ def process_notebooks(nbfile_or_path, exec_only=False, **kwargs):
     exec_only : bool, optional
         Just execute the notebooks, don't run them.
     **kwargs
-        Any other keyword arguments are passed to the ``NBConverter`` init.
+        Any other keyword arguments are passed to the ``NBTutorialsConverter``
+        init.
 
     """
     if path.isdir(nbfile_or_path):
@@ -167,7 +169,7 @@ def process_notebooks(nbfile_or_path, exec_only=False, **kwargs):
                     continue
 
                 if ext == '.ipynb':
-                    nbc = NBConverter(full_path, **kwargs)
+                    nbc = NBTutorialsConverter(full_path, **kwargs)
                     nbc.execute()
 
                     if not exec_only:
@@ -175,7 +177,7 @@ def process_notebooks(nbfile_or_path, exec_only=False, **kwargs):
 
     else:
         # It's a single file, so convert it
-        nbc = NBConverter(nbfile_or_path, **kwargs)
+        nbc = NBTutorialsConverter(nbfile_or_path, **kwargs)
         nbc.execute()
 
         if not exec_only:
