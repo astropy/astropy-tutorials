@@ -1,6 +1,6 @@
 .ipynb_checkpoints/
-docs/_build/
-docs/rst-tutorials/
+build/
+tutorials/rst-tutorials/
 IPython-*
 *.fits
 *.pdf

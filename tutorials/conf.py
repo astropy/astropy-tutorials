@@ -142,9 +142,9 @@ if _scripts_path not in sys.path:
     sys.path.insert(1, _scripts_path)
 
 from convert import process_notebooks
-nb_tutorials_path = os.path.join(_root, 'docs', '_static', 'tutorials')
-template_path = os.path.join(_root, 'docs', '_static', 'astropy.tpl')
-rst_output_path = os.path.join(_root, 'docs', 'rst-tutorials')
+nb_tutorials_path = os.path.join(_root, 'tutorials', 'notebooks')
+template_path = os.path.join(_root, 'tutorials', 'astropy.tpl')
+rst_output_path = os.path.join(_root, 'tutorials', 'rst-tutorials')
 process_notebooks(nb_tutorials_path, output_path=rst_output_path,
                   template_file=template_path)
 

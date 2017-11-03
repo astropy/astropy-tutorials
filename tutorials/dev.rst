@@ -5,7 +5,7 @@ Overview
 --------
 
 Tutorials are written as Jupyter notebooks on the ``master`` branch of the
-``astropy/astropy-tutorials`` repository in ``docs/_static/tutorials/``. These
+``astropy/astropy-tutorials`` repository in ``tutorials/notebooks/``. These
 notebook files do not contain output in order to simplify version-controlling
 the files.
 
@@ -37,7 +37,7 @@ Tutorials directory structure
 -----------------------------
 
 The notebook files must be written as a single Jupyter notebook in a directory
-within the ``docs/_static/tutorials`` directory. The name of the notebook must
+within the ``tutorials/notebooks`` directory. The name of the notebook must
 be the same as the subdirectory name. This is just needed for auto-generating
 links to the source notebooks from the generated RST pages.
 
@@ -48,7 +48,7 @@ You can use the custom nbconvert script in the astropy-tutorials repository to
 test that the tutorials all execute correctly. From the top-level repository
 path::
 
-    python scripts/convert.py docs/_static/tutorials -v --exec-only
+    python scripts/convert.py tutorials/notebooks -v --exec-only
 
 Running the convert script with the flag ``--exec-only`` will just execute the
 notebooks and won't generate RST files. If you have already run the notebooks
@@ -58,16 +58,16 @@ executed. The ``-v`` flag just tells the script to output more "verbose"
 messages, which you may or may not want.
 
 The above command will execute all notebooks in any subdirectory of the
-``docs/_static/tutorials`` path. If you want to just execute a single notebook,
+``tutorials/notebooks`` path. If you want to just execute a single notebook,
 you can specify the path to a single notebook file, e.g.::
 
-    python scripts/convert.py docs/_static/tutorials/coordinates/coordinates.ipynb -v --exec-only
+    python scripts/convert.py tutorials/notebooks/coordinates/coordinates.ipynb -v --exec-only
 
 You can also do this when running and generating RST files, which can be useful
 when writing a new tutorial to make sure it renders in RST properly. To do
 this, just remove the ``--exec-only`` flag::
 
-    python scripts/convert.py docs/_static/tutorials/coordinates/coordinates.ipynb -v
+    python scripts/convert.py tutorials/notebooks/coordinates/coordinates.ipynb -v
 
 Releases
 --------

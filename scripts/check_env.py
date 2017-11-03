@@ -91,7 +91,7 @@ if __name__ == "__main__":
                         help="A regular expression to select the names of the "
                              "notebooks to be processed.  If not given, all "
                              "notebooks will be used.")
-    parser.add_argument("tutorial_base_path", default='docs/_static/tutorials',
+    parser.add_argument("tutorial_base_path", default='tutorials/notebooks',
                         nargs='?',
                         help="The path to the root of the tutorial "
                              "directories.")

@@ -205,7 +205,7 @@ if __name__ == "__main__":
                         help='Re-run and overwrite any existing executed '
                              'notebook or RST files.')
 
-    parser.add_argument('nbfile_or_path', default='docs/_static/tutorials/',
+    parser.add_argument('nbfile_or_path', default='tutorials/notebooks/',
                         nargs='?',
                         help='Path to a specific notebook file, or the '
                              'top-level path to a directory containing '
