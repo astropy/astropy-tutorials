@@ -4,3 +4,4 @@ astroquery==0.3.6
 matplotlib==2.0.2
 numpy==1.13.1
 jupyter==1.0
+scipy=0.19
