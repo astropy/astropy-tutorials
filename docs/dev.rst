@@ -1,5 +1,5 @@
-Documentation for tutorials infrastructure developers
-=====================================================
+Documentation on tutorials infrastructure
+=========================================
 
 Overview
 --------

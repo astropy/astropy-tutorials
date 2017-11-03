@@ -26,12 +26,11 @@ dependencies.
 
 ## Building the tutorial web pages
 
-To build all of the tutorials in the form they appear on the web site, you first
-convert the notebooks to sphinx, then run sphinx::
+To build all of the tutorials in the form they appear on the web site, you just
+do the sphinx build as for a Python package::
 
-  >>> python scripts/convert.py docs/_static/tutorials -v --exec-only
-  >>> cd docs
-  >>> make html
+  >>> python setup.py build_docs
 
-For more detail on this, see the "Documentation for tutorials infrastructure
-developers" section of the generated sphinx docs.
+For more information on this and other ways to execute the tutorials, see the
+"Documentation on tutorials infrastructure" section of the generated
+sphinx docs.
