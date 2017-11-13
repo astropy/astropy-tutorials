@@ -85,6 +85,8 @@ html_theme_options = {
     'nosidebar': True
     }
 
+html_style = 'custom.css'
+
 # Add any paths that contain custom themes here, relative to this directory.
 # To use a different custom theme, add the directory containing the theme.
 #html_theme_path = []
@@ -150,4 +152,4 @@ process_notebooks(nb_tutorials_path, output_path=rst_output_path,
 
 
 suppress_warnings = ['image.nonlocal_uri']
-html_static_path = ['notebooks']
+html_static_path = ['notebooks', '_static']

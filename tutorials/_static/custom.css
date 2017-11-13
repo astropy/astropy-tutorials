@@ -1,0 +1,6 @@
+@import url("bootstrap-astropy.css");
+
+div.body {
+    margin: 0 auto;
+    max-width: 768px;
+}
