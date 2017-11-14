@@ -8,16 +8,19 @@ import os
 import sys
 from os import path
 
-try:
-    import astropy_helpers
-except ImportError:
-    # Building from inside the tutorials/ directory?
-    if os.path.basename(os.getcwd()) == 'tutorials':
-        a_h_path = os.path.abspath(os.path.join('..', 'astropy_helpers'))
-        if os.path.isdir(a_h_path):
-            sys.path.insert(1, a_h_path)
+# try:
+#     import astropy_helpers
+# except ImportError:
+#     # Building from inside the tutorials/ directory?
+#     if os.path.basename(os.getcwd()) == 'tutorials':
+#         a_h_path = os.path.abspath(os.path.join('..', 'astropy_helpers'))
+#         if os.path.isdir(a_h_path):
+#             sys.path.insert(1, a_h_path)
+sys.path.insert(0, os.path.abspath(os.path.join('..', 'astropy_helpers')))
 
 # Load all of the global Astropy configuration
+
+
 from astropy_helpers.sphinx.conf import *
 
 # Get configuration information from setup.cfg
