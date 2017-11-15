@@ -15,7 +15,12 @@ if os.path.basename(os.getcwd()) == 'tutorials':
         sys.path.insert(1, a_h_path)
 
 # Load all of the global Astropy configuration
-from astropy_helpers.sphinx.conf import *
+try:
+    from astropy_helpers.sphinx.conf import *
+except ImportError:
+    raise ImportError('Couldn\'t import astropy_helpers. You may need to "git '
+                      'submodule init" and then "git submodule update" from '
+                      'the base of the tutorials repo?')
 
 # Get configuration information from setup.cfg
 try:
