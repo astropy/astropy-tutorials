@@ -88,6 +88,9 @@ do::
     git submodule update
     make html
 
+Once this is done, you will find the index for the pages in your local
+``build/html/index.html`` file.
+
 Releases
 --------
 
@@ -96,6 +99,10 @@ Astropy core package; i.e. we will release for 3.0, 3.1, etc., but not for
 bugfix releases like 2.0.3, etc. With each release, we update the pinned
 versions of the global dependency files (``conda-envirionment.yml`` for Anaconda
 and ``pip-requirements.txt`` for pip).
+
+To actually update the version, modify the ``metadata.cfg`` at the root of this
+repository with the new version.  This is the version number that will be
+shown in the sphinx builds.
 
 Marking a cell with an intentional error
 ----------------------------------------
