@@ -18,25 +18,17 @@ List of tutorials
 For contributors
 ----------------
 
-We welcome feedback and improvements to these tutorials via the `Astropy
-Tutorials repo on Github <https://github.com/astropy/astropy-tutorials>`_. If
-you find a typo or would like to clarify some text, please either `create an
-issue <https://github.com/astropy/astropy-tutorials/issues/new>`_ or make the
-change yourself and then submit a pull request directly to the repository.
-Questions and/or comments about the tutorials are welcome on the `astropy-dev
-<https://groups.google.com/forum/#!forum/astropy-dev>`_ mailing list.
+We welcome feedback, improvements, and new tutorial content via the `Astropy
+Tutorials repository <https://github.com/astropy/astropy-tutorials>`_  on
+GitHub. If you find a typo or would like to clarify some text, please either
+`create an issue <https://github.com/astropy/astropy-tutorials/issues/new>`_ or
+make the change yourself and then submit a pull request directly to the
+repository. Questions and/or comments about the tutorials are welcome on the
+`astropy-dev <https://groups.google.com/forum/#!forum/astropy-dev>`_ mailing
+list.
 
-If you are interested in contributing an ipython notebook as a tutorial, please
-check the `README
-<https://github.com/astropy/astropy-tutorials/blob/master/README.md>`_ or
-contact the `astropy developer email list
-<https://groups.google.com/forum/#!forum/astropy-dev>`_. If you have an idea for
-a tutorial or a tutorial request, please also post to the developer email list.
-If you would like to contribute to this effort, but need some inspiration, check
-out the `open issues for new content
-<https://github.com/astropy/astropy-tutorials/labels/content-new>`_. This is a
-collaborative effort and we are looking for contributions and ideas from users
-like you!
+If you are interested in contributing a new tutorial or content, please see
+:ref:`contributing-page`.
 
 For developers
 --------------
