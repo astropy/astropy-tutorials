@@ -28,7 +28,7 @@ repository. Questions and/or comments about the tutorials are welcome on the
 list.
 
 If you are interested in contributing a new tutorial or content, please see
-:ref:`contributing-page`.
+:doc:`contributing`.
 
 For developers
 --------------
