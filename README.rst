@@ -1,36 +1,32 @@
-# Astropy Tutorials
+Astropy Tutorials
+=================
 
-This repository contains tutorials for the [Astropy](http://astropy.org)
-project (also on [github](https://github.com/astropy/astropy)).
+This repository contains tutorials for the `Astropy <http://astropy.org>`_
+project. These are typically longer-form, more narrative presentations of
+functionality in the `Astropy core package
+<https://github.com/astropy/astropy>`_ and any `affiliated packages
+<http://www.astropy.org/affiliated/index.html>`_. The tutorials are therefore
+different from the `Astropy core package documentation
+<http://docs.astropy.org>`_, which presents a more structured and exhaustive
+view of the core package.
 
-## Running Tutorials
+To see the tutorials rendered as static web pages, see the `Astropy tutorials
+site <http://tutorials.astropy.org>`_.
 
-The easiest way to get started quickly is to use binder to run the tutorials in
-your web browser - when this loads, click the "tutorials" folder and you should
-see all the tutorials:
+To run the tutorials interactively, you'll need to make sure you have `Jupyter
+notebook <http://jupyter.org/>`_ installed, then clone or download this
+repository. The notebook files themselves live in the ``tutorials`` directory
+of this repository, organized by the names of the tutorials.
+
+You can also get started quickly using `Binder <http://mybinder.org>`_ to run the tutorials in
+your web browser within a remote server:
 
 .. image:: http://mybinder.org/badge.svg
     :target: http://mybinder.org/repo/astropy/astropy-tutorials/docs/tutorials
 
-To run the tutorials *locally*, you need jupyter notebook installed::
+Contributing tutorial material
+------------------------------
 
-    jupyter notebook
-
-The tutorials are initially empty of any output.  You can run them by pressing
-"Run All" under the "Cell" menu in the notebook file.
-
-## Dependencies
-
-See the conda environment file or pip requirements file for a list of
-dependencies.
-
-## Building the tutorial web pages
-
-To build all of the tutorials in the form they appear on the web site, you just
-do the sphinx build as for a Python package::
-
-  >>> python setup.py build_docs
-
-For more information on this and other ways to execute the tutorials, see the
-"Documentation on tutorials infrastructure" section of the generated
-sphinx docs.
+Please see the "`For contributors
+<http://astropy-tutorials.readthedocs.io/en/latest/#for-contributors>`_" section
+of the tutorials documentation for information on how to get started.
