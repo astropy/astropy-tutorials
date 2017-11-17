@@ -1,9 +1,11 @@
 .ipynb_checkpoints/
-html/
-runipy-*
+build/
+tutorials/rst-tutorials/
 IPython-*
-tutorials/*/_run_*
-tutorials/*/*.fits
-tutorials/*/*.pdf
-tutorials/*/*.png
+*.fits
+*.pdf
+*.png
+*.jpg
 *.pyc
+*.tex
+exec*.ipynb
