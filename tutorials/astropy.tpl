@@ -15,7 +15,7 @@
     |binder{{ nb_name }}|
 
 .. |binder{{ nb_name }}| image:: http://mybinder.org/badge.svg
-   :target: https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=docs/_static/tutorials/{{ nb_name }}/{{ nb_name }}.ipynb
+   :target: https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/{{ nb_name }}/{{ nb_name }}.ipynb
 
 .. _{{nb_name}}:
 {% endblock %}
