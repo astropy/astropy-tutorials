@@ -102,7 +102,8 @@ and ``pip-requirements.txt`` for pip).
 
 To actually update the version, modify the ``metadata.cfg`` at the root of this
 repository with the new version.  This is the version number that will be
-shown in the sphinx builds.
+shown in the sphinx builds. Note that if it ends in ``.dev``, this will be
+followed by a revision number that is determined by the number of git commits.
 
 Marking a cell with an intentional error
 ----------------------------------------

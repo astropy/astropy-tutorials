@@ -4,9 +4,9 @@
 # Astropy documentation build configuration file.
 
 import datetime
+import re
 import os
 import sys
-from os import path
 
 # Building from inside the tutorials/ directory?  Need to add correct helpers to the python path
 a_h_path = None
@@ -17,6 +17,8 @@ if os.path.basename(os.getcwd()) == 'tutorials':
 
 # Load all of the global Astropy configuration
 try:
+    # at some point hopefully this can be replaced with installing a
+    # standalone sphinx-astropy-theme
     from astropy_helpers.sphinx.conf import *
 
     import astropy_helpers
@@ -41,6 +43,7 @@ conf = ConfigParser()
 
 conf.read([os.path.join(os.path.dirname(__file__), '..', 'metadata.cfg')])
 setup_cfg = dict(conf.items('metadata'))
+
 
 # -- General configuration ----------------------------------------------------
 
@@ -72,11 +75,21 @@ copyright = '2013–{0}, {1}'.format(
 # |version| and |release|, also used in various other places throughout the
 # built documents.
 
-# The short X.Y version.
-version = setup_cfg['version'].split('-', 1)[0]
 # The full version, including alpha/beta/rc tags.
-# release = package.__version__
-release = version
+release = setup_cfg['version']
+# The short X.Y version.
+version = re.match(r'([\d\.]*)(\D*\d?)', setup_cfg['version']).group(1)
+if version.endswith('.'): # e.g. "3.0.dev", which splits into groups "3.0." and "dev"
+  version = version[:-1]
+
+
+if release.endswith('dev'):
+    # once the sphinx-astropy-theme is ready, just copy over the git_helpers.py file
+    # into this repo - it has been long-term stable so the helpers aren't needed
+    # just for this.
+    from astropy_helpers.git_helpers import get_git_devstr
+    release = release + get_git_devstr(path=os.path.join(os.path.split(__file__)[0],'..'))
+
 
 
 # -- Options for HTML output --------------------------------------------------
