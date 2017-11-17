@@ -17,44 +17,77 @@ with the tutorial.
 
 Content Guidelines
 --------
-Narrative:
-- Please read through the other tutorials to get a sense of the desired tone and length. 
-- Use the first-person inclusive plural ("we"). For example, "We are going to make a plot which..", "Above, we did it the hard way, but here is the easier  way..."
-- Avoid words such as "obviously","just", "simply", "easily". For example, "we just have to do this one thing."
-- Include brief explanations and descriptions
- 
-Content:
-- Demo ~2-3 astro-relevant functions and 2-3 generic but commonly used functions (e.g., numpy, matplotlib)  
+Content Overview:
+- Each tutorial should have 3-5 explicit [Learning Goals](http://tll.mit.edu/help/intended-learning-outcomes)  and demonstrate ~2-3 astro-relevant functions and 2-3 generic but commonly used functions (e.g., numpy, matplotlib)  
 - Roughly follow this progression:
   - Intput/Output: read in some data 
+    - use [astroquery](https://astroquery.readthedocs.io/en/latest/) where possible
   - Analysis: do something insightful/useful 
   - Visualization: make a pretty figure
-- Include relevant uses for these packages 
-  - [astropy.units](http://docs.astropy.org/en/stable/units/)
-  - [astropy.coordinates](http://docs.astropy.org/en/stable/coordinates/)
-  - [astroquery](https://astroquery.readthedocs.io/en/latest/)
-
+    - use [astropy.visualization](http://docs.astropy.org/en/stable/visualization/) where possible
+    
 Code:
 - Demonstrate good commenting practice
+  - add comments to bits of code which use concepts not included in Learning Goals
 - Demonstrate best practices of variable names. 
    - Variables should be all lower case with words separated by underscores.
    - Variable names should be descriptive. E.g., galaxy_mass, u_mag.
+- Use the print function explicitly to display information about variables
 - As much as possible, comply with [PEP8](https://www.python.org/dev/peps/pep-0008/)
+- Imports
+  - Do not import `*`. Import package and functions explicitly. 
+  - Recommended import block and abbreviations
+    ```python
+    import numpy as np
+    import matplotlib as mpl
+    import matplotlib.pyplot as plt
+    import astropy.units as u
+    import astropy.coordinates as coord
+    from astropy.io import fits
 
-Description:
-- Compile a list of the functions and packages the tutorial demonstartes and include a short a description with the pull request.
+    %matplotlib inline # make plots display in notebooks
+    ```
 
-Procedure
----------
 
-If you are unfamiliar with git, you should first get familiar with git and
-github. There are a number of resources available for learning git, but a good
-place to start is with the [github interactive tutorial](http://try.github.io/).
-You should also get familiar with using pull requests and forks on github:
-https://help.github.com/articles/using-pull-requests
+Narrative:
+- Please read through the other tutorials to get a sense of the desired tone and length. 
+- Use [Markdown formatting](http://jupyter-notebook.readthedocs.io/en/latest/examples/Notebook/Working%20With%20Markdown%20Cells.html) in text cells for formatting, links, latex, and code snippets. 
+- Title should be short yet descriptive and emphasize the learning goals of the tutorial. Try to make the title appeal to a broad audience and avoid referencing a specefic instrument, catalog, or anything wavelength dependent.
+- List all author's full names (comma separated) and link to github profile and/or [ORCID iD](https://orcid.org/).
+- Include [Learning Goals](http://tll.mit.edu/help/intended-learning-outcomes) at the top as a bulleted list.
+- Include Keywords as a comma separated list of topics, packages, and functions demonstrated.
+- The first paragraph should give a brief overview of the entire tutorial including relevant astronomy concepts.
+- Use the first-person inclusive plural ("we"). For example, "We are going to make a plot which..", "Above, we did it the hard way, but here is the easier  way..."
+- Section Headings should be in the imperative mood. For example, "Download the data."
+- Avoid words such as "obviously","just", "simply", "easily". For example, "we just have to do this one thing."
+- Use `<div class="alert alert-info">Note</div>` for Notes and `<div class="alert alert-warning">Warning</div>` for Warnings.
 
-To create and contribute a new tutorial, you will first need to fork the
-astropy-tutorials repository on github and clone this fork locally to your
+Template:
+# Doing a thing with things
+
+## Authors
+Jane Smith, Jose Jones
+
+## Leaning Goals
+- Query..
+- Calculate..
+- Display..
+
+## Keywords
+Example, example, example
+
+## Companion Content
+Carroll & Ostlie 10.3, Binney & Tremaine 1.5
+
+In this tutorial, we download a data file, do something to it, and then visualize it.
+
+Procedure for Contributing
+--------------------------
+
+The process for contributing a tutorial includes the github [fork](https://help.github.com/articles/working-with-forks/), [branch, push, pull request](https://help.github.com/articles/proposing-changes-to-your-work-with-pull-requests/) workflow. 
+
+To contribute a new tutorial, first fork the
+astropy-tutorials repository and clone it locally to your
 machine (replace <GITHUB USERNAME> with your github username)::
 
     git clone git@github.com:<GITHUB USERNAME>/astropy-tutorials.git
@@ -71,42 +104,18 @@ branch:
     mkdir tutorials/Spectral-Line-Fitting
 
 All files used by the tutorial -- e.g., example data files, the IPython
-notebook file itself -- should go in this directory. Now you can start writing
-the tutorial! Change directories into this new path and start up an
-IPython notebook server:
+notebook file itself -- should go in this directory. 
 
-    cd tutorials/Spectral-Line-Fitting
-    ipython notebook --matplotlib inline
-
-Create a new notebook file, and write away! (Following the Content Guidelines above.)
-Remember to place any extra files
-used by the tutorial in the directory with the notebook file, and place them
-under git version control.
-
-You will also need to edit the notebook file metadata.
-(IPython notebook --> edit menu --> edit notebook metadata)
-The metadata contains any extra information about the tutorial you may want to add.
-The metadata must contain, at minimum, the following fields:
-
-- link_name (the name of the link which will appear in the list of tutorials)
-- author
-- date (month year, e.g. 'July 2013')
-
-Here is an example of one of these files: [FITS-header.ipynb](https://github.com/astropy/astropy-tutorials/blob/master/tutorials/FITS-header/FITS-header.ipynb) (be sure to hit the "raw" button to see the metadata).
-
-You will also need to specify any python packages that the tutorial depends on.
-Almost always this will include a specific version of `astropy`, and perhaps other affiliated packages.
-You do this by placing a file called `requirements.json` in the directory that contains the tutorial notebook file.
+Specify the python packages the tutorial depends on via the `requirements.json` file.
+Place a file called `requirements.json` in the directory that contains the tutorial notebook file.
 To see in example of that, have a look at [requirements.json](https://github.com/astropy/astropy-tutorials/blob/master/tutorials/FITS-header/requirements.json).
 
-When you feel like your tutorial is complete, push your local branch up to your
-fork of the repository on github (by default, named 'origin'):
+Push the notebook and other files on the local branch up to your fork of the repository on github (by default, named 'origin'):
 
     git push origin Spectral-Line-Fitting
 
-Then you will file a pull request against the main `astropy-tutorials`
-repository for review.
-
+When the tutorial is ready for broader community feedback, [open a pull request](https://help.github.com/articles/creating-a-pull-request/) against the main `astropy-tutorials`
+repository in order for the community to review the new tutorial.
 
 Data Files
 ----------
@@ -117,10 +126,9 @@ If your tutorial includes large data files (where large means >~ 1 MB), we
 don't want them in the astropy/astropy-tutorials git repository, as that will
 drastically slow down cloning the repository.  Instead, we encourage use of the
 `astropy.utils.download_files` function, and will host data files on the
-http://data.astropy.org server.  To make this easy, use the following procedure
-when you have large data files.
+http://data.astropy.org server. To do this, use the following procedure:
 
-* When writing your tutorial, just include the files in your tutorial's
+* When writing your tutorial, include the files in your tutorial's
   directory (e.g., ``tutorials/My-tutorial-name/mydatafile.fits``).  Those who
   are reviewing your tutorial will have to download them, but they would need
   them anyway, so it's ok. _IMPORTANT_: when you add or modify data files, make
