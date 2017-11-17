@@ -22,7 +22,7 @@ We use `readthedocs <http://rtfd.io>`_ to do the Sphinx build, which is what
 allows us to preserve the version history of the tutorials. The notebooks are
 first converted to RST files during the Sphinx build by doing the conversion
 at the end of the `Sphinx configuration file
-<https://github.com/astropy/astropy-tutorials/blob/master/docs/conf.py>`_.
+<https://github.com/astropy/astropy-tutorials/blob/master/tutorials/conf.py>`_.
 
 Why not use nbsphinx?
 ---------------------
@@ -68,6 +68,25 @@ when writing a new tutorial to make sure it renders in RST properly. To do
 this, just remove the ``--exec-only`` flag::
 
     python scripts/convert.py tutorials/notebooks/coordinates/coordinates.ipynb -v
+
+Building the tutorials page locally
+-----------------------------------
+
+For this, you can use the `Makefile
+<https://github.com/astropy/astropy-tutorials/blob/master/Makefile>`_ at the
+top-level of the tutorials repository. From the root level of the cloned or
+downloaded repository::
+
+    make html
+
+Will execute and convert the Jupyter notebooks to RST files, then do the Sphinx
+build. If this returns an error, you may need to initialize the
+``astropy_helpers`` submodule (read the error message). That is, you may need to
+do::
+
+    git submodule init
+    git submodule update
+    make html
 
 Releases
 --------
