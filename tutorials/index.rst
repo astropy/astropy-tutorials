@@ -25,10 +25,14 @@ GitHub. If you find a typo or would like to clarify some text, please either
 make the change yourself and then submit a pull request directly to the
 repository. Questions and/or comments about the tutorials are welcome on the
 `astropy-dev <https://groups.google.com/forum/#!forum/astropy-dev>`_ mailing
-list.
+list. For more information, please see the contributing documentation:
+:ref:`contributing-page`.
 
-If you are interested in contributing a new tutorial or content, please see the
-contributing documentation: :ref:`contributing-page`.
+If you would like to contribute to this effort, but need some inspiration, check
+out the `open issues for new content
+<https://github.com/astropy/astropy-tutorials/labels/content-new>`_ and see the
+contributing documentation :ref:`contributing-page`. This is a collaborative
+effort and we are looking for contributions and ideas from users like you!
 
 For developers
 --------------
