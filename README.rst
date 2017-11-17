@@ -22,7 +22,7 @@ You can also get started quickly using `Binder <http://mybinder.org>`_ to run th
 your web browser within a remote server:
 
 .. image:: http://mybinder.org/badge.svg
-    :target: http://mybinder.org/repo/astropy/astropy-tutorials/docs/tutorials
+    :target: https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/?filepath=tutorials/notebooks
 
 Contributing tutorial material
 ------------------------------
