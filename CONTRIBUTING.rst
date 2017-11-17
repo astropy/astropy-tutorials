@@ -1,5 +1,3 @@
-:orphan:
-
 Contributing
 ============
 
@@ -32,11 +30,11 @@ Overview
   pieces of functionality relevant to astronomy, and 2–3 demonstrations of
   generic but commonly used functionality (e.g., numpy, matplotlib)
 * Roughly follow this progression:
-  * *Intput/Output*: read in some data (use `astroquery
-    <https://astroquery.readthedocs.io/en/latest/>`_ where possible
-  * *Analysis*: do something insightful/useful with the data
-  - *Visualization*: make a pretty figure (use `astropy.visualization
-    <http://docs.astropy.org/en/stable/visualization/>`_ where possible)
+    * *Intput/Output*: read in some data (use `astroquery
+      <https://astroquery.readthedocs.io/en/latest/>`_ where possible
+    * *Analysis*: do something insightful/useful with the data
+    * *Visualization*: make a pretty figure (use `astropy.visualization
+      <http://docs.astropy.org/en/stable/visualization/>`_ where possible)
 * The tutorials must be compatible with the versions supported by the last major
   release of the Astropy core package (i.e. Python >= 3.5).
 
@@ -44,24 +42,24 @@ Code
 ^^^^
 
 * Demonstrate good commenting practice
-  * add comments to sections of code that use concepts not included in the
-    Learning Goals
+    * add comments to sections of code that use concepts not included in the
+      Learning Goals
 * Demonstrate best practices of variable names
-   * Variables should be all lower case with words separated by underscores
-   * Variable names should be descriptive, e.g., ``galaxy_mass``, ``u_mag``
+    * Variables should be all lower case with words separated by underscores
+    * Variable names should be descriptive, e.g., ``galaxy_mass``, ``u_mag``
 * Use the print function explicitly to display information about variables
 * As much as possible, comply with [PEP8](https://www.python.org/dev/peps/pep-0008/)
 * Imports
-  * Do not use ``from package import *``; import packages, classes, and
-    functions explicitly.
-  * Follow recommended package name abbreviations:
-    * ``import numpy as np``
-    * ``import matplotlib as mpl``
-    * ``import matplotlib.pyplot as plt``
-    * ``import astropy.units as u``
-    * ``import astropy.coordinates as coord``
-    * ``from astropy.io import fits``
-  * Display figures inline using matplotlib's inline backend:
+    * Do not use ``from package import *``; import packages, classes, and
+      functions explicitly.
+    * Follow recommended package name abbreviations:
+        * ``import numpy as np``
+        * ``import matplotlib as mpl``
+        * ``import matplotlib.pyplot as plt``
+        * ``import astropy.units as u``
+        * ``import astropy.coordinates as coord``
+        * ``from astropy.io import fits``
+* Display figures inline using matplotlib's inline backend:
     * ``%matplotlib inline # make plots display in notebooks``
 
 Narrative
@@ -97,7 +95,7 @@ Narrative
 Template intro
 ^^^^^^^^^^^^^^
 
-.. code-block:: markdown
+.. code-block:: none
 
     # Doing a thing with things
 

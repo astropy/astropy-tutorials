@@ -1,3 +1,5 @@
-.. _contributing-page
+:orphan:
+
+.. _contributing-page:
 
 .. include:: ../CONTRIBUTING.rst
