@@ -27,13 +27,10 @@ repository. Questions and/or comments about the tutorials are welcome on the
 `astropy-dev <https://groups.google.com/forum/#!forum/astropy-dev>`_ mailing
 list.
 
-If you are interested in contributing a new tutorial or content, please see
-:doc:`contributing`.
+If you are interested in contributing a new tutorial or content, please see the
+contributing documentation: :ref:`contributing-page`.
 
 For developers
 --------------
 
-.. toctree::
-    :maxdepth: 1
-
-    dev
+See the developer documentation: :ref:`dev-page`.

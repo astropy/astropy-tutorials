@@ -1,3 +1,7 @@
+:orphan:
+
+.. _dev-page:
+
 Documentation on tutorials infrastructure
 =========================================
 
