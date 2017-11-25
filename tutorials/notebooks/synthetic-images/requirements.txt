@@ -1,0 +1,4 @@
+astropy
+numpy
+matplotlib
+IPython
