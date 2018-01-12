@@ -4,5 +4,5 @@ matplotlib
 astroquery
 IPython
 aplpy
-spectral_cube
+spectral-cube
 reproject

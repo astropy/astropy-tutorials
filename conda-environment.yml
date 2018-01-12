@@ -14,5 +14,5 @@ dependencies:
   - jupyter=1.0
   - notebook=5.0
   - aplpy # used in FITS-cube tutorial
-  - spectral_cube # used in FITS-cube tutorial
+  - spectral-cube # used in FITS-cube tutorial
   - reproject # used in FITS-cube tutorial
