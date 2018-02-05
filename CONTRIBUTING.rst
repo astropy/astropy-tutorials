@@ -48,7 +48,7 @@ Code
     * Variables should be all lower case with words separated by underscores
     * Variable names should be descriptive, e.g., ``galaxy_mass``, ``u_mag``
 * Use the print function explicitly to display information about variables
-* As much as possible, comply with [PEP8](https://www.python.org/dev/peps/pep-0008/)
+* As much as possible, comply with `PEP8 <https://www.python.org/dev/peps/pep-0008/>`_.
 * Imports
     * Do not use ``from package import *``; import packages, classes, and
       functions explicitly.
