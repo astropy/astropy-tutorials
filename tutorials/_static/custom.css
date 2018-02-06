@@ -4,3 +4,7 @@ div.body {
     margin: 0 auto;
     max-width: 768px;
 }
+
+div.body p {
+    font-size: 15px;
+}
