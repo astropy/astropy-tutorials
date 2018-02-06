@@ -144,6 +144,7 @@ htmlhelp_basename = project + 'doc'
 plot_rcparams = dict()
 plot_rcparams['savefig.facecolor'] = 'none'
 plot_rcparams['savefig.bbox'] = 'tight'
+plot_rcparams['figure.dpi'] = 256
 plot_apply_rcparams = True
 plot_formats = [('png', 512)]
 
