@@ -24,9 +24,18 @@ your web browser within a remote server:
 .. image:: http://mybinder.org/badge.svg
     :target: https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/?filepath=tutorials/notebooks
 
+
 Contributing tutorial material
 ------------------------------
 
 Please see the "`For contributors
 <http://astropy-tutorials.readthedocs.io/en/latest/#for-contributors>`_" section
 of the tutorials documentation for information on how to get started.
+
+
+Tutorial infrastructure
+-----------------------
+
+For more information on the infrastructure that builds the tutorials, see the
+`infrastructure/developer http://astropy-tutorials.readthedocs.io/en/latest/dev.html>`_"
+section of the tutorials documentation.

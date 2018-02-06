@@ -7,7 +7,7 @@
 
 .. note::
 
-    This tutorial was generated from an IPython notebook that can be downloaded `here
+    This tutorial was generated from a Jupyter notebook that can be downloaded `here
     <../_static/{{ nb_name }}/{{ nb_name }}.ipynb>`_.
 
     You can interact with a live version of the source notebook through binder:
