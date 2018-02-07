@@ -10,7 +10,7 @@ from nbconvert.exporters import RSTExporter
 from nbconvert.writers import FilesWriter
 import nbformat
 
-IPYTHON_VERSION = 4
+IPYTHON_VERSION = 6
 
 class NBTutorialsConverter(object):
 
