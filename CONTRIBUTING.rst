@@ -136,8 +136,10 @@ spectral line fitting -- we might call it "Spectral-Line-Fitting"::
 
     git checkout -b Spectral-Line-Fitting
 
-Next we'll create a new directory in ``tutorials/notebooks`` with the same name
-as the branch::
+The notebook files must be written as a single Jupyter notebook in a directory
+within the ``tutorials/notebooks`` directory. The name of the notebook must
+be the same as the subdirectory name. We'll create a new directory in
+``tutorials/notebooks`` with the same name as the branch::
 
     mkdir tutorials/notebooks/Spectral-Line-Fitting
 
