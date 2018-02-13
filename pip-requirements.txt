@@ -1,6 +1,6 @@
 IPython==6.1.0
 astropy==2.0.2
-astroquery==0.3.6
+astroquery==0.3.7
 matplotlib==2.0.2
 numpy==1.13.1
 jupyter==1.0
