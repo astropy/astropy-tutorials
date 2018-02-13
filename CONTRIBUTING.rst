@@ -212,6 +212,14 @@ procedure:
   set ``tutorialpath`` to
   ``'http://data.astropy.org/tutorials/My-tutorial-name/'``.
 
+If you need information or help with:
+
+* previewing how the rendered Jupyter notebooks will look on the tutorial
+  webpage
+* marking a cell with an intentional / expected error
+
+please see the :ref:`dev-page`.
+
 For repository maintainers
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
