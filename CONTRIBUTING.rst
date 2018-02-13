@@ -136,8 +136,10 @@ spectral line fitting -- we might call it "Spectral-Line-Fitting"::
 
     git checkout -b Spectral-Line-Fitting
 
-Next we'll create a new directory in ``tutorials/notebooks`` with the same name
-as the branch::
+The notebook files must be written as a single Jupyter notebook in a directory
+within the ``tutorials/notebooks`` directory. The name of the notebook must
+be the same as the subdirectory name. We'll create a new directory in
+``tutorials/notebooks`` with the same name as the branch::
 
     mkdir tutorials/notebooks/Spectral-Line-Fitting
 
@@ -209,6 +211,14 @@ procedure:
   If you do this, the only change necessary on merging your notebook will be to
   set ``tutorialpath`` to
   ``'http://data.astropy.org/tutorials/My-tutorial-name/'``.
+
+If you need information or help with:
+
+* previewing how the rendered Jupyter notebooks will look on the tutorial
+  webpage
+* marking a cell with an intentional / expected error
+
+please see the :ref:`dev-page`.
 
 For repository maintainers
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
