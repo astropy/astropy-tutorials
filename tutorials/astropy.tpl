@@ -5,17 +5,8 @@
 {# Remove the exec_ prefix #}
 {% set nb_name = resources.metadata.name[5:] %}
 
-.. note::
-
-    This tutorial was generated from a Jupyter notebook that can be downloaded `here
-    <../_static/{{ nb_name }}/{{ nb_name }}.ipynb>`_.
-
-    You can interact with a live version of the source notebook through binder:
-
-    |binder{{ nb_name }}|
-
-.. |binder{{ nb_name }}| image:: http://mybinder.org/badge.svg
-   :target: https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/{{ nb_name }}/{{ nb_name }}.ipynb
+`Download tutorial notebook <../_static/{{ nb_name }}/{{ nb_name }}.ipynb>`_ -
+`Interactive tutorial notebook <https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/{{ nb_name }}/{{ nb_name }}.ipynb>`_
 
 .. role:: inputnumrole
 .. role:: outputnumrole
