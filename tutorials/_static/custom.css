@@ -16,3 +16,12 @@ span.inputnumrole {
 span.outputnumrole {
     color: #D84315
 }
+
+.intro {
+    background-color: #d8ebf3;
+    padding: 12px;
+    border: 1px solid #9dcde1;
+    border-radius: 6px;
+    margin-top: 32px;
+    margin-bottom: 32px;
+}

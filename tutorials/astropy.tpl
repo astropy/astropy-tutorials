@@ -1,10 +1,8 @@
 {%- extends 'display_priority.tpl' -%}
 
 {% block header %}
-
 {# Remove the exec_ prefix #}
 {% set nb_name = resources.metadata.name[5:] %}
-
 `Download tutorial notebook <../_static/{{ nb_name }}/{{ nb_name }}.ipynb>`_ -
 `Interactive tutorial notebook <https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/{{ nb_name }}/{{ nb_name }}.ipynb>`_
 
@@ -89,7 +87,14 @@
 {% endblock data_html %}
 
 {% block markdowncell scoped %}
+{% if cell.source.startswith('# Introduction') %}
+.. rst-class:: intro
+
 {{ cell.source | markdown2rst }}
+{% else %}
+{{ cell.source | markdown2rst }}
+{% endif %}
+
 {% endblock markdowncell %}
 
 {%- block rawcell scoped -%}
