@@ -102,7 +102,7 @@ Template intro
     ## Authors
     Jane Smith, Jose Jones
 
-    ## Leaning Goals
+    ## Learning Goals
     - Query..
     - Calculate..
     - Display..
