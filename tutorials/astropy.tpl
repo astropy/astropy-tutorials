@@ -21,9 +21,16 @@
 {% endblock %}
 
 {% block in_prompt %}
+
+*In[{{  cell['execution_count'] }}]:*
+
+
 {% endblock in_prompt %}
 
 {% block output_prompt %}
+
+*Out[{{  cell['execution_count'] }}]:*
+
 {% endblock output_prompt %}
 
 {% block input %}
