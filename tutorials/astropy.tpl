@@ -32,7 +32,7 @@
 
 {% block output_prompt %}
 
-:outputnumrole:`Out[{{  cell['execution_count'] }}]:``
+:outputnumrole:`Out[{{  cell['execution_count'] }}]:`
 
 {% endblock output_prompt %}
 
