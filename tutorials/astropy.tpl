@@ -17,19 +17,22 @@
 .. |binder{{ nb_name }}| image:: http://mybinder.org/badge.svg
    :target: https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/{{ nb_name }}/{{ nb_name }}.ipynb
 
+.. role:: inputnumrole
+.. role:: outputnumrole
+
 .. _{{nb_name}}:
 {% endblock %}
 
 {% block in_prompt %}
 
-*In[{{  cell['execution_count'] }}]:*
+:inputnumrole:`In[{{  cell['execution_count'] }}]:`
 
 
 {% endblock in_prompt %}
 
 {% block output_prompt %}
 
-*Out[{{  cell['execution_count'] }}]:*
+:outputnumrole:`Out[{{  cell['execution_count'] }}]:``
 
 {% endblock output_prompt %}
 

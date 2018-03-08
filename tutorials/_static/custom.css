@@ -8,3 +8,11 @@ div.body {
 div.body p {
     font-size: 15px;
 }
+
+span.inputnumrole {
+    color: #303F9F
+}
+
+span.outputnumrole {
+    color: #D84315
+}
