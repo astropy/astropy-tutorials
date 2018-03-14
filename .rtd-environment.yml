@@ -13,5 +13,8 @@ dependencies:
   - scipy=0.19 # needed for coordinates cross-matching
   - jupyter=1.0
   - notebook=5.0
+  - aplpy=1.1.1
+  - spectral-cube=0.4
+  - reproject=0.3.2
   - pip:
     - git+https://github.com/jupyter/nbconvert # this is really >=5.4, but at the time of adding this that wasn't yet available
