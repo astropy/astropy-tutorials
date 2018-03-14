@@ -1,15 +1,32 @@
 {%- extends 'display_priority.tpl' -%}
 
 {% block header %}
+
 {# Remove the exec_ prefix #}
 {% set nb_name = resources.metadata.name[5:] %}
-`Download tutorial notebook <../_static/{{ nb_name }}/{{ nb_name }}.ipynb>`_ -
-`Interactive tutorial notebook <https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/{{ nb_name }}/{{ nb_name }}.ipynb>`_
+
+.. raw:: html
+
+    <a href="../_static/{{ nb_name }}/{{ nb_name }}.ipynb"><button id="download">Download tutorial notebook</button></a>
+    <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/{{ nb_name }}/{{ nb_name }}.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
+
+    <div id="spacer"></div>
 
 .. role:: inputnumrole
 .. role:: outputnumrole
 
 .. _{{nb_name}}:
+{% endblock %}
+
+{% block footer %}
+
+.. raw:: html
+
+    <div id="spacer"></div>
+
+    <a href="../_static/{{ nb_name }}/{{ nb_name }}.ipynb"><button id="download">Download tutorial notebook</button></a>
+    <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/{{ nb_name }}/{{ nb_name }}.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
+
 {% endblock %}
 
 {% block in_prompt %}
@@ -87,14 +104,7 @@
 {% endblock data_html %}
 
 {% block markdowncell scoped %}
-{% if cell.source.startswith('# Introduction') %}
-.. rst-class:: intro
-
 {{ cell.source | markdown2rst }}
-{% else %}
-{{ cell.source | markdown2rst }}
-{% endif %}
-
 {% endblock markdowncell %}
 
 {%- block rawcell scoped -%}
