@@ -5,22 +5,28 @@
 {# Remove the exec_ prefix #}
 {% set nb_name = resources.metadata.name[5:] %}
 
-.. note::
+.. raw:: html
 
-    This tutorial was generated from a Jupyter notebook that can be downloaded `here
-    <../_static/{{ nb_name }}/{{ nb_name }}.ipynb>`_.
+    <a href="../_static/{{ nb_name }}/{{ nb_name }}.ipynb"><button id="download">Download tutorial notebook</button></a>
+    <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/{{ nb_name }}/{{ nb_name }}.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
 
-    You can interact with a live version of the source notebook through binder:
-
-    |binder{{ nb_name }}|
-
-.. |binder{{ nb_name }}| image:: http://mybinder.org/badge.svg
-   :target: https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/{{ nb_name }}/{{ nb_name }}.ipynb
+    <div id="spacer"></div>
 
 .. role:: inputnumrole
 .. role:: outputnumrole
 
 .. _{{nb_name}}:
+{% endblock %}
+
+{% block footer %}
+
+.. raw:: html
+
+    <div id="spacer"></div>
+
+    <a href="../_static/{{ nb_name }}/{{ nb_name }}.ipynb"><button id="download">Download tutorial notebook</button></a>
+    <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/{{ nb_name }}/{{ nb_name }}.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
+
 {% endblock %}
 
 {% block in_prompt %}

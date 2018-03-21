@@ -28,11 +28,12 @@ Overview
 * Each tutorial should have 3–5 explicit `Learning Goals
   <http://tll.mit.edu/help/intended-learning-outcomes>`_, demonstrate ~2–3
   pieces of functionality relevant to astronomy, and 2–3 demonstrations of
-  generic but commonly used functionality (e.g., numpy, matplotlib)
+  generic but commonly used functionality (e.g., ``numpy``, ``matplotlib``)
 * Roughly follow this progression:
-    * *Intput/Output*: read in some data (use `astroquery
-      <https://astroquery.readthedocs.io/en/latest/>`_ where possible
-    * *Analysis*: do something insightful/useful with the data
+    * *Input/Output*: read in some data (use `astroquery
+      <https://astroquery.readthedocs.io/en/latest/>`_ where possible to query
+      real astronomical datasets)
+    * *Analysis*: do something insightful / useful with the data
     * *Visualization*: make a pretty figure (use `astropy.visualization
       <http://docs.astropy.org/en/stable/visualization/>`_ where possible)
 * The tutorials must be compatible with the versions supported by the last major
@@ -72,9 +73,9 @@ Narrative
   formatting, links, latex, and code snippets.
 * Title should be short yet descriptive and emphasize the learning goals of the
   tutorial. Try to make the title appeal to a broad audience and avoid
-  referencing a specefic instrument, catalog, or anything wavelength dependent.
-* List all author's full names (comma separated) and link to github profile
-  and/or `ORCID iD <https://orcid.org/>`_.
+  referencing a specific instrument, catalog, or anything wavelength dependent.
+* List all author's full names (comma separated) and link to GitHub profile
+  and/or `ORCID iD <https://orcid.org/>`_ when relevant.
 * Include `Learning Goals <http://tll.mit.edu/help/intended-learning-outcomes>`_
   at the top as a bulleted list.
 * Include Keywords as a comma separated list of topics, packages, and functions
@@ -97,15 +98,15 @@ Template intro
 
 .. code-block:: none
 
-    # Doing a thing with things
+    # Title name
 
     ## Authors
     Jane Smith, Jose Jones
 
-    ## Leaning Goals
-    - Query..
-    - Calculate..
-    - Display..
+    ## Learning Goals
+    * Query the ... dataset
+    * Calculate ...
+    * Display ...
 
     ## Keywords
     Example, example, example
@@ -113,6 +114,7 @@ Template intro
     ## Companion Content
     Carroll & Ostlie 10.3, Binney & Tremaine 1.5
 
+    ## Summary
     In this tutorial, we download a data file, do something to it, and then
     visualize it.
 
@@ -126,7 +128,7 @@ concepts `branch, push, pull request <https://help.github.com/articles/proposing
 
 To contribute a new tutorial, first fork the ``astropy-tutorials`` repository.
 Then, clone your fork locally to your machine (replace <GITHUB USERNAME> with
-your github username)::
+your GitHub username)::
 
     git clone git@github.com:<GITHUB USERNAME>/astropy-tutorials.git
 
@@ -148,8 +150,8 @@ notebook file itself -- should go in this directory.
 
 Specify the python packages the tutorial depends on by creating a text file
 called ``requirements.txt`` in the same notebook directory. For example, if your
-tutorial requires scipy version 1.0 and numpy version 1.13 or greater, your
-``requirements.txt`` file would look like:
+tutorial requires ``scipy`` version 1.0 and ``numpy`` version 1.13 or greater,
+your ``requirements.txt`` file would look like:
 
 .. code-block:: none
 
@@ -158,7 +160,7 @@ tutorial requires scipy version 1.0 and numpy version 1.13 or greater, your
 
 To see an example, have a look at the FITS-header `requirements.txt file <https:
 //github.com/astropy/astropy-tutorials/blob/master/tutorials/notebooks/FITS-head
-er/requirements.json>`_.
+er/requirements.txt>`_.
 
 Push the notebook and other files from your local branch up to your fork of the
 repository on GitHub (by default, named 'origin')::
@@ -166,7 +168,7 @@ repository on GitHub (by default, named 'origin')::
     git push origin Spectral-Line-Fitting
 
 When the tutorial is ready for broader community feedback, `open a pull request
-<https://help.github.com/articles/creating-a-pull-request/>`_against the main
+<https://help.github.com/articles/creating-a-pull-request/>`_ against the main
 ``astropy-tutorials`` repository in order for the community to review the new
 tutorial.
 

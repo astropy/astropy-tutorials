@@ -37,6 +37,7 @@ clean:
 	-rm -rf $(BUILDDIR)
 	-rm -rf api
 	-rm -rf generated
+	-rm -rf tutorials/rst-tutorials
 
 html:
 	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(BUILDDIR)/html
