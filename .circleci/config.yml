@@ -21,7 +21,7 @@ jobs:
       - run:
           name: Build documentation
           command: |
-            python setup.py build_docs -w 2> /dev/null
+            python setup.py build_docs -w
 
       - store_artifacts:
           path: docs/_build/html
