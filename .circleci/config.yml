@@ -6,7 +6,7 @@ apt-run: &apt-install
   name: Install apt packages
   command: |
     sudo apt-get update
-    sudo apt-get install build-essential
+    sudo apt-get install build-essential pandoc
 
 pip-run: &pip-install
   name: Install Python dependencies
