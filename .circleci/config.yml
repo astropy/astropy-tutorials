@@ -14,6 +14,7 @@ pip-run: &pip-install
     python3 -m venv venv
     . venv/bin/activate
     pip install -q -r pip-requirements.txt
+    pip install sphinx
 
 jobs:
   build:
