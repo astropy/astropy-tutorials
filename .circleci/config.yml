@@ -31,7 +31,7 @@ jobs:
           command: |
             DOCS_URL="${CIRCLE_BUILD_URL}/artifacts/${CIRCLE_NODE_INDEX}/${CIRCLE_WORKING_DIRECTORY/#\~/$HOME}/docs/_build/html/index.html"; echo $DOCS_URL
 
-      # - save_cache: # specify what paths to cache
+      # - save_cache: # Specify what paths to cache
       #     key: sample-data-v1
       #     paths:
       #       - ~/sunpy/data/sample_data
