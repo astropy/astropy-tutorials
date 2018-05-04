@@ -8465,15 +8465,15 @@ label {
 }
 /* Flexible box model classes */
 /* Taken from Alex Russell http://infrequently.org/2009/08/css-3-progress/ */
-/* This file is a compatability layer.  It allows the usage of flexible box 
+/* This file is a compatability layer.  It allows the usage of flexible box
 model layouts accross multiple browsers, including older browsers.  The newest,
 universal implementation of the flexible box model is used when available (see
-`Modern browsers` comments below).  Browsers that are known to implement this 
+`Modern browsers` comments below).  Browsers that are known to implement this
 new spec completely include:
 
     Firefox 28.0+
     Chrome 29.0+
-    Internet Explorer 11+ 
+    Internet Explorer 11+
     Opera 17.0+
 
 Browsers not listed, including Safari, are supported via the styling under the
@@ -11223,7 +11223,7 @@ div#pager .ui-resizable-handle {
   background: #f7f7f7;
   border-top: 1px solid #cfcfcf;
   border-bottom: 1px solid #cfcfcf;
-  /* This injects handle bars (a short, wide = symbol) for 
+  /* This injects handle bars (a short, wide = symbol) for
         the resize handle. */
 }
 div#pager .ui-resizable-handle::after {
@@ -11658,7 +11658,7 @@ ul.typeahead-list > li > a {
 .highlight .il { color: #666666 } /* Literal.Number.Integer.Long */
     </style>
 <style type="text/css">
-    
+
 /* Temporary definitions which will become obsolete with Notebook release 5.0 */
 .ansi-black-fg { color: #3E424D; }
 .ansi-black-bg { background-color: #3E424D; }
@@ -11714,14 +11714,14 @@ div#notebook {
   div.cell {
     display: block;
     page-break-inside: avoid;
-  } 
-  div.output_wrapper { 
-    display: block;
-    page-break-inside: avoid; 
   }
-  div.output { 
+  div.output_wrapper {
     display: block;
-    page-break-inside: avoid; 
+    page-break-inside: avoid;
+  }
+  div.output {
+    display: block;
+    page-break-inside: avoid;
   }
 }
 </style>
@@ -11765,19 +11765,26 @@ div#notebook {
             </ul>
         </div>
     </nav>
-	
-	
+
+
 	<!-- Author and Date Information & Edit on Github Link-->
-	
+
+<meta http-equiv="refresh" content="5; url=http://astropy-tutorials.readthedocs.io/en/latest/rst-tutorials/Coordinates.html" />
+
+<p style='background:pink'>This tutorial have been moved to <a href="http://astropy-tutorials.readthedocs.io/en/latest/rst-tutorials/Coordinates.html">http://astropy-tutorials.readthedocs.io/en/latest/rst-tutorials/Coordinates.html</a>.This page should auto redirect you to that page in 5 seconds.<br />
+
+If you really wanted to see the old (unmaintained) version of the tutorials that was previously at this location, it is archived here: <a href =“http://www.astropy.org/astropy-tutorials/Coordinates_old.html”>http://www.astropy.org/astropy-tutorials/Coordinates_old.html</a>
+</p>
+
 	<div class="clearfix" style='margin-top:25px;margin-left:12%;'>
 		<ul>
-			<span style="float: left;"><b>Author: </b>Erik Tollerud <erik.tollerud@gmail.com></span> 
+			<span style="float: left;"><b>Author: </b>Erik Tollerud <erik.tollerud@gmail.com></span>
 			<span style="float: right"><a href="https://github.com/astropy/astropy-tutorials/tree/master/tutorials/Coordinates">Edit this tutorial on GitHub <img src="https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png" height="25px" width="25px" /></a></span>
 			<br><span style="float: left;"><b>Date Created: </b> July 2015</span>
 		</ul>
 	</div>
-	
-    
+
+
 <body>
   <div tabindex="-1" id="notebook" class="border-box-sizing">
     <div class="container" id="notebook-container">
@@ -12038,12 +12045,12 @@ div#notebook {
 <span class="ansi-green-fg">/Users/erik/miniconda3/envs/astropy-tutorials/lib/python3.5/urllib/request.py</span> in <span class="ansi-cyan-fg">urlopen</span><span class="ansi-blue-fg">(url, data, timeout, cafile, capath, cadefault, context)</span>
 <span class="ansi-green-intense-fg ansi-bold">    162</span>         opener <span class="ansi-blue-fg">=</span> _opener
 <span class="ansi-green-fg">--&gt; 163</span><span class="ansi-red-fg">     </span><span class="ansi-green-fg">return</span> opener<span class="ansi-blue-fg">.</span>open<span class="ansi-blue-fg">(</span>url<span class="ansi-blue-fg">,</span> data<span class="ansi-blue-fg">,</span> timeout<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    164</span> 
+<span class="ansi-green-intense-fg ansi-bold">    164</span>
 
 <span class="ansi-green-fg">/Users/erik/miniconda3/envs/astropy-tutorials/lib/python3.5/urllib/request.py</span> in <span class="ansi-cyan-fg">open</span><span class="ansi-blue-fg">(self, fullurl, data, timeout)</span>
-<span class="ansi-green-intense-fg ansi-bold">    465</span> 
+<span class="ansi-green-intense-fg ansi-bold">    465</span>
 <span class="ansi-green-fg">--&gt; 466</span><span class="ansi-red-fg">         </span>response <span class="ansi-blue-fg">=</span> self<span class="ansi-blue-fg">.</span>_open<span class="ansi-blue-fg">(</span>req<span class="ansi-blue-fg">,</span> data<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    467</span> 
+<span class="ansi-green-intense-fg ansi-bold">    467</span>
 
 <span class="ansi-green-fg">/Users/erik/miniconda3/envs/astropy-tutorials/lib/python3.5/urllib/request.py</span> in <span class="ansi-cyan-fg">_open</span><span class="ansi-blue-fg">(self, req, data)</span>
 <span class="ansi-green-intense-fg ansi-bold">    483</span>         result = self._call_chain(self.handle_open, protocol, protocol +
@@ -12058,7 +12065,7 @@ div#notebook {
 <span class="ansi-green-fg">/Users/erik/miniconda3/envs/astropy-tutorials/lib/python3.5/urllib/request.py</span> in <span class="ansi-cyan-fg">http_open</span><span class="ansi-blue-fg">(self, req)</span>
 <span class="ansi-green-intense-fg ansi-bold">   1281</span>     <span class="ansi-green-fg">def</span> http_open<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> req<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
 <span class="ansi-green-fg">-&gt; 1282</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>do_open<span class="ansi-blue-fg">(</span>http<span class="ansi-blue-fg">.</span>client<span class="ansi-blue-fg">.</span>HTTPConnection<span class="ansi-blue-fg">,</span> req<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">   1283</span> 
+<span class="ansi-green-intense-fg ansi-bold">   1283</span>
 
 <span class="ansi-green-fg">/Users/erik/miniconda3/envs/astropy-tutorials/lib/python3.5/urllib/request.py</span> in <span class="ansi-cyan-fg">do_open</span><span class="ansi-blue-fg">(self, http_class, req, **http_conn_args)</span>
 <span class="ansi-green-intense-fg ansi-bold">   1256</span>                 <span class="ansi-green-fg">raise</span> URLError<span class="ansi-blue-fg">(</span>err<span class="ansi-blue-fg">)</span>
@@ -12096,7 +12103,7 @@ During handling of the above exception, another exception occurred:
 
 <span class="ansi-green-fg">/Users/erik/miniconda3/envs/astropy-tutorials/lib/python3.5/site-packages/astropy/coordinates/sky_coordinate.py</span> in <span class="ansi-cyan-fg">from_name</span><span class="ansi-blue-fg">(cls, name, frame)</span>
 <span class="ansi-green-intense-fg ansi-bold">   1284</span>         <span class="ansi-green-fg">from</span> <span class="ansi-blue-fg">.</span>name_resolve <span class="ansi-green-fg">import</span> get_icrs_coordinates
-<span class="ansi-green-intense-fg ansi-bold">   1285</span> 
+<span class="ansi-green-intense-fg ansi-bold">   1285</span>
 <span class="ansi-green-fg">-&gt; 1286</span><span class="ansi-red-fg">         </span>icrs_coord <span class="ansi-blue-fg">=</span> get_icrs_coordinates<span class="ansi-blue-fg">(</span>name<span class="ansi-blue-fg">)</span>
 <span class="ansi-green-intense-fg ansi-bold">   1287</span>         icrs_sky_coord <span class="ansi-blue-fg">=</span> cls<span class="ansi-blue-fg">(</span>icrs_coord<span class="ansi-blue-fg">)</span>
 <span class="ansi-green-intense-fg ansi-bold">   1288</span>         <span class="ansi-green-fg">if</span> frame <span class="ansi-green-fg">in</span> <span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;icrs&#39;</span><span class="ansi-blue-fg">,</span> icrs_coord<span class="ansi-blue-fg">.</span>__class__<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
@@ -12105,7 +12112,7 @@ During handling of the above exception, another exception occurred:
 <span class="ansi-green-intense-fg ansi-bold">    155</span>             raise NameResolveError(
 <span class="ansi-green-intense-fg ansi-bold">    156</span>                 <span class="ansi-blue-fg">&#34;Unable to retrieve coordinates for name &#39;{0}&#39;; connection &#34;</span>
 <span class="ansi-green-fg">--&gt; 157</span><span class="ansi-red-fg">                 &#34;timed out&#34;.format(name))
-</span><span class="ansi-green-intense-fg ansi-bold">    158</span> 
+</span><span class="ansi-green-intense-fg ansi-bold">    158</span>
 <span class="ansi-green-intense-fg ansi-bold">    159</span>     <span class="ansi-red-fg"># All Sesame URL&#39;s timed out...</span>
 
 <span class="ansi-red-fg">NameResolveError</span>: Unable to retrieve coordinates for name &#39;HCG 7&#39;; connection timed out</pre>
@@ -12261,9 +12268,9 @@ $9^\circ48{}^\prime58.5{}^{\prime\prime}$
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">impix</span> <span class="o">=</span> <span class="mi">1024</span>
 <span class="n">imsize</span> <span class="o">=</span> <span class="mi">12</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">arcmin</span>
 <span class="n">cutoutbaseurl</span> <span class="o">=</span> <span class="s1">&#39;http://skyservice.pha.jhu.edu/DR12/ImgCutout/getjpeg.aspx&#39;</span>
-<span class="n">query_string</span> <span class="o">=</span> <span class="n">urlencode</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">ra</span><span class="o">=</span><span class="n">hcg7_center</span><span class="o">.</span><span class="n">ra</span><span class="o">.</span><span class="n">deg</span><span class="p">,</span> 
-                                     <span class="n">dec</span><span class="o">=</span><span class="n">hcg7_center</span><span class="o">.</span><span class="n">dec</span><span class="o">.</span><span class="n">deg</span><span class="p">,</span> 
-                                     <span class="n">width</span><span class="o">=</span><span class="n">impix</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="n">impix</span><span class="p">,</span> 
+<span class="n">query_string</span> <span class="o">=</span> <span class="n">urlencode</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">ra</span><span class="o">=</span><span class="n">hcg7_center</span><span class="o">.</span><span class="n">ra</span><span class="o">.</span><span class="n">deg</span><span class="p">,</span>
+                                     <span class="n">dec</span><span class="o">=</span><span class="n">hcg7_center</span><span class="o">.</span><span class="n">dec</span><span class="o">.</span><span class="n">deg</span><span class="p">,</span>
+                                     <span class="n">width</span><span class="o">=</span><span class="n">impix</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="n">impix</span><span class="p">,</span>
                                      <span class="n">scale</span><span class="o">=</span><span class="n">imsize</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">arcsec</span><span class="p">)</span><span class="o">.</span><span class="n">value</span><span class="o">/</span><span class="n">impix</span><span class="p">))</span>
 <span class="n">url</span> <span class="o">=</span> <span class="n">cutoutbaseurl</span> <span class="o">+</span> <span class="s1">&#39;?&#39;</span> <span class="o">+</span> <span class="n">query_string</span>
 
@@ -13960,7 +13967,7 @@ EE9/bmmHQbuIGMc0vbqPyo+lKCT2oAb34pWz3zQCegFK2RSAGb5s4FI2SeOaAfYcUZIJwcUAf//Z
 <div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
+<div class=" highlight hl-ipython3"><pre><span></span>
 </pre></div>
 
 </div>
@@ -13984,7 +13991,7 @@ EE9/bmmHQbuIGMc0vbqPyo+lKCT2oAb34pWz3zQCegFK2RSAGb5s4FI2SeOaAfYcUZIJwcUAf//Z
 <div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
+<div class=" highlight hl-ipython3"><pre><span></span>
 </pre></div>
 
 </div>
@@ -14027,8 +14034,8 @@ EE9/bmmHQbuIGMc0vbqPyo+lKCT2oAb34pWz3zQCegFK2RSAGb5s4FI2SeOaAfYcUZIJwcUAf//Z
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">astroquery.sdss</span> <span class="k">import</span> <span class="n">SDSS</span>
-<span class="n">sdss</span> <span class="o">=</span> <span class="n">SDSS</span><span class="o">.</span><span class="n">query_region</span><span class="p">(</span><span class="n">coordinates</span><span class="o">=</span><span class="n">hcg7_center</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mi">20</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">arcmin</span><span class="p">,</span> 
-                         <span class="n">spectro</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> 
+<span class="n">sdss</span> <span class="o">=</span> <span class="n">SDSS</span><span class="o">.</span><span class="n">query_region</span><span class="p">(</span><span class="n">coordinates</span><span class="o">=</span><span class="n">hcg7_center</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mi">20</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">arcmin</span><span class="p">,</span>
+                         <span class="n">spectro</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                          <span class="n">photoobj_fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ra&#39;</span><span class="p">,</span><span class="s1">&#39;dec&#39;</span><span class="p">,</span><span class="s1">&#39;u&#39;</span><span class="p">,</span><span class="s1">&#39;g&#39;</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="s1">&#39;i&#39;</span><span class="p">,</span><span class="s1">&#39;z&#39;</span><span class="p">])</span>
 </pre></div>
 
@@ -14047,7 +14054,7 @@ EE9/bmmHQbuIGMc0vbqPyo+lKCT2oAb34pWz3zQCegFK2RSAGb5s4FI2SeOaAfYcUZIJwcUAf//Z
 <span class="ansi-red-fg">ImportError</span>                               Traceback (most recent call last)
 <span class="ansi-green-fg">&lt;ipython-input-15-54321b6f2b92&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
 <span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span><span class="ansi-green-fg">from</span> astroquery<span class="ansi-blue-fg">.</span>sdss <span class="ansi-green-fg">import</span> SDSS
-<span class="ansi-green-intense-fg ansi-bold">      2</span> sdss = SDSS.query_region(coordinates=hcg7_center, radius=20*u.arcmin, 
+<span class="ansi-green-intense-fg ansi-bold">      2</span> sdss = SDSS.query_region(coordinates=hcg7_center, radius=20*u.arcmin,
 <span class="ansi-green-intense-fg ansi-bold">      3</span>                          spectro<span class="ansi-blue-fg">=</span><span class="ansi-green-fg">True</span><span class="ansi-blue-fg">,</span>
 <span class="ansi-green-intense-fg ansi-bold">      4</span>                          photoobj_fields=[&#39;ra&#39;,&#39;dec&#39;,&#39;u&#39;,&#39;g&#39;,&#39;r&#39;,&#39;i&#39;,&#39;z&#39;])
 
@@ -14500,7 +14507,7 @@ kgElSWrJgJIktWRASZJaMqAkSS39P/72EP62gPabAAAAAElFTkSuQmCC
 <div class="prompt input_prompt">In&nbsp;[25]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">coo_simulated</span> <span class="o">=</span> <span class="n">SkyCoord</span><span class="p">(</span><span class="n">ras_sim</span><span class="p">,</span> <span class="n">decs_sim</span><span class="p">)</span>  
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">coo_simulated</span> <span class="o">=</span> <span class="n">SkyCoord</span><span class="p">(</span><span class="n">ras_sim</span><span class="p">,</span> <span class="n">decs_sim</span><span class="p">)</span>
 <span class="n">idx_sim</span><span class="p">,</span> <span class="n">d2d_sim</span><span class="p">,</span> <span class="n">d3d_sim</span> <span class="o">=</span> <span class="n">coo_simulated</span><span class="o">.</span><span class="n">match_to_catalog_sky</span><span class="p">(</span><span class="n">coo_sdss</span><span class="p">)</span>
 </pre></div>
 
@@ -14897,7 +14904,7 @@ AIAkkaAAAEkiQQEAkkSCAgAkiQQFAEgSCQoAkCQSFAAgSf8PsFYsQiqpPSUAAAAASUVORK5CYII=
 <div class="prompt input_prompt">In&nbsp;[28]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
+<div class=" highlight hl-ipython3"><pre><span></span>
 </pre></div>
 
 </div>
@@ -14921,7 +14928,7 @@ AIAkkaAAAEkiQQEAkkSCAgAkiQQFAEgSCQoAkCQSFAAgSf8PsFYsQiqpPSUAAAAASUVORK5CYII=
 <div class="prompt input_prompt">In&nbsp;[28]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
+<div class=" highlight hl-ipython3"><pre><span></span>
 </pre></div>
 
 </div>
@@ -15076,7 +15083,7 @@ AIAkkaAAAEkiQQEAkkSCAgAkiQQFAEgSCQoAkCQSFAAgSf8PsFYsQiqpPSUAAAAASUVORK5CYII=
 <span class="ansi-green-intense-fg ansi-bold">    485</span>         <span class="ansi-red-fg"># Fail</span>
 <span class="ansi-green-intense-fg ansi-bold">    486</span>         raise AttributeError(&#34;&#39;{0}&#39; object has no attribute &#39;{1}&#39;&#34;
 <span class="ansi-green-fg">--&gt; 487</span><span class="ansi-red-fg">                              .format(self.__class__.__name__, attr))
-</span><span class="ansi-green-intense-fg ansi-bold">    488</span> 
+</span><span class="ansi-green-intense-fg ansi-bold">    488</span>
 <span class="ansi-green-intense-fg ansi-bold">    489</span>     <span class="ansi-green-fg">def</span> __setattr__<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> attr<span class="ansi-blue-fg">,</span> val<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
 
 <span class="ansi-red-fg">AttributeError</span>: &#39;SkyCoord&#39; object has no attribute &#39;ra&#39;</pre>
@@ -15790,7 +15797,7 @@ CpSIiCQkFSgREUlIKlAiIpKQVKBERCQh/X/6PULRgxsDSQAAAABJRU5ErkJggg==
 <div class="prompt input_prompt">In&nbsp;[37]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
+<div class=" highlight hl-ipython3"><pre><span></span>
 </pre></div>
 
 </div>
@@ -15814,7 +15821,7 @@ CpSIiCQkFSgREUlIKlAiIpKQVKBERCQh/X/6PULRgxsDSQAAAABJRU5ErkJggg==
 <div class="prompt input_prompt">In&nbsp;[37]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
+<div class=" highlight hl-ipython3"><pre><span></span>
 </pre></div>
 
 </div>
@@ -15845,14 +15852,14 @@ CpSIiCQkFSgREUlIKlAiIpKQVKBERCQh/X/6PULRgxsDSQAAAABJRU5ErkJggg==
     </div>
   </div>
 </body>
-	
+
 
   <!--Disqus Comment Section -->
-	
+
 	<div id="disqus_thread" style='margin-top:50px;'></div>
 	<script type="text/javascript">
 		/* * * CONFIGURATION VARIABLES * * */
-		var disqus_shortname = 'astropytutorials'; //registered short name of astropy tutorials 
+		var disqus_shortname = 'astropytutorials'; //registered short name of astropy tutorials
 		var disqus_identifier= 'Coordinates.html';
 		var disqus_url = 'http://www.astropy.org/astropy-tutorials/Coordinates.html';
 		/* * * DON'T EDIT BELOW THIS LINE * * */
@@ -15869,7 +15876,7 @@ CpSIiCQkFSgREUlIKlAiIpKQVKBERCQh/X/6PULRgxsDSQAAAABJRU5ErkJggg==
 		}());
 	</script>
 	<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
-	
+
 	<!--End of comments section-->
 </div>
 

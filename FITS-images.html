@@ -8465,15 +8465,15 @@ label {
 }
 /* Flexible box model classes */
 /* Taken from Alex Russell http://infrequently.org/2009/08/css-3-progress/ */
-/* This file is a compatability layer.  It allows the usage of flexible box 
+/* This file is a compatability layer.  It allows the usage of flexible box
 model layouts accross multiple browsers, including older browsers.  The newest,
 universal implementation of the flexible box model is used when available (see
-`Modern browsers` comments below).  Browsers that are known to implement this 
+`Modern browsers` comments below).  Browsers that are known to implement this
 new spec completely include:
 
     Firefox 28.0+
     Chrome 29.0+
-    Internet Explorer 11+ 
+    Internet Explorer 11+
     Opera 17.0+
 
 Browsers not listed, including Safari, are supported via the styling under the
@@ -11223,7 +11223,7 @@ div#pager .ui-resizable-handle {
   background: #f7f7f7;
   border-top: 1px solid #cfcfcf;
   border-bottom: 1px solid #cfcfcf;
-  /* This injects handle bars (a short, wide = symbol) for 
+  /* This injects handle bars (a short, wide = symbol) for
         the resize handle. */
 }
 div#pager .ui-resizable-handle::after {
@@ -11658,7 +11658,7 @@ ul.typeahead-list > li > a {
 .highlight .il { color: #666666 } /* Literal.Number.Integer.Long */
     </style>
 <style type="text/css">
-    
+
 /* Temporary definitions which will become obsolete with Notebook release 5.0 */
 .ansi-black-fg { color: #3E424D; }
 .ansi-black-bg { background-color: #3E424D; }
@@ -11714,14 +11714,14 @@ div#notebook {
   div.cell {
     display: block;
     page-break-inside: avoid;
-  } 
-  div.output_wrapper { 
-    display: block;
-    page-break-inside: avoid; 
   }
-  div.output { 
+  div.output_wrapper {
     display: block;
-    page-break-inside: avoid; 
+    page-break-inside: avoid;
+  }
+  div.output {
+    display: block;
+    page-break-inside: avoid;
   }
 }
 </style>
@@ -11765,19 +11765,26 @@ div#notebook {
             </ul>
         </div>
     </nav>
-	
-	
+
+
 	<!-- Author and Date Information & Edit on Github Link-->
-	
+
+<meta http-equiv="refresh" content="5; url=http://astropy-tutorials.readthedocs.io/en/latest/rst-tutorials/FITS-images.html" />
+
+<p style='background:pink'>This tutorial have been moved to <a href="http://astropy-tutorials.readthedocs.io/en/latest/rst-tutorials/FITS-images.html">http://astropy-tutorials.readthedocs.io/en/latest/rst-tutorials/FITS-images.html</a>.This page should auto redirect you to that page in 5 seconds.<br />
+
+If you really wanted to see the old (unmaintained) version of the tutorials that was previously at this location, it is archived here: <a href =“http://www.astropy.org/astropy-tutorials/FITS-images_old.html”>http://www.astropy.org/astropy-tutorials/FITS-images_old.html</a>
+</p>
+
 	<div class="clearfix" style='margin-top:25px;margin-left:12%;'>
 		<ul>
-			<span style="float: left;"><b>Author: </b>Lia R. Corrales <lia@astro.columbia.edu></span> 
+			<span style="float: left;"><b>Author: </b>Lia R. Corrales <lia@astro.columbia.edu></span>
 			<span style="float: right"><a href="https://github.com/astropy/astropy-tutorials/tree/master/tutorials/FITS-images">Edit this tutorial on GitHub <img src="https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png" height="25px" width="25px" /></a></span>
 			<br><span style="float: left;"><b>Date Created: </b> January 2014</span>
 		</ul>
 	</div>
-	
-    
+
+
 <body>
   <div tabindex="-1" id="notebook" class="border-box-sizing">
     <div class="container" id="notebook-container">
@@ -11915,8 +11922,8 @@ div#notebook {
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>Filename: /Users/erik/.astropy/cache/download/py3/2c9202ae878ecfcb60878ceb63837f5f
 No.    Name         Type      Cards   Dimensions   Format
-  0  PRIMARY     PrimaryHDU     161   (891, 893)   int16   
-  1  er.mask     TableHDU        25   1600R x 4C   [F6.2, F6.2, F6.2, F6.2]   
+  0  PRIMARY     PrimaryHDU     161   (891, 893)   int16
+  1  er.mask     TableHDU        25   1600R x 4C   [F6.2, F6.2, F6.2, F6.2]
 </pre>
 </div>
 </div>
@@ -17726,7 +17733,7 @@ TME5RQcHBwcHhyn8F5fesweiHqCMAAAAAElFTkSuQmCC
 <span class="n">image_concat</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">image</span> <span class="ow">in</span> <span class="n">image_list</span><span class="p">:</span>
     <span class="n">image_concat</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fits</span><span class="o">.</span><span class="n">getdata</span><span class="p">(</span><span class="n">image</span><span class="p">))</span>
-    
+
 <span class="c1"># The short way</span>
 <span class="c1">#image_concat = [ fits.getdata(image) for image in IMAGE_LIST ]</span>
 </pre></div>
@@ -21659,7 +21666,7 @@ D1C/iBxBuU1FAAAAAElFTkSuQmCC
 <div class="prompt input_prompt">In&nbsp;[21]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span> 
+<div class=" highlight hl-ipython2"><pre><span></span>
 </pre></div>
 
 </div>
@@ -21683,7 +21690,7 @@ D1C/iBxBuU1FAAAAAElFTkSuQmCC
 <div class="prompt input_prompt">In&nbsp;[21]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span> 
+<div class=" highlight hl-ipython2"><pre><span></span>
 </pre></div>
 
 </div>
@@ -21707,7 +21714,7 @@ D1C/iBxBuU1FAAAAAElFTkSuQmCC
 <div class="prompt input_prompt">In&nbsp;[21]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython2"><pre><span></span> 
+<div class=" highlight hl-ipython2"><pre><span></span>
 </pre></div>
 
 </div>
@@ -21718,14 +21725,14 @@ D1C/iBxBuU1FAAAAAElFTkSuQmCC
     </div>
   </div>
 </body>
-	
+
 
   <!--Disqus Comment Section -->
-	
+
 	<div id="disqus_thread" style='margin-top:50px;'></div>
 	<script type="text/javascript">
 		/* * * CONFIGURATION VARIABLES * * */
-		var disqus_shortname = 'astropytutorials'; //registered short name of astropy tutorials 
+		var disqus_shortname = 'astropytutorials'; //registered short name of astropy tutorials
 		var disqus_identifier= 'FITS-images.html';
 		var disqus_url = 'http://www.astropy.org/astropy-tutorials/FITS-images.html';
 		/* * * DON'T EDIT BELOW THIS LINE * * */
@@ -21742,7 +21749,7 @@ D1C/iBxBuU1FAAAAAElFTkSuQmCC
 		}());
 	</script>
 	<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
-	
+
 	<!--End of comments section-->
 </div>
 

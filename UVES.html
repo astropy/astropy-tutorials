@@ -8465,15 +8465,15 @@ label {
 }
 /* Flexible box model classes */
 /* Taken from Alex Russell http://infrequently.org/2009/08/css-3-progress/ */
-/* This file is a compatability layer.  It allows the usage of flexible box 
+/* This file is a compatability layer.  It allows the usage of flexible box
 model layouts accross multiple browsers, including older browsers.  The newest,
 universal implementation of the flexible box model is used when available (see
-`Modern browsers` comments below).  Browsers that are known to implement this 
+`Modern browsers` comments below).  Browsers that are known to implement this
 new spec completely include:
 
     Firefox 28.0+
     Chrome 29.0+
-    Internet Explorer 11+ 
+    Internet Explorer 11+
     Opera 17.0+
 
 Browsers not listed, including Safari, are supported via the styling under the
@@ -11223,7 +11223,7 @@ div#pager .ui-resizable-handle {
   background: #f7f7f7;
   border-top: 1px solid #cfcfcf;
   border-bottom: 1px solid #cfcfcf;
-  /* This injects handle bars (a short, wide = symbol) for 
+  /* This injects handle bars (a short, wide = symbol) for
         the resize handle. */
 }
 div#pager .ui-resizable-handle::after {
@@ -11658,7 +11658,7 @@ ul.typeahead-list > li > a {
 .highlight .il { color: #666666 } /* Literal.Number.Integer.Long */
     </style>
 <style type="text/css">
-    
+
 /* Temporary definitions which will become obsolete with Notebook release 5.0 */
 .ansi-black-fg { color: #3E424D; }
 .ansi-black-bg { background-color: #3E424D; }
@@ -11714,14 +11714,14 @@ div#notebook {
   div.cell {
     display: block;
     page-break-inside: avoid;
-  } 
-  div.output_wrapper { 
-    display: block;
-    page-break-inside: avoid; 
   }
-  div.output { 
+  div.output_wrapper {
     display: block;
-    page-break-inside: avoid; 
+    page-break-inside: avoid;
+  }
+  div.output {
+    display: block;
+    page-break-inside: avoid;
   }
 }
 </style>
@@ -11765,19 +11765,26 @@ div#notebook {
             </ul>
         </div>
     </nav>
-	
-	
+
+
 	<!-- Author and Date Information & Edit on Github Link-->
-	
+
+<meta http-equiv="refresh" content="5; url=http://astropy-tutorials.readthedocs.io/en/latest/rst-tutorials/UVES.html" />
+
+<p style='background:pink'>This tutorial have been moved to <a href="http://astropy-tutorials.readthedocs.io/en/latest/rst-tutorials/UVES.html">http://astropy-tutorials.readthedocs.io/en/latest/rst-tutorials/UVES.html</a>.This page should auto redirect you to that page in 5 seconds.<br />
+
+If you really wanted to see the old (unmaintained) version of the tutorials that was previously at this location, it is archived here: <a href =“http://www.astropy.org/astropy-tutorials/UVES_old.html”>http://www.astropy.org/astropy-tutorials/UVES_old.html</a>
+</p>
+
 	<div class="clearfix" style='margin-top:25px;margin-left:12%;'>
 		<ul>
-			<span style="float: left;"><b>Author: </b>Hans Moritz Günther <hguenther@cfa.harvard.edu>, Miguel de Val-Borro <valborro@princeton.edu></span> 
+			<span style="float: left;"><b>Author: </b>Hans Moritz Günther <hguenther@cfa.harvard.edu>, Miguel de Val-Borro <valborro@princeton.edu></span>
 			<span style="float: right"><a href="https://github.com/astropy/astropy-tutorials/tree/master/tutorials/UVES">Edit this tutorial on GitHub <img src="https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png" height="25px" width="25px" /></a></span>
 			<br><span style="float: left;"><b>Date Created: </b> August 2014</span>
 		</ul>
 	</div>
-	
-    
+
+
 <body>
   <div tabindex="-1" id="notebook" class="border-box-sizing">
     <div class="container" id="notebook-container">
@@ -12064,7 +12071,7 @@ fully conform to the WCS standard.</p>
 <span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
 <span class="ansi-green-fg">&lt;ipython-input-4-44a0e7d5e3f1&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
 <span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>header <span class="ansi-blue-fg">=</span> sp<span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">0</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">.</span>header
-<span class="ansi-green-intense-fg ansi-bold">      2</span> 
+<span class="ansi-green-intense-fg ansi-bold">      2</span>
 <span class="ansi-green-intense-fg ansi-bold">      3</span> wcs <span class="ansi-blue-fg">=</span> WCS<span class="ansi-blue-fg">(</span>header<span class="ansi-blue-fg">)</span>
 <span class="ansi-green-intense-fg ansi-bold">      4</span> <span class="ansi-red-fg">#make index array</span>
 <span class="ansi-green-intense-fg ansi-bold">      5</span> index <span class="ansi-blue-fg">=</span> np<span class="ansi-blue-fg">.</span>arange<span class="ansi-blue-fg">(</span>header<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">&#39;NAXIS1&#39;</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span>
@@ -12263,12 +12270,12 @@ read_spec<span class="o">?</span>
 
 read_spec(filename)
     Read a UVES spectrum from the ESO pipeline
-    
+
     Parameters
     ----------
     filename : string
     name of the fits file with the data
-    
+
     Returns
     -------
     wavelength : np.ndarray
@@ -12414,7 +12421,7 @@ with data.</p>
 <span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>flux <span class="ansi-blue-fg">=</span> np<span class="ansi-blue-fg">.</span>zeros<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">(</span>len<span class="ansi-blue-fg">(</span>filelist<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span> len<span class="ansi-blue-fg">(</span>wavelength<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
 <span class="ansi-green-intense-fg ansi-bold">      2</span> <span class="ansi-red-fg"># date comes as string with 23 characters (dtype = &#39;S23&#39;)</span>
 <span class="ansi-green-intense-fg ansi-bold">      3</span> date <span class="ansi-blue-fg">=</span> np<span class="ansi-blue-fg">.</span>zeros<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">(</span>len<span class="ansi-blue-fg">(</span>filelist<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">,</span> dtype <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">&#39;S23&#39;</span><span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">      4</span> 
+<span class="ansi-green-intense-fg ansi-bold">      4</span>
 <span class="ansi-green-intense-fg ansi-bold">      5</span> <span class="ansi-green-fg">for</span> i<span class="ansi-blue-fg">,</span> fname <span class="ansi-green-fg">in</span> enumerate<span class="ansi-blue-fg">(</span>filelist<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
 
 <span class="ansi-red-fg">NameError</span>: name &#39;np&#39; is not defined</pre>
@@ -12495,9 +12502,9 @@ The easiest way to attach a unit to a number is by multiplication.</p>
 <span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
 <span class="ansi-green-fg">&lt;ipython-input-10-d03299c9ea1a&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
 <span class="ansi-green-intense-fg ansi-bold">      2</span> <span class="ansi-green-fg">from</span> astropy<span class="ansi-blue-fg">.</span>constants<span class="ansi-blue-fg">.</span>si <span class="ansi-green-fg">import</span> c<span class="ansi-blue-fg">,</span> G<span class="ansi-blue-fg">,</span> M_sun<span class="ansi-blue-fg">,</span> R_sun
-<span class="ansi-green-intense-fg ansi-bold">      3</span> 
+<span class="ansi-green-intense-fg ansi-bold">      3</span>
 <span class="ansi-green-fg">----&gt; 4</span><span class="ansi-red-fg"> </span>wavelength <span class="ansi-blue-fg">=</span> wavelength <span class="ansi-blue-fg">*</span> u<span class="ansi-blue-fg">.</span>AA
-<span class="ansi-green-intense-fg ansi-bold">      5</span> 
+<span class="ansi-green-intense-fg ansi-bold">      5</span>
 <span class="ansi-green-intense-fg ansi-bold">      6</span> <span class="ansi-red-fg"># Let&#39;s define some constants we need for the exercises further down</span>
 
 <span class="ansi-red-fg">NameError</span>: name &#39;wavelength&#39; is not defined</pre>
@@ -12547,7 +12554,7 @@ $$E_{kin}  =  E_{grav}$$$$\frac{1}{2} m v^2  =  G \frac{m M_*}{R_*}$$
 <div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">v_accr</span> <span class="o">=</span> <span class="p">(</span><span class="mf">2.</span><span class="o">*</span> <span class="n">G</span> <span class="o">*</span> <span class="n">M_MN_Lup</span><span class="o">/</span><span class="n">R_MN_Lup</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span> 
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">v_accr</span> <span class="o">=</span> <span class="p">(</span><span class="mf">2.</span><span class="o">*</span> <span class="n">G</span> <span class="o">*</span> <span class="n">M_MN_Lup</span><span class="o">/</span><span class="n">R_MN_Lup</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">v_accr</span><span class="p">)</span>
 <span class="c1"># Maybe astronomers prefer it in the traditional cgs system?</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">v_accr</span><span class="o">.</span><span class="n">cgs</span><span class="p">)</span>
@@ -13002,7 +13009,7 @@ of the following wavelengths relative to $H_\alpha$.</p>
 <span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
 <span class="ansi-green-fg">&lt;ipython-input-19-353e38c6da5d&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
 <span class="ansi-green-intense-fg ansi-bold">      6</span>     <span class="ansi-green-fg">return</span> w_equiv
-<span class="ansi-green-intense-fg ansi-bold">      7</span> 
+<span class="ansi-green-intense-fg ansi-bold">      7</span>
 <span class="ansi-green-fg">----&gt; 8</span><span class="ansi-red-fg"> </span>print<span class="ansi-blue-fg">(</span>wave2doppler<span class="ansi-blue-fg">(</span>waveclosetoHa<span class="ansi-blue-fg">,</span> <span class="ansi-cyan-fg">656.489</span> <span class="ansi-blue-fg">*</span> u<span class="ansi-blue-fg">.</span>nm<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">.</span>to<span class="ansi-blue-fg">(</span>u<span class="ansi-blue-fg">.</span>km<span class="ansi-blue-fg">/</span>u<span class="ansi-blue-fg">.</span>s<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
 
 <span class="ansi-red-fg">NameError</span>: name &#39;waveclosetoHa&#39; is not defined</pre>
@@ -13398,7 +13405,7 @@ this polynomial.</p>
 <span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
 <span class="ansi-green-fg">&lt;ipython-input-27-fad3c5c2e041&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
 <span class="ansi-green-intense-fg ansi-bold">     27</span>     <span class="ansi-green-fg">return</span> w<span class="ansi-blue-fg">[</span>indrange<span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">,</span> f
-<span class="ansi-green-intense-fg ansi-bold">     28</span> 
+<span class="ansi-green-intense-fg ansi-bold">     28</span>
 <span class="ansi-green-fg">---&gt; 29</span><span class="ansi-red-fg"> wcaII, fcaII = region_around_line(wavelength, flux,
 </span><span class="ansi-green-intense-fg ansi-bold">     30</span>     [[3925*u.AA, 3930*u.AA],[3938*u.AA, 3945*u.AA]])
 
@@ -13565,7 +13572,7 @@ details on <code>Table</code>). So, here is the code:</p>
 <span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
 <span class="ansi-green-fg">&lt;ipython-input-30-755e0846408e&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
 <span class="ansi-green-intense-fg ansi-bold">      2</span> <span class="ansi-green-fg">import</span> astropy<span class="ansi-blue-fg">.</span>io<span class="ansi-blue-fg">.</span>ascii <span class="ansi-green-fg">as</span> ascii
-<span class="ansi-green-intense-fg ansi-bold">      3</span> 
+<span class="ansi-green-intense-fg ansi-bold">      3</span>
 <span class="ansi-green-fg">----&gt; 4</span><span class="ansi-red-fg"> </span>datecol <span class="ansi-blue-fg">=</span> Column<span class="ansi-blue-fg">(</span>name <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">&#39;Obs Date&#39;</span><span class="ansi-blue-fg">,</span> data <span class="ansi-blue-fg">=</span> date<span class="ansi-blue-fg">)</span>
 <span class="ansi-green-intense-fg ansi-bold">      5</span> pcol <span class="ansi-blue-fg">=</span> Column<span class="ansi-blue-fg">(</span>name <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">&#39;phase&#39;</span><span class="ansi-blue-fg">,</span> data <span class="ansi-blue-fg">=</span> delta_p<span class="ansi-blue-fg">,</span> format <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">&#39;{:.1f}&#39;</span><span class="ansi-blue-fg">)</span>
 <span class="ansi-green-intense-fg ansi-bold">      6</span> ewcol <span class="ansi-blue-fg">=</span> Column<span class="ansi-blue-fg">(</span>name <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">&#39;EW&#39;</span><span class="ansi-blue-fg">,</span> data <span class="ansi-blue-fg">=</span> ew<span class="ansi-blue-fg">,</span> format <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">&#39;{:.1f}&#39;</span><span class="ansi-blue-fg">,</span> unit <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">&#39;\\AA&#39;</span><span class="ansi-blue-fg">)</span>
@@ -13845,7 +13852,7 @@ way.</p>
 <span class="ansi-green-intense-fg ansi-bold">      2</span> <span class="ansi-red-fg">#shift the second night up by a little more</span>
 <span class="ansi-green-intense-fg ansi-bold">      3</span> yshift<span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">:</span><span class="ansi-blue-fg">]</span> <span class="ansi-blue-fg">+=</span> <span class="ansi-cyan-fg">1.5</span>
 <span class="ansi-green-intense-fg ansi-bold">      4</span> yshift<span class="ansi-blue-fg">[</span><span class="ansi-cyan-fg">13</span><span class="ansi-blue-fg">:</span><span class="ansi-blue-fg">]</span> <span class="ansi-blue-fg">+=</span> <span class="ansi-cyan-fg">1</span>
-<span class="ansi-green-intense-fg ansi-bold">      5</span> 
+<span class="ansi-green-intense-fg ansi-bold">      5</span>
 
 <span class="ansi-red-fg">NameError</span>: name &#39;np&#39; is not defined</pre>
 </div>
@@ -14059,7 +14066,7 @@ of the axis.</p>
 <span class="ansi-green-fg">&lt;ipython-input-36-480050f21ea9&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
 <span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>ind1 <span class="ansi-blue-fg">=</span> delta_p <span class="ansi-blue-fg">&lt;</span> <span class="ansi-cyan-fg">1</span> <span class="ansi-blue-fg">*</span> u<span class="ansi-blue-fg">.</span>dimensionless_unscaled
 <span class="ansi-green-intense-fg ansi-bold">      2</span> ind2 <span class="ansi-blue-fg">=</span> delta_p <span class="ansi-blue-fg">&gt;</span> <span class="ansi-cyan-fg">1</span> <span class="ansi-blue-fg">*</span> u<span class="ansi-blue-fg">.</span>dimensionless_unscaled
-<span class="ansi-green-intense-fg ansi-bold">      3</span> 
+<span class="ansi-green-intense-fg ansi-bold">      3</span>
 <span class="ansi-green-intense-fg ansi-bold">      4</span> fig <span class="ansi-blue-fg">=</span> plt<span class="ansi-blue-fg">.</span>figure<span class="ansi-blue-fg">(</span>figsize <span class="ansi-blue-fg">=</span> <span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">4</span><span class="ansi-blue-fg">,</span><span class="ansi-cyan-fg">3</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
 <span class="ansi-green-intense-fg ansi-bold">      5</span> ax <span class="ansi-blue-fg">=</span> fig<span class="ansi-blue-fg">.</span>add_subplot<span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">,</span><span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">,</span><span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">)</span>
 
@@ -14236,14 +14243,14 @@ information about your operating system (e.g. MacOSX version or Linux version).<
     </div>
   </div>
 </body>
-	
+
 
   <!--Disqus Comment Section -->
-	
+
 	<div id="disqus_thread" style='margin-top:50px;'></div>
 	<script type="text/javascript">
 		/* * * CONFIGURATION VARIABLES * * */
-		var disqus_shortname = 'astropytutorials'; //registered short name of astropy tutorials 
+		var disqus_shortname = 'astropytutorials'; //registered short name of astropy tutorials
 		var disqus_identifier= 'UVES.html';
 		var disqus_url = 'http://www.astropy.org/astropy-tutorials/UVES.html';
 		/* * * DON'T EDIT BELOW THIS LINE * * */
@@ -14260,7 +14267,7 @@ information about your operating system (e.g. MacOSX version or Linux version).<
 		}());
 	</script>
 	<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
-	
+
 	<!--End of comments section-->
 </div>
 

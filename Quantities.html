@@ -8465,15 +8465,15 @@ label {
 }
 /* Flexible box model classes */
 /* Taken from Alex Russell http://infrequently.org/2009/08/css-3-progress/ */
-/* This file is a compatability layer.  It allows the usage of flexible box 
+/* This file is a compatability layer.  It allows the usage of flexible box
 model layouts accross multiple browsers, including older browsers.  The newest,
 universal implementation of the flexible box model is used when available (see
-`Modern browsers` comments below).  Browsers that are known to implement this 
+`Modern browsers` comments below).  Browsers that are known to implement this
 new spec completely include:
 
     Firefox 28.0+
     Chrome 29.0+
-    Internet Explorer 11+ 
+    Internet Explorer 11+
     Opera 17.0+
 
 Browsers not listed, including Safari, are supported via the styling under the
@@ -11223,7 +11223,7 @@ div#pager .ui-resizable-handle {
   background: #f7f7f7;
   border-top: 1px solid #cfcfcf;
   border-bottom: 1px solid #cfcfcf;
-  /* This injects handle bars (a short, wide = symbol) for 
+  /* This injects handle bars (a short, wide = symbol) for
         the resize handle. */
 }
 div#pager .ui-resizable-handle::after {
@@ -11658,7 +11658,7 @@ ul.typeahead-list > li > a {
 .highlight .il { color: #666666 } /* Literal.Number.Integer.Long */
     </style>
 <style type="text/css">
-    
+
 /* Temporary definitions which will become obsolete with Notebook release 5.0 */
 .ansi-black-fg { color: #3E424D; }
 .ansi-black-bg { background-color: #3E424D; }
@@ -11714,14 +11714,14 @@ div#notebook {
   div.cell {
     display: block;
     page-break-inside: avoid;
-  } 
-  div.output_wrapper { 
-    display: block;
-    page-break-inside: avoid; 
   }
-  div.output { 
+  div.output_wrapper {
     display: block;
-    page-break-inside: avoid; 
+    page-break-inside: avoid;
+  }
+  div.output {
+    display: block;
+    page-break-inside: avoid;
   }
 }
 </style>
@@ -11765,19 +11765,27 @@ div#notebook {
             </ul>
         </div>
     </nav>
-	
-	
+
+
 	<!-- Author and Date Information & Edit on Github Link-->
-	
+<meta http-equiv="refresh" content="5; url=http://astropy-tutorials.readthedocs.io/en/latest/rst-tutorials/quantities.html" />
+
+<p style='background:pink'>This tutorial have been moved to <a href="http://astropy-tutorials.readthedocs.io/en/latest/rst-tutorials/quantities.html">http://astropy-tutorials.readthedocs.io/en/latest/rst-tutorials/quantities.html</a>.This page should auto redirect you to that page in 5 seconds.<br />
+
+If you really wanted to see the old (unmaintained) version of the tutorials that was previously at this location, it is archived here: <a href =“http://www.astropy.org/astropy-tutorials/quantities_old.html”>http://www.astropy.org/astropy-tutorials/quantities_old.html</a>
+</p>
+
+
+
 	<div class="clearfix" style='margin-top:25px;margin-left:12%;'>
 		<ul>
-			<span style="float: left;"><b>Author: </b>Ana Bonaca <ana.bonaca@yale.edu>, Erik Tollerud <erik.tollerud@yale.edu>, Jonathan Foster <jonathan.b.foster@yale.edu></span> 
+			<span style="float: left;"><b>Author: </b>Ana Bonaca <ana.bonaca@yale.edu>, Erik Tollerud <erik.tollerud@yale.edu>, Jonathan Foster <jonathan.b.foster@yale.edu></span>
 			<span style="float: right"><a href="https://github.com/astropy/astropy-tutorials/tree/master/tutorials/Quantities">Edit this tutorial on GitHub <img src="https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png" height="25px" width="25px" /></a></span>
 			<br><span style="float: left;"><b>Date Created: </b> April 2014</span>
 		</ul>
 	</div>
-	
-    
+
+
 <body>
   <div tabindex="-1" id="notebook" class="border-box-sizing">
     <div class="container" id="notebook-container">
@@ -12120,7 +12128,7 @@ unit: pc
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>First 10 radial velocity measurements: 
+<pre>First 10 radial velocity measurements:
 [ 205.11975706  208.05945635  203.76641353  203.61035969  214.45285646
   211.99164508  206.39950387  207.21150846  209.30679704  211.35966937] km / s
 [ 205119.75706422  208059.45635365  203766.41352526  203610.35969131
@@ -12418,12 +12426,12 @@ BmWSc30AAAAASUVORK5CYII=
 <span class="ansi-green-fg">/Users/erik/miniconda3/envs/astropy-tutorials/lib/python3.5/site-packages/astropy/units/core.py</span> in <span class="ansi-cyan-fg">to</span><span class="ansi-blue-fg">(self, other, value, equivalencies)</span>
 <span class="ansi-green-intense-fg ansi-bold">   1007</span>         &#34;&#34;&#34;
 <span class="ansi-green-fg">-&gt; 1008</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>_get_converter<span class="ansi-blue-fg">(</span>other<span class="ansi-blue-fg">,</span> equivalencies<span class="ansi-blue-fg">=</span>equivalencies<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">(</span>value<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">   1009</span> 
+<span class="ansi-green-intense-fg ansi-bold">   1009</span>
 
 <span class="ansi-green-fg">/Users/erik/miniconda3/envs/astropy-tutorials/lib/python3.5/site-packages/astropy/units/core.py</span> in <span class="ansi-cyan-fg">_get_converter</span><span class="ansi-blue-fg">(self, other, equivalencies)</span>
-<span class="ansi-green-intense-fg ansi-bold">    909</span> 
+<span class="ansi-green-intense-fg ansi-bold">    909</span>
 <span class="ansi-green-fg">--&gt; 910</span><span class="ansi-red-fg">             </span><span class="ansi-green-fg">raise</span> exc
-<span class="ansi-green-intense-fg ansi-bold">    911</span> 
+<span class="ansi-green-intense-fg ansi-bold">    911</span>
 
 <span class="ansi-green-fg">/Users/erik/miniconda3/envs/astropy-tutorials/lib/python3.5/site-packages/astropy/units/core.py</span> in <span class="ansi-cyan-fg">_get_converter</span><span class="ansi-blue-fg">(self, other, equivalencies)</span>
 <span class="ansi-green-intense-fg ansi-bold">    895</span>             return self._apply_equivalencies(
@@ -12433,7 +12441,7 @@ BmWSc30AAAAASUVORK5CYII=
 <span class="ansi-green-fg">/Users/erik/miniconda3/envs/astropy-tutorials/lib/python3.5/site-packages/astropy/units/core.py</span> in <span class="ansi-cyan-fg">_apply_equivalencies</span><span class="ansi-blue-fg">(self, unit, other, equivalencies)</span>
 <span class="ansi-green-intense-fg ansi-bold">    879</span>             &#34;{0} and {1} are not convertible&#34;.format(
 <span class="ansi-green-fg">--&gt; 880</span><span class="ansi-red-fg">                 unit_str, other_str))
-</span><span class="ansi-green-intense-fg ansi-bold">    881</span> 
+</span><span class="ansi-green-intense-fg ansi-bold">    881</span>
 
 <span class="ansi-red-fg">UnitConversionError</span>: &#39;km2 / s2&#39; and &#39;&#39; (dimensionless) are not convertible
 
@@ -12448,7 +12456,7 @@ During handling of the above exception, another exception occurred:
 <span class="ansi-green-intense-fg ansi-bold">   1072</span>         <span class="ansi-green-fg">except</span> <span class="ansi-blue-fg">(</span>UnitsError<span class="ansi-blue-fg">,</span> TypeError<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
 <span class="ansi-green-fg">-&gt; 1073</span><span class="ansi-red-fg">             raise TypeError(&#39;Only dimensionless scalar quantities can be &#39;
 </span><span class="ansi-green-intense-fg ansi-bold">   1074</span>                             &#39;converted to Python scalars&#39;)
-<span class="ansi-green-intense-fg ansi-bold">   1075</span> 
+<span class="ansi-green-intense-fg ansi-bold">   1075</span>
 
 <span class="ansi-red-fg">TypeError</span>: Only dimensionless scalar quantities can be converted to Python scalars</pre>
 </div>
@@ -12668,7 +12676,7 @@ $5.7103529 \; \mathrm{}$
 <span class="ansi-green-fg">/Users/erik/miniconda3/envs/astropy-tutorials/lib/python3.5/site-packages/astropy/units/core.py</span> in <span class="ansi-cyan-fg">_to</span><span class="ansi-blue-fg">(self, other)</span>
 <span class="ansi-green-intense-fg ansi-bold">    974</span>         raise UnitConversionError(
 <span class="ansi-green-fg">--&gt; 975</span><span class="ansi-red-fg">             &#34;&#39;{0!r}&#39; is not a scaled version of &#39;{1!r}&#39;&#34;.format(self, other))
-</span><span class="ansi-green-intense-fg ansi-bold">    976</span> 
+</span><span class="ansi-green-intense-fg ansi-bold">    976</span>
 
 <span class="ansi-red-fg">UnitConversionError</span>: &#39;Unit(&#34;kg km2 pc / m3&#34;)&#39; is not a scaled version of &#39;Unit(dimensionless)&#39;
 
@@ -12688,7 +12696,7 @@ During handling of the above exception, another exception occurred:
 <span class="ansi-green-fg">/Users/erik/miniconda3/envs/astropy-tutorials/lib/python3.5/site-packages/astropy/units/core.py</span> in <span class="ansi-cyan-fg">_apply_equivalencies</span><span class="ansi-blue-fg">(self, unit, other, equivalencies)</span>
 <span class="ansi-green-intense-fg ansi-bold">    879</span>             &#34;{0} and {1} are not convertible&#34;.format(
 <span class="ansi-green-fg">--&gt; 880</span><span class="ansi-red-fg">                 unit_str, other_str))
-</span><span class="ansi-green-intense-fg ansi-bold">    881</span> 
+</span><span class="ansi-green-intense-fg ansi-bold">    881</span>
 
 <span class="ansi-red-fg">UnitConversionError</span>: &#39;kg km2 pc / m3&#39; (mass) and &#39;&#39; (dimensionless) are not convertible
 
@@ -12709,7 +12717,7 @@ During handling of the above exception, another exception occurred:
 <span class="ansi-green-intense-fg ansi-bold">    106</span>         raise TypeError(&#34;Can only apply &#39;{0}&#39; function to &#34;
 <span class="ansi-green-intense-fg ansi-bold">    107</span>                         <span class="ansi-blue-fg">&#34;dimensionless quantities&#34;</span>
 <span class="ansi-green-fg">--&gt; 108</span><span class="ansi-red-fg">                         .format(f.__name__))
-</span><span class="ansi-green-intense-fg ansi-bold">    109</span> 
+</span><span class="ansi-green-intense-fg ansi-bold">    109</span>
 <span class="ansi-green-intense-fg ansi-bold">    110</span> UFUNC_HELPERS<span class="ansi-blue-fg">[</span>np<span class="ansi-blue-fg">.</span>exp<span class="ansi-blue-fg">]</span> <span class="ansi-blue-fg">=</span> helper_dimensionless_to_dimensionless
 
 <span class="ansi-red-fg">TypeError</span>: Can only apply &#39;log10&#39; function to dimensionless quantities</pre>
@@ -12744,7 +12752,7 @@ $$v = \sqrt{\frac{G M_{\odot}}{r}}$$
 <div class="prompt input_prompt">In&nbsp;[18]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
+<div class=" highlight hl-ipython3"><pre><span></span>
 </pre></div>
 
 </div>
@@ -12767,7 +12775,7 @@ $$v = \sqrt{\frac{G M_{\odot}}{r}}$$
 <div class="prompt input_prompt">In&nbsp;[18]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
+<div class=" highlight hl-ipython3"><pre><span></span>
 </pre></div>
 
 </div>
@@ -12790,7 +12798,7 @@ $$v = \sqrt{\frac{G M_{\odot}}{r}}$$
 <div class="prompt input_prompt">In&nbsp;[18]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
+<div class=" highlight hl-ipython3"><pre><span></span>
 </pre></div>
 
 </div>
@@ -12883,8 +12891,8 @@ $$v = \sqrt{\frac{G M_{\odot}}{r}}$$
 <span class="c1">#this creates data cubes of size for each coordinate based on the dimensions of the other coordinates</span>
 <span class="n">ra_cube</span><span class="p">,</span> <span class="n">dec_cube</span><span class="p">,</span> <span class="n">v_cube</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">ra</span><span class="p">,</span> <span class="n">dec</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
 
-<span class="n">data_gauss</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="o">*</span><span class="p">((</span><span class="n">ra_cube</span><span class="o">-</span><span class="n">cen_ra</span><span class="p">)</span><span class="o">/</span><span class="n">sig_ra</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> 
-                    <span class="o">-</span><span class="mf">0.5</span><span class="o">*</span><span class="p">((</span><span class="n">dec_cube</span><span class="o">-</span><span class="n">cen_dec</span><span class="p">)</span><span class="o">/</span><span class="n">sig_dec</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> 
+<span class="n">data_gauss</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="o">*</span><span class="p">((</span><span class="n">ra_cube</span><span class="o">-</span><span class="n">cen_ra</span><span class="p">)</span><span class="o">/</span><span class="n">sig_ra</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span>
+                    <span class="o">-</span><span class="mf">0.5</span><span class="o">*</span><span class="p">((</span><span class="n">dec_cube</span><span class="o">-</span><span class="n">cen_dec</span><span class="p">)</span><span class="o">/</span><span class="n">sig_dec</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span>
                     <span class="o">-</span><span class="mf">0.5</span><span class="o">*</span><span class="p">((</span><span class="n">v_cube</span><span class="o">-</span><span class="n">cen_v</span><span class="p">)</span><span class="o">/</span><span class="n">sig_v</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="p">)</span>
 </pre></div>
 
@@ -13020,11 +13028,11 @@ $\mathrm{\frac{K\,km}{s}}$
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#Note that we display RA in the convential way by going from max to min</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">intcloud</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> 
-           <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">,</span> 
-           <span class="n">extent</span><span class="o">=</span><span class="p">[</span><span class="n">ra</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">ra</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">dec</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">dec</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">max</span><span class="p">()],</span> 
-           <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;hot&#39;</span><span class="p">,</span> 
-           <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">,</span> 
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">intcloud</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+           <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">,</span>
+           <span class="n">extent</span><span class="o">=</span><span class="p">[</span><span class="n">ra</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">ra</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">dec</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">dec</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">max</span><span class="p">()],</span>
+           <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;hot&#39;</span><span class="p">,</span>
+           <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">,</span>
            <span class="n">aspect</span><span class="o">=</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s2">&quot;Intensity (</span><span class="si">{}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">intcloud</span><span class="o">.</span><span class="n">unit</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;RA (deg)&quot;</span><span class="p">)</span>
@@ -13496,20 +13504,20 @@ kQILSSIiIgUWkkRERAosJImIiBT+H9kImObVhmmTAAAAAElFTkSuQmCC
 <span class="ansi-green-intense-fg ansi-bold">    765</span>         new_val = self.unit.to(unit, self.view(np.ndarray),
 <span class="ansi-green-fg">--&gt; 766</span><span class="ansi-red-fg">                                equivalencies=equivalencies)
 </span><span class="ansi-green-intense-fg ansi-bold">    767</span>         <span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>_new_view<span class="ansi-blue-fg">(</span>new_val<span class="ansi-blue-fg">,</span> unit<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    768</span> 
+<span class="ansi-green-intense-fg ansi-bold">    768</span>
 
 <span class="ansi-green-fg">/Users/erik/miniconda3/envs/astropy-tutorials/lib/python3.5/site-packages/astropy/units/core.py</span> in <span class="ansi-cyan-fg">to</span><span class="ansi-blue-fg">(self, other, value, equivalencies)</span>
 <span class="ansi-green-intense-fg ansi-bold">   1006</span>             If units are inconsistent
 <span class="ansi-green-intense-fg ansi-bold">   1007</span>         &#34;&#34;&#34;
 <span class="ansi-green-fg">-&gt; 1008</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>_get_converter<span class="ansi-blue-fg">(</span>other<span class="ansi-blue-fg">,</span> equivalencies<span class="ansi-blue-fg">=</span>equivalencies<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">(</span>value<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">   1009</span> 
+<span class="ansi-green-intense-fg ansi-bold">   1009</span>
 <span class="ansi-green-intense-fg ansi-bold">   1010</span>     <span class="ansi-green-fg">def</span> in_units<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> other<span class="ansi-blue-fg">,</span> value<span class="ansi-blue-fg">=</span><span class="ansi-cyan-fg">1.0</span><span class="ansi-blue-fg">,</span> equivalencies<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
 
 <span class="ansi-green-fg">/Users/erik/miniconda3/envs/astropy-tutorials/lib/python3.5/site-packages/astropy/units/core.py</span> in <span class="ansi-cyan-fg">_get_converter</span><span class="ansi-blue-fg">(self, other, equivalencies)</span>
 <span class="ansi-green-intense-fg ansi-bold">    908</span>                             <span class="ansi-green-fg">pass</span>
-<span class="ansi-green-intense-fg ansi-bold">    909</span> 
+<span class="ansi-green-intense-fg ansi-bold">    909</span>
 <span class="ansi-green-fg">--&gt; 910</span><span class="ansi-red-fg">             </span><span class="ansi-green-fg">raise</span> exc
-<span class="ansi-green-intense-fg ansi-bold">    911</span> 
+<span class="ansi-green-intense-fg ansi-bold">    911</span>
 <span class="ansi-green-intense-fg ansi-bold">    912</span>     <span class="ansi-blue-fg">@</span>deprecated<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;1.0&#39;</span><span class="ansi-blue-fg">)</span>
 
 <span class="ansi-green-fg">/Users/erik/miniconda3/envs/astropy-tutorials/lib/python3.5/site-packages/astropy/units/core.py</span> in <span class="ansi-cyan-fg">_get_converter</span><span class="ansi-blue-fg">(self, other, equivalencies)</span>
@@ -13523,7 +13531,7 @@ kQILSSIiIgUWkkRERAosJImIiBT+H9kImObVhmmTAAAAAElFTkSuQmCC
 <span class="ansi-green-intense-fg ansi-bold">    878</span>         raise UnitConversionError(
 <span class="ansi-green-intense-fg ansi-bold">    879</span>             &#34;{0} and {1} are not convertible&#34;.format(
 <span class="ansi-green-fg">--&gt; 880</span><span class="ansi-red-fg">                 unit_str, other_str))
-</span><span class="ansi-green-intense-fg ansi-bold">    881</span> 
+</span><span class="ansi-green-intense-fg ansi-bold">    881</span>
 <span class="ansi-green-intense-fg ansi-bold">    882</span>     <span class="ansi-green-fg">def</span> _get_converter<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> other<span class="ansi-blue-fg">,</span> equivalencies<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
 
 <span class="ansi-red-fg">UnitConversionError</span>: &#39;mm&#39; (length) and &#39;Hz&#39; (frequency) are not convertible</pre>
@@ -13693,7 +13701,7 @@ $2.1792458 \times 10^{14} \; \mathrm{\frac{s}{K\,km\,cm^{2}}}$
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Peak CO column density: 
+<pre>Peak CO column density:
 </pre>
 </div>
 </div>
@@ -13751,7 +13759,7 @@ $8.5782087 \times 10^{15} \; \mathrm{\frac{1}{cm^{2}}}$
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Peak H2 column density: 
+<pre>Peak H2 column density:
 </pre>
 </div>
 </div>
@@ -13947,20 +13955,20 @@ $0.00047596472 \; \mathrm{pc^{2}}$
 <span class="ansi-green-intense-fg ansi-bold">    765</span>         new_val = self.unit.to(unit, self.view(np.ndarray),
 <span class="ansi-green-fg">--&gt; 766</span><span class="ansi-red-fg">                                equivalencies=equivalencies)
 </span><span class="ansi-green-intense-fg ansi-bold">    767</span>         <span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>_new_view<span class="ansi-blue-fg">(</span>new_val<span class="ansi-blue-fg">,</span> unit<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    768</span> 
+<span class="ansi-green-intense-fg ansi-bold">    768</span>
 
 <span class="ansi-green-fg">/Users/erik/miniconda3/envs/astropy-tutorials/lib/python3.5/site-packages/astropy/units/core.py</span> in <span class="ansi-cyan-fg">to</span><span class="ansi-blue-fg">(self, other, value, equivalencies)</span>
 <span class="ansi-green-intense-fg ansi-bold">   1006</span>             If units are inconsistent
 <span class="ansi-green-intense-fg ansi-bold">   1007</span>         &#34;&#34;&#34;
 <span class="ansi-green-fg">-&gt; 1008</span><span class="ansi-red-fg">         </span><span class="ansi-green-fg">return</span> self<span class="ansi-blue-fg">.</span>_get_converter<span class="ansi-blue-fg">(</span>other<span class="ansi-blue-fg">,</span> equivalencies<span class="ansi-blue-fg">=</span>equivalencies<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">(</span>value<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">   1009</span> 
+<span class="ansi-green-intense-fg ansi-bold">   1009</span>
 <span class="ansi-green-intense-fg ansi-bold">   1010</span>     <span class="ansi-green-fg">def</span> in_units<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> other<span class="ansi-blue-fg">,</span> value<span class="ansi-blue-fg">=</span><span class="ansi-cyan-fg">1.0</span><span class="ansi-blue-fg">,</span> equivalencies<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
 
 <span class="ansi-green-fg">/Users/erik/miniconda3/envs/astropy-tutorials/lib/python3.5/site-packages/astropy/units/core.py</span> in <span class="ansi-cyan-fg">_get_converter</span><span class="ansi-blue-fg">(self, other, equivalencies)</span>
 <span class="ansi-green-intense-fg ansi-bold">    908</span>                             <span class="ansi-green-fg">pass</span>
-<span class="ansi-green-intense-fg ansi-bold">    909</span> 
+<span class="ansi-green-intense-fg ansi-bold">    909</span>
 <span class="ansi-green-fg">--&gt; 910</span><span class="ansi-red-fg">             </span><span class="ansi-green-fg">raise</span> exc
-<span class="ansi-green-intense-fg ansi-bold">    911</span> 
+<span class="ansi-green-intense-fg ansi-bold">    911</span>
 <span class="ansi-green-intense-fg ansi-bold">    912</span>     <span class="ansi-blue-fg">@</span>deprecated<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">&#39;1.0&#39;</span><span class="ansi-blue-fg">)</span>
 
 <span class="ansi-green-fg">/Users/erik/miniconda3/envs/astropy-tutorials/lib/python3.5/site-packages/astropy/units/core.py</span> in <span class="ansi-cyan-fg">_get_converter</span><span class="ansi-blue-fg">(self, other, equivalencies)</span>
@@ -13974,7 +13982,7 @@ $0.00047596472 \; \mathrm{pc^{2}}$
 <span class="ansi-green-intense-fg ansi-bold">    878</span>         raise UnitConversionError(
 <span class="ansi-green-intense-fg ansi-bold">    879</span>             &#34;{0} and {1} are not convertible&#34;.format(
 <span class="ansi-green-fg">--&gt; 880</span><span class="ansi-red-fg">                 unit_str, other_str))
-</span><span class="ansi-green-intense-fg ansi-bold">    881</span> 
+</span><span class="ansi-green-intense-fg ansi-bold">    881</span>
 <span class="ansi-green-intense-fg ansi-bold">    882</span>     <span class="ansi-green-fg">def</span> _get_converter<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> other<span class="ansi-blue-fg">,</span> equivalencies<span class="ansi-blue-fg">=</span><span class="ansi-blue-fg">[</span><span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
 
 <span class="ansi-red-fg">UnitConversionError</span>: &#39;deg2 pc2&#39; and &#39;cm2&#39; (area) are not convertible</pre>
@@ -14118,7 +14126,7 @@ $317.53818 \; \mathrm{M_{\odot}}$
 <div class="prompt input_prompt">In&nbsp;[40]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
+<div class=" highlight hl-ipython3"><pre><span></span>
 </pre></div>
 
 </div>
@@ -14141,7 +14149,7 @@ $317.53818 \; \mathrm{M_{\odot}}$
 <div class="prompt input_prompt">In&nbsp;[40]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
+<div class=" highlight hl-ipython3"><pre><span></span>
 </pre></div>
 
 </div>
@@ -14188,7 +14196,7 @@ $317.53818 \; \mathrm{M_{\odot}}$
     <span class="n">yscale</span> <span class="o">=</span> <span class="mf">0.85</span>
     <span class="n">xfactor</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">xinarcsec</span><span class="o">/</span><span class="n">xscale</span><span class="p">)</span>
     <span class="n">yfactor</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">yinarcsec</span><span class="o">/</span><span class="n">yscale</span><span class="p">)</span>
-    
+
     <span class="k">return</span> <span class="n">xfactor</span> <span class="o">*</span> <span class="n">yfactor</span>
 </pre></div>
 
@@ -14256,7 +14264,7 @@ $317.53818 \; \mathrm{M_{\odot}}$
     <span class="n">yscale</span> <span class="o">=</span> <span class="mf">0.85</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">arcsec</span>
     <span class="n">xfactor</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">x</span><span class="o">/</span><span class="n">xscale</span><span class="p">)</span>
     <span class="n">yfactor</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">y</span><span class="o">/</span><span class="n">yscale</span><span class="p">)</span>
-    
+
     <span class="k">return</span> <span class="n">xfactor</span> <span class="o">*</span> <span class="n">yfactor</span>
 </pre></div>
 
@@ -14304,7 +14312,7 @@ $317.53818 \; \mathrm{M_{\odot}}$
 <span class="ansi-green-intense-fg ansi-bold">      3</span>     yscale <span class="ansi-blue-fg">=</span> <span class="ansi-cyan-fg">0.85</span> <span class="ansi-blue-fg">*</span> u<span class="ansi-blue-fg">.</span>arcsec
 <span class="ansi-green-fg">----&gt; 4</span><span class="ansi-red-fg">     </span>xfactor <span class="ansi-blue-fg">=</span> <span class="ansi-cyan-fg">1</span> <span class="ansi-blue-fg">/</span> <span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">1</span> <span class="ansi-blue-fg">+</span> x<span class="ansi-blue-fg">/</span>xscale<span class="ansi-blue-fg">)</span>
 <span class="ansi-green-intense-fg ansi-bold">      5</span>     yfactor <span class="ansi-blue-fg">=</span> <span class="ansi-cyan-fg">1</span> <span class="ansi-blue-fg">/</span> <span class="ansi-blue-fg">(</span><span class="ansi-cyan-fg">1</span> <span class="ansi-blue-fg">+</span> y<span class="ansi-blue-fg">/</span>yscale<span class="ansi-blue-fg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">      6</span> 
+<span class="ansi-green-intense-fg ansi-bold">      6</span>
 
 <span class="ansi-green-fg">/Users/erik/miniconda3/envs/astropy-tutorials/lib/python3.5/site-packages/astropy/units/quantity.py</span> in <span class="ansi-cyan-fg">__array_prepare__</span><span class="ansi-blue-fg">(self, obj, context)</span>
 <span class="ansi-green-intense-fg ansi-bold">    406</span>                                      <span class="ansi-blue-fg">&#34;argument is not a quantity (unless the &#34;</span>
@@ -14394,7 +14402,7 @@ $0.0001724307 \; \mathrm{}$
 <div class="prompt input_prompt">In&nbsp;[45]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
+<div class=" highlight hl-ipython3"><pre><span></span>
 </pre></div>
 
 </div>
@@ -14405,14 +14413,14 @@ $0.0001724307 \; \mathrm{}$
     </div>
   </div>
 </body>
-	
+
 
   <!--Disqus Comment Section -->
-	
+
 	<div id="disqus_thread" style='margin-top:50px;'></div>
 	<script type="text/javascript">
 		/* * * CONFIGURATION VARIABLES * * */
-		var disqus_shortname = 'astropytutorials'; //registered short name of astropy tutorials 
+		var disqus_shortname = 'astropytutorials'; //registered short name of astropy tutorials
 		var disqus_identifier= 'Quantities.html';
 		var disqus_url = 'http://www.astropy.org/astropy-tutorials/Quantities.html';
 		/* * * DON'T EDIT BELOW THIS LINE * * */
@@ -14429,7 +14437,7 @@ $0.0001724307 \; \mathrm{}$
 		}());
 	</script>
 	<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
-	
+
 	<!--End of comments section-->
 </div>
 
