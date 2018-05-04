@@ -17,11 +17,12 @@ jobs:
           command: |
             conda config --set always_yes yes --set changeps1 no
             conda env update --file=environment.yml
+            pip install git+https://github.com/jupyter/nbconvert
 
       - run:
           name: Build documentation
           command: |
-            python setup.py build_docs -w
+            make html
 
       - store_artifacts:
           path: docs/_build/html
