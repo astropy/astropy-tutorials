@@ -1,0 +1,37 @@
+# Python CircleCI 2.0 configuration file
+# Check https://circleci.com/docs/2.0/language-python/ for more details
+version: 2
+jobs:
+  build:
+    docker:
+      - image: continuumio/miniconda3
+
+    steps:
+      - checkout
+
+      # - restore_cache: # Need cache for all tutorial data!
+      #     keys: sample-data-v1
+
+      - run:
+          name: Conda setup
+          command: |
+            conda config --set always_yes yes --set changeps1 no
+            conda env update --file=environment.yml
+
+      - run:
+          name: Build documentation
+          command: |
+            python setup.py build_docs -w 2> /dev/null
+
+      - store_artifacts:
+          path: docs/_build/html
+
+      - run:
+          name: "Built documentation is available at:"
+          command: |
+            DOCS_URL="${CIRCLE_BUILD_URL}/artifacts/${CIRCLE_NODE_INDEX}/${CIRCLE_WORKING_DIRECTORY/#\~/$HOME}/docs/_build/html/index.html"; echo $DOCS_URL
+
+      # - save_cache: # specify what paths to cache
+      #     key: sample-data-v1
+      #     paths:
+      #       - ~/sunpy/data/sample_data
