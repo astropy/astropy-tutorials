@@ -5,27 +5,28 @@ version: 2
 apt-run: &apt-install
   name: Install apt packages
   command: |
-    apt-get update
-    apt-get install build-essential
+    sudo apt-get update
+    sudo apt-get install build-essential
+
+pip-run: &pip-install
+  name: Install Python dependencies
+  command: |
+    python3 -m venv venv
+    . venv/bin/activate
+    pip install -q -r pip-requirements.txt
 
 jobs:
   build:
     docker:
-      - image: continuumio/miniconda3
+      - image: circleci/python:3.6
 
     steps:
       - checkout
       - run: *apt-install # run the apt install defined above
+      - run: *pip-install # run the pip install defined above
 
       # - restore_cache: # Need cache for all tutorial data!
       #     keys: sample-data-v1
-
-      - run:
-          name: Conda setup
-          command: |
-            conda config --set always_yes yes --set changeps1 no
-            conda env update --file=environment.yml
-            pip install git+https://github.com/jupyter/nbconvert
 
       - run:
           name: Build documentation
