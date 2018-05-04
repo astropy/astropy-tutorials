@@ -32,6 +32,7 @@ jobs:
       - run:
           name: Build documentation
           command: |
+            . venv/bin/activate
             make html
 
       - store_artifacts:
