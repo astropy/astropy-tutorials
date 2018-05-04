@@ -5,8 +5,7 @@ version: 2
 apt-run: &apt-install
   name: Install apt packages
   command: |
-    sudo apt update
-    sudo apt install build-essential
+    apt-get install build-essential
 
 jobs:
   build:
