@@ -45,7 +45,7 @@ jobs:
           path: build/html
 
       - run:
-          name: Built documentation is available at:
+          name: Built documentation is available at
           command: |
             DOCS_URL="${CIRCLE_BUILD_URL}/artifacts/${CIRCLE_NODE_INDEX}/${CIRCLE_WORKING_DIRECTORY/#\~/$HOME}/build/html/index.html"; echo $DOCS_URL
 
