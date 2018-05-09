@@ -16,21 +16,22 @@ pip-run: &pip-install
     pip install -q -r pip-requirements.txt
     pip install astropy_helpers sphinx
 
-add_ssh_keys: &add_ssh_keys
-    add_ssh_keys:
-      fingerprints:
-        - 32:53:df:4a:53:71:25:8b:73:42:71:c8:57:8a:3f:f7
-
 jobs:
+  deploy-job:
+    steps:
+
+
   build:
     docker:
       - image: circleci/python:3.6
 
     steps:
       - checkout
+      - add_ssh_keys: # add GitHub SSH keys
+          fingerprints:
+            - 32:53:df:4a:53:71:25:8b:73:42:71:c8:57:8a:3f:f7
       - run: *apt-install # run the apt install defined above
       - run: *pip-install # run the pip install defined above
-      - run: *add_ssh_keys # add GitHub SSH keys
 
       # - restore_cache: # Need cache for all tutorial data!
       #     keys: sample-data-v1
