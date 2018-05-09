@@ -41,6 +41,10 @@ class NBTutorialsConverter(object):
         logger.info('Processing notebook {0} (in {1})'.format(fn,
                                                               self.path_only))
 
+        # the RST file
+        self._rst_path = path.join(self.output_path,
+                                   '{0}.rst'.format(self.nb_name))
+
         if kernel_name is None:
             self.kernel_name = ExecutePreprocessor.kernel_name.default_value
         else:
@@ -106,6 +110,12 @@ class NBTutorialsConverter(object):
         if not path.exists(self._executed_nb_path):
             raise IOError("Executed notebook file doesn't exist! Expected: {0}"
                           .format(self._executed_nb_path))
+
+        if path.exists(self._rst_path) and not self.overwrite:
+            logger.debug("RST version of notebook already exists at {0}. Use "
+                         "overwrite=True or --overwrite (at cmd line) to re-run"
+                         .format(self._rst_path))
+            return self._rst_path
 
         # Initialize the resources dict - see:
         # https://github.com/jupyter/nbconvert/blob/master/nbconvert/nbconvertapp.py#L327
