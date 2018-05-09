@@ -1,3 +1,15 @@
+#!/bin/bash -eux
+
+# if [ -z "${GIT_USER_NAME}" ]; then
+#   echo "Please set an env var GIT_USER_NAME"
+#   exit 1
+# fi
+#
+# if [ -z "${GIT_USER_EMAIL}" ]; then
+#   echo "Please set an env var GIT_USER_EMAIL"
+#   exit 1
+# fi
+
 if [[ ! -z $CIRCLE_PULL_REQUEST ]] ; then
     # git checkout --orphan rst
     # git add -f tutorials/rst-tutorials/*
