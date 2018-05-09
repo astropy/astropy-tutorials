@@ -16,6 +16,8 @@ pip-run: &pip-install
     pip install -q -r pip-requirements.txt
     pip install astropy_helpers sphinx
 
+jobs:
+
   build:
     docker:
       - image: circleci/python:3.6
