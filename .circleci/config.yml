@@ -36,7 +36,7 @@ jobs:
             make html
 
       - store_artifacts:
-          path: docs/_build/html
+          path: build/html
 
       - run:
           name: "Built documentation is available at:"
@@ -47,3 +47,7 @@ jobs:
       #     key: sample-data-v1
       #     paths:
       #       - ~/sunpy/data/sample_data
+
+notify:
+  webhooks:
+    - url: https://giles.cadair.com/circleci
