@@ -50,7 +50,7 @@ jobs:
       - run:
           name: Push to RTD branch
           command: |
-            bash circleci/rtd-push.sh
+            bash .circleci/rtd-push.sh
 
       # - save_cache: # Specify what paths to cache
       #     key: sample-data-v1
