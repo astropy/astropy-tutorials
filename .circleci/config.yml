@@ -15,6 +15,7 @@ pip-run: &pip-install
     . venv/bin/activate
     pip install -q -r pip-requirements.txt
     pip install astropy_helpers sphinx
+    pip install git+https://github.com/jupyter/nbconvert
 
 jobs:
 
