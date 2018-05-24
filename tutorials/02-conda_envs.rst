@@ -90,6 +90,12 @@ If you do not see any output, install it with
 
     python -m ipykernel install --user --name python2 --display-name "python2"`
 
+- Now leave that environement
+
+::
+
+    conda deactivate
+
 -  Start a Jupyter Notebook session
 
    ::
