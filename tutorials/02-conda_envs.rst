@@ -27,10 +27,10 @@ Step 1: Set up a Python 2 environment
    you need to run your favorite code library. If you want to download
    Astropy and **all** affiliated packages, you can install ``stsci``
 
-::
+    ::
 
-    conda activate python2
-    conda install stsci
+        conda activate python2
+        conda install stsci
 
 -  When you are ready to return to your default environment:
 
@@ -57,12 +57,12 @@ Step 2: Check that your code runs in the new environment
    switching to your Python 2 environment, running your Python 2 script,
    and exiting the environment.
 
-::
+    ::
 
-    cd ~/my-python2-library
-    conda activate python2
-    python my_python2_script.py
-    conda deactivate
+        cd ~/my-python2-library
+        conda activate python2
+        python my_python2_script.py
+        conda deactivate
 
 Step 3: Set up a Jupyter Notebook for the new environment
 ---------------------------------------------------------
@@ -86,15 +86,15 @@ If you do not see any output, install it with
    giving the environment "python2" as a display name, but you may
    choose something else (e.g., "Python 2.7" or "conda-env-python2")
 
-::
+    ::
 
-    python -m ipykernel install --user --name python2 --display-name "python2"`
+        python -m ipykernel install --user --name python2 --display-name "python2"`
 
 - Now leave that environement
 
-::
+    ::
 
-    conda deactivate
+        conda deactivate
 
 -  Start a Jupyter Notebook session
 
