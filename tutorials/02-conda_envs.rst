@@ -79,7 +79,7 @@ If you do not see any output, install it with
 
    ::
 
-       conda activate python2
+       source activate python2
 
 -  Install that environment for Jupyter notebook. In this case, we are
    giving the environment "python2" as a display name, but you may
@@ -93,7 +93,7 @@ If you do not see any output, install it with
 
     ::
 
-        conda deactivate
+        source deactivate
 
 -  Start a Jupyter Notebook session
 
