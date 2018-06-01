@@ -29,20 +29,18 @@ Step 1: Set up a Python 2 environment
 
     ::
 
-        conda activate python2
+        source activate python2
         conda install stsci
 
 -  When you are ready to return to your default environment:
 
    ::
 
-       conda deactivate
+       source deactivate
 
-**NOTE:** Older versions of Anaconda use ``source activate`` and
-``source deactivate``. These will both work in newer versions of
-Anaconda. If you receive an error with ``conda activate``, switch to
-``source activate`` or update your Anaconda installation with
-``conda update conda``
+**NOTE:** Some newer versions of Anaconda use ``conda activate`` and
+``conda deactivate``. In that case, both ``source`` and ``conda`` will work 
+interchangeably when activating or deactivating your chosen environment.
 
 When you want to see all of your available environments:
 
