@@ -24,13 +24,14 @@ Step 1: Set up a Python 2 environment
 **NOTE:** ``anaconda`` at the end is optional...
 
 -  Activate the Python 2 environment and install any additional packages
-   you need to run your favorite code library. If you want to download
+   you need to run your favorite code library. Here, we show you how to 
+   install the base version of Astropy. If you want to download
    Astropy and **all** affiliated packages, you can install ``stsci``
 
     ::
 
         source activate python2
-        conda install stsci
+        conda install astropy
 
 -  When you are ready to return to your default environment:
 
