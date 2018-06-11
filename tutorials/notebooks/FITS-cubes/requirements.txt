@@ -1,7 +1,7 @@
 astropy=2.0.2
 numpy=1.13.3
 matplotlib=2.1.0
-astroquery==0.3.7
+astroquery>=0.3.7
 ipython=6.2.1
 aplpy=1.1.1
 spectral-cube=0.4.1
