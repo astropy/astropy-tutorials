@@ -1,9 +1,6 @@
 Installing Astropy and Related Packages with Anaconda
 =====================================================
 
-conda #astropy
-==============
-
 Pre-requisites
 --------------
 
