@@ -1,9 +1,6 @@
 How to set up a development version of Astropy
 ==============================================
 
-conda #astropy
-==============
-
 Found a bug? Know how to fix it? See a modification you need for your
 own project? This tutorial will teach you how to set up a conda
 environment for installing and modifying a developer version of Astropy.
