@@ -53,13 +53,13 @@ We can use the ``conda install`` command to install everything else we
 need. Anaconda will automatically check, update, and install any python
 packages that your desired package depends on.
 
--  We recommend installing the following suite of astropy, scientific,
-   statistical, and visualization packages. You can install them all
+-  Below, we give an example of installing astropy along with some common 
+   scientific, statistical, and visualization packages. You can install them all
    individually or in one line:
 
 ::
 
-    conda install astropy scikit-learn pandas 
+    conda install astropy matplotlib scikit-learn pandas
 
 Step 3: Install affiliated packages
 -----------------------------------
@@ -121,16 +121,15 @@ Conda vs Pip
 
 Anaconda is one of several package management systems that you might use
 for Python. The `Python Package Index <https://pypi.org/>`__ project
-also provides a package management program called
-```pip`` <https://pypi.org/project/pip/>`__.
+also provides a package management program called `pip <https://pypi.org/project/pip/>`__.
 
 Generally, you should pick one package management program and stick to
 it. However, there may be cases where a package is available with
 ``pip`` and not ``conda``, or vice versa.
 
 With Anaconda, you can still use ``pip`` to download and install
-software within the `conda environment of your
-choice <bear://x-callback-url/open-note?id=ADD2C653-49D3-45A6-909E-946A19A5CC22-13044-00004DD45F195558>`__.
+software within the conda environment of your
+choice.
 
 Conflicts may arise if you ``pip install`` a package that has already
 been installed with ``conda``, or vice versa.
