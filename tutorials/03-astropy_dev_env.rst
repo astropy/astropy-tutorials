@@ -91,11 +91,9 @@ Use ``git`` for committing your changes and pushing those changes to
 your ``my-code-update`` branch on Github.
 
 For more help with learning Git and Github, see the `Github
-Help <https://help.github.com/>`__ pages and `Git and Github Learning
+Help <https://help.github.com/>`__ pages, the `Git and Github Learning
 Resources <https://help.github.com/articles/git-and-github-learning-resources/>`__
-guide.
-
-https://try.github.io/levels/1/challenges/1
+guide, `try.github.io <http://try.github.io/>`_, and the `Github Learning Lab  <https://lab.github.com/>`_
 
 When you are done working on development, don't forget to exit the
 astropy-dev environment.
