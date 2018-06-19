@@ -1,8 +1,6 @@
 An Astropy User's Guide to Managing Conda Environments and Jupyter Notebook
 ===========================================================================
 
-conda #astropy
-==============
 
     Help! My code library works in Python 2 and I don't have time to
     make it work in Python 3
@@ -59,12 +57,18 @@ Step 2: Check that your code runs in the new environment
     ::
 
         cd ~/my-python2-library
-        conda activate python2
+        source activate python2
         python my_python2_script.py
-        conda deactivate
+        source deactivate
 
 Step 3: Set up a Jupyter Notebook for the new environment
 ---------------------------------------------------------
+
+-  Activate your custom Python 2 environment:
+
+   ::
+
+       source activate python2
 
 -  Check that you have ipykernel installed
 
@@ -75,15 +79,9 @@ Step 3: Set up a Jupyter Notebook for the new environment
 If you do not see any output, install it with
 ``conda install ipykernel``
 
--  Activate your custom Python 2 environment:
-
-   ::
-
-       source activate python2
-
 -  Install that environment for Jupyter notebook. In this case, we are
-   giving the environment "python2" as a display name, but you may
-   choose something else (e.g., "Python 2.7" or "conda-env-python2")
+   choosing a display name, "python2", that matches the environment name, 
+   but you may choose something else.
 
     ::
 
