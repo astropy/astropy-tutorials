@@ -1,0 +1,27 @@
+{# basic/search.html #}
+
+{%- extends "layout.html" %}
+{% set title = _('Search') %}
+
+{% block body %}
+  <h1 id="search-documentation">Search Results</h1>
+  <div id="fallback" class="admonition warning">
+  <script type="text/javascript">$('#fallback').hide();</script>
+  <p>
+    {% trans %}Please activate JavaScript to enable the search
+    functionality.{% endtrans %}
+  </p>
+  </div>
+  <p>
+    {% trans %}The following contains the search results from the Astropy Tutorials.
+    Note that the search function will automatically search for all of the words.
+    Pages containing fewer words won't appear in the result list.{% endtrans %}
+  </p>
+
+  {% if search_performed %}
+    {% if not search_results %}
+      <p>{{ _('Your search did not match any documents. Please make sure that all words are spelled correctly and that you\'ve selected enough categories.') }}</p>
+    {% endif %}
+  {% endif %}
+  <div id="search-results"></div>
+{% endblock %}
