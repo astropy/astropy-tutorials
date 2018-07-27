@@ -95,6 +95,19 @@ do::
 Once this is done, you will find the index for the pages in your local
 ``build/html/index.html`` file.
 
+If you use multiple environments to manage your python installation, you
+might be surprised to find that by default this build does *not* use the
+same python environment you are running sphinx in.  This is because the
+nbconvert machinery depends on Jupyter kernels to create a separated
+environment to run each notebook.  To use a specific environment, you will
+need to use the ``jupyter kernelspec`` or ``ipykernel install`` command
+to create a named kernel for
+your favored environment. Then pass it into sphinx using the ``NBCONVERT_KERNEL``
+environment variable.  Something like::
+
+     $ python -m ipykernel install --user --name astropy-tutorials --display-name "Python (astropy-tutorials)"
+     $ NBCONVERT_KERNEL=astropy-tutorials make html
+
 Releases
 --------
 
