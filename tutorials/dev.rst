@@ -98,7 +98,7 @@ Once this is done, you will find the index for the pages in your local
 If you use multiple environments to manage your python installation, you
 might be surprised to find that by default this build does *not* use the
 same python environment you are running sphinx in.  This is because the
-nbconvert machinery depends on Jupyter kernels to create a separated
+``nbconvert`` machinery depends on Jupyter kernels to create a separate
 environment to run each notebook.  To use a specific environment, you will
 need to use the ``jupyter kernelspec`` or ``ipykernel install`` command
 to create a named kernel for
