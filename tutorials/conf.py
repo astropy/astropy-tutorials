@@ -133,7 +133,7 @@ html_theme_options = {
 # The name of an image file (within the static path) to use as favicon of the
 # docs.  This file should be a Windows icon file (.ico) being 16x16 or 32x32
 # pixels large.
-#html_favicon = ''
+html_favicon = 'astropy_favicon.ico'
 
 # If not '', a 'Last updated on:' timestamp is inserted at every page bottom,
 # using the given strftime format.
@@ -171,7 +171,8 @@ github_issues_url = 'https://github.com/{0}/issues/'.format(setup_cfg['github_pr
 # Add any paths that contain custom themes here, relative to this directory.
 html_theme_path = [path.abspath(path.join(path.dirname(__file__), 'themes'))]
 html_theme = 'tutorials-theme'
-html_sidebars = {'tutorials': ['searchbox.html', 'tutorialfilters.html'], 'index': ['searchbox.html', 'localtoc.html']}
+# html_sidebars = {'tutorials': ['searchbox.html', 'tutorialfilters.html'], 'index': ['searchbox.html', 'localtoc.html']}
+html_sidebars = {'tutorials': ['searchbox.html', 'tutorialfilters.html']}
 
 # # Custom style overrides
 def setup(app):

@@ -770,8 +770,19 @@ var Search = {
   makeSearchSummary : function(text, keywords, hlwords) {
     var textLower = text.toLowerCase();
     
+    //extracting an image for the thumbnail
+    var imageSearch = textLower.indexOf('nboutput',0);
+    var imageTypePNG = textLower.indexOf('.png', imageSearch);
+    var imageTypeJPEG = textLower.indexOf('.jpeg', imageSearch);
+    imageURLEnd = ( (imageTypeJPEG == -1) || (imageTypePNG < imageTypeJPEG) )? imageTypePNG : imageTypeJPEG ; //to end the URL with appropriate extention
+    var imageURL = $.trim(text.substr((imageSearch+8),(imageURLEnd-imageSearch)))
+    if(imageURL == "") //to add default image
+      {imageURL = "_static/default_thumbnail.png";}
+    else
+      {imageURL = '_images' + imageURL;}  
+    console.log(imageURL);
+    
     var startPoint = textLower.indexOf('====',0);
-    console.log(startPoint);
     var start = startPoint;
     var sentenceStart = 0;  
     $.each(keywords, function() {
@@ -782,7 +793,6 @@ var Search = {
   
       while(flag==0 && sentenceStart!=80){
         var i = textLower.indexOf(this.toLowerCase(),finderStart);
-        console.log("this", this.toLowerCase());
         if (i > -1)
           start = i;
         else if (i==-1 && firstFound!=-1)
@@ -790,32 +800,30 @@ var Search = {
            sentenceStart=0;
            flag =1;
            break;}
-      console.log("Starting point", start);
   
-      for( sentenceStart = 0; sentenceStart<80; sentenceStart++){ 
-        if((text.charAt(start - sentenceStart) == '>') || (text.charAt(start - sentenceStart) == '<')) {
-          finderStart = start+1;
-          if(finderStart == startPoint)
-          {firstFound = start;}
-          console.log("finderStart" , finderStart);
-          console.log("start" , start);
-          break;
+        for( sentenceStart = 0; sentenceStart<80; sentenceStart++){ 
+          if((text.charAt(start - sentenceStart) == '>') || (text.charAt(start - sentenceStart) == '<')) {
+            finderStart = start+1;
+            if(finderStart == startPoint)
+            {firstFound = start;}
+            break;
+          }
+          else if(text.charAt(start - sentenceStart) == '.') {
+            flag = 1;
+            break;}
         }
-        else if(text.charAt(start - sentenceStart) == '.') {
-          flag = 1;
-          break;}
       }
-  }
  
   });
     start = Math.max(start - sentenceStart, 0);
     var trimmedText = ((start > 0) ? '...' : '') +
-      $.trim(text.substr(start, 300)) +
-      ((start + 300 - text.length) ? '...' : '');
+      $.trim(text.substr(start, 350)) +
+      ((start + 350 - text.length) ? '...' : '');
     
     var excerpt = trimmedText.replace(/[`~!@#$%^&*()_|+\-=?:'"<>\{\}\[\]\\\/]/gi, '');
-          
-    var rv = $('<div class="context"></div>').text(excerpt);
+    excerpt = '<div class="row"><div class="col-md-3"><img src="../' + imageURL + '" style="width: 150px; padding-top: 5px;"></div> <div class="col-md-9" style="padding-top: 20px; padding-left: 0px;">' + excerpt + '</div></div></div>'
+    
+    var rv = $('<div class="context"></div>').html(excerpt);
     $.each(hlwords, function() {
       rv = rv.highlightText(this, 'highlighted');
     });
