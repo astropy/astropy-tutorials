@@ -780,7 +780,6 @@ var Search = {
       {imageURL = "_static/default_thumbnail.png";}
     else
       {imageURL = '_images' + imageURL;}  
-
     var startPoint = textLower.indexOf('====',0);
     var start = startPoint;
     var sentenceStart = 0;  
