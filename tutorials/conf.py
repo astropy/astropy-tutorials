@@ -106,10 +106,6 @@ if release.endswith('dev'):
 
 # Please update these texts to match the name of your package.
 html_theme_options = {
-    'logotext1': 'astro',  # white,  semi-bold
-    'logotext2': 'py',  # orange, light
-    'logotext3': ':tutorials',   # white,  light
-    # 'nosidebar': True
     'globaltoc_depth': 2,
     'navbar_fixed_top': "true",
     'bootswatch_theme': "sandstone",
@@ -171,8 +167,7 @@ github_issues_url = 'https://github.com/{0}/issues/'.format(setup_cfg['github_pr
 # Add any paths that contain custom themes here, relative to this directory.
 html_theme_path = [path.abspath(path.join(path.dirname(__file__), 'themes'))]
 html_theme = 'tutorials-theme'
-# html_sidebars = {'tutorials': ['searchbox.html', 'tutorialfilters.html'], 'index': ['searchbox.html', 'localtoc.html']}
-html_sidebars = {'tutorials': ['searchbox.html', 'tutorialfilters.html']}
+html_sidebars = {'tutorials': ['tutorialfilters.html']}
 
 # # Custom style overrides
 def setup(app):
