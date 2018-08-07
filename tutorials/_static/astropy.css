@@ -27,12 +27,12 @@ a :hover{
 .card{
   border-radius: 10px;
   border: none;
-  box-shadow: 5px 5px 10px 1px rgba(0, 0, 0, .4);
+  box-shadow: 4px 4px 10px 1px rgba(0, 0, 0, .4);
 }
 
 .card-body h2 {
   color: #ffffff !important;
-  font-weight: 600;  
+  font-weight: 600;
 }
 
 /* To enable guides after they incorporated into Learn Astropy: 1. Comment the display property below. 2. Remove "ml-auto" from tutorial placard's classes. */
