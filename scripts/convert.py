@@ -45,10 +45,10 @@ class NBTutorialsConverter(object):
         self._rst_path = path.join(self.output_path,
                                    '{0}.rst'.format(self.nb_name))
 
-        if kernel_name is None:
-            self.kernel_name = ExecutePreprocessor.kernel_name.default_value
-        else:
-            self.kernel_name = kernel_name
+        self._execute_kwargs = dict(timeout=900)
+        if kernel_name:
+            self._execute_kwargs['kernel_name'] = kernel_name
+            # self.kernel_name = ExecutePreprocessor.kernel_name.default_value
 
     def execute(self, write=True):
         """
@@ -75,10 +75,9 @@ class NBTutorialsConverter(object):
             return self._executed_nb_path
 
         # Execute the notebook
-        logger.debug('Executing notebook using kernel '
-                     '"{}"...'.format(self.kernel_name))
-        executor = ExecutePreprocessor(timeout=900,
-                                       kernel_name=self.kernel_name)
+        logger.debug('Executing notebook using kwargs '
+                     '"{}"...'.format(self._execute_kwargs))
+        executor = ExecutePreprocessor(**self._execute_kwargs)
 
         with open(self.nb_path) as f:
             nb = nbformat.read(f, as_version=IPYTHON_VERSION)
