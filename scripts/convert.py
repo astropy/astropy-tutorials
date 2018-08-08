@@ -48,7 +48,6 @@ class NBTutorialsConverter(object):
         self._execute_kwargs = dict(timeout=900)
         if kernel_name:
             self._execute_kwargs['kernel_name'] = kernel_name
-            # self.kernel_name = ExecutePreprocessor.kernel_name.default_value
 
     def execute(self, write=True):
         """
