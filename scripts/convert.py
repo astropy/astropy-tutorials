@@ -1,5 +1,6 @@
 # Standard library
 from os import path, walk, remove, makedirs
+import re
 
 # Third-party
 from astropy import log as logger
@@ -137,6 +138,31 @@ class NBTutorialsConverter(object):
         writer = FilesWriter()
         output_file_path = writer.write(output, resources,
                                         notebook_name=self.nb_name)
+
+        # read the executed notebook, grab the keywords from the header,
+        # add them in to the RST as filter keywords
+        with open(self._executed_nb_path) as f:
+            nb = nbformat.read(f, as_version=IPYTHON_VERSION)
+
+        top_cell_text = nb['cells'][0]['source']
+        match = re.search('## [kK]eywords\s+(.*)', top_cell_text)
+
+        if match:
+            keywords = match.groups()[0].split(',')
+            keywords = [k.strip() for k in keywords if k.strip()]
+
+        # Add metatags to top of RST files to get rendered into HTML, used for
+        # the search and filter functionality in Learn Astropy
+        meta_tutorials = '.. meta::\n    :keywords: filterTutorials\n'
+        with open(output_file_path, 'r') as f:
+            rst_text = f.read()
+
+        with open(output_file_path, 'w') as f:
+            rst_text = '{0}\n{1}'.format(rst_text, meta_tutorials)
+            f.write(rst_text)
+
+        # TODO: now what? need to add some sphinx stuff to the top of the RST
+        # tile to generate metadata tags in the rendered HTML
 
         if remove_executed: # optionally, clean up the executed notebook file
             remove(self._executed_nb_path)
