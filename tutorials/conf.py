@@ -174,8 +174,15 @@ from convert import process_notebooks
 nb_tutorials_path = os.path.join(_root, 'tutorials', 'notebooks')
 template_path = os.path.join(_root, 'tutorials', 'astropy.tpl')
 rst_output_path = os.path.join(_root, 'tutorials', 'rst-tutorials')
-process_notebooks(nb_tutorials_path, output_path=rst_output_path,
-                  template_file=template_path)
+
+processkwargs = dict(output_path=rst_output_path, template_file=template_path)
+if os.environ.get('NBCONVERT_KERNEL'):  # this allows access from "make html"
+    processkwargs['kernel_name'] = os.environ.get('NBCONVERT_KERNEL')
+
+if os.environ.get('NBFILE'):  # this allows only building a single tutorial file
+    nb_tutorials_path = os.path.abspath(os.environ.get('NBFILE'))
+
+process_notebooks(nb_tutorials_path, **processkwargs)
 
 
 suppress_warnings = ['image.nonlocal_uri']

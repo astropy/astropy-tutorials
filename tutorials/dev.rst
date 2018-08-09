@@ -95,6 +95,27 @@ do::
 Once this is done, you will find the index for the pages in your local
 ``build/html/index.html`` file.
 
+For testing, you may want to run the build process on just one notebook file, as
+the full build takes some time to execute and convert all of the tutorial
+notebooks. To do this, you can set the ``NBFILE`` environment variable to
+specify the path to a notebook file relative to the ``tutorials`` path. For
+example, to run the build process on just the FITS-header tutorial::
+
+    $ NBFILE=notebooks/FITS-header/FITS-header.ipynb make html
+
+If you use multiple environments to manage your python installation, you
+might be surprised to find that by default this build does *not* use the
+same python environment you are running sphinx in.  This is because the
+``nbconvert`` machinery depends on Jupyter kernels to create a separate
+environment to run each notebook.  To use a specific environment, you will
+need to use the ``jupyter kernelspec`` or ``ipykernel install`` command
+to create a named kernel for
+your favored environment. Then pass it into sphinx using the ``NBCONVERT_KERNEL``
+environment variable.  Something like::
+
+     $ python -m ipykernel install --user --name astropy-tutorials --display-name "Python (astropy-tutorials)"
+     $ NBCONVERT_KERNEL=astropy-tutorials make html
+
 Releases
 --------
 
