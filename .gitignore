@@ -9,3 +9,4 @@ IPython-*
 *.pyc
 *.tex
 exec*.ipynb
+.DS_Store

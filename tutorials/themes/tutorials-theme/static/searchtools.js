@@ -780,13 +780,14 @@ var Search = {
       {imageURL = "_static/default_thumbnail.png";}
     else
       {imageURL = '_images' + imageURL;}  
+
+    //extracting context
     var startPoint = textLower.indexOf('====',0);
     var start = startPoint;
     var sentenceStart = 0;  
     $.each(keywords, function() {
       var finderStart = startPoint;
       var flag = 0;
-    
       var firstFound =-1;
   
       while(flag==0 && sentenceStart!=80){
@@ -823,7 +824,11 @@ var Search = {
     
     var rv = $('<div class="context"></div>').html(excerpt);
     $.each(hlwords, function() {
-      rv = rv.highlightText(this, 'highlighted');
+      if(this.search('filter')==-1){   //if "filter" is not there in the search query then directly use the query to highlight text
+        rv = rv.highlightText(this, 'highlighted');
+      } else {    //if "filter" is there in the search query then first strip "filter" from the query and then use it to highlight text
+        rv = rv.highlightText(this.split('filter')[1], 'highlighted');
+      }  
     });
     return rv;
   }
