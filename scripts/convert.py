@@ -159,12 +159,14 @@ class NBTutorialsConverter(object):
         if match:
             keywords = match.groups()[0].split(',')
             keywords = [clean_keyword(k) for k in keywords if k.strip()]
+            keyword_filters = ['filter{0}'.format(k) for k in keywords]
+        else:
+            keyword_filters = []
 
         # Add metatags to top of RST files to get rendered into HTML, used for
         # the search and filter functionality in Learn Astropy
         meta_tutorials = '.. meta::\n    :keywords: {0}\n'
-        filters = ['filterTutorials'] + ['filter{0}'.format(k)
-                                         for k in keywords]
+        filters = ['filterTutorials'] + keyword_filters
         meta_tutorials = meta_tutorials.format(', '.join(filters))
         with open(output_file_path, 'r') as f:
             rst_text = f.read()
