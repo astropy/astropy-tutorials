@@ -24,6 +24,7 @@ a{
 a :hover{
   text-decoration: none;
 }
+
 .card{
   border-radius: 10px;
   border: none;
@@ -87,6 +88,10 @@ a :hover{
 #search-bar {
   padding: 30px;
   margin: auto;
+}
+
+#learn-astropy a{
+  color: #fa743b !important;
 }
 
 .sidenav {

@@ -1,21 +1,33 @@
 Learn Astropy
 =============
+Astropy is a python library for use in astronomy. Learn Astropy provides the entire Astropy learning material through a single dynamically searchable web page. 
+It allows you to filter tutorials by keywords, search for filters, make search queries in tutorials and documentation simultaneously.
 
-Learn Astropy consolidates:
+Installing Astropy
+-------------------
 
-* Astropy Tutorials
-* Astropy Documentation
-* Examples
-* Guides
+The `Anaconda Python Distribution <https://www.anaconda.com/download/>`_ includes astropy and is the recommended way to install both Python and the astropy package. Once you have Anaconda installed use the following to update to the latest version of astropy:
 
-Learn Astropy makes all the Astropy content easily accessible through a single dynamically searchable web page. 
-It organises the Astropy tutorials in a more efficient way and adds functionalities like filter by keywords, search for filters, make search queries in tutorials and documentation simultaneously.
-It also redesigns the individual tutorials with a sidebar to ease navigation through the tutorials and gives the tutorials a more modern feel at the same time.  
+.. code:: python
+    
+    conda update astropy
 
-**This is dummy text and will be replaced in the final build.**
+To install astropy from source into a existing Python installation, use the following:
+
+.. code:: python
+    
+    pip install astropy
+
+More detailed `installation instructions <http://astropy.readthedocs.io/en/stable/install.html>`_ (e.g., for building from source code locally) are in the documentation.
+
+Get help
+---------
+
+If you have any questions regarding using Astropy there are numerous channels for communication.
+Post to any one of `several forums <https://www.astropy.org/help.html>`_ to get help from our active, helpful, and friendly community of users and developers.
 
 For contributors
-----------------
+-----------------
 
 We welcome feedback, improvements, and new tutorial content via the `Astropy
 Tutorials repository <https://github.com/astropy/astropy-tutorials>`_  on
@@ -27,13 +39,7 @@ repository. Questions and/or comments about the tutorials are welcome on the
 list. For more information, please see the contributing documentation:
 :ref:`contributing-page`.
 
-If you would like to contribute to this effort, but need some inspiration, check
-out the `open issues for new content
-<https://github.com/astropy/astropy-tutorials/labels/content-new>`_ and see the
-contributing documentation :ref:`contributing-page`. This is a collaborative
-effort and we are looking for contributions and ideas from users like you!
-
 For developers
---------------
+---------------
 
 See the developer documentation: :ref:`dev-page`.
