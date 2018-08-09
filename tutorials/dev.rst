@@ -95,7 +95,11 @@ do::
 Once this is done, you will find the index for the pages in your local
 ``build/html/index.html`` file.
 
-For testing, you may want to run the build process on just one notebook file, as the full build takes some time to execute and convert all of the tutorial notebooks. To do this, you can set the ``NB`` environment variable to specify the path to a notebook file relative to the ``tutorials`` path. For example, to run the build process on just the FITS-header tutorial::
+For testing, you may want to run the build process on just one notebook file, as
+the full build takes some time to execute and convert all of the tutorial
+notebooks. To do this, you can set the ``NB`` environment variable to specify
+the path to a notebook file relative to the ``tutorials`` path. For example, to
+run the build process on just the FITS-header tutorial::
 
     $ NB=notebooks/FITS-header/FITS-header.ipynb make html
 
