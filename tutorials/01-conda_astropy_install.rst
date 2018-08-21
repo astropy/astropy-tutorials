@@ -71,7 +71,7 @@ to Anaconda's package search list, run the following command:
 
 ::
 
-    conda config --add channels http://ssb.stsci.edu/astroconda
+    conda install --channel "astropy" package
 
 Some astronomical packages are also available in the *conda-forge*
 channel. There is no wrong choice between installing a package from
@@ -89,14 +89,13 @@ Anaconda <https://conda.io/docs/user-guide/tasks/manage-channels.html>`__
 is available on the main documentation pages.
 
 -  Here's an example for downloading a few commonly used Astropy
-   affiliated packages, directly from the *astroconda* channel:
+   affiliated packages, directly from the *astropy* channel:
 
    ::
 
-       conda install -c astroconda astroquery photutils specutils
-
-You will not need to use ``-c astroconda`` if you ran the commands above
-to add *astroconda* to your default channels.
+       conda install -c astropy photutils specutils
+       
+**Note:** If you plan to use the ``astroquery`` package, we recommend using ``pip install`` instead of ``conda install``. See the *Conda vs Pip* discussion, below.
 
 Additional materials
 ====================
@@ -123,16 +122,16 @@ Anaconda is one of several package management systems that you might use
 for Python. The `Python Package Index <https://pypi.org/>`__ project
 also provides a package management program called `pip <https://pypi.org/project/pip/>`__.
 
-Generally, you should pick one package management program and stick to
+Generally, you should pick one package management system and stick to
 it. However, there may be cases where a package is available with
 ``pip`` and not ``conda``, or vice versa.
 
 With Anaconda, you can still use ``pip`` to download and install
 software within the conda environment of your
-choice.
+choice. However, conflicts may arise if you ``pip install`` a package that has already
+been installed with ``conda``, or vice versa. So once you use ``pip`` to install a package, you should use ``pip`` to update and manage that package.
 
-Conflicts may arise if you ``pip install`` a package that has already
-been installed with ``conda``, or vice versa.
+**In particular, we recommend using `pip` to manage the `astroquery` package.** This library is under continuous development. The latest versions and bug-fixes are more readily available with ``pip``, because it takes a long time for the ``conda`` distribution to update.
 
 Further documentation on this topic is available on the `conda package
 management documentation
