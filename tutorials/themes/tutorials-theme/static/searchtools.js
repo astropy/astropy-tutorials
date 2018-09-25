@@ -774,6 +774,8 @@ var Search = {
     var imageSearch = textLower.indexOf('nboutput',0);
     var imageTypePNG = textLower.indexOf('.png', imageSearch);
     var imageTypeJPEG = textLower.indexOf('.jpeg', imageSearch);
+    var imageTypeJPG = textLower.indexOf('.jpg', imageSearch);
+    imageTypeJPEG = ( (imageTypeJPEG == -1) || (imageTypeJPG < imageTypeJPEG) )? imageTypeJPG : imageTypeJPEG ; 
     imageURLEnd = ( (imageTypeJPEG == -1) || (imageTypePNG < imageTypeJPEG) )? imageTypePNG : imageTypeJPEG ; //to end the URL with appropriate extention
     var imageURL = $.trim(text.substr((imageSearch+8),(imageURLEnd-imageSearch)))
     if(imageURL == "") //to add default image
