@@ -5,6 +5,8 @@ body{
 
 h1{
   font-size: 1.8rem;
+  padding-bottom: 0.8rem;
+  font-weight: 500;
 }
 
 h2{
@@ -36,9 +38,9 @@ a :hover{
   font-weight: 600;
 }
 
-/* To enable guides after they incorporated into Learn Astropy: 1. Comment the display property below. 2. Remove "ml-auto" from tutorial placard's classes. */
+/* To enable guides after they are incorporated into Learn Astropy: 1. Comment the display property below. 2. Remove "ml-auto" from tutorial placard's class in navbar.html */
 .enable-guides {
-  /* display: none; */
+  display: none;
 }
 
 .bg-guide {
