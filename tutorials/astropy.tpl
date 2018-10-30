@@ -12,6 +12,9 @@
 
     <div id="spacer"></div>
 
+.. meta::
+    :keywords: {% for kw in resources.nb_keywords %}filter{{ kw|title }}, {% endfor %}
+
 .. role:: inputnumrole
 .. role:: outputnumrole
 
