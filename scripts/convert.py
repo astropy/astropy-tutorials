@@ -1,5 +1,6 @@
 # Standard library
-from os import path, walk, remove, makedirs
+
+from os import path, walk, remove, makedirs, sep
 
 # Third-party
 from astropy import log as logger
@@ -131,7 +132,7 @@ class NBTutorialsConverter(object):
         # NOTE: the split[-4] trick below is brittle in that it will break if
         # a notebook is, say, nested two layers deep instead of just one like
         # all of our notebooks thus far.
-        resources['nb_keywords'] = [self.nb_path.split(os.sep)[-4]]
+        resources['nb_keywords'] = [self.nb_path.split(sep)[-4]]
 
         # Exports the notebook to RST
         logger.debug('Exporting notebook to RST...')
