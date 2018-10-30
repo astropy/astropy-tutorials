@@ -48,6 +48,13 @@
   <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
   <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
   <meta name="apple-mobile-web-app-capable" content="yes">
+  {# this script is to redirect /tutorials.html to /tutorials.html?q=filterTutorials #}
+  <script type="text/javascript">  
+    if( (window.location.href.search("tutorials.html") != -1) && (window.location.href.search("q=filterTutorials") == -1) ){
+      var url = window.location.href.split("tutorials.html")[0] + "tutorials.html?q=filterTutorials";
+      window.location.href = url;
+    }
+  </script>
   <script type="text/javascript">
     jQuery(function() { Search.loadIndex("{{ pathto('searchindex.js', 1) }}"); });
   </script>
