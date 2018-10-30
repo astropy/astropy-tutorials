@@ -37,7 +37,10 @@ make the change yourself and then submit a pull request directly to the
 repository. Questions and/or comments about the tutorials are welcome on the
 `astropy-dev <https://groups.google.com/forum/#!forum/astropy-dev>`_ mailing
 list. For more information, please see the contributing documentation:
-:ref:`contributing-page`.
+
+.. raw:: html
+
+    <a href="contributing.html"><button id="binder" style="background-color: #fa743b; border-color: #fa743b; margin-bottom: 1rem; cursor: pointer">contribute</button></a>
 
 For developers
 ---------------
