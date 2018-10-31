@@ -1,5 +1,6 @@
 # Standard library
-from os import path, walk, remove, makedirs
+
+from os import path, walk, remove, makedirs, sep
 
 # Third-party
 from astropy import log as logger
@@ -85,7 +86,7 @@ class NBTutorialsConverter(object):
         try:
             executor.preprocess(nb, {'metadata': {'path': self.path_only}})
         except CellExecutionError:
-            # TODO: should we fail fast and raies, or record all errors?
+            # TODO: should we fail fast and raise, or record all errors?
             raise
 
         if write:
@@ -124,6 +125,14 @@ class NBTutorialsConverter(object):
 
         # path to store extra files, like plots generated
         resources['output_files_dir'] = 'nboutput'
+
+        # these keywords are used to build the filter keywords
+        # TODO: add a pre-processor that extracts the keywords from the markdown
+        # cell in the header and adds them to this list
+        # NOTE: the split[-4] trick below is brittle in that it will break if
+        # a notebook is, say, nested two layers deep instead of just one like
+        # all of our notebooks thus far.
+        resources['nb_keywords'] = [self.nb_path.split(sep)[-4]]
 
         # Exports the notebook to RST
         logger.debug('Exporting notebook to RST...')
