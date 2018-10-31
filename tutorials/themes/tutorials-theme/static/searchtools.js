@@ -772,8 +772,8 @@ var Search = {
     
     //extracting an image for the thumbnail
     var imageSearch = textLower.indexOf('nboutput',0);
-    var imageTypePNG = textLower.indexOf('.png', imageSearch);
     var imageTypeJPEG = textLower.indexOf('.jpeg', imageSearch);
+    var imageTypePNG = textLower.indexOf('.png', imageSearch);
     var imageTypeJPG = textLower.indexOf('.jpg', imageSearch);
     imageTypeJPEG = ( (imageTypeJPEG == -1) || (imageTypeJPG < imageTypeJPEG) )? imageTypeJPG : imageTypeJPEG ; 
     imageURLEnd = ( (imageTypeJPEG == -1) || (imageTypePNG < imageTypeJPEG) )? imageTypePNG : imageTypeJPEG ; //to end the URL with appropriate extention
@@ -822,7 +822,7 @@ var Search = {
       ((start + 350 - text.length) ? '...' : '');
     
     var excerpt = trimmedText.replace(/[`~!@#$%^&*()_|+\-=?:'"<>\{\}\[\]\\\/]/gi, '');
-    excerpt = '<div class="row"><div class="col-md-3"><img src="../' + imageURL + '" style="width: 150px; padding-top: 5px;"></div> <div class="col-md-9" style="padding-top: 20px; padding-left: 0px;">' + excerpt + '</div></div></div>'
+    excerpt = '<div class="row"><div class="col-md-3"><img src="' + imageURL + '" style="width: 150px; padding-top: 5px;"></div> <div class="col-md-9" style="padding-top: 20px; padding-left: 0px;">' + excerpt + '</div></div></div>'
     
     var rv = $('<div class="context"></div>').html(excerpt);
     $.each(hlwords, function() {
