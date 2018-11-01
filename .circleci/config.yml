@@ -13,7 +13,7 @@ pip-run: &pip-install
   command: |
     python3 -m venv venv
     . venv/bin/activate
-    pip install -q -r pip-requirements.txt
+    pip install -r pip-requirements.txt
     pip install astropy_helpers sphinx pytest
     pip install git+https://github.com/jupyter/nbconvert
     pip install sphinx-bootstrap-theme
