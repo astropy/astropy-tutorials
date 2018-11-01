@@ -775,10 +775,10 @@ var Search = {
     var imageTypeJPEG = textLower.indexOf('.jpeg', imageSearch);
     var imageTypePNG = textLower.indexOf('.png', imageSearch);
     var imageTypeJPG = textLower.indexOf('.jpg', imageSearch);
-    imageTypeJPEG = ( (imageTypeJPEG == -1) || (imageTypeJPG < imageTypeJPEG) )? imageTypeJPG : imageTypeJPEG ; 
-    imageURLEnd = ( (imageTypeJPEG == -1) || (imageTypePNG < imageTypeJPEG) )? imageTypePNG : imageTypeJPEG ; //to end the URL with appropriate extention
+    imageType = ( (imageTypeJPEG == -1) || ((imageTypeJPG != -1) && (imageTypeJPG < imageTypeJPEG)) )? imageTypeJPG : imageTypeJPEG ; 
+    imageURLEnd = ( (imageType == -1) || ((imageTypePNG != -1) && (imageTypePNG < imageType)) )? imageTypePNG : imageType ; //to end the URL with appropriate extention
     var imageURL = $.trim(text.substr((imageSearch+8),(imageURLEnd-imageSearch)))
-    if(imageURL == "") //to add default image
+    if(imageURL == "" || imageURL.length > 80) //to add default image
       {imageURL = "_static/default_thumbnail.png";}
     else
       {imageURL = '_images' + imageURL;}  
