@@ -784,43 +784,59 @@ var Search = {
       {imageURL = '_images' + imageURL;}  
 
     //extracting context
-    var startPoint = textLower.indexOf('====',0);
-    var start = startPoint;
-    var sentenceStart = 0;  
-    $.each(keywords, function() {
-      var finderStart = startPoint;
-      var flag = 0;
-      var firstFound =-1;
-  
-      while(flag==0 && sentenceStart!=80){
-        var i = textLower.indexOf(this.toLowerCase(),finderStart);
-        if (i > -1)
-          start = i;
-        else if (i==-1 && firstFound!=-1)
-          {start = firstFound;
-           sentenceStart=0;
-           flag =1;
-           break;}
-  
-        for( sentenceStart = 0; sentenceStart<80; sentenceStart++){ 
-          if((text.charAt(start - sentenceStart) == '>') || (text.charAt(start - sentenceStart) == '<')) {
-            finderStart = start+1;
-            if(finderStart == startPoint)
-            {firstFound = start;}
-            break;
-          }
-          else if(text.charAt(start - sentenceStart) == '.') {
-            flag = 1;
-            break;}
+    textLower = textLower.replace(/<[^<>]*>/gi, ''); //removing the html tags
+
+    //content to displayed on the placards on the tutorials page
+    if(hlwords=="filtertutorials"){
+      var startPoint = textLower.indexOf('====',0);
+      var start = textLower.indexOf("tutorial",startPoint);
+      if(start == -1 || textLower.charAt(start-1) == '/'){
+        var i = 0;
+        while(textLower.charAt(start+i)=='='){
+          i++;
         }
+        start = start + i + 9;
       }
- 
-  });
-    start = Math.max(start - sentenceStart, 0);
-    var trimmedText = ((start > 0) ? '...' : '') +
-      $.trim(text.substr(start, 350)) +
-      ((start + 350 - text.length) ? '...' : '');
-    
+      var trimmedText = ((textLower.charAt(start-9) == "\n" ) ? '' : '...') + $.trim(textLower.substr(start-8, 350)) + '...';
+    }
+
+    //content to displayed on the placards on search queries
+    else{
+      var startPoint = textLower.indexOf('====',0);
+      var start = startPoint;
+      var sentenceStart = 0;  
+      $.each(keywords, function() {
+        var finderStart = startPoint;
+        var flag = 0;
+        var firstFound =-1;
+      
+        while(flag==0 && sentenceStart!=80){
+          var i = textLower.indexOf(this.toLowerCase(),finderStart);
+          if (i > -1)
+            start = i;
+          else if (i==-1 && firstFound!=-1)
+            {start = firstFound;
+             sentenceStart=0;
+             flag =1;
+             break;}
+            
+          for( sentenceStart = 0; sentenceStart<80; sentenceStart++){ 
+            if((textLower.charAt(start - sentenceStart) == '>') || (textLower.charAt(start - sentenceStart) == '<')) {
+              finderStart = start+1;
+              if(finderStart == startPoint)
+              {firstFound = start;}
+              break;
+            }
+            else if(textLower.charAt(start - sentenceStart) == '.') {
+              flag = 1;
+              break;}
+          }
+          }
+        });
+      start = Math.max(start - sentenceStart, 0);
+      var trimmedText = ((start > 0) ? '...' : '') + $.trim(textLower.substr(start, 350)) + ((start + 350 - textLower.length) ? '...' : '');
+    }
+
     var excerpt = trimmedText.replace(/[`~!@#$%^&*()_|+\-=?:'"<>\{\}\[\]\\\/]/gi, '');
     excerpt = '<div class="row"><div class="col-md-3"><img src="' + imageURL + '" style="width: 150px; padding-top: 5px;"></div> <div class="col-md-9" style="padding-top: 20px; padding-left: 0px;">' + excerpt + '</div></div></div>'
     
