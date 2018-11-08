@@ -1,3 +1,11 @@
+span.inputnumrole {
+    color: #303F9F
+}
+
+span.outputnumrole {
+    color: #D84315
+}
+
 body{
   padding : 0px;
   background-color: #fafafa;
@@ -23,8 +31,9 @@ a{
   color: black !important;
 }
 
-a :hover{
-  text-decoration: none;
+a:hover{
+  text-decoration: underline !important;
+  color: gray !important;
 }
 
 .card{
