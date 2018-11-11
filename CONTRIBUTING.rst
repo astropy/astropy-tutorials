@@ -4,8 +4,7 @@ Contributing
 Overview
 --------
 
-Each tutorial is a `Jupyter notebook <http://jupyter.org/>`_ file. The notebooks
-are each saved in a separate directory within the ``tutorials/notebooks``
+Each tutorial is a `Jupyter notebook <http://jupyter.org/>`_ file. Each notebook is saved in a separate directory within the ``tutorials/notebooks``
 subdirectory in this project. For an example, let's look at the source notebook
 of the `FITS-header <https://github.com/astropy/astropy-tutorials/tree/master/tu
 torials/notebooks/FITS-header/>`_ tutorial. Within
@@ -27,9 +26,8 @@ Overview
 
 * Each tutorial should have 3–5 explicit `Learning Goals
   <http://tll.mit.edu/help/intended-learning-outcomes>`_, demonstrate ~2–3
-  pieces of functionality relevant to astronomy, and 2–3 demonstrations of
-  generic but commonly used functionality (e.g., ``numpy``, ``matplotlib``)
-* Roughly follow this progression:
+  pieces of functionality relevant to astronomy, and contain 2–3 demonstrations of generic but commonly used functionality (e.g., ``numpy``, ``matplotlib``)
+* Each tutorial should roughly follow this progression:
     * *Input/Output*: read in some data (use `astroquery
       <https://astroquery.readthedocs.io/en/latest/>`_ where possible to query
       real astronomical datasets)
@@ -37,13 +35,13 @@ Overview
     * *Visualization*: make a pretty figure (use `astropy.visualization
       <http://docs.astropy.org/en/stable/visualization/>`_ where possible)
 * The tutorials must be compatible with the versions supported by the last major
-  release of the Astropy core package (i.e. Python >= 3.5).
+  release of the Astropy core package (i.e. Python >= 3.5)
 
 Code
 ^^^^
 
 * Demonstrate good commenting practice
-    * add comments to sections of code that use concepts not included in the
+    * Add comments to sections of code that use concepts not included in the
       Learning Goals
 * Demonstrate best practices of variable names
     * Variables should be all lower case with words separated by underscores
@@ -52,7 +50,7 @@ Code
 * As much as possible, comply with `PEP8 <https://www.python.org/dev/peps/pep-0008/>`_.
 * Imports
     * Do not use ``from package import *``; import packages, classes, and
-      functions explicitly.
+      functions explicitly
     * Follow recommended package name abbreviations:
         * ``import numpy as np``
         * ``import matplotlib as mpl``
@@ -71,10 +69,10 @@ Narrative
 * Use `Markdown formatting <http://jupyter-notebook.readthedocs.io/en/latest/exa
   mples/Notebook/Working%20With%20Markdown%20Cells.html>`_ in text cells for
   formatting, links, latex, and code snippets.
-* Title should be short yet descriptive and emphasize the learning goals of the
+* Titles should be short yet descriptive and emphasize the learning goals of the
   tutorial. Try to make the title appeal to a broad audience and avoid
   referencing a specific instrument, catalog, or anything wavelength dependent.
-* List all author's full names (comma separated) and link to GitHub profile
+* List all authors' full names (comma separated) and link to GitHub profiles
   and/or `ORCID iD <https://orcid.org/>`_ when relevant.
 * Include `Learning Goals <http://tll.mit.edu/help/intended-learning-outcomes>`_
   at the top as a bulleted list.
@@ -83,12 +81,10 @@ Narrative
 * The first paragraph should give a brief overview of the entire tutorial
   including relevant astronomy concepts.
 * Use the first-person inclusive plural ("we"). For example, "We are going to
-  make a plot which..", "Above, we did it the hard way, but here is the easier
-  way..."
+  make a plot which...", or "Above, we did it the hard way, but here is the easier way..."
 * Section headings should be in the imperative mood. For example, "Download the
   data."
-* Avoid words such as "obviously", "just", "simply", "easily". For example,
-  avoid "we just have to do this one thing."
+* Avoid extraneous words such as "obviously", "just", "simply", or "easily." For example, avoid phrases like "we just have to do this one thing."
 * Use ``<div class="alert alert-info">Note</div>`` for Notes and ``<div
   class="alert alert-warning">Warning</div>`` for Warnings (Markdown supports
   raw HTML)
@@ -115,10 +111,10 @@ Template intro
     Carroll & Ostlie 10.3, Binney & Tremaine 1.5
 
     ## Summary
-    In this tutorial, we download a data file, do something to it, and then
+    In this tutorial, we will download a data file, do something to it, and then
     visualize it.
 
-Procedure for Contributing
+Procedure for contributing
 --------------------------
 
 The process for contributing a tutorial involves the `GitHub fork
@@ -148,7 +144,7 @@ be the same as the subdirectory name. We'll create a new directory in
 All files used by the tutorial -- e.g., example data files, the Jupyter
 notebook file itself -- should go in this directory.
 
-Specify the python packages the tutorial depends on by creating a text file
+Specify the Python packages the tutorial depends on by creating a text file
 called ``requirements.txt`` in the same notebook directory. For example, if your
 tutorial requires ``scipy`` version 1.0 and ``numpy`` version 1.13 or greater,
 your ``requirements.txt`` file would look like:
@@ -210,9 +206,7 @@ procedure:
       with open(mydatafilename2) as f:
           ...
 
-  If you do this, the only change necessary on merging your notebook will be to
-  set ``tutorialpath`` to
-  ``'http://data.astropy.org/tutorials/My-tutorial-name/'``.
+  If you do this, the only change necessary when merging your notebook will be to set ``tutorialpath`` to  ``'http://data.astropy.org/tutorials/My-tutorial-name/'``.
 
 If you need information or help with:
 
@@ -225,9 +219,9 @@ please see the :ref:`dev-page`.
 For repository maintainers
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-If this above procedure is followed, you only need to do these steps when
+If this above procedure is followed, you only need to do these three steps when
 merging your pull request:
 
 1. Do ``git rebase -i`` and delete the commits that include the data files
 2. Upload the data files to ``http://data.astropy.org/tutorials/My-tutorial-name/``
-3. Update the ``tutorialpath`` variable.
+3. Update the ``tutorialpath`` variable

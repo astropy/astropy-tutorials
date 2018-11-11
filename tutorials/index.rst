@@ -2,7 +2,7 @@ Learn Astropy
 =============
 Astropy is a Python library for use in astronomy.
 Learn Astropy provides a portal to all of the Astropy educational material through a single dynamically searchable web page.
-It allows you to filter tutorials by keywords, search for filters, make search queries in tutorials and documentation simultaneously.
+It allows you to filter tutorials by keywords, search for filters, and make search queries in tutorials and documentation simultaneously.
 
 Installing Astropy
 ------------------
@@ -13,7 +13,7 @@ The `Anaconda Python Distribution <https://www.anaconda.com/download/>`_ include
 
     conda update astropy
 
-To install Astropy from source into an existing Python installation, see the more detailed `installation instructions <http://astropy.readthedocs.io/en/stable/install.html>`_ in the main Astropy documentation.
+To install Astropy from the source into an existing Python installation, see the more detailed `installation instructions <http://astropy.readthedocs.io/en/stable/install.html>`_ in the main Astropy documentation.
 
 Get help
 --------
@@ -25,7 +25,7 @@ For contributors
 ----------------
 
 We welcome feedback, improvements, and new tutorial content via the `Astropy
-Tutorials repository <https://github.com/astropy/astropy-tutorials>`_  on
+Tutorials Repository <https://github.com/astropy/astropy-tutorials>`_  on
 GitHub. If you find a typo or would like to clarify some text, please either
 `create an issue <https://github.com/astropy/astropy-tutorials/issues/new>`_ or
 make the change yourself and then submit a pull request directly to the
