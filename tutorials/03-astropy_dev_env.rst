@@ -67,8 +67,9 @@ Step 3: Create a new conda environment for developing astropy
 
    ::
 
-       python setup.py build
-       python setup.py install
+       python setup.py develop
+       
+   The *develop* command will install the package in way that does not require you to re-install any time you make changes to your astropy-dev library.
 
 -  At this point, you could install any other packages you normally work
    with, *except* for astropy. For example,
