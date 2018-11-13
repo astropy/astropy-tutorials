@@ -158,5 +158,9 @@ Step 3: Push the changes to your fork on Github
    ::
 
        git push origin master
+   
+   If you've already made some changes to your own master branch, you may need to force the push with the `--force` command. This may cause you to lose some changes or issues with your git history. This is why it's good practice to **always develop in a separate branch**.
+
+
 
 Congratulations! You are up to date!
