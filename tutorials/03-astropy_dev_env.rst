@@ -114,6 +114,9 @@ astropy-dev environment.
 
     source deactivate
 
+When you want your changes to be incorporated into Astropy, `submit a pull request on Github <https://help.github.com/articles/creating-a-pull-request/>`__. If you're looking for `quick ways to contribute to Astropy <http://www.astropy.org/contribute.html#code>`__, check out the issues page on the main Astropy Github repo.
+
+
 Keeping your fork up to date
 ============================
 
