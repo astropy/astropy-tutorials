@@ -95,12 +95,12 @@ your ``my-code-update`` branch on Github.
 
 Here's an example of creating a new file and pushing it to the new branch:
 
-    ::
-        
-        echo "print('hello world')" > my-new-code.py
-        git add my-new-code.py
-        git commit -m "first commit"
-        git push origin my-code-update
+::
+
+       echo "print('hello world')" > my-new-code.py
+       git add my-new-code.py
+       git commit -m "first commit"
+       git push origin my-code-update
 
 For more help with learning Git and Github, see the `Github
 Help <https://help.github.com/>`__ pages, the `Git and Github Learning
