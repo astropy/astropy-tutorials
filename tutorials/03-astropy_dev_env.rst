@@ -57,8 +57,10 @@ Step 3: Create a new conda environment for developing astropy
 
    ::
 
-       conda create -n astropy-dev python=3 anaconda
+       conda create -n astropy-dev --only-deps python=3 astropy
        source activate astropy-dev
+       
+   The *--only-deps* flag indicates that the new environment will be installed with all of astropy's dependencies without installing astropy itself.
 
 -  Inside the astropy-dev folder, install the Astropy from the source
    code:
