@@ -93,6 +93,15 @@ Congratulations! You're ready to edit the astropy source code safely.
 Use ``git`` for committing your changes and pushing those changes to
 your ``my-code-update`` branch on Github.
 
+Here's an example of creating a new file and pushing it to the new branch:
+
+    ::
+        
+        echo "print('hello world')" > my-new-code.py
+        git add my-new-code.py
+        git commit -m "first commit"
+        git push origin my-code-update
+
 For more help with learning Git and Github, see the `Github
 Help <https://help.github.com/>`__ pages, the `Git and Github Learning
 Resources <https://help.github.com/articles/git-and-github-learning-resources/>`__
