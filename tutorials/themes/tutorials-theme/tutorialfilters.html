@@ -1,0 +1,174 @@
+<script>
+  $(document).ready(function(){
+      //to retain the scroll position
+      if (sessionStorage.scrollTop != "undefined") {  
+        $(window).scrollTop(sessionStorage.scrollTop);
+      }
+
+      //checking the active filters
+      var activeFilters = $.getQueryParameters();
+      var filters = document.getElementsByClassName('custom-control-input');
+      for(var f=0; filters[f]; ++f){
+          if(activeFilters.q[0].search(filters[f].value)!=-1)
+              filters[f].checked = true;   
+      }
+      document.getElementById("search-bar-input").value = '';
+  });
+  
+  //no results found
+  $(window).on("load", function(){
+          if(!document.getElementsByClassName('result-card').length)
+              {document.getElementById('search-results').innerHTML += '<h3>No tutorials found!</h3>'}
+  });  
+
+  //update filters
+  function applyFilter(){
+      sessionStorage.scrollTop = $(window).scrollTop(); //to store the current scroll position
+      var checkedValue = 'filterTutorials';    //because we only want to search the tutorials 
+      var inputElements = document.getElementsByClassName('custom-control-input');
+      for(var i=0; inputElements[i]; ++i){
+          if(inputElements[i].checked){
+              checkedValue += '+' + inputElements[i].value ;   //new query
+          }
+      }
+      var url = window.location.href.split("tutorials.html")[0] + "tutorials.html?q=" + checkedValue;
+      window.location.href = url;
+  }
+
+  //search filter 
+  function filterFunction() {
+        var input, filterQuery, filterDiv, filterDivLabel, ul, li, i;
+        input = document.getElementById("filter-search");
+        filterQuery = input.value.toUpperCase();
+        filterDiv = document.getElementsByClassName("custom-control");
+        filterDivLabel = document.getElementsByClassName("custom-control-label");
+        for (i = 0; i < filterDiv.length; i++) {
+          if (filterDivLabel[i].innerHTML.toUpperCase().indexOf(filterQuery) > -1) {
+            filterDiv[i].style.display = "";
+          } else {
+            filterDiv[i].style.display = "none";
+          }
+        }
+      }
+</script>
+
+<form action="">
+<div class="form-group">
+  <input type="text" name="q" id="filter-search" class="form-control" placeholder="Search for a filter" onkeyup="filterFunction()"/>
+</div>
+</form>  
+
+<form name="filterForm" class="form-group" style="padding-left: 20px; margin-bottom: 0;" action="">
+  <div class="custom-control custom-checkbox">
+    <input type="checkbox" name="q" class="custom-control-input" id="customCheck1" value="filterastroquery" onClick="applyFilter()">
+    <label class="custom-control-label" for="customCheck1">astroquery</label>
+  </div>
+  <div class="custom-control custom-checkbox">
+    <input type="checkbox" name="q" class="custom-control-input" id="customCheck2" value="filtercontourplots" onClick="applyFilter()">
+    <label class="custom-control-label" for="customCheck2">contour plots</label>
+  </div>
+  <div class="custom-control custom-checkbox">
+    <input type="checkbox" name="q" class="custom-control-input" id="customCheck3" value="filtercoordinates" onClick="applyFilter()">
+    <label class="custom-control-label" for="customCheck3">coordinates</label>
+  </div>
+  <div class="custom-control custom-checkbox">
+    <input type="checkbox" name="q" class="custom-control-input" id="customCheck4" value="filterdatacubes" onClick="applyFilter()">
+    <label class="custom-control-label" for="customCheck4">data cubes</label>
+  </div>
+  <div class="custom-control custom-checkbox">
+    <input type="checkbox" name="q" class="custom-control-input" id="customCheck5" value="filterdynamics" onClick="applyFilter()">
+    <label class="custom-control-label" for="customCheck5">dynamics</label>
+  </div>
+  <div class="custom-control custom-checkbox">
+    <input type="checkbox" name="q" class="custom-control-input" id="customCheck6" value="filtererrorbars" onClick="applyFilter()">
+    <label class="custom-control-label" for="customCheck6">errorbars</label>
+  </div>
+  <div class="custom-control custom-checkbox">
+    <input type="checkbox" name="q" class="custom-control-input" id="customCheck7" value="filterfitsimage" onClick="applyFilter()">
+    <label class="custom-control-label" for="customCheck7">fits image</label>
+  </div>
+  <div class="custom-control custom-checkbox">
+    <input type="checkbox" name="q" class="custom-control-input" id="customCheck8" value="filterfitstable" onClick="applyFilter()">
+    <label class="custom-control-label" for="customCheck8">fits table</label>
+  </div>
+  <div class="custom-control custom-checkbox">
+    <input type="checkbox" name="q" class="custom-control-input" id="customCheck9" value="filterfitting" onClick="applyFilter()">
+    <label class="custom-control-label" for="customCheck9">fitting</label>
+  </div>
+  <div class="custom-control custom-checkbox">
+    <input type="checkbox" name="q" class="custom-control-input" id="customCheck10" value="filterhistogram" onClick="applyFilter()">
+    <label class="custom-control-label" for="customCheck10">histogram</label>
+  </div>
+  <div class="custom-control custom-checkbox">
+    <input type="checkbox" name="q" class="custom-control-input" id="customCheck11" value="filtermatplotlib" onClick="applyFilter()">
+    <label class="custom-control-label" for="customCheck11">matplotlib</label>
+  </div>
+  <div class="custom-control custom-checkbox">
+    <input type="checkbox" name="q" class="custom-control-input" id="customCheck12" value="filternumpy" onClick="applyFilter()">
+    <label class="custom-control-label" for="customCheck12">numpy</label>
+  </div>
+  <div class="custom-control custom-checkbox">
+    <input type="checkbox" name="q" class="custom-control-input" id="customCheck13" value="filterobsplan" onClick="applyFilter()">
+    <label class="custom-control-label" for="customCheck13">obsplan</label>
+  </div>
+  <div class="custom-control custom-checkbox">
+    <input type="checkbox" name="q" class="custom-control-input" id="customCheck14" value="filterOOP" onClick="applyFilter()">
+    <label class="custom-control-label" for="customCheck14">OOP</label>
+  </div>
+  <div class="custom-control custom-checkbox">
+    <input type="checkbox" name="q" class="custom-control-input" id="customCheck15" value="filterphotometry" onClick="applyFilter()">
+    <label class="custom-control-label" for="customCheck15">photometry</label>
+  </div>
+  <div class="custom-control custom-checkbox">
+    <input type="checkbox" name="q" class="custom-control-input" id="customCheck16" value="filterphysics" onClick="applyFilter()">
+    <label class="custom-control-label" for="customCheck16">physics</label>
+  </div>
+  <div class="custom-control custom-checkbox">
+    <input type="checkbox" name="q" class="custom-control-input" id="customCheck17" value="filterplots" onClick="applyFilter()">
+    <label class="custom-control-label" for="customCheck17">plots</label>
+  </div>
+  <div class="custom-control custom-checkbox">
+    <input type="checkbox" name="q" class="custom-control-input" id="customCheck18" value="filterradio" onClick="applyFilter()">
+    <label class="custom-control-label" for="customCheck18">radio</label>
+  </div>
+  <div class="custom-control custom-checkbox">
+    <input type="checkbox" name="q" class="custom-control-input" id="customCheck19" value="filterreproject" onClick="applyFilter()">
+    <label class="custom-control-label" for="customCheck19">reproject</label>
+  </div>
+  <div class="custom-control custom-checkbox">
+    <input type="checkbox" name="q" class="custom-control-input" id="customCheck20" value="filterscipy" onClick="applyFilter()">
+    <label class="custom-control-label" for="customCheck20">scipy</label>
+  </div>
+  <div class="custom-control custom-checkbox">
+    <input type="checkbox" name="q" class="custom-control-input" id="customCheck21" value="filterspectroscopy" onClick="applyFilter()">
+    <label class="custom-control-label" for="customCheck21">spectroscopy</label>
+  </div>
+  <div class="custom-control custom-checkbox">
+    <input type="checkbox" name="q" class="custom-control-input" id="customCheck22" value="filterstatistics " onClick="applyFilter()">
+    <label class="custom-control-label" for="customCheck22">statistics </label>
+  </div>
+  <div class="custom-control custom-checkbox">
+    <input type="checkbox" name="q" class="custom-control-input" id="customCheck23" value="filtertable" onClick="applyFilter()">
+    <label class="custom-control-label" for="customCheck23">table</label>
+  </div>
+  <div class="custom-control custom-checkbox">
+    <input type="checkbox" name="q" class="custom-control-input" id="customCheck24" value="filtertheory" onClick="applyFilter()">
+    <label class="custom-control-label" for="customCheck24">theory</label>
+  </div>
+  <div class="custom-control custom-checkbox">
+    <input type="checkbox" name="q" class="custom-control-input" id="customCheck25" value="filtertimeseries" onClick="applyFilter()">
+    <label class="custom-control-label" for="customCheck25">time series</label>
+  </div>
+  <div class="custom-control custom-checkbox">
+    <input type="checkbox" name="q" class="custom-control-input" id="customCheck26" value="filterunits" onClick="applyFilter()">
+    <label class="custom-control-label" for="customCheck26">units</label>
+  </div>
+  <div class="custom-control custom-checkbox">
+    <input type="checkbox" name="q" class="custom-control-input" id="customCheck27" value="filterVizier" onClick="applyFilter()">
+    <label class="custom-control-label" for="customCheck27">Vizier</label>
+  </div>
+  <div class="custom-control custom-checkbox">
+    <input type="checkbox" name="q" class="custom-control-input" id="customCheck28" value="filterxray" onClick="applyFilter()">
+    <label class="custom-control-label" for="customCheck28">xray</label>
+  </div>
+</form>
