@@ -165,7 +165,8 @@ man_pages = [('index', project.lower(), project + u' Documentation',
 github_issues_url = 'https://github.com/{0}/issues/'.format(setup_cfg['github_project'])
 
 # Add any paths that contain custom themes here, relative to this directory.
-html_theme_path = [path.abspath(path.join(path.dirname(__file__), 'themes'))]
+html_theme_path = [os.path.abspath(os.path.join(os.path.dirname(__file__),
+                                                'themes'))]
 html_theme = 'tutorials-theme'
 html_sidebars = {'tutorials': ['tutorialfilters.html']}
 
