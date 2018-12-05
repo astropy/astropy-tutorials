@@ -18,4 +18,3 @@ dependencies:
   - reproject=0.3.2
   - pip:
     - git+https://github.com/jupyter/nbconvert # this is really >=5.4, but at the time of adding this that wasn't yet available
-    - sphinx_bootstrap_theme # needed for new theme
