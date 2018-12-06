@@ -40,7 +40,7 @@ Overview
 Template intro
 ^^^^^^^^^^^^^^
 
-The first cell in every tutorial notebook must adhere to the following format:
+The first cell in every tutorial notebook must adhere to the following format.
 
 .. code-block:: none
 
@@ -131,8 +131,8 @@ editing and feedback for submitted tutorial notebooks via
 procedure to submit a Jupyter notebook:
 
 * Upload the Jupyter notebook to Google drive
-* Right click on the file in your Google drive and select _Get
-  shareable link_. Click on _Share settings_ and change it so that
+* Right click on the file in your Google drive and select *Get
+  shareable link*. Click on *Share settings* and change it so that
   "Anyone with a link can edit". Then copy the url in the box.
 * `Open an issue on the astropy-tutorials Github repo
   <https://github.com/astropy/astropy-tutorials/issues>`_ and paste
