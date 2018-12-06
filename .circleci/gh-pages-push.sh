@@ -13,8 +13,10 @@
 if [[ -z $CIRCLE_PULL_REQUEST ]] ; then
     git -c user.name='circle' -c user.email='circle' commit -m "now with RST"
     git clone --single-branch -b gh-pages https://github.com/Cadair/astropy-tutorials gh-pages
-    cp -r _build/html/* gh-pages
+    cp -r build/html/* gh-pages
     cd gh-pages
+    git add .
+    git commit -m "Upadate the build docs"
     git push -q origin gh-pages
     echo "Not a pull request: pushing RST files to rst branch."
 else
