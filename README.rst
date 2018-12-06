@@ -37,5 +37,5 @@ Tutorial infrastructure
 -----------------------
 
 For more information on the infrastructure that builds the tutorials, see the
-`infrastructure/developer http://astropy-tutorials.readthedocs.io/en/latest/dev.html>`_"
+`infrastructure/developer <http://astropy-tutorials.readthedocs.io/en/latest/dev.html>`_"
 section of the tutorials documentation.
