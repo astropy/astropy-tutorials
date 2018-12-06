@@ -26,7 +26,7 @@ Overview
 
 * Each tutorial should have 3–5 explicit `Learning Goals
   <http://tll.mit.edu/help/intended-learning-outcomes>`_, demonstrate ~2–3
-  pieces of functionality relevant to astronomy, and contain 2–3 demonstrations of generic but commonly used functionality (e.g., ``numpy``, ``matplotlib``)
+  pieces of functionality relevant to astronomy, and contain 2–3 demonstrations of generic but commonly used functionality (e.g., ``numpy``, ``matplotlib``).
 * Each tutorial should roughly follow this progression:
     * *Input/Output*: read in some data (use `astroquery
       <https://astroquery.readthedocs.io/en/latest/>`_ where possible to query
@@ -36,6 +36,34 @@ Overview
       <http://docs.astropy.org/en/stable/visualization/>`_ where possible)
 * The tutorials must be compatible with the versions supported by the last major
   release of the Astropy core package (i.e. Python >= 3.5)
+
+Template intro
+^^^^^^^^^^^^^^
+
+The first cell in every tutorial notebook must adhere to the following format:
+
+.. code-block:: none
+
+    # Title name
+
+    ## Authors
+    Jane Smith, Jose Jones
+
+    ## Learning Goals
+    * Query the ... dataset
+    * Calculate ...
+    * Display ...
+
+    ## Keywords
+    Example, example, example
+
+    ## Companion Content
+    Carroll & Ostlie 10.3, Binney & Tremaine 1.5
+
+    ## Summary
+    In this tutorial, we will download a data file, do something to it, and then
+    visualize it.
+
 
 Code
 ^^^^
@@ -88,31 +116,6 @@ Narrative
 * Use ``<div class="alert alert-info">Note</div>`` for Notes and ``<div
   class="alert alert-warning">Warning</div>`` for Warnings (Markdown supports
   raw HTML)
-
-Template intro
-^^^^^^^^^^^^^^
-
-.. code-block:: none
-
-    # Title name
-
-    ## Authors
-    Jane Smith, Jose Jones
-
-    ## Learning Goals
-    * Query the ... dataset
-    * Calculate ...
-    * Display ...
-
-    ## Keywords
-    Example, example, example
-
-    ## Companion Content
-    Carroll & Ostlie 10.3, Binney & Tremaine 1.5
-
-    ## Summary
-    In this tutorial, we will download a data file, do something to it, and then
-    visualize it.
 
 Procedure for contributing
 --------------------------
