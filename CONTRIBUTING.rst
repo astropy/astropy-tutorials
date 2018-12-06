@@ -40,7 +40,7 @@ Overview
 Template intro
 ^^^^^^^^^^^^^^
 
-The first cell in every tutorial notebook must adhere to the following format.
+The first cell in every tutorial notebook is used for the title, author list, keywords, and summary and should adhere to the following format:
 
 .. code-block:: none
 
