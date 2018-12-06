@@ -120,6 +120,35 @@ Narrative
 Procedure for contributing
 --------------------------
 
+There are two methods for contributing tutorial notebooks.
+
+Method One: Submit a Jupyter Notebook using Colaboratory
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The Learn Astropy project is transitioning to providing interactive
+editing and feedback for submitted tutorial notebooks via
+`Colaboratory <https://colab.research.google.com/>`_. Follow this
+procedure to submit a Jupyter notebook:
+
+* Upload the Jupyter notebook to Google drive
+* Right click on the file in your Google drive and select _Get
+  shareable link_. Click on _Share settings_ and change it so that
+  "Anyone with a link can edit". Then copy the url in the box.
+* `Open an issue on the astropy-tutorials Github repo
+  <https://github.com/astropy/astropy-tutorials/issues>`_ and paste
+  the url to your Jupyter notebook.
+
+Learn Astropy maintainers will respond as soon as possible by
+downloading your notebook, testing it, and editting the file in your
+Google drive to conform to the above style guide.
+
+When the tutorial is ready to be incorporated, Learn Astropy
+maintainers will open a pull request on behalf of the tutorial
+authors.
+
+Method Two: Submit a Pull Request
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 The process for contributing a tutorial involves the `GitHub fork
 <https://help.github.com/articles/working-with-forks/>`_ and ``git`` workflow
 concepts `branch, push, pull request <https://help.github.com/articles/proposing
