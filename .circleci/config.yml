@@ -15,8 +15,8 @@ pip-run: &pip-install
     . venv/bin/activate
     pip install -r pip-requirements.txt
     pip install astropy_helpers sphinx pytest
+    pip install sphinx-astropy sphinx-bootstrap-theme
     pip install git+https://github.com/jupyter/nbconvert
-    pip install sphinx_astropy sphinx-bootstrap-theme
 
 jobs:
 
