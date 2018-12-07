@@ -11,7 +11,7 @@
 # fi
 
 if [[ -z $CIRCLE_PULL_REQUEST ]] ; then
-    git clone --single-branch -b gh-pages https://github.com/Cadair/astropy-tutorials gh-pages
+    git clone --single-branch -b gh-pages git@github.com:astropy/astropy-tutorials.git gh-pages
     cp -r build/html/* gh-pages
     cd gh-pages
     git add .
