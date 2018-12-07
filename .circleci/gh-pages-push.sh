@@ -12,9 +12,11 @@
 
 # if [[ -z $CIRCLE_PULL_REQUEST ]] ; then
 git checkout --orphan test-branch
-cp -R _build/html/* ./
-git add -f *
-git -c user.name='circle' -c user.email='circle' commit -m "now with html"
+git add -f _build/html/*
+git -c user.name='circle' -c user.email='circle' commit -m "add html pages"
+git clean -fxd
+git mv _build/html/* ./
+git -c user.name='circle' -c user.email='circle' commit -m "move html to top"
 
 branches="$(git remote -v)"
 if [[ $branches != *"origin"* ]]; then
