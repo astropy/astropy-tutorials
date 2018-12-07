@@ -58,16 +58,7 @@ release = setup_cfg['version']
 # The short X.Y version.
 version = re.match(r'([\d\.]*)(\D*\d?)', setup_cfg['version']).group(1)
 if version.endswith('.'): # e.g. "3.0.dev", which splits into groups "3.0." and "dev"
-  version = version[:-1]
-
-
-if release.endswith('dev'):
-    # once the sphinx-astropy-theme is ready, just copy over the git_helpers.py file
-    # into this repo - it has been long-term stable so the helpers aren't needed
-    # just for this.
-    from astropy_helpers.git_helpers import get_git_devstr
-    release = release + get_git_devstr(path=os.path.join(os.path.split(__file__)[0],'..'))
-
+    version = version[:-1]
 
 
 # -- Options for HTML output --------------------------------------------------
@@ -86,13 +77,13 @@ html_theme_options = {
     'navbar_fixed_top': "true",
     'bootswatch_theme': "sandstone",
     'bootstrap_version': "3"
-    }
+}
 
 # html_style = 'custom.css'
 
 # Add any paths that contain custom themes here, relative to this directory.
 # To use a different custom theme, add the directory containing the theme.
-#html_theme_path = []
+# html_theme_path = []
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes. To override the custom theme, set this to the
@@ -141,7 +132,8 @@ man_pages = [('index', project.lower(), project + u' Documentation',
 github_issues_url = 'https://github.com/{0}/issues/'.format(setup_cfg['github_project'])
 
 # Add any paths that contain custom themes here, relative to this directory.
-html_theme_path = [path.abspath(path.join(path.dirname(__file__), 'themes'))]
+html_theme_path = [os.path.abspath(os.path.join(os.path.dirname(__file__),
+                                                'themes'))]
 html_theme = 'tutorials-theme'
 html_sidebars = {'tutorials': ['tutorialfilters.html']}
 
