@@ -8,33 +8,9 @@ import re
 import os
 import sys
 
-import sphinx_bootstrap_theme
-
-# Building from inside the tutorials/ directory?  Need to add correct helpers to the python path
-a_h_path = None
-if os.path.basename(os.getcwd()) == 'tutorials':
-    a_h_path = os.path.abspath(os.path.join('..', 'astropy_helpers'))
-    if os.path.isdir(a_h_path):
-        sys.path.insert(1, a_h_path)
-
 # Load all of the global Astropy configuration
-try:
-    # at some point hopefully this can be replaced with installing a
-    # standalone sphinx-astropy-theme
-    from astropy_helpers.sphinx.conf import *
-
-    import astropy_helpers
-    if a_h_path is not None and not astropy_helpers.__path__[0].startswith(a_h_path):
-        from warnings import warn
-        warn("The astropy_helpers you are importing is not the one that's "
-             "included with the tutorials.  This may be fine but might cause "
-             "unexpected problems. You'll probably need to init/update the "
-             "submodules to rectify this, or delete your installed version of "
-             "the helpers (normally you shouldn't need to have them installed)")
-except ImportError:
-    raise ImportError('Couldn\'t import astropy_helpers. You may need to "git '
-                      'submodule init" and then "git submodule update" from '
-                      'the base of the tutorials repo?')
+from sphinx_astropy.conf import *
+import sphinx_bootstrap_theme
 
 # Get configuration information from setup.cfg
 try:
