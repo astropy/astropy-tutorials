@@ -8,33 +8,9 @@ import re
 import os
 import sys
 
-import sphinx_bootstrap_theme
-
-# Building from inside the tutorials/ directory?  Need to add correct helpers to the python path
-a_h_path = None
-if os.path.basename(os.getcwd()) == 'tutorials':
-    a_h_path = os.path.abspath(os.path.join('..', 'astropy_helpers'))
-    if os.path.isdir(a_h_path):
-        sys.path.insert(1, a_h_path)
-
 # Load all of the global Astropy configuration
-try:
-    # at some point hopefully this can be replaced with installing a
-    # standalone sphinx-astropy-theme
-    from astropy_helpers.sphinx.conf import *
-
-    import astropy_helpers
-    if a_h_path is not None and not astropy_helpers.__path__[0].startswith(a_h_path):
-        from warnings import warn
-        warn("The astropy_helpers you are importing is not the one that's "
-             "included with the tutorials.  This may be fine but might cause "
-             "unexpected problems. You'll probably need to init/update the "
-             "submodules to rectify this, or delete your installed version of "
-             "the helpers (normally you shouldn't need to have them installed)")
-except ImportError:
-    raise ImportError('Couldn\'t import astropy_helpers. You may need to "git '
-                      'submodule init" and then "git submodule update" from '
-                      'the base of the tutorials repo?')
+from sphinx_astropy.conf import *
+import sphinx_bootstrap_theme
 
 # Get configuration information from setup.cfg
 try:
@@ -82,16 +58,7 @@ release = setup_cfg['version']
 # The short X.Y version.
 version = re.match(r'([\d\.]*)(\D*\d?)', setup_cfg['version']).group(1)
 if version.endswith('.'): # e.g. "3.0.dev", which splits into groups "3.0." and "dev"
-  version = version[:-1]
-
-
-if release.endswith('dev'):
-    # once the sphinx-astropy-theme is ready, just copy over the git_helpers.py file
-    # into this repo - it has been long-term stable so the helpers aren't needed
-    # just for this.
-    from astropy_helpers.git_helpers import get_git_devstr
-    release = release + get_git_devstr(path=os.path.join(os.path.split(__file__)[0],'..'))
-
+    version = version[:-1]
 
 
 # -- Options for HTML output --------------------------------------------------
@@ -110,13 +77,13 @@ html_theme_options = {
     'navbar_fixed_top': "true",
     'bootswatch_theme': "sandstone",
     'bootstrap_version': "3"
-    }
+}
 
 # html_style = 'custom.css'
 
 # Add any paths that contain custom themes here, relative to this directory.
 # To use a different custom theme, add the directory containing the theme.
-#html_theme_path = []
+# html_theme_path = []
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes. To override the custom theme, set this to the
@@ -165,7 +132,8 @@ man_pages = [('index', project.lower(), project + u' Documentation',
 github_issues_url = 'https://github.com/{0}/issues/'.format(setup_cfg['github_project'])
 
 # Add any paths that contain custom themes here, relative to this directory.
-html_theme_path = [path.abspath(path.join(path.dirname(__file__), 'themes'))]
+html_theme_path = [os.path.abspath(os.path.join(os.path.dirname(__file__),
+                                                'themes'))]
 html_theme = 'tutorials-theme'
 html_sidebars = {'tutorials': ['tutorialfilters.html']}
 
