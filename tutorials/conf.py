@@ -197,4 +197,3 @@ process_notebooks(nb_tutorials_path, **processkwargs)
 
 
 suppress_warnings = ['image.nonlocal_uri']
-html_static_path = ['notebooks', '_static']
