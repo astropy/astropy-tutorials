@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="filterTutorials, filterFitsHeader, filterFileInputOutput" name="keywords" />
+<meta content="filterTutorials," name="keywords" />
+
+    <title>Edit a FITS header &#8212; astropy-tutorials v3.0.dev</title>
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bootstrap_sandstone.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/astropy.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <script type="text/javascript" src="../_static/searchtools.js"></script>
+    <script type="text/javascript" src="https://use.fontawesome.com/3168e95f94.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <link rel="shortcut icon" href="../_static/astropy_favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  
+  <script type="text/javascript">  
+    if( (window.location.href.search("tutorials.html") != -1) && (window.location.href.search("q=filterTutorials") == -1) ){
+      var url = window.location.href.split("tutorials.html")[0] + "tutorials.html?q=filterTutorials";
+      window.location.href = url;
+    }
+  </script>
+  <script type="text/javascript">
+    jQuery(function() { Search.loadIndex("../searchindex.js"); });
+  </script>
+  
+  <script type="text/javascript" id="searchindexloader"></script>
+   
+
+  </head><body>
+
+
+
+<nav class="navbar navbar-expand-lg bg-navbar">
+  <a class="navbar-brand" href="/"style="padding: 0px 5px;"><img src="../_static/astropy_logo.png" style="height:38px;"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarColor01">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="http://www.astropy.org"/>Astropy<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Modules</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0" action="../search.html" method="get">
+      <div class="input-group-prepend">
+          <button class="input-group-text" style="padding: 0.7rem"><i class="fa fa-search fa-fw"></i></button>
+      </div>
+      <input class="form-control mr-sm-3" name="q" type="text" placeholder="Search the universe" />
+    </form>
+  </div>
+</nav>
+
+
+<div class="container">
+  <div class="row">
+
+    
+    
+    
+    
+    
+    <div class="col-md-3" style="padding-left: 0px;">
+      <div id="sidebar" class="bs-sidenav card" role="complementary">
+        <h3>Table of contents</h3>
+        <ul>
+<li><a class="reference internal" href="#">Edit a FITS header</a><ul>
+<li><a class="reference internal" href="#authors">Authors</a></li>
+<li><a class="reference internal" href="#learning-goals">Learning Goals</a></li>
+<li><a class="reference internal" href="#keywords">Keywords</a></li>
+<li><a class="reference internal" href="#summary">Summary</a></li>
+<li><a class="reference internal" href="#exercise">Exercise</a></li>
+</ul>
+</li>
+</ul>
+
+      </div>    
+    </div>
+    
+
+    <div class="col-md-9">
+      <div class="content-padding card">
+        <div>
+  <a href="../_static/FITS-header/FITS-header.ipynb"><button id="download">Download tutorial notebook</button></a>
+<a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/FITS-header/FITS-header.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
+
+<div id="spacer"></div><div class="section" id="edit-a-fits-header">
+<span id="fits-header"></span><h1>Edit a FITS header<a class="headerlink" href="#edit-a-fits-header" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="authors">
+<h2>Authors<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a></h2>
+<p>Adrian Price-Whelan, Adam Ginsburg</p>
+</div>
+<div class="section" id="learning-goals">
+<h2>Learning Goals<a class="headerlink" href="#learning-goals" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Read a FITS file and retrieve the header metadata</li>
+<li>Edit the FITS header and write the modified file as a FITS file</li>
+</ul>
+</div>
+<div class="section" id="keywords">
+<h2>Keywords<a class="headerlink" href="#keywords" title="Permalink to this headline">¶</a></h2>
+<p>FITS header, file input/output</p>
+</div>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p>This tutorial describes how to read in, edit a FITS header, and then
+write it back out to disk. For this example we’re going to change the
+<code class="docutils literal notranslate"><span class="pre">OBJECT</span></code> keyword.</p>
+<p>This tutorial uses
+<a class="reference external" href="http://docs.astropy.org/en/latest/io/fits/index.html">astropy.io.fits</a>,
+which was formerly released separately as <code class="docutils literal notranslate"><span class="pre">pyfits</span></code>. If you have used
+<code class="docutils literal notranslate"><span class="pre">pyfits</span></code> to manipulate FITS files then you may already be familiar
+with the features and syntax of the package. We start by importing the
+subpackage into our local namespace, which allows us to access the
+functions and classes as <code class="docutils literal notranslate"><span class="pre">fits.name_of_function()</span></code>. For example, to
+access the <code class="docutils literal notranslate"><span class="pre">getdata()</span></code> function, we <em>don’t</em> have to do
+<code class="docutils literal notranslate"><span class="pre">astropy.io.fits.getdata()</span></code> and can instead simply use
+<code class="docutils literal notranslate"><span class="pre">fits.getdata()</span></code>. You may run across old documentation or tutorials
+that use the name <code class="docutils literal notranslate"><span class="pre">pyfits</span></code>. Such examples will begin with
+<code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">pyfits</span></code> and then the command <code class="docutils literal notranslate"><span class="pre">fits.getdata()</span></code> (for example)
+would be written as <code class="docutils literal notranslate"><span class="pre">pyfits.getdata()</span></code>.</p>
+<p><span class="inputnumrole">In[1]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">astropy.io</span> <span class="k">import</span> <span class="n">fits</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">astropy.io.fits</span></code> provides a lot of flexibility for reading FITS files
+and headers, but most of the time the convenience functions are the
+easiest way to access the data. <code class="docutils literal notranslate"><span class="pre">fits.getdata()</span></code> reads just the data
+from a FITS file, but with the <code class="docutils literal notranslate"><span class="pre">header=True</span></code> keyword argument will
+also read the header.</p>
+<p><span class="inputnumrole">In[2]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">getdata</span><span class="p">(</span><span class="s2">&quot;input_file.fits&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>There is also a dedicated function for reading just the header:</p>
+<p><span class="inputnumrole">In[3]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">hdu_number</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># HDU means header data unit</span>
+<span class="n">fits</span><span class="o">.</span><span class="n">getheader</span><span class="p">(</span><span class="s1">&#39;input_file.fits&#39;</span><span class="p">,</span> <span class="n">hdu_number</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[3]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SIMPLE</span>  <span class="o">=</span>                    <span class="n">T</span> <span class="o">/</span> <span class="n">conforms</span> <span class="n">to</span> <span class="n">FITS</span> <span class="n">standard</span>
+<span class="n">BITPIX</span>  <span class="o">=</span>                  <span class="o">-</span><span class="mi">64</span> <span class="o">/</span> <span class="n">array</span> <span class="n">data</span> <span class="nb">type</span>
+<span class="n">NAXIS</span>   <span class="o">=</span>                    <span class="mi">2</span> <span class="o">/</span> <span class="n">number</span> <span class="n">of</span> <span class="n">array</span> <span class="n">dimensions</span>
+<span class="n">NAXIS1</span>  <span class="o">=</span>                  <span class="mi">100</span>
+<span class="n">NAXIS2</span>  <span class="o">=</span>                  <span class="mi">100</span>
+<span class="n">EXTEND</span>  <span class="o">=</span>                    <span class="n">T</span>
+<span class="n">OBJECT</span>  <span class="o">=</span> <span class="s1">&#39;KITTEN  &#39;</span>
+</pre></div>
+</div>
+<p>But <code class="docutils literal notranslate"><span class="pre">getdata()</span></code> can get both the data and the header, so it’s a useful
+command to remember. Since the primary HDU of a FITS file must contain
+image data, the data is now stored in a <code class="docutils literal notranslate"><span class="pre">numpy</span></code> array. The header is
+stored in an object that acts like a standard Python dictionary.</p>
+<p><span class="inputnumrole">In[4]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># But hdu_number = 0 is the PRIMARY HDU.How many HDUs are in this file?</span>
+<span class="n">fits_inf</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;input_file.fits&quot;</span><span class="p">)</span>
+<span class="n">fits_inf</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+<span class="n">fits_inf</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">header</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[4]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Filename</span><span class="p">:</span> <span class="n">input_file</span><span class="o">.</span><span class="n">fits</span>
+<span class="n">No</span><span class="o">.</span>    <span class="n">Name</span>      <span class="n">Ver</span>    <span class="n">Type</span>      <span class="n">Cards</span>   <span class="n">Dimensions</span>   <span class="n">Format</span>
+  <span class="mi">0</span>  <span class="n">PRIMARY</span>       <span class="mi">1</span> <span class="n">PrimaryHDU</span>       <span class="mi">7</span>   <span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>   <span class="n">float64</span>
+  <span class="mi">1</span>                <span class="mi">1</span> <span class="n">ImageHDU</span>         <span class="mi">7</span>   <span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">)</span>   <span class="n">float64</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SIMPLE</span>  <span class="o">=</span>                    <span class="n">T</span> <span class="o">/</span> <span class="n">conforms</span> <span class="n">to</span> <span class="n">FITS</span> <span class="n">standard</span>
+<span class="n">BITPIX</span>  <span class="o">=</span>                  <span class="o">-</span><span class="mi">64</span> <span class="o">/</span> <span class="n">array</span> <span class="n">data</span> <span class="nb">type</span>
+<span class="n">NAXIS</span>   <span class="o">=</span>                    <span class="mi">2</span> <span class="o">/</span> <span class="n">number</span> <span class="n">of</span> <span class="n">array</span> <span class="n">dimensions</span>
+<span class="n">NAXIS1</span>  <span class="o">=</span>                  <span class="mi">100</span>
+<span class="n">NAXIS2</span>  <span class="o">=</span>                  <span class="mi">100</span>
+<span class="n">EXTEND</span>  <span class="o">=</span>                    <span class="n">T</span>
+<span class="n">OBJECT</span>  <span class="o">=</span> <span class="s1">&#39;KITTEN  &#39;</span>
+</pre></div>
+</div>
+<p>Using <code class="docutils literal notranslate"><span class="pre">fits.open</span></code> allowed us to look more generally at our data.
+<code class="docutils literal notranslate"><span class="pre">fits_inf[0].header</span></code> gave us the same output as <code class="docutils literal notranslate"><span class="pre">fits.getheader</span></code>.
+What will you learn if you type <code class="docutils literal notranslate"><span class="pre">fits_inf[1].header</span></code>? Based on
+<code class="docutils literal notranslate"><span class="pre">fits_inf.info()</span></code> can you guess what will happen if you type
+<code class="docutils literal notranslate"><span class="pre">fits_inf[2].header</span></code>?</p>
+<p>Now let’s change the header to give it the correct object:</p>
+<p><span class="inputnumrole">In[5]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">header</span><span class="p">[</span><span class="s1">&#39;OBJECT&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;M31&quot;</span>
+</pre></div>
+</div>
+<p>Finally, we have to write out the FITS file. Again, the convenience
+function for this is the most useful command to remember:</p>
+<p><span class="inputnumrole">In[6]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fits</span><span class="o">.</span><span class="n">writeto</span><span class="p">(</span><span class="s1">&#39;output_file.fits&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">header</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>That’s it; you’re done!</p>
+<p>Two common and more complicated cases are worth mentioning (but if your
+needs are much more complex, you should consult the full documentation
+<a class="reference external" href="http://docs.astropy.org/en/stable/io/fits/">http://docs.astropy.org/en/stable/io/fits/</a>).</p>
+<p>The first complication is that the FITS file you’re examining and
+editing might have multiple HDU’s (extensions), in which case you can
+specify the extension like this:</p>
+<p><span class="inputnumrole">In[7]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">data1</span><span class="p">,</span> <span class="n">header1</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">getdata</span><span class="p">(</span><span class="s2">&quot;input_file.fits&quot;</span><span class="p">,</span> <span class="n">ext</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>This will get you the data and header associated with the <code class="docutils literal notranslate"><span class="pre">index=1</span></code>
+extension in the FITS file. Without specifying a number, <code class="docutils literal notranslate"><span class="pre">getdata()</span></code>
+will get the 0th extension (equivalent to saying <code class="docutils literal notranslate"><span class="pre">ext=0</span></code>).</p>
+<p>Another useful tip is if you want to overwrite an existing FITS file. By
+default, <code class="docutils literal notranslate"><span class="pre">writeto()</span></code> won’t let you do this, so you need to explicitly
+give it permission using the <code class="docutils literal notranslate"><span class="pre">clobber</span></code> keyword argument:</p>
+<p><span class="inputnumrole">In[8]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fits</span><span class="o">.</span><span class="n">writeto</span><span class="p">(</span><span class="s1">&#39;output_file.fits&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">header</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>A final example is if you want to make a small change to a FITS file,
+like updating a header keyword, but you don’t want to read in and write
+out the whole file, which can take a while. Instead you can use the
+<code class="docutils literal notranslate"><span class="pre">mode='update'</span></code> read mode to do this:</p>
+<p><span class="inputnumrole">In[9]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;input_file.fits&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;update&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">filehandle</span><span class="p">:</span>
+    <span class="n">filehandle</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="s1">&#39;MYHDRKW&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;My Header Keyword&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="exercise">
+<h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">¶</a></h2>
+<p>Read in the file you just wrote and add three header keywords:</p>
+<ol class="arabic simple">
+<li>‘RA’ for the Right Ascension of M31</li>
+<li>‘DEC’ for the Declination of M31</li>
+<li>‘RADECSRC’ with text indicating where you found the RA/Dec (web URL,
+textbook name, your photographic memory, etc.)</li>
+</ol>
+<p>Then write the updated header back out to a new file:</p>
+<p><span class="inputnumrole">In[None]:</span></p>
+<div id="spacer"></div>
+
+<a href="../_static//.ipynb"><button id="download">Download tutorial notebook</button></a>
+<a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks//.ipynb"><button id="binder">Interactive tutorial notebook</button></a></div>
+</div>
+
+</div>
+      </div>  
+      
+    </div>
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.2.
+    &copy; Copyright Astropy.   
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

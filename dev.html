@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Documentation on tutorials infrastructure &#8212; astropy-tutorials v3.0.dev</title>
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="_static/bootstrap_sandstone.css" />
+    <link rel="stylesheet" type="text/css" href="_static/astropy.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <script type="text/javascript" src="_static/searchtools.js"></script>
+    <script type="text/javascript" src="https://use.fontawesome.com/3168e95f94.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <link rel="shortcut icon" href="_static/astropy_favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  
+  <script type="text/javascript">  
+    if( (window.location.href.search("tutorials.html") != -1) && (window.location.href.search("q=filterTutorials") == -1) ){
+      var url = window.location.href.split("tutorials.html")[0] + "tutorials.html?q=filterTutorials";
+      window.location.href = url;
+    }
+  </script>
+  <script type="text/javascript">
+    jQuery(function() { Search.loadIndex("searchindex.js"); });
+  </script>
+  
+  <script type="text/javascript" id="searchindexloader"></script>
+   
+
+  </head><body>
+
+
+
+<nav class="navbar navbar-expand-lg bg-navbar">
+  <a class="navbar-brand" href="/"style="padding: 0px 5px;"><img src="../_static/astropy_logo.png" style="height:38px;"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarColor01">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="http://www.astropy.org"/>Astropy<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Modules</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0" action="search.html" method="get">
+      <div class="input-group-prepend">
+          <button class="input-group-text" style="padding: 0.7rem"><i class="fa fa-search fa-fw"></i></button>
+      </div>
+      <input class="form-control mr-sm-3" name="q" type="text" placeholder="Search the universe" />
+    </form>
+  </div>
+</nav>
+
+
+<div class="container">
+  <div class="row">
+
+    
+    
+    
+    
+    
+    <div class="col-md-3" style="padding-left: 0px;">
+      <div id="sidebar" class="bs-sidenav card" role="complementary">
+        <h3>Table of contents</h3>
+        <ul>
+<li><a class="reference internal" href="#">Documentation on tutorials infrastructure</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#why-not-use-nbsphinx">Why not use nbsphinx?</a></li>
+<li><a class="reference internal" href="#tutorials-directory-structure">Tutorials directory structure</a></li>
+<li><a class="reference internal" href="#testing-notebook-execution">Testing notebook execution</a></li>
+<li><a class="reference internal" href="#building-the-tutorials-page-locally">Building the tutorials page locally</a></li>
+<li><a class="reference internal" href="#releases">Releases</a></li>
+<li><a class="reference internal" href="#marking-a-cell-with-an-intentional-error">Marking a cell with an intentional error</a></li>
+</ul>
+</li>
+</ul>
+
+      </div>    
+    </div>
+    
+
+    <div class="col-md-9">
+      <div class="content-padding card">
+        <div>
+  <div class="section" id="documentation-on-tutorials-infrastructure">
+<span id="dev-page"></span><h1>Documentation on tutorials infrastructure<a class="headerlink" href="#documentation-on-tutorials-infrastructure" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>Tutorials are written as Jupyter notebooks on the <code class="docutils literal notranslate"><span class="pre">master</span></code> branch of the
+<code class="docutils literal notranslate"><span class="pre">astropy/astropy-tutorials</span></code> repository in <code class="docutils literal notranslate"><span class="pre">tutorials/notebooks/</span></code>. These
+notebook files do not contain output in order to simplify version-controlling
+the files.</p>
+<p>The rendered Astropy-tutorials site is built using Sphinx with the Astropy theme
+to look like the main documentation. Sphinx requires restructured text (RST)
+files for its build process, so use an intermediate step to run the notebooks to
+produce output, and then convert the notebook files into RST files.</p>
+<p>We use our own run-and-convert machinery using <code class="docutils literal notranslate"><span class="pre">nbconvert</span></code>. We use the same
+script that converts the notebooks to RST to test the notebooks on travis by
+simply executing the notebooks and ignoring the output.</p>
+<p>We use <a class="reference external" href="http://rtfd.io">readthedocs</a> to do the Sphinx build, which is what
+allows us to preserve the version history of the tutorials. The notebooks are
+first converted to RST files during the Sphinx build by doing the conversion
+at the end of the <a class="reference external" href="https://github.com/astropy/astropy-tutorials/blob/master/tutorials/conf.py">Sphinx configuration file</a>.</p>
+</div>
+<div class="section" id="why-not-use-nbsphinx">
+<h2>Why not use nbsphinx?<a class="headerlink" href="#why-not-use-nbsphinx" title="Permalink to this headline">¶</a></h2>
+<p>Both running and converting the notebooks is handled automatically by the Sphinx
+plugin <code class="docutils literal notranslate"><span class="pre">nbsphinx</span></code>, but it doesn’t support all of the features we want. In
+particular, there is no supported way to modify the template file that controls
+the output RST file that gets generated from each notebook; we want to be able
+to modify the template so we can add the links mentioned above.</p>
+</div>
+<div class="section" id="tutorials-directory-structure">
+<h2>Tutorials directory structure<a class="headerlink" href="#tutorials-directory-structure" title="Permalink to this headline">¶</a></h2>
+<p>The notebook files must be written as a single Jupyter notebook in a directory
+within the <code class="docutils literal notranslate"><span class="pre">tutorials/notebooks</span></code> directory. The name of the notebook must
+be the same as the subdirectory name. This is just needed for auto-generating
+links to the source notebooks from the generated RST pages.</p>
+</div>
+<div class="section" id="testing-notebook-execution">
+<h2>Testing notebook execution<a class="headerlink" href="#testing-notebook-execution" title="Permalink to this headline">¶</a></h2>
+<p>You can use the custom nbconvert script in the astropy-tutorials repository to
+test that the tutorials all execute correctly. From the top-level repository
+path:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">scripts</span><span class="o">/</span><span class="n">convert</span><span class="o">.</span><span class="n">py</span> <span class="n">tutorials</span><span class="o">/</span><span class="n">notebooks</span> <span class="o">-</span><span class="n">v</span> <span class="o">--</span><span class="n">exec</span><span class="o">-</span><span class="n">only</span>
+</pre></div>
+</div>
+<p>Running the convert script with the flag <code class="docutils literal notranslate"><span class="pre">--exec-only</span></code> will just execute the
+notebooks and won’t generate RST files. If you have already run the notebooks
+once, you may need to also specify the <code class="docutils literal notranslate"><span class="pre">-o</span></code> or <code class="docutils literal notranslate"><span class="pre">--overwrite</span></code> flag: by
+default, the script will only execute notebooks that haven’t already been
+executed. The <code class="docutils literal notranslate"><span class="pre">-v</span></code> flag just tells the script to output more “verbose”
+messages, which you may or may not want.</p>
+<p>The above command will execute all notebooks in any subdirectory of the
+<code class="docutils literal notranslate"><span class="pre">tutorials/notebooks</span></code> path. If you want to just execute a single notebook,
+you can specify the path to a single notebook file, e.g.:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">scripts</span><span class="o">/</span><span class="n">convert</span><span class="o">.</span><span class="n">py</span> <span class="n">tutorials</span><span class="o">/</span><span class="n">notebooks</span><span class="o">/</span><span class="n">coordinates</span><span class="o">/</span><span class="n">coordinates</span><span class="o">.</span><span class="n">ipynb</span> <span class="o">-</span><span class="n">v</span> <span class="o">--</span><span class="n">exec</span><span class="o">-</span><span class="n">only</span>
+</pre></div>
+</div>
+<p>You can also do this when running and generating RST files, which can be useful
+when writing a new tutorial to make sure it renders in RST properly. To do
+this, just remove the <code class="docutils literal notranslate"><span class="pre">--exec-only</span></code> flag:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">scripts</span><span class="o">/</span><span class="n">convert</span><span class="o">.</span><span class="n">py</span> <span class="n">tutorials</span><span class="o">/</span><span class="n">notebooks</span><span class="o">/</span><span class="n">coordinates</span><span class="o">/</span><span class="n">coordinates</span><span class="o">.</span><span class="n">ipynb</span> <span class="o">-</span><span class="n">v</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="building-the-tutorials-page-locally">
+<h2>Building the tutorials page locally<a class="headerlink" href="#building-the-tutorials-page-locally" title="Permalink to this headline">¶</a></h2>
+<p>For this, you can use the <a class="reference external" href="https://github.com/astropy/astropy-tutorials/blob/master/Makefile">Makefile</a> at the
+top-level of the tutorials repository. From the root level of the cloned or
+downloaded repository:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">html</span>
+</pre></div>
+</div>
+<p>Will execute and convert the Jupyter notebooks to RST files, then do the Sphinx
+build. If this returns an error, you may need to initialize the
+<code class="docutils literal notranslate"><span class="pre">astropy_helpers</span></code> submodule (read the error message). That is, you may need to
+do:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">submodule</span> <span class="n">init</span>
+<span class="n">git</span> <span class="n">submodule</span> <span class="n">update</span>
+<span class="n">make</span> <span class="n">html</span>
+</pre></div>
+</div>
+<p>Once this is done, you will find the index for the pages in your local
+<code class="docutils literal notranslate"><span class="pre">build/html/index.html</span></code> file.</p>
+<p>For testing, you may want to run the build process on just one notebook file, as
+the full build takes some time to execute and convert all of the tutorial
+notebooks. To do this, you can set the <code class="docutils literal notranslate"><span class="pre">NBFILE</span></code> environment variable to
+specify the path to a notebook file relative to the <code class="docutils literal notranslate"><span class="pre">tutorials</span></code> path. For
+example, to run the build process on just the FITS-header tutorial:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ NBFILE=notebooks/FITS-header/FITS-header.ipynb make html
+</pre></div>
+</div>
+<p>If you use multiple environments to manage your python installation, you
+might be surprised to find that by default this build does <em>not</em> use the
+same python environment you are running sphinx in.  This is because the
+<code class="docutils literal notranslate"><span class="pre">nbconvert</span></code> machinery depends on Jupyter kernels to create a separate
+environment to run each notebook.  To use a specific environment, you will
+need to use the <code class="docutils literal notranslate"><span class="pre">jupyter</span> <span class="pre">kernelspec</span></code> or <code class="docutils literal notranslate"><span class="pre">ipykernel</span> <span class="pre">install</span></code> command
+to create a named kernel for
+your favored environment. Then pass it into sphinx using the <code class="docutils literal notranslate"><span class="pre">NBCONVERT_KERNEL</span></code>
+environment variable.  Something like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ python -m ipykernel install --user --name astropy-tutorials --display-name &quot;Python (astropy-tutorials)&quot;
+$ NBCONVERT_KERNEL=astropy-tutorials make html
+</pre></div>
+</div>
+</div>
+<div class="section" id="releases">
+<h2>Releases<a class="headerlink" href="#releases" title="Permalink to this headline">¶</a></h2>
+<p>We will release a new version of the tutorials with each major release of the
+Astropy core package; i.e. we will release for 3.0, 3.1, etc., but not for
+bugfix releases like 2.0.3, etc. With each release, we update the pinned
+versions of the global dependency files (<code class="docutils literal notranslate"><span class="pre">conda-envirionment.yml</span></code> for Anaconda
+and <code class="docutils literal notranslate"><span class="pre">pip-requirements.txt</span></code> for pip).</p>
+<p>To actually update the version, modify the <code class="docutils literal notranslate"><span class="pre">metadata.cfg</span></code> at the root of this
+repository with the new version.  This is the version number that will be
+shown in the sphinx builds. Note that if it ends in <code class="docutils literal notranslate"><span class="pre">.dev</span></code>, this will be
+followed by a revision number that is determined by the number of git commits.</p>
+</div>
+<div class="section" id="marking-a-cell-with-an-intentional-error">
+<h2>Marking a cell with an intentional error<a class="headerlink" href="#marking-a-cell-with-an-intentional-error" title="Permalink to this headline">¶</a></h2>
+<p>Edit the cell metadata of the cell in which you would like to raise an exception
+and add the following to the top-level JSON: <code class="docutils literal notranslate"><span class="pre">&quot;tags&quot;:</span> <span class="pre">[&quot;raises-exception&quot;]</span></code>
+This tag is recognized by the latest (master) version of nbconvert.</p>
+</div>
+</div>
+
+</div>
+      </div>  
+      
+    </div>
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.2.
+    &copy; Copyright Astropy.   
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Contributing &#8212; astropy-tutorials v3.0.dev</title>
+    <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="_static/bootstrap_sandstone.css" />
+    <link rel="stylesheet" type="text/css" href="_static/astropy.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
+    <script type="text/javascript" src="_static/searchtools.js"></script>
+    <script type="text/javascript" src="https://use.fontawesome.com/3168e95f94.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <link rel="shortcut icon" href="_static/astropy_favicon.ico"/>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  
+  <script type="text/javascript">  
+    if( (window.location.href.search("tutorials.html") != -1) && (window.location.href.search("q=filterTutorials") == -1) ){
+      var url = window.location.href.split("tutorials.html")[0] + "tutorials.html?q=filterTutorials";
+      window.location.href = url;
+    }
+  </script>
+  <script type="text/javascript">
+    jQuery(function() { Search.loadIndex("searchindex.js"); });
+  </script>
+  
+  <script type="text/javascript" id="searchindexloader"></script>
+   
+
+  </head><body>
+
+
+
+<nav class="navbar navbar-expand-lg bg-navbar">
+  <a class="navbar-brand" href="/"style="padding: 0px 5px;"><img src="../_static/astropy_logo.png" style="height:38px;"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarColor01">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="http://www.astropy.org"/>Astropy<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Modules</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0" action="search.html" method="get">
+      <div class="input-group-prepend">
+          <button class="input-group-text" style="padding: 0.7rem"><i class="fa fa-search fa-fw"></i></button>
+      </div>
+      <input class="form-control mr-sm-3" name="q" type="text" placeholder="Search the universe" />
+    </form>
+  </div>
+</nav>
+
+
+<div class="container">
+  <div class="row">
+
+    
+    
+    
+    
+    
+    <div class="col-md-3" style="padding-left: 0px;">
+      <div id="sidebar" class="bs-sidenav card" role="complementary">
+        <h3>Table of contents</h3>
+        <ul>
+<li><a class="reference internal" href="#">Contributing</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#content-guidelines">Content Guidelines</a><ul>
+<li><a class="reference internal" href="#id1">Overview</a></li>
+<li><a class="reference internal" href="#code">Code</a></li>
+<li><a class="reference internal" href="#narrative">Narrative</a></li>
+<li><a class="reference internal" href="#template-intro">Template intro</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#procedure-for-contributing">Procedure for contributing</a></li>
+<li><a class="reference internal" href="#data-files">Data Files</a><ul>
+<li><a class="reference internal" href="#for-tutorial-authors">For tutorial authors</a></li>
+<li><a class="reference internal" href="#for-repository-maintainers">For repository maintainers</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      </div>    
+    </div>
+    
+
+    <div class="col-md-9">
+      <div class="content-padding card">
+        <div>
+  <div class="section" id="contributing">
+<span id="contributing-page"></span><h1>Contributing<a class="headerlink" href="#contributing" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
+<p>Each tutorial is a <a class="reference external" href="http://jupyter.org/">Jupyter notebook</a> file. Each notebook is saved in a separate directory within the <code class="docutils literal notranslate"><span class="pre">tutorials/notebooks</span></code>
+subdirectory in this project. For an example, let’s look at the source notebook
+of the <a class="reference external" href="https://github.com/astropy/astropy-tutorials/tree/master/tutorials/notebooks/FITS-header/">FITS-header</a> tutorial. Within
+<code class="docutils literal notranslate"><span class="pre">tutorials/notebooks/FITS-header</span></code>, there is a single Jupyter notebook file
+that contains the text and code for the tutorial, and any small data files used
+in the tutorial (in this case, a single FITS file). The notebook file is
+automatically run and converted into a static HTML page (<a class="reference external" href="http://tutorials.astropy.org/FITS-header.html">for example</a>), which is then displayed in
+the tutorial listing on the main tutorials webpage,
+<a class="reference external" href="http://tutorials.astropy.org">http://tutorials.astropy.org</a>. Each tutorial notebook file also contains
+information such as the author’s name, month and year it was written, and any
+other metadata that should be associated with the tutorial.</p>
+</div>
+<div class="section" id="content-guidelines">
+<h2>Content Guidelines<a class="headerlink" href="#content-guidelines" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id1">
+<h3>Overview<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Each tutorial should have 3–5 explicit <a class="reference external" href="http://tll.mit.edu/help/intended-learning-outcomes">Learning Goals</a>, demonstrate ~2–3
+pieces of functionality relevant to astronomy, and contain 2–3 demonstrations of generic but commonly used functionality (e.g., <code class="docutils literal notranslate"><span class="pre">numpy</span></code>, <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>)</li>
+<li><dl class="first docutils">
+<dt>Each tutorial should roughly follow this progression:</dt>
+<dd><ul class="first last">
+<li><em>Input/Output</em>: read in some data (use <a class="reference external" href="https://astroquery.readthedocs.io/en/latest/">astroquery</a> where possible to query
+real astronomical datasets)</li>
+<li><em>Analysis</em>: do something insightful / useful with the data</li>
+<li><em>Visualization</em>: make a pretty figure (use <a class="reference external" href="http://docs.astropy.org/en/stable/visualization/">astropy.visualization</a> where possible)</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li>The tutorials must be compatible with the versions supported by the last major
+release of the Astropy core package (i.e. Python &gt;= 3.5)</li>
+</ul>
+</div>
+<div class="section" id="code">
+<h3>Code<a class="headerlink" href="#code" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li><dl class="first docutils">
+<dt>Demonstrate good commenting practice</dt>
+<dd><ul class="first last">
+<li>Add comments to sections of code that use concepts not included in the
+Learning Goals</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Demonstrate best practices of variable names</dt>
+<dd><ul class="first last">
+<li>Variables should be all lower case with words separated by underscores</li>
+<li>Variable names should be descriptive, e.g., <code class="docutils literal notranslate"><span class="pre">galaxy_mass</span></code>, <code class="docutils literal notranslate"><span class="pre">u_mag</span></code></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li>Use the print function explicitly to display information about variables</li>
+<li>As much as possible, comply with <a class="reference external" href="https://www.python.org/dev/peps/pep-0008/">PEP8</a>.</li>
+<li><dl class="first docutils">
+<dt>Imports</dt>
+<dd><ul class="first last">
+<li>Do not use <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">package</span> <span class="pre">import</span> <span class="pre">*</span></code>; import packages, classes, and
+functions explicitly</li>
+<li><dl class="first docutils">
+<dt>Follow recommended package name abbreviations:</dt>
+<dd><ul class="first last">
+<li><code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">numpy</span> <span class="pre">as</span> <span class="pre">np</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">matplotlib</span> <span class="pre">as</span> <span class="pre">mpl</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">matplotlib.pyplot</span> <span class="pre">as</span> <span class="pre">plt</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">astropy.units</span> <span class="pre">as</span> <span class="pre">u</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">astropy.coordinates</span> <span class="pre">as</span> <span class="pre">coord</span></code></li>
+<li><code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">astropy.io</span> <span class="pre">import</span> <span class="pre">fits</span></code></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Display figures inline using matplotlib’s inline backend:</dt>
+<dd><ul class="first last">
+<li><code class="docutils literal notranslate"><span class="pre">%matplotlib</span> <span class="pre">inline</span> <span class="pre">#</span> <span class="pre">make</span> <span class="pre">plots</span> <span class="pre">display</span> <span class="pre">in</span> <span class="pre">notebooks</span></code></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="narrative">
+<h3>Narrative<a class="headerlink" href="#narrative" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Please read through the other tutorials to get a sense of the desired tone and
+length.</li>
+<li>Use <a class="reference external" href="http://jupyter-notebook.readthedocs.io/en/latest/examples/Notebook/Working%20With%20Markdown%20Cells.html">Markdown formatting</a> in text cells for
+formatting, links, latex, and code snippets.</li>
+<li>Titles should be short yet descriptive and emphasize the learning goals of the
+tutorial. Try to make the title appeal to a broad audience and avoid
+referencing a specific instrument, catalog, or anything wavelength dependent.</li>
+<li>List all authors’ full names (comma separated) and link to GitHub profiles
+and/or <a class="reference external" href="https://orcid.org/">ORCID iD</a> when relevant.</li>
+<li>Include <a class="reference external" href="http://tll.mit.edu/help/intended-learning-outcomes">Learning Goals</a>
+at the top as a bulleted list.</li>
+<li>Include Keywords as a comma separated list of topics, packages, and functions
+demonstrated.</li>
+<li>The first paragraph should give a brief overview of the entire tutorial
+including relevant astronomy concepts.</li>
+<li>Use the first-person inclusive plural (“we”). For example, “We are going to
+make a plot which…”, or “Above, we did it the hard way, but here is the easier way…”</li>
+<li>Section headings should be in the imperative mood. For example, “Download the
+data.”</li>
+<li>Avoid extraneous words such as “obviously”, “just”, “simply”, or “easily.” For example, avoid phrases like “we just have to do this one thing.”</li>
+<li>Use <code class="docutils literal notranslate"><span class="pre">&lt;div</span> <span class="pre">class=&quot;alert</span> <span class="pre">alert-info&quot;&gt;Note&lt;/div&gt;</span></code> for Notes and <code class="docutils literal notranslate"><span class="pre">&lt;div</span>
+<span class="pre">class=&quot;alert</span> <span class="pre">alert-warning&quot;&gt;Warning&lt;/div&gt;</span></code> for Warnings (Markdown supports
+raw HTML)</li>
+</ul>
+</div>
+<div class="section" id="template-intro">
+<h3>Template intro<a class="headerlink" href="#template-intro" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Title name
+
+## Authors
+Jane Smith, Jose Jones
+
+## Learning Goals
+* Query the ... dataset
+* Calculate ...
+* Display ...
+
+## Keywords
+Example, example, example
+
+## Companion Content
+Carroll &amp; Ostlie 10.3, Binney &amp; Tremaine 1.5
+
+## Summary
+In this tutorial, we will download a data file, do something to it, and then
+visualize it.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="procedure-for-contributing">
+<h2>Procedure for contributing<a class="headerlink" href="#procedure-for-contributing" title="Permalink to this headline">¶</a></h2>
+<p>The process for contributing a tutorial involves the <a class="reference external" href="https://help.github.com/articles/working-with-forks/">GitHub fork</a> and <code class="docutils literal notranslate"><span class="pre">git</span></code> workflow
+concepts <a class="reference external" href="https://help.github.com/articles/proposing-changes-to-your-work-with-pull-requests/">branch, push, pull request</a>.</p>
+<p>To contribute a new tutorial, first fork the <code class="docutils literal notranslate"><span class="pre">astropy-tutorials</span></code> repository.
+Then, clone your fork locally to your machine (replace &lt;GITHUB USERNAME&gt; with
+your GitHub username):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">clone</span> <span class="n">git</span><span class="nd">@github</span><span class="o">.</span><span class="n">com</span><span class="p">:</span><span class="o">&lt;</span><span class="n">GITHUB</span> <span class="n">USERNAME</span><span class="o">&gt;/</span><span class="n">astropy</span><span class="o">-</span><span class="n">tutorials</span><span class="o">.</span><span class="n">git</span>
+</pre></div>
+</div>
+<p>Next, create a branch in your local repository with the name of the tutorial
+you’d like to contribute. Let’s imagine we’re adding a tutorial to demonstrate
+spectral line fitting – we might call it “Spectral-Line-Fitting”:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">checkout</span> <span class="o">-</span><span class="n">b</span> <span class="n">Spectral</span><span class="o">-</span><span class="n">Line</span><span class="o">-</span><span class="n">Fitting</span>
+</pre></div>
+</div>
+<p>The notebook files must be written as a single Jupyter notebook in a directory
+within the <code class="docutils literal notranslate"><span class="pre">tutorials/notebooks</span></code> directory. The name of the notebook must
+be the same as the subdirectory name. We’ll create a new directory in
+<code class="docutils literal notranslate"><span class="pre">tutorials/notebooks</span></code> with the same name as the branch:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="n">tutorials</span><span class="o">/</span><span class="n">notebooks</span><span class="o">/</span><span class="n">Spectral</span><span class="o">-</span><span class="n">Line</span><span class="o">-</span><span class="n">Fitting</span>
+</pre></div>
+</div>
+<p>All files used by the tutorial – e.g., example data files, the Jupyter
+notebook file itself – should go in this directory.</p>
+<p>Specify the Python packages the tutorial depends on by creating a text file
+called <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> in the same notebook directory. For example, if your
+tutorial requires <code class="docutils literal notranslate"><span class="pre">scipy</span></code> version 1.0 and <code class="docutils literal notranslate"><span class="pre">numpy</span></code> version 1.13 or greater,
+your <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> file would look like:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>scipy==1.0
+numpy&gt;=1.13
+</pre></div>
+</div>
+<p>To see an example, have a look at the FITS-header <a class="reference external" href="https://github.com/astropy/astropy-tutorials/blob/master/tutorials/notebooks/FITS-header/requirements.txt">requirements.txt file</a>.</p>
+<p>Push the notebook and other files from your local branch up to your fork of the
+repository on GitHub (by default, named ‘origin’):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">git</span> <span class="n">push</span> <span class="n">origin</span> <span class="n">Spectral</span><span class="o">-</span><span class="n">Line</span><span class="o">-</span><span class="n">Fitting</span>
+</pre></div>
+</div>
+<p>When the tutorial is ready for broader community feedback, <a class="reference external" href="https://help.github.com/articles/creating-a-pull-request/">open a pull request</a> against the main
+<code class="docutils literal notranslate"><span class="pre">astropy-tutorials</span></code> repository in order for the community to review the new
+tutorial.</p>
+</div>
+<div class="section" id="data-files">
+<h2>Data Files<a class="headerlink" href="#data-files" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="for-tutorial-authors">
+<h3>For tutorial authors<a class="headerlink" href="#for-tutorial-authors" title="Permalink to this headline">¶</a></h3>
+<p>If your tutorial includes large data files (where large means &gt;~ 1 MB), we don’t
+want to include them in the <code class="docutils literal notranslate"><span class="pre">astropy/astropy-tutorials</span></code> git repository, as
+that will drastically slow down cloning the repository. Instead, we encourage
+use of the <code class="xref py py-obj docutils literal notranslate"><span class="pre">astropy.utils.download_files</span></code> function, and will host data files on
+the <a class="reference external" href="http://data.astropy.org">http://data.astropy.org</a> server. To do this, use the following
+procedure:</p>
+<ul>
+<li><p class="first">When writing your tutorial, include the files in your tutorial’s directory
+(e.g., <code class="docutils literal notranslate"><span class="pre">tutorials/notebooks/My-tutorial-name/mydatafile.fits</span></code>). Those who
+are reviewing your tutorial will have to download them, but they would need
+them anyway, so it’s ok. <strong>IMPORTANT</strong>: when you add or modify data files,
+make sure the only thing in that commit involves the data files.  That is, do
+<em>not</em> edit your notebook and add/change data files in the same commit.  This
+will make it much easier to remove the data files when your tutorial is
+actually merged.</p>
+</li>
+<li><p class="first">To actually access your data files in the notebook, do something like this at
+the top of the notebook:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">astropy.utils.data</span> <span class="k">import</span> <span class="n">download_file</span>
+
+<span class="n">tutorialpath</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<span class="n">mydatafilename1</span> <span class="o">=</span> <span class="n">download_file</span><span class="p">(</span><span class="n">tutorialpath</span> <span class="o">+</span> <span class="s1">&#39;mydatafile1.fits&#39;</span><span class="p">,</span> <span class="n">cache</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">mydatafilename2</span> <span class="o">=</span> <span class="n">download_file</span><span class="p">(</span><span class="n">tutorialpath</span> <span class="o">+</span> <span class="s1">&#39;mydatafile2.dat&#39;</span><span class="p">,</span> <span class="n">cache</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>And then use them like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">mydatafilename1</span><span class="p">)</span>
+<span class="o">...</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">mydatafilename2</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p>If you do this, the only change necessary when merging your notebook will be to set <code class="docutils literal notranslate"><span class="pre">tutorialpath</span></code> to  <code class="docutils literal notranslate"><span class="pre">'http://data.astropy.org/tutorials/My-tutorial-name/'</span></code>.</p>
+</li>
+</ul>
+<p>If you need information or help with:</p>
+<ul class="simple">
+<li>previewing how the rendered Jupyter notebooks will look on the tutorial
+webpage</li>
+<li>marking a cell with an intentional / expected error</li>
+</ul>
+<p>please see the <a class="reference internal" href="dev.html#dev-page"><span class="std std-ref">Documentation on tutorials infrastructure</span></a>.</p>
+</div>
+<div class="section" id="for-repository-maintainers">
+<h3>For repository maintainers<a class="headerlink" href="#for-repository-maintainers" title="Permalink to this headline">¶</a></h3>
+<p>If this above procedure is followed, you only need to do these three steps when
+merging your pull request:</p>
+<ol class="arabic simple">
+<li>Do <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rebase</span> <span class="pre">-i</span></code> and delete the commits that include the data files</li>
+<li>Upload the data files to <code class="docutils literal notranslate"><span class="pre">http://data.astropy.org/tutorials/My-tutorial-name/</span></code></li>
+<li>Update the <code class="docutils literal notranslate"><span class="pre">tutorialpath</span></code> variable</li>
+</ol>
+</div>
+</div>
+</div>
+
+</div>
+      </div>  
+      
+    </div>
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.2.
+    &copy; Copyright Astropy.   
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

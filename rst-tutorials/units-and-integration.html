@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="filterTutorials, filterOop, filterLatex, filterAstrostatistics, filterMatplotlib, filterModeling, filterUnits" name="keywords" />
+<meta content="filterTutorials," name="keywords" />
+
+    <title>Using scipy.integrate &#8212; astropy-tutorials v3.0.dev</title>
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bootstrap_sandstone.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/astropy.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <script type="text/javascript" src="../_static/searchtools.js"></script>
+    <script type="text/javascript" src="https://use.fontawesome.com/3168e95f94.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <link rel="shortcut icon" href="../_static/astropy_favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  
+  <script type="text/javascript">  
+    if( (window.location.href.search("tutorials.html") != -1) && (window.location.href.search("q=filterTutorials") == -1) ){
+      var url = window.location.href.split("tutorials.html")[0] + "tutorials.html?q=filterTutorials";
+      window.location.href = url;
+    }
+  </script>
+  <script type="text/javascript">
+    jQuery(function() { Search.loadIndex("../searchindex.js"); });
+  </script>
+  
+  <script type="text/javascript" id="searchindexloader"></script>
+   
+
+  </head><body>
+
+
+
+<nav class="navbar navbar-expand-lg bg-navbar">
+  <a class="navbar-brand" href="/"style="padding: 0px 5px;"><img src="../_static/astropy_logo.png" style="height:38px;"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarColor01">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="http://www.astropy.org"/>Astropy<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Modules</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0" action="../search.html" method="get">
+      <div class="input-group-prepend">
+          <button class="input-group-text" style="padding: 0.7rem"><i class="fa fa-search fa-fw"></i></button>
+      </div>
+      <input class="form-control mr-sm-3" name="q" type="text" placeholder="Search the universe" />
+    </form>
+  </div>
+</nav>
+
+
+<div class="container">
+  <div class="row">
+
+    
+    
+    
+    
+    
+    <div class="col-md-3" style="padding-left: 0px;">
+      <div id="sidebar" class="bs-sidenav card" role="complementary">
+        <h3>Table of contents</h3>
+        <ul>
+<li><a class="reference internal" href="#">Using <code class="docutils literal notranslate"><span class="pre">scipy.integrate</span></code></a><ul>
+<li><a class="reference internal" href="#authors">Authors</a></li>
+<li><a class="reference internal" href="#learning-goals">Learning Goals</a></li>
+<li><a class="reference internal" href="#keywords">Keywords</a></li>
+<li><a class="reference internal" href="#companion-content">Companion Content</a></li>
+<li><a class="reference internal" href="#summary">Summary</a></li>
+<li><a class="reference internal" href="#the-planck-function">The Planck function</a><ul>
+<li><a class="reference internal" href="#using-latex-for-axis-labels">Using <span class="math notranslate nohighlight">\(LaTeX\)</span> for axis labels</a></li>
+<li><a class="reference internal" href="#how-to-simulate-actual-observations">How to simulate actual observations</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-stellar-initial-mass-function-imf">The stellar initial mass function (IMF)</a><ul>
+<li><a class="reference internal" href="#the-call-method">The <code class="docutils literal notranslate"><span class="pre">__call__</span></code> method</a></li>
+<li><a class="reference internal" href="#more-about-classes">More about classes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#integrating-using-gaussian-quadrature">Integrating using Gaussian quadrature</a><ul>
+<li><a class="reference internal" href="#how-many-more-m-stars-are-there-than-o-stars">How many more M stars are there than O stars?</a></li>
+<li><a class="reference internal" href="#where-is-all-the-mass">Where is all the mass?</a></li>
+<li><a class="reference internal" href="#extras">Extras</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#challenge-problems">Challenge problems</a></li>
+</ul>
+</li>
+</ul>
+
+      </div>    
+    </div>
+    
+
+    <div class="col-md-9">
+      <div class="content-padding card">
+        <div>
+  <a href="../_static/units-and-integration/units-and-integration.ipynb"><button id="download">Download tutorial notebook</button></a>
+<a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/units-and-integration/units-and-integration.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
+
+<div id="spacer"></div><div class="section" id="using-scipy-integrate">
+<span id="units-and-integration"></span><h1>Using <code class="docutils literal notranslate"><span class="pre">scipy.integrate</span></code><a class="headerlink" href="#using-scipy-integrate" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="authors">
+<h2>Authors<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a></h2>
+<p>Zach Pace, Lia Corrales</p>
+</div>
+<div class="section" id="learning-goals">
+<h2>Learning Goals<a class="headerlink" href="#learning-goals" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>perform numerical integration in the <code class="docutils literal notranslate"><span class="pre">astropy</span></code> and scientific
+python context</li>
+<li>trapezoidal approximation</li>
+<li>gaussian quadrature</li>
+<li>use <code class="docutils literal notranslate"><span class="pre">astropy</span></code>’s built-in black-body curves</li>
+<li>understand how <code class="docutils literal notranslate"><span class="pre">astropy</span></code>’s units interact with one another</li>
+<li>write a mini Python class</li>
+<li>how the <code class="docutils literal notranslate"><span class="pre">__call__</span></code> method works</li>
+<li>add <span class="math notranslate nohighlight">\(\LaTeX\)</span> labels to <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> figures using the
+<code class="docutils literal notranslate"><span class="pre">latex_inline</span></code> formatter</li>
+</ul>
+</div>
+<div class="section" id="keywords">
+<h2>Keywords<a class="headerlink" href="#keywords" title="Permalink to this headline">¶</a></h2>
+<p>OOP, LaTeX, astrostatistics, matplotlib, modeling, units</p>
+</div>
+<div class="section" id="companion-content">
+<h2>Companion Content<a class="headerlink" href="#companion-content" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="http://synphot.readthedocs.io/en/latest/">http://synphot.readthedocs.io/en/latest/</a></li>
+<li><a class="reference external" href="http://astropy-tutorials.readthedocs.io/en/latest/rst-tutorials/quantities.html">Using Astropy Quantities for astrophysical
+calculations</a></li>
+</ul>
+</div>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p>In this tutorial, we will use the examples of the Planck function and
+the stellar initial mass function (IMF) to illustrate how to integrate
+numerically, using the trapezoidal approximation and Gaussian
+quadrature. We will also explore making a custom class, an instance of
+which is callable in the same way as a function. In addition, we will
+encounter <code class="docutils literal notranslate"><span class="pre">astropy</span></code>’s built-in units, and get a first taste of how to
+convert between them. Finally, we will use <span class="math notranslate nohighlight">\(\LaTeX\)</span> to make our
+figure axis labels easy to read.</p>
+<p><span class="inputnumrole">In[1]:</span></p>
+</div>
+<div class="section" id="the-planck-function">
+<h2>The Planck function<a class="headerlink" href="#the-planck-function" title="Permalink to this headline">¶</a></h2>
+<p>The Planck function describes how a black-body radiates energy. We will
+explore how to find bolometric luminosity using the Planck function in
+both frequency and wavelength space.</p>
+<p>Let’s say we have a black-body at 5000 Kelvin. We can find out the total
+intensity (bolometric) from this object, by integrating the Planck
+function. The simplest way to do this is by approximating the integral
+using the trapezoid rule. Let’s do this first using the frequency
+definition of the Planck function.</p>
+<p>We’ll define a photon frequency grid, and evaluate the Planck function
+at those frequencies. Those will be used to numerically integrate using
+the trapezoidal rule. By multiplying a <code class="docutils literal notranslate"><span class="pre">numpy</span></code> array by an <code class="docutils literal notranslate"><span class="pre">astropy</span></code>
+unit, we get a <code class="docutils literal notranslate"><span class="pre">Quantity</span></code>, which is effectively a combination of one
+or more numbers and a unit.</p>
+<div class="alert alert-info"><p><strong>Note on printing units</strong>:</p>
+<p>Quantities and units can be printed to strings using the <a class="reference external" href="https://docs.python.org/3/library/string.html#format-string-syntax">Format String
+Syntax</a>.
+This demonstration uses the <code class="docutils literal notranslate"><span class="pre">latex_inline</span></code> format that is built in to
+the <code class="docutils literal notranslate"><span class="pre">astropy.units</span></code> package. To see additional ways to format
+quantities, see the <a class="reference external" href="http://docs.astropy.org/en/stable/units/#getting-started">Getting
+Started</a>
+section of the astropy.units documentation pages.</p>
+</div><p><span class="inputnumrole">In[2]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">3000.</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">THz</span>
+<span class="n">bb5000K_nu</span> <span class="o">=</span> <span class="n">blackbody_nu</span><span class="p">(</span><span class="n">in_x</span><span class="o">=</span><span class="n">nu</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mf">5000.</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">Kelvin</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">nu</span><span class="p">,</span> <span class="n">bb5000K_nu</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\nu$, [{0:latex_inline}]&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">nu</span><span class="o">.</span><span class="n">unit</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$I_{\nu}$, &#39;</span> <span class="o">+</span> <span class="s1">&#39;[{0:latex_inline}]&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">bb5000K_nu</span><span class="o">.</span><span class="n">unit</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Planck function in frequency&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[2]:</span></p>
+<img alt="../_images/units-and-integration_5_0.png" src="../_images/units-and-integration_5_0.png" />
+<div class="section" id="using-latex-for-axis-labels">
+<h3>Using <span class="math notranslate nohighlight">\(LaTeX\)</span> for axis labels<a class="headerlink" href="#using-latex-for-axis-labels" title="Permalink to this headline">¶</a></h3>
+<p>Here, we’ve used <span class="math notranslate nohighlight">\(LaTeX\)</span> markup to add nice-looking axis labels.
+To do that, we enclose <span class="math notranslate nohighlight">\(LaTeX\)</span> markup text in dollar signs, within
+a string <code class="docutils literal notranslate"><span class="pre">r'\$</span> <span class="pre">...</span> <span class="pre">\$'</span></code>. The <code class="docutils literal notranslate"><span class="pre">r</span></code> before the open-quote denotes that
+the string is “raw,” and backslashes are treated literally. This is the
+suggested format for axis label text that includes markup.</p>
+<p><span class="inputnumrole">In[3]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">nu</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">bb5000K_nu</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;erg s-1 cm-2 sr-1&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[3]:</span></p>
+<div class="math notranslate nohighlight">
+\[1.1280834 \times 10^{10} \; \mathrm{\frac{erg}{s\,sr\,cm^{2}}}\]</div>
+<p>Now we can do something similar, but for a wavelength grid. We want to
+integrate over an equivalent wavelength range to the frequency range we
+did earlier. We can transform the maximum frequency into the
+corresponding (minimum) wavelength by using the <code class="docutils literal notranslate"><span class="pre">.to()</span></code> method, with
+the addition of an <em>equivalency</em>.</p>
+<p><span class="inputnumrole">In[4]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lam</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">nu</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">AA</span><span class="p">,</span> <span class="n">equivalencies</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">spectral</span><span class="p">()),</span>
+                  <span class="n">nu</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">AA</span><span class="p">,</span> <span class="n">equivalencies</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">spectral</span><span class="p">()),</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">bb5000K_lam</span> <span class="o">=</span> <span class="n">blackbody_lambda</span><span class="p">(</span><span class="n">in_x</span><span class="o">=</span><span class="n">lam</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mf">5000.</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">Kelvin</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lam</span><span class="p">,</span> <span class="n">bb5000K_lam</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mf">1.0e3</span><span class="p">,</span> <span class="mf">5.0e4</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\lambda$, [{0:latex_inline}]&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">lam</span><span class="o">.</span><span class="n">unit</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$I_{\lambda}$, &#39;</span> <span class="o">+</span> <span class="s1">&#39;[{0:latex_inline}]&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">bb5000K_lam</span><span class="o">.</span><span class="n">unit</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Planck function in wavelength&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[4]:</span></p>
+<img alt="../_images/units-and-integration_9_0.png" src="../_images/units-and-integration_9_0.png" />
+<p><span class="inputnumrole">In[5]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">lam</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">bb5000K_lam</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;erg s-1 cm-2 sr-1&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[5]:</span></p>
+<div class="math notranslate nohighlight">
+\[1.1467744 \times 10^{10} \; \mathrm{\frac{erg}{s\,sr\,cm^{2}}}\]</div>
+<p>Notice this is within a couple percent of the answer we got in frequency
+space, despite our bad sampling at small wavelengths!</p>
+<p>Many <code class="docutils literal notranslate"><span class="pre">astropy</span></code> functions use units and quantities directly. As you
+gain confidence working with them, consider incorporating them into your
+regular workflow. Read more
+<a class="reference external" href="http://docs.astropy.org/en/stable/units/">here</a> about how to use
+units.</p>
+</div>
+<div class="section" id="how-to-simulate-actual-observations">
+<h3>How to simulate actual observations<a class="headerlink" href="#how-to-simulate-actual-observations" title="Permalink to this headline">¶</a></h3>
+<p>As of Fall 2017, <code class="docutils literal notranslate"><span class="pre">astropy</span></code> does not explicitly support constructing
+synthetic observations of models like black-body curves. The
+<code class="docutils literal notranslate"><span class="pre">`synphot</span></code> &lt;<a class="reference external" href="https://synphot.readthedocs.io/en/latest/">https://synphot.readthedocs.io/en/latest/</a>&gt;`__ library does
+allow this. You can use <code class="docutils literal notranslate"><span class="pre">synphot</span></code> to perform tasks like turning
+spectra into visual magnitudes by convolving with a filter curve.</p>
+</div>
+</div>
+<div class="section" id="the-stellar-initial-mass-function-imf">
+<h2>The stellar initial mass function (IMF)<a class="headerlink" href="#the-stellar-initial-mass-function-imf" title="Permalink to this headline">¶</a></h2>
+<p>The stellar initial mass function tells us how many of each mass of
+stars are formed. In particular, low-mass stars are much more abundant
+than high-mass stars are. Let’s explore more of the functionality of
+<code class="docutils literal notranslate"><span class="pre">astropy</span></code> using this concept.</p>
+<p>People generally think of the IMF as a power-law probability density
+function. In other words, if you count the stars that have been born
+recently from a cloud of gas, their distribution of masses will follow
+the IMF. Let’s write a little class to help us keep track of that:</p>
+<p><span class="inputnumrole">In[6]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">PowerLawPDF</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">gamma</span><span class="p">,</span> <span class="n">B</span><span class="o">=</span><span class="mf">1.</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="n">gamma</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">B</span> <span class="o">=</span> <span class="n">B</span>
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">B</span>
+</pre></div>
+</div>
+<div class="section" id="the-call-method">
+<h3>The <code class="docutils literal notranslate"><span class="pre">__call__</span></code> method<a class="headerlink" href="#the-call-method" title="Permalink to this headline">¶</a></h3>
+<p>By defining the method <code class="docutils literal notranslate"><span class="pre">__call__</span></code>, we are telling the Python
+interpreter that an instance of the class can be called like a function.
+When called, an instance of this class, takes a single argument, <code class="docutils literal notranslate"><span class="pre">x</span></code>,
+but it uses other attributes of the instance, like <code class="docutils literal notranslate"><span class="pre">gamma</span></code> and <code class="docutils literal notranslate"><span class="pre">B</span></code>.</p>
+</div>
+<div class="section" id="more-about-classes">
+<h3>More about classes<a class="headerlink" href="#more-about-classes" title="Permalink to this headline">¶</a></h3>
+<p>Classes are more advanced data structures, which can help you keep track
+of functionality within your code that all works together. You can learn
+more about classes in <a class="reference external" href="https://www.codecademy.com/ja/courses/learn-python/lessons/introduction-to-classes/exercises/why-use-classes">this
+tutorial</a>.</p>
+</div>
+</div>
+<div class="section" id="integrating-using-gaussian-quadrature">
+<h2>Integrating using Gaussian quadrature<a class="headerlink" href="#integrating-using-gaussian-quadrature" title="Permalink to this headline">¶</a></h2>
+<p>In this section, we’ll explore a method of numerical integration that
+does not require having your sampling grid set-up already.
+<code class="docutils literal notranslate"><span class="pre">`scipy.integrate.quad</span></code> &lt;<a class="reference external" href="https://docs.scipy.org/doc/scipy-0.19.1/reference/generated/scipy.integrate.quad.html">https://docs.scipy.org/doc/scipy-0.19.1/reference/generated/scipy.integrate.quad.html</a>&gt;`__
+takes a function and both a lower and upper bound, and our
+<code class="docutils literal notranslate"><span class="pre">PowerLawPDF</span></code> class takes care of this just fine.</p>
+<p>Now we can use our new class to normalize our IMF given the mass bounds.
+This amounts to normalizing a probability density function. We’ll use
+Gaussian quadrature (<code class="docutils literal notranslate"><span class="pre">quad</span></code>) to find the integral. <code class="docutils literal notranslate"><span class="pre">quad</span></code> returns
+the numerical value of the integral and its uncertainty. We only care
+about the numerical value, so we’ll pack the uncertainty into <code class="docutils literal notranslate"><span class="pre">_</span></code> (a
+placeholder variable). We immediately throw the integral into our IMF
+object and use it for normalizing!</p>
+<p>To read more about <em>generalized packing and unpacking</em> in Python, look
+at the original proposal, <a class="reference external" href="https://www.python.org/dev/peps/pep-0448/">PEP
+448</a>, which was accepted
+in 2015.</p>
+<p><span class="inputnumrole">In[7]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">salpeter</span> <span class="o">=</span> <span class="n">PowerLawPDF</span><span class="p">(</span><span class="n">gamma</span><span class="o">=-</span><span class="mf">2.35</span><span class="p">)</span>
+<span class="n">salpeter</span><span class="o">.</span><span class="n">B</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">integrate</span><span class="o">.</span><span class="n">quad</span><span class="p">(</span><span class="n">salpeter</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mf">100.</span><span class="p">)</span>
+
+<span class="n">m_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mf">2.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">loglog</span><span class="p">(</span><span class="n">m_grid</span><span class="p">,</span> <span class="n">salpeter</span><span class="p">(</span><span class="n">m_grid</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Stellar mass [$M_{\odot}$]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Probability density&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[7]:</span></p>
+<img alt="../_images/units-and-integration_17_0.png" src="../_images/units-and-integration_17_0.png" />
+<div class="section" id="how-many-more-m-stars-are-there-than-o-stars">
+<h3>How many more M stars are there than O stars?<a class="headerlink" href="#how-many-more-m-stars-are-there-than-o-stars" title="Permalink to this headline">¶</a></h3>
+<p>Let’s compare the number of M dwarf stars (mass less than 60% solar)
+created by the IMF, to the number of O stars (mass more than 15 times
+solar).</p>
+<p><span class="inputnumrole">In[8]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">n_m</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">integrate</span><span class="o">.</span><span class="n">quad</span><span class="p">(</span><span class="n">salpeter</span><span class="p">,</span> <span class="n">a</span><span class="o">=.</span><span class="mi">01</span><span class="p">,</span> <span class="n">b</span><span class="o">=.</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">n_o</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">integrate</span><span class="o">.</span><span class="n">quad</span><span class="p">(</span><span class="n">salpeter</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mf">15.</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mf">100.</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">n_m</span> <span class="o">/</span> <span class="n">n_o</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[8]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">20936.017868337385</span>
+</pre></div>
+</div>
+<p>There are almost 21000 as many low-mass stars born as there are
+high-mass stars!</p>
+</div>
+<div class="section" id="where-is-all-the-mass">
+<h3>Where is all the mass?<a class="headerlink" href="#where-is-all-the-mass" title="Permalink to this headline">¶</a></h3>
+<p>Now let’s compute the relative total masses for all O stars and all M
+stars born. To do this, weight the Salpeter IMF by mass (i.e., add an
+extra factor of mass to the integral). To do this, we define a new
+function that takes the old power-law IMF as one of its arguments. Since
+this argument is unchanged throughout the integral, it is passed into
+the tuple <code class="docutils literal notranslate"><span class="pre">args</span></code> within <code class="docutils literal notranslate"><span class="pre">quad</span></code>. It’s important that there is only
+<em>one</em> argument that changes over the integral, and that it is the
+<em>first</em> argument that the function being integrated accepts.</p>
+<p>Mathematically, the integral for the M stars is</p>
+<div class="math notranslate nohighlight">
+\[m^M = \int_{.01 \, M_{\odot}}^{.6 \, M_{\odot}} m \, {\rm IMF}(m) \, dm\]</div>
+<p>and it amounts to weighting the probability density function (the IMF)
+by mass. More generally, you find the value of some property
+<span class="math notranslate nohighlight">\(\rho\)</span> that depends on <span class="math notranslate nohighlight">\(m\)</span> by calculating</p>
+<div class="math notranslate nohighlight">
+\[\rho(m)^M = \int_{.01 \, M_{\odot}}^{.6 \, M_{\odot}} \rho(m) \, {\rm IMF}(m) \, dm\]</div>
+<p><span class="inputnumrole">In[9]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">IMF_m</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">imf</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">imf</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="o">*</span> <span class="n">m</span>
+
+<span class="n">m_m</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">integrate</span><span class="o">.</span><span class="n">quad</span><span class="p">(</span><span class="n">IMF_m</span><span class="p">,</span> <span class="n">a</span><span class="o">=.</span><span class="mi">01</span><span class="p">,</span> <span class="n">b</span><span class="o">=.</span><span class="mi">6</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">salpeter</span><span class="p">,</span> <span class="p">))</span>
+<span class="n">m_o</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">integrate</span><span class="o">.</span><span class="n">quad</span><span class="p">(</span><span class="n">IMF_m</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mf">15.</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mf">100.</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">salpeter</span><span class="p">,</span> <span class="p">))</span>
+
+<span class="n">m_m</span> <span class="o">/</span> <span class="n">m_o</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[9]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">20.29197629920483</span>
+</pre></div>
+</div>
+<p>So about 20 times as much mass is tied up in M stars as in O stars.</p>
+</div>
+<div class="section" id="extras">
+<h3>Extras<a class="headerlink" href="#extras" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Now compare the total luminosity from all O stars to total luminosity
+from all M stars. This requires a mass-luminosity relation, like this
+one:</li>
+</ul>
+<div class="math notranslate nohighlight">
+\[\begin{split}\frac{L}{L_{\odot}} (M) =
+ \begin{cases}
+     \hfill .23 \left( \frac{M}{M_{\odot}} \right)^{2.3} \hfill , \hfill &amp; .1 &lt; \frac{M}{M_{\odot}} &lt; .43 \\
+     \hfill \left( \frac{M}{M_{\odot}} \right)^{4} \hfill , \hfill &amp; .43 &lt; \frac{M}{M_{\odot}} &lt; 2 \\
+     \hfill 1.5 \left( \frac{M}{M_{\odot}} \right)^{3.5} \hfill , \hfill &amp; 2 &lt; \frac{M}{M_{\odot}} &lt; 20 \\
+     \hfill 3200 \left( \frac{M}{M_{\odot}} \right) \hfill , \hfill &amp; 20 &lt; \frac{M}{M_{\odot}} &lt; 100 \\
+ \end{cases},\end{split}\]</div>
+<p>which you will use as <span class="math notranslate nohighlight">\(\rho(m)\)</span></p>
+<ul class="simple">
+<li>Think about which stars are producing most of the light, and which
+stars have most of the mass. How might this result in difficulty
+inferring stellar masses from the light they produce? If you’re
+interested in learning more, see <a class="reference external" href="https://ned.ipac.caltech.edu/level5/Sept14/Courteau/Courteau_contents.html">this review
+article</a>.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="challenge-problems">
+<h2>Challenge problems<a class="headerlink" href="#challenge-problems" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Right now, we aren’t worried about the bounds of the power law, but
+the IMF should drop off to zero probability at masses below .01 solar
+masses and above 100 solar masses. Modify <code class="docutils literal notranslate"><span class="pre">PowerLawPDF</span></code> in a way
+that allows both <code class="docutils literal notranslate"><span class="pre">float</span></code> and <code class="docutils literal notranslate"><span class="pre">numpy.ndarray</span></code> inputs.</li>
+<li>Modify the <code class="docutils literal notranslate"><span class="pre">PowerLawPDF</span></code> class to explicitly use <code class="docutils literal notranslate"><span class="pre">astropy</span></code>’s
+<code class="docutils literal notranslate"><span class="pre">units</span></code> constructs.</li>
+<li>Derive a relationship between recent star-formation rate and
+<span class="math notranslate nohighlight">\(H\alpha\)</span> luminosity. In other words, for the function $
+{<a href="#id1"><span class="problematic" id="id2">:raw-latex:`\rm SFR \, [\frac{M_{\odot}}{yr}]`</span></a>} = C ,
+L_{H:raw-latex:<code class="xref py py-obj docutils literal notranslate"><span class="pre">alpha</span></code>} , [{<a href="#id3"><span class="problematic" id="id4">:raw-latex:`\rm \frac{erg}{s}`</span></a>}]$, find
+a value of <span class="math notranslate nohighlight">\(C\)</span>. How does this depend on the slope and endpoints
+of the IMF?</li>
+<li>take a look at Appendix B of <a class="reference external" href="http://adsabs.harvard.edu/cgi-bin/bib_query?arXiv:astro-ph/0408229">Hunter &amp; Elmegreen 2004, AJ, 128,
+2170</a></li>
+<li>what effect does changing the power-law index or upper mass limit of
+the IMF have on the value of <span class="math notranslate nohighlight">\(C\)</span>?</li>
+<li>predict the effect on the value of <span class="math notranslate nohighlight">\(C\)</span> of using a different
+form of the IMF, like Kroupa or Chabrier (both are lighter on the
+low-mass end). If you’re not tired of IMFs yet, try defining a new
+class that implements a broken-power-law (Kroupa) or log-parabola
+(Chabrier) IMF. Perform the same calculations as above.</li>
+</ul>
+<div id="spacer"></div>
+
+<a href="../_static//.ipynb"><button id="download">Download tutorial notebook</button></a>
+<a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks//.ipynb"><button id="binder">Interactive tutorial notebook</button></a></div>
+</div>
+
+</div>
+      </div>  
+      
+    </div>
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.2.
+    &copy; Copyright Astropy.   
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

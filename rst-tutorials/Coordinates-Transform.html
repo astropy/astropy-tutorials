@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="filterTutorials, filterCoordinates, filterUnits" name="keywords" />
+<meta content="filterTutorials," name="keywords" />
+
+    <title>Transforming between coordinate systems &#8212; astropy-tutorials v3.0.dev</title>
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bootstrap_sandstone.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/astropy.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <script type="text/javascript" src="../_static/searchtools.js"></script>
+    <script type="text/javascript" src="https://use.fontawesome.com/3168e95f94.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <link rel="shortcut icon" href="../_static/astropy_favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  
+  <script type="text/javascript">  
+    if( (window.location.href.search("tutorials.html") != -1) && (window.location.href.search("q=filterTutorials") == -1) ){
+      var url = window.location.href.split("tutorials.html")[0] + "tutorials.html?q=filterTutorials";
+      window.location.href = url;
+    }
+  </script>
+  <script type="text/javascript">
+    jQuery(function() { Search.loadIndex("../searchindex.js"); });
+  </script>
+  
+  <script type="text/javascript" id="searchindexloader"></script>
+   
+
+  </head><body>
+
+
+
+<nav class="navbar navbar-expand-lg bg-navbar">
+  <a class="navbar-brand" href="/"style="padding: 0px 5px;"><img src="../_static/astropy_logo.png" style="height:38px;"></a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarColor01">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="http://www.astropy.org"/>Astropy<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Modules</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0" action="../search.html" method="get">
+      <div class="input-group-prepend">
+          <button class="input-group-text" style="padding: 0.7rem"><i class="fa fa-search fa-fw"></i></button>
+      </div>
+      <input class="form-control mr-sm-3" name="q" type="text" placeholder="Search the universe" />
+    </form>
+  </div>
+</nav>
+
+
+<div class="container">
+  <div class="row">
+
+    
+    
+    
+    
+    
+    <div class="col-md-3" style="padding-left: 0px;">
+      <div id="sidebar" class="bs-sidenav card" role="complementary">
+        <h3>Table of contents</h3>
+        <ul>
+<li><a class="reference internal" href="#">Transforming between coordinate systems</a><ul>
+<li><a class="reference internal" href="#authors">Authors</a></li>
+<li><a class="reference internal" href="#learning-goals">Learning Goals</a></li>
+<li><a class="reference internal" href="#keywords">Keywords</a></li>
+<li><a class="reference internal" href="#summary">Summary</a><ul>
+<li><a class="reference internal" href="#imports">Imports</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#section-0-quickstart">Section 0: Quickstart</a></li>
+<li><a class="reference internal" href="#section-1">Section 1:</a><ul>
+<li><a class="reference internal" href="#introducing-frame-transformations">Introducing frame transformations</a><ul>
+<li><a class="reference internal" href="#transforming-coordinates-using-attributes">Transforming coordinates using attributes:</a></li>
+<li><a class="reference internal" href="#transforming-coordinates-using-the-transform-to-method-and-other-coordinate-object">Transforming coordinates using the transform_to() method and other coordinate object</a></li>
+<li><a class="reference internal" href="#transforming-coordinates-using-the-transform-to-method-and-a-string">Transforming coordinates using the transform_to() method and a string</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#section-2">Section 2:</a></li>
+<li><a class="reference internal" href="#transform-frames-to-get-to-altitude-azimuth-altaz">Transform frames to get to altitude-azimuth (“AltAz”)</a></li>
+<li><a class="reference internal" href="#exercises">Exercises</a><ul>
+<li><a class="reference internal" href="#excercise-1">Excercise 1</a></li>
+<li><a class="reference internal" href="#excercise-2">Excercise 2</a></li>
+<li><a class="reference internal" href="#excercise-3">Excercise 3</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#wrap-up">Wrap-up</a></li>
+</ul>
+</li>
+</ul>
+
+      </div>    
+    </div>
+    
+
+    <div class="col-md-9">
+      <div class="content-padding card">
+        <div>
+  <a href="../_static/Coordinates-Transform/Coordinates-Transform.ipynb"><button id="download">Download tutorial notebook</button></a>
+<a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/Coordinates-Transform/Coordinates-Transform.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
+
+<div id="spacer"></div><div class="section" id="transforming-between-coordinate-systems">
+<span id="coordinates-transform"></span><h1>Transforming between coordinate systems<a class="headerlink" href="#transforming-between-coordinate-systems" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="authors">
+<h2>Authors<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a></h2>
+<p>Erik Tollerud, Kelle Cruz, Stephen Pardy</p>
+</div>
+<div class="section" id="learning-goals">
+<h2>Learning Goals<a class="headerlink" href="#learning-goals" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Make coordinate objects</li>
+<li>Transform to different coordinate systems</li>
+<li>See how to track an object’s altitude from certain observing
+locations</li>
+</ul>
+</div>
+<div class="section" id="keywords">
+<h2>Keywords<a class="headerlink" href="#keywords" title="Permalink to this headline">¶</a></h2>
+<p>coordinates, units</p>
+</div>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p>In this tutorial we demonstrate how to define astronomical coordinates
+using the <code class="docutils literal notranslate"><span class="pre">astropy.coordinates</span></code> “frame” classes. We then show how to
+transform between the different built-in coordinate frames, such as from
+ICRS (RA, Dec) to Galactic (l, b).</p>
+<div class="section" id="imports">
+<h3>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h3>
+<p><span class="inputnumrole">In[1]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Python standard-library</span>
+<span class="kn">from</span> <span class="nn">urllib.parse</span> <span class="k">import</span> <span class="n">urlencode</span>
+<span class="kn">from</span> <span class="nn">urllib.request</span> <span class="k">import</span> <span class="n">urlretrieve</span>
+
+<span class="c1"># Third-party dependencies</span>
+<span class="kn">from</span> <span class="nn">astropy</span> <span class="k">import</span> <span class="n">units</span> <span class="k">as</span> <span class="n">u</span>
+<span class="kn">from</span> <span class="nn">astropy.coordinates</span> <span class="k">import</span> <span class="n">SkyCoord</span>
+<span class="kn">from</span> <span class="nn">astropy.table</span> <span class="k">import</span> <span class="n">Table</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="k">import</span> <span class="n">Image</span>
+</pre></div>
+</div>
+<p><span class="inputnumrole">In[2]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set up matplotlib and use a nicer set of plot parameters</span>
+<span class="kn">from</span> <span class="nn">astropy.visualization</span> <span class="k">import</span> <span class="n">astropy_mpl_style</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="n">astropy_mpl_style</span><span class="p">)</span>
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="section-0-quickstart">
+<h2>Section 0: Quickstart<a class="headerlink" href="#section-0-quickstart" title="Permalink to this headline">¶</a></h2>
+<div class="alert alert-info"><p><strong>Note:</strong> If you already worked through the first in this series you can
+feel free to skip to <a class="reference external" href="#Section-1:">Section 1</a>.</p>
+</div><p>In Astropy, the most common object you’ll work with for coordinates is
+<code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code>. A <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> can most easily be created directly from
+angles as shown below.</p>
+<p>In this tutorial we’ll be converting between frames. Let’s start in the
+ICRS frame (which happens to be the default.)</p>
+<p>For much of this tutorial we’ll work with the Hickson Compact Group 7.
+We can create an object either by passing the degrees explicitly (using
+the astropy
+<a class="reference external" href="http://docs.astropy.org/en/stable/units/index.html">units</a> library)
+or by passing in strings. The two coordinates below are equivalent:</p>
+<p><span class="inputnumrole">In[3]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">hcg7_center</span> <span class="o">=</span> <span class="n">SkyCoord</span><span class="p">(</span><span class="mf">9.81625</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">deg</span><span class="p">,</span> <span class="mf">0.88806</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">deg</span><span class="p">,</span> <span class="n">frame</span><span class="o">=</span><span class="s1">&#39;icrs&#39;</span><span class="p">)</span>  <span class="c1"># using degrees directly</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">hcg7_center</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[3]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">SkyCoord</span> <span class="p">(</span><span class="n">ICRS</span><span class="p">):</span> <span class="p">(</span><span class="n">ra</span><span class="p">,</span> <span class="n">dec</span><span class="p">)</span> <span class="ow">in</span> <span class="n">deg</span>
+    <span class="p">(</span><span class="mf">9.81625</span><span class="p">,</span> <span class="mf">0.88806</span><span class="p">)</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p><span class="inputnumrole">In[4]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">hcg7_center</span> <span class="o">=</span> <span class="n">SkyCoord</span><span class="p">(</span><span class="s1">&#39;0h39m15.9s&#39;</span><span class="p">,</span> <span class="s1">&#39;0d53m17.016s&#39;</span><span class="p">,</span> <span class="n">frame</span><span class="o">=</span><span class="s1">&#39;icrs&#39;</span><span class="p">)</span>  <span class="c1"># passing in string format</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">hcg7_center</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[4]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">SkyCoord</span> <span class="p">(</span><span class="n">ICRS</span><span class="p">):</span> <span class="p">(</span><span class="n">ra</span><span class="p">,</span> <span class="n">dec</span><span class="p">)</span> <span class="ow">in</span> <span class="n">deg</span>
+    <span class="p">(</span><span class="mf">9.81625</span><span class="p">,</span> <span class="mf">0.88806</span><span class="p">)</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>We can get the right ascension and declination components of the object
+directly by accessing those attributes.</p>
+<p><span class="inputnumrole">In[5]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">hcg7_center</span><span class="o">.</span><span class="n">ra</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">hcg7_center</span><span class="o">.</span><span class="n">dec</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[5]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">9</span><span class="n">d48m58</span><span class="o">.</span><span class="mi">5</span><span class="n">s</span>
+<span class="mi">0</span><span class="n">d53m17</span><span class="o">.</span><span class="mi">016</span><span class="n">s</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="section-1">
+<h2>Section 1:<a class="headerlink" href="#section-1" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="introducing-frame-transformations">
+<h3>Introducing frame transformations<a class="headerlink" href="#introducing-frame-transformations" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">astropy.coordinates</span></code> provides many tools to transform between
+different coordinate systems. For instance, we can use it to transform
+from ICRS coordinates (in RA and Dec) to Galactic coordinates.</p>
+<p>To understand the code in this section, it may help to read over the
+<a class="reference external" href="http://astropy.readthedocs.org/en/latest/coordinates/index.html#overview-of-astropy-coordinates-concepts">overview of the astropy coordinates
+scheme</a>.
+The key piece to understand is that all coordinates in Astropy are in
+particular “frames” and we can transform between a specific <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code>
+object in one frame to another. For example, we can transform our
+previously-defined center of HCG 7 from ICRS to Galactic coordinates:</p>
+<p><span class="inputnumrole">In[6]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">hcg7_center</span> <span class="o">=</span> <span class="n">SkyCoord</span><span class="p">(</span><span class="mf">9.81625</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">deg</span><span class="p">,</span> <span class="mf">0.88806</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">deg</span><span class="p">,</span> <span class="n">frame</span><span class="o">=</span><span class="s1">&#39;icrs&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>There are three different ways of transforming coordinates. Each has its
+pros and cons, but all should give you the same result. The first way to
+transform to other built-in frames is by specifying those attributes.
+For instance, let’s see the location of HCG 7 in Galactic coordinates.</p>
+<div class="section" id="transforming-coordinates-using-attributes">
+<h4>Transforming coordinates using attributes:<a class="headerlink" href="#transforming-coordinates-using-attributes" title="Permalink to this headline">¶</a></h4>
+<p><span class="inputnumrole">In[7]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">hcg7_center</span><span class="o">.</span><span class="n">galactic</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[7]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">SkyCoord</span> <span class="p">(</span><span class="n">Galactic</span><span class="p">):</span> <span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="ow">in</span> <span class="n">deg</span>
+    <span class="p">(</span><span class="mf">116.47556813</span><span class="p">,</span> <span class="o">-</span><span class="mf">61.83099472</span><span class="p">)</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="transforming-coordinates-using-the-transform-to-method-and-other-coordinate-object">
+<h4>Transforming coordinates using the transform_to() method and other coordinate object<a class="headerlink" href="#transforming-coordinates-using-the-transform-to-method-and-other-coordinate-object" title="Permalink to this headline">¶</a></h4>
+<p>The above is actually a special “quick-access” form that internally does
+the same as what’s in the cell below: it uses the
+<code class="docutils literal notranslate"><span class="pre">`transform_to()</span></code> &lt;<a class="reference external" href="http://docs.astropy.org/en/stable/api/astropy.coordinates.SkyCoord.html#astropy.coordinates.SkyCoord.transform_to">http://docs.astropy.org/en/stable/api/astropy.coordinates.SkyCoord.html#astropy.coordinates.SkyCoord.transform_to</a>&gt;`__
+method to convert from one frame to another. We can pass in an empty
+coordinate class to specify what coordinate system to transform into.</p>
+<p><span class="inputnumrole">In[8]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">astropy.coordinates</span> <span class="k">import</span> <span class="n">Galactic</span>  <span class="c1"># new coordinate baseclass</span>
+<span class="n">hcg7_center</span><span class="o">.</span><span class="n">transform_to</span><span class="p">(</span><span class="n">Galactic</span><span class="p">())</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[8]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">SkyCoord</span> <span class="p">(</span><span class="n">Galactic</span><span class="p">):</span> <span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="ow">in</span> <span class="n">deg</span>
+    <span class="p">(</span><span class="mf">116.47556813</span><span class="p">,</span> <span class="o">-</span><span class="mf">61.83099472</span><span class="p">)</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="transforming-coordinates-using-the-transform-to-method-and-a-string">
+<h4>Transforming coordinates using the transform_to() method and a string<a class="headerlink" href="#transforming-coordinates-using-the-transform-to-method-and-a-string" title="Permalink to this headline">¶</a></h4>
+<p>Finally, we can transform using the <code class="docutils literal notranslate"><span class="pre">transform_to()</span></code> method and a
+string with the name of a built-in coordinate system.</p>
+<p><span class="inputnumrole">In[9]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">hcg7_center</span><span class="o">.</span><span class="n">transform_to</span><span class="p">(</span><span class="s1">&#39;galactic&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[9]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">SkyCoord</span> <span class="p">(</span><span class="n">Galactic</span><span class="p">):</span> <span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="ow">in</span> <span class="n">deg</span>
+    <span class="p">(</span><span class="mf">116.47556813</span><span class="p">,</span> <span class="o">-</span><span class="mf">61.83099472</span><span class="p">)</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>We can transform to many coordinate frames and equinoxes.</p>
+<p>These coordinates are available by default:</p>
+<ul class="simple">
+<li>ICRS</li>
+<li>FK5</li>
+<li>FK4</li>
+<li>FK4NoETerms</li>
+<li>Galactic</li>
+<li>Galactocentric</li>
+<li>Supergalactic</li>
+<li>AltAz</li>
+<li>GCRS</li>
+<li>CIRS</li>
+<li>ITRS</li>
+<li>HCRS</li>
+<li>PrecessedGeocentric</li>
+<li>GeocentricTrueEcliptic</li>
+<li>BarycentricTrueEcliptic</li>
+<li>HeliocentricTrueEcliptic</li>
+<li>SkyOffsetFrame</li>
+<li>GalacticLSR</li>
+<li>LSR</li>
+<li>BaseEclipticFrame</li>
+<li>BaseRADecFrame</li>
+</ul>
+<p>Let’s focus on just a few of these. We can try FK5 coordinates next:</p>
+<p><span class="inputnumrole">In[10]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">hcg7_center_fk5</span> <span class="o">=</span> <span class="n">hcg7_center</span><span class="o">.</span><span class="n">transform_to</span><span class="p">(</span><span class="s1">&#39;fk5&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">hcg7_center_fk5</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[10]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">SkyCoord</span> <span class="p">(</span><span class="n">FK5</span><span class="p">:</span> <span class="n">equinox</span><span class="o">=</span><span class="n">J2000</span><span class="o">.</span><span class="mi">000</span><span class="p">):</span> <span class="p">(</span><span class="n">ra</span><span class="p">,</span> <span class="n">dec</span><span class="p">)</span> <span class="ow">in</span> <span class="n">deg</span>
+    <span class="p">(</span><span class="mf">9.81625645</span><span class="p">,</span> <span class="mf">0.88806155</span><span class="p">)</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>And, as with the Galactic coordinates, we can acheive the same result by
+importing the FK5 class from the <code class="docutils literal notranslate"><span class="pre">astropy.coordinates</span></code> package. This
+also allows us to change the equinox.</p>
+<p><span class="inputnumrole">In[11]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">astropy.coordinates</span> <span class="k">import</span> <span class="n">FK5</span>
+<span class="n">hcg7_center_fk5</span><span class="o">.</span><span class="n">transform_to</span><span class="p">(</span><span class="n">FK5</span><span class="p">(</span><span class="n">equinox</span><span class="o">=</span><span class="s1">&#39;J1975&#39;</span><span class="p">))</span>  <span class="c1"># precess to a different equinox</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[11]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">SkyCoord</span> <span class="p">(</span><span class="n">FK5</span><span class="p">:</span> <span class="n">equinox</span><span class="o">=</span><span class="n">J1975</span><span class="o">.</span><span class="mi">000</span><span class="p">):</span> <span class="p">(</span><span class="n">ra</span><span class="p">,</span> <span class="n">dec</span><span class="p">)</span> <span class="ow">in</span> <span class="n">deg</span>
+    <span class="p">(</span><span class="mf">9.49565759</span><span class="p">,</span> <span class="mf">0.75084648</span><span class="p">)</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<div class="alert alert-warning"><p><strong>Beware:</strong> Changing frames also changes some of the attributes of the
+object, but usually in a way that makes sense. The following code should
+fail.</p>
+</div><p><span class="inputnumrole">In[12]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">hcg7_center</span><span class="o">.</span><span class="n">galactic</span><span class="o">.</span><span class="n">ra</span>  <span class="c1"># should fail because Galactic coordinates are l/b not RA/Dec</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[12]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">AttributeErrorTraceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span>
+
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">40062</span><span class="n">ef68db1</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="o">----&gt;</span> <span class="mi">1</span> <span class="n">hcg7_center</span><span class="o">.</span><span class="n">galactic</span><span class="o">.</span><span class="n">ra</span>  <span class="c1"># should fail because Galactic coordinates are l/b not RA/Dec</span>
+
+
+<span class="o">~/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">6</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astropy</span><span class="o">/</span><span class="n">coordinates</span><span class="o">/</span><span class="n">sky_coordinate</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="fm">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr</span><span class="p">)</span>
+    <span class="mi">693</span>         <span class="c1"># Fail</span>
+    <span class="mi">694</span>         <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s2">&quot;&#39;</span><span class="si">{0}</span><span class="s2">&#39; object has no attribute &#39;</span><span class="si">{1}</span><span class="s2">&#39;&quot;</span>
+<span class="o">--&gt;</span> <span class="mi">695</span>                              <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="n">attr</span><span class="p">))</span>
+    <span class="mi">696</span>
+    <span class="mi">697</span>     <span class="k">def</span> <span class="nf">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+
+
+<span class="ne">AttributeError</span><span class="p">:</span> <span class="s1">&#39;SkyCoord&#39;</span> <span class="nb">object</span> <span class="n">has</span> <span class="n">no</span> <span class="n">attribute</span> <span class="s1">&#39;ra&#39;</span>
+</pre></div>
+</div>
+<p>Instead, we now have access to the l and b attributes:</p>
+<p><span class="inputnumrole">In[13]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">hcg7_center</span><span class="o">.</span><span class="n">galactic</span><span class="o">.</span><span class="n">l</span><span class="p">,</span> <span class="n">hcg7_center</span><span class="o">.</span><span class="n">galactic</span><span class="o">.</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[13]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">116</span><span class="n">d28m32</span><span class="o">.</span><span class="mi">0453</span><span class="n">s</span> <span class="o">-</span><span class="mi">61</span><span class="n">d49m51</span><span class="o">.</span><span class="mi">581</span><span class="n">s</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="section-2">
+<h2>Section 2:<a class="headerlink" href="#section-2" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="transform-frames-to-get-to-altitude-azimuth-altaz">
+<h2>Transform frames to get to altitude-azimuth (“AltAz”)<a class="headerlink" href="#transform-frames-to-get-to-altitude-azimuth-altaz" title="Permalink to this headline">¶</a></h2>
+<p>To actually do anything with observability we need to convert to a frame
+local to an on-earth observer. By far the most common choice is
+horizontal altitude-azimuth coordinates, or “AltAz”. We first need to
+specify both where and when we want to try to observe.</p>
+<p>We’ll need to import a few more specific modules:</p>
+<p><span class="inputnumrole">In[14]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">astropy.coordinates</span> <span class="k">import</span> <span class="n">EarthLocation</span>
+<span class="kn">from</span> <span class="nn">astropy.time</span> <span class="k">import</span> <span class="n">Time</span>
+</pre></div>
+</div>
+<p>Let’s first see the sky position at Kitt Peak National Observatory in
+Arizona.</p>
+<p><span class="inputnumrole">In[15]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Kitt Peak, Arizona</span>
+<span class="n">kitt_peak</span> <span class="o">=</span> <span class="n">EarthLocation</span><span class="p">(</span><span class="n">lat</span><span class="o">=</span><span class="s1">&#39;31d57.5m&#39;</span><span class="p">,</span> <span class="n">lon</span><span class="o">=</span><span class="s1">&#39;-111d35.8m&#39;</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">2096</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">m</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>For known observing sites we can enter the name directly.</p>
+<p><span class="inputnumrole">In[16]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">kitt_peak</span> <span class="o">=</span> <span class="n">EarthLocation</span><span class="o">.</span><span class="n">of_site</span><span class="p">(</span><span class="s1">&#39;Kitt Peak&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[16]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Downloading</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">data</span><span class="o">.</span><span class="n">astropy</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">coordinates</span><span class="o">/</span><span class="n">sites</span><span class="o">.</span><span class="n">json</span> <span class="p">[</span><span class="n">Done</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>We can see the list of observing sites:</p>
+<p><span class="inputnumrole">In[17]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">EarthLocation</span><span class="o">.</span><span class="n">get_site_names</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[17]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;ALMA&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Anglo-Australian Observatory&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Apache Point&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Apache Point Observatory&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Atacama Large Millimeter Array&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;BAO&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Beijing XingLong Observatory&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Black Moshannon Observatory&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;CHARA&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Canada-France-Hawaii Telescope&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Catalina Observatory&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Cerro Pachon&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Cerro Paranal&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Cerro Tololo&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Cerro Tololo Interamerican Observatory&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;DCT&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Discovery Channel Telescope&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Dominion Astrophysical Observatory&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;GBT&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Gemini South&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Green Bank Telescope&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Hale Telescope&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Haleakala Observatories&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Happy Jack&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;JCMT&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;James Clerk Maxwell Telescope&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Jansky Very Large Array&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Keck Observatory&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Kitt Peak&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Kitt Peak National Observatory&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;La Silla Observatory&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Large Binocular Telescope&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Las Campanas Observatory&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Lick Observatory&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Lowell Observatory&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;MWA&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Manastash Ridge Observatory&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;McDonald Observatory&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Medicina&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Medicina Dish&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Michigan-Dartmouth-MIT Observatory&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Mount Graham International Observatory&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Mt Graham&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Mt. Ekar 182 cm. Telescope&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Mt. Stromlo Observatory&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Multiple Mirror Telescope&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Murchison Widefield Array&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;NOV&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;National Observatory of Venezuela&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Noto&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Observatorio Astronomico Nacional, San Pedro Martir&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Observatorio Astronomico Nacional, Tonantzintla&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Palomar&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Paranal Observatory&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Roque de los Muchachos&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;SAAO&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;SALT&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;SRT&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Siding Spring Observatory&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Southern African Large Telescope&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Subaru&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Subaru Telescope&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Sutherland&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;TUG&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;UKIRT&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;United Kingdom Infrared Telescope&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Vainu Bappu Observatory&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Very Large Array&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;W. M. Keck Observatory&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Whipple&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;Whipple Observatory&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;aao&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;alma&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;apo&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;bmo&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;cfht&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;ctio&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;dao&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;dct&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;ekar&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;example_site&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;flwo&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;gbt&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;gemini_north&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;gemini_south&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;gemn&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;gems&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;greenwich&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;haleakala&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;irtf&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;jcmt&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;keck&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;kpno&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;lapalma&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;lasilla&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;lbt&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;lco&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;lick&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;lowell&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;mcdonald&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;mdm&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;medicina&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;mmt&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;mro&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;mso&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;mtbigelow&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;mwa&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;mwo&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;noto&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;ohp&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;paranal&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;salt&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;sirene&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;spm&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;srt&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;sso&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;tona&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;tug&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;ukirt&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;vbo&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;vla&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Let’s check the altitude at 1 AM UTC, which is 6 PM AZ mountain time:</p>
+<p><span class="inputnumrole">In[18]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">observing_time</span> <span class="o">=</span> <span class="n">Time</span><span class="p">(</span><span class="s1">&#39;2010-12-21 1:00&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now we use these to create an <code class="docutils literal notranslate"><span class="pre">AltAz</span></code> frame object. Note that this
+frame has some other information about the atmosphere, which can be used
+to correct for atmospheric refraction. Here we leave that alone, because
+the default is to ignore this effect (by setting the pressure to 0).</p>
+<p><span class="inputnumrole">In[19]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">astropy.coordinates</span> <span class="k">import</span> <span class="n">AltAz</span>
+
+<span class="n">aa</span> <span class="o">=</span> <span class="n">AltAz</span><span class="p">(</span><span class="n">location</span><span class="o">=</span><span class="n">kitt_peak</span><span class="p">,</span> <span class="n">obstime</span><span class="o">=</span><span class="n">observing_time</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">aa</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[19]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">AltAz</span> <span class="n">Frame</span> <span class="p">(</span><span class="n">obstime</span><span class="o">=</span><span class="mi">2010</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">21</span> <span class="mi">01</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mf">00.000</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">1994502.6043061386</span><span class="p">,</span> <span class="o">-</span><span class="mf">5037538.54232911</span><span class="p">,</span> <span class="mf">3358104.9969029757</span><span class="p">)</span> <span class="n">m</span><span class="p">,</span> <span class="n">pressure</span><span class="o">=</span><span class="mf">0.0</span> <span class="n">hPa</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mf">0.0</span> <span class="n">deg_C</span><span class="p">,</span> <span class="n">relative_humidity</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">obswl</span><span class="o">=</span><span class="mf">1.0</span> <span class="n">micron</span><span class="p">)</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Now we can just transform our ICRS <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> to <code class="docutils literal notranslate"><span class="pre">AltAz</span></code> to get the
+location in the sky over Kitt Peak at the requested time.</p>
+<p><span class="inputnumrole">In[20]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">hcg7_center</span><span class="o">.</span><span class="n">transform_to</span><span class="p">(</span><span class="n">aa</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[20]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Downloading</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">maia</span><span class="o">.</span><span class="n">usno</span><span class="o">.</span><span class="n">navy</span><span class="o">.</span><span class="n">mil</span><span class="o">/</span><span class="n">ser7</span><span class="o">/</span><span class="n">finals2000A</span><span class="o">.</span><span class="n">all</span> <span class="p">[</span><span class="n">Done</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">SkyCoord</span> <span class="p">(</span><span class="n">AltAz</span><span class="p">:</span> <span class="n">obstime</span><span class="o">=</span><span class="mi">2010</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">21</span> <span class="mi">01</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mf">00.000</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">1994502.6043061386</span><span class="p">,</span> <span class="o">-</span><span class="mf">5037538.54232911</span><span class="p">,</span> <span class="mf">3358104.9969029757</span><span class="p">)</span> <span class="n">m</span><span class="p">,</span> <span class="n">pressure</span><span class="o">=</span><span class="mf">0.0</span> <span class="n">hPa</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mf">0.0</span> <span class="n">deg_C</span><span class="p">,</span> <span class="n">relative_humidity</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">obswl</span><span class="o">=</span><span class="mf">1.0</span> <span class="n">micron</span><span class="p">):</span> <span class="p">(</span><span class="n">az</span><span class="p">,</span> <span class="n">alt</span><span class="p">)</span> <span class="ow">in</span> <span class="n">deg</span>
+    <span class="p">(</span><span class="mf">149.19234446</span><span class="p">,</span> <span class="mf">55.05673074</span><span class="p">)</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>To look at just the altitude we can <code class="docutils literal notranslate"><span class="pre">alt</span></code> attribute:</p>
+<p><span class="inputnumrole">In[21]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">hcg7_center</span><span class="o">.</span><span class="n">transform_to</span><span class="p">(</span><span class="n">aa</span><span class="p">)</span><span class="o">.</span><span class="n">alt</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[21]:</span></p>
+<div class="math notranslate nohighlight">
+\[55^\circ03{}^\prime24.2307{}^{\prime\prime}\]</div>
+<p>Alright, it’s at 55 degrees at 6 PM, but that’s pretty early to be
+observing. We could try various times one at a time to see if the
+airmass is at a darker time, but we can do better: let’s try to create
+an airmass plot.</p>
+<p><span class="inputnumrole">In[22]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># this gives a Time object with an *array* of times</span>
+<span class="n">delta_hours</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">hour</span>
+<span class="n">full_night_times</span> <span class="o">=</span> <span class="n">observing_time</span> <span class="o">+</span> <span class="n">delta_hours</span>
+<span class="n">full_night_aa_frames</span> <span class="o">=</span> <span class="n">AltAz</span><span class="p">(</span><span class="n">location</span><span class="o">=</span><span class="n">kitt_peak</span><span class="p">,</span> <span class="n">obstime</span><span class="o">=</span><span class="n">full_night_times</span><span class="p">)</span>
+<span class="n">full_night_aa_coos</span> <span class="o">=</span> <span class="n">hcg7_center</span><span class="o">.</span><span class="n">transform_to</span><span class="p">(</span><span class="n">full_night_aa_frames</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">delta_hours</span><span class="p">,</span> <span class="n">full_night_aa_coos</span><span class="o">.</span><span class="n">secz</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Hours from 6pm AZ time&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Airmass [Sec(z)]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mf">0.9</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[22]:</span></p>
+<img alt="../_images/Coordinates-Transform_51_0.png" src="../_images/Coordinates-Transform_51_0.png" />
+<p>Great! Looks like the lowest airmass is in another hour or so (7 PM).
+But that might still be twilight… When should we start observing for
+proper dark skies? Fortunately, Astropy provides a <code class="docutils literal notranslate"><span class="pre">get_sun</span></code> function
+that can be used to check this. Let’s use it to check if we’re in
+18-degree twilight or not.</p>
+<p><span class="inputnumrole">In[23]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">astropy.coordinates</span> <span class="k">import</span> <span class="n">get_sun</span>
+
+<span class="n">full_night_sun_coos</span> <span class="o">=</span> <span class="n">get_sun</span><span class="p">(</span><span class="n">full_night_times</span><span class="p">)</span><span class="o">.</span><span class="n">transform_to</span><span class="p">(</span><span class="n">full_night_aa_frames</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">delta_hours</span><span class="p">,</span> <span class="n">full_night_sun_coos</span><span class="o">.</span><span class="n">alt</span><span class="o">.</span><span class="n">deg</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="o">-</span><span class="mi">18</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Hours from 6pm AZ time&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Sun altitude&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[23]:</span></p>
+<img alt="../_images/Coordinates-Transform_53_0.png" src="../_images/Coordinates-Transform_53_0.png" />
+<p>Looks like it’s just below 18 degrees at 7 PM, so you should be good to
+go!</p>
+<p>We can also look at the object altitude at the present time and date:</p>
+<p><span class="inputnumrole">In[24]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">now</span> <span class="o">=</span> <span class="n">Time</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+<span class="n">hcg7_center</span> <span class="o">=</span> <span class="n">SkyCoord</span><span class="p">(</span><span class="mf">9.81625</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">deg</span><span class="p">,</span> <span class="mf">0.88806</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">deg</span><span class="p">,</span> <span class="n">frame</span><span class="o">=</span><span class="s1">&#39;icrs&#39;</span><span class="p">)</span>
+<span class="n">kitt_peak_aa</span> <span class="o">=</span> <span class="n">AltAz</span><span class="p">(</span><span class="n">location</span><span class="o">=</span><span class="n">kitt_peak</span><span class="p">,</span> <span class="n">obstime</span><span class="o">=</span><span class="n">now</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">hcg7_center</span><span class="o">.</span><span class="n">transform_to</span><span class="p">(</span><span class="n">kitt_peak_aa</span><span class="p">))</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[24]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">SkyCoord</span> <span class="p">(</span><span class="n">AltAz</span><span class="p">:</span> <span class="n">obstime</span><span class="o">=</span><span class="mi">2018</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">08</span> <span class="mi">18</span><span class="p">:</span><span class="mi">22</span><span class="p">:</span><span class="mf">53.010518</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">1994502.6043061386</span><span class="p">,</span> <span class="o">-</span><span class="mf">5037538.54232911</span><span class="p">,</span> <span class="mf">3358104.9969029757</span><span class="p">)</span> <span class="n">m</span><span class="p">,</span> <span class="n">pressure</span><span class="o">=</span><span class="mf">0.0</span> <span class="n">hPa</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mf">0.0</span> <span class="n">deg_C</span><span class="p">,</span> <span class="n">relative_humidity</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">obswl</span><span class="o">=</span><span class="mf">1.0</span> <span class="n">micron</span><span class="p">):</span> <span class="p">(</span><span class="n">az</span><span class="p">,</span> <span class="n">alt</span><span class="p">)</span> <span class="ow">in</span> <span class="n">deg</span>
+    <span class="p">(</span><span class="mf">66.27306423</span><span class="p">,</span> <span class="o">-</span><span class="mf">31.24364988</span><span class="p">)</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="excercise-1">
+<h3>Excercise 1<a class="headerlink" href="#excercise-1" title="Permalink to this headline">¶</a></h3>
+<p>Try to compute to some arbitrary precision (rather than eyeballing on a
+plot) when 18 degree twilight or sunrise/sunset hits on that night.</p>
+<p><span class="inputnumrole">In[None]:</span></p>
+</div>
+<div class="section" id="excercise-2">
+<h3>Excercise 2<a class="headerlink" href="#excercise-2" title="Permalink to this headline">¶</a></h3>
+<p>Try converting the HCG 7 coordinates to an equatorial frame at some
+other equinox a while in the past (like J2000). Do you see the
+precession of the equinoxes?</p>
+<p>Hint: To see a diagram of the supported frames look
+<a class="reference external" href="http://docs.astropy.org/en/stable/coordinates/#module-astropy.coordinates">here</a>
+or on the list above. One of those will do what you need if you give it
+the right frame attributes.</p>
+<p><span class="inputnumrole">In[None]:</span></p>
+</div>
+<div class="section" id="excercise-3">
+<h3>Excercise 3<a class="headerlink" href="#excercise-3" title="Permalink to this headline">¶</a></h3>
+<p>Try looking at the altitude of HCG 7 at another observatory.</p>
+<p><span class="inputnumrole">In[None]:</span></p>
+</div>
+</div>
+<div class="section" id="wrap-up">
+<h2>Wrap-up<a class="headerlink" href="#wrap-up" title="Permalink to this headline">¶</a></h2>
+<p>For more documentation on the many other features of
+<code class="docutils literal notranslate"><span class="pre">astropy.coordinates</span></code>, check out <a class="reference external" href="http://astropy.readthedocs.org/en/latest/coordinates/index.html">its section of the
+documentation</a>.</p>
+<p>You might also be interested in <a class="reference external" href="http://astroplan.readthedocs.org/">the astroplan affiliated
+package</a>, which uses the
+<code class="docutils literal notranslate"><span class="pre">astropy.coordinates</span></code> to do more advanced versions of the tasks in the
+last section of this tutorial.</p>
+<p><span class="inputnumrole">In[None]:</span></p>
+<div id="spacer"></div>
+
+<a href="../_static//.ipynb"><button id="download">Download tutorial notebook</button></a>
+<a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks//.ipynb"><button id="binder">Interactive tutorial notebook</button></a></div>
+</div>
+
+</div>
+      </div>  
+      
+    </div>
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.2.
+    &copy; Copyright Astropy.   
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

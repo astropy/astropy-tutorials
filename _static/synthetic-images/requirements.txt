@@ -1,0 +1,4 @@
+astropy=2.0
+numpy=1.13
+matplotlib==2.0.2 # breaks in version 2.1
+ipython=6.2
