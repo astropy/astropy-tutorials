@@ -668,6 +668,11 @@ location in the sky over Kitt Peak at the requested time.
 :outputnumrole:`Out[20]:`
 
 
+.. parsed-literal::
+
+    Downloading http://maia.usno.navy.mil/ser7/finals2000A.all [Done]
+
+
 
 
 .. parsed-literal::
@@ -783,8 +788,8 @@ We can also look at the object altitude at the present time and date:
 
 .. parsed-literal::
 
-    <SkyCoord (AltAz: obstime=2018-12-09 20:00:39.648550, location=(-1994502.6043061386, -5037538.54232911, 3358104.9969029757) m, pressure=0.0 hPa, temperature=0.0 deg_C, relative_humidity=0, obswl=1.0 micron): (az, alt) in deg
-        (82.19287282, -10.45311848)>
+    <SkyCoord (AltAz: obstime=2018-12-09 20:25:36.029723, location=(-1994502.6043061386, -5037538.54232911, 3358104.9969029757) m, pressure=0.0 hPa, temperature=0.0 deg_C, relative_humidity=0, obswl=1.0 micron): (az, alt) in deg
+        (85.58247206, -5.179863)>
 
 
 Exercises
