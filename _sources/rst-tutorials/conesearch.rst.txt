@@ -107,8 +107,6 @@ Validation is hosted by Space Telescope Science Institute (STScI).
      'SDSS DR7 - Sloan Digital Sky Survey Data Release 7 2',
      'SDSS DR7 - Sloan Digital Sky Survey Data Release 7 3',
      'SDSS DR7 - Sloan Digital Sky Survey Data Release 7 4',
-     'SDSS DR8 - Sloan Digital Sky Survey Data Release 8 1',
-     'SDSS DR8 - Sloan Digital Sky Survey Data Release 8 2',
      'The HST Guide Star Catalog, Version 1.1 (Lasker+ 1992) 1',
      'The HST Guide Star Catalog, Version 1.2 (Lasker+ 1996) 1',
      'The HST Guide Star Catalog, Version GSC-ACT (Lasker+ 1996-99) 1',
@@ -4396,17 +4394,17 @@ catalog.
         "validate_out_db_name": "good",
         "validate_version": "1.2",
         "validate_warning_types": [
-            "W48",
-            "W50"
+            "W50",
+            "W48"
         ],
         "validate_warnings": [
-            "/eng/ssb/websites/astropy/aux/vo_databases/daily_20181208/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:154:0: W50: Invalid unit string 'pixel'",
-            "/eng/ssb/websites/astropy/aux/vo_databases/daily_20181208/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:179:0: W48: Unknown attribute 'nrows' on TABLEDATA",
-            "/eng/ssb/websites/astropy/aux/vo_databases/daily_20181208/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:154:0: W50: Invalid unit string 'pixel'",
-            "/eng/ssb/websites/astropy/aux/vo_databases/daily_20181208/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:179:0: W48: Unknown attribute 'nrows' on TABLEDATA"
+            "/eng/ssb/websites/astropy/aux/vo_databases/daily_20181209/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:154:0: W50: Invalid unit string 'pixel'",
+            "/eng/ssb/websites/astropy/aux/vo_databases/daily_20181209/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:179:0: W48: Unknown attribute 'nrows' on TABLEDATA",
+            "/eng/ssb/websites/astropy/aux/vo_databases/daily_20181209/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:154:0: W50: Invalid unit string 'pixel'",
+            "/eng/ssb/websites/astropy/aux/vo_databases/daily_20181209/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:179:0: W48: Unknown attribute 'nrows' on TABLEDATA"
         ],
         "validate_xmllint": false,
-        "validate_xmllint_content": "/eng/ssb/websites/astropy/aux/vo_databases/daily_20181208/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:179: element TABLEDATA: Schemas validity error : Element '{http://www.ivoa.net/xml/VOTable/v1.2}TABLEDATA', attribute 'nrows': The attribute 'nrows' is not allowed.\n/eng/ssb/websites/astropy/aux/vo_databases/daily_20181208/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml fails to validate\n",
+        "validate_xmllint_content": "/eng/ssb/websites/astropy/aux/vo_databases/daily_20181209/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:179: element TABLEDATA: Schemas validity error : Element '{http://www.ivoa.net/xml/VOTable/v1.2}TABLEDATA', attribute 'nrows': The attribute 'nrows' is not allowed.\n/eng/ssb/websites/astropy/aux/vo_databases/daily_20181209/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml fails to validate\n",
         "waveband": "optical",
         "wsdl_url": ""
     }
@@ -4758,7 +4756,7 @@ This might take a while.
 
 .. parsed-literal::
 
-    Predicted run time is 0.755034554069507 seconds
+    Predicted run time is 0.6429279070078354 seconds
     Predicted number of rows is 2617
 
 
@@ -4787,7 +4785,7 @@ the service provider.
 
 .. parsed-literal::
 
-    INFO: conesearch_timer took 0.715888500213623 s on AVERAGE for 1 call(s). [astropy.utils.timer]
+    INFO: conesearch_timer took 0.6330335140228271 s on AVERAGE for 1 call(s). [astropy.utils.timer]
 
 
 
@@ -4805,7 +4803,7 @@ the service provider.
 
 .. parsed-literal::
 
-    Actual run time is 0.715888500213623 seconds
+    Actual run time is 0.6330335140228271 seconds
     Actual number of rows is 4028
 
 
