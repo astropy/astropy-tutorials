@@ -212,7 +212,7 @@ proper range (``vmin`` and ``vmax``).
 
 .. parsed-literal::
 
-    <matplotlib.image.AxesImage at 0x7fd555371e48>
+    <matplotlib.image.AxesImage at 0x7f8947a3ada0>
 
 
 
@@ -412,7 +412,7 @@ pixels by using our pixel scale keyword ``cdelt2`` from above.
 
 .. parsed-literal::
 
-    <matplotlib.image.AxesImage at 0x7fd4c6c5b860>
+    <matplotlib.image.AxesImage at 0x7f8945ec1860>
 
 
 
@@ -457,7 +457,7 @@ this, using a 2D Lorentzian
 
 .. parsed-literal::
 
-    <matplotlib.image.AxesImage at 0x7fd4c8a30128>
+    <matplotlib.image.AxesImage at 0x7f8947c522e8>
 
 
 
@@ -520,7 +520,7 @@ Now let's take a look at the convolved image.
 
 .. parsed-literal::
 
-    <matplotlib.colorbar.Colorbar at 0x7fd4c899d7f0>
+    <matplotlib.colorbar.Colorbar at 0x7f8947bbf358>
 
 
 
@@ -619,7 +619,7 @@ Let's plot the Q and U images.
 
 .. parsed-literal::
 
-    <matplotlib.colorbar.Colorbar at 0x7fd4c5425208>
+    <matplotlib.colorbar.Colorbar at 0x7f89451e8208>
 
 
 
@@ -694,7 +694,7 @@ vectors along the x/right-ascention axis.
 
 .. parsed-literal::
 
-    <matplotlib.quiver.Quiver at 0x7fd4c5323550>
+    <matplotlib.quiver.Quiver at 0x7f89450e4470>
 
 
 
