@@ -87,12 +87,16 @@
 <li><a class="reference internal" href="#overview">Overview</a></li>
 <li><a class="reference internal" href="#content-guidelines">Content Guidelines</a><ul>
 <li><a class="reference internal" href="#id1">Overview</a></li>
+<li><a class="reference internal" href="#template-intro">Template intro</a></li>
 <li><a class="reference internal" href="#code">Code</a></li>
 <li><a class="reference internal" href="#narrative">Narrative</a></li>
-<li><a class="reference internal" href="#template-intro">Template intro</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#procedure-for-contributing">Procedure for contributing</a></li>
+<li><a class="reference internal" href="#procedure-for-contributing">Procedure for contributing</a><ul>
+<li><a class="reference internal" href="#method-one-submit-a-jupyter-notebook-using-colaboratory">Method One: Submit a Jupyter Notebook using Colaboratory</a></li>
+<li><a class="reference internal" href="#method-two-submit-a-pull-request">Method Two: Submit a Pull Request</a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#data-files">Data Files</a><ul>
 <li><a class="reference internal" href="#for-tutorial-authors">For tutorial authors</a></li>
 <li><a class="reference internal" href="#for-repository-maintainers">For repository maintainers</a></li>
@@ -131,7 +135,7 @@ other metadata that should be associated with the tutorial.</p>
 <h3>Overview<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li>Each tutorial should have 3–5 explicit <a class="reference external" href="http://tll.mit.edu/help/intended-learning-outcomes">Learning Goals</a>, demonstrate ~2–3
-pieces of functionality relevant to astronomy, and contain 2–3 demonstrations of generic but commonly used functionality (e.g., <code class="docutils literal notranslate"><span class="pre">numpy</span></code>, <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>)</li>
+pieces of functionality relevant to astronomy, and contain 2–3 demonstrations of generic but commonly used functionality (e.g., <code class="docutils literal notranslate"><span class="pre">numpy</span></code>, <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>).</li>
 <li><dl class="first docutils">
 <dt>Each tutorial should roughly follow this progression:</dt>
 <dd><ul class="first last">
@@ -146,6 +150,31 @@ real astronomical datasets)</li>
 <li>The tutorials must be compatible with the versions supported by the last major
 release of the Astropy core package (i.e. Python &gt;= 3.5)</li>
 </ul>
+</div>
+<div class="section" id="template-intro">
+<h3>Template intro<a class="headerlink" href="#template-intro" title="Permalink to this headline">¶</a></h3>
+<p>The first cell in every tutorial notebook is used for the title, author list, keywords, and summary and should adhere to the following format:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Title name
+
+## Authors
+Jane Smith, Jose Jones
+
+## Learning Goals
+* Query the ... dataset
+* Calculate ...
+* Display ...
+
+## Keywords
+Example, example, example
+
+## Companion Content
+Carroll &amp; Ostlie 10.3, Binney &amp; Tremaine 1.5
+
+## Summary
+In this tutorial, we will download a data file, do something to it, and then
+visualize it.
+</pre></div>
+</div>
 </div>
 <div class="section" id="code">
 <h3>Code<a class="headerlink" href="#code" title="Permalink to this headline">¶</a></h3>
@@ -230,33 +259,33 @@ data.”</li>
 raw HTML)</li>
 </ul>
 </div>
-<div class="section" id="template-intro">
-<h3>Template intro<a class="headerlink" href="#template-intro" title="Permalink to this headline">¶</a></h3>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># Title name
-
-## Authors
-Jane Smith, Jose Jones
-
-## Learning Goals
-* Query the ... dataset
-* Calculate ...
-* Display ...
-
-## Keywords
-Example, example, example
-
-## Companion Content
-Carroll &amp; Ostlie 10.3, Binney &amp; Tremaine 1.5
-
-## Summary
-In this tutorial, we will download a data file, do something to it, and then
-visualize it.
-</pre></div>
-</div>
-</div>
 </div>
 <div class="section" id="procedure-for-contributing">
 <h2>Procedure for contributing<a class="headerlink" href="#procedure-for-contributing" title="Permalink to this headline">¶</a></h2>
+<p>There are two methods for contributing tutorial notebooks.</p>
+<div class="section" id="method-one-submit-a-jupyter-notebook-using-colaboratory">
+<h3>Method One: Submit a Jupyter Notebook using Colaboratory<a class="headerlink" href="#method-one-submit-a-jupyter-notebook-using-colaboratory" title="Permalink to this headline">¶</a></h3>
+<p>The Learn Astropy project is transitioning to providing interactive
+editing and feedback for submitted tutorial notebooks via
+<a class="reference external" href="https://colab.research.google.com/">Colaboratory</a>. Follow this
+procedure to submit a Jupyter notebook:</p>
+<ul class="simple">
+<li>Upload the Jupyter notebook to Google drive</li>
+<li>Right click on the file in your Google drive and select <em>Get
+shareable link</em>. Click on <em>Share settings</em> and change it so that
+“Anyone with a link can edit”. Then copy the url in the box.</li>
+<li><a class="reference external" href="https://github.com/astropy/astropy-tutorials/issues">Open an issue on the astropy-tutorials Github repo</a> and paste
+the url to your Jupyter notebook.</li>
+</ul>
+<p>Learn Astropy maintainers will respond as soon as possible by
+downloading your notebook, testing it, and editing the file in your
+Google drive to conform to the above style guide.</p>
+<p>When the tutorial is ready to be incorporated, Learn Astropy
+maintainers will open a pull request on behalf of the tutorial
+authors.</p>
+</div>
+<div class="section" id="method-two-submit-a-pull-request">
+<h3>Method Two: Submit a Pull Request<a class="headerlink" href="#method-two-submit-a-pull-request" title="Permalink to this headline">¶</a></h3>
 <p>The process for contributing a tutorial involves the <a class="reference external" href="https://help.github.com/articles/working-with-forks/">GitHub fork</a> and <code class="docutils literal notranslate"><span class="pre">git</span></code> workflow
 concepts <a class="reference external" href="https://help.github.com/articles/proposing-changes-to-your-work-with-pull-requests/">branch, push, pull request</a>.</p>
 <p>To contribute a new tutorial, first fork the <code class="docutils literal notranslate"><span class="pre">astropy-tutorials</span></code> repository.
@@ -297,6 +326,7 @@ repository on GitHub (by default, named ‘origin’):</p>
 <p>When the tutorial is ready for broader community feedback, <a class="reference external" href="https://help.github.com/articles/creating-a-pull-request/">open a pull request</a> against the main
 <code class="docutils literal notranslate"><span class="pre">astropy-tutorials</span></code> repository in order for the community to review the new
 tutorial.</p>
+</div>
 </div>
 <div class="section" id="data-files">
 <h2>Data Files<a class="headerlink" href="#data-files" title="Permalink to this headline">¶</a></h2>
