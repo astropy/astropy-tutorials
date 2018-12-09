@@ -139,7 +139,7 @@ procedure to submit a Jupyter notebook:
   the url to your Jupyter notebook.
 
 Learn Astropy maintainers will respond as soon as possible by
-downloading your notebook, testing it, and editting the file in your
+downloading your notebook, testing it, and editing the file in your
 Google drive to conform to the above style guide.
 
 When the tutorial is ready to be incorporated, Learn Astropy
