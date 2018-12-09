@@ -3,6 +3,7 @@
 if [[ -z $CIRCLE_PULL_REQUEST ]] ; then
     git clone --single-branch -b gh-pages git@github.com:astropy/astropy-tutorials.git gh-pages
     cp -r build/html/* gh-pages
+    cp -R .circleci gh-pages/
     cd gh-pages
     git add .
     touch .nojekyll
