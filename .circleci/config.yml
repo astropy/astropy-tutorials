@@ -24,6 +24,11 @@ jobs:
     docker:
       - image: circleci/python:3.6
 
+    branches:
+      ignore:
+        - gh-pages
+        - rst
+
     steps:
       - checkout
       - add_ssh_keys: # add GitHub SSH keys
