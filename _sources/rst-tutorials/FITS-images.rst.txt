@@ -203,7 +203,7 @@ Viewing the image data and getting basic statistics
 
 .. parsed-literal::
 
-    <matplotlib.colorbar.Colorbar at 0x7fda3616bd30>
+    <matplotlib.colorbar.Colorbar at 0x7f589802fd68>
 
 
 
@@ -314,9 +314,9 @@ to load the ``LogNorm`` object from ``matplotlib``.
 
 .. parsed-literal::
 
-    [<matplotlib.text.Text at 0x7fda320d6828>,
-     <matplotlib.text.Text at 0x7fda3213ce80>,
-     <matplotlib.text.Text at 0x7fda325037f0>]
+    [<matplotlib.text.Text at 0x7f588ff80c18>,
+     <matplotlib.text.Text at 0x7f588ff8be80>,
+     <matplotlib.text.Text at 0x7f5894302588>]
 
 
 
@@ -417,7 +417,7 @@ scaling for ``imshow``.
 
 .. parsed-literal::
 
-    <matplotlib.colorbar.Colorbar at 0x7fda311caa20>
+    <matplotlib.colorbar.Colorbar at 0x7f588f00d6a0>
 
 
 
