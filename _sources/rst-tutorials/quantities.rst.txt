@@ -258,7 +258,7 @@ km/s and a velocity dispersion of 4.3 km/s.
 
 .. parsed-literal::
 
-    <matplotlib.text.Text at 0x7fb916879f60>
+    <matplotlib.text.Text at 0x7fc0c1dcc8d0>
 
 
 
