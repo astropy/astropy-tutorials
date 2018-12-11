@@ -32,7 +32,14 @@ P. L. Lim
 Learning Goals
 --------------
 
--  TODO
+-  Perform a cone search around M31 using a web service.
+-  Write the result out to a LaTeX table.
+-  Perform a SIMBAD query using the cone search result.
+-  Extract metadata from the cone search catalog.
+-  Sort cone search results by angular distance.
+-  Search multiple cone search services at once (synchronously and
+   asynchronously).
+-  Estimate the run time of a cone search.
 
 Keywords
 --------
@@ -4308,8 +4315,9 @@ result above.
     #
     # CHANGE THESE VALUES to the appropriate RA and DEC
     # column names you see above, if necessary.
-    ra_colname = 'RAJ2000'
-    dec_colname = 'DEJ2000'
+    # These are for http://gsss.stsci.edu/webservices/vo/ConeSearch.aspx?CAT=GSC23&
+    ra_colname = 'ra'
+    dec_colname = 'dec'
 
 
 :inputnumrole:`In[10]:`
@@ -4334,7 +4342,35 @@ result above.
 
 .. parsed-literal::
 
-    RAJ2000 or DEJ2000 not in search results. Choose from: objID gsc2ID gsc1ID hstID ra dec epoch raEpsilon decEpsilon rapm decpm rapmErr decpmErr deltaEpoch FpgMag FpgMagErr FpgMagCode JpgMag JpgMagErr JpgMagCode NpgMag NpgMagErr NpgMagCode UMag UMagErr UMagCode BMag BMagErr BMagCode VMag VMagErr VMagCode RMag RMagErr RMagCode IMag IMagErr IMagCode JMag JMagErr JMagCode HMag HMagErr HMagCode KMag KMagErr KMagCode class semiMajorAxis eccentricity positionAngle sourceStatus variableFlag multipleFlag compassGSC2id Mag
+    Searching SIMBAD for
+    <SkyCoord (ICRS): (ra, dec) in deg
+        (10.684737, 41.269035)>
+    
+                MAIN_ID                  RA      ...     COO_BIBCODE    
+                                      "h:m:s"    ...                    
+    ------------------------------- ------------ ... -------------------
+                   NAME P2B Cluster  00 42 44.34 ... 2010ApJ...710..755G
+                         [LFG93] P3  00 42 44.34 ... 2010ApJ...710..755G
+                          NAME M31*  00 42 44.33 ... 1993ApJ...411L.107C
+        [K2002] J004244.35+411608.9 00 42 44.351 ... 2002ApJ...577..738K
+                          HD   3969 00 42 44.367 ... 1988A&AS...74..449R
+                      [HPH2013] 165  00 42 44.34 ... 2013A&A...555A..65H
+                      [HPH2013] 164  00 42 44.30 ... 2013A&A...555A..65H
+                         [LFG93] P1  00 42 44.37 ... 2010ApJ...710..755G
+        [KPM2002] G121.1741-21.5730  00 42 44.27 ... 2002AJ....124.2990K
+                      [O2006] QSS 8 00 42 44.365 ... 2002ApJ...577..738K
+                                ...          ... ...                 ...
+            CXOGMP J004244.2+411608   00 42 44.2 ... 2001A&A...365L.195S
+                      [HPH2013] 170  00 42 44.40 ... 2013A&A...555A..65H
+            XMMM31 J004244.1+411607  00 42 44.19 ... 2005A&A...434..483P
+                      [HPH2013] 172  00 42 44.47 ... 2013A&A...555A..65H
+                      [HPH2013] 169  00 42 44.39 ... 2013A&A...555A..65H
+                      M31N 2004-09b  00 42 44.45 ... 2007A&A...465..375P
+                      [HPH2013] 166 00 42 44.355 ... 2002ApJ...577..738K
+                        [PSC2013] 9 00 42 44.060 ... 2013MNRAS.430.1219P
+                       [LGF2011] S1  00 42 44.36 ... 2011ApJ...728L..10L
+    NAME Nova Treffers 1993 in M 31     00 42 44 ...                    
+    Length = 25 rows
 
 
 Now back to Cone Search... You can extract metadata of this Cone Search
@@ -4398,13 +4434,13 @@ catalog.
             "W48"
         ],
         "validate_warnings": [
-            "/eng/ssb/websites/astropy/aux/vo_databases/daily_20181209/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:154:0: W50: Invalid unit string 'pixel'",
-            "/eng/ssb/websites/astropy/aux/vo_databases/daily_20181209/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:179:0: W48: Unknown attribute 'nrows' on TABLEDATA",
-            "/eng/ssb/websites/astropy/aux/vo_databases/daily_20181209/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:154:0: W50: Invalid unit string 'pixel'",
-            "/eng/ssb/websites/astropy/aux/vo_databases/daily_20181209/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:179:0: W48: Unknown attribute 'nrows' on TABLEDATA"
+            "/eng/ssb/websites/astropy/aux/vo_databases/daily_20181211/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:154:0: W50: Invalid unit string 'pixel'",
+            "/eng/ssb/websites/astropy/aux/vo_databases/daily_20181211/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:179:0: W48: Unknown attribute 'nrows' on TABLEDATA",
+            "/eng/ssb/websites/astropy/aux/vo_databases/daily_20181211/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:154:0: W50: Invalid unit string 'pixel'",
+            "/eng/ssb/websites/astropy/aux/vo_databases/daily_20181211/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:179:0: W48: Unknown attribute 'nrows' on TABLEDATA"
         ],
         "validate_xmllint": false,
-        "validate_xmllint_content": "/eng/ssb/websites/astropy/aux/vo_databases/daily_20181209/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:179: element TABLEDATA: Schemas validity error : Element '{http://www.ivoa.net/xml/VOTable/v1.2}TABLEDATA', attribute 'nrows': The attribute 'nrows' is not allowed.\n/eng/ssb/websites/astropy/aux/vo_databases/daily_20181209/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml fails to validate\n",
+        "validate_xmllint_content": "/eng/ssb/websites/astropy/aux/vo_databases/daily_20181211/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:179: element TABLEDATA: Schemas validity error : Element '{http://www.ivoa.net/xml/VOTable/v1.2}TABLEDATA', attribute 'nrows': The attribute 'nrows' is not allowed.\n/eng/ssb/websites/astropy/aux/vo_databases/daily_20181211/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml fails to validate\n",
         "waveband": "optical",
         "wsdl_url": ""
     }
@@ -4430,11 +4466,6 @@ calling ``conesearch.list_catalogs()``, as mentioned above.
 .. parsed-literal::
 
     Trying http://vizier.u-strasbg.fr/viz-bin/conesearch/I/252/out?
-
-
-.. parsed-literal::
-
-    WARNING: W22: http://vizier.u-strasbg.fr/viz-bin/conesearch/I/252/out?RA=10.6847083&DEC=41.26875&SR=0.1&VERB=1:15:0: W22: The DEFINITIONS element is deprecated in VOTable 1.1.  Ignoring [astropy.io.votable.tree]
 
 
 
@@ -4756,7 +4787,7 @@ This might take a while.
 
 .. parsed-literal::
 
-    Predicted run time is 0.6866865663817434 seconds
+    Predicted run time is 0.6014642407936741 seconds
     Predicted number of rows is 2617
 
 
@@ -4785,7 +4816,7 @@ the service provider.
 
 .. parsed-literal::
 
-    INFO: conesearch_timer took 0.7160303592681885 s on AVERAGE for 1 call(s). [astropy.utils.timer]
+    INFO: conesearch_timer took 0.6783020496368408 s on AVERAGE for 1 call(s). [astropy.utils.timer]
 
 
 
@@ -4803,7 +4834,7 @@ the service provider.
 
 .. parsed-literal::
 
-    Actual run time is 0.7160303592681885 seconds
+    Actual run time is 0.6783020496368408 seconds
     Actual number of rows is 4028
 
 

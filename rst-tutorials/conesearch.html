@@ -122,7 +122,14 @@
 <div class="section" id="learning-goals">
 <h2>Learning Goals<a class="headerlink" href="#learning-goals" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>TODO</li>
+<li>Perform a cone search around M31 using a web service.</li>
+<li>Write the result out to a LaTeX table.</li>
+<li>Perform a SIMBAD query using the cone search result.</li>
+<li>Extract metadata from the cone search catalog.</li>
+<li>Sort cone search results by angular distance.</li>
+<li>Search multiple cone search services at once (synchronously and
+asynchronously).</li>
+<li>Estimate the run time of a cone search.</li>
 </ul>
 </div>
 <div class="section" id="keywords">
@@ -4316,8 +4323,9 @@ result above.</p>
 <span class="c1">#</span>
 <span class="c1"># CHANGE THESE VALUES to the appropriate RA and DEC</span>
 <span class="c1"># column names you see above, if necessary.</span>
-<span class="n">ra_colname</span> <span class="o">=</span> <span class="s1">&#39;RAJ2000&#39;</span>
-<span class="n">dec_colname</span> <span class="o">=</span> <span class="s1">&#39;DEJ2000&#39;</span>
+<span class="c1"># These are for http://gsss.stsci.edu/webservices/vo/ConeSearch.aspx?CAT=GSC23&amp;</span>
+<span class="n">ra_colname</span> <span class="o">=</span> <span class="s1">&#39;ra&#39;</span>
+<span class="n">dec_colname</span> <span class="o">=</span> <span class="s1">&#39;dec&#39;</span>
 </pre></div>
 </div>
 <p><span class="inputnumrole">In[10]:</span></p>
@@ -4334,7 +4342,35 @@ result above.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[10]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">RAJ2000</span> <span class="ow">or</span> <span class="n">DEJ2000</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">search</span> <span class="n">results</span><span class="o">.</span> <span class="n">Choose</span> <span class="n">from</span><span class="p">:</span> <span class="n">objID</span> <span class="n">gsc2ID</span> <span class="n">gsc1ID</span> <span class="n">hstID</span> <span class="n">ra</span> <span class="n">dec</span> <span class="n">epoch</span> <span class="n">raEpsilon</span> <span class="n">decEpsilon</span> <span class="n">rapm</span> <span class="n">decpm</span> <span class="n">rapmErr</span> <span class="n">decpmErr</span> <span class="n">deltaEpoch</span> <span class="n">FpgMag</span> <span class="n">FpgMagErr</span> <span class="n">FpgMagCode</span> <span class="n">JpgMag</span> <span class="n">JpgMagErr</span> <span class="n">JpgMagCode</span> <span class="n">NpgMag</span> <span class="n">NpgMagErr</span> <span class="n">NpgMagCode</span> <span class="n">UMag</span> <span class="n">UMagErr</span> <span class="n">UMagCode</span> <span class="n">BMag</span> <span class="n">BMagErr</span> <span class="n">BMagCode</span> <span class="n">VMag</span> <span class="n">VMagErr</span> <span class="n">VMagCode</span> <span class="n">RMag</span> <span class="n">RMagErr</span> <span class="n">RMagCode</span> <span class="n">IMag</span> <span class="n">IMagErr</span> <span class="n">IMagCode</span> <span class="n">JMag</span> <span class="n">JMagErr</span> <span class="n">JMagCode</span> <span class="n">HMag</span> <span class="n">HMagErr</span> <span class="n">HMagCode</span> <span class="n">KMag</span> <span class="n">KMagErr</span> <span class="n">KMagCode</span> <span class="k">class</span> <span class="nc">semiMajorAxis</span> <span class="n">eccentricity</span> <span class="n">positionAngle</span> <span class="n">sourceStatus</span> <span class="n">variableFlag</span> <span class="n">multipleFlag</span> <span class="n">compassGSC2id</span> <span class="n">Mag</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Searching</span> <span class="n">SIMBAD</span> <span class="k">for</span>
+<span class="o">&lt;</span><span class="n">SkyCoord</span> <span class="p">(</span><span class="n">ICRS</span><span class="p">):</span> <span class="p">(</span><span class="n">ra</span><span class="p">,</span> <span class="n">dec</span><span class="p">)</span> <span class="ow">in</span> <span class="n">deg</span>
+    <span class="p">(</span><span class="mf">10.684737</span><span class="p">,</span> <span class="mf">41.269035</span><span class="p">)</span><span class="o">&gt;</span>
+
+            <span class="n">MAIN_ID</span>                  <span class="n">RA</span>      <span class="o">...</span>     <span class="n">COO_BIBCODE</span>
+                                  <span class="s2">&quot;h:m:s&quot;</span>    <span class="o">...</span>
+<span class="o">-------------------------------</span> <span class="o">------------</span> <span class="o">...</span> <span class="o">-------------------</span>
+               <span class="n">NAME</span> <span class="n">P2B</span> <span class="n">Cluster</span>  <span class="mi">00</span> <span class="mi">42</span> <span class="mf">44.34</span> <span class="o">...</span> <span class="mi">2010</span><span class="n">ApJ</span><span class="o">...</span><span class="mf">710.</span><span class="o">.</span><span class="mi">755</span><span class="n">G</span>
+                     <span class="p">[</span><span class="n">LFG93</span><span class="p">]</span> <span class="n">P3</span>  <span class="mi">00</span> <span class="mi">42</span> <span class="mf">44.34</span> <span class="o">...</span> <span class="mi">2010</span><span class="n">ApJ</span><span class="o">...</span><span class="mf">710.</span><span class="o">.</span><span class="mi">755</span><span class="n">G</span>
+                      <span class="n">NAME</span> <span class="n">M31</span><span class="o">*</span>  <span class="mi">00</span> <span class="mi">42</span> <span class="mf">44.33</span> <span class="o">...</span> <span class="mi">1993</span><span class="n">ApJ</span><span class="o">...</span><span class="mi">411</span><span class="n">L</span><span class="o">.</span><span class="mi">107</span><span class="n">C</span>
+    <span class="p">[</span><span class="n">K2002</span><span class="p">]</span> <span class="n">J004244</span><span class="o">.</span><span class="mi">35</span><span class="o">+</span><span class="mf">411608.9</span> <span class="mi">00</span> <span class="mi">42</span> <span class="mf">44.351</span> <span class="o">...</span> <span class="mi">2002</span><span class="n">ApJ</span><span class="o">...</span><span class="mf">577.</span><span class="o">.</span><span class="mi">738</span><span class="n">K</span>
+                      <span class="n">HD</span>   <span class="mi">3969</span> <span class="mi">00</span> <span class="mi">42</span> <span class="mf">44.367</span> <span class="o">...</span> <span class="mi">1988</span><span class="n">A</span><span class="o">&amp;</span><span class="n">AS</span><span class="o">...</span><span class="mf">74.</span><span class="o">.</span><span class="mi">449</span><span class="n">R</span>
+                  <span class="p">[</span><span class="n">HPH2013</span><span class="p">]</span> <span class="mi">165</span>  <span class="mi">00</span> <span class="mi">42</span> <span class="mf">44.34</span> <span class="o">...</span> <span class="mi">2013</span><span class="n">A</span><span class="o">&amp;</span><span class="n">A</span><span class="o">...</span><span class="mi">555</span><span class="n">A</span><span class="o">..</span><span class="mi">65</span><span class="n">H</span>
+                  <span class="p">[</span><span class="n">HPH2013</span><span class="p">]</span> <span class="mi">164</span>  <span class="mi">00</span> <span class="mi">42</span> <span class="mf">44.30</span> <span class="o">...</span> <span class="mi">2013</span><span class="n">A</span><span class="o">&amp;</span><span class="n">A</span><span class="o">...</span><span class="mi">555</span><span class="n">A</span><span class="o">..</span><span class="mi">65</span><span class="n">H</span>
+                     <span class="p">[</span><span class="n">LFG93</span><span class="p">]</span> <span class="n">P1</span>  <span class="mi">00</span> <span class="mi">42</span> <span class="mf">44.37</span> <span class="o">...</span> <span class="mi">2010</span><span class="n">ApJ</span><span class="o">...</span><span class="mf">710.</span><span class="o">.</span><span class="mi">755</span><span class="n">G</span>
+    <span class="p">[</span><span class="n">KPM2002</span><span class="p">]</span> <span class="n">G121</span><span class="o">.</span><span class="mi">1741</span><span class="o">-</span><span class="mf">21.5730</span>  <span class="mi">00</span> <span class="mi">42</span> <span class="mf">44.27</span> <span class="o">...</span> <span class="mi">2002</span><span class="n">AJ</span><span class="o">....</span><span class="mf">124.2990</span><span class="n">K</span>
+                  <span class="p">[</span><span class="n">O2006</span><span class="p">]</span> <span class="n">QSS</span> <span class="mi">8</span> <span class="mi">00</span> <span class="mi">42</span> <span class="mf">44.365</span> <span class="o">...</span> <span class="mi">2002</span><span class="n">ApJ</span><span class="o">...</span><span class="mf">577.</span><span class="o">.</span><span class="mi">738</span><span class="n">K</span>
+                            <span class="o">...</span>          <span class="o">...</span> <span class="o">...</span>                 <span class="o">...</span>
+        <span class="n">CXOGMP</span> <span class="n">J004244</span><span class="o">.</span><span class="mi">2</span><span class="o">+</span><span class="mi">411608</span>   <span class="mi">00</span> <span class="mi">42</span> <span class="mf">44.2</span> <span class="o">...</span> <span class="mi">2001</span><span class="n">A</span><span class="o">&amp;</span><span class="n">A</span><span class="o">...</span><span class="mi">365</span><span class="n">L</span><span class="o">.</span><span class="mi">195</span><span class="n">S</span>
+                  <span class="p">[</span><span class="n">HPH2013</span><span class="p">]</span> <span class="mi">170</span>  <span class="mi">00</span> <span class="mi">42</span> <span class="mf">44.40</span> <span class="o">...</span> <span class="mi">2013</span><span class="n">A</span><span class="o">&amp;</span><span class="n">A</span><span class="o">...</span><span class="mi">555</span><span class="n">A</span><span class="o">..</span><span class="mi">65</span><span class="n">H</span>
+        <span class="n">XMMM31</span> <span class="n">J004244</span><span class="o">.</span><span class="mi">1</span><span class="o">+</span><span class="mi">411607</span>  <span class="mi">00</span> <span class="mi">42</span> <span class="mf">44.19</span> <span class="o">...</span> <span class="mi">2005</span><span class="n">A</span><span class="o">&amp;</span><span class="n">A</span><span class="o">...</span><span class="mf">434.</span><span class="o">.</span><span class="mi">483</span><span class="n">P</span>
+                  <span class="p">[</span><span class="n">HPH2013</span><span class="p">]</span> <span class="mi">172</span>  <span class="mi">00</span> <span class="mi">42</span> <span class="mf">44.47</span> <span class="o">...</span> <span class="mi">2013</span><span class="n">A</span><span class="o">&amp;</span><span class="n">A</span><span class="o">...</span><span class="mi">555</span><span class="n">A</span><span class="o">..</span><span class="mi">65</span><span class="n">H</span>
+                  <span class="p">[</span><span class="n">HPH2013</span><span class="p">]</span> <span class="mi">169</span>  <span class="mi">00</span> <span class="mi">42</span> <span class="mf">44.39</span> <span class="o">...</span> <span class="mi">2013</span><span class="n">A</span><span class="o">&amp;</span><span class="n">A</span><span class="o">...</span><span class="mi">555</span><span class="n">A</span><span class="o">..</span><span class="mi">65</span><span class="n">H</span>
+                  <span class="n">M31N</span> <span class="mi">2004</span><span class="o">-</span><span class="mi">09</span><span class="n">b</span>  <span class="mi">00</span> <span class="mi">42</span> <span class="mf">44.45</span> <span class="o">...</span> <span class="mi">2007</span><span class="n">A</span><span class="o">&amp;</span><span class="n">A</span><span class="o">...</span><span class="mf">465.</span><span class="o">.</span><span class="mi">375</span><span class="n">P</span>
+                  <span class="p">[</span><span class="n">HPH2013</span><span class="p">]</span> <span class="mi">166</span> <span class="mi">00</span> <span class="mi">42</span> <span class="mf">44.355</span> <span class="o">...</span> <span class="mi">2002</span><span class="n">ApJ</span><span class="o">...</span><span class="mf">577.</span><span class="o">.</span><span class="mi">738</span><span class="n">K</span>
+                    <span class="p">[</span><span class="n">PSC2013</span><span class="p">]</span> <span class="mi">9</span> <span class="mi">00</span> <span class="mi">42</span> <span class="mf">44.060</span> <span class="o">...</span> <span class="mi">2013</span><span class="n">MNRAS</span><span class="o">.</span><span class="mf">430.1219</span><span class="n">P</span>
+                   <span class="p">[</span><span class="n">LGF2011</span><span class="p">]</span> <span class="n">S1</span>  <span class="mi">00</span> <span class="mi">42</span> <span class="mf">44.36</span> <span class="o">...</span> <span class="mi">2011</span><span class="n">ApJ</span><span class="o">...</span><span class="mi">728</span><span class="n">L</span><span class="o">..</span><span class="mi">10</span><span class="n">L</span>
+<span class="n">NAME</span> <span class="n">Nova</span> <span class="n">Treffers</span> <span class="mi">1993</span> <span class="ow">in</span> <span class="n">M</span> <span class="mi">31</span>     <span class="mi">00</span> <span class="mi">42</span> <span class="mi">44</span> <span class="o">...</span>
+<span class="n">Length</span> <span class="o">=</span> <span class="mi">25</span> <span class="n">rows</span>
 </pre></div>
 </div>
 <p>Now back to Cone Search… You can extract metadata of this Cone Search
@@ -4389,13 +4425,13 @@ catalog.</p>
         &quot;W48&quot;
     ],
     &quot;validate_warnings&quot;: [
-        &quot;/eng/ssb/websites/astropy/aux/vo_databases/daily_20181209/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:154:0: W50: Invalid unit string 'pixel'&quot;,
-        &quot;/eng/ssb/websites/astropy/aux/vo_databases/daily_20181209/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:179:0: W48: Unknown attribute 'nrows' on TABLEDATA&quot;,
-        &quot;/eng/ssb/websites/astropy/aux/vo_databases/daily_20181209/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:154:0: W50: Invalid unit string 'pixel'&quot;,
-        &quot;/eng/ssb/websites/astropy/aux/vo_databases/daily_20181209/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:179:0: W48: Unknown attribute 'nrows' on TABLEDATA&quot;
+        &quot;/eng/ssb/websites/astropy/aux/vo_databases/daily_20181211/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:154:0: W50: Invalid unit string 'pixel'&quot;,
+        &quot;/eng/ssb/websites/astropy/aux/vo_databases/daily_20181211/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:179:0: W48: Unknown attribute 'nrows' on TABLEDATA&quot;,
+        &quot;/eng/ssb/websites/astropy/aux/vo_databases/daily_20181211/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:154:0: W50: Invalid unit string 'pixel'&quot;,
+        &quot;/eng/ssb/websites/astropy/aux/vo_databases/daily_20181211/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:179:0: W48: Unknown attribute 'nrows' on TABLEDATA&quot;
     ],
     &quot;validate_xmllint&quot;: false,
-    &quot;validate_xmllint_content&quot;: &quot;/eng/ssb/websites/astropy/aux/vo_databases/daily_20181209/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:179: element TABLEDATA: Schemas validity error : Element '{http://www.ivoa.net/xml/VOTable/v1.2}TABLEDATA', attribute 'nrows': The attribute 'nrows' is not allowed.n/eng/ssb/websites/astropy/aux/vo_databases/daily_20181209/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml fails to validaten&quot;,
+    &quot;validate_xmllint_content&quot;: &quot;/eng/ssb/websites/astropy/aux/vo_databases/daily_20181211/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:179: element TABLEDATA: Schemas validity error : Element '{http://www.ivoa.net/xml/VOTable/v1.2}TABLEDATA', attribute 'nrows': The attribute 'nrows' is not allowed.n/eng/ssb/websites/astropy/aux/vo_databases/daily_20181211/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml fails to validaten&quot;,
     &quot;waveband&quot;: &quot;optical&quot;,
     &quot;wsdl_url&quot;: &quot;&quot;
 }
@@ -4410,9 +4446,6 @@ calling <code class="docutils literal notranslate"><span class="pre">conesearch.
 </div>
 <p><span class="outputnumrole">Out[12]:</span></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Trying http://vizier.u-strasbg.fr/viz-bin/conesearch/I/252/out?
-</pre></div>
-</div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>WARNING: W22: http://vizier.u-strasbg.fr/viz-bin/conesearch/I/252/out?RA=10.6847083&amp;DEC=41.26875&amp;SR=0.1&amp;VERB=1:15:0: W22: The DEFINITIONS element is deprecated in VOTable 1.1.  Ignoring [astropy.io.votable.tree]
 </pre></div>
 </div>
 <p><span class="inputnumrole">In[13]:</span></p>
@@ -4608,7 +4641,7 @@ linear model, which might or might not reflect the actual trend.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[25]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Predicted</span> <span class="n">run</span> <span class="n">time</span> <span class="ow">is</span> <span class="mf">0.6866865663817434</span> <span class="n">seconds</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Predicted</span> <span class="n">run</span> <span class="n">time</span> <span class="ow">is</span> <span class="mf">0.6014642407936741</span> <span class="n">seconds</span>
 <span class="n">Predicted</span> <span class="n">number</span> <span class="n">of</span> <span class="n">rows</span> <span class="ow">is</span> <span class="mi">2617</span>
 </pre></div>
 </div>
@@ -4626,7 +4659,7 @@ the service provider.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[26]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">INFO</span><span class="p">:</span> <span class="n">conesearch_timer</span> <span class="n">took</span> <span class="mf">0.7160303592681885</span> <span class="n">s</span> <span class="n">on</span> <span class="n">AVERAGE</span> <span class="k">for</span> <span class="mi">1</span> <span class="n">call</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">.</span> <span class="p">[</span><span class="n">astropy</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">timer</span><span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">INFO</span><span class="p">:</span> <span class="n">conesearch_timer</span> <span class="n">took</span> <span class="mf">0.6783020496368408</span> <span class="n">s</span> <span class="n">on</span> <span class="n">AVERAGE</span> <span class="k">for</span> <span class="mi">1</span> <span class="n">call</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">.</span> <span class="p">[</span><span class="n">astropy</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">timer</span><span class="p">]</span>
 </pre></div>
 </div>
 <p><span class="inputnumrole">In[27]:</span></p>
@@ -4635,7 +4668,7 @@ the service provider.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[27]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Actual</span> <span class="n">run</span> <span class="n">time</span> <span class="ow">is</span> <span class="mf">0.7160303592681885</span> <span class="n">seconds</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Actual</span> <span class="n">run</span> <span class="n">time</span> <span class="ow">is</span> <span class="mf">0.6783020496368408</span> <span class="n">seconds</span>
 <span class="n">Actual</span> <span class="n">number</span> <span class="n">of</span> <span class="n">rows</span> <span class="ow">is</span> <span class="mi">4028</span>
 </pre></div>
 </div>
