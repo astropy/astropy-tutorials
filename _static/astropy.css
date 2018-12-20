@@ -47,6 +47,11 @@ a:hover{
   font-weight: 600;
 }
 
+.definition-cards a:hover {
+  text-decoration: none !important;
+  color: black !important; 
+}
+
 /* To enable guides after they are incorporated into Learn Astropy: 1. Comment the display property below. 2. Remove "ml-auto" from tutorial placard's class in navbar.html */
 .enable-guides {
   display: none;
@@ -269,10 +274,23 @@ a.reference.internal.nav-header {
 
 
 /* Responsivness */
-@media only screen and (max-width: 850px) {
+@media only screen and (max-width: 1150px) and (min-width: 992px) {
+  .definition-cards a {
+    font-size: 21px !important;
+  }
+}
+
+@media only screen and (max-width: 768px) {
   #astropy-logo {
     width: 50vw;
   }
+
+  .bg-documentation, .bg-example, .bg-guide, .bg-tutorial {
+    margin: 8px !important;
+    margin-left: 3rem !important;
+    margin-right: 3rem !important;
+  }
+
 }
 
 @media only screen and (max-width: 575px) {
@@ -286,5 +304,11 @@ a.reference.internal.nav-header {
 
   body {
     background-color: #fafafa;
+  }
+
+  .bg-documentation, .bg-example, .bg-guide, .bg-tutorial {
+    margin: 8px !important;
+    margin-left: 20px !important;
+    margin-right: 20px !important;
   }
 }

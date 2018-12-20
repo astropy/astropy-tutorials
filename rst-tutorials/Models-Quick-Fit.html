@@ -197,7 +197,7 @@ refers to the error bars in the magnitude measurements.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[4]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">Text</span> <span class="n">at</span> <span class="mh">0x7f93117668d0</span><span class="o">&gt;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">Text</span> <span class="n">at</span> <span class="mh">0x7fa94f37d860</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <img alt="../_images/Models-Quick-Fit_10_1.png" src="../_images/Models-Quick-Fit_10_1.png" />
@@ -303,7 +303,7 @@ or
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[8]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">Text</span> <span class="n">at</span> <span class="mh">0x7f9310640c18</span><span class="o">&gt;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">Text</span> <span class="n">at</span> <span class="mh">0x7fa94ea39898</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <img alt="../_images/Models-Quick-Fit_27_1.png" src="../_images/Models-Quick-Fit_27_1.png" />
@@ -349,7 +349,7 @@ distribution with mean 0 and standard deviation 2.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[10]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">Text</span> <span class="n">at</span> <span class="mh">0x7f9310545160</span><span class="o">&gt;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">Text</span> <span class="n">at</span> <span class="mh">0x7fa94e9e20b8</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <img alt="../_images/Models-Quick-Fit_36_1.png" src="../_images/Models-Quick-Fit_36_1.png" />
@@ -372,9 +372,9 @@ perform fit.</p>
 <span class="n">Model</span> <span class="nb">set</span> <span class="n">size</span><span class="p">:</span> <span class="mi">1</span>
 <span class="n">Degree</span><span class="p">:</span> <span class="mi">3</span>
 <span class="n">Parameters</span><span class="p">:</span>
-            <span class="n">c0</span>                 <span class="n">c1</span>                 <span class="n">c2</span>                <span class="n">c3</span>
-    <span class="o">------------------</span> <span class="o">------------------</span> <span class="o">------------------</span> <span class="o">----------------</span>
-    <span class="o">-</span><span class="mf">9.340298810925493</span> <span class="mf">13.051612980426256</span> <span class="o">-</span><span class="mf">6.795354899132228</span> <span class="mf">1.14411977897428</span>
+            <span class="n">c0</span>                 <span class="n">c1</span>                <span class="n">c2</span>                 <span class="n">c3</span>
+    <span class="o">------------------</span> <span class="o">-----------------</span> <span class="o">------------------</span> <span class="o">------------------</span>
+    <span class="o">-</span><span class="mf">9.303273744083361</span> <span class="mf">12.57200506003461</span> <span class="o">-</span><span class="mf">6.518909842435308</span> <span class="mf">1.1135533052985322</span>
 </pre></div>
 </div>
 <p>What would happend if we use a different fitter (method)? Let’s use the
@@ -402,7 +402,7 @@ same model but with <code class="docutils literal notranslate"><span class="pre"
 <span class="n">Parameters</span><span class="p">:</span>
             <span class="n">c0</span>                  <span class="n">c1</span>                  <span class="n">c2</span>                  <span class="n">c3</span>
     <span class="o">------------------</span> <span class="o">--------------------</span> <span class="o">------------------</span> <span class="o">-------------------</span>
-    <span class="o">-</span><span class="mf">4.393952553323004</span> <span class="mf">0.022383501475875638</span> <span class="mf">1.6181095065501583</span> <span class="o">-</span><span class="mf">0.2949297016064659</span>
+    <span class="mf">0.3823641433292486</span> <span class="mf">0.032973614141515055</span> <span class="o">-</span><span class="mf">1.317577414327428</span> <span class="mf">0.43153562688244623</span>
 </pre></div>
 </div>
 <p>Note that we got a warning after using <code class="docutils literal notranslate"><span class="pre">SimplexLSQFitter</span></code> to fit the
@@ -441,7 +441,7 @@ times.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[16]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Reduced</span> <span class="n">Chi</span> <span class="n">Squared</span> <span class="k">with</span> <span class="n">LinearLSQFitter</span><span class="p">:</span> <span class="mf">1.848518423366577</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Reduced</span> <span class="n">Chi</span> <span class="n">Squared</span> <span class="k">with</span> <span class="n">LinearLSQFitter</span><span class="p">:</span> <span class="mf">1.8487018867089717</span>
 </pre></div>
 </div>
 <p><span class="inputnumrole">In[17]:</span></p>
@@ -450,7 +450,7 @@ times.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[17]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Reduced</span> <span class="n">Chi</span> <span class="n">Squared</span> <span class="k">with</span> <span class="n">SimplexLSQFitter</span><span class="p">:</span> <span class="mf">3.633077632562139</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Reduced</span> <span class="n">Chi</span> <span class="n">Squared</span> <span class="k">with</span> <span class="n">SimplexLSQFitter</span><span class="p">:</span> <span class="mf">5.607506081342519</span>
 </pre></div>
 </div>
 <p>As we can see, the <em>Reduced Chi Square</em> for the first fit is closer to
@@ -467,7 +467,7 @@ after the discussion of the warnings.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[18]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">legend</span><span class="o">.</span><span class="n">Legend</span> <span class="n">at</span> <span class="mh">0x7f9310456828</span><span class="o">&gt;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">legend</span><span class="o">.</span><span class="n">Legend</span> <span class="n">at</span> <span class="mh">0x7fa94e8725c0</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <img alt="../_images/Models-Quick-Fit_50_1.png" src="../_images/Models-Quick-Fit_50_1.png" />
@@ -498,7 +498,7 @@ with fake data in the shape of a Gaussian.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[20]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">Text</span> <span class="n">at</span> <span class="mh">0x7f9310409f28</span><span class="o">&gt;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">Text</span> <span class="n">at</span> <span class="mh">0x7fa94e8493c8</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <img alt="../_images/Models-Quick-Fit_55_1.png" src="../_images/Models-Quick-Fit_55_1.png" />
@@ -522,8 +522,8 @@ we need (<code class="docutils literal notranslate"><span class="pre">Gaussian1D
 <span class="n">Model</span> <span class="nb">set</span> <span class="n">size</span><span class="p">:</span> <span class="mi">1</span>
 <span class="n">Parameters</span><span class="p">:</span>
         <span class="n">amplitude</span>              <span class="n">mean</span>               <span class="n">stddev</span>
-    <span class="o">------------------</span> <span class="o">--------------------</span> <span class="o">-----------------</span>
-    <span class="mf">10.075986599490664</span> <span class="o">-</span><span class="mf">0.02355663771054535</span> <span class="mf">9.538008548517498</span>
+    <span class="o">------------------</span> <span class="o">--------------------</span> <span class="o">------------------</span>
+    <span class="mf">10.072377243171596</span> <span class="o">-</span><span class="mf">0.08560752307236885</span> <span class="mf">10.104545080082328</span>
 </pre></div>
 </div>
 <p>We can get the <a class="reference external" href="http://mathworld.wolfram.com/CovarianceMatrix.html">covariance
@@ -546,7 +546,7 @@ parameters using:</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[24]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mf">0.06267045</span> <span class="mf">0.07485523</span> <span class="mf">0.07496134</span><span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mf">0.05344519</span> <span class="mf">0.07167129</span> <span class="mf">0.07192751</span><span class="p">]</span>
 </pre></div>
 </div>
 <p>Then:</p>
@@ -558,9 +558,9 @@ parameters using:</p>
 </div>
 <p><span class="outputnumrole">Out[25]:</span></p>
 <pre class="literal-block">
-Amplitude: 10.075986599490664 +- 0.2503406723118861
-Mean: -0.02355663771054535 +- 0.273596835057046
-Standard Deviation: 9.538008548517498 +- 0.2737906915638463
+Amplitude: 10.072377243171596 +- 0.23118216192918725
+Mean: -0.08560752307236885 +- 0.26771494573334176
+Standard Deviation: 10.104545080082328 +- 0.2681930542573288
 </pre>
 <p>We can apply the same method with <code class="docutils literal notranslate"><span class="pre">scipy.optimize.curve_fit</span></code>, and
 compare the results using again the <em>Reduced Chi Square Value</em>.</p>
@@ -580,7 +580,7 @@ compare the results using again the <em>Reduced Chi Square Value</em>.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[28]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mf">10.07598684</span> <span class="o">-</span><span class="mf">0.02355676</span>  <span class="mf">9.53800809</span><span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mf">10.07237674</span> <span class="o">-</span><span class="mf">0.08560748</span> <span class="mf">10.10454609</span><span class="p">]</span>
 </pre></div>
 </div>
 <p><span class="inputnumrole">In[29]:</span></p>
@@ -591,9 +591,9 @@ compare the results using again the <em>Reduced Chi Square Value</em>.</p>
 </div>
 <p><span class="outputnumrole">Out[29]:</span></p>
 <pre class="literal-block">
-Amplitude: 10.075986839014936 +- 0.25034119419108164
-Mean: -0.02355675608149211 +- 0.27359481261877694
-Standard Deviation: 9.538008094088827 +- 0.2737893644737072
+Amplitude: 10.072376737792872 +- 0.23118202786009937
+Mean: -0.08560747974349255 +- 0.2677151474267261
+Standard Deviation: 10.104546094091033 +- 0.26819337827781176
 </pre>
 <p><span class="inputnumrole">In[30]:</span></p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">reduced_chi_squared</span> <span class="o">=</span> <span class="n">calc_reduced_chi_square</span><span class="p">(</span><span class="n">best_fit_gauss</span><span class="p">(</span><span class="n">x2</span><span class="p">),</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">y2_err</span><span class="p">,</span> <span class="n">N2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
@@ -601,7 +601,7 @@ Standard Deviation: 9.538008094088827 +- 0.2737893644737072
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[30]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Reduced</span> <span class="n">Chi</span> <span class="n">Squared</span> <span class="n">using</span> <span class="n">astropy</span><span class="o">.</span><span class="n">modeling</span><span class="p">:</span> <span class="mf">1.1649341021903872</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Reduced</span> <span class="n">Chi</span> <span class="n">Squared</span> <span class="n">using</span> <span class="n">astropy</span><span class="o">.</span><span class="n">modeling</span><span class="p">:</span> <span class="mf">1.0517872523839529</span>
 </pre></div>
 </div>
 <p><span class="inputnumrole">In[31]:</span></p>
@@ -610,7 +610,7 @@ Standard Deviation: 9.538008094088827 +- 0.2737893644737072
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[31]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Reduced</span> <span class="n">Chi</span> <span class="n">Squared</span> <span class="n">using</span> <span class="n">scipy</span><span class="p">:</span> <span class="mf">1.1649341021904207</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Reduced</span> <span class="n">Chi</span> <span class="n">Squared</span> <span class="n">using</span> <span class="n">scipy</span><span class="p">:</span> <span class="mf">1.0517872523842269</span>
 </pre></div>
 </div>
 <p>As we can see there is a very small difference in the <em>Reduced Chi
@@ -629,7 +629,7 @@ us to remember the expression of the function we wanted to use.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[32]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">legend</span><span class="o">.</span><span class="n">Legend</span> <span class="n">at</span> <span class="mh">0x7f93102da898</span><span class="o">&gt;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">legend</span><span class="o">.</span><span class="n">Legend</span> <span class="n">at</span> <span class="mh">0x7fa94e6e1f28</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <img alt="../_images/Models-Quick-Fit_73_1.png" src="../_images/Models-Quick-Fit_73_1.png" />
@@ -679,7 +679,7 @@ Compare different options</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[34]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">Text</span> <span class="n">at</span> <span class="mh">0x7f9310249390</span><span class="o">&gt;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">Text</span> <span class="n">at</span> <span class="mh">0x7fa94e666a90</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <img alt="../_images/Models-Quick-Fit_79_1.png" src="../_images/Models-Quick-Fit_79_1.png" />
