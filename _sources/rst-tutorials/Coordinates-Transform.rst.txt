@@ -518,6 +518,7 @@ We can see the list of observing sites:
      'Hale Telescope',
      'Haleakala Observatories',
      'Happy Jack',
+     'IAO',
      'JCMT',
      'James Clerk Maxwell Telescope',
      'Jansky Very Large Array',
@@ -583,6 +584,7 @@ We can see the list of observing sites:
      'gems',
      'greenwich',
      'haleakala',
+     'iao',
      'irtf',
      'jcmt',
      'keck',
@@ -670,7 +672,7 @@ location in the sky over Kitt Peak at the requested time.
 
 .. parsed-literal::
 
-    Downloading http://maia.usno.navy.mil/ser7/finals2000A.all [Done]
+    WARNING: failed to download http://maia.usno.navy.mil/ser7/finals2000A.all, using local IERS-B: <urlopen error [Errno -3] Temporary failure in name resolution> [astropy.utils.iers.iers]
 
 
 
@@ -694,6 +696,11 @@ To look at just the altitude we can ``alt`` attribute:
 
 
 :outputnumrole:`Out[21]:`
+
+
+.. parsed-literal::
+
+    WARNING: failed to download http://maia.usno.navy.mil/ser7/finals2000A.all, using local IERS-B: <urlopen error [Errno -3] Temporary failure in name resolution> [astropy.utils.iers.iers]
 
 
 
@@ -731,8 +738,13 @@ an airmass plot.
 :outputnumrole:`Out[22]:`
 
 
+.. parsed-literal::
 
-.. image:: nboutput/Coordinates-Transform_51_0.png
+    WARNING: failed to download http://maia.usno.navy.mil/ser7/finals2000A.all, using local IERS-B: <urlopen error [Errno -3] Temporary failure in name resolution> [astropy.utils.iers.iers]
+
+
+
+.. image:: nboutput/Coordinates-Transform_51_1.png
 
 
 
@@ -761,8 +773,13 @@ that can be used to check this. Let's use it to check if we're in
 :outputnumrole:`Out[23]:`
 
 
+.. parsed-literal::
 
-.. image:: nboutput/Coordinates-Transform_53_0.png
+    WARNING: failed to download http://maia.usno.navy.mil/ser7/finals2000A.all, using local IERS-B: <urlopen error [Errno -3] Temporary failure in name resolution> [astropy.utils.iers.iers]
+
+
+
+.. image:: nboutput/Coordinates-Transform_53_1.png
 
 
 
@@ -788,8 +805,19 @@ We can also look at the object altitude at the present time and date:
 
 .. parsed-literal::
 
-    <SkyCoord (AltAz: obstime=2018-12-11 16:34:18.869081, location=(-1994502.6043061386, -5037538.54232911, 3358104.9969029757) m, pressure=0.0 hPa, temperature=0.0 deg_C, relative_humidity=0, obswl=1.0 micron): (az, alt) in deg
-        (43.34691349, -48.15045768)>
+    WARNING: failed to download http://maia.usno.navy.mil/ser7/finals2000A.all, using local IERS-B: <urlopen error [Errno -3] Temporary failure in name resolution> [astropy.utils.iers.iers]
+    WARNING: Tried to get polar motions for times after IERS data is valid. Defaulting to polar motion from the 50-yr mean for those. This may affect precision at the 10s of arcsec level [astropy.coordinates.builtin_frames.utils]
+
+
+.. parsed-literal::
+
+    <SkyCoord (AltAz: obstime=2018-12-20 18:38:55.279288, location=(-1994502.6043061386, -5037538.54232911, 3358104.9969029757) m, pressure=0.0 hPa, temperature=0.0 deg_C, relative_humidity=0, obswl=1.0 micron): (az, alt) in deg
+        (76.68917011, -18.49772609)>
+
+
+.. parsed-literal::
+
+    WARNING: (some) times are outside of range covered by IERS table. Assuming UT1-UTC=0 for coordinate transformations. [astropy.coordinates.builtin_frames.utils]
 
 
 Exercises
