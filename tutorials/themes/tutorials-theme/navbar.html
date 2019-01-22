@@ -35,13 +35,13 @@
         <h2 class="card-title text-center"><a href="{{ pathto('examples') }}" class="text-white">Examples</a></h2>
       <p class="card-text text-center">Examples are stand-alone code snippets that live in the astropy documentation that demonstrate a specific functionality within a package.</p>
     </div>
-  </div>      
+  </div>
 </div>
 
 {% else %}
 
 <nav class="navbar navbar-expand-lg bg-navbar">
-  <a class="navbar-brand" href="/"style="padding: 0px 5px;"><img src="../_static/astropy_logo.png" style="height:38px;"></a>
+  <a class="navbar-brand" href="/"style="padding: 0px 5px;"><img src="{{ pathto('_static/' + 'astropy_logo.png') }}" style="height:38px;"></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
