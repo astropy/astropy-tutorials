@@ -16,7 +16,8 @@
     <script type="text/javascript" src="../_static/jquery.js"></script>
     <script type="text/javascript" src="../_static/underscore.js"></script>
     <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
     <script type="text/javascript" src="../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
@@ -627,9 +628,9 @@ with <code class="docutils literal notranslate"><span class="pre">astropy.modeli
 <span class="n">Outputs</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,)</span>
 <span class="n">Model</span> <span class="nb">set</span> <span class="n">size</span><span class="p">:</span> <span class="mi">1</span>
 <span class="n">Parameters</span><span class="p">:</span>
-            <span class="n">a</span>                   <span class="n">b</span>                  <span class="n">c</span>
-    <span class="o">------------------</span> <span class="o">-------------------</span> <span class="o">------------------</span>
-    <span class="mf">1.3619210259407302</span> <span class="o">-</span><span class="mf">1.8746914434205377</span> <span class="mf">0.7171928237692655</span>
+            <span class="n">a</span>                  <span class="n">b</span>                   <span class="n">c</span>
+    <span class="o">-----------------</span> <span class="o">-------------------</span> <span class="o">-------------------</span>
+    <span class="mf">2.303381915335349</span> <span class="o">-</span><span class="mf">2.2096116055486807</span> <span class="mf">0.32078628699435596</span>
 </pre></div>
 </div>
 <p>The fit looks good in the plot. Let’s check the parameters and the
@@ -651,7 +652,7 @@ goodness of the fit.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[32]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">0.8918175796093485</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">0.9105878504490128</span>
 </pre></div>
 </div>
 <p>The Reduced Chi Square value is close to 1. Great! This means our fit is
@@ -749,9 +750,9 @@ of the parameters.</p>
 <span class="n">Outputs</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">,)</span>
 <span class="n">Model</span> <span class="nb">set</span> <span class="n">size</span><span class="p">:</span> <span class="mi">1</span>
 <span class="n">Parameters</span><span class="p">:</span>
-           <span class="n">a</span>                 <span class="n">b</span>                  <span class="n">c</span>                 <span class="n">d</span>
-    <span class="o">----------------</span> <span class="o">------------------</span> <span class="o">-----------------</span> <span class="o">------------------</span>
-    <span class="mf">3.39091899695355</span> <span class="mf">2.0120459422608326</span> <span class="mf">3.753518487985891</span> <span class="mf">0.9432335246390116</span>
+            <span class="n">a</span>                  <span class="n">b</span>                 <span class="n">c</span>                 <span class="n">d</span>
+    <span class="o">------------------</span> <span class="o">-----------------</span> <span class="o">-----------------</span> <span class="o">------------------</span>
+    <span class="mf">3.3905267014673166</span> <span class="mf">2.025275396270663</span> <span class="mf">3.679863592185081</span> <span class="mf">1.0347271563995821</span>
 </pre></div>
 </div>
 <p><span class="inputnumrole">In[39]:</span></p>
@@ -759,7 +760,7 @@ of the parameters.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[39]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">5.514174289561363</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">5.975932119926818</span>
 </pre></div>
 </div>
 <p>The Reduced Chi Squared value is showing the same as the plot: this fit
@@ -813,7 +814,7 @@ the following data.</p>
       
     </p>
     <p>
-    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.2.
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.3.
     &copy; Copyright Astropy.   
     </p>
   </div>

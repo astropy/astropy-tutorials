@@ -4432,17 +4432,17 @@ catalog.
         "validate_out_db_name": "good",
         "validate_version": "1.2",
         "validate_warning_types": [
-            "W48",
-            "W50"
+            "W50",
+            "W48"
         ],
         "validate_warnings": [
-            "/eng/ssb/websites/astropy/aux/vo_databases/daily_20181220/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:154:0: W50: Invalid unit string 'pixel'",
-            "/eng/ssb/websites/astropy/aux/vo_databases/daily_20181220/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:179:0: W48: Unknown attribute 'nrows' on TABLEDATA",
-            "/eng/ssb/websites/astropy/aux/vo_databases/daily_20181220/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:154:0: W50: Invalid unit string 'pixel'",
-            "/eng/ssb/websites/astropy/aux/vo_databases/daily_20181220/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:179:0: W48: Unknown attribute 'nrows' on TABLEDATA"
+            "/eng/ssb/websites/astropy/aux/vo_databases/daily_20190122/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:154:0: W50: Invalid unit string 'pixel'",
+            "/eng/ssb/websites/astropy/aux/vo_databases/daily_20190122/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:179:0: W48: Unknown attribute 'nrows' on TABLEDATA",
+            "/eng/ssb/websites/astropy/aux/vo_databases/daily_20190122/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:154:0: W50: Invalid unit string 'pixel'",
+            "/eng/ssb/websites/astropy/aux/vo_databases/daily_20190122/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:179:0: W48: Unknown attribute 'nrows' on TABLEDATA"
         ],
         "validate_xmllint": false,
-        "validate_xmllint_content": "/eng/ssb/websites/astropy/aux/vo_databases/daily_20181220/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:179: element TABLEDATA: Schemas validity error : Element '{http://www.ivoa.net/xml/VOTable/v1.2}TABLEDATA', attribute 'nrows': The attribute 'nrows' is not allowed.\n/eng/ssb/websites/astropy/aux/vo_databases/daily_20181220/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml fails to validate\n",
+        "validate_xmllint_content": "/eng/ssb/websites/astropy/aux/vo_databases/daily_20190122/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:179: element TABLEDATA: Schemas validity error : Element '{http://www.ivoa.net/xml/VOTable/v1.2}TABLEDATA', attribute 'nrows': The attribute 'nrows' is not allowed.\n/eng/ssb/websites/astropy/aux/vo_databases/daily_20190122/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml fails to validate\n",
         "waveband": "optical",
         "wsdl_url": ""
     }
@@ -4789,7 +4789,7 @@ This might take a while.
 
 .. parsed-literal::
 
-    Predicted run time is 0.7317364289025139 seconds
+    Predicted run time is 0.7665339600882419 seconds
     Predicted number of rows is 2617
 
 
@@ -4818,7 +4818,7 @@ the service provider.
 
 .. parsed-literal::
 
-    INFO: conesearch_timer took 0.7093720436096191 s on AVERAGE for 1 call(s). [astropy.utils.timer]
+    INFO: conesearch_timer took 0.7290434837341309 s on AVERAGE for 1 call(s). [astropy.utils.timer]
 
 
 
@@ -4836,7 +4836,7 @@ the service provider.
 
 .. parsed-literal::
 
-    Actual run time is 0.7093720436096191 seconds
+    Actual run time is 0.7290434837341309 seconds
     Actual number of rows is 4028
 
 

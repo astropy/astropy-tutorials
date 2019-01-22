@@ -305,7 +305,7 @@ file\ ``'HCG7_SDSS_cutout.jpg'``, defined at the top of the cell.
 
 .. parsed-literal::
 
-    ('HCG7_SDSS_cutout.jpg', <http.client.HTTPMessage at 0x7fcbdf0ed7f0>)
+    ('HCG7_SDSS_cutout.jpg', <http.client.HTTPMessage at 0x7f027d76a128>)
 
 
 
@@ -479,30 +479,30 @@ the tables to see just what everything is that's in them.
 .. raw:: html
 
     <i>Table length=679</i>
-    <table id="table140515357607528" class="table-striped table-bordered table-condensed">
+    <table id="table139650744674400" class="table-striped table-bordered table-condensed">
     <thead><tr><th>ra</th><th>dec</th><th>u</th><th>g</th><th>r</th><th>i</th><th>z</th></tr></thead>
     <thead><tr><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th></tr></thead>
-    <tr><td>9.92247283186737</td><td>0.97775766332052</td><td>20.43676</td><td>17.94613</td><td>16.50844</td><td>15.79941</td><td>15.41096</td></tr>
-    <tr><td>9.73001716011208</td><td>0.991258981941023</td><td>21.43877</td><td>21.11119</td><td>21.30741</td><td>21.09469</td><td>21.74804</td></tr>
-    <tr><td>10.0775826925982</td><td>0.790111126438688</td><td>21.14568</td><td>18.76275</td><td>17.45607</td><td>16.95887</td><td>16.72254</td></tr>
-    <tr><td>10.1303393482758</td><td>1.1523773556596</td><td>22.96277</td><td>21.15212</td><td>19.39642</td><td>18.78123</td><td>18.43637</td></tr>
-    <tr><td>9.56078248603797</td><td>0.619560657217678</td><td>19.78478</td><td>17.88036</td><td>16.91253</td><td>16.49844</td><td>16.16783</td></tr>
-    <tr><td>10.1278326325973</td><td>0.773840299602122</td><td>22.32918</td><td>21.46565</td><td>20.0551</td><td>19.25995</td><td>18.70672</td></tr>
-    <tr><td>9.48407695670596</td><td>1.19045532974859</td><td>23.89429</td><td>22.31505</td><td>20.9971</td><td>19.95295</td><td>19.61565</td></tr>
-    <tr><td>9.68881501269831</td><td>0.766316730900438</td><td>22.79572</td><td>20.11252</td><td>18.80546</td><td>18.14293</td><td>17.74013</td></tr>
-    <tr><td>9.85142233276181</td><td>0.660021031158792</td><td>22.8327</td><td>20.50534</td><td>19.02676</td><td>17.70129</td><td>16.97601</td></tr>
-    <tr><td>9.49788438832076</td><td>0.886448603055719</td><td>20.81937</td><td>20.45431</td><td>20.41823</td><td>19.98793</td><td>19.76102</td></tr>
+    <tr><td>9.77189392633511</td><td>1.08851778782272</td><td>22.1365</td><td>19.42289</td><td>18.11884</td><td>17.5613</td><td>17.25852</td></tr>
+    <tr><td>9.91404352649283</td><td>1.10767806592904</td><td>23.92247</td><td>23.17045</td><td>21.37167</td><td>20.181</td><td>19.5382</td></tr>
+    <tr><td>9.79537845566955</td><td>0.849932759023708</td><td>18.19011</td><td>16.74625</td><td>16.20456</td><td>16.02315</td><td>15.95449</td></tr>
+    <tr><td>9.71431790060433</td><td>1.04953522552351</td><td>21.61689</td><td>19.42595</td><td>18.4278</td><td>18.10297</td><td>17.92925</td></tr>
+    <tr><td>9.53331141392175</td><td>1.09981305021434</td><td>21.11045</td><td>18.78089</td><td>17.75572</td><td>17.39869</td><td>17.19268</td></tr>
+    <tr><td>9.79293339427181</td><td>0.659829329156064</td><td>16.9821</td><td>15.47834</td><td>15.42514</td><td>14.61907</td><td>14.47095</td></tr>
+    <tr><td>9.89512804606989</td><td>0.8599586710626</td><td>15.01746</td><td>13.38153</td><td>12.7639</td><td>12.41548</td><td>12.29506</td></tr>
+    <tr><td>10.001921893077</td><td>0.956962974170162</td><td>22.36868</td><td>19.51999</td><td>18.16483</td><td>17.41288</td><td>16.98804</td></tr>
+    <tr><td>10.0298203018955</td><td>0.785404231428639</td><td>20.93396</td><td>19.98706</td><td>19.61393</td><td>19.46158</td><td>19.38252</td></tr>
+    <tr><td>9.99582645517671</td><td>0.56766540048313</td><td>22.50412</td><td>21.14094</td><td>19.74576</td><td>18.77176</td><td>18.36258</td></tr>
     <tr><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr>
-    <tr><td>9.86428684229807</td><td>0.720839309701538</td><td>23.22432</td><td>21.24871</td><td>19.70633</td><td>18.25559</td><td>17.41176</td></tr>
-    <tr><td>9.8716679740179</td><td>0.609864377500405</td><td>18.94749</td><td>18.94014</td><td>18.76177</td><td>18.93954</td><td>18.98092</td></tr>
-    <tr><td>9.63707753795836</td><td>0.601805919859364</td><td>20.73203</td><td>18.24676</td><td>17.02157</td><td>16.49905</td><td>16.17841</td></tr>
-    <tr><td>9.69056643962546</td><td>0.755271229226288</td><td>24.29986</td><td>22.66226</td><td>20.6659</td><td>19.6947</td><td>19.21622</td></tr>
-    <tr><td>10.1004964143571</td><td>1.15670540586993</td><td>19.78674</td><td>18.66197</td><td>18.16735</td><td>17.83388</td><td>17.59916</td></tr>
-    <tr><td>10.0466962469296</td><td>0.905013010598113</td><td>21.47542</td><td>18.93695</td><td>17.48529</td><td>16.48045</td><td>15.94561</td></tr>
-    <tr><td>9.67946480065007</td><td>0.581059933100146</td><td>17.74734</td><td>16.4498</td><td>15.85848</td><td>15.52075</td><td>15.25987</td></tr>
-    <tr><td>10.001526644975</td><td>0.989081016611435</td><td>20.94188</td><td>18.52371</td><td>17.45651</td><td>17.02363</td><td>16.76776</td></tr>
-    <tr><td>10.0777061349142</td><td>0.725711701258196</td><td>21.85427</td><td>19.24766</td><td>17.7151</td><td>16.26826</td><td>15.51393</td></tr>
-    <tr><td>9.67805190789801</td><td>0.978063092604916</td><td>19.82045</td><td>18.17598</td><td>17.27152</td><td>16.82992</td><td>16.47521</td></tr>
+    <tr><td>9.85142233276181</td><td>0.660021031158792</td><td>22.8327</td><td>20.50534</td><td>19.02676</td><td>17.70129</td><td>16.97601</td></tr>
+    <tr><td>9.85015240594311</td><td>1.00941389131306</td><td>22.79017</td><td>19.93356</td><td>18.57176</td><td>17.65981</td><td>17.13897</td></tr>
+    <tr><td>9.68881501269831</td><td>0.766316730900438</td><td>22.79572</td><td>20.11252</td><td>18.80546</td><td>18.14293</td><td>17.74013</td></tr>
+    <tr><td>9.49788438832076</td><td>0.886448603055719</td><td>20.81937</td><td>20.45431</td><td>20.41823</td><td>19.98793</td><td>19.76102</td></tr>
+    <tr><td>9.91318165978998</td><td>1.10494984958845</td><td>20.45888</td><td>19.25467</td><td>18.52454</td><td>18.19474</td><td>17.88742</td></tr>
+    <tr><td>9.63379865775846</td><td>1.04451580716087</td><td>20.88008</td><td>19.80103</td><td>18.69122</td><td>18.20208</td><td>17.96495</td></tr>
+    <tr><td>9.83106890786564</td><td>0.625042547249356</td><td>22.88215</td><td>22.44291</td><td>20.8858</td><td>19.80261</td><td>19.30529</td></tr>
+    <tr><td>10.056542658354</td><td>0.59110327546726</td><td>20.35315</td><td>18.69015</td><td>18.22211</td><td>18.12444</td><td>17.8771</td></tr>
+    <tr><td>9.55446133730533</td><td>1.14220591660834</td><td>23.06536</td><td>23.08205</td><td>22.12111</td><td>21.67837</td><td>21.63256</td></tr>
+    <tr><td>9.73001716011208</td><td>0.991258981941023</td><td>21.43877</td><td>21.11119</td><td>21.30741</td><td>21.09469</td><td>21.74804</td></tr>
     </table>
 
 
@@ -524,7 +524,7 @@ the tables to see just what everything is that's in them.
 .. raw:: html
 
     <i>Table masked=True length=23</i>
-    <table id="table140515357233952" class="table-striped table-bordered table-condensed">
+    <table id="table139650744979528" class="table-striped table-bordered table-condensed">
     <thead><tr><th>designation</th><th>ra</th><th>dec</th><th>r_k20fe</th><th>j_m_k20fe</th><th>j_msig_k20fe</th><th>j_flg_k20fe</th><th>h_m_k20fe</th><th>h_msig_k20fe</th><th>h_flg_k20fe</th><th>k_m_k20fe</th><th>k_msig_k20fe</th><th>k_flg_k20fe</th><th>k_ba</th><th>k_phi</th><th>sup_ba</th><th>sup_phi</th><th>r_ext</th><th>j_m_ext</th><th>j_msig_ext</th><th>h_m_ext</th><th>h_msig_ext</th><th>k_m_ext</th><th>k_msig_ext</th><th>cc_flg</th><th>dist</th><th>angle</th></tr></thead>
     <thead><tr><th></th><th>deg</th><th>deg</th><th>arcsec</th><th>mag</th><th>mag</th><th></th><th>mag</th><th>mag</th><th></th><th>mag</th><th>mag</th><th></th><th></th><th>deg</th><th></th><th>deg</th><th>arcsec</th><th>mag</th><th>mag</th><th>mag</th><th>mag</th><th>mag</th><th>mag</th><th></th><th>arcsec</th><th>deg</th></tr></thead>
     <thead><tr><th>str16</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>int64</th><th>float64</th><th>float64</th><th>int64</th><th>float64</th><th>float64</th><th>int64</th><th>float64</th><th>int64</th><th>float64</th><th>int64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>str1</th><th>float64</th><th>float64</th></tr></thead>
@@ -642,16 +642,16 @@ We first create a set of uniformly random points (with size matching
 
 .. parsed-literal::
 
-    (<Angle [ 9.68596271, 10.1095993 ,  9.68623888,  9.59076784,  9.94797762,
-              9.79979155, 10.01341914,  9.52331467,  9.83932745,  9.64159272,
-              9.50012547,  9.53443871,  9.54110432,  9.75328151, 10.02277906,
-              9.58027165, 10.04939804,  9.94151987, 10.08640948,  9.51846722,
-             10.08623222,  9.76533162,  9.80104707] deg>,
-     <Angle [1.17146283, 1.10173635, 0.70970259, 0.8891789 , 1.07015716,
-             0.79514073, 0.86009002, 0.90653465, 1.00921113, 0.67155803,
-             0.96451535, 1.02127668, 0.98327704, 1.14530877, 0.89255366,
-             0.86442012, 0.78873906, 0.9275347 , 0.9130546 , 0.68884797,
-             0.76407816, 0.73480384, 0.75465666] deg>)
+    (<Angle [10.14348859,  9.67832707,  9.83812244, 10.12617027, 10.08126456,
+              9.65691941,  9.65737811,  9.49495739, 10.0740494 ,  9.65511574,
+              9.87915219, 10.03813596, 10.03812049,  9.8683699 ,  9.6670868 ,
+              9.53952388,  9.67668969, 10.01030909,  9.52359122, 10.11237565,
+              9.97713061,  9.54206088,  9.94375803] deg>,
+     <Angle [0.83721013, 0.66323724, 1.10691446, 0.85920084, 0.63333239,
+             1.06016423, 0.75181582, 0.82932196, 0.95356741, 0.59442656,
+             0.89247277, 0.61241651, 0.87325406, 0.85869044, 0.72449478,
+             1.08529879, 0.68508738, 1.00618969, 0.83246621, 1.01455098,
+             0.69177371, 0.73243166, 1.1364934 ] deg>)
 
 
 
@@ -958,11 +958,6 @@ location in the sky over Kitt Peak at the requested time.
 :outputnumrole:`Out[32]:`
 
 
-.. parsed-literal::
-
-    WARNING: failed to download http://maia.usno.navy.mil/ser7/finals2000A.all, using local IERS-B: <urlopen error [Errno -3] Temporary failure in name resolution> [astropy.utils.iers.iers]
-
-
 
 
 .. parsed-literal::
@@ -998,13 +993,8 @@ darker time, but we can do better: lets try to create an airmass plot.
 :outputnumrole:`Out[33]:`
 
 
-.. parsed-literal::
 
-    WARNING: failed to download http://maia.usno.navy.mil/ser7/finals2000A.all, using local IERS-B: <urlopen error [Errno -3] Temporary failure in name resolution> [astropy.utils.iers.iers]
-
-
-
-.. image:: nboutput/coordinates_78_1.png
+.. image:: nboutput/coordinates_78_0.png
 
 
 
@@ -1033,13 +1023,8 @@ check if we're in 18-degree twilight or not.
 :outputnumrole:`Out[34]:`
 
 
-.. parsed-literal::
 
-    WARNING: failed to download http://maia.usno.navy.mil/ser7/finals2000A.all, using local IERS-B: <urlopen error [Errno -3] Temporary failure in name resolution> [astropy.utils.iers.iers]
-
-
-
-.. image:: nboutput/coordinates_80_1.png
+.. image:: nboutput/coordinates_80_0.png
 
 
 
