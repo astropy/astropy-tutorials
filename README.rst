@@ -29,7 +29,7 @@ Contributing tutorial material
 ------------------------------
 
 Please see the "`For contributors
-<http://astropy-tutorials.readthedocs.io/en/latest/#for-contributors>`_" section
+<http://www.astropy.org/astropy-tutorials/#for-contributors>`_" section
 of the tutorials documentation for information on how to get started.
 
 
@@ -37,5 +37,5 @@ Tutorial infrastructure
 -----------------------
 
 For more information on the infrastructure that builds the tutorials, see the
-`infrastructure/developer <http://astropy-tutorials.readthedocs.io/en/latest/dev.html>`_
+`infrastructure/developer <http://www.astropy.org/astropy-tutorials/dev.html#dev-page>`_
 section of the tutorials documentation.
