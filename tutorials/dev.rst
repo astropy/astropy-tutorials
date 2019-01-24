@@ -22,10 +22,10 @@ We use our own run-and-convert machinery using ``nbconvert``. We use the same
 script that converts the notebooks to RST to test the notebooks on travis by
 simply executing the notebooks and ignoring the output.
 
-We use `readthedocs <http://rtfd.io>`_ to do the Sphinx build, which is what
-allows us to preserve the version history of the tutorials. The notebooks are
-first converted to RST files during the Sphinx build by doing the conversion
-at the end of the `Sphinx configuration file
+We use `CircleCI <https://circleci.com>`_ to do the Sphinx build, which is then
+pushed to the ``gh-pages`` branch of the repository and served by GitHub. The
+notebooks are first converted to RST files during the Sphinx build by doing the
+conversion at the end of the `Sphinx configuration file
 <https://github.com/astropy/astropy-tutorials/blob/master/tutorials/conf.py>`_.
 
 Why not use nbsphinx?
