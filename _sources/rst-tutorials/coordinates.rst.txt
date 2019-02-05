@@ -305,7 +305,7 @@ file\ ``'HCG7_SDSS_cutout.jpg'``, defined at the top of the cell.
 
 .. parsed-literal::
 
-    ('HCG7_SDSS_cutout.jpg', <http.client.HTTPMessage at 0x7f45be782240>)
+    ('HCG7_SDSS_cutout.jpg', <http.client.HTTPMessage at 0x7f20f87941d0>)
 
 
 
@@ -479,30 +479,30 @@ the tables to see just what everything is that's in them.
 .. raw:: html
 
     <i>Table length=679</i>
-    <table id="table139939463888512" class="table-striped table-bordered table-condensed">
+    <table id="table139781665505176" class="table-striped table-bordered table-condensed">
     <thead><tr><th>ra</th><th>dec</th><th>u</th><th>g</th><th>r</th><th>i</th><th>z</th></tr></thead>
     <thead><tr><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th></tr></thead>
+    <tr><td>9.74546663598161</td><td>0.804785379785538</td><td>23.40089</td><td>22.80742</td><td>21.17173</td><td>20.07909</td><td>19.74573</td></tr>
+    <tr><td>10.0614782147115</td><td>0.710481131795868</td><td>19.97823</td><td>17.32766</td><td>16.07767</td><td>15.58068</td><td>15.30027</td></tr>
+    <tr><td>9.70612154678523</td><td>0.688411024325877</td><td>20.90669</td><td>19.90285</td><td>18.9021</td><td>18.51294</td><td>18.2186</td></tr>
+    <tr><td>9.86737236492638</td><td>1.12039478979814</td><td>20.42693</td><td>19.39079</td><td>19.06576</td><td>18.92027</td><td>18.93778</td></tr>
+    <tr><td>10.0862742219876</td><td>0.880830948406311</td><td>18.45603</td><td>16.49136</td><td>15.44498</td><td>14.9986</td><td>14.61169</td></tr>
     <tr><td>9.53729913945995</td><td>0.855434437201292</td><td>22.17931</td><td>20.77754</td><td>19.05077</td><td>18.44905</td><td>18.08414</td></tr>
+    <tr><td>9.93099932805407</td><td>0.638142996054846</td><td>23.25417</td><td>22.10502</td><td>20.48582</td><td>19.46803</td><td>18.93533</td></tr>
     <tr><td>9.53055821092903</td><td>0.960512767184623</td><td>25.156</td><td>23.86622</td><td>22.75501</td><td>21.1689</td><td>21.09199</td></tr>
     <tr><td>9.99949344772466</td><td>1.06522715882485</td><td>17.11143</td><td>15.3926</td><td>14.51749</td><td>14.11533</td><td>13.7892</td></tr>
-    <tr><td>9.6117016554133</td><td>1.06366800597759</td><td>21.48008</td><td>20.48495</td><td>18.98479</td><td>18.39204</td><td>18.08545</td></tr>
-    <tr><td>9.92112559653924</td><td>0.907689189590104</td><td>20.51148</td><td>20.49785</td><td>20.70594</td><td>20.87635</td><td>21.31508</td></tr>
-    <tr><td>9.70612154678523</td><td>0.688411024325877</td><td>20.90669</td><td>19.90285</td><td>18.9021</td><td>18.51294</td><td>18.2186</td></tr>
-    <tr><td>9.56337109630783</td><td>0.773710711671235</td><td>22.06565</td><td>19.56467</td><td>18.13755</td><td>17.28719</td><td>16.83946</td></tr>
-    <tr><td>10.0614782147115</td><td>0.710481131795868</td><td>19.97823</td><td>17.32766</td><td>16.07767</td><td>15.58068</td><td>15.30027</td></tr>
     <tr><td>9.48516597655112</td><td>1.06970371767879</td><td>19.18206</td><td>17.42762</td><td>16.71963</td><td>16.45744</td><td>16.32053</td></tr>
-    <tr><td>9.7291895782171</td><td>0.656378251652919</td><td>20.75797</td><td>19.03338</td><td>18.19287</td><td>17.87208</td><td>17.72765</td></tr>
     <tr><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr>
-    <tr><td>9.87442390961087</td><td>0.640525382932243</td><td>23.32474</td><td>23.13577</td><td>22.50962</td><td>23.22936</td><td>23.37973</td></tr>
-    <tr><td>9.75102448455053</td><td>0.700323838245865</td><td>18.60522</td><td>17.68015</td><td>17.42669</td><td>17.3608</td><td>17.33352</td></tr>
-    <tr><td>9.89567937370347</td><td>0.821235987435705</td><td>18.73664</td><td>16.43359</td><td>15.40407</td><td>14.98025</td><td>14.71223</td></tr>
-    <tr><td>9.89760681153166</td><td>0.851470021592911</td><td>22.98979</td><td>20.99517</td><td>19.89779</td><td>18.82003</td><td>18.26491</td></tr>
-    <tr><td>10.0245400418839</td><td>1.17472787157442</td><td>22.0138</td><td>21.19021</td><td>20.21557</td><td>19.01437</td><td>18.79128</td></tr>
-    <tr><td>9.97847333351228</td><td>0.925403097543988</td><td>21.08156</td><td>18.38997</td><td>17.01971</td><td>16.35805</td><td>15.99225</td></tr>
-    <tr><td>9.63248301633331</td><td>0.91802775712068</td><td>23.53428</td><td>20.86658</td><td>19.5107</td><td>18.35619</td><td>17.71567</td></tr>
-    <tr><td>9.77082730502991</td><td>1.1721990524913</td><td>22.03058</td><td>19.77174</td><td>18.52457</td><td>17.96533</td><td>17.68188</td></tr>
-    <tr><td>9.66342407533082</td><td>0.769467518917798</td><td>21.99623</td><td>19.6382</td><td>18.32809</td><td>17.66253</td><td>17.251</td></tr>
-    <tr><td>9.69688897313227</td><td>0.572142197034862</td><td>22.9356</td><td>21.91595</td><td>20.37401</td><td>19.62768</td><td>19.18269</td></tr>
+    <tr><td>10.0033924259152</td><td>0.562143092761047</td><td>22.36979</td><td>19.68795</td><td>18.24449</td><td>17.20709</td><td>16.62654</td></tr>
+    <tr><td>9.84173327881078</td><td>0.805414763358399</td><td>23.38519</td><td>21.2712</td><td>19.40338</td><td>18.74573</td><td>18.25649</td></tr>
+    <tr><td>9.53853316540022</td><td>0.560793643683023</td><td>19.72024</td><td>17.28436</td><td>16.17188</td><td>15.71497</td><td>15.42104</td></tr>
+    <tr><td>9.75958199165811</td><td>0.72402974617045</td><td>22.47514</td><td>19.48003</td><td>17.99869</td><td>16.99166</td><td>16.41765</td></tr>
+    <tr><td>10.1075682975037</td><td>0.802012514795865</td><td>19.85836</td><td>17.90779</td><td>17.11513</td><td>16.81467</td><td>16.64346</td></tr>
+    <tr><td>9.83733447550082</td><td>0.847358156892093</td><td>21.89719</td><td>21.32755</td><td>21.01554</td><td>21.14131</td><td>20.89685</td></tr>
+    <tr><td>9.7396826056405</td><td>1.14307140836122</td><td>21.97651</td><td>19.56925</td><td>18.34523</td><td>17.83226</td><td>17.51764</td></tr>
+    <tr><td>9.94096384906567</td><td>1.10418417130823</td><td>21.5859</td><td>20.96224</td><td>20.08104</td><td>19.79259</td><td>19.4037</td></tr>
+    <tr><td>10.077827682578</td><td>0.923865878609736</td><td>19.62583</td><td>19.39541</td><td>19.22466</td><td>19.05589</td><td>18.77663</td></tr>
+    <tr><td>9.81444144742625</td><td>0.942584493635296</td><td>19.55784</td><td>17.89278</td><td>17.24308</td><td>16.94552</td><td>16.73516</td></tr>
     </table>
 
 
@@ -524,7 +524,7 @@ the tables to see just what everything is that's in them.
 .. raw:: html
 
     <i>Table masked=True length=23</i>
-    <table id="table139939463924256" class="table-striped table-bordered table-condensed">
+    <table id="table139781665523360" class="table-striped table-bordered table-condensed">
     <thead><tr><th>designation</th><th>ra</th><th>dec</th><th>r_k20fe</th><th>j_m_k20fe</th><th>j_msig_k20fe</th><th>j_flg_k20fe</th><th>h_m_k20fe</th><th>h_msig_k20fe</th><th>h_flg_k20fe</th><th>k_m_k20fe</th><th>k_msig_k20fe</th><th>k_flg_k20fe</th><th>k_ba</th><th>k_phi</th><th>sup_ba</th><th>sup_phi</th><th>r_ext</th><th>j_m_ext</th><th>j_msig_ext</th><th>h_m_ext</th><th>h_msig_ext</th><th>k_m_ext</th><th>k_msig_ext</th><th>cc_flg</th><th>dist</th><th>angle</th></tr></thead>
     <thead><tr><th></th><th>deg</th><th>deg</th><th>arcsec</th><th>mag</th><th>mag</th><th></th><th>mag</th><th>mag</th><th></th><th>mag</th><th>mag</th><th></th><th></th><th>deg</th><th></th><th>deg</th><th>arcsec</th><th>mag</th><th>mag</th><th>mag</th><th>mag</th><th>mag</th><th>mag</th><th></th><th>arcsec</th><th>deg</th></tr></thead>
     <thead><tr><th>str16</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>int64</th><th>float64</th><th>float64</th><th>int64</th><th>float64</th><th>float64</th><th>int64</th><th>float64</th><th>int64</th><th>float64</th><th>int64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>str1</th><th>float64</th><th>float64</th></tr></thead>
@@ -642,16 +642,16 @@ We first create a set of uniformly random points (with size matching
 
 .. parsed-literal::
 
-    (<Angle [10.12898365, 10.11121076,  9.68641221,  9.6687752 , 10.12486773,
-              9.94013408,  9.76075507,  9.69913184,  9.70511046, 10.03190556,
-              9.56174684,  9.69372053,  9.53895362,  9.54057897, 10.05572698,
-             10.10118202, 10.06662348,  9.99668645,  9.57590384, 10.08395142,
-              9.82080843, 10.1173824 , 10.04653169] deg>,
-     <Angle [0.75177291, 0.63828713, 0.60165039, 0.78027293, 0.77626912,
-             0.98389047, 0.90624986, 0.86054843, 1.12932493, 0.67353568,
-             0.68829984, 1.01165761, 0.65358708, 0.80991223, 0.93275201,
-             0.70065309, 0.68280359, 1.12167321, 0.74071938, 1.08371497,
-             0.60967322, 0.98169154, 1.06188834] deg>)
+    (<Angle [ 9.81659669,  9.77198615,  9.52400118,  9.50224953, 10.0583069 ,
+              9.92805803,  9.94290084,  9.96727453, 10.02469073,  9.77786639,
+              9.81082696,  9.85450781,  9.7111999 ,  9.85381208,  9.48974365,
+              9.61011432,  9.9434223 , 10.11700947,  9.53048018,  9.59920943,
+              9.9290787 ,  9.62456963,  9.70374865] deg>,
+     <Angle [1.15595644, 0.83127638, 0.68234212, 0.96566752, 0.71745088,
+             1.00841965, 0.55812647, 0.62049   , 1.16311513, 0.74334907,
+             1.04946972, 1.18475912, 0.87950887, 1.04106905, 0.55835092,
+             0.71513823, 0.63010821, 1.1649603 , 1.0394607 , 0.55888273,
+             0.55659811, 1.17249604, 0.89266688] deg>)
 
 
 
