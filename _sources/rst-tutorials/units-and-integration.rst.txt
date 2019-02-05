@@ -53,7 +53,7 @@ Companion Content
 
 -  http://synphot.readthedocs.io/en/latest/
 -  `Using Astropy Quantities for astrophysical
-   calculations <http://astropy-tutorials.readthedocs.io/en/latest/rst-tutorials/quantities.html>`__
+   calculations <http://www.astropy.org/astropy-tutorials/rst-tutorials/quantities.html>`__
 
 Summary
 -------

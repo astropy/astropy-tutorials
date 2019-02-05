@@ -118,10 +118,10 @@ produce output, and then convert the notebook files into RST files.</p>
 <p>We use our own run-and-convert machinery using <code class="docutils literal notranslate"><span class="pre">nbconvert</span></code>. We use the same
 script that converts the notebooks to RST to test the notebooks on travis by
 simply executing the notebooks and ignoring the output.</p>
-<p>We use <a class="reference external" href="http://rtfd.io">readthedocs</a> to do the Sphinx build, which is what
-allows us to preserve the version history of the tutorials. The notebooks are
-first converted to RST files during the Sphinx build by doing the conversion
-at the end of the <a class="reference external" href="https://github.com/astropy/astropy-tutorials/blob/master/tutorials/conf.py">Sphinx configuration file</a>.</p>
+<p>We use <a class="reference external" href="https://circleci.com">CircleCI</a> to do the Sphinx build, which is then
+pushed to the <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> branch of the repository and served by GitHub. The
+notebooks are first converted to RST files during the Sphinx build by doing the
+conversion at the end of the <a class="reference external" href="https://github.com/astropy/astropy-tutorials/blob/master/tutorials/conf.py">Sphinx configuration file</a>.</p>
 </div>
 <div class="section" id="why-not-use-nbsphinx">
 <h2>Why not use nbsphinx?<a class="headerlink" href="#why-not-use-nbsphinx" title="Permalink to this headline">¶</a></h2>
@@ -239,7 +239,7 @@ This tag is recognized by the latest (master) version of nbconvert.</p>
       
     </p>
     <p>
-    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.3.
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.4.
     &copy; Copyright Astropy.   
     </p>
   </div>

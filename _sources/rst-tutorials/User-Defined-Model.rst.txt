@@ -41,7 +41,7 @@ Learning Goals
 
 This tutorial assumes the student knows how to fit data using
 ``astropy.modeling``. This topic is covered in the `Models-Quick-Fit
-tutorial <https://astropy-tutorials.readthedocs.io/en/latest/rst-tutorials/Models-Quick-Fit.html>`__.
+tutorial <http://www.astropy.org/astropy-tutorials/rst-tutorials/Models-Quick-Fit.html>`__.
 
 Keywords
 --------
@@ -291,7 +291,7 @@ us the height of the line.
 We are going to go quickly over this part of the tutorial because it
 involves fitting with ``astropy.modeling`` and this was explained in the
 `Models-Quick-Fit
-tutorial <https://astropy-tutorials.readthedocs.io/en/latest/rst-tutorials/Models-Quick-Fit.html>`__.
+tutorial <http://www.astropy.org/astropy-tutorials/rst-tutorials/Models-Quick-Fit.html>`__.
 
 
 :inputnumrole:`In[9]:`
@@ -807,7 +807,7 @@ with ``astropy.modeling``.
     Parameters:
                 a                   b                  c         
         ------------------ ------------------- ------------------
-        0.9816693036935404 -1.8222358273440915 1.0495307067121185
+        1.2130889218245193 -1.8767712486868453 0.9250101720864466
 
 
 The fit looks good in the plot. Let's check the parameters and the
@@ -845,7 +845,7 @@ goodness of the fit.
 
 .. parsed-literal::
 
-    1.2732896472586803
+    0.7898964305845304
 
 
 
@@ -994,9 +994,9 @@ of the parameters.
     Outputs: ('y',)
     Model set size: 1
     Parameters:
-                a                 b                 c                 d        
-        ----------------- ----------------- ----------------- -----------------
-        3.486398401802515 2.020827746413738 3.723111889676874 0.989774887509452
+                a                  b                  c                  d         
+        ------------------ ------------------ ------------------ ------------------
+        3.4428121005686125 2.0159346196652095 3.7878762863231112 0.9564389592726225
 
 
 
@@ -1015,7 +1015,7 @@ of the parameters.
 
 .. parsed-literal::
 
-    5.793720172732352
+    4.98758188125846
 
 
 
