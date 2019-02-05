@@ -33,8 +33,8 @@
 
 {%- macro bsidebar() %}
     {%- if render_sidebar %}
-    <div class="{{ bs_span_prefix }}3" style="padding-left: 0px;">
-      <div id="sidebar" class="bs-sidenav card" role="complementary">
+    <div class="{{ bs_span_prefix }}3">
+      <div id="sidebar" class="bs-sidenav card" role="complementary" style="position: static !important;" >
         {%- for sidebartemplate in sidebars %}
           {%- include sidebartemplate %}
         {%- endfor %}
@@ -84,7 +84,7 @@
     {% endif %}
     
     {% if pagename != "search" and pagename != "index" and pagename != "tutorials" and pagename != "documentation" and pagename != "examples" and pagename != "guides" %}
-    <div class="{{ bs_span_prefix }}3" style="padding-left: 0px;">
+    <div class="{{ bs_span_prefix }}3">
       <div id="sidebar" class="bs-sidenav card" role="complementary">
         <h3>Table of contents</h3>
         {{toc}}
