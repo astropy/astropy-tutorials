@@ -45,8 +45,8 @@ Summary
 This tutorial demonstrates the use of ``astropy.utils.data`` to download
 a data file, then uses ``astropy.io.fits`` to open the file, and lastly
 uses ``matplotlib`` to view the image with different color scales and
-stretches and to make histrograms. In this tutorial we've also included
-a demonstration of simple image stacking.
+stretches and to make histograms. In this tutorial we've also included a
+demonstration of simple image stacking.
 
 
 :inputnumrole:`In[1]:`
@@ -203,7 +203,7 @@ Viewing the image data and getting basic statistics
 
 .. parsed-literal::
 
-    <matplotlib.colorbar.Colorbar at 0x7f83d18895c0>
+    <matplotlib.colorbar.Colorbar at 0x7fb76c34c6a0>
 
 
 
@@ -314,9 +314,9 @@ to load the ``LogNorm`` object from ``matplotlib``.
 
 .. parsed-literal::
 
-    [<matplotlib.text.Text at 0x7f83cd86e9b0>,
-     <matplotlib.text.Text at 0x7f83cd8608d0>,
-     <matplotlib.text.Text at 0x7f83cdbd2518>]
+    [<matplotlib.text.Text at 0x7fb768330780>,
+     <matplotlib.text.Text at 0x7fb7683222e8>,
+     <matplotlib.text.Text at 0x7fb7686694a8>]
 
 
 
@@ -417,7 +417,7 @@ scaling for ``imshow``.
 
 .. parsed-literal::
 
-    <matplotlib.colorbar.Colorbar at 0x7f83cc9089b0>
+    <matplotlib.colorbar.Colorbar at 0x7fb7633a9fd0>
 
 
 
