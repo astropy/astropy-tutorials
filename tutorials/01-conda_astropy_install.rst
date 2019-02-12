@@ -66,7 +66,7 @@ Step 3: Install affiliated packages
 
 Many `Astropy affiliated
 packages <https://www.astropy.org/affiliated/>`__ can be found on
-*astroconda* channel, maintained by AURA and STScI. To add this channel
+*astropy* channel, maintained by AURA and STScI. To add this channel
 to Anaconda's package search list, run the following command:
 
 ::
@@ -75,8 +75,12 @@ to Anaconda's package search list, run the following command:
 
 Some astronomical packages are also available in the *conda-forge*
 channel. There is no wrong choice between installing a package from
-*astroconda* versus *conda-forge*. However, a package that is available
-in the *astroconda* channel may not be available in *conda-forge*.
+*astropy* versus *conda-forge*. However, a package that is available
+in the *astropy* channel may not be available in *conda-forge*.
+
+Note also that there is an `*astroconda* channel managed by STScI
+<https://astroconda.readthedocs.io/en/latest/installation.html#configure-conda-to-use-the-astroconda-channel>`__
+that includes IRAF/pyraf and several other modern packages.
 
 To see what channels you have available:
 
@@ -107,7 +111,7 @@ To upgrade to the latest version of Astropy:
 
 ::
 
-    conda upgrade astropy
+    conda update astropy
 
 You can choose a specific Astropy version using:
 
@@ -127,11 +131,17 @@ it. However, there may be cases where a package is available with
 ``pip`` and not ``conda``, or vice versa.
 
 With Anaconda, you can still use ``pip`` to download and install
-software within the conda environment of your
-choice. However, conflicts may arise if you ``pip install`` a package that has already
-been installed with ``conda``, or vice versa. So once you use ``pip`` to install a package, you should use ``pip`` to update and manage that package.
+software within the conda environment of your choice. However,
+conflicts will arise if you ``pip install`` a package that has already
+been installed with ``conda``, or vice versa. So once you use ``pip``
+to install a package, you should use ``pip`` to update and manage that
+package.
 
-**In particular, we recommend using `pip` to manage the `astroquery` package.** This library is under continuous development. The latest versions and bug-fixes are more readily available with ``pip``, because it takes a long time for the ``conda`` distribution to update.
+**In particular, we recommend using `pip` to manage the `astroquery`
+  package.** This library is under continuous development. The latest
+  versions and bug-fixes are more readily available with ``pip``,
+  because it takes a long time for the ``conda`` distribution to
+  update.
 
 Further documentation on this topic is available on the `conda package
 management documentation
