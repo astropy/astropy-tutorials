@@ -1,5 +1,5 @@
 .. meta::
-    :keywords: filterTutorials, filterUnits, filterMatplotlib, filterRadioAstronomy
+    :keywords: filterTutorials, filterUnits, filterMatplotlib, filterRadioAstronomy, filterDataCubes
 
 
 
@@ -37,7 +37,7 @@ Learning Goals
 Keywords
 --------
 
-units, matplotlib, radio astronomy
+units, matplotlib, radio astronomy, data cubes
 
 Summary
 -------
@@ -258,7 +258,7 @@ km/s and a velocity dispersion of 4.3 km/s.
 
 .. parsed-literal::
 
-    <matplotlib.text.Text at 0x7f2057bb2400>
+    <matplotlib.text.Text at 0x7f43aa828320>
 
 
 
