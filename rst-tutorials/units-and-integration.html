@@ -167,6 +167,15 @@ encounter <code class="docutils literal notranslate"><span class="pre">astropy</
 convert between them. Finally, we will use <span class="math notranslate nohighlight">\(\LaTeX\)</span> to make our
 figure axis labels easy to read.</p>
 <p><span class="inputnumrole">In[1]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">scipy</span> <span class="k">import</span> <span class="n">integrate</span>
+<span class="kn">from</span> <span class="nn">astropy.modeling.blackbody</span> <span class="k">import</span> <span class="n">blackbody_lambda</span><span class="p">,</span> <span class="n">blackbody_nu</span><span class="p">,</span> <span class="n">BlackBody1D</span>
+<span class="kn">from</span> <span class="nn">astropy</span> <span class="k">import</span> <span class="n">units</span> <span class="k">as</span> <span class="n">u</span><span class="p">,</span> <span class="n">constants</span> <span class="k">as</span> <span class="n">c</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="the-planck-function">
 <h2>The Planck function<a class="headerlink" href="#the-planck-function" title="Permalink to this headline">¶</a></h2>
@@ -254,10 +263,10 @@ units.</p>
 <div class="section" id="how-to-simulate-actual-observations">
 <h3>How to simulate actual observations<a class="headerlink" href="#how-to-simulate-actual-observations" title="Permalink to this headline">¶</a></h3>
 <p>As of Fall 2017, <code class="docutils literal notranslate"><span class="pre">astropy</span></code> does not explicitly support constructing
-synthetic observations of models like black-body curves. The
-<code class="docutils literal notranslate"><span class="pre">`synphot</span></code> &lt;<a class="reference external" href="https://synphot.readthedocs.io/en/latest/">https://synphot.readthedocs.io/en/latest/</a>&gt;`__ library does
-allow this. You can use <code class="docutils literal notranslate"><span class="pre">synphot</span></code> to perform tasks like turning
-spectra into visual magnitudes by convolving with a filter curve.</p>
+synthetic observations of models like black-body curves. The <a class="reference external" href="https://synphot.readthedocs.io/en/latest/">synphot
+library</a> does allow this.
+You can use <code class="docutils literal notranslate"><span class="pre">synphot</span></code> to perform tasks like turning spectra into
+visual magnitudes by convolving with a filter curve.</p>
 </div>
 </div>
 <div class="section" id="the-stellar-initial-mass-function-imf">
@@ -298,7 +307,8 @@ tutorial</a>.</p>
 <h2>Integrating using Gaussian quadrature<a class="headerlink" href="#integrating-using-gaussian-quadrature" title="Permalink to this headline">¶</a></h2>
 <p>In this section, we’ll explore a method of numerical integration that
 does not require having your sampling grid set-up already.
-<code class="docutils literal notranslate"><span class="pre">`scipy.integrate.quad</span></code> &lt;<a class="reference external" href="https://docs.scipy.org/doc/scipy-0.19.1/reference/generated/scipy.integrate.quad.html">https://docs.scipy.org/doc/scipy-0.19.1/reference/generated/scipy.integrate.quad.html</a>&gt;`__
+<code class="docutils literal notranslate"><span class="pre">scipy.integrate.quad</span></code> with reference
+<a class="reference external" href="https://docs.scipy.org/doc/scipy-0.19.1/reference/generated/scipy.integrate.quad.html">here</a>
 takes a function and both a lower and upper bound, and our
 <code class="docutils literal notranslate"><span class="pre">PowerLawPDF</span></code> class takes care of this just fine.</p>
 <p>Now we can use our new class to normalize our IMF given the mass bounds.
@@ -412,21 +422,21 @@ that allows both <code class="docutils literal notranslate"><span class="pre">fl
 <li>Modify the <code class="docutils literal notranslate"><span class="pre">PowerLawPDF</span></code> class to explicitly use <code class="docutils literal notranslate"><span class="pre">astropy</span></code>’s
 <code class="docutils literal notranslate"><span class="pre">units</span></code> constructs.</li>
 <li>Derive a relationship between recent star-formation rate and
-<span class="math notranslate nohighlight">\(H\alpha\)</span> luminosity. In other words, for the function $
-{<a href="#id1"><span class="problematic" id="id2">:raw-latex:`\rm SFR \, [\frac{M_{\odot}}{yr}]`</span></a>} = C ,
-L_{H:raw-latex:<code class="xref py py-obj docutils literal notranslate"><span class="pre">alpha</span></code>} , [{<a href="#id3"><span class="problematic" id="id4">:raw-latex:`\rm \frac{erg}{s}`</span></a>}]$, find
-a value of <span class="math notranslate nohighlight">\(C\)</span>. How does this depend on the slope and endpoints
-of the IMF?</li>
-<li>take a look at Appendix B of <a class="reference external" href="http://adsabs.harvard.edu/cgi-bin/bib_query?arXiv:astro-ph/0408229">Hunter &amp; Elmegreen 2004, AJ, 128,
-2170</a></li>
-<li>what effect does changing the power-law index or upper mass limit of
-the IMF have on the value of <span class="math notranslate nohighlight">\(C\)</span>?</li>
-<li>predict the effect on the value of <span class="math notranslate nohighlight">\(C\)</span> of using a different
-form of the IMF, like Kroupa or Chabrier (both are lighter on the
-low-mass end). If you’re not tired of IMFs yet, try defining a new
-class that implements a broken-power-law (Kroupa) or log-parabola
-(Chabrier) IMF. Perform the same calculations as above.</li>
+<span class="math notranslate nohighlight">\(H\alpha\)</span> luminosity. In other words, for the function</li>
 </ul>
+<div class="math notranslate nohighlight">
+\[{\rm SFR \, [\frac{M_{\odot}}{yr}]} = {\rm C \, L_{H\alpha} \, [\frac{erg}{s}]} \, ,\]</div>
+<p>find a value of <span class="math notranslate nohighlight">\(C\)</span>. How does this depend on the slope and
+endpoints of the IMF? * Take a look at Appendix B of <a class="reference external" href="http://adsabs.harvard.edu/cgi-bin/bib_query?arXiv:astro-ph/0408229">Hunter &amp;
+Elmegreen 2004, AJ, 128,
+2170</a>
+* What effect does changing the power-law index or upper mass limit of
+the IMF have on the value of <span class="math notranslate nohighlight">\(C\)</span>? * Predict the effect on the
+value of <span class="math notranslate nohighlight">\(C\)</span> of using a different form of the IMF, like Kroupa or
+Chabrier (both are lighter on the low-mass end). If you’re not tired of
+IMFs yet, try defining a new class that implements a broken-power-law
+(Kroupa) or log-parabola (Chabrier) IMF. Perform the same calculations
+as above.</p>
 <div id="spacer"></div>
 
 <a href="../_static//.ipynb"><button id="download">Download tutorial notebook</button></a>

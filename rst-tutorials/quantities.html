@@ -272,7 +272,7 @@ km/s and a velocity dispersion of 4.3 km/s.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[10]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">Text</span> <span class="n">at</span> <span class="mh">0x7f1fa938f940</span><span class="o">&gt;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">Text</span> <span class="n">at</span> <span class="mh">0x7f80c31ba208</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <img alt="../_images/quantities_21_1.png" src="../_images/quantities_21_1.png" />
@@ -617,13 +617,15 @@ of light, we can convert between them. However, doing so just using the
 convertible:</p>
 <p><span class="inputnumrole">In[25]:</span></p>
 <div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nu13</span> <span class="o">=</span> <span class="n">lambda13</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">Hz</span><span class="p">)</span>
+<span class="n">nu18</span> <span class="o">=</span> <span class="n">lambda18</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">Hz</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[25]:</span></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">UnitConversionErrorTraceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span>
 
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">25</span><span class="o">-</span><span class="n">b4a9b54d7f21</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span><span class="p">()</span>
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">25</span><span class="o">-</span><span class="mi">10</span><span class="n">c6a3b6dc61</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span><span class="p">()</span>
 <span class="o">----&gt;</span> <span class="mi">1</span> <span class="n">nu13</span> <span class="o">=</span> <span class="n">lambda13</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">Hz</span><span class="p">)</span>
+      <span class="mi">2</span> <span class="n">nu18</span> <span class="o">=</span> <span class="n">lambda18</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">Hz</span><span class="p">)</span>
 
 
 <span class="o">~/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">6</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astropy</span><span class="o">/</span><span class="n">units</span><span class="o">/</span><span class="n">quantity</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unit</span><span class="p">,</span> <span class="n">equivalencies</span><span class="p">)</span>
@@ -697,7 +699,9 @@ and calculate the ratios in constant <span class="math notranslate nohighlight">
 frequency and Einstein coefficient units are dimensionless, so the unit
 of <span class="math notranslate nohighlight">\(C\)</span> is unchanged.</p>
 <p><span class="inputnumrole">In[27]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">A13</span> <span class="o">=</span> <span class="mf">7.4e-8</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nu13</span> <span class="o">=</span> <span class="mf">115271096910.13396</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">Hz</span>
+<span class="n">nu18</span> <span class="o">=</span> <span class="mf">109782318669.689</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">Hz</span>
+<span class="n">A13</span> <span class="o">=</span> <span class="mf">7.4e-8</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span>
 <span class="n">A18</span> <span class="o">=</span> <span class="mf">8.8e-8</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span>
 
 <span class="n">C</span> <span class="o">=</span> <span class="mf">3e14</span> <span class="o">*</span> <span class="p">(</span><span class="n">nu18</span><span class="o">/</span><span class="n">nu13</span><span class="p">)</span><span class="o">**</span><span class="mi">3</span> <span class="o">*</span> <span class="p">(</span><span class="n">A13</span><span class="o">/</span><span class="n">A18</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">K</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">2</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">km</span> <span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">))</span>

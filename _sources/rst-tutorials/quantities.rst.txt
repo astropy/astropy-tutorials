@@ -258,7 +258,7 @@ km/s and a velocity dispersion of 4.3 km/s.
 
 .. parsed-literal::
 
-    <matplotlib.text.Text at 0x7f1fa938f940>
+    <matplotlib.text.Text at 0x7f80c31ba208>
 
 
 
@@ -775,6 +775,7 @@ convertible:
 .. code:: python
 
     nu13 = lambda13.to(u.Hz)
+    nu18 = lambda18.to(u.Hz)
 
 
 :outputnumrole:`Out[25]:`
@@ -787,9 +788,10 @@ convertible:
 
     UnitConversionErrorTraceback (most recent call last)
 
-    <ipython-input-25-b4a9b54d7f21> in <module>()
+    <ipython-input-25-10c6a3b6dc61> in <module>()
     ----> 1 nu13 = lambda13.to(u.Hz)
-    
+          2 nu18 = lambda18.to(u.Hz)
+
 
     ~/project/venv/lib/python3.6/site-packages/astropy/units/quantity.py in to(self, unit, equivalencies)
         845         # and don't want to slow down this method (esp. the scalar case).
@@ -874,6 +876,8 @@ of :math:`C` is unchanged.
 
 .. code:: python
 
+    nu13 = 115271096910.13396 * u.Hz
+    nu18 = 109782318669.689 * u.Hz
     A13 = 7.4e-8 / u.s
     A18 = 8.8e-8 / u.s
     

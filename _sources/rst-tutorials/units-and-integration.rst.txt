@@ -71,6 +71,15 @@ figure axis labels easy to read.
 :inputnumrole:`In[1]:`
 
 
+.. code:: python
+
+    import numpy as np
+    from scipy import integrate
+    from astropy.modeling.blackbody import blackbody_lambda, blackbody_nu, BlackBody1D
+    from astropy import units as u, constants as c
+    import matplotlib.pyplot as plt
+    
+    %matplotlib inline
 
 The Planck function
 -------------------
@@ -225,10 +234,10 @@ How to simulate actual observations
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 As of Fall 2017, ``astropy`` does not explicitly support constructing
-synthetic observations of models like black-body curves. The
-```synphot`` <https://synphot.readthedocs.io/en/latest/>`__ library does
-allow this. You can use ``synphot`` to perform tasks like turning
-spectra into visual magnitudes by convolving with a filter curve.
+synthetic observations of models like black-body curves. The `synphot
+library <https://synphot.readthedocs.io/en/latest/>`__ does allow this.
+You can use ``synphot`` to perform tasks like turning spectra into
+visual magnitudes by convolving with a filter curve.
 
 The stellar initial mass function (IMF)
 ---------------------------------------
@@ -277,7 +286,8 @@ Integrating using Gaussian quadrature
 
 In this section, we'll explore a method of numerical integration that
 does not require having your sampling grid set-up already.
-```scipy.integrate.quad`` <https://docs.scipy.org/doc/scipy-0.19.1/reference/generated/scipy.integrate.quad.html>`__
+``scipy.integrate.quad`` with reference
+`here <https://docs.scipy.org/doc/scipy-0.19.1/reference/generated/scipy.integrate.quad.html>`__
 takes a function and both a lower and upper bound, and our
 ``PowerLawPDF`` class takes care of this just fine.
 
@@ -433,20 +443,21 @@ Challenge problems
 -  Modify the ``PowerLawPDF`` class to explicitly use ``astropy``'s
    ``units`` constructs.
 -  Derive a relationship between recent star-formation rate and
-   :math:`H\alpha` luminosity. In other words, for the function $
-   {:raw-latex:`\rm SFR \, [\frac{M_{\odot}}{yr}]`} = C ,
-   L\_{H:raw-latex:`\alpha`} , [{:raw-latex:`\rm \frac{erg}{s}`}]$, find
-   a value of :math:`C`. How does this depend on the slope and endpoints
-   of the IMF?
--  take a look at Appendix B of `Hunter & Elmegreen 2004, AJ, 128,
-   2170 <http://adsabs.harvard.edu/cgi-bin/bib_query?arXiv:astro-ph/0408229>`__
--  what effect does changing the power-law index or upper mass limit of
-   the IMF have on the value of :math:`C`?
--  predict the effect on the value of :math:`C` of using a different
-   form of the IMF, like Kroupa or Chabrier (both are lighter on the
-   low-mass end). If you're not tired of IMFs yet, try defining a new
-   class that implements a broken-power-law (Kroupa) or log-parabola
-   (Chabrier) IMF. Perform the same calculations as above.
+   :math:`H\alpha` luminosity. In other words, for the function
+
+.. math:: {\rm SFR \, [\frac{M_{\odot}}{yr}]} = {\rm C \, L_{H\alpha} \, [\frac{erg}{s}]} \, ,
+
+find a value of :math:`C`. How does this depend on the slope and
+endpoints of the IMF? \* Take a look at Appendix B of `Hunter &
+Elmegreen 2004, AJ, 128,
+2170 <http://adsabs.harvard.edu/cgi-bin/bib_query?arXiv:astro-ph/0408229>`__
+\* What effect does changing the power-law index or upper mass limit of
+the IMF have on the value of :math:`C`? \* Predict the effect on the
+value of :math:`C` of using a different form of the IMF, like Kroupa or
+Chabrier (both are lighter on the low-mass end). If you're not tired of
+IMFs yet, try defining a new class that implements a broken-power-law
+(Kroupa) or log-parabola (Chabrier) IMF. Perform the same calculations
+as above.
 
 
 .. raw:: html
