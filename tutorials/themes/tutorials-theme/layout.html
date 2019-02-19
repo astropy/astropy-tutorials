@@ -27,7 +27,7 @@
 <!DOCTYPE html>
 {%- endblock %}
 
-{% macro navBar() %}
+{% macro nav_bar() %}
 {% include "navbar" + navbar_version + ".html" %}
 {% endmacro %}
 
@@ -71,7 +71,7 @@
 {% block sidebarsourcelink %}{% endblock %}
 
 {%- block content %}
-{{ navBar() }}
+{{ nav_bar() }}
 <div class="container">
   <div class="row">
     {%- block sidebar1 %}{{ bsidebar() }}{% endblock %}
