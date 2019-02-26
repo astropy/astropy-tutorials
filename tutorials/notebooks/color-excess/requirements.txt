@@ -1,0 +1,7 @@
+numpy=1.14
+matplotlib=3.0
+astropy=3.1
+synphot==0.1.2
+dust_extinction>=0.7
+astroquery==0.3.8
+IPython
