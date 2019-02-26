@@ -320,8 +320,8 @@ Show the RA and Dec.
 
 .. parsed-literal::
 
-    9d48m58.5s 0d53m17.016s
-    0.6544166666666668 0d53m17.016s
+    9d48m58.5s 0d53m17s
+    0.6544166666666668 0d53m17s
 
 
 We see that, according to SESAME, HCG 7 is located at ra = 9.849 deg and
@@ -377,7 +377,7 @@ angle units:
 
 .. parsed-literal::
 
-    (<Longitude 9.81625 deg>, <Latitude 0.88806 deg>)
+    (<Longitude 9.81625 deg>, <Latitude 0.88805556 deg>)
 
 
 
@@ -398,7 +398,7 @@ angle units:
 .. parsed-literal::
 
     <SkyCoord (ICRS): (ra, dec) in deg
-        (9.81625, 0.88806)>
+        (9.81625, 0.88805556)>
 
 
 
@@ -507,7 +507,7 @@ file\ ``'HCG7_SDSS_cutout.jpg'``, defined at the top of the cell.
 
 .. parsed-literal::
 
-    ('HCG7_SDSS_cutout.jpg', <http.client.HTTPMessage at 0x7f899c67b080>)
+    ('HCG7_SDSS_cutout.jpg', <http.client.HTTPMessage at 0x7f2dba5b1080>)
 
 
 
