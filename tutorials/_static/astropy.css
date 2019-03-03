@@ -272,6 +272,15 @@ a.reference.internal.nav-header {
   background-color: #fa743b;
 }
 
+.collapse.in{
+  display: block !important;
+  visibility: visible;
+  }
+  
+  [aria-expanded="false"] > #viewless,
+  [aria-expanded="true"] > #viewmore {
+  display: none;
+  }  
 
 /* Responsivness */
 @media only screen and (max-width: 1150px) and (min-width: 992px) {
