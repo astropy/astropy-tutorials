@@ -346,7 +346,7 @@ var Search = {
               if (textstatus != "success") {
                 document.getElementById("searchindexloader").src = url;
               }
-            }});
+            }, async: false});
   },
 
   setIndex : function(index) {
@@ -577,7 +577,7 @@ var Search = {
                     listItem.slideDown(5, function() {
                       displayNextItem();
                     });
-                  }});
+                  }, async: false});
         } else {
           // no source available, just display title
           Search.output.append(listItem);
