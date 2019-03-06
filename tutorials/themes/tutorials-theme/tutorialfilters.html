@@ -9,18 +9,18 @@
       var activeFilters = $.getQueryParameters();
       var filters = document.getElementsByClassName('custom-control-input');
       for(var f=0; filters[f]; ++f){
-          if(activeFilters.q[0].search(filters[f].value)!=-1)
-              filters[f].checked = true;   
+          if (activeFilters.q[0].search(filters[f].value)!=-1)
+              filters[f].checked = true;
       }
       document.getElementById("search-bar-input").value = '';
   });
   
   //no results found
-  $(window).on("load", function(){
-          if(!document.getElementsByClassName('result-card').length)
-              {document.getElementById('search-results').innerHTML += '<h3>No tutorials found!</h3>'}
-  });  
-
+  //$(window).on('load', function(){
+        //if(!document.getElementsByClassName('result-card').length)
+            //{document.getElementById('search-results').innerHTML = '<h3>No tutorials found!</h3>' ;}
+  //});
+  
   //update filters
   function applyFilter(){
       sessionStorage.scrollTop = $(window).scrollTop(); //to store the current scroll position
@@ -49,6 +49,7 @@
             filterDiv[i].style.display = "none";
           }
         }
+<<<<<<< HEAD
 
         var toggleCollapse, viewButton, j;
         toggleCollapse = document.getElementsByClassName("collapse");
@@ -68,6 +69,9 @@
         }
 
       }
+=======
+      }  
+>>>>>>> 15c6212... This is a combination of 20 commits.
 </script>
 
 <form action="">
