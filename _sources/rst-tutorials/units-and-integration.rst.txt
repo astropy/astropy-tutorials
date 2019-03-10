@@ -412,7 +412,7 @@ Extras
 
 -  Now compare the total luminosity from all O stars to total luminosity
    from all M stars. This requires a mass-luminosity relation, like this
-   one:
+   one which you will use as :math:`\rho(m)`:
 
 .. math::
 
@@ -424,8 +424,6 @@ Extras
          \hfill 1.5 \left( \frac{M}{M_{\odot}} \right)^{3.5} \hfill , \hfill & 2 < \frac{M}{M_{\odot}} < 20 \\
          \hfill 3200 \left( \frac{M}{M_{\odot}} \right) \hfill , \hfill & 20 < \frac{M}{M_{\odot}} < 100 \\
      \end{cases},
-
-which you will use as :math:`\rho(m)`
 
 -  Think about which stars are producing most of the light, and which
    stars have most of the mass. How might this result in difficulty
@@ -443,21 +441,22 @@ Challenge problems
 -  Modify the ``PowerLawPDF`` class to explicitly use ``astropy``'s
    ``units`` constructs.
 -  Derive a relationship between recent star-formation rate and
-   :math:`H\alpha` luminosity. In other words, for the function
+   :math:`H\alpha` luminosity. In other words, find a value of :math:`C`
+   for the function
 
-.. math:: {\rm SFR \, [\frac{M_{\odot}}{yr}]} = {\rm C \, L_{H\alpha} \, [\frac{erg}{s}]} \, ,
+.. math:: {\rm SFR \, [\frac{M_{\odot}}{yr}]} = {\rm C \, L_{H\alpha} \, [\frac{erg}{s}]} \, .
 
-find a value of :math:`C`. How does this depend on the slope and
-endpoints of the IMF? \* Take a look at Appendix B of `Hunter &
-Elmegreen 2004, AJ, 128,
-2170 <http://adsabs.harvard.edu/cgi-bin/bib_query?arXiv:astro-ph/0408229>`__
-\* What effect does changing the power-law index or upper mass limit of
-the IMF have on the value of :math:`C`? \* Predict the effect on the
-value of :math:`C` of using a different form of the IMF, like Kroupa or
-Chabrier (both are lighter on the low-mass end). If you're not tired of
-IMFs yet, try defining a new class that implements a broken-power-law
-(Kroupa) or log-parabola (Chabrier) IMF. Perform the same calculations
-as above.
+-  How does this depend on the slope and endpoints of the IMF?
+-  Take a look at Appendix B of `Hunter & Elmegreen 2004, AJ, 128,
+   2170 <http://adsabs.harvard.edu/cgi-bin/bib_query?arXiv:astro-ph/0408229>`__
+-  What effect does changing the power-law index or upper mass limit of
+   the IMF have on the value of :math:`C`?
+-  Predict the effect on the value of :math:`C` of using a different
+   form of the IMF, like Kroupa or Chabrier (both are lighter on the
+   low-mass end).
+-  If you're not tired of IMFs yet, try defining a new class that
+   implements a broken-power-law (Kroupa) or log-parabola (Chabrier)
+   IMF. Perform the same calculations as above.
 
 
 .. raw:: html

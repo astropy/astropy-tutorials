@@ -393,7 +393,7 @@ by mass. More generally, you find the value of some property
 <ul class="simple">
 <li>Now compare the total luminosity from all O stars to total luminosity
 from all M stars. This requires a mass-luminosity relation, like this
-one:</li>
+one which you will use as <span class="math notranslate nohighlight">\(\rho(m)\)</span>:</li>
 </ul>
 <div class="math notranslate nohighlight">
 \[\begin{split}\frac{L}{L_{\odot}} (M) =
@@ -403,7 +403,6 @@ one:</li>
      \hfill 1.5 \left( \frac{M}{M_{\odot}} \right)^{3.5} \hfill , \hfill &amp; 2 &lt; \frac{M}{M_{\odot}} &lt; 20 \\
      \hfill 3200 \left( \frac{M}{M_{\odot}} \right) \hfill , \hfill &amp; 20 &lt; \frac{M}{M_{\odot}} &lt; 100 \\
  \end{cases},\end{split}\]</div>
-<p>which you will use as <span class="math notranslate nohighlight">\(\rho(m)\)</span></p>
 <ul class="simple">
 <li>Think about which stars are producing most of the light, and which
 stars have most of the mass. How might this result in difficulty
@@ -423,21 +422,24 @@ that allows both <code class="docutils literal notranslate"><span class="pre">fl
 <li>Modify the <code class="docutils literal notranslate"><span class="pre">PowerLawPDF</span></code> class to explicitly use <code class="docutils literal notranslate"><span class="pre">astropy</span></code>’s
 <code class="docutils literal notranslate"><span class="pre">units</span></code> constructs.</li>
 <li>Derive a relationship between recent star-formation rate and
-<span class="math notranslate nohighlight">\(H\alpha\)</span> luminosity. In other words, for the function</li>
+<span class="math notranslate nohighlight">\(H\alpha\)</span> luminosity. In other words, find a value of <span class="math notranslate nohighlight">\(C\)</span>
+for the function</li>
 </ul>
 <div class="math notranslate nohighlight">
-\[{\rm SFR \, [\frac{M_{\odot}}{yr}]} = {\rm C \, L_{H\alpha} \, [\frac{erg}{s}]} \, ,\]</div>
-<p>find a value of <span class="math notranslate nohighlight">\(C\)</span>. How does this depend on the slope and
-endpoints of the IMF? * Take a look at Appendix B of <a class="reference external" href="http://adsabs.harvard.edu/cgi-bin/bib_query?arXiv:astro-ph/0408229">Hunter &amp;
-Elmegreen 2004, AJ, 128,
-2170</a>
-* What effect does changing the power-law index or upper mass limit of
-the IMF have on the value of <span class="math notranslate nohighlight">\(C\)</span>? * Predict the effect on the
-value of <span class="math notranslate nohighlight">\(C\)</span> of using a different form of the IMF, like Kroupa or
-Chabrier (both are lighter on the low-mass end). If you’re not tired of
-IMFs yet, try defining a new class that implements a broken-power-law
-(Kroupa) or log-parabola (Chabrier) IMF. Perform the same calculations
-as above.</p>
+\[{\rm SFR \, [\frac{M_{\odot}}{yr}]} = {\rm C \, L_{H\alpha} \, [\frac{erg}{s}]} \, .\]</div>
+<ul class="simple">
+<li>How does this depend on the slope and endpoints of the IMF?</li>
+<li>Take a look at Appendix B of <a class="reference external" href="http://adsabs.harvard.edu/cgi-bin/bib_query?arXiv:astro-ph/0408229">Hunter &amp; Elmegreen 2004, AJ, 128,
+2170</a></li>
+<li>What effect does changing the power-law index or upper mass limit of
+the IMF have on the value of <span class="math notranslate nohighlight">\(C\)</span>?</li>
+<li>Predict the effect on the value of <span class="math notranslate nohighlight">\(C\)</span> of using a different
+form of the IMF, like Kroupa or Chabrier (both are lighter on the
+low-mass end).</li>
+<li>If you’re not tired of IMFs yet, try defining a new class that
+implements a broken-power-law (Kroupa) or log-parabola (Chabrier)
+IMF. Perform the same calculations as above.</li>
+</ul>
 <div id="spacer"></div>
 
 <a href="../_static//.ipynb"><button id="download">Download tutorial notebook</button></a>
@@ -457,7 +459,7 @@ as above.</p>
       
     </p>
     <p>
-    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.4.
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
     &copy; Copyright Astropy.   
     </p>
   </div>

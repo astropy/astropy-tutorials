@@ -142,129 +142,195 @@
             filterDiv[i].style.display = "none";
           }
         }
+
+        var toggleCollapse, viewButton, j;
+        toggleCollapse = document.getElementsByClassName("collapse");
+        viewButton = document.getElementsByClassName("view-button");
+        for(j = 0; j < toggleCollapse.length; j++){
+          toggleCollapse[j].className = "collapse in";
+          viewButton[j].children[0].style.display = "none";
+          viewButton[j].children[1].style.display = "none";
+        }
+
+        if(filterQuery == ""){
+          for(j = 0; j < toggleCollapse.length; j++){
+            toggleCollapse[j].className = "collapse";
+            viewButton[j].children[0].style.display = "";
+            viewButton[j].children[1].style.display = "none";
+          }
+        }
+
       }
 </script>
 
 <form action="">
-<div class="form-group">
-  <input type="text" name="q" id="filter-search" class="form-control" placeholder="Search for a filter" onkeyup="filterFunction()"/>
-</div>
-</form>  
+  <div class="form-group">
+    <input type="text" name="q" id="filter-search" class="form-control" placeholder="Search for a filter" onkeyup="filterFunction()"/>
+  </div>
+  </form>  
 
-<form name="filterForm" class="form-group" style="padding-left: 20px; margin-bottom: 0;" action="">
-  <div class="custom-control custom-checkbox">
-    <input type="checkbox" name="q" class="custom-control-input" id="customCheck1" value="filterastroquery" onClick="applyFilter()">
-    <label class="custom-control-label" for="customCheck1">astroquery</label>
+  <!-- Astropy Packages -->
+  <h3 style="font-size: 1rem; font-weight: 500; text-decoration: none;">Astropy packages</h3>
+  <form name="filterForm" class="form-group" style="padding-left: 20px; margin-bottom: 0;" action="">
+    <div class="custom-control custom-checkbox">
+      <input type="checkbox" name="q" class="custom-control-input" id="customCheck1" value="filterastroquery" onClick="applyFilter()">
+      <label class="custom-control-label" for="customCheck1">Astroquery</label>
+    </div>
+    <div class="custom-control custom-checkbox">
+      <input type="checkbox" name="q" class="custom-control-input" id="customCheck2" value="filtercoordinates" onClick="applyFilter()">
+      <label class="custom-control-label" for="customCheck2">Coordinates</label>
+    </div>
+    <div class="custom-control custom-checkbox">
+      <input type="checkbox" name="q" class="custom-control-input" id="customCheck3" value="filterobsplan" onClick="applyFilter()">
+      <label class="custom-control-label" for="customCheck3">Obsplan</label>
+    </div>
+    <!-- Display 3 in compact view -->
+      <div class="collapse" id="viewmore1">
+    <!-- -->
+    <div class="custom-control custom-checkbox">
+      <input type="checkbox" name="q" class="custom-control-input" id="customCheck4" value="filterreproject" onClick="applyFilter()">
+      <label class="custom-control-label" for="customCheck4">Reproject</label>
+    </div>
+    <div class="custom-control custom-checkbox">
+      <input type="checkbox" name="q" class="custom-control-input" id="customCheck5" value="filtertable" onClick="applyFilter()">
+      <label class="custom-control-label" for="customCheck5">Table</label>
+    </div>
+    <div class="custom-control custom-checkbox">
+      <input type="checkbox" name="q" class="custom-control-input" id="customCheck6" value="filterspectralcube" onClick="applyFilter()">
+      <label class="custom-control-label" for="customCheck6">Spectral Cube</label>
+    </div>
+    <div class="custom-control custom-checkbox">
+      <input type="checkbox" name="q" class="custom-control-input" id="customCheck7" value="filteraplpy" onClick="applyFilter()">
+      <label class="custom-control-label" for="customCheck7">Aplpy</label>
+    </div>
+    <div class="custom-control custom-checkbox">
+      <input type="checkbox" name="q" class="custom-control-input" id="customCheck8" value="filterimexamine" onClick="applyFilter()">
+      <label class="custom-control-label" for="customCheck8">Imexamine</label>
+    </div>
+    <div class="custom-control custom-checkbox">
+      <input type="checkbox" name="q" class="custom-control-input" id="customCheck9" value="filterspecutils" onClick="applyFilter()">
+      <label class="custom-control-label" for="customCheck9">Specutils</label>
+    </div>
+    <div class="custom-control custom-checkbox">
+      <input type="checkbox" name="q" class="custom-control-input" id="customCheck10" value="filterphotutils" onClick="applyFilter()">
+      <label class="custom-control-label" for="customCheck10">Photutils</label>
+    </div>
+
   </div>
-  <div class="custom-control custom-checkbox">
-    <input type="checkbox" name="q" class="custom-control-input" id="customCheck2" value="filtercontourplots" onClick="applyFilter()">
-    <label class="custom-control-label" for="customCheck2">contour plots</label>
+
+  <a data-toggle="collapse" data-target="#viewmore1" aria-expanded="false" style="text-decoration: none !important" class="view-button">
+  
+    <span id="viewmore" style="text-decoration: none !important; color: #ff6a22 !important; font-size: 0.8rem;">
+      VIEW MORE
+    </span>
+    <span id="viewless" style="text-decoration: none !important; color: #ff6a22 !important; font-size: 0.8rem;">
+      VIEW LESS
+    </span>
+  
+  </a>  
+  </form>
+
+  <!-- Python Packages -->
+  <h3 style="font-size: 1rem; font-weight: 500; text-decoration: none; padding-top: 15px;">Python packages</h3>
+  <form  name="filterForm" class="form-group" style="padding-left: 20px; margin-bottom: 0;" action="">
+    <div class="custom-control custom-checkbox">
+      <input type="checkbox" name="q" class="custom-control-input" id="customCheck11" value="filtermatplotlib" onClick="applyFilter()">
+      <label class="custom-control-label" for="customCheck11">Matplotlib</label>
+    </div>
+    <div class="custom-control custom-checkbox">
+      <input type="checkbox" name="q" class="custom-control-input" id="customCheck12" value="filternumpy" onClick="applyFilter()">
+      <label class="custom-control-label" for="customCheck12">Numpy</label>
+    </div>
+    <div class="custom-control custom-checkbox">
+      <input type="checkbox" name="q" class="custom-control-input" id="customCheck13" value="filterscipy" onClick="applyFilter()">
+      <label class="custom-control-label" for="customCheck13">Scipy</label>
+    </div>
+  </form>
+
+  <!-- Task -->
+  <h3 style="font-size: 1rem; font-weight: 500; text-decoration: none; padding-top: 15px;">Task</h3>
+  <form  name="filterForm" class="form-group" style="padding-left: 20px; margin-bottom: 0;" action="">
+    <div class="custom-control custom-checkbox">
+      <input type="checkbox" name="q" class="custom-control-input" id="customCheck14" value="filtercontourplots" onClick="applyFilter()">
+      <label class="custom-control-label" for="customCheck14">Contour Plots</label>
+    </div>
+    <div class="custom-control custom-checkbox">
+      <input type="checkbox" name="q" class="custom-control-input" id="customCheck15" value="filterdatacubes" onClick="applyFilter()">
+      <label class="custom-control-label" for="customCheck15">Data Cubes</label>
+    </div>
+    <div class="custom-control custom-checkbox">
+      <input type="checkbox" name="q" class="custom-control-input" id="customCheck16" value="filterfitsheader" onClick="applyFilter()">
+      <label class="custom-control-label" for="customCheck16">FITS Header</label>
+    </div>
+    <!-- -->
+    <div class="collapse" id="viewmore2">
+    <!-- -->
+    <div class="custom-control custom-checkbox">
+      <input type="checkbox" name="q" class="custom-control-input" id="customCheck17" value="filterfitsimage" onClick="applyFilter()">
+      <label class="custom-control-label" for="customCheck17">FITS Image</label>
+    </div>
+    <div class="custom-control custom-checkbox">
+      <input type="checkbox" name="q" class="custom-control-input" id="customCheck18" value="filterfitstable" onClick="applyFilter()">
+      <label class="custom-control-label" for="customCheck18">FITS Table</label>
+    </div>
+    <div class="custom-control custom-checkbox">
+      <input type="checkbox" name="q" class="custom-control-input" id="customCheck19" value="filtermodelfitting" onClick="applyFilter()">
+      <label class="custom-control-label" for="customCheck19">Model Fitting</label>
+    </div>
+    <div class="custom-control custom-checkbox">
+      <input type="checkbox" name="q" class="custom-control-input" id="customCheck20" value="filterfileinputoutput" onClick="applyFilter()">
+      <label class="custom-control-label" for="customCheck20">File Input/Output</label>
+    </div>
+    <div class="custom-control custom-checkbox">
+      <input type="checkbox" name="q" class="custom-control-input" id="customCheck21" value="filterhistogram" onClick="applyFilter()">
+      <label class="custom-control-label" for="customCheck21">Histogram</label>
+    </div>
+    <div class="custom-control custom-checkbox">
+      <input type="checkbox" name="q" class="custom-control-input" id="customCheck22" value="filtererrorbars " onClick="applyFilter()">
+      <label class="custom-control-label" for="customCheck22">Errorbars</label>
+    </div>
+    <div class="custom-control custom-checkbox">
+      <input type="checkbox" name="q" class="custom-control-input" id="customCheck23" value="filteroop" onClick="applyFilter()">
+      <label class="custom-control-label" for="customCheck23">OOP</label>
+    </div>
+    <div class="custom-control custom-checkbox">
+      <input type="checkbox" name="q" class="custom-control-input" id="customCheck24" value="filterplots" onClick="applyFilter()">
+      <label class="custom-control-label" for="customCheck24">Plots</label>
+    </div>
+    <div class="custom-control custom-checkbox">
+      <input type="checkbox" name="q" class="custom-control-input" id="customCheck25" value="filterspectroscopy" onClick="applyFilter()">
+      <label class="custom-control-label" for="customCheck25">Spectroscopy</label>
+    </div>
+    <div class="custom-control custom-checkbox">
+      <input type="checkbox" name="q" class="custom-control-input" id="customCheck26" value="filtertimeseries" onClick="applyFilter()">
+      <label class="custom-control-label" for="customCheck26">Time Series</label>
+    </div>
+    <div class="custom-control custom-checkbox">
+      <input type="checkbox" name="q" class="custom-control-input" id="customCheck27" value="filterunits" onClick="applyFilter()">
+      <label class="custom-control-label" for="customCheck27">Units</label>
+    </div>
+    <div class="custom-control custom-checkbox">
+      <input type="checkbox" name="q" class="custom-control-input" id="customCheck28" value="filtervizier" onClick="applyFilter()">
+      <label class="custom-control-label" for="customCheck28">Vizier</label>
+    </div>
+    <div class="custom-control custom-checkbox">
+        <input type="checkbox" name="q" class="custom-control-input" id="customCheck29" value="filterphotometry" onClick="applyFilter()">
+        <label class="custom-control-label" for="customCheck29">Photometry</label>
+    </div>
+
   </div>
-  <div class="custom-control custom-checkbox">
-    <input type="checkbox" name="q" class="custom-control-input" id="customCheck3" value="filtercoordinates" onClick="applyFilter()">
-    <label class="custom-control-label" for="customCheck3">coordinates</label>
-  </div>
-  <div class="custom-control custom-checkbox">
-    <input type="checkbox" name="q" class="custom-control-input" id="customCheck4" value="filterdatacubes" onClick="applyFilter()">
-    <label class="custom-control-label" for="customCheck4">data cubes</label>
-  </div>
-  <div class="custom-control custom-checkbox">
-    <input type="checkbox" name="q" class="custom-control-input" id="customCheck5" value="filterdynamics" onClick="applyFilter()">
-    <label class="custom-control-label" for="customCheck5">dynamics</label>
-  </div>
-  <div class="custom-control custom-checkbox">
-    <input type="checkbox" name="q" class="custom-control-input" id="customCheck6" value="filtererrorbars" onClick="applyFilter()">
-    <label class="custom-control-label" for="customCheck6">errorbars</label>
-  </div>
-  <div class="custom-control custom-checkbox">
-    <input type="checkbox" name="q" class="custom-control-input" id="customCheck7" value="filterfitsimage" onClick="applyFilter()">
-    <label class="custom-control-label" for="customCheck7">fits image</label>
-  </div>
-  <div class="custom-control custom-checkbox">
-    <input type="checkbox" name="q" class="custom-control-input" id="customCheck8" value="filterfitstable" onClick="applyFilter()">
-    <label class="custom-control-label" for="customCheck8">fits table</label>
-  </div>
-  <div class="custom-control custom-checkbox">
-    <input type="checkbox" name="q" class="custom-control-input" id="customCheck9" value="filterfitting" onClick="applyFilter()">
-    <label class="custom-control-label" for="customCheck9">fitting</label>
-  </div>
-  <div class="custom-control custom-checkbox">
-    <input type="checkbox" name="q" class="custom-control-input" id="customCheck10" value="filterhistogram" onClick="applyFilter()">
-    <label class="custom-control-label" for="customCheck10">histogram</label>
-  </div>
-  <div class="custom-control custom-checkbox">
-    <input type="checkbox" name="q" class="custom-control-input" id="customCheck11" value="filtermatplotlib" onClick="applyFilter()">
-    <label class="custom-control-label" for="customCheck11">matplotlib</label>
-  </div>
-  <div class="custom-control custom-checkbox">
-    <input type="checkbox" name="q" class="custom-control-input" id="customCheck12" value="filternumpy" onClick="applyFilter()">
-    <label class="custom-control-label" for="customCheck12">numpy</label>
-  </div>
-  <div class="custom-control custom-checkbox">
-    <input type="checkbox" name="q" class="custom-control-input" id="customCheck13" value="filterobsplan" onClick="applyFilter()">
-    <label class="custom-control-label" for="customCheck13">obsplan</label>
-  </div>
-  <div class="custom-control custom-checkbox">
-    <input type="checkbox" name="q" class="custom-control-input" id="customCheck14" value="filterOOP" onClick="applyFilter()">
-    <label class="custom-control-label" for="customCheck14">OOP</label>
-  </div>
-  <div class="custom-control custom-checkbox">
-    <input type="checkbox" name="q" class="custom-control-input" id="customCheck15" value="filterphotometry" onClick="applyFilter()">
-    <label class="custom-control-label" for="customCheck15">photometry</label>
-  </div>
-  <div class="custom-control custom-checkbox">
-    <input type="checkbox" name="q" class="custom-control-input" id="customCheck16" value="filterphysics" onClick="applyFilter()">
-    <label class="custom-control-label" for="customCheck16">physics</label>
-  </div>
-  <div class="custom-control custom-checkbox">
-    <input type="checkbox" name="q" class="custom-control-input" id="customCheck17" value="filterplots" onClick="applyFilter()">
-    <label class="custom-control-label" for="customCheck17">plots</label>
-  </div>
-  <div class="custom-control custom-checkbox">
-    <input type="checkbox" name="q" class="custom-control-input" id="customCheck18" value="filterradio" onClick="applyFilter()">
-    <label class="custom-control-label" for="customCheck18">radio</label>
-  </div>
-  <div class="custom-control custom-checkbox">
-    <input type="checkbox" name="q" class="custom-control-input" id="customCheck19" value="filterreproject" onClick="applyFilter()">
-    <label class="custom-control-label" for="customCheck19">reproject</label>
-  </div>
-  <div class="custom-control custom-checkbox">
-    <input type="checkbox" name="q" class="custom-control-input" id="customCheck20" value="filterscipy" onClick="applyFilter()">
-    <label class="custom-control-label" for="customCheck20">scipy</label>
-  </div>
-  <div class="custom-control custom-checkbox">
-    <input type="checkbox" name="q" class="custom-control-input" id="customCheck21" value="filterspectroscopy" onClick="applyFilter()">
-    <label class="custom-control-label" for="customCheck21">spectroscopy</label>
-  </div>
-  <div class="custom-control custom-checkbox">
-    <input type="checkbox" name="q" class="custom-control-input" id="customCheck22" value="filterstatistics " onClick="applyFilter()">
-    <label class="custom-control-label" for="customCheck22">statistics </label>
-  </div>
-  <div class="custom-control custom-checkbox">
-    <input type="checkbox" name="q" class="custom-control-input" id="customCheck23" value="filtertable" onClick="applyFilter()">
-    <label class="custom-control-label" for="customCheck23">table</label>
-  </div>
-  <div class="custom-control custom-checkbox">
-    <input type="checkbox" name="q" class="custom-control-input" id="customCheck24" value="filtertheory" onClick="applyFilter()">
-    <label class="custom-control-label" for="customCheck24">theory</label>
-  </div>
-  <div class="custom-control custom-checkbox">
-    <input type="checkbox" name="q" class="custom-control-input" id="customCheck25" value="filtertimeseries" onClick="applyFilter()">
-    <label class="custom-control-label" for="customCheck25">time series</label>
-  </div>
-  <div class="custom-control custom-checkbox">
-    <input type="checkbox" name="q" class="custom-control-input" id="customCheck26" value="filterunits" onClick="applyFilter()">
-    <label class="custom-control-label" for="customCheck26">units</label>
-  </div>
-  <div class="custom-control custom-checkbox">
-    <input type="checkbox" name="q" class="custom-control-input" id="customCheck27" value="filterVizier" onClick="applyFilter()">
-    <label class="custom-control-label" for="customCheck27">Vizier</label>
-  </div>
-  <div class="custom-control custom-checkbox">
-    <input type="checkbox" name="q" class="custom-control-input" id="customCheck28" value="filterxray" onClick="applyFilter()">
-    <label class="custom-control-label" for="customCheck28">xray</label>
-  </div>
-</form>
+
+  <a data-toggle="collapse" data-target="#viewmore2" aria-expanded="false" style="text-decoration: none !important" class="view-button">
+  
+    <span id="viewmore" style="text-decoration: none !important; color: #ff6a22 !important; font-size: 0.8rem;">
+      VIEW MORE
+    </span>
+    <span id="viewless" style="text-decoration: none !important; color: #ff6a22 !important; font-size: 0.8rem;">
+      VIEW LESS
+    </span>
+  
+  </a>
+  </form>
       </div>
     </div>
 
@@ -302,7 +368,7 @@ for a structured view of the functionality within the Astropy project.</p>
       
     </p>
     <p>
-    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.4.
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
     &copy; Copyright Astropy.   
     </p>
   </div>
