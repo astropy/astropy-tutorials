@@ -320,6 +320,10 @@ function splitQuery(query) {
     return result;
 }
 
+// Set ajaxSetup to synchronous to make a synchronous $.get call (but could be bad form).
+// See https://stackoverflow.com/a/25489055/9959073 for details.
+jQuery.ajaxSetup({async:false});
+
 var docResultsCount = -1;
 /**
  * Search Module
