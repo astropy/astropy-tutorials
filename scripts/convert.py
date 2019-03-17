@@ -1,10 +1,10 @@
 # Standard library
 from os import path, walk, remove, makedirs, sep
+import os
 import re
 
 # Third-party
 from astropy import log as logger
-logger.setLevel('INFO')
 
 from nbconvert.preprocessors import ExecutePreprocessor, CellExecutionError
 from nbconvert.exporters import RSTExporter
@@ -12,6 +12,7 @@ from nbconvert.writers import FilesWriter
 import nbformat
 
 IPYTHON_VERSION = 4
+logger.setLevel('INFO')
 
 def clean_keyword(kw):
     """Given a keyword parsed from the header of one of the tutorials, return
@@ -21,6 +22,29 @@ def clean_keyword(kw):
     - Removes . / and space
     """
     return kw.strip().title().replace('.', '').replace('/', '').replace(' ', '')
+
+
+class TutorialsExecutePreprocessor(ExecutePreprocessor):
+
+    def preprocess_cell(self, cell, resources, cell_index):
+        """
+        Executes a single code cell, unless the cell has metadata key
+        "tutorials-ci-skip" set to "true".  See
+        nbconvert/preprocessors/execute.py for more details.  To execute all
+        cells see :meth:`preprocess`.
+        """
+        on_ci = os.environ.get("CI", "false") == "true"
+        ci_skip = cell.metadata.get("tutorials-ci-skip", False)
+
+        if on_ci and ci_skip:
+            logger.debug("On CI: skipping cell {0}".format(cell_index))
+            return cell, resources
+
+        cell, resources = super().preprocess_cell(cell, resources,
+                                                  cell_index)
+
+        return cell, resources
+
 
 class NBTutorialsConverter(object):
 
@@ -86,7 +110,7 @@ class NBTutorialsConverter(object):
         # Execute the notebook
         logger.debug('Executing notebook using kwargs '
                      '"{}"...'.format(self._execute_kwargs))
-        executor = ExecutePreprocessor(**self._execute_kwargs)
+        executor = TutorialsExecutePreprocessor(**self._execute_kwargs)
 
         with open(self.nb_path) as f:
             nb = nbformat.read(f, as_version=IPYTHON_VERSION)
