@@ -1,0 +1,8 @@
+astropy
+numpy
+matplotlib
+astroquery
+IPython
+scipy
+astroquery
+astro-gala
