@@ -101,17 +101,17 @@
       //checking the active filters
       var activeFilters = $.getQueryParameters();
       var filters = document.getElementsByClassName('custom-control-input');
-      for(var f=0; filters[f]; ++f){
-          if(activeFilters.q[0].search(filters[f].value)!=-1)
+      for (var f=0; filters[f]; ++f){
+          if (activeFilters.q[0].search(filters[f].value)!=-1)
               filters[f].checked = true;   
       }
       document.getElementById("search-bar-input").value = '';
   });
   
   //no results found
-  $(window).on("load", function(){
-          if(!document.getElementsByClassName('result-card').length)
-              {document.getElementById('search-results').innerHTML += '<h3>No tutorials found!</h3>'}
+  $(window).on('load', function() {
+          if (!document.getElementsByClassName('result-card').length)
+              {document.getElementById('search-results').innerHTML += '<h3>No tutorials found!</h3>';}
   });  
 
   //update filters
