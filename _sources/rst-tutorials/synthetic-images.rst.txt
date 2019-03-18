@@ -116,7 +116,6 @@ load a FITS file and examine the header.
 
 .. parsed-literal::
 
-    Downloading http://data.astropy.org/tutorials/synthetic-images/synchrotron_i_lobe_0700_150MHz_sm.fits [Done]
     Filename: /home/circleci/.astropy/cache/download/py3/c0ef4c0e064fc23aef784f93082d8b9a
     No.    Name      Ver    Type      Cards   Dimensions   Format
       0  PRIMARY       1 PrimaryHDU       4   ()      
@@ -212,7 +211,7 @@ proper range (``vmin`` and ``vmax``).
 
 .. parsed-literal::
 
-    <matplotlib.image.AxesImage at 0x7fde64bd2e48>
+    <matplotlib.image.AxesImage at 0x7f0768d017b8>
 
 
 
@@ -412,7 +411,7 @@ pixels by using our pixel scale keyword ``cdelt2`` from above.
 
 .. parsed-literal::
 
-    <matplotlib.image.AxesImage at 0x7fde5ef89320>
+    <matplotlib.image.AxesImage at 0x7f0762a3fcf8>
 
 
 
@@ -457,7 +456,7 @@ this, using a 2D Lorentzian
 
 .. parsed-literal::
 
-    <matplotlib.image.AxesImage at 0x7fde64de9cf8>
+    <matplotlib.image.AxesImage at 0x7f0762a21a90>
 
 
 
@@ -520,7 +519,7 @@ Now let's take a look at the convolved image.
 
 .. parsed-literal::
 
-    <matplotlib.colorbar.Colorbar at 0x7fde64d529b0>
+    <matplotlib.colorbar.Colorbar at 0x7f0762880400>
 
 
 
@@ -578,16 +577,6 @@ Now let's take a look at the convolved image.
     convolved_image_q = convolve_fft(hdu_q.data, psf, boundary='wrap')
     convolved_image_u = convolve_fft(hdu_u.data, psf, boundary='wrap')
 
-
-:outputnumrole:`Out[18]:`
-
-
-.. parsed-literal::
-
-    Downloading http://data.astropy.org/tutorials/synthetic-images/synchrotron_q_lobe_0700_150MHz_sm.fits [Done]
-    Downloading http://data.astropy.org/tutorials/synthetic-images/synchrotron_u_lobe_0700_150MHz_sm.fits [Done]
-
-
 Let's plot the Q and U images.
 
 
@@ -619,7 +608,7 @@ Let's plot the Q and U images.
 
 .. parsed-literal::
 
-    <matplotlib.colorbar.Colorbar at 0x7fde5d7c7ba8>
+    <matplotlib.colorbar.Colorbar at 0x7f07610f3f60>
 
 
 
@@ -694,7 +683,7 @@ vectors along the x/right-ascention axis.
 
 .. parsed-literal::
 
-    <matplotlib.quiver.Quiver at 0x7fde5d6c6da0>
+    <matplotlib.quiver.Quiver at 0x7f0768d0d5f8>
 
 
 

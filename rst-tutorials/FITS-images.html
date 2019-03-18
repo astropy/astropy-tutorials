@@ -158,10 +158,6 @@ here.</p>
 <span class="n">image_file</span> <span class="o">=</span> <span class="n">download_file</span><span class="p">(</span><span class="s1">&#39;http://data.astropy.org/tutorials/FITS-images/HorseHead.fits&#39;</span><span class="p">,</span> <span class="n">cache</span><span class="o">=</span><span class="kc">True</span> <span class="p">)</span>
 </pre></div>
 </div>
-<p><span class="outputnumrole">Out[2]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Downloading</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">data</span><span class="o">.</span><span class="n">astropy</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">tutorials</span><span class="o">/</span><span class="n">FITS</span><span class="o">-</span><span class="n">images</span><span class="o">/</span><span class="n">HorseHead</span><span class="o">.</span><span class="n">fits</span> <span class="p">[</span><span class="n">Done</span><span class="p">]</span>
-</pre></div>
-</div>
 </div>
 <div class="section" id="opening-fits-files-and-loading-the-image-data">
 <h2>Opening FITS files and loading the image data<a class="headerlink" href="#opening-fits-files-and-loading-the-image-data" title="Permalink to this headline">¶</a></h2>
@@ -231,7 +227,7 @@ everything we wanted to a variable.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[8]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">colorbar</span><span class="o">.</span><span class="n">Colorbar</span> <span class="n">at</span> <span class="mh">0x7f27bc045cc0</span><span class="o">&gt;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">colorbar</span><span class="o">.</span><span class="n">Colorbar</span> <span class="n">at</span> <span class="mh">0x7eff3f6db0b8</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <img alt="../_images/FITS-images_17_1.png" src="../_images/FITS-images_17_1.png" />
@@ -288,9 +284,7 @@ to load the <code class="docutils literal notranslate"><span class="pre">LogNorm
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[13]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">Text</span> <span class="n">at</span> <span class="mh">0x7f27b8029f98</span><span class="o">&gt;</span><span class="p">,</span>
- <span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">Text</span> <span class="n">at</span> <span class="mh">0x7f27b8036e10</span><span class="o">&gt;</span><span class="p">,</span>
- <span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">text</span><span class="o">.</span><span class="n">Text</span> <span class="n">at</span> <span class="mh">0x7f27b8312048</span><span class="o">&gt;</span><span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">Text</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;5,000&#39;</span><span class="p">),</span> <span class="n">Text</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;10,000&#39;</span><span class="p">),</span> <span class="n">Text</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;20,000&#39;</span><span class="p">)]</span>
 </pre></div>
 </div>
 <img alt="../_images/FITS-images_28_1.png" src="../_images/FITS-images_28_1.png" />
@@ -309,14 +303,6 @@ list, which we’ve named <code class="docutils literal notranslate"><span class
 <span class="n">image_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">download_file</span><span class="p">(</span><span class="n">base_url</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n</span><span class="p">),</span> <span class="n">cache</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
               <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
 <span class="n">image_concat</span> <span class="o">=</span> <span class="p">[</span><span class="n">fits</span><span class="o">.</span><span class="n">getdata</span><span class="p">(</span><span class="n">image</span><span class="p">)</span> <span class="k">for</span> <span class="n">image</span> <span class="ow">in</span> <span class="n">image_list</span><span class="p">]</span>
-</pre></div>
-</div>
-<p><span class="outputnumrole">Out[14]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Downloading</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">data</span><span class="o">.</span><span class="n">astropy</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">tutorials</span><span class="o">/</span><span class="n">FITS</span><span class="o">-</span><span class="n">images</span><span class="o">/</span><span class="n">M13_blue_0001</span><span class="o">.</span><span class="n">fits</span> <span class="p">[</span><span class="n">Done</span><span class="p">]</span>
-<span class="n">Downloading</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">data</span><span class="o">.</span><span class="n">astropy</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">tutorials</span><span class="o">/</span><span class="n">FITS</span><span class="o">-</span><span class="n">images</span><span class="o">/</span><span class="n">M13_blue_0002</span><span class="o">.</span><span class="n">fits</span> <span class="p">[</span><span class="n">Done</span><span class="p">]</span>
-<span class="n">Downloading</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">data</span><span class="o">.</span><span class="n">astropy</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">tutorials</span><span class="o">/</span><span class="n">FITS</span><span class="o">-</span><span class="n">images</span><span class="o">/</span><span class="n">M13_blue_0003</span><span class="o">.</span><span class="n">fits</span> <span class="p">[</span><span class="n">Done</span><span class="p">]</span>
-<span class="n">Downloading</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">data</span><span class="o">.</span><span class="n">astropy</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">tutorials</span><span class="o">/</span><span class="n">FITS</span><span class="o">-</span><span class="n">images</span><span class="o">/</span><span class="n">M13_blue_0004</span><span class="o">.</span><span class="n">fits</span> <span class="p">[</span><span class="n">Done</span><span class="p">]</span>
-<span class="n">Downloading</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">data</span><span class="o">.</span><span class="n">astropy</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">tutorials</span><span class="o">/</span><span class="n">FITS</span><span class="o">-</span><span class="n">images</span><span class="o">/</span><span class="n">M13_blue_0005</span><span class="o">.</span><span class="n">fits</span> <span class="p">[</span><span class="n">Done</span><span class="p">]</span>
 </pre></div>
 </div>
 <p>Now we’ll stack the images by summing the concatenated list.</p>
@@ -347,7 +333,7 @@ scaling for <code class="docutils literal notranslate"><span class="pre">imshow<
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[17]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">colorbar</span><span class="o">.</span><span class="n">Colorbar</span> <span class="n">at</span> <span class="mh">0x7f27b3042240</span><span class="o">&gt;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">colorbar</span><span class="o">.</span><span class="n">Colorbar</span> <span class="n">at</span> <span class="mh">0x7eff352c5f60</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <img alt="../_images/FITS-images_38_1.png" src="../_images/FITS-images_38_1.png" />

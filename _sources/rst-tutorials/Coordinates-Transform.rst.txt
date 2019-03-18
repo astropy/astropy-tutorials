@@ -386,16 +386,16 @@ fail.
 
     AttributeErrorTraceback (most recent call last)
 
-    <ipython-input-12-40062ef68db1> in <module>()
+    <ipython-input-12-1275c2f67eab> in <module>
     ----> 1 hcg7_center.galactic.ra  # should fail because Galactic coordinates are l/b not RA/Dec
     
 
     ~/project/venv/lib/python3.6/site-packages/astropy/coordinates/sky_coordinate.py in __getattr__(self, attr)
-        693         # Fail
-        694         raise AttributeError("'{0}' object has no attribute '{1}'"
-    --> 695                              .format(self.__class__.__name__, attr))
-        696 
-        697     def __setattr__(self, attr, val):
+        598         # Fail
+        599         raise AttributeError("'{0}' object has no attribute '{1}'"
+    --> 600                              .format(self.__class__.__name__, attr))
+        601 
+        602     def __setattr__(self, attr, val):
 
 
     AttributeError: 'SkyCoord' object has no attribute 'ra'
@@ -463,15 +463,6 @@ For known observing sites we can enter the name directly.
 .. code:: python
 
     kitt_peak = EarthLocation.of_site('Kitt Peak')
-
-
-:outputnumrole:`Out[16]:`
-
-
-.. parsed-literal::
-
-    Downloading http://data.astropy.org/coordinates/sites.json [Done]
-
 
 We can see the list of observing sites:
 
@@ -652,7 +643,7 @@ the default is to ignore this effect (by setting the pressure to 0).
 
 .. parsed-literal::
 
-    <AltAz Frame (obstime=2010-12-21 01:00:00.000, location=(-1994502.6043061386, -5037538.54232911, 3358104.9969029757) m, pressure=0.0 hPa, temperature=0.0 deg_C, relative_humidity=0, obswl=1.0 micron)>
+    <AltAz Frame (obstime=2010-12-21 01:00:00.000, location=(-1994502.60430614, -5037538.54232911, 3358104.99690298) m, pressure=0.0 hPa, temperature=0.0 deg_C, relative_humidity=0.0, obswl=1.0 micron)>
 
 
 Now we can just transform our ICRS ``SkyCoord`` to ``AltAz`` to get the
@@ -670,16 +661,11 @@ location in the sky over Kitt Peak at the requested time.
 :outputnumrole:`Out[20]:`
 
 
-.. parsed-literal::
-
-    Downloading http://maia.usno.navy.mil/ser7/finals2000A.all [Done]
-
-
 
 
 .. parsed-literal::
 
-    <SkyCoord (AltAz: obstime=2010-12-21 01:00:00.000, location=(-1994502.6043061386, -5037538.54232911, 3358104.9969029757) m, pressure=0.0 hPa, temperature=0.0 deg_C, relative_humidity=0, obswl=1.0 micron): (az, alt) in deg
+    <SkyCoord (AltAz: obstime=2010-12-21 01:00:00.000, location=(-1994502.60430614, -5037538.54232911, 3358104.99690298) m, pressure=0.0 hPa, temperature=0.0 deg_C, relative_humidity=0.0, obswl=1.0 micron): (az, alt) in deg
         (149.19234446, 55.05673074)>
 
 
@@ -790,8 +776,8 @@ We can also look at the object altitude at the present time and date:
 
 .. parsed-literal::
 
-    <SkyCoord (AltAz: obstime=2019-03-10 18:30:56.783272, location=(-1994502.6043061386, -5037538.54232911, 3358104.9969029757) m, pressure=0.0 hPa, temperature=0.0 deg_C, relative_humidity=0, obswl=1.0 micron): (az, alt) in deg
-        (125.35878148, 44.2136645)>
+    <SkyCoord (AltAz: obstime=2019-03-18 16:52:28.741537, location=(-1994502.60430614, -5037538.54232911, 3358104.99690298) m, pressure=0.0 hPa, temperature=0.0 deg_C, relative_humidity=0.0, obswl=1.0 micron): (az, alt) in deg
+        (111.13902891, 31.64397926)>
 
 
 Exercises

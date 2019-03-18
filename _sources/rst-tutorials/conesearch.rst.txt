@@ -100,11 +100,6 @@ Validation is hosted by Space Telescope Science Institute (STScI).
 :outputnumrole:`Out[2]:`
 
 
-.. parsed-literal::
-
-    Downloading https://astropy.stsci.edu/aux/vo_databases/conesearch_good.json [Done]
-
-
 
 
 .. parsed-literal::
@@ -115,6 +110,7 @@ Validation is hosted by Space Telescope Science Institute (STScI).
      'SDSS DR7 - Sloan Digital Sky Survey Data Release 7 3',
      'SDSS DR7 - Sloan Digital Sky Survey Data Release 7 4',
      'SDSS DR8 - Sloan Digital Sky Survey Data Release 8 1',
+     'SDSS DR8 - Sloan Digital Sky Survey Data Release 8 2',
      'The HST Guide Star Catalog, Version 1.1 (Lasker+ 1992) 1',
      'The HST Guide Star Catalog, Version 1.2 (Lasker+ 1996) 1',
      'The HST Guide Star Catalog, Version GSC-ACT (Lasker+ 1996-99) 1',
@@ -267,7 +263,7 @@ then manipulated as such; e.g., re-write the table into LaTeX format.
     \begin{table}
     \begin{tabular}{cccccccccccccccccccccccccccccccccccccccccccccccccccccccc}
     objID & gsc2ID & gsc1ID & hstID & ra & dec & epoch & raEpsilon & decEpsilon & rapm & decpm & rapmErr & decpmErr & deltaEpoch & FpgMag & FpgMagErr & FpgMagCode & JpgMag & JpgMagErr & JpgMagCode & NpgMag & NpgMagErr & NpgMagCode & UMag & UMagErr & UMagCode & BMag & BMagErr & BMagCode & VMag & VMagErr & VMagCode & RMag & RMagErr & RMagCode & IMag & IMagErr & IMagCode & JMag & JMagErr & JMagCode & HMag & HMagErr & HMagCode & KMag & KMagErr & KMagCode & class & semiMajorAxis & eccentricity & positionAngle & sourceStatus & variableFlag & multipleFlag & compassGSC2id & Mag \\
-     &  &  &  & $\mathrm{deg}$ & $\mathrm{deg}$ & $\mathrm{yr}$ & $\mathrm{arcs}$ & $\mathrm{arcs}$ & $\mathrm{mas\,yr^{-1}}$ & $\mathrm{mas\,yr^{-1}}$ & $\mathrm{mas\,yr^{-1}}$ & $\mathrm{mas\,yr^{-1}}$ & $\mathrm{yr}$ & $\mathrm{mag}$ & $\mathrm{mag}$ &  & $\mathrm{mag}$ & $\mathrm{mag}$ &  & $\mathrm{mag}$ & $\mathrm{mag}$ &  & $\mathrm{mag}$ & $\mathrm{mag}$ &  & $\mathrm{mag}$ & $\mathrm{mag}$ &  & $\mathrm{mag}$ & $\mathrm{mag}$ &  & $\mathrm{mag}$ & $\mathrm{mag}$ &  & $\mathrm{mag}$ & $\mathrm{mag}$ &  & $\mathrm{mag}$ & $\mathrm{mag}$ &  & $\mathrm{mag}$ & $\mathrm{mag}$ &  & $\mathrm{mag}$ & $\mathrm{mag}$ &  &  & pixel &  & $\mathrm{deg}$ &  &  &  &  & $\mathrm{mag}$ \\
+     &  &  &  & $\mathrm{deg}$ & $\mathrm{deg}$ & $\mathrm{yr}$ & $\mathrm{arcsec}$ & $\mathrm{arcsec}$ & $\mathrm{mas\,yr^{-1}}$ & $\mathrm{mas\,yr^{-1}}$ & $\mathrm{mas\,yr^{-1}}$ & $\mathrm{mas\,yr^{-1}}$ & $\mathrm{yr}$ & $\mathrm{mag}$ & $\mathrm{mag}$ &  & $\mathrm{mag}$ & $\mathrm{mag}$ &  & $\mathrm{mag}$ & $\mathrm{mag}$ &  & $\mathrm{mag}$ & $\mathrm{mag}$ &  & $\mathrm{mag}$ & $\mathrm{mag}$ &  & $\mathrm{mag}$ & $\mathrm{mag}$ &  & $\mathrm{mag}$ & $\mathrm{mag}$ &  & $\mathrm{mag}$ & $\mathrm{mag}$ &  & $\mathrm{mag}$ & $\mathrm{mag}$ &  & $\mathrm{mag}$ & $\mathrm{mag}$ &  & $\mathrm{mag}$ & $\mathrm{mag}$ &  &  & pixel &  & $\mathrm{deg}$ &  &  &  &  & $\mathrm{mag}$ \\
     23323175812944 & 00424433+4116085 &  & 2MJG1R2O & 10.684737 & 41.269035 & 1997.815 & 0.08 & 0.07 & 0.0 & 0.0 & 0.0 & 0.0 & 0.0 & 99.99 & 99.99 & 99 & 99.99 & 99.99 & 99 & 99.99 & 99.99 & 99 & 99.99 & 99.99 & 99 & 99.99 & 99.99 & 99 & 99.99 & 99.99 & 99 & 99.99 & 99.99 & 99 & 99.99 & 99.99 & 99 & 9.453 & 0.052 & 47 & 8.668 & 0.051 & 48 & 8.475 & 0.051 & 49 & 4 & 0.0 & 0.0 & 0.0 & 77777700 & 0 & 0 & 6453800072293 & 9.453 \\
     23323175812948 & 00424403+4116069 &  & 2MJG1R2S & 10.683469 & 41.268585 & 1997.815 & 0.13 & 0.12 & 0.0 & 0.0 & 0.0 & 0.0 & 0.0 & 99.99 & 99.99 & 99 & 99.99 & 99.99 & 99 & 99.99 & 99.99 & 99 & 99.99 & 99.99 & 99 & 99.99 & 99.99 & 99 & 99.99 & 99.99 & 99 & 99.99 & 99.99 & 99 & 99.99 & 99.99 & 99 & 9.321 & -999.0 & 47 & 8.614 & -999.0 & 48 & 10.601 & 0.025 & 49 & 4 & 0.0 & 0.0 & 0.0 & 77777700 & 0 & 0 & 6453800072297 & 9.321 \\
     23323175812933 & 00424455+4116103 &  & 2MJG1R2D & 10.685657 & 41.26955 & 1997.815 & 0.13 & 0.12 & 0.0 & 0.0 & 0.0 & 0.0 & 0.0 & 99.99 & 99.99 & 99 & 99.99 & 99.99 & 99 & 99.99 & 99.99 & 99 & 99.99 & 99.99 & 99 & 99.99 & 99.99 & 99 & 99.99 & 99.99 & 99 & 99.99 & 99.99 & 99 & 99.99 & 99.99 & 99 & 10.773 & 0.069 & 47 & 8.532 & -999.0 & 48 & 8.254 & -999.0 & 49 & 4 & 0.0 & 0.0 & 0.0 & 77777700 & 0 & 0 & 6453800072282 & 10.773 \\
@@ -4431,17 +4427,17 @@ catalog.
         "validate_out_db_name": "good",
         "validate_version": "1.2",
         "validate_warning_types": [
-            "W48",
-            "W50"
+            "W50",
+            "W48"
         ],
         "validate_warnings": [
-            "/eng/ssb/websites/astropy/aux/vo_databases/daily_20190310/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:154:0: W50: Invalid unit string 'pixel'",
-            "/eng/ssb/websites/astropy/aux/vo_databases/daily_20190310/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:179:0: W48: Unknown attribute 'nrows' on TABLEDATA",
-            "/eng/ssb/websites/astropy/aux/vo_databases/daily_20190310/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:154:0: W50: Invalid unit string 'pixel'",
-            "/eng/ssb/websites/astropy/aux/vo_databases/daily_20190310/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:179:0: W48: Unknown attribute 'nrows' on TABLEDATA"
+            "/eng/ssb/websites/astropy/aux/vo_databases/daily_20190318/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:154:0: W50: Invalid unit string 'pixel'",
+            "/eng/ssb/websites/astropy/aux/vo_databases/daily_20190318/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:179:0: W48: Unknown attribute 'nrows' on TABLEDATA",
+            "/eng/ssb/websites/astropy/aux/vo_databases/daily_20190318/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:154:0: W50: Invalid unit string 'pixel'",
+            "/eng/ssb/websites/astropy/aux/vo_databases/daily_20190318/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:179:0: W48: Unknown attribute 'nrows' on TABLEDATA"
         ],
         "validate_xmllint": false,
-        "validate_xmllint_content": "/eng/ssb/websites/astropy/aux/vo_databases/daily_20190310/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:179: element TABLEDATA: Schemas validity error : Element '{http://www.ivoa.net/xml/VOTable/v1.2}TABLEDATA', attribute 'nrows': The attribute 'nrows' is not allowed.\n/eng/ssb/websites/astropy/aux/vo_databases/daily_20190310/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml fails to validate\n",
+        "validate_xmllint_content": "/eng/ssb/websites/astropy/aux/vo_databases/daily_20190318/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:179: element TABLEDATA: Schemas validity error : Element '{http://www.ivoa.net/xml/VOTable/v1.2}TABLEDATA', attribute 'nrows': The attribute 'nrows' is not allowed.\n/eng/ssb/websites/astropy/aux/vo_databases/daily_20190318/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml fails to validate\n",
         "waveband": "optical",
         "wsdl_url": ""
     }
@@ -4788,7 +4784,7 @@ This might take a while.
 
 .. parsed-literal::
 
-    Predicted run time is 0.7629523474575478 seconds
+    Predicted run time is 0.8807816505432127 seconds
     Predicted number of rows is 2617
 
 
@@ -4817,7 +4813,7 @@ the service provider.
 
 .. parsed-literal::
 
-    INFO: conesearch_timer took 0.6480042934417725 s on AVERAGE for 1 call(s). [astropy.utils.timer]
+    INFO: conesearch_timer took 0.6415302753448486 s on AVERAGE for 1 call(s). [astropy.utils.timer]
 
 
 
@@ -4835,7 +4831,7 @@ the service provider.
 
 .. parsed-literal::
 
-    Actual run time is 0.6480042934417725 seconds
+    Actual run time is 0.6415302753448486 seconds
     Actual number of rows is 4028
 
 

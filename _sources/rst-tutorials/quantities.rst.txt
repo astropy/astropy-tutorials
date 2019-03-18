@@ -258,7 +258,7 @@ km/s and a velocity dispersion of 4.3 km/s.
 
 .. parsed-literal::
 
-    <matplotlib.text.Text at 0x7f94326120b8>
+    Text(0, 0.5, 'N')
 
 
 
@@ -434,16 +434,16 @@ mathematically sensible.
 
     UnitConversionErrorTraceback (most recent call last)
 
-    ~/project/venv/lib/python3.6/site-packages/astropy/units/quantity_helper.py in get_converter(from_unit, to_unit)
-         28     try:
-    ---> 29         scale = from_unit._to(to_unit)
-         30     except UnitsError:
+    ~/project/venv/lib/python3.6/site-packages/astropy/units/quantity_helper/helpers.py in get_converter(from_unit, to_unit)
+         31     try:
+    ---> 32         scale = from_unit._to(to_unit)
+         33     except UnitsError:
 
 
     ~/project/venv/lib/python3.6/site-packages/astropy/units/core.py in _to(self, other)
-        931         raise UnitConversionError(
-    --> 932             "'{0!r}' is not a scaled version of '{1!r}'".format(self, other))
-        933 
+        952         raise UnitConversionError(
+    --> 953             "'{0!r}' is not a scaled version of '{1!r}'".format(self, other))
+        954 
 
 
     UnitConversionError: 'Unit("kg km2 pc / m3")' is not a scaled version of 'Unit(dimensionless)'
@@ -454,22 +454,22 @@ mathematically sensible.
 
     UnitConversionErrorTraceback (most recent call last)
 
-    ~/project/venv/lib/python3.6/site-packages/astropy/units/quantity_helper.py in helper_dimensionless_to_dimensionless(f, unit)
-        156     try:
-    --> 157         return ([get_converter(unit, dimensionless_unscaled)],
-        158                 dimensionless_unscaled)
+    ~/project/venv/lib/python3.6/site-packages/astropy/units/quantity_helper/helpers.py in helper_dimensionless_to_dimensionless(f, unit)
+        146     try:
+    --> 147         return ([get_converter(unit, dimensionless_unscaled)],
+        148                 dimensionless_unscaled)
 
 
-    ~/project/venv/lib/python3.6/site-packages/astropy/units/quantity_helper.py in get_converter(from_unit, to_unit)
-         31         return from_unit._apply_equivalencies(
-    ---> 32                 from_unit, to_unit, get_current_unit_registry().equivalencies)
-         33     except AttributeError:
+    ~/project/venv/lib/python3.6/site-packages/astropy/units/quantity_helper/helpers.py in get_converter(from_unit, to_unit)
+         34         return from_unit._apply_equivalencies(
+    ---> 35                 from_unit, to_unit, get_current_unit_registry().equivalencies)
+         36     except AttributeError:
 
 
     ~/project/venv/lib/python3.6/site-packages/astropy/units/core.py in _apply_equivalencies(self, unit, other, equivalencies)
-        868             "{0} and {1} are not convertible".format(
-    --> 869                 unit_str, other_str))
-        870 
+        889             "{0} and {1} are not convertible".format(
+    --> 890                 unit_str, other_str))
+        891 
 
 
     UnitConversionError: 'kg km2 pc / m3' (mass) and '' (dimensionless) are not convertible
@@ -480,32 +480,32 @@ mathematically sensible.
 
     UnitTypeErrorTraceback (most recent call last)
 
-    <ipython-input-17-598955917a11> in <module>()
+    <ipython-input-17-1faee346a12e> in <module>
     ----> 1 np.log10(M)
     
 
     ~/project/venv/lib/python3.6/site-packages/astropy/units/quantity.py in __array_ufunc__(self, function, method, *inputs, **kwargs)
-        618         # consistent units between two inputs (e.g., in np.add) --
-        619         # and the unit of the result (or tuple of units for nout > 1).
-    --> 620         converters, unit = converters_and_unit(function, method, *inputs)
-        621 
-        622         out = kwargs.get('out', None)
+        442         # consistent units between two inputs (e.g., in np.add) --
+        443         # and the unit of the result (or tuple of units for nout > 1).
+    --> 444         converters, unit = converters_and_unit(function, method, *inputs)
+        445 
+        446         out = kwargs.get('out', None)
 
 
-    ~/project/venv/lib/python3.6/site-packages/astropy/units/quantity_helper.py in converters_and_unit(function, method, *args)
-        536 
-        537         # Determine possible conversion functions, and the result unit.
-    --> 538         converters, result_unit = ufunc_helper(function, *units)
-        539 
-        540         if any(converter is False for converter in converters):
-
-
-    ~/project/venv/lib/python3.6/site-packages/astropy/units/quantity_helper.py in helper_dimensionless_to_dimensionless(f, unit)
-        160         raise UnitTypeError("Can only apply '{0}' function to "
-        161                             "dimensionless quantities"
-    --> 162                             .format(f.__name__))
-        163 
+    ~/project/venv/lib/python3.6/site-packages/astropy/units/quantity_helper/converters.py in converters_and_unit(function, method, *args)
         164 
+        165         # Determine possible conversion functions, and the result unit.
+    --> 166         converters, result_unit = ufunc_helper(function, *units)
+        167 
+        168         if any(converter is False for converter in converters):
+
+
+    ~/project/venv/lib/python3.6/site-packages/astropy/units/quantity_helper/helpers.py in helper_dimensionless_to_dimensionless(f, unit)
+        150         raise UnitTypeError("Can only apply '{0}' function to "
+        151                             "dimensionless quantities"
+    --> 152                             .format(f.__name__))
+        153 
+        154 
 
 
     UnitTypeError: Can only apply 'log10' function to dimensionless quantities
@@ -788,57 +788,57 @@ convertible:
 
     UnitConversionErrorTraceback (most recent call last)
 
-    <ipython-input-25-10c6a3b6dc61> in <module>()
+    <ipython-input-25-2e9e7e5707cb> in <module>
     ----> 1 nu13 = lambda13.to(u.Hz)
           2 nu18 = lambda18.to(u.Hz)
 
 
     ~/project/venv/lib/python3.6/site-packages/astropy/units/quantity.py in to(self, unit, equivalencies)
-        845         # and don't want to slow down this method (esp. the scalar case).
-        846         unit = Unit(unit)
-    --> 847         return self._new_view(self._to_value(unit, equivalencies), unit)
-        848 
-        849     def to_value(self, unit=None, equivalencies=[]):
+        669         # and don't want to slow down this method (esp. the scalar case).
+        670         unit = Unit(unit)
+    --> 671         return self._new_view(self._to_value(unit, equivalencies), unit)
+        672 
+        673     def to_value(self, unit=None, equivalencies=[]):
 
 
     ~/project/venv/lib/python3.6/site-packages/astropy/units/quantity.py in _to_value(self, unit, equivalencies)
-        817             equivalencies = self._equivalencies
-        818         return self.unit.to(unit, self.view(np.ndarray),
-    --> 819                             equivalencies=equivalencies)
-        820 
-        821     def to(self, unit, equivalencies=[]):
+        641             equivalencies = self._equivalencies
+        642         return self.unit.to(unit, self.view(np.ndarray),
+    --> 643                             equivalencies=equivalencies)
+        644 
+        645     def to(self, unit, equivalencies=[]):
 
 
     ~/project/venv/lib/python3.6/site-packages/astropy/units/core.py in to(self, other, value, equivalencies)
-        963             If units are inconsistent
-        964         """
-    --> 965         return self._get_converter(other, equivalencies=equivalencies)(value)
-        966 
-        967     def in_units(self, other, value=1.0, equivalencies=[]):
+        987             return UNITY
+        988         else:
+    --> 989             return self._get_converter(other, equivalencies=equivalencies)(value)
+        990 
+        991     def in_units(self, other, value=1.0, equivalencies=[]):
 
 
     ~/project/venv/lib/python3.6/site-packages/astropy/units/core.py in _get_converter(self, other, equivalencies)
-        897                             pass
-        898 
-    --> 899             raise exc
-        900 
-        901     def _to(self, other):
+        918                             pass
+        919 
+    --> 920             raise exc
+        921 
+        922     def _to(self, other):
 
 
     ~/project/venv/lib/python3.6/site-packages/astropy/units/core.py in _get_converter(self, other, equivalencies)
-        883         try:
-        884             return self._apply_equivalencies(
-    --> 885                 self, other, self._normalize_equivalencies(equivalencies))
-        886         except UnitsError as exc:
-        887             # Last hope: maybe other knows how to do it?
+        904         try:
+        905             return self._apply_equivalencies(
+    --> 906                 self, other, self._normalize_equivalencies(equivalencies))
+        907         except UnitsError as exc:
+        908             # Last hope: maybe other knows how to do it?
 
 
     ~/project/venv/lib/python3.6/site-packages/astropy/units/core.py in _apply_equivalencies(self, unit, other, equivalencies)
-        867         raise UnitConversionError(
-        868             "{0} and {1} are not convertible".format(
-    --> 869                 unit_str, other_str))
-        870 
-        871     def _get_converter(self, other, equivalencies=[]):
+        888         raise UnitConversionError(
+        889             "{0} and {1} are not convertible".format(
+    --> 890                 unit_str, other_str))
+        891 
+        892     def _get_converter(self, other, equivalencies=[]):
 
 
     UnitConversionError: 'mm' (length) and 'Hz' (frequency) are not convertible
@@ -1112,56 +1112,56 @@ convert to a different area unit, it will fail:
 
     UnitConversionErrorTraceback (most recent call last)
 
-    <ipython-input-36-d7c4d4dcf9cc> in <module>()
+    <ipython-input-36-a7ea5a2a0bb2> in <module>
     ----> 1 da.to(u.cm**2)
     
 
     ~/project/venv/lib/python3.6/site-packages/astropy/units/quantity.py in to(self, unit, equivalencies)
-        845         # and don't want to slow down this method (esp. the scalar case).
-        846         unit = Unit(unit)
-    --> 847         return self._new_view(self._to_value(unit, equivalencies), unit)
-        848 
-        849     def to_value(self, unit=None, equivalencies=[]):
+        669         # and don't want to slow down this method (esp. the scalar case).
+        670         unit = Unit(unit)
+    --> 671         return self._new_view(self._to_value(unit, equivalencies), unit)
+        672 
+        673     def to_value(self, unit=None, equivalencies=[]):
 
 
     ~/project/venv/lib/python3.6/site-packages/astropy/units/quantity.py in _to_value(self, unit, equivalencies)
-        817             equivalencies = self._equivalencies
-        818         return self.unit.to(unit, self.view(np.ndarray),
-    --> 819                             equivalencies=equivalencies)
-        820 
-        821     def to(self, unit, equivalencies=[]):
+        641             equivalencies = self._equivalencies
+        642         return self.unit.to(unit, self.view(np.ndarray),
+    --> 643                             equivalencies=equivalencies)
+        644 
+        645     def to(self, unit, equivalencies=[]):
 
 
     ~/project/venv/lib/python3.6/site-packages/astropy/units/core.py in to(self, other, value, equivalencies)
-        963             If units are inconsistent
-        964         """
-    --> 965         return self._get_converter(other, equivalencies=equivalencies)(value)
-        966 
-        967     def in_units(self, other, value=1.0, equivalencies=[]):
+        987             return UNITY
+        988         else:
+    --> 989             return self._get_converter(other, equivalencies=equivalencies)(value)
+        990 
+        991     def in_units(self, other, value=1.0, equivalencies=[]):
 
 
     ~/project/venv/lib/python3.6/site-packages/astropy/units/core.py in _get_converter(self, other, equivalencies)
-        897                             pass
-        898 
-    --> 899             raise exc
-        900 
-        901     def _to(self, other):
+        918                             pass
+        919 
+    --> 920             raise exc
+        921 
+        922     def _to(self, other):
 
 
     ~/project/venv/lib/python3.6/site-packages/astropy/units/core.py in _get_converter(self, other, equivalencies)
-        883         try:
-        884             return self._apply_equivalencies(
-    --> 885                 self, other, self._normalize_equivalencies(equivalencies))
-        886         except UnitsError as exc:
-        887             # Last hope: maybe other knows how to do it?
+        904         try:
+        905             return self._apply_equivalencies(
+    --> 906                 self, other, self._normalize_equivalencies(equivalencies))
+        907         except UnitsError as exc:
+        908             # Last hope: maybe other knows how to do it?
 
 
     ~/project/venv/lib/python3.6/site-packages/astropy/units/core.py in _apply_equivalencies(self, unit, other, equivalencies)
-        867         raise UnitConversionError(
-        868             "{0} and {1} are not convertible".format(
-    --> 869                 unit_str, other_str))
-        870 
-        871     def _get_converter(self, other, equivalencies=[]):
+        888         raise UnitConversionError(
+        889             "{0} and {1} are not convertible".format(
+    --> 890                 unit_str, other_str))
+        891 
+        892     def _get_converter(self, other, equivalencies=[]):
 
 
     UnitConversionError: 'deg2 pc2' and 'cm2' (area) are not convertible
@@ -1356,11 +1356,11 @@ in a number they get an error:
 
     UnitsErrorTraceback (most recent call last)
 
-    <ipython-input-43-5d7d1ca80126> in <module>()
+    <ipython-input-43-5a4a987a8177> in <module>
     ----> 1 response_func(1.0, 1.2)
     
 
-    <ipython-input-42-c1a22f103934> in response_func(x, y)
+    <ipython-input-42-f7171be85f1d> in response_func(x, y)
           2     xscale = 0.9 * u.arcsec
           3     yscale = 0.85 * u.arcsec
     ----> 4     xfactor = 1 / (1 + x/xscale)
@@ -1369,19 +1369,19 @@ in a number they get an error:
 
 
     ~/project/venv/lib/python3.6/site-packages/astropy/units/quantity.py in __array_ufunc__(self, function, method, *inputs, **kwargs)
-        618         # consistent units between two inputs (e.g., in np.add) --
-        619         # and the unit of the result (or tuple of units for nout > 1).
-    --> 620         converters, unit = converters_and_unit(function, method, *inputs)
-        621 
-        622         out = kwargs.get('out', None)
+        442         # consistent units between two inputs (e.g., in np.add) --
+        443         # and the unit of the result (or tuple of units for nout > 1).
+    --> 444         converters, unit = converters_and_unit(function, method, *inputs)
+        445 
+        446         out = kwargs.get('out', None)
 
 
-    ~/project/venv/lib/python3.6/site-packages/astropy/units/quantity_helper.py in converters_and_unit(function, method, *args)
-        554                                      "argument is not a quantity (unless the "
-        555                                      "latter is all zero/infinity/nan)"
-    --> 556                                      .format(function.__name__))
-        557             except TypeError:
-        558                 # _can_have_arbitrary_unit failed: arg could not be compared
+    ~/project/venv/lib/python3.6/site-packages/astropy/units/quantity_helper/converters.py in converters_and_unit(function, method, *args)
+        182                                      "argument is not a quantity (unless the "
+        183                                      "latter is all zero/infinity/nan)"
+    --> 184                                      .format(function.__name__))
+        185             except TypeError:
+        186                 # _can_have_arbitrary_unit failed: arg could not be compared
 
 
     UnitsError: Can only apply 'add' function to dimensionless quantities when other argument is not a quantity (unless the latter is all zero/infinity/nan)

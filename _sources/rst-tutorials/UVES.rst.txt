@@ -97,15 +97,6 @@ want to fill with data files, change the ``working_dir_path`` variable.
     working_dir_path = '.'  # CHANGE TO WHEREVER YOU WANT THE DATA TO BE EXTRACTED
     f.extractall(path=working_dir_path)
 
-
-:outputnumrole:`Out[2]:`
-
-
-.. parsed-literal::
-
-    Downloading http://data.astropy.org/tutorials/UVES/data_UVES.tar.gz [Done]
-
-
 Scientific background
 ---------------------
 

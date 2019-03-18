@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="filterTutorials" name="keywords" />
+<meta content="filterTutorials," name="keywords" />
+
+    <title>Computing Galactic Orbits of Stars with Gala &#8212; astropy-tutorials v3.0.dev</title>
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bootstrap_sandstone.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/astropy.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <script type="text/javascript" src="../_static/searchtools.js"></script>
+    <script type="text/javascript" src="https://use.fontawesome.com/3168e95f94.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <link rel="shortcut icon" href="../_static/astropy_favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  
+  <script type="text/javascript">  
+    if( (window.location.href.search("tutorials.html") != -1) && (window.location.href.search("q=filterTutorials") == -1) ){
+      var url = window.location.href.split("tutorials.html")[0] + "tutorials.html?q=filterTutorials";
+      window.location.href = url;
+    }
+  </script>
+  <script type="text/javascript">
+    jQuery(function() { Search.loadIndex("../searchindex.js"); });
+  </script>
+  
+  <script type="text/javascript" id="searchindexloader"></script>
+   
+
+  </head><body>
+
+
+<nav class="navbar navbar-expand-lg bg-navbar">
+  <a class="navbar-brand" href="/astropy-tutorials" style="padding: 0px 5px;">
+    <img src="../../_static/astropy_logo.png" onerror="this.onerror=null;this.src='../_static/astropy_logo.png';" style="height: 38px;">
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarColor01">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="http://www.astropy.org"/>Astropy<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Modules</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0" action="../search.html" method="get">
+      <div class="input-group-prepend">
+          <button class="input-group-text" style="padding: 0.7rem"><i class="fa fa-search fa-fw"></i></button>
+      </div>
+      <input class="form-control mr-sm-3" name="q" type="text" placeholder="Search the universe" />
+    </form>
+  </div>
+</nav>
+
+
+<div class="container">
+  <div class="row">
+
+    
+    
+    
+    
+    
+    <div class="col-md-3">
+      <div id="sidebar" class="bs-sidenav card" role="complementary">
+        <h3>Table of contents</h3>
+        <ul>
+<li><a class="reference internal" href="#">Computing Galactic Orbits of Stars with Gala</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a><ul>
+<li><a class="reference internal" href="#authors">Authors</a></li>
+<li><a class="reference internal" href="#learning-goals">Learning Goals</a></li>
+<li><a class="reference internal" href="#keywords">Keywords</a></li>
+<li><a class="reference internal" href="#companion-content">Companion Content</a></li>
+<li><a class="reference internal" href="#summary">Summary</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#installing-dependencies">Installing Dependencies</a></li>
+<li><a class="reference internal" href="#imports">Imports</a></li>
+<li><a class="reference internal" href="#scientific-background">Scientific Background</a></li>
+<li><a class="reference internal" href="#using-astroquery-to-retrieve-gaia-data">Using <code class="docutils literal notranslate"><span class="pre">astroquery</span></code> to retrieve Gaia data</a></li>
+<li><a class="reference internal" href="#using-astropy-coordinates-to-represent-and-transform-stellar-positions-and-velocities">Using <code class="docutils literal notranslate"><span class="pre">astropy.coordinates</span></code> to represent and transform stellar positions and velocities</a></li>
+<li><a class="reference internal" href="#using-gala-to-numerically-integrate-galactic-stellar-orbits">Using <code class="docutils literal notranslate"><span class="pre">gala</span></code> to numerically integrate Galactic stellar orbits</a></li>
+<li><a class="reference internal" href="#exercises">Exercises</a></li>
+</ul>
+</li>
+</ul>
+
+      </div>    
+    </div>
+    
+
+    <div class="col-md-9">
+      <div class="content-padding card">
+        <div>
+  <a href="../_static/gaia-galactic-orbits/gaia-galactic-orbits.ipynb"><button id="download">Download tutorial notebook</button></a>
+<a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/gaia-galactic-orbits/gaia-galactic-orbits.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
+
+<div id="spacer"></div><div class="section" id="computing-galactic-orbits-of-stars-with-gala">
+<span id="gaia-galactic-orbits"></span><h1>Computing Galactic Orbits of Stars with Gala<a class="headerlink" href="#computing-galactic-orbits-of-stars-with-gala" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="authors">
+<h3>Authors<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a></h3>
+<p>Adrian Price-Whelan</p>
+</div>
+<div class="section" id="learning-goals">
+<h3>Learning Goals<a class="headerlink" href="#learning-goals" title="Permalink to this headline">¶</a></h3>
+<ul class="simple">
+<li>Query the Gaia data release 2 catalog to retrieve data for a sample
+of well-measured, nearby stars</li>
+<li>Define high-mass and low-mass stellar samples using color-magnitude
+selections</li>
+<li>Calculate orbits of the high-mass and low-mass stars within the
+Galaxy to show that the typically younger stars (high-mass) have
+smaller vertical excursions</li>
+</ul>
+</div>
+<div class="section" id="keywords">
+<h3>Keywords<a class="headerlink" href="#keywords" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<div><p><strong>astropy packages:</strong> coordinates, gala, astroquery</p>
+<p><strong>python packages:</strong></p>
+<p><strong>task:</strong></p>
+<p><strong>science:</strong> galaxy dynamics</p>
+</div></blockquote>
+</div>
+<div class="section" id="companion-content">
+<h3>Companion Content<a class="headerlink" href="#companion-content" title="Permalink to this headline">¶</a></h3>
+<p>Astropy Docs: <a class="reference external" href="http://docs.astropy.org/en/latest/generated/examples/coordinates/plot_galactocentric-frame.html#sphx-glr-generated-examples-coordinates-plot-galactocentric-frame-py">Description of the Galactocentric frame in astropy
+coordinates</a></p>
+</div>
+<div class="section" id="summary">
+<h3>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h3>
+<p>We will use data from the <a class="reference external" href="https://www.cosmos.esa.int/web/gaia">Gaia
+mission</a> to get sky positions,
+distances (parallaxes), proper motions, and radial velocities for a set
+of stars that are close to the Sun. We will then transform these
+observed, heliocentric kinematic measurements to Galactocentric
+Cartesian coordinates and use the positions and velocities as initial
+conditions to compute the orbits of these stars in the galaxy using the
+<a class="reference external" href="http://gala.adrian.pw">gala</a> Python package. We will compare the
+orbits of high-mass main sequence (i.e. young) stars to the orbits of
+lower-mass main sequence stars to show that young stars have smaller
+vertical amplitudes.</p>
+</div>
+</div>
+<div class="section" id="installing-dependencies">
+<h2>Installing Dependencies<a class="headerlink" href="#installing-dependencies" title="Permalink to this headline">¶</a></h2>
+<p>This tutorial depends on the Astropy affiliated packages <code class="docutils literal notranslate"><span class="pre">gala</span></code> and
+<code class="docutils literal notranslate"><span class="pre">astroquery</span></code>. Both of these packages can be pip-installed with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">astro</span><span class="o">-</span><span class="n">gala</span> <span class="n">astroquery</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="imports">
+<h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h2>
+<p><span class="inputnumrole">In[1]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># astropy imports</span>
+<span class="kn">import</span> <span class="nn">astropy.coordinates</span> <span class="k">as</span> <span class="nn">coord</span>
+<span class="kn">from</span> <span class="nn">astropy.table</span> <span class="k">import</span> <span class="n">QTable</span>
+<span class="kn">import</span> <span class="nn">astropy.units</span> <span class="k">as</span> <span class="nn">u</span>
+<span class="kn">from</span> <span class="nn">astroquery.gaia</span> <span class="k">import</span> <span class="n">Gaia</span>
+
+<span class="c1"># Third-party imports</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+
+<span class="c1"># gala imports</span>
+<span class="kn">import</span> <span class="nn">gala.coordinates</span> <span class="k">as</span> <span class="nn">gc</span>
+<span class="kn">import</span> <span class="nn">gala.dynamics</span> <span class="k">as</span> <span class="nn">gd</span>
+<span class="kn">import</span> <span class="nn">gala.potential</span> <span class="k">as</span> <span class="nn">gp</span>
+<span class="kn">from</span> <span class="nn">gala.units</span> <span class="k">import</span> <span class="n">galactic</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[1]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Created</span> <span class="n">TAP</span><span class="o">+</span> <span class="p">(</span><span class="n">v1</span><span class="o">.</span><span class="mf">0.1</span><span class="p">)</span> <span class="o">-</span> <span class="n">Connection</span><span class="p">:</span>
+    <span class="n">Host</span><span class="p">:</span> <span class="n">gea</span><span class="o">.</span><span class="n">esac</span><span class="o">.</span><span class="n">esa</span><span class="o">.</span><span class="n">int</span>
+    <span class="n">Use</span> <span class="n">HTTPS</span><span class="p">:</span> <span class="kc">False</span>
+    <span class="n">Port</span><span class="p">:</span> <span class="mi">80</span>
+    <span class="n">SSL</span> <span class="n">Port</span><span class="p">:</span> <span class="mi">443</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="scientific-background">
+<h2>Scientific Background<a class="headerlink" href="#scientific-background" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://www.cosmos.esa.int/web/gaia/">The Gaia mission</a> is an ESA
+mission that aims to measure the 3D positions and velocities of a large
+number of stars throughout the Milky Way. The primary mission objective
+is to enable studying the formation, structure, and evolutionary history
+of our Galaxy by measuring astrometry (sky position, parallax, and
+proper motion) for about 2 billion stars brighter than the Gaia
+<span class="math notranslate nohighlight">\(G\)</span>-band photometric magnitude <span class="math notranslate nohighlight">\(G \lesssim 21\)</span>. By end of
+mission (~2022), Gaia will also provide multi-band photometry and
+low-resolution spectrophotometry for these sources, along with radial or
+line-of-sight velocities for a subsample of about 100 million stars.</p>
+<p>In April 2018, Gaia publicly released its first major catalog of data —
+data release 2 or DR2 — which provides a subset of these data to anyone
+with an internet connection. In this tutorial, we will use astrometry,
+radial velocities, and photometry for a small subset of DR2 to study the
+kinematics of different types of stars in the Milky Way.</p>
+</div>
+<div class="section" id="using-astroquery-to-retrieve-gaia-data">
+<h2>Using <code class="docutils literal notranslate"><span class="pre">astroquery</span></code> to retrieve Gaia data<a class="headerlink" href="#using-astroquery-to-retrieve-gaia-data" title="Permalink to this headline">¶</a></h2>
+<p>We’ll start by querying the <a class="reference external" href="http://gea.esac.esa.int/archive/">Gaia science
+archive</a> to download astrometric
+and kinematic data (parallax, proper motion, radial velocity) for a
+sample of stars near the Sun. We’ll use data exclusively from <a class="reference external" href="https://www.cosmos.esa.int/web/gaia/data-release-2">data
+release 2 (DR2)</a>
+from the <em>Gaia</em> mission. For the demonstration here, let’s grab data for
+a random subset of 4096 stars within a distance of 100 pc from the Sun
+that have high signal-to-noise astrometric measurements.</p>
+<p>To perform the query and to retrieve the data, we’ll use the <em>Gaia</em>
+module in the
+<a class="reference external" href="https://astroquery.readthedocs.io/en/latest/gaia/gaia.html">astroquery</a>
+package, <code class="docutils literal notranslate"><span class="pre">astroquery.gaia</span></code>. This module expects us to provide an SQL
+query to select the data we want (technically it should be an
+<a class="reference external" href="https://gea.esac.esa.int/archive-help/adql/index.html">ADQL</a> query,
+which is similar to SQL but provides some additional functionality for
+astronomy; to learn more about ADQL syntax and options, <a class="reference external" href="https://www.gaia.ac.uk/data/gaia-data-release-1/adql-cookbook">this
+guide</a>
+provides an introduction). We don’t need all of the columns that are
+available in DR2, so we’ll limit our query to request the sky position
+(<code class="docutils literal notranslate"><span class="pre">ra</span></code>, <code class="docutils literal notranslate"><span class="pre">dec</span></code>), parallax, proper motion components (<code class="docutils literal notranslate"><span class="pre">pmra</span></code>,
+<code class="docutils literal notranslate"><span class="pre">pmdec</span></code>), radial velocity, and magnitudes (<code class="docutils literal notranslate"><span class="pre">phot_*_mean_mag</span></code>). More
+information about the available columns is in the <a class="reference external" href="https://gea.esac.esa.int/archive/documentation/GDR2/Gaia_archive/chap_datamodel/sec_dm_main_tables/ssec_dm_gaia_source.html">Gaia DR2 data
+model</a>.</p>
+<p>To select stars that have high signal-to-noise parallaxes, we’ll use the
+filter <code class="docutils literal notranslate"><span class="pre">parallax_over_error</span> <span class="pre">&gt;</span> <span class="pre">10</span></code> to select stars that have small
+fractional uncertainties. We’ll also use the filter
+<code class="docutils literal notranslate"><span class="pre">radial_velocity</span> <span class="pre">IS</span> <span class="pre">NOT</span> <span class="pre">null</span></code> to only select stars that have measured
+radial velocities.</p>
+<p><span class="inputnumrole">In[2]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">query_text</span> <span class="o">=</span> <span class="s1">&#39;&#39;&#39;SELECT TOP 4096 ra, dec, parallax, pmra, pmdec, radial_velocity,</span>
+<span class="s1">phot_g_mean_mag, phot_bp_mean_mag, phot_rp_mean_mag</span>
+<span class="s1">FROM gaiadr2.gaia_source</span>
+<span class="s1">WHERE parallax_over_error &gt; 10 AND</span>
+<span class="s1">    parallax &gt; 10 AND</span>
+<span class="s1">    radial_velocity IS NOT null</span>
+<span class="s1">ORDER BY random_index</span>
+<span class="s1">&#39;&#39;&#39;</span>
+</pre></div>
+</div>
+<p>We now pass this query to the <code class="docutils literal notranslate"><span class="pre">Gaia.launch_job()</span></code> class method to
+create an anonymous job in the <code class="docutils literal notranslate"><span class="pre">Gaia</span></code> science archive to run our
+query. To retrieve the results of this query as an Astropy <code class="docutils literal notranslate"><span class="pre">Table</span></code>
+object, we then use the <code class="docutils literal notranslate"><span class="pre">job.get_results()</span></code> method. Note that you may
+receive a number of warnings (output lines that begin with <code class="docutils literal notranslate"><span class="pre">WARNING:</span></code>)
+from the <code class="docutils literal notranslate"><span class="pre">astropy.io.votable</span></code> package — these are expected, and it’s
+OK to ignore these warnings (the <code class="docutils literal notranslate"><span class="pre">Gaia</span></code> archive returns a slightly
+invalid VOTable).</p>
+<p><span class="inputnumrole">In[3]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Note: the following lines require an internet connection, so we have</span>
+<span class="c1"># provided the results of this query as a FITS file included with the</span>
+<span class="c1"># tutorials repository. If you have an internet connection, feel free</span>
+<span class="c1"># to uncomment these lines to retrieve the data with `astroquery`:</span>
+<span class="c1"># job = Gaia.launch_job(query_text)</span>
+<span class="c1"># gaia_data = job.get_results()</span>
+<span class="c1"># gaia_data.write(&#39;gaia_data.fits&#39;)</span>
+</pre></div>
+</div>
+<p><span class="inputnumrole">In[4]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gaia_data</span> <span class="o">=</span> <span class="n">QTable</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;gaia_data.fits&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">data</span></code> object is now an Astropy <code class="docutils literal notranslate"><span class="pre">Table</span></code> called <code class="docutils literal notranslate"><span class="pre">gaia_data</span></code>
+that contains <code class="docutils literal notranslate"><span class="pre">Gaia</span></code> data for 4096 random stars within 100 pc (or with
+a parallax &gt; 10 mas) of the Sun, as we requested. Let’s look at the
+first four rows of the table:</p>
+<p><span class="inputnumrole">In[5]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gaia_data</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[5]:</span></p>
+<i>QTable length=4</i>
+<table id="table139956615565552" class="table-striped table-bordered table-condensed">
+<thead><tr><th>ra</th><th>dec</th><th>parallax</th><th>pmra</th><th>pmdec</th><th>radial_velocity</th><th>phot_g_mean_mag</th><th>phot_bp_mean_mag</th><th>phot_rp_mean_mag</th></tr></thead>
+<thead><tr><th>deg</th><th>deg</th><th>mas</th><th>mas / yr</th><th>mas / yr</th><th>km / s</th><th>mag</th><th>mag</th><th>mag</th></tr></thead>
+<thead><tr><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float32</th><th>float32</th><th>float32</th></tr></thead>
+<tr><td>256.8370985186671</td><td>46.5081010273448</td><td>10.770964834345387</td><td>-19.76657104695835</td><td>55.92605676622464</td><td>-17.673072044811907</td><td>12.956912994384766</td><td>14.192928314208984</td><td>11.859498023986816</td></tr>
+<tr><td>129.45826809010867</td><td>-6.806694022293258</td><td>41.081670013380716</td><td>-297.34595349374183</td><td>43.83424795415093</td><td>35.53814452290586</td><td>6.576352119445801</td><td>6.931065082550049</td><td>6.111272811889648</td></tr>
+<tr><td>2.317856723637118</td><td>9.00699655780345</td><td>17.824765284426462</td><td>-171.8278607514459</td><td>-1083.8740928197751</td><td>-148.91780163518774</td><td>13.119074821472168</td><td>13.968703269958496</td><td>12.223302841186523</td></tr>
+<tr><td>330.41287472805976</td><td>51.88897801553169</td><td>13.0756133009657</td><td>-85.30745872006916</td><td>-34.23366534215265</td><td>-28.726469345049587</td><td>12.101919174194336</td><td>13.05264949798584</td><td>11.149785995483398</td></tr>
+</table><p>Note that the table columns already contain units! They are indicated in
+the second row of the header.</p>
+</div>
+<div class="section" id="using-astropy-coordinates-to-represent-and-transform-stellar-positions-and-velocities">
+<h2>Using <code class="docutils literal notranslate"><span class="pre">astropy.coordinates</span></code> to represent and transform stellar positions and velocities<a class="headerlink" href="#using-astropy-coordinates-to-represent-and-transform-stellar-positions-and-velocities" title="Permalink to this headline">¶</a></h2>
+<p>Let’s double check that the farthest star is still within 100 pc, as we
+expect from the parallax selection we did in the query above. To do
+this, we’ll create an Astropy <code class="docutils literal notranslate"><span class="pre">Distance</span></code> object using the parallax
+(<em>Note: this inverts the parallax to compute the distance! This is only
+a good approximation when the parallax signal to noise is large, as we
+ensured in the query above with ``parallax_over_error &gt; 10``</em>):</p>
+<p><span class="inputnumrole">In[6]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dist</span> <span class="o">=</span> <span class="n">coord</span><span class="o">.</span><span class="n">Distance</span><span class="p">(</span><span class="n">parallax</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">(</span><span class="n">gaia_data</span><span class="p">[</span><span class="s1">&#39;parallax&#39;</span><span class="p">]))</span>
+<span class="n">dist</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">dist</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[6]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="o">&lt;</span><span class="n">Distance</span> <span class="mf">8.79909291</span> <span class="n">pc</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">Distance</span> <span class="mf">99.99985292</span> <span class="n">pc</span><span class="o">&gt;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>It looks like the closest star in our sample is about 9 pc away, and the
+farthest is almost 100 pc, as we expected.</p>
+<p>We next want to convert the coordinate position and velocity data from
+heliocentric, spherical values to Galactocentric, Cartesian values.
+We’ll do this using the <a class="reference external" href="http://docs.astropy.org/en/latest/coordinates/index.html">Astropy
+coordinates</a>
+transformation machinery. To make use of this functionality, we first
+have to create a <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> object from the <code class="docutils literal notranslate"><span class="pre">Gaia</span></code> data we
+downloaded. The <code class="docutils literal notranslate"><span class="pre">Gaia</span></code> DR2 data are in the ICRS (equatorial) reference
+frame, which is also the default frame when creating new <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code>
+objects, so we don’t need to specify the frame below:</p>
+<p><span class="inputnumrole">In[7]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">coord</span><span class="o">.</span><span class="n">SkyCoord</span><span class="p">(</span><span class="n">ra</span><span class="o">=</span><span class="n">gaia_data</span><span class="p">[</span><span class="s1">&#39;ra&#39;</span><span class="p">],</span>
+                   <span class="n">dec</span><span class="o">=</span><span class="n">gaia_data</span><span class="p">[</span><span class="s1">&#39;dec&#39;</span><span class="p">],</span>
+                   <span class="n">distance</span><span class="o">=</span><span class="n">dist</span><span class="p">,</span>
+                   <span class="n">pm_ra_cosdec</span><span class="o">=</span><span class="n">gaia_data</span><span class="p">[</span><span class="s1">&#39;pmra&#39;</span><span class="p">],</span>
+                   <span class="n">pm_dec</span><span class="o">=</span><span class="n">gaia_data</span><span class="p">[</span><span class="s1">&#39;pmdec&#39;</span><span class="p">],</span>
+                   <span class="n">radial_velocity</span><span class="o">=</span><span class="n">gaia_data</span><span class="p">[</span><span class="s1">&#39;radial_velocity&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Note: as described in the <a class="reference external" href="https://gea.esac.esa.int/archive/documentation/GDR2/Gaia_archive/chap_datamodel/sec_dm_main_tables/ssec_dm_gaia_source.html">Gaia DR2 data
+model</a>,
+the Gaia column <code class="docutils literal notranslate"><span class="pre">pmra</span></code> contains the cos(dec) term. In Astropy
+coordinates, the name of this component is <code class="docutils literal notranslate"><span class="pre">pm_ra_cosdec</span></code>.</p>
+<p>Let’s again look at the first four coordinates in the <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code>
+object:</p>
+<p><span class="inputnumrole">In[8]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">c</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[8]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">SkyCoord</span> <span class="p">(</span><span class="n">ICRS</span><span class="p">):</span> <span class="p">(</span><span class="n">ra</span><span class="p">,</span> <span class="n">dec</span><span class="p">,</span> <span class="n">distance</span><span class="p">)</span> <span class="ow">in</span> <span class="p">(</span><span class="n">deg</span><span class="p">,</span> <span class="n">deg</span><span class="p">,</span> <span class="n">pc</span><span class="p">)</span>
+    <span class="p">[(</span><span class="mf">256.83709852</span><span class="p">,</span> <span class="mf">46.50810103</span><span class="p">,</span> <span class="mf">92.84219338</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">129.45826809</span><span class="p">,</span> <span class="o">-</span><span class="mf">6.80669402</span><span class="p">,</span> <span class="mf">24.3417563</span> <span class="p">),</span>
+     <span class="p">(</span>  <span class="mf">2.31785672</span><span class="p">,</span>  <span class="mf">9.00699656</span><span class="p">,</span> <span class="mf">56.1017205</span> <span class="p">),</span>
+     <span class="p">(</span><span class="mf">330.41287473</span><span class="p">,</span> <span class="mf">51.88897802</span><span class="p">,</span> <span class="mf">76.47824825</span><span class="p">)]</span>
+ <span class="p">(</span><span class="n">pm_ra_cosdec</span><span class="p">,</span> <span class="n">pm_dec</span><span class="p">,</span> <span class="n">radial_velocity</span><span class="p">)</span> <span class="ow">in</span> <span class="p">(</span><span class="n">mas</span> <span class="o">/</span> <span class="n">yr</span><span class="p">,</span> <span class="n">mas</span> <span class="o">/</span> <span class="n">yr</span><span class="p">,</span> <span class="n">km</span> <span class="o">/</span> <span class="n">s</span><span class="p">)</span>
+    <span class="p">[(</span> <span class="o">-</span><span class="mf">19.76657105</span><span class="p">,</span>    <span class="mf">55.92605677</span><span class="p">,</span>  <span class="o">-</span><span class="mf">17.67307204</span><span class="p">),</span>
+     <span class="p">(</span><span class="o">-</span><span class="mf">297.34595349</span><span class="p">,</span>    <span class="mf">43.83424795</span><span class="p">,</span>   <span class="mf">35.53814452</span><span class="p">),</span>
+     <span class="p">(</span><span class="o">-</span><span class="mf">171.82786075</span><span class="p">,</span> <span class="o">-</span><span class="mf">1083.87409282</span><span class="p">,</span> <span class="o">-</span><span class="mf">148.91780164</span><span class="p">),</span>
+     <span class="p">(</span> <span class="o">-</span><span class="mf">85.30745872</span><span class="p">,</span>   <span class="o">-</span><span class="mf">34.23366534</span><span class="p">,</span>  <span class="o">-</span><span class="mf">28.72646935</span><span class="p">)]</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Now that we have a <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> object with the Gaia data, we can
+transform to other coordinate systems. For example, we can transform to
+the <code class="docutils literal notranslate"><span class="pre">Galactic</span></code> coordinate system (centered on the Sun but with the
+zero latitude approximately aligned with the Galactic plane) using the
+<code class="docutils literal notranslate"><span class="pre">.galactic</span></code> attribute (this works for any of the <a class="reference external" href="http://docs.astropy.org/en/latest/coordinates/index.html#reference-api">built-in Astropy
+coordinate
+frames</a>,
+e.g., <code class="docutils literal notranslate"><span class="pre">.fk5</span></code> should also work):</p>
+<p><span class="inputnumrole">In[9]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">c</span><span class="o">.</span><span class="n">galactic</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[9]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">SkyCoord</span> <span class="p">(</span><span class="n">Galactic</span><span class="p">):</span> <span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">distance</span><span class="p">)</span> <span class="ow">in</span> <span class="p">(</span><span class="n">deg</span><span class="p">,</span> <span class="n">deg</span><span class="p">,</span> <span class="n">pc</span><span class="p">)</span>
+    <span class="p">[(</span> <span class="mf">72.32926334</span><span class="p">,</span>  <span class="mf">36.8367097</span> <span class="p">,</span> <span class="mf">92.84219338</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">232.07542475</span><span class="p">,</span>  <span class="mf">19.9763116</span> <span class="p">,</span> <span class="mf">24.3417563</span> <span class="p">),</span>
+     <span class="p">(</span><span class="mf">105.68646983</span><span class="p">,</span> <span class="o">-</span><span class="mf">52.44715126</span><span class="p">,</span> <span class="mf">56.1017205</span> <span class="p">),</span>
+     <span class="p">(</span> <span class="mf">98.28701089</span><span class="p">,</span>  <span class="o">-</span><span class="mf">2.66800849</span><span class="p">,</span> <span class="mf">76.47824825</span><span class="p">)]</span>
+ <span class="p">(</span><span class="n">pm_l_cosb</span><span class="p">,</span> <span class="n">pm_b</span><span class="p">,</span> <span class="n">radial_velocity</span><span class="p">)</span> <span class="ow">in</span> <span class="p">(</span><span class="n">mas</span> <span class="o">/</span> <span class="n">yr</span><span class="p">,</span> <span class="n">mas</span> <span class="o">/</span> <span class="n">yr</span><span class="p">,</span> <span class="n">km</span> <span class="o">/</span> <span class="n">s</span><span class="p">)</span>
+    <span class="p">[(</span>  <span class="mf">55.13035551</span><span class="p">,</span>   <span class="mf">21.88801174</span><span class="p">,</span>  <span class="o">-</span><span class="mf">17.67307204</span><span class="p">),</span>
+     <span class="p">(</span><span class="o">-</span><span class="mf">195.30630898</span><span class="p">,</span> <span class="o">-</span><span class="mf">228.4545973</span> <span class="p">,</span>   <span class="mf">35.53814452</span><span class="p">),</span>
+     <span class="p">(</span><span class="o">-</span><span class="mf">455.13470935</span><span class="p">,</span> <span class="o">-</span><span class="mf">998.57912013</span><span class="p">,</span> <span class="o">-</span><span class="mf">148.91780164</span><span class="p">),</span>
+     <span class="p">(</span> <span class="o">-</span><span class="mf">88.74713695</span><span class="p">,</span>   <span class="mf">23.94268239</span><span class="p">,</span>  <span class="o">-</span><span class="mf">28.72646935</span><span class="p">)]</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">Galactic</span></code> frame is still centered on the solar system barycenter,
+whereas we want to compute the positions and velocities of our sample of
+stars in a Galactocentric frame, centered on the center of the Milky
+Way. To do this transformation, Astropy provides the <code class="docutils literal notranslate"><span class="pre">Galactocentric</span></code>
+frame class, which allows us to use our own conventions for, e.g., the
+distance from the sun to the Galactic center (<code class="docutils literal notranslate"><span class="pre">galcen_distance</span></code>) or
+the height of the Sun over the Galactic midplane (<code class="docutils literal notranslate"><span class="pre">z_sun</span></code>). Let’s look
+at the default values for the solar position and velocity:</p>
+<p><span class="inputnumrole">In[10]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">coord</span><span class="o">.</span><span class="n">Galactocentric</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[10]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">Galactocentric</span> <span class="n">Frame</span> <span class="p">(</span><span class="n">galcen_coord</span><span class="o">=&lt;</span><span class="n">ICRS</span> <span class="n">Coordinate</span><span class="p">:</span> <span class="p">(</span><span class="n">ra</span><span class="p">,</span> <span class="n">dec</span><span class="p">)</span> <span class="ow">in</span> <span class="n">deg</span>
+    <span class="p">(</span><span class="mf">266.4051</span><span class="p">,</span> <span class="o">-</span><span class="mf">28.936175</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">galcen_distance</span><span class="o">=</span><span class="mf">8.3</span> <span class="n">kpc</span><span class="p">,</span> <span class="n">galcen_v_sun</span><span class="o">=</span><span class="p">(</span><span class="mf">11.1</span><span class="p">,</span> <span class="mf">232.24</span><span class="p">,</span> <span class="mf">7.25</span><span class="p">)</span> <span class="n">km</span> <span class="o">/</span> <span class="n">s</span><span class="p">,</span> <span class="n">z_sun</span><span class="o">=</span><span class="mf">27.0</span> <span class="n">pc</span><span class="p">,</span> <span class="n">roll</span><span class="o">=</span><span class="mf">0.0</span> <span class="n">deg</span><span class="p">)</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>We’ll instead use a distance of 8.1 kpc — more consistent with the
+<a class="reference external" href="https://arxiv.org/abs/1807.09409">recent results from the GRAVITY
+collaboration</a> — and a solar height
+of 0 pc. We’ll use the default solar velocity (see output above). We can
+transform our data to this frame using the <code class="docutils literal notranslate"><span class="pre">transform_to()</span></code> method by
+specifying the <code class="docutils literal notranslate"><span class="pre">Galactocentric</span></code> frame with our adopted values:</p>
+<p><span class="inputnumrole">In[11]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">galcen</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">transform_to</span><span class="p">(</span><span class="n">coord</span><span class="o">.</span><span class="n">Galactocentric</span><span class="p">(</span><span class="n">z_sun</span><span class="o">=</span><span class="mi">0</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">pc</span><span class="p">,</span>
+                                             <span class="n">galcen_distance</span><span class="o">=</span><span class="mf">8.1</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">kpc</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">galcen</span></code> object now contains the data for our sample, but in the
+Galactocentric frame:</p>
+<p><span class="inputnumrole">In[12]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">galcen</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[12]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">SkyCoord</span> <span class="p">(</span><span class="n">Galactocentric</span><span class="p">:</span> <span class="n">galcen_coord</span><span class="o">=&lt;</span><span class="n">ICRS</span> <span class="n">Coordinate</span><span class="p">:</span> <span class="p">(</span><span class="n">ra</span><span class="p">,</span> <span class="n">dec</span><span class="p">)</span> <span class="ow">in</span> <span class="n">deg</span>
+    <span class="p">(</span><span class="mf">266.4051</span><span class="p">,</span> <span class="o">-</span><span class="mf">28.936175</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">galcen_distance</span><span class="o">=</span><span class="mf">8.1</span> <span class="n">kpc</span><span class="p">,</span> <span class="n">galcen_v_sun</span><span class="o">=</span><span class="p">(</span><span class="mf">11.1</span><span class="p">,</span> <span class="mf">232.24</span><span class="p">,</span> <span class="mf">7.25</span><span class="p">)</span> <span class="n">km</span> <span class="o">/</span> <span class="n">s</span><span class="p">,</span> <span class="n">z_sun</span><span class="o">=</span><span class="mf">0.0</span> <span class="n">pc</span><span class="p">,</span> <span class="n">roll</span><span class="o">=</span><span class="mf">0.0</span> <span class="n">deg</span><span class="p">):</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span> <span class="ow">in</span> <span class="n">pc</span>
+    <span class="p">[(</span><span class="o">-</span><span class="mf">8077.44468803</span><span class="p">,</span>  <span class="mf">70.79989896</span><span class="p">,</span>  <span class="mf">55.66242071</span><span class="p">),</span>
+     <span class="p">(</span><span class="o">-</span><span class="mf">8114.06090109</span><span class="p">,</span> <span class="o">-</span><span class="mf">18.04601124</span><span class="p">,</span>   <span class="mf">8.31586669</span><span class="p">),</span>
+     <span class="p">(</span><span class="o">-</span><span class="mf">8109.24493623</span><span class="p">,</span>  <span class="mf">32.92015736</span><span class="p">,</span> <span class="o">-</span><span class="mf">44.47693151</span><span class="p">),</span>
+     <span class="p">(</span><span class="o">-</span><span class="mf">8111.0109288</span> <span class="p">,</span>  <span class="mf">75.59768012</span><span class="p">,</span>  <span class="o">-</span><span class="mf">3.55986822</span><span class="p">)]</span>
+ <span class="p">(</span><span class="n">v_x</span><span class="p">,</span> <span class="n">v_y</span><span class="p">,</span> <span class="n">v_z</span><span class="p">)</span> <span class="ow">in</span> <span class="n">km</span> <span class="o">/</span> <span class="n">s</span>
+    <span class="p">[(</span><span class="o">-</span><span class="mf">18.06556759</span><span class="p">,</span> <span class="mf">220.62501167</span><span class="p">,</span>   <span class="mf">4.36424163</span><span class="p">),</span>
+     <span class="p">(</span><span class="o">-</span><span class="mf">32.74107553</span><span class="p">,</span> <span class="mf">212.64094753</span><span class="p">,</span>  <span class="o">-</span><span class="mf">5.38474972</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">209.09926667</span><span class="p">,</span> <span class="o">-</span><span class="mf">25.11804786</span><span class="p">,</span> <span class="o">-</span><span class="mf">36.55277769</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">47.01632893</span><span class="p">,</span> <span class="mf">208.88147077</span><span class="p">,</span>  <span class="mf">17.25803683</span><span class="p">)]</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>We can access the positions of the stars using the <code class="docutils literal notranslate"><span class="pre">.x</span></code>, <code class="docutils literal notranslate"><span class="pre">.y</span></code>, and
+<code class="docutils literal notranslate"><span class="pre">.z</span></code> attributes, for example:</p>
+<p><span class="inputnumrole">In[13]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">galcen</span><span class="o">.</span><span class="n">z</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">110</span><span class="p">,</span> <span class="mi">110</span><span class="p">,</span> <span class="mi">32</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;$z$ [{0:latex_inline}]&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">galcen</span><span class="o">.</span><span class="n">z</span><span class="o">.</span><span class="n">unit</span><span class="p">));</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[13]:</span></p>
+<img alt="../_images/gaia-galactic-orbits_30_0.png" src="../_images/gaia-galactic-orbits_30_0.png" />
+<p>Similarly, for the velocity components, we can use <code class="docutils literal notranslate"><span class="pre">.v_x</span></code>, <code class="docutils literal notranslate"><span class="pre">.v_y</span></code>,
+and <code class="docutils literal notranslate"><span class="pre">.v_z</span></code>. For example, to create a classic “UV” plane velocity plot:</p>
+<p><span class="inputnumrole">In[14]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">galcen</span><span class="o">.</span><span class="n">v_x</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">galcen</span><span class="o">.</span><span class="n">v_y</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
+        <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">125</span><span class="p">,</span> <span class="mi">125</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">200</span><span class="o">-</span><span class="mi">125</span><span class="p">,</span> <span class="mi">200</span><span class="o">+</span><span class="mi">125</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;$v_x$ [{0:latex_inline}]&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">km</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$v_y$ [{0:latex_inline}]&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">km</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">))</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[14]:</span></p>
+<pre class="literal-block">
+Text(0, 0.5, '$v_y$ [$\mathrm{km\,s^{-1}}$]')
+</pre>
+<img alt="../_images/gaia-galactic-orbits_32_1.png" src="../_images/gaia-galactic-orbits_32_1.png" />
+<p>Along with astrometric and radial velocity data, <code class="docutils literal notranslate"><span class="pre">Gaia</span></code> also provides
+photometric data for three photometric bandpasses: the broad-band <code class="docutils literal notranslate"><span class="pre">G</span></code>,
+the blue <code class="docutils literal notranslate"><span class="pre">BP</span></code>, and the red <code class="docutils literal notranslate"><span class="pre">RP</span></code> magnitudes. Let’s make a Gaia
+color-magnitude diagram using the <span class="math notranslate nohighlight">\(G_{\rm BP}-G_{\rm RP}\)</span> color
+and the absolute <span class="math notranslate nohighlight">\(G\)</span>-band magnitude <span class="math notranslate nohighlight">\(M_G\)</span>. We’ll compute the
+absolute magnitude using the distances we computed earlier — Astropy
+<code class="docutils literal notranslate"><span class="pre">Distance</span></code> objects have a convenient <code class="docutils literal notranslate"><span class="pre">.distmod</span></code> attribute that
+provides the distance modulus:</p>
+<p><span class="inputnumrole">In[15]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">M_G</span> <span class="o">=</span> <span class="n">gaia_data</span><span class="p">[</span><span class="s1">&#39;phot_g_mean_mag&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">dist</span><span class="o">.</span><span class="n">distmod</span>
+<span class="n">BP_RP</span> <span class="o">=</span> <span class="n">gaia_data</span><span class="p">[</span><span class="s1">&#39;phot_bp_mean_mag&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">gaia_data</span><span class="p">[</span><span class="s1">&#39;phot_rp_mean_mag&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p><span class="inputnumrole">In[16]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">BP_RP</span><span class="p">,</span> <span class="n">M_G</span><span class="p">,</span>
+        <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;$G_</span><span class="si">{BP}</span><span class="s1">-G_</span><span class="si">{RP}</span><span class="s1">$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$M_G$&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[16]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Text</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="s1">&#39;$M_G$&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../_images/gaia-galactic-orbits_35_1.png" src="../_images/gaia-galactic-orbits_35_1.png" />
+<p>In the above, there is a wide range of main sequence star masses which
+have a range of lifetimes. The most massive stars were likely born in
+the thin disk and their orbits therefore likely have smaller vertical
+amplitudes than the typical old main sequence star. To compare, we’ll
+create two sub-selections of the Gaia CMD to select massive and low-mass
+main sequence stars from the CMD for comparison. You may see two
+<code class="docutils literal notranslate"><span class="pre">RuntimeWarning</span></code>(s) from running the next cell — these are expected
+and it’s safe to ignore them.</p>
+<p><span class="inputnumrole">In[17]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">hi_mass_mask</span> <span class="o">=</span> <span class="p">((</span><span class="n">BP_RP</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">mag</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">BP_RP</span> <span class="o">&lt;</span> <span class="mf">0.7</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">mag</span><span class="p">)</span> <span class="o">&amp;</span>
+                <span class="p">(</span><span class="n">M_G</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">mag</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">M_G</span> <span class="o">&lt;</span> <span class="mf">3.75</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">mag</span><span class="p">)</span> <span class="o">&amp;</span>
+                <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">galcen</span><span class="o">.</span><span class="n">v_y</span> <span class="o">-</span> <span class="mi">220</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">km</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">50</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">km</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">))</span>
+
+<span class="n">lo_mass_mask</span> <span class="o">=</span> <span class="p">((</span><span class="n">BP_RP</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">mag</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">BP_RP</span> <span class="o">&lt;</span> <span class="mf">2.4</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">mag</span><span class="p">)</span> <span class="o">&amp;</span>
+                <span class="p">(</span><span class="n">M_G</span> <span class="o">&gt;</span> <span class="mf">8.2</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">mag</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">M_G</span> <span class="o">&lt;</span> <span class="mf">9.7</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">mag</span><span class="p">)</span> <span class="o">&amp;</span>
+                <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">galcen</span><span class="o">.</span><span class="n">v_y</span> <span class="o">-</span> <span class="mi">220</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">km</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">50</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">km</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">))</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[17]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">circleci</span><span class="o">/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">6</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astropy</span><span class="o">/</span><span class="n">units</span><span class="o">/</span><span class="n">quantity</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">463</span><span class="p">:</span> <span class="ne">RuntimeWarning</span><span class="p">:</span> <span class="n">invalid</span> <span class="n">value</span> <span class="n">encountered</span> <span class="ow">in</span> <span class="n">greater</span>
+  <span class="n">result</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__array_ufunc__</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="o">*</span><span class="n">arrays</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">circleci</span><span class="o">/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">6</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astropy</span><span class="o">/</span><span class="n">units</span><span class="o">/</span><span class="n">quantity</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">463</span><span class="p">:</span> <span class="ne">RuntimeWarning</span><span class="p">:</span> <span class="n">invalid</span> <span class="n">value</span> <span class="n">encountered</span> <span class="ow">in</span> <span class="n">less</span>
+  <span class="n">result</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__array_ufunc__</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="o">*</span><span class="n">arrays</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Let’s also define default colors to use when visualizing the high- and
+low-mass stars:</p>
+<p><span class="inputnumrole">In[18]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">hi_mass_color</span> <span class="o">=</span> <span class="s1">&#39;tab:red&#39;</span>
+<span class="n">lo_mass_color</span> <span class="o">=</span> <span class="s1">&#39;tab:purple&#39;</span>
+</pre></div>
+</div>
+<p>Let’s now visualize these two CMD selections:</p>
+<p><span class="inputnumrole">In[19]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">BP_RP</span><span class="p">,</span> <span class="n">M_G</span><span class="p">,</span>
+        <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">mask</span><span class="p">,</span> <span class="n">color</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">([</span><span class="n">lo_mass_mask</span><span class="p">,</span> <span class="n">hi_mass_mask</span><span class="p">],</span>
+                       <span class="p">[</span><span class="n">lo_mass_color</span><span class="p">,</span> <span class="n">hi_mass_color</span><span class="p">]):</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">BP_RP</span><span class="p">[</span><span class="n">mask</span><span class="p">],</span> <span class="n">M_G</span><span class="p">[</span><span class="n">mask</span><span class="p">],</span>
+            <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span>
+            <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;$G_</span><span class="si">{BP}</span><span class="s1">-G_</span><span class="si">{RP}</span><span class="s1">$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$M_G$&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[19]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Text</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="s1">&#39;$M_G$&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../_images/gaia-galactic-orbits_41_1.png" src="../_images/gaia-galactic-orbits_41_1.png" />
+<p>Thus far, we’ve used the color-magnitude diagram (using parallaxes and
+photometry from Gaia to compute absolute magnitudes) to select samples
+of high- and low-mass stars based on their colors.</p>
+<p>In what follows, we’ll compute Galactic orbits for stars in the high-
+and low-mass star selections above and compare.</p>
+</div>
+<div class="section" id="using-gala-to-numerically-integrate-galactic-stellar-orbits">
+<h2>Using <code class="docutils literal notranslate"><span class="pre">gala</span></code> to numerically integrate Galactic stellar orbits<a class="headerlink" href="#using-gala-to-numerically-integrate-galactic-stellar-orbits" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">gala</span></code> is an Astropy affiliated package for Galactic dynamics.
+<code class="docutils literal notranslate"><span class="pre">gala</span></code> provides functionality for representing analytic mass models
+that are commonly used in Galactic dynamics contexts for numerically
+integrating stellar orbits. For examples, see Chapter 3 of Binney and
+Tremaine (2008). The gravitational potential models are defined by
+specifying parameters like mass, scale radii, or shape parameters and
+can be combined. Once defined, they can be used in combination with
+numerical integrators provided in <code class="docutils literal notranslate"><span class="pre">gala</span></code> to compute orbits. <code class="docutils literal notranslate"><span class="pre">gala</span></code>
+comes with a pre-defined, multi-component, but <a class="reference external" href="http://gala.adrian.pw/en/latest/potential/define-milky-way-model.html">simple model for the
+Milky
+Way</a>
+that can be used for orbit integrations. Let’s create an instance of the
+<code class="docutils literal notranslate"><span class="pre">MilkyWayPotential</span></code> model and integrate orbits for the high- and
+low-mass main sequence stars selected above:</p>
+<p><span class="inputnumrole">In[20]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">milky_way</span> <span class="o">=</span> <span class="n">gp</span><span class="o">.</span><span class="n">MilkyWayPotential</span><span class="p">()</span>
+<span class="n">milky_way</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[20]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">CompositePotential</span> <span class="n">disk</span><span class="p">,</span><span class="n">bulge</span><span class="p">,</span><span class="n">nucleus</span><span class="p">,</span><span class="n">halo</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>This model has mass components for the Galactic disk, bulge, nucleus,
+and halo, and the parameters were defined by fitting measurements of the
+Milky Way enclosed mass at various radii. See <a class="reference external" href="http://gala.adrian.pw/en/latest/potential/define-milky-way-model.html">this
+document</a>
+for more details. The parameters of the <code class="docutils literal notranslate"><span class="pre">MilkyWayPotential</span></code> can be
+changed by passing in a dictionary of parameter values to argument names
+set by the component names. For example, to change the disk mass to make
+it slightly more massive (the choice <code class="docutils literal notranslate"><span class="pre">8e10</span></code> is arbitrary!):</p>
+<p><span class="inputnumrole">In[21]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">different_disk_potential</span> <span class="o">=</span> <span class="n">gp</span><span class="o">.</span><span class="n">MilkyWayPotential</span><span class="p">(</span><span class="n">disk</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">m</span><span class="o">=</span><span class="mf">8e10</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">Msun</span><span class="p">))</span>
+<span class="n">different_disk_potential</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[21]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">CompositePotential</span> <span class="n">disk</span><span class="p">,</span><span class="n">bulge</span><span class="p">,</span><span class="n">nucleus</span><span class="p">,</span><span class="n">halo</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>To integrate orbits, we have to combine the mass model with a reference
+frame into a <code class="docutils literal notranslate"><span class="pre">Hamiltonian</span></code> object. If no reference frame is passed in,
+it’s assumed that we are in a static inertial frame moving with the
+center of the mass model:</p>
+<p><span class="inputnumrole">In[22]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">H</span> <span class="o">=</span> <span class="n">gp</span><span class="o">.</span><span class="n">Hamiltonian</span><span class="p">(</span><span class="n">milky_way</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now that we have the mass model, we can integrate orbits. Let’s now
+define initial conditions for subsets of the high- and low-mass star
+selections we did above. Initial conditions in <code class="docutils literal notranslate"><span class="pre">gala</span></code> are specified by
+creating <code class="docutils literal notranslate"><span class="pre">PhaseSpacePosition</span></code> objects. We can create these objects
+directly from a <code class="docutils literal notranslate"><span class="pre">Galactocentric</span></code> object, like we have defined above
+from transforming the Gaia data — we first have to extract the data with
+a Cartesian representation. We can do this by calling
+<code class="docutils literal notranslate"><span class="pre">galcen.cartesian</span></code>:</p>
+<p><span class="inputnumrole">In[23]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">w0_hi</span> <span class="o">=</span> <span class="n">gd</span><span class="o">.</span><span class="n">PhaseSpacePosition</span><span class="p">(</span><span class="n">galcen</span><span class="p">[</span><span class="n">hi_mass_mask</span><span class="p">]</span><span class="o">.</span><span class="n">cartesian</span><span class="p">)</span>
+<span class="n">w0_lo</span> <span class="o">=</span> <span class="n">gd</span><span class="o">.</span><span class="n">PhaseSpacePosition</span><span class="p">(</span><span class="n">galcen</span><span class="p">[</span><span class="n">lo_mass_mask</span><span class="p">]</span><span class="o">.</span><span class="n">cartesian</span><span class="p">)</span>
+<span class="n">w0_hi</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">w0_lo</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[23]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">((</span><span class="mi">185</span><span class="p">,),</span> <span class="p">(</span><span class="mi">577</span><span class="p">,))</span>
+</pre></div>
+</div>
+<p>From the above, we can see that we have 185 high-mass star and 577
+low-mass stars in our selections. To integrate orbits, we call the
+<code class="docutils literal notranslate"><span class="pre">.integrate_orbit()</span></code> method on the Hamiltonian object we defined
+above, and pass in initial conditions. We also have to specify the
+timestep for integration, and how long we want to integrate for. We can
+do this by either specifying the amount of time to integrate for, or by
+specifying the number of timesteps. Let’s specify a timestep of 1 Myr
+and a time of 500 Myr (approximately two revolutions around the Galaxy
+for a Sun-like orbit):</p>
+<p><span class="inputnumrole">In[24]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">orbits_hi</span> <span class="o">=</span> <span class="n">H</span><span class="o">.</span><span class="n">integrate_orbit</span><span class="p">(</span><span class="n">w0_hi</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mi">1</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">Myr</span><span class="p">,</span>
+                              <span class="n">t1</span><span class="o">=</span><span class="mi">0</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">Myr</span><span class="p">,</span> <span class="n">t2</span><span class="o">=</span><span class="mi">500</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">Myr</span><span class="p">)</span>
+
+<span class="n">orbits_lo</span> <span class="o">=</span> <span class="n">H</span><span class="o">.</span><span class="n">integrate_orbit</span><span class="p">(</span><span class="n">w0_lo</span><span class="p">,</span> <span class="n">dt</span><span class="o">=</span><span class="mi">1</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">Myr</span><span class="p">,</span>
+                              <span class="n">t1</span><span class="o">=</span><span class="mi">0</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">Myr</span><span class="p">,</span> <span class="n">t2</span><span class="o">=</span><span class="mi">500</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">Myr</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>By default this uses a
+<a class="reference external" href="https://en.wikipedia.org/wiki/Leapfrog_integration">Leapfrog</a>
+numerical integration scheme, but the integrator can be customized — see
+the <code class="docutils literal notranslate"><span class="pre">gala</span></code>
+<a class="reference external" href="http://gala.adrian.pw/en/latest/examples/integrate-potential-example.html">examples</a>
+for more details.</p>
+<p>With the orbit objects in hand, we can continue our comparison of the
+orbits of high-mass and low-mass main sequence stars in the solar
+neighborhood. Let’s start by plotting a few orbits. The <code class="docutils literal notranslate"><span class="pre">.plot()</span></code>
+convenience function provides a quick way to visualize orbits in three
+Cartesian projections. For example, let’s plot the first orbit in each
+subsample on the same figure:</p>
+<p><span class="inputnumrole">In[25]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">orbits_hi</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">hi_mass_color</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">orbits_lo</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">axes</span><span class="o">=</span><span class="n">fig</span><span class="o">.</span><span class="n">axes</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">lo_mass_color</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[25]:</span></p>
+<img alt="../_images/gaia-galactic-orbits_54_0.png" src="../_images/gaia-galactic-orbits_54_0.png" />
+<p>Note in the above figure that the orbits are almost constrained to the
+x-y plane: the excursions are much larger in the x and y directions as
+compared to the z direction.</p>
+<p>The default plots show all Cartesian projections. This can be customized
+to, for example, only show specified components (including velocity
+components):</p>
+<p><span class="inputnumrole">In[26]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">orbits_hi</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;v_x&#39;</span><span class="p">],</span>
+                           <span class="n">auto_aspect</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                           <span class="n">color</span><span class="o">=</span><span class="n">hi_mass_color</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[26]:</span></p>
+<img alt="../_images/gaia-galactic-orbits_57_0.png" src="../_images/gaia-galactic-orbits_57_0.png" />
+<p>The representation can also be changed, for example, to a cylindrical
+representation:</p>
+<p><span class="inputnumrole">In[27]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">orbits_hi</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">cylindrical</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="s1">&#39;rho&#39;</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">],</span>
+                                       <span class="n">color</span><span class="o">=</span><span class="n">hi_mass_color</span><span class="p">,</span>
+                                       <span class="n">label</span><span class="o">=</span><span class="s1">&#39;high mass&#39;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">orbits_lo</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">cylindrical</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="s1">&#39;rho&#39;</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">lo_mass_color</span><span class="p">,</span>
+                                     <span class="n">axes</span><span class="o">=</span><span class="n">fig</span><span class="o">.</span><span class="n">axes</span><span class="p">,</span>
+                                     <span class="n">label</span><span class="o">=</span><span class="s1">&#39;low mass&#39;</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;upper left&#39;</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[27]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="o">-</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../_images/gaia-galactic-orbits_59_1.png" src="../_images/gaia-galactic-orbits_59_1.png" />
+<p>Already in the above plot we can see that the high-mass star has an
+orbit with smaller eccentricity (smaller radial variations) and smaller
+vertical oscillations as compared to the low-mass star. Below, we’ll
+quantify this and look at the vertical excursions of all of the high-
+and low-mass stars, respectively.</p>
+<p>Let’s now compare the vertical amplitudes of the orbits in each of our
+sub-selections! We can compute the (approximate) maximum vertical height
+of each orbit using the convenience method <code class="docutils literal notranslate"><span class="pre">.zmax()</span></code> (you can see a
+list of all convenience methods on the <code class="docutils literal notranslate"><span class="pre">Orbit</span></code> object <a class="reference external" href="http://gala.adrian.pw/en/latest/api/gala.dynamics.Orbit.html#gala.dynamics.Orbit">in the Gala
+documentation
+here</a>):</p>
+<p><span class="inputnumrole">In[28]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">zmax_hi</span> <span class="o">=</span> <span class="n">orbits_hi</span><span class="o">.</span><span class="n">zmax</span><span class="p">(</span><span class="n">approximate</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">zmax_lo</span> <span class="o">=</span> <span class="n">orbits_lo</span><span class="o">.</span><span class="n">zmax</span><span class="p">(</span><span class="n">approximate</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Let’s make histograms of the maximum <span class="math notranslate nohighlight">\(z\)</span> heights for these two
+samples:</p>
+<p><span class="inputnumrole">In[29]:</span></p>
+<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">zmax_hi</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">,</span>
+         <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;high-mass&#39;</span><span class="p">,</span>
+         <span class="n">color</span><span class="o">=</span><span class="n">hi_mass_color</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">zmax_lo</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">,</span>
+         <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;low-mass&#39;</span><span class="p">,</span>
+         <span class="n">color</span><span class="o">=</span><span class="n">lo_mass_color</span><span class="p">);</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$z_{\rm max}$&quot;</span> <span class="o">+</span> <span class="s2">&quot; [{0:latex}]&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">zmax_hi</span><span class="o">.</span><span class="n">unit</span><span class="p">))</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[29]:</span></p>
+<pre class="literal-block">
+Text(0.5, 0, '$z_{\rm max}$ [$\mathrm{kpc}$]')
+</pre>
+<img alt="../_images/gaia-galactic-orbits_64_1.png" src="../_images/gaia-galactic-orbits_64_1.png" />
+<p>The distribution of <span class="math notranslate nohighlight">\(z\)</span>-heights for the low-mass (i.e. typically
+older) stars is more extended, as we predicted!</p>
+<p>In this tutorial, we’ve used <code class="docutils literal notranslate"><span class="pre">astroquery</span></code> to query the Gaia science
+archive to retrieve kinematic and photometric data for a small sample of
+stars with well-measured parallaxes from Gaia DR2. We used the colors
+and absolute magnitudes of these stars to select subsamples of high- and
+low-mass stars, which, on average, will provide us with subsamples of
+stars that are younger and older, respectively. We then constructed a
+model for the gravitational field of the Milky Way and numerically
+integrated the orbits of all stars in each of the two subsamples.
+Finally, we used the orbits to compute the maximum height that each star
+reaches above the Galactic midplane and showed that the younger
+(higher-mass) stars tend to have smaller excursions from the Galactic
+plane, consistent with the idea that stars are either born in a
+“thinner” disk and dynamically “heated,” or that older stars formed with
+a larger vertical scale-height.</p>
+</div>
+<div class="section" id="exercises">
+<h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li>Some of the low-mass star orbits have large vertical excursions from
+the Galactic disk (up to and above 1.5 kpc) and could therefore be
+stellar halo stars rather than part of the Galactic disk. Use the
+zmax values to select a few of these stars and plot their full
+orbits. Do these stars look like they are part of the disk? Why / why
+not?</li>
+<li><a class="reference external" href="http://gala.adrian.pw/en/latest/dynamics/orbits-in-detail.html">Orbit</a>
+objects also provide methods for computing apocenter and pericenter
+distances and eccentricities. Which types of stars (high-mass or
+low-mass) tend to have high eccentricity orbits within the Galaxy?
+Similar to the plot above, make a plot showing the two distributions
+of eccentricity values.</li>
+</ol>
+<p><span class="inputnumrole">In[0]:</span></p>
+<div id="spacer"></div>
+
+<a href="../_static//.ipynb"><button id="download">Download tutorial notebook</button></a>
+<a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks//.ipynb"><button id="binder">Interactive tutorial notebook</button></a></div>
+</div>
+
+</div>
+      </div>  
+      
+    </div>
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+    &copy; Copyright Astropy.   
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

@@ -195,7 +195,6 @@ created called ``hcg7_center``
      '_abc_registry',
      '_apply',
      '_extra_frameattr_names',
-     '_parse_inputs',
      '_sky_coord_frame',
      'altaz',
      'apply_space_motion',
@@ -203,6 +202,7 @@ created called ``hcg7_center``
      'cache',
      'cartesian',
      'cirs',
+     'contained_by',
      'copy',
      'data',
      'dec',
@@ -210,6 +210,7 @@ created called ``hcg7_center``
      'default_representation',
      'diagonal',
      'differential_type',
+     'directional_offset_by',
      'distance',
      'equinox',
      'fk4',
@@ -507,7 +508,7 @@ file\ ``'HCG7_SDSS_cutout.jpg'``, defined at the top of the cell.
 
 .. parsed-literal::
 
-    ('HCG7_SDSS_cutout.jpg', <http.client.HTTPMessage at 0x7f9e7e8e4b38>)
+    ('HCG7_SDSS_cutout.jpg', <http.client.HTTPMessage at 0x7f15dc2356d8>)
 
 
 
