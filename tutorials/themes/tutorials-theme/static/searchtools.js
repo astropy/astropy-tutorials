@@ -9,6 +9,9 @@
  *
  */
 
+// Set ajaxSetup to synchronous to make a synchronous $.get call (but could be bad form).
+// See https://stackoverflow.com/a/25489055/9959073 for details.
+jQuery.ajaxSetup({async:false});
 
 /* Non-minified version JS is _stemmer.js if file is provided */ 
 /**
@@ -346,7 +349,7 @@ var Search = {
               if (textstatus != "success") {
                 document.getElementById("searchindexloader").src = url;
               }
-            }});
+            }, async: false});
   },
 
   setIndex : function(index) {
@@ -577,7 +580,7 @@ var Search = {
                     listItem.slideDown(5, function() {
                       displayNextItem();
                     });
-                  }});
+                  }, async: false});
         } else {
           // no source available, just display title
           Search.output.append(listItem);
