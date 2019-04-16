@@ -11,4 +11,4 @@ spectral-cube
 reproject
 astro-gala
 dust_extinction>=0.7
-
+synphot
