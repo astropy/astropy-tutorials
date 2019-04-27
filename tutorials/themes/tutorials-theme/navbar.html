@@ -1,7 +1,7 @@
 {% if pagename == "index" or pagename == "search" or pagename == "tutorials" or pagename == "documentation" or pagename == "examples" or pagename == "guides" %}
 <!-- Learn astropy banner -->
 <div class="container-fluid landing text-center">
-  <a href="/astropy-tutorials"><img src="_static/astropy_logo_banner.png" id="astropy-logo"></a>
+  <a href="/"><img src="_static/astropy_logo_banner.png" id="astropy-logo"></a>
   <form class="input-group col-sm-7 m-auto"  id="search-bar" action="{{ pathto('search') }}" method="get">
       <div class="input-group-prepend">
           <button class="input-group-text" type="submit"><i class="fa fa-search fa-fw"></i></button>
@@ -40,7 +40,7 @@
 
 {% else %}
 <nav class="navbar navbar-expand-lg bg-navbar">
-  <a class="navbar-brand" href="/astropy-tutorials" style="padding: 0px 5px;">
+  <a class="navbar-brand" href="/" style="padding: 0px 5px;">
     <img src="{{ pathto('../_static/' + 'astropy_logo.png', 1) }}" onerror="this.onerror=null;this.src='{{ pathto("_static/" + "astropy_logo.png", 1) }}';" style="height: 38px;">
   </a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
