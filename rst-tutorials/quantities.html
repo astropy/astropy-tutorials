@@ -2,8 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="filterTutorials, filterUnits, filterMatplotlib, filterRadioAstronomy, filterDataCubes" name="keywords" />
+    <meta charset="utf-8" /><meta content="filterTutorials, filterUnits, filterMatplotlib, filterRadioAstronomy, filterDataCubes" name="keywords" />
 <meta content="filterTutorials," name="keywords" />
 
     <title>Using Astropy Quantities for astrophysical calculations &#8212; astropy-tutorials v3.0.dev</title>
@@ -127,7 +126,7 @@
 <div class="section" id="learning-goals">
 <h2>Learning Goals<a class="headerlink" href="#learning-goals" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>TODO</li>
+<li><p>TODO</p></li>
 </ul>
 </div>
 <div class="section" id="keywords">
@@ -151,15 +150,15 @@ section</a>.</p>
 <p>We start by loading standard libraries and set up plotting for ipython
 notebooks.</p>
 <p><span class="inputnumrole">In[1]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 
 <span class="c1"># You shouldn&#39;t use the `seed` function in real science code, but we use it here for example purposes.</span>
 <span class="c1"># It makes the &quot;random&quot; number generator always give the same numbers wherever you run it.</span>
 <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">12345</span><span class="p">)</span>
 
 <span class="c1"># Set up matplotlib</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 <span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
 </pre></div>
 </div>
@@ -172,8 +171,8 @@ are available. The constants are stored as objects of a subclass of
 need the gravitational constant <code class="docutils literal notranslate"><span class="pre">G</span></code>, Planck’s constant <code class="docutils literal notranslate"><span class="pre">h</span></code>, and
 Boltzmann’s constant, <code class="docutils literal notranslate"><span class="pre">k_B</span></code>.</p>
 <p><span class="inputnumrole">In[2]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">astropy.units</span> <span class="k">as</span> <span class="nn">u</span>
-<span class="kn">from</span> <span class="nn">astropy.constants</span> <span class="k">import</span> <span class="n">G</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">k_B</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">astropy.units</span> <span class="kn">as</span> <span class="nn">u</span>
+<span class="kn">from</span> <span class="nn">astropy.constants</span> <span class="kn">import</span> <span class="n">G</span><span class="p">,</span> <span class="n">h</span><span class="p">,</span> <span class="n">k_B</span>
 </pre></div>
 </div>
 </div>
@@ -189,7 +188,7 @@ object with the name <code class="docutils literal notranslate"><span class="pre
 object is by multiplying the value with its unit. Units are accessed as
 u.”unit”, in this case u.pc.</p>
 <p><span class="inputnumrole">In[3]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Reff</span> <span class="o">=</span> <span class="mi">29</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">pc</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Reff</span> <span class="o">=</span> <span class="mi">29</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">pc</span>
 </pre></div>
 </div>
 <p>A completely equivalent (but more verbose) way of doing the same thing
@@ -200,15 +199,15 @@ has more options, though, which you can learn about from the <a class="reference
 reference documentation on
 Quantity</a>.</p>
 <p><span class="inputnumrole">In[4]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Reff</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">(</span><span class="mi">29</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">pc</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Reff</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">Quantity</span><span class="p">(</span><span class="mi">29</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">pc</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>We can access the value and unit of a <code class="docutils literal notranslate"><span class="pre">Quantity</span></code> using the <code class="docutils literal notranslate"><span class="pre">value</span></code>
 and <code class="docutils literal notranslate"><span class="pre">unit</span></code> attributes.</p>
 <p><span class="inputnumrole">In[5]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;Half light radius</span>
-<span class="s2">value: </span><span class="si">{0}</span><span class="s2"></span>
-<span class="s2">unit: </span><span class="si">{1}</span><span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Reff</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">Reff</span><span class="o">.</span><span class="n">unit</span><span class="p">))</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;Half light radius</span>
+<span class="s2">value: {0}</span>
+<span class="s2">unit: {1}&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Reff</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">Reff</span><span class="o">.</span><span class="n">unit</span><span class="p">))</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[5]:</span></p>
@@ -220,9 +219,9 @@ and <code class="docutils literal notranslate"><span class="pre">unit</span></co
 <p>The <code class="docutils literal notranslate"><span class="pre">value</span></code> and <code class="docutils literal notranslate"><span class="pre">unit</span></code> attributes can also be accessed within the
 print function.</p>
 <p><span class="inputnumrole">In[6]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;Half light radius</span>
-<span class="s2">value: </span><span class="si">{0.value}</span><span class="s2"></span>
-<span class="s2">unit: </span><span class="si">{0.unit}</span><span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Reff</span><span class="p">))</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;Half light radius</span>
+<span class="s2">value: {0.value}</span>
+<span class="s2">unit: {0.unit}&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Reff</span><span class="p">))</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[6]:</span></p>
@@ -234,7 +233,7 @@ print function.</p>
 <p>Furthermore, we can convert the radius in parsecs to any other unit of
 length using the <code class="docutils literal notranslate"><span class="pre">to()</span></code> method. Here, we convert it to meters.</p>
 <p><span class="inputnumrole">In[7]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">{0:.3g}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Reff</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">m</span><span class="p">)))</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;{0:.3g}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">Reff</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">m</span><span class="p">)))</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[7]:</span></p>
@@ -245,15 +244,15 @@ length using the <code class="docutils literal notranslate"><span class="pre">to
 measurements, assuming a normal distribution with a mean velocity of 206
 km/s and a velocity dispersion of 4.3 km/s.</p>
 <p><span class="inputnumrole">In[8]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">vmean</span> <span class="o">=</span> <span class="mi">206</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">vmean</span> <span class="o">=</span> <span class="mi">206</span>
 <span class="n">sigin</span> <span class="o">=</span> <span class="mf">4.3</span>
 <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="n">vmean</span><span class="p">,</span> <span class="n">sigin</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">km</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">s</span>
 </pre></div>
 </div>
 <p><span class="inputnumrole">In[9]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;First 10 radial velocity measurements:</span>
-<span class="si">{0}</span><span class="s2"></span>
-<span class="si">{1}</span><span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">v</span><span class="p">[:</span><span class="mi">10</span><span class="p">],</span> <span class="n">v</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">m</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">)[:</span><span class="mi">10</span><span class="p">]))</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;First 10 radial velocity measurements:</span>
+<span class="s2">{0}</span>
+<span class="s2">{1}&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">v</span><span class="p">[:</span><span class="mi">10</span><span class="p">],</span> <span class="n">v</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">m</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">)[:</span><span class="mi">10</span><span class="p">]))</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[9]:</span></p>
@@ -266,7 +265,7 @@ km/s and a velocity dispersion of 4.3 km/s.</p>
 </pre></div>
 </div>
 <p><span class="inputnumrole">In[10]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span> <span class="n">histtype</span><span class="o">=</span><span class="s2">&quot;step&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Velocity (km/s)&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;N&quot;</span><span class="p">)</span>
@@ -283,8 +282,8 @@ division with <code class="docutils literal notranslate"><span class="pre">Quant
 functions such as <code class="docutils literal notranslate"><span class="pre">mean()</span></code> and <code class="docutils literal notranslate"><span class="pre">size()</span></code>. They retain their units
 through these operations just as you would expect them to.</p>
 <p><span class="inputnumrole">In[11]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sigma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">v</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">v</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">v</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Velocity dispersion: </span><span class="si">{0:.2f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sigma</span><span class="p">))</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sigma</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">v</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">v</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">v</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Velocity dispersion: {0:.2f}&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">sigma</span><span class="p">))</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[11]:</span></p>
@@ -296,7 +295,7 @@ resulting velocity dispersion quantity is a <code class="docutils literal notran
 the python standard <code class="docutils literal notranslate"><span class="pre">math</span></code> library’s <code class="docutils literal notranslate"><span class="pre">sqrt</span></code> function instead, we get
 an error.</p>
 <p><span class="inputnumrole">In[12]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sigma_scalar</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">v</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">v</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">))</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sigma_scalar</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">v</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">v</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">))</span>
 </pre></div>
 </div>
 <p>In general, you should only use <code class="docutils literal notranslate"><span class="pre">numpy</span></code> functions with <code class="docutils literal notranslate"><span class="pre">Quantity</span></code>
@@ -311,7 +310,7 @@ demonstrating <code class="docutils literal notranslate"><span class="pre">Quant
 enough. For the calculation, we can multiply the quantities together,
 and <code class="docutils literal notranslate"><span class="pre">astropy</span></code> will keep track of the units.</p>
 <p><span class="inputnumrole">In[13]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">M</span> <span class="o">=</span> <span class="mi">4</span><span class="o">*</span><span class="n">sigma</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">Reff</span><span class="o">/</span><span class="n">G</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">M</span> <span class="o">=</span> <span class="mi">4</span><span class="o">*</span><span class="n">sigma</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span><span class="n">Reff</span><span class="o">/</span><span class="n">G</span>
 <span class="n">M</span>
 </pre></div>
 </div>
@@ -322,7 +321,7 @@ and <code class="docutils literal notranslate"><span class="pre">astropy</span><
 mass. However, it can be decomposed to cancel all of the length units
 (<span class="math notranslate nohighlight">\(km^2 pc/m^3\)</span>) using the <code class="docutils literal notranslate"><span class="pre">decompose()</span></code> method.</p>
 <p><span class="inputnumrole">In[14]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">M</span><span class="o">.</span><span class="n">decompose</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">M</span><span class="o">.</span><span class="n">decompose</span><span class="p">()</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[14]:</span></p>
@@ -332,10 +331,10 @@ mass. However, it can be decomposed to cancel all of the length units
 masses are common in astronomy, or maybe you want the default SI and CGS
 units.</p>
 <p><span class="inputnumrole">In[15]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;Galaxy mass</span>
-<span class="s2">in solar units: </span><span class="si">{0:.3g}</span><span class="s2"></span>
-<span class="s2">SI units: </span><span class="si">{1:.3g}</span><span class="s2"></span>
-<span class="s2">CGS units: </span><span class="si">{2:.3g}</span><span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">M</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">Msun</span><span class="p">),</span> <span class="n">M</span><span class="o">.</span><span class="n">si</span><span class="p">,</span> <span class="n">M</span><span class="o">.</span><span class="n">cgs</span><span class="p">))</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;Galaxy mass</span>
+<span class="s2">in solar units: {0:.3g}</span>
+<span class="s2">SI units: {1:.3g}</span>
+<span class="s2">CGS units: {2:.3g}&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">M</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">Msun</span><span class="p">),</span> <span class="n">M</span><span class="o">.</span><span class="n">si</span><span class="p">,</span> <span class="n">M</span><span class="o">.</span><span class="n">cgs</span><span class="p">))</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[15]:</span></p>
@@ -348,7 +347,7 @@ units.</p>
 <p>Or, if you want the log of the mass, you can just use <code class="docutils literal notranslate"><span class="pre">np.log10</span></code> as
 long as the logarithm’s argument is dimensionless.</p>
 <p><span class="inputnumrole">In[16]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">M</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">Msun</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">M</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">Msun</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[16]:</span></p>
@@ -357,7 +356,7 @@ long as the logarithm’s argument is dimensionless.</p>
 <p>However, you can’t take the log of something with units, as that is not
 mathematically sensible.</p>
 <p><span class="inputnumrole">In[17]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[17]:</span></p>
@@ -480,7 +479,7 @@ that we have an independent measurement of distance to the cloud
 <span class="math notranslate nohighlight">\(d=250\)</span> pc and that the excitation temperature is known and
 constant throughout the cloud: <span class="math notranslate nohighlight">\(T_{ex}=25\)</span> K.</p>
 <p><span class="inputnumrole">In[18]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="mi">250</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">pc</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="mi">250</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">pc</span>
 <span class="n">Tex</span> <span class="o">=</span> <span class="mi">25</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">K</span>
 </pre></div>
 </div>
@@ -497,7 +496,7 @@ the center in each dimension shown below. Note in particular that the
 <code class="docutils literal notranslate"><span class="pre">astropy</span></code> automatically does the relevant conversions before computing
 the exponential.</p>
 <p><span class="inputnumrole">In[19]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Cloud&#39;s center</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Cloud&#39;s center</span>
 <span class="n">cen_ra</span> <span class="o">=</span> <span class="mf">52.25</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">deg</span>
 <span class="n">cen_dec</span> <span class="o">=</span> <span class="mf">0.25</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">deg</span>
 <span class="n">cen_v</span> <span class="o">=</span> <span class="mi">15</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">km</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">s</span>
@@ -528,22 +527,22 @@ experts, we’re setting up our artificial cube on the main-beam
 temperature scale (T:math:<code class="xref py py-obj docutils literal notranslate"><span class="pre">_{rm</span> <span class="pre">MB}</span></code>) which is the closest we can
 normally get to the actual brightness temperature of our source.</p>
 <p><span class="inputnumrole">In[20]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">data_gauss</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">K</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">data_gauss</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">K</span>
 </pre></div>
 </div>
 <p>We will also need to know the width of each velocity bin and the size of
 each pixel, so let’s calculate that now.</p>
 <p><span class="inputnumrole">In[21]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Average pixel size</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Average pixel size</span>
 <span class="c1"># This is only right if dec ~ 0, because of the cos(dec) factor.</span>
 <span class="n">dra</span> <span class="o">=</span> <span class="p">(</span><span class="n">ra</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">ra</span><span class="o">.</span><span class="n">min</span><span class="p">())</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">ra</span><span class="p">)</span>
 <span class="n">ddec</span> <span class="o">=</span> <span class="p">(</span><span class="n">dec</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">dec</span><span class="o">.</span><span class="n">min</span><span class="p">())</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">dec</span><span class="p">)</span>
 
 <span class="c1">#Average velocity bin width</span>
 <span class="n">dv</span> <span class="o">=</span> <span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">v</span><span class="o">.</span><span class="n">min</span><span class="p">())</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;dra = </span><span class="si">{0}</span><span class="s2"></span>
-<span class="s2">ddec = </span><span class="si">{1}</span><span class="s2"></span>
-<span class="s2">dv = </span><span class="si">{2}</span><span class="s2">&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dra</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">arcsec</span><span class="p">),</span> <span class="n">ddec</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">arcsec</span><span class="p">),</span> <span class="n">dv</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;dra = {0}</span>
+<span class="s2">ddec = {1}</span>
+<span class="s2">dv = {2}&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dra</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">arcsec</span><span class="p">),</span> <span class="n">ddec</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">arcsec</span><span class="p">),</span> <span class="n">dv</span><span class="p">))</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[21]:</span></p>
@@ -556,7 +555,7 @@ each pixel, so let’s calculate that now.</p>
 channels, so let’s create a 2D quantity array by summing our data cube
 along the velocity axis (multiplying by the velocity width of a pixel).</p>
 <p><span class="inputnumrole">In[22]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">intcloud</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">data</span><span class="o">*</span><span class="n">dv</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">intcloud</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">data</span><span class="o">*</span><span class="n">dv</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">intcloud</span><span class="o">.</span><span class="n">unit</span>
 </pre></div>
 </div>
@@ -568,14 +567,14 @@ passing the quantity’s value. Similarly, we can set the correct extent
 using the values of <span class="math notranslate nohighlight">\(x_i\)</span> and <span class="math notranslate nohighlight">\(x_f\)</span>. Finally, we can set the
 colorbar label to have proper units.</p>
 <p><span class="inputnumrole">In[23]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#Note that we display RA in the convential way by going from max to min</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#Note that we display RA in the convential way by going from max to min</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">intcloud</span><span class="o">.</span><span class="n">value</span><span class="p">,</span>
            <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">,</span>
            <span class="n">extent</span><span class="o">=</span><span class="p">[</span><span class="n">ra</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">max</span><span class="p">(),</span> <span class="n">ra</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">dec</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">dec</span><span class="o">.</span><span class="n">value</span><span class="o">.</span><span class="n">max</span><span class="p">()],</span>
            <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;hot&#39;</span><span class="p">,</span>
            <span class="n">interpolation</span><span class="o">=</span><span class="s1">&#39;nearest&#39;</span><span class="p">,</span>
            <span class="n">aspect</span><span class="o">=</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s2">&quot;Intensity (</span><span class="si">{}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">intcloud</span><span class="o">.</span><span class="n">unit</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s2">&quot;Intensity ({})&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">intcloud</span><span class="o">.</span><span class="n">unit</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;RA (deg)&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Dec (deg)&quot;</span><span class="p">);</span>
 </pre></div>
@@ -608,7 +607,7 @@ define it as a <code class="docutils literal notranslate"><span class="pre">Quan
 <p>First, we look up the wavelength for these emission lines and store them
 as quantities.</p>
 <p><span class="inputnumrole">In[24]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">lambda13</span> <span class="o">=</span> <span class="mf">2.60076</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">mm</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">lambda13</span> <span class="o">=</span> <span class="mf">2.60076</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">mm</span>
 <span class="n">lambda18</span> <span class="o">=</span> <span class="mf">2.73079</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">mm</span>
 </pre></div>
 </div>
@@ -617,7 +616,7 @@ of light, we can convert between them. However, doing so just using the
 <code class="docutils literal notranslate"><span class="pre">to()</span></code> method fails, as units of length and frequency are not
 convertible:</p>
 <p><span class="inputnumrole">In[25]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nu13</span> <span class="o">=</span> <span class="n">lambda13</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">Hz</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">nu13</span> <span class="o">=</span> <span class="n">lambda13</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">Hz</span><span class="p">)</span>
 <span class="n">nu18</span> <span class="o">=</span> <span class="n">lambda18</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">Hz</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -691,7 +690,7 @@ the equivalencies necessary to handle conversions between wavelength and
 frequency. To use it, provide the equivalencies to the <code class="docutils literal notranslate"><span class="pre">equivalencies</span></code>
 keyword of the <code class="docutils literal notranslate"><span class="pre">to()</span></code> call:</p>
 <p><span class="inputnumrole">In[26]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nu13</span> <span class="o">=</span> <span class="n">lambda13</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">Hz</span><span class="p">,</span> <span class="n">equivalencies</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">spectral</span><span class="p">())</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">nu13</span> <span class="o">=</span> <span class="n">lambda13</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">Hz</span><span class="p">,</span> <span class="n">equivalencies</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">spectral</span><span class="p">())</span>
 <span class="n">nu18</span> <span class="o">=</span> <span class="n">lambda18</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">Hz</span><span class="p">,</span> <span class="n">equivalencies</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">spectral</span><span class="p">())</span>
 </pre></div>
 </div>
@@ -700,7 +699,7 @@ and calculate the ratios in constant <span class="math notranslate nohighlight">
 frequency and Einstein coefficient units are dimensionless, so the unit
 of <span class="math notranslate nohighlight">\(C\)</span> is unchanged.</p>
 <p><span class="inputnumrole">In[27]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nu13</span> <span class="o">=</span> <span class="mf">115271096910.13396</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">Hz</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">nu13</span> <span class="o">=</span> <span class="mf">115271096910.13396</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">Hz</span>
 <span class="n">nu18</span> <span class="o">=</span> <span class="mf">109782318669.689</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">Hz</span>
 <span class="n">A13</span> <span class="o">=</span> <span class="mf">7.4e-8</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span>
 <span class="n">A18</span> <span class="o">=</span> <span class="mf">8.8e-8</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span>
@@ -719,7 +718,7 @@ emission frequency, and <span class="math notranslate nohighlight">\(T\)</span> 
 constants were imported from <code class="docutils literal notranslate"><span class="pre">astropy.constants</span></code>, and the other two
 values are already calculated, so here we just take the ratio.</p>
 <p><span class="inputnumrole">In[28]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">B</span> <span class="o">=</span> <span class="n">h</span> <span class="o">*</span> <span class="n">nu18</span> <span class="o">/</span> <span class="p">(</span><span class="n">k_B</span> <span class="o">*</span> <span class="n">Tex</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">B</span> <span class="o">=</span> <span class="n">h</span> <span class="o">*</span> <span class="n">nu18</span> <span class="o">/</span> <span class="p">(</span><span class="n">k_B</span> <span class="o">*</span> <span class="n">Tex</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The units of <span class="math notranslate nohighlight">\(B\)</span> are Hz sec, which can be decomposed to a
@@ -728,7 +727,7 @@ not necessary, though. Quantities are at their best if you use them
 without worrying about intermediate units, and only convert at the very
 end when you want a final answer.</p>
 <p><span class="inputnumrole">In[29]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{0}</span><span class="se">\n</span><span class="si">{1}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">B</span><span class="o">.</span><span class="n">decompose</span><span class="p">()))</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;{0}</span><span class="se">\n</span><span class="s1">{1}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">B</span><span class="o">.</span><span class="n">decompose</span><span class="p">()))</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[29]:</span></p>
@@ -743,8 +742,8 @@ intensity map, but we’ll do it again here for clarity. This gives us the
 column density of CO for each spatial pixel in our map. We can then
 print out the peak column column density.</p>
 <p><span class="inputnumrole">In[30]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">NCO</span> <span class="o">=</span> <span class="n">C</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">data</span><span class="o">*</span><span class="n">dv</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">B</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Peak CO column density: &quot;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">NCO</span> <span class="o">=</span> <span class="n">C</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">data</span><span class="o">*</span><span class="n">dv</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">B</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Peak CO column density: &quot;</span><span class="p">)</span>
 <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">NCO</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -762,9 +761,9 @@ the quantity we are actually trying to infer. Since most of the mass is
 in H<span class="math notranslate nohighlight">\(_2\)</span>, we calculate its column density by multiplying the CO
 column density with the (known/assumed) H<span class="math notranslate nohighlight">\(_2\)</span>/CO ratio.</p>
 <p><span class="inputnumrole">In[31]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">H2_CO_ratio</span> <span class="o">=</span> <span class="mf">5.9e6</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">H2_CO_ratio</span> <span class="o">=</span> <span class="mf">5.9e6</span>
 <span class="n">NH2</span> <span class="o">=</span> <span class="n">NCO</span> <span class="o">*</span> <span class="n">H2_CO_ratio</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Peak H2 column density: &quot;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s2">&quot;Peak H2 column density: &quot;</span><span class="p">)</span>
 <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">NH2</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -781,7 +780,7 @@ molecular cloud.</p>
 <p>We obtain the mass column density by multiplying the number column
 density by the mass of an individual H<span class="math notranslate nohighlight">\(_2\)</span> molecule.</p>
 <p><span class="inputnumrole">In[32]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mH2</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="mf">1.008</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">Dalton</span>  <span class="c1">#aka atomic mass unit/amu</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mH2</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="mf">1.008</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">Dalton</span>  <span class="c1">#aka atomic mass unit/amu</span>
 <span class="n">rho</span> <span class="o">=</span> <span class="n">NH2</span> <span class="o">*</span> <span class="n">mH2</span>
 </pre></div>
 </div>
@@ -789,8 +788,8 @@ density by the mass of an individual H<span class="math notranslate nohighlight"
 the area area. If we do this in the straightforward way of length x
 width of a pixel, this area is then in units of <span class="math notranslate nohighlight">\({\rm deg}^2\)</span>.</p>
 <p><span class="inputnumrole">In[33]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dap</span> <span class="o">=</span> <span class="n">dra</span> <span class="o">*</span> <span class="n">ddec</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">dap</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dap</span> <span class="o">=</span> <span class="n">dra</span> <span class="o">*</span> <span class="n">ddec</span>
+<span class="k">print</span><span class="p">(</span><span class="n">dap</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[33]:</span></p>
@@ -803,8 +802,8 @@ cross-sectional area of the cloud that the pixel covers, in <em>physical</em>
 units, rather than angular units. So it’s tempting to just multiply the
 area and the square of the distance.</p>
 <p><span class="inputnumrole">In[34]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">da</span> <span class="o">=</span> <span class="n">dap</span> <span class="o">*</span> <span class="n">d</span><span class="o">**</span><span class="mi">2</span>  <span class="c1"># don&#39;t actually do it this way - use the version below instead!</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">da</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">da</span> <span class="o">=</span> <span class="n">dap</span> <span class="o">*</span> <span class="n">d</span><span class="o">**</span><span class="mi">2</span>  <span class="c1"># don&#39;t actually do it this way - use the version below instead!</span>
+<span class="k">print</span><span class="p">(</span><span class="n">da</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[34]:</span></p>
@@ -812,7 +811,7 @@ area and the square of the distance.</p>
 </pre></div>
 </div>
 <p><span class="inputnumrole">In[35]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">dap</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">steradian</span><span class="p">)</span><span class="o">.</span><span class="n">value</span> <span class="o">*</span> <span class="n">d</span><span class="o">**</span><span class="mi">2</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dap</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">steradian</span><span class="p">)</span><span class="o">.</span><span class="n">value</span> <span class="o">*</span> <span class="n">d</span><span class="o">**</span><span class="mi">2</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[35]:</span></p>
@@ -823,7 +822,7 @@ solid angles) as actual physical units, while the small-angle
 approximation assumes angles are dimensionless. So if you, e.g., try to
 convert to a different area unit, it will fail:</p>
 <p><span class="inputnumrole">In[36]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">da</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">da</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[36]:</span></p>
@@ -889,7 +888,7 @@ allows angles to be treated as dimensionless. This makes it so that they
 will automatically convert to radians and become dimensionless when a
 conversion is needed.</p>
 <p><span class="inputnumrole">In[37]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">da</span> <span class="o">=</span> <span class="p">(</span><span class="n">dap</span> <span class="o">*</span> <span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">pc</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">equivalencies</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_angles</span><span class="p">())</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">da</span> <span class="o">=</span> <span class="p">(</span><span class="n">dap</span> <span class="o">*</span> <span class="n">d</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">pc</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">equivalencies</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">dimensionless_angles</span><span class="p">())</span>
 <span class="n">da</span>
 </pre></div>
 </div>
@@ -897,7 +896,7 @@ conversion is needed.</p>
 <div class="math notranslate nohighlight">
 \[0.00047596472 \; \mathrm{pc^{2}}\]</div>
 <p><span class="inputnumrole">In[38]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">da</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">da</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[38]:</span></p>
@@ -906,7 +905,7 @@ conversion is needed.</p>
 <p>Finally, multiplying the column density with the pixel area and summing
 over all the pixels gives us the cloud mass.</p>
 <p><span class="inputnumrole">In[39]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">rho</span> <span class="o">*</span> <span class="n">da</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">M</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">rho</span> <span class="o">*</span> <span class="n">da</span><span class="p">)</span>
 <span class="n">M</span><span class="o">.</span><span class="n">decompose</span><span class="p">()</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">solMass</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -942,7 +941,7 @@ You determine from some tests it’s basically a Lorentzian, but with a
 different scale along the two axes. Your first thought might be to do
 this:</p>
 <p><span class="inputnumrole">In[40]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">response_func</span><span class="p">(</span><span class="n">xinarcsec</span><span class="p">,</span> <span class="n">yinarcsec</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">response_func</span><span class="p">(</span><span class="n">xinarcsec</span><span class="p">,</span> <span class="n">yinarcsec</span><span class="p">):</span>
     <span class="n">xscale</span> <span class="o">=</span> <span class="mf">0.9</span>
     <span class="n">yscale</span> <span class="o">=</span> <span class="mf">0.85</span>
     <span class="n">xfactor</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">xinarcsec</span><span class="o">/</span><span class="n">xscale</span><span class="p">)</span>
@@ -955,7 +954,7 @@ this:</p>
 collaborator and they don’t look closely and think the inputs are
 instead supposed to be in arcmin. So they do:</p>
 <p><span class="inputnumrole">In[41]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response_func</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">response_func</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[41]:</span></p>
@@ -968,7 +967,7 @@ clearly shows it can only resolve an arcmin at best. But you can solve
 this by requiring they pass in <code class="docutils literal notranslate"><span class="pre">Quantity</span></code> objects. The new function
 could simply be:</p>
 <p><span class="inputnumrole">In[42]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">response_func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">response_func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
     <span class="n">xscale</span> <span class="o">=</span> <span class="mf">0.9</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">arcsec</span>
     <span class="n">yscale</span> <span class="o">=</span> <span class="mf">0.85</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">arcsec</span>
     <span class="n">xfactor</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">x</span><span class="o">/</span><span class="n">xscale</span><span class="p">)</span>
@@ -980,7 +979,7 @@ could simply be:</p>
 <p>And your collaborator now has to pay attention. If they just blindly put
 in a number they get an error:</p>
 <p><span class="inputnumrole">In[43]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response_func</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">response_func</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[43]:</span></p>
@@ -1019,7 +1018,7 @@ in a number they get an error:</p>
 </div>
 <p>Which is their cue to provide the units explicitly:</p>
 <p><span class="inputnumrole">In[44]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">response_func</span><span class="p">(</span><span class="mf">1.0</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">arcmin</span><span class="p">,</span> <span class="mf">1.2</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">arcmin</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">response_func</span><span class="p">(</span><span class="mf">1.0</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">arcmin</span><span class="p">,</span> <span class="mf">1.2</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">arcmin</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[44]:</span></p>
@@ -1058,7 +1057,7 @@ masses and distances.</p>
       
     </p>
     <p>
-    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
     &copy; Copyright Astropy.   
     </p>
   </div>

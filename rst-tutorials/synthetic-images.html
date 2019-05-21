@@ -2,8 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="filterTutorials, filterAstrometry, filterWcs, filterFitsImage, filterRadioAstronomy, filterVisualization, filterMatplotlib" name="keywords" />
+    <meta charset="utf-8" /><meta content="filterTutorials, filterAstrometry, filterWcs, filterFitsImage, filterRadioAstronomy, filterVisualization, filterMatplotlib" name="keywords" />
 <meta content="filterTutorials," name="keywords" />
 
     <title>Synthetic Images from simulated data &#8212; astropy-tutorials v3.0.dev</title>
@@ -123,11 +122,11 @@
 <div class="section" id="learning-goals">
 <h2>Learning Goals<a class="headerlink" href="#learning-goals" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Assign WCS astrometry to an image using <code class="docutils literal notranslate"><span class="pre">astropy.wcs</span></code></li>
-<li>Construct a PSF using <code class="docutils literal notranslate"><span class="pre">astropy.modeling.model</span></code></li>
-<li>Convolve raw data with PSF using <code class="docutils literal notranslate"><span class="pre">astropy.convolution</span></code></li>
-<li>Calculate polarization fraction and angle from Stokes I, Q, U data</li>
-<li>Overplot quivers on the image</li>
+<li><p>Assign WCS astrometry to an image using <code class="docutils literal notranslate"><span class="pre">astropy.wcs</span></code></p></li>
+<li><p>Construct a PSF using <code class="docutils literal notranslate"><span class="pre">astropy.modeling.model</span></code></p></li>
+<li><p>Convolve raw data with PSF using <code class="docutils literal notranslate"><span class="pre">astropy.convolution</span></code></p></li>
+<li><p>Calculate polarization fraction and angle from Stokes I, Q, U data</p></li>
+<li><p>Overplot quivers on the image</p></li>
 </ul>
 </div>
 <div class="section" id="keywords">
@@ -143,26 +142,27 @@ file</a></p>
 <p><a class="reference external" href="#3.-Prepare-a-Point-Spread-Function-(PSF)">3. Prepare a Point Spread Function
 (PSF)</a></p>
 <blockquote>
-<div><a class="reference external" href="#3.a-How-to-do-this-without-astropy-kernels">3.a How to do this without astropy
-kernels</a></div></blockquote>
+<div><p><a class="reference external" href="#3.a-How-to-do-this-without-astropy-kernels">3.a How to do this without astropy
+kernels</a></p>
+</div></blockquote>
 <p><a class="reference external" href="#4.-Convolve-image-with-PSF">4. Convolve image with PSF</a></p>
 <p><a class="reference external" href="#5.-Convolve-Stokes-Q-and-U-images">5. Convolve Stokes Q and U
 images</a></p>
 <p><a class="reference external" href="#6.-Calculate-polarization-angle-and-fraction-for-quiver-plot">6. Calculate polarization angle and fraction for quiver
 plot</a></p>
 <p><span class="inputnumrole">In[1]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">astropy.utils.data</span> <span class="k">import</span> <span class="n">download_file</span>
-<span class="kn">from</span> <span class="nn">astropy.io</span> <span class="k">import</span> <span class="n">fits</span>
-<span class="kn">from</span> <span class="nn">astropy</span> <span class="k">import</span> <span class="n">units</span> <span class="k">as</span> <span class="n">u</span>
-<span class="kn">from</span> <span class="nn">astropy.coordinates</span> <span class="k">import</span> <span class="n">SkyCoord</span>
-<span class="kn">from</span> <span class="nn">astropy.wcs</span> <span class="k">import</span> <span class="n">WCS</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">astropy.utils.data</span> <span class="kn">import</span> <span class="n">download_file</span>
+<span class="kn">from</span> <span class="nn">astropy.io</span> <span class="kn">import</span> <span class="n">fits</span>
+<span class="kn">from</span> <span class="nn">astropy</span> <span class="kn">import</span> <span class="n">units</span> <span class="k">as</span> <span class="n">u</span>
+<span class="kn">from</span> <span class="nn">astropy.coordinates</span> <span class="kn">import</span> <span class="n">SkyCoord</span>
+<span class="kn">from</span> <span class="nn">astropy.wcs</span> <span class="kn">import</span> <span class="n">WCS</span>
 
-<span class="kn">from</span> <span class="nn">astropy.convolution</span> <span class="k">import</span> <span class="n">Gaussian2DKernel</span>
-<span class="kn">from</span> <span class="nn">astropy.modeling.models</span> <span class="k">import</span> <span class="n">Lorentz1D</span>
-<span class="kn">from</span> <span class="nn">astropy.convolution</span> <span class="k">import</span> <span class="n">convolve_fft</span>
+<span class="kn">from</span> <span class="nn">astropy.convolution</span> <span class="kn">import</span> <span class="n">Gaussian2DKernel</span>
+<span class="kn">from</span> <span class="nn">astropy.modeling.models</span> <span class="kn">import</span> <span class="n">Lorentz1D</span>
+<span class="kn">from</span> <span class="nn">astropy.convolution</span> <span class="kn">import</span> <span class="n">convolve_fft</span>
 
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 
 <span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
 </pre></div>
@@ -174,9 +174,9 @@ plot</a></p>
 from some simulations. We have Stokes I, Q, and U maps. We we’ll first
 load a FITS file and examine the header.</p>
 <p><span class="inputnumrole">In[2]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">file_i</span> <span class="o">=</span> <span class="n">download_file</span><span class="p">(</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">file_i</span> <span class="o">=</span> <span class="n">download_file</span><span class="p">(</span>
     <span class="s1">&#39;http://data.astropy.org/tutorials/synthetic-images/synchrotron_i_lobe_0700_150MHz_sm.fits&#39;</span><span class="p">,</span>
-    <span class="n">cache</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">cache</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="n">hdulist</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">file_i</span><span class="p">)</span>
 <span class="n">hdulist</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
 
@@ -221,8 +221,8 @@ coordinate in physical units (cm). We want to convert it into sky
 coordinates. Before we proceed, let’s find out the range of the data and
 plot a histogram.</p>
 <p><span class="inputnumrole">In[3]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">hdu</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">hdu</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">hdu</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">max</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">hdu</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">hdu</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">flatten</span><span class="p">()),</span> <span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">bins</span><span class="o">=</span><span class="mi">100</span><span class="p">);</span>
 </pre></div>
 </div>
@@ -239,7 +239,7 @@ plot a histogram.</p>
 <p>Once we know the range of the data, we can do a visualization with the
 proper range (<code class="docutils literal notranslate"><span class="pre">vmin</span></code> and <code class="docutils literal notranslate"><span class="pre">vmax</span></code>).</p>
 <p><span class="inputnumrole">In[4]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">12</span><span class="p">))</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">12</span><span class="p">))</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">)</span>
 
 <span class="c1"># We plot it in log-scale and add a small number to avoid nan values.</span>
@@ -247,7 +247,7 @@ proper range (<code class="docutils literal notranslate"><span class="pre">vmin<
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[4]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">AxesImage</span> <span class="n">at</span> <span class="mh">0x7f921598de10</span><span class="o">&gt;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">AxesImage</span> <span class="n">at</span> <span class="mh">0x7f1cd6e7eb38</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <img alt="../_images/synthetic-images_7_1.png" src="../_images/synthetic-images_7_1.png" />
@@ -260,7 +260,7 @@ physical units to sky coordinates, we will need to make some assumptions
 about where the object is located, i.e. the distance to the object and
 the central RA and Dec.</p>
 <p><span class="inputnumrole">In[5]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># distance to the object</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># distance to the object</span>
 <span class="n">dist_obj</span> <span class="o">=</span> <span class="mi">200</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">Mpc</span>
 
 <span class="c1"># We have the RA in hh:mm:ss and DEC in dd:mm:ss format.</span>
@@ -272,9 +272,9 @@ the central RA and Dec.</p>
 <p>Here we convert the pixel scale from cm to degree by dividing the
 distance to the object.</p>
 <p><span class="inputnumrole">In[6]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cdelt1</span> <span class="o">=</span> <span class="p">((</span><span class="n">hdu</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="s1">&#39;CDELT1&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">/</span><span class="n">dist_obj</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;cm&#39;</span><span class="p">))</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">rad</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;deg&#39;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cdelt1</span> <span class="o">=</span> <span class="p">((</span><span class="n">hdu</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="s1">&#39;CDELT1&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">/</span><span class="n">dist_obj</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;cm&#39;</span><span class="p">))</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">rad</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;deg&#39;</span><span class="p">)</span>
 <span class="n">cdelt2</span> <span class="o">=</span> <span class="p">((</span><span class="n">hdu</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="s1">&#39;CDELT2&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">/</span><span class="n">dist_obj</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;cm&#39;</span><span class="p">))</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">rad</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;deg&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">cdelt1</span><span class="p">,</span> <span class="n">cdelt2</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">cdelt1</span><span class="p">,</span> <span class="n">cdelt2</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[6]:</span></p>
@@ -283,7 +283,7 @@ distance to the object.</p>
 </div>
 <p>Use <code class="docutils literal notranslate"><span class="pre">astropy.wcs.WCS</span></code> to prepare a FITS header.</p>
 <p><span class="inputnumrole">In[7]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">w</span> <span class="o">=</span> <span class="n">WCS</span><span class="p">(</span><span class="n">naxis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">w</span> <span class="o">=</span> <span class="n">WCS</span><span class="p">(</span><span class="n">naxis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 
 <span class="c1"># reference pixel coordinate</span>
 <span class="n">w</span><span class="o">.</span><span class="n">wcs</span><span class="o">.</span><span class="n">crpix</span> <span class="o">=</span> <span class="p">[</span><span class="n">hdu</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span><span class="n">hdu</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">/</span><span class="mi">2</span><span class="p">]</span>
@@ -301,14 +301,14 @@ distance to the object.</p>
 </div>
 <p>Now we can convert the WCS coordinate into header and update the hdu.</p>
 <p><span class="inputnumrole">In[8]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">wcs_header</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">to_header</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">wcs_header</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">to_header</span><span class="p">()</span>
 <span class="n">hdu</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">wcs_header</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Let’s take a look at the header. <code class="docutils literal notranslate"><span class="pre">CDELT1</span></code>, <code class="docutils literal notranslate"><span class="pre">CDELT2</span></code>, <code class="docutils literal notranslate"><span class="pre">CUNIT1</span></code>,
 <code class="docutils literal notranslate"><span class="pre">CUNIT2</span></code>, <code class="docutils literal notranslate"><span class="pre">CRVAL1</span></code>, and <code class="docutils literal notranslate"><span class="pre">CRVAL2</span></code> are in sky coordinates now.</p>
 <p><span class="inputnumrole">In[9]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">hdu</span><span class="o">.</span><span class="n">header</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">hdu</span><span class="o">.</span><span class="n">header</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[9]:</span></p>
@@ -338,7 +338,7 @@ distance to the object.</p>
 </pre></div>
 </div>
 <p><span class="inputnumrole">In[10]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">wcs</span> <span class="o">=</span> <span class="n">WCS</span><span class="p">(</span><span class="n">hdu</span><span class="o">.</span><span class="n">header</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">wcs</span> <span class="o">=</span> <span class="n">WCS</span><span class="p">(</span><span class="n">hdu</span><span class="o">.</span><span class="n">header</span><span class="p">)</span>
 
 <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">12</span><span class="p">))</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="n">wcs</span><span class="p">)</span>
@@ -358,7 +358,7 @@ distance to the object.</p>
 telescope resolution. For a 2D Gaussian, we can calculate sigma in
 pixels by using our pixel scale keyword <code class="docutils literal notranslate"><span class="pre">cdelt2</span></code> from above.</p>
 <p><span class="inputnumrole">In[11]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># assume our telescope has 1 arcsecond resolution</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># assume our telescope has 1 arcsecond resolution</span>
 <span class="n">telescope_resolution</span> <span class="o">=</span> <span class="mi">1</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">arcsecond</span>
 
 <span class="c1"># calculate the sigma in pixels.</span>
@@ -367,7 +367,7 @@ pixels by using our pixel scale keyword <code class="docutils literal notranslat
 </pre></div>
 </div>
 <p><span class="inputnumrole">In[12]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># By default, the Gaussian kernel will go to 4 sigma</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># By default, the Gaussian kernel will go to 4 sigma</span>
 <span class="c1"># in each direction</span>
 <span class="n">psf</span> <span class="o">=</span> <span class="n">Gaussian2DKernel</span><span class="p">(</span><span class="n">sigma</span><span class="p">)</span>
 
@@ -376,7 +376,7 @@ pixels by using our pixel scale keyword <code class="docutils literal notranslat
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[12]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">AxesImage</span> <span class="n">at</span> <span class="mh">0x7f920f807c50</span><span class="o">&gt;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">AxesImage</span> <span class="n">at</span> <span class="mh">0x7f1cd4c322b0</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <img alt="../_images/synthetic-images_23_1.png" src="../_images/synthetic-images_23_1.png" />
@@ -386,7 +386,7 @@ pixels by using our pixel scale keyword <code class="docutils literal notranslat
 <p>Maybe your PSF is more complicated. Here’s an alternative way to do
 this, using a 2D Lorentzian</p>
 <p><span class="inputnumrole">In[13]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># set FWHM and psf grid</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># set FWHM and psf grid</span>
 <span class="n">telescope_resolution</span> <span class="o">=</span> <span class="mi">1</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">arcsecond</span>
 <span class="n">gamma</span> <span class="o">=</span> <span class="n">telescope_resolution</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;deg&#39;</span><span class="p">)</span><span class="o">/</span><span class="n">cdelt2</span>
 <span class="n">x_grid</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">gamma</span><span class="o">*</span><span class="mi">4</span><span class="p">,</span><span class="n">gamma</span><span class="o">*</span><span class="mi">4</span><span class="p">,</span><span class="nb">int</span><span class="p">(</span><span class="mi">8</span><span class="o">*</span><span class="n">gamma</span><span class="p">)),</span><span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="mi">8</span><span class="o">*</span><span class="n">gamma</span><span class="p">)))</span>
@@ -404,7 +404,7 @@ this, using a 2D Lorentzian</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[13]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">AxesImage</span> <span class="n">at</span> <span class="mh">0x7f920f769a20</span><span class="o">&gt;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">AxesImage</span> <span class="n">at</span> <span class="mh">0x7f1cd4b92048</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <img alt="../_images/synthetic-images_26_1.png" src="../_images/synthetic-images_26_1.png" />
@@ -418,11 +418,11 @@ fft, however, causes boundary effects. We’ll need to specify how we want
 to handle the boundary. Here we choose to “wrap” the data, which means
 making the data periodic.</p>
 <p><span class="inputnumrole">In[14]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">convolved_image</span> <span class="o">=</span> <span class="n">convolve_fft</span><span class="p">(</span><span class="n">hdu</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">psf</span><span class="p">,</span> <span class="n">boundary</span><span class="o">=</span><span class="s1">&#39;wrap&#39;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">convolved_image</span> <span class="o">=</span> <span class="n">convolve_fft</span><span class="p">(</span><span class="n">hdu</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">psf</span><span class="p">,</span> <span class="n">boundary</span><span class="o">=</span><span class="s1">&#39;wrap&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="inputnumrole">In[15]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Put a psf at the corner of the image</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Put a psf at the corner of the image</span>
 <span class="n">delta_x_psf</span><span class="o">=</span><span class="mi">100</span> <span class="c1"># number of pixels from the edges</span>
 <span class="n">xmin</span><span class="p">,</span> <span class="n">xmax</span> <span class="o">=</span> <span class="o">-</span><span class="n">psf</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">delta_x_psf</span><span class="p">,</span> <span class="o">-</span><span class="n">delta_x_psf</span>
 <span class="n">ymin</span><span class="p">,</span> <span class="n">ymax</span> <span class="o">=</span> <span class="n">delta_x_psf</span><span class="p">,</span> <span class="n">delta_x_psf</span><span class="o">+</span><span class="n">psf</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -431,7 +431,7 @@ making the data periodic.</p>
 </div>
 <p>Now let’s take a look at the convolved image.</p>
 <p><span class="inputnumrole">In[16]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">wcs</span> <span class="o">=</span> <span class="n">WCS</span><span class="p">(</span><span class="n">hdu</span><span class="o">.</span><span class="n">header</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">wcs</span> <span class="o">=</span> <span class="n">WCS</span><span class="p">(</span><span class="n">hdu</span><span class="o">.</span><span class="n">header</span><span class="p">)</span>
 <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">12</span><span class="p">))</span>
 <span class="n">i_plot</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="n">wcs</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">convolved_image</span><span class="o">+</span><span class="mf">1e-3</span><span class="p">),</span> <span class="n">vmin</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">)</span><span class="c1">#, cmap=plt.cm.viridis)</span>
@@ -441,7 +441,7 @@ making the data periodic.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[16]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">colorbar</span><span class="o">.</span><span class="n">Colorbar</span> <span class="n">at</span> <span class="mh">0x7f920f5ca358</span><span class="o">&gt;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">colorbar</span><span class="o">.</span><span class="n">Colorbar</span> <span class="n">at</span> <span class="mh">0x7f1cd4ae7940</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <img alt="../_images/synthetic-images_32_1.png" src="../_images/synthetic-images_32_1.png" />
@@ -449,7 +449,7 @@ making the data periodic.</p>
 <div class="section" id="convolve-stokes-q-and-u-images">
 <h2>5. Convolve Stokes Q and U images<a class="headerlink" href="#convolve-stokes-q-and-u-images" title="Permalink to this headline">¶</a></h2>
 <p><span class="inputnumrole">In[17]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">hdulist</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">hdulist</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[17]:</span></p>
@@ -460,15 +460,15 @@ making the data periodic.</p>
 </pre></div>
 </div>
 <p><span class="inputnumrole">In[18]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">file_q</span> <span class="o">=</span> <span class="n">download_file</span><span class="p">(</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">file_q</span> <span class="o">=</span> <span class="n">download_file</span><span class="p">(</span>
     <span class="s1">&#39;http://data.astropy.org/tutorials/synthetic-images/synchrotron_q_lobe_0700_150MHz_sm.fits&#39;</span><span class="p">,</span>
-    <span class="n">cache</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">cache</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="n">hdulist</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">file_q</span><span class="p">)</span>
 <span class="n">hdu_q</span> <span class="o">=</span> <span class="n">hdulist</span><span class="p">[</span><span class="s1">&#39;NN_EMISSIVITY_Q_LOBE_150.0MHZ&#39;</span><span class="p">]</span>
 
 <span class="n">file_u</span> <span class="o">=</span> <span class="n">download_file</span><span class="p">(</span>
     <span class="s1">&#39;http://data.astropy.org/tutorials/synthetic-images/synchrotron_u_lobe_0700_150MHz_sm.fits&#39;</span><span class="p">,</span>
-    <span class="n">cache</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">cache</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="n">hdulist</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">file_u</span><span class="p">)</span>
 <span class="n">hdu_u</span> <span class="o">=</span> <span class="n">hdulist</span><span class="p">[</span><span class="s1">&#39;NN_EMISSIVITY_U_LOBE_150.0MHZ&#39;</span><span class="p">]</span>
 
@@ -483,7 +483,7 @@ making the data periodic.</p>
 </div>
 <p>Let’s plot the Q and U images.</p>
 <p><span class="inputnumrole">In[19]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">wcs</span> <span class="o">=</span> <span class="n">WCS</span><span class="p">(</span><span class="n">hdu</span><span class="o">.</span><span class="n">header</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">wcs</span> <span class="o">=</span> <span class="n">WCS</span><span class="p">(</span><span class="n">hdu</span><span class="o">.</span><span class="n">header</span><span class="p">)</span>
 <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span><span class="mi">12</span><span class="p">))</span>
 <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">121</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="n">wcs</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">convolved_image_q</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;seismic&#39;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=-</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">)</span><span class="c1">#, cmap=plt.cm.viridis)</span>
@@ -500,7 +500,7 @@ making the data periodic.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[19]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">colorbar</span><span class="o">.</span><span class="n">Colorbar</span> <span class="n">at</span> <span class="mh">0x7f920de3fef0</span><span class="o">&gt;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">colorbar</span><span class="o">.</span><span class="n">Colorbar</span> <span class="n">at</span> <span class="mh">0x7f1cd6eef4e0</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <img alt="../_images/synthetic-images_37_1.png" src="../_images/synthetic-images_37_1.png" />
@@ -512,7 +512,7 @@ Here we assume that the Stokes q and u maps were calculated defining the
 y/declination axis as vertical, such that Q is positive for polarization
 vectors along the x/right-ascention axis.</p>
 <p><span class="inputnumrole">In[20]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># First, we plot the background image</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># First, we plot the background image</span>
 <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">16</span><span class="p">))</span>
 <span class="n">i_plot</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="n">wcs</span><span class="p">)</span>
 <span class="n">i_plot</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">convolved_image</span><span class="o">+</span><span class="mf">1e-3</span><span class="p">),</span> <span class="n">vmin</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">)</span>
@@ -529,8 +529,8 @@ vectors along the x/right-ascention axis.</p>
 <span class="n">ny_new</span> <span class="o">=</span> <span class="n">convolved_image</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">//</span> <span class="n">factor</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 
 <span class="c1"># These are the positions of the quivers</span>
-<span class="n">X</span><span class="p">,</span><span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">xx0</span><span class="p">,</span><span class="n">xx1</span><span class="p">,</span><span class="n">nx_new</span><span class="p">,</span><span class="n">endpoint</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
-                  <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">yy0</span><span class="p">,</span><span class="n">yy1</span><span class="p">,</span><span class="n">ny_new</span><span class="p">,</span><span class="n">endpoint</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+<span class="n">X</span><span class="p">,</span><span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">xx0</span><span class="p">,</span><span class="n">xx1</span><span class="p">,</span><span class="n">nx_new</span><span class="p">,</span><span class="n">endpoint</span><span class="o">=</span><span class="bp">True</span><span class="p">),</span>
+                  <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="n">yy0</span><span class="p">,</span><span class="n">yy1</span><span class="p">,</span><span class="n">ny_new</span><span class="p">,</span><span class="n">endpoint</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
 
 <span class="c1"># bin the data</span>
 <span class="n">I_bin</span> <span class="o">=</span> <span class="n">convolved_image</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">nx_new</span><span class="p">,</span> <span class="n">factor</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">ny_new</span><span class="p">,</span> <span class="n">factor</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
@@ -558,7 +558,7 @@ vectors along the x/right-ascention axis.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[20]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">quiver</span><span class="o">.</span><span class="n">Quiver</span> <span class="n">at</span> <span class="mh">0x7f9215a4e6a0</span><span class="o">&gt;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">quiver</span><span class="o">.</span><span class="n">Quiver</span> <span class="n">at</span> <span class="mh">0x7f1cd6f4b710</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <img alt="../_images/synthetic-images_40_1.png" src="../_images/synthetic-images_40_1.png" />
@@ -588,7 +588,7 @@ take the psf we created earlier, you can convert the data into Jy/beam.</p>
       
     </p>
     <p>
-    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
     &copy; Copyright Astropy.   
     </p>
   </div>

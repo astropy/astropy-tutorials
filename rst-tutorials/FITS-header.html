@@ -2,8 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="filterTutorials, filterFitsHeader, filterFileInputOutput" name="keywords" />
+    <meta charset="utf-8" /><meta content="filterTutorials, filterFitsHeader, filterFileInputOutput" name="keywords" />
 <meta content="filterTutorials," name="keywords" />
 
     <title>Edit a FITS header &#8212; astropy-tutorials v3.0.dev</title>
@@ -116,8 +115,8 @@
 <div class="section" id="learning-goals">
 <h2>Learning Goals<a class="headerlink" href="#learning-goals" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Read a FITS file and retrieve the header metadata</li>
-<li>Edit the FITS header and write the modified file as a FITS file</li>
+<li><p>Read a FITS file and retrieve the header metadata</p></li>
+<li><p>Edit the FITS header and write the modified file as a FITS file</p></li>
 </ul>
 </div>
 <div class="section" id="keywords">
@@ -143,7 +142,7 @@ that use the name <code class="docutils literal notranslate"><span class="pre">p
 <code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">pyfits</span></code> and then the command <code class="docutils literal notranslate"><span class="pre">fits.getdata()</span></code> (for example)
 would be written as <code class="docutils literal notranslate"><span class="pre">pyfits.getdata()</span></code>.</p>
 <p><span class="inputnumrole">In[1]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">astropy.io</span> <span class="k">import</span> <span class="n">fits</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">astropy.io</span> <span class="kn">import</span> <span class="n">fits</span>
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">astropy.io.fits</span></code> provides a lot of flexibility for reading FITS files
@@ -152,12 +151,12 @@ easiest way to access the data. <code class="docutils literal notranslate"><span
 from a FITS file, but with the <code class="docutils literal notranslate"><span class="pre">header=True</span></code> keyword argument will
 also read the header.</p>
 <p><span class="inputnumrole">In[2]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">getdata</span><span class="p">(</span><span class="s2">&quot;input_file.fits&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">getdata</span><span class="p">(</span><span class="s2">&quot;input_file.fits&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>There is also a dedicated function for reading just the header:</p>
 <p><span class="inputnumrole">In[3]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">hdu_number</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># HDU means header data unit</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">hdu_number</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># HDU means header data unit</span>
 <span class="n">fits</span><span class="o">.</span><span class="n">getheader</span><span class="p">(</span><span class="s1">&#39;input_file.fits&#39;</span><span class="p">,</span> <span class="n">hdu_number</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -176,7 +175,7 @@ command to remember. Since the primary HDU of a FITS file must contain
 image data, the data is now stored in a <code class="docutils literal notranslate"><span class="pre">numpy</span></code> array. The header is
 stored in an object that acts like a standard Python dictionary.</p>
 <p><span class="inputnumrole">In[4]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># But hdu_number = 0 is the PRIMARY HDU.How many HDUs are in this file?</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># But hdu_number = 0 is the PRIMARY HDU.How many HDUs are in this file?</span>
 <span class="n">fits_inf</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s2">&quot;input_file.fits&quot;</span><span class="p">)</span>
 <span class="n">fits_inf</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
 <span class="n">fits_inf</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">header</span>
@@ -205,13 +204,13 @@ What will you learn if you type <code class="docutils literal notranslate"><span
 <code class="docutils literal notranslate"><span class="pre">fits_inf[2].header</span></code>?</p>
 <p>Now let’s change the header to give it the correct object:</p>
 <p><span class="inputnumrole">In[5]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">header</span><span class="p">[</span><span class="s1">&#39;OBJECT&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;M31&quot;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">header</span><span class="p">[</span><span class="s1">&#39;OBJECT&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;M31&quot;</span>
 </pre></div>
 </div>
 <p>Finally, we have to write out the FITS file. Again, the convenience
 function for this is the most useful command to remember:</p>
 <p><span class="inputnumrole">In[6]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fits</span><span class="o">.</span><span class="n">writeto</span><span class="p">(</span><span class="s1">&#39;output_file.fits&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">header</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fits</span><span class="o">.</span><span class="n">writeto</span><span class="p">(</span><span class="s1">&#39;output_file.fits&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">header</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>That’s it; you’re done!</p>
@@ -222,7 +221,7 @@ needs are much more complex, you should consult the full documentation
 editing might have multiple HDU’s (extensions), in which case you can
 specify the extension like this:</p>
 <p><span class="inputnumrole">In[7]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">data1</span><span class="p">,</span> <span class="n">header1</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">getdata</span><span class="p">(</span><span class="s2">&quot;input_file.fits&quot;</span><span class="p">,</span> <span class="n">ext</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data1</span><span class="p">,</span> <span class="n">header1</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">getdata</span><span class="p">(</span><span class="s2">&quot;input_file.fits&quot;</span><span class="p">,</span> <span class="n">ext</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>This will get you the data and header associated with the <code class="docutils literal notranslate"><span class="pre">index=1</span></code>
@@ -232,7 +231,7 @@ will get the 0th extension (equivalent to saying <code class="docutils literal n
 default, <code class="docutils literal notranslate"><span class="pre">writeto()</span></code> won’t let you do this, so you need to explicitly
 give it permission using the <code class="docutils literal notranslate"><span class="pre">clobber</span></code> keyword argument:</p>
 <p><span class="inputnumrole">In[8]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fits</span><span class="o">.</span><span class="n">writeto</span><span class="p">(</span><span class="s1">&#39;output_file.fits&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">header</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fits</span><span class="o">.</span><span class="n">writeto</span><span class="p">(</span><span class="s1">&#39;output_file.fits&#39;</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">header</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>A final example is if you want to make a small change to a FITS file,
@@ -240,7 +239,7 @@ like updating a header keyword, but you don’t want to read in and write
 out the whole file, which can take a while. Instead you can use the
 <code class="docutils literal notranslate"><span class="pre">mode='update'</span></code> read mode to do this:</p>
 <p><span class="inputnumrole">In[9]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;input_file.fits&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;update&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">filehandle</span><span class="p">:</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;input_file.fits&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;update&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">filehandle</span><span class="p">:</span>
     <span class="n">filehandle</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="s1">&#39;MYHDRKW&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;My Header Keyword&quot;</span>
 </pre></div>
 </div>
@@ -249,10 +248,10 @@ out the whole file, which can take a while. Instead you can use the
 <h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">¶</a></h2>
 <p>Read in the file you just wrote and add three header keywords:</p>
 <ol class="arabic simple">
-<li>‘RA’ for the Right Ascension of M31</li>
-<li>‘DEC’ for the Declination of M31</li>
-<li>‘RADECSRC’ with text indicating where you found the RA/Dec (web URL,
-textbook name, your photographic memory, etc.)</li>
+<li><p>‘RA’ for the Right Ascension of M31</p></li>
+<li><p>‘DEC’ for the Declination of M31</p></li>
+<li><p>‘RADECSRC’ with text indicating where you found the RA/Dec (web URL,
+textbook name, your photographic memory, etc.)</p></li>
 </ol>
 <p>Then write the updated header back out to a new file:</p>
 <p><span class="inputnumrole">In[None]:</span></p>
@@ -275,7 +274,7 @@ textbook name, your photographic memory, etc.)</li>
       
     </p>
     <p>
-    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
     &copy; Copyright Astropy.   
     </p>
   </div>

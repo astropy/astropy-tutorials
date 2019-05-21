@@ -2,8 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
     <title>Contributing &#8212; astropy-tutorials v3.0.dev</title>
     <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -136,21 +135,20 @@ other metadata that should be associated with the tutorial.</p>
 <div class="section" id="id1">
 <h3>Overview<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>Each tutorial should have 3–5 explicit <a class="reference external" href="http://tll.mit.edu/help/intended-learning-outcomes">Learning Goals</a>, demonstrate ~2–3
-pieces of functionality relevant to astronomy, and contain 2–3 demonstrations of generic but commonly used functionality (e.g., <code class="docutils literal notranslate"><span class="pre">numpy</span></code>, <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>).</li>
-<li><dl class="first docutils">
-<dt>Each tutorial should roughly follow this progression:</dt>
-<dd><ul class="first last">
-<li><em>Input/Output</em>: read in some data (use <a class="reference external" href="https://astroquery.readthedocs.io/en/latest/">astroquery</a> where possible to query
-real astronomical datasets)</li>
-<li><em>Analysis</em>: do something insightful / useful with the data</li>
-<li><em>Visualization</em>: make a pretty figure (use <a class="reference external" href="http://docs.astropy.org/en/stable/visualization/">astropy.visualization</a> where possible)</li>
+<li><p>Each tutorial should have 3–5 explicit <a class="reference external" href="http://tll.mit.edu/help/intended-learning-outcomes">Learning Goals</a>, demonstrate ~2–3
+pieces of functionality relevant to astronomy, and contain 2–3 demonstrations of generic but commonly used functionality (e.g., <code class="docutils literal notranslate"><span class="pre">numpy</span></code>, <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>).</p></li>
+<li><dl class="simple">
+<dt>Each tutorial should roughly follow this progression:</dt><dd><ul>
+<li><p><em>Input/Output</em>: read in some data (use <a class="reference external" href="https://astroquery.readthedocs.io/en/latest/">astroquery</a> where possible to query
+real astronomical datasets)</p></li>
+<li><p><em>Analysis</em>: do something insightful / useful with the data</p></li>
+<li><p><em>Visualization</em>: make a pretty figure (use <a class="reference external" href="http://docs.astropy.org/en/stable/visualization/">astropy.visualization</a> where possible)</p></li>
 </ul>
 </dd>
 </dl>
 </li>
-<li>The tutorials must be compatible with the versions supported by the last major
-release of the Astropy core package (i.e. Python &gt;= 3.5)</li>
+<li><p>The tutorials must be compatible with the versions supported by the last major
+release of the Astropy core package (i.e. Python &gt;= 3.5)</p></li>
 </ul>
 </div>
 <div class="section" id="template-intro">
@@ -181,41 +179,37 @@ visualize it.
 <div class="section" id="code">
 <h3>Code<a class="headerlink" href="#code" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li><dl class="first docutils">
-<dt>Demonstrate good commenting practice</dt>
-<dd><ul class="first last">
-<li>Add comments to sections of code that use concepts not included in the
-Learning Goals</li>
+<li><dl class="simple">
+<dt>Demonstrate good commenting practice</dt><dd><ul>
+<li><p>Add comments to sections of code that use concepts not included in the
+Learning Goals</p></li>
 </ul>
 </dd>
 </dl>
 </li>
-<li><dl class="first docutils">
-<dt>Demonstrate best practices of variable names</dt>
-<dd><ul class="first last">
-<li>Variables should be all lower case with words separated by underscores</li>
-<li>Variable names should be descriptive, e.g., <code class="docutils literal notranslate"><span class="pre">galaxy_mass</span></code>, <code class="docutils literal notranslate"><span class="pre">u_mag</span></code></li>
+<li><dl class="simple">
+<dt>Demonstrate best practices of variable names</dt><dd><ul>
+<li><p>Variables should be all lower case with words separated by underscores</p></li>
+<li><p>Variable names should be descriptive, e.g., <code class="docutils literal notranslate"><span class="pre">galaxy_mass</span></code>, <code class="docutils literal notranslate"><span class="pre">u_mag</span></code></p></li>
 </ul>
 </dd>
 </dl>
 </li>
-<li>Use the print function explicitly to display information about variables</li>
-<li>As much as possible, comply with <a class="reference external" href="https://www.python.org/dev/peps/pep-0008/">PEP8</a>.</li>
-<li>As much as possible, comply with Jupyter notebook style guides - <a class="reference external" href="https://github.com/spacetelescope/style-guides/blob/master/guides/jupyter-notebooks.md">STScI style guide</a> and <a class="reference external" href="https://jupyter.readthedocs.io/en/latest/development_guide/coding_style.html">Official Coding Style</a>.</li>
-<li><dl class="first docutils">
-<dt>Imports</dt>
-<dd><ul class="first last">
-<li>Do not use <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">package</span> <span class="pre">import</span> <span class="pre">*</span></code>; import packages, classes, and
-functions explicitly</li>
-<li><dl class="first docutils">
-<dt>Follow recommended package name abbreviations:</dt>
-<dd><ul class="first last">
-<li><code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">numpy</span> <span class="pre">as</span> <span class="pre">np</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">matplotlib</span> <span class="pre">as</span> <span class="pre">mpl</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">matplotlib.pyplot</span> <span class="pre">as</span> <span class="pre">plt</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">astropy.units</span> <span class="pre">as</span> <span class="pre">u</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">astropy.coordinates</span> <span class="pre">as</span> <span class="pre">coord</span></code></li>
-<li><code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">astropy.io</span> <span class="pre">import</span> <span class="pre">fits</span></code></li>
+<li><p>Use the print function explicitly to display information about variables</p></li>
+<li><p>As much as possible, comply with <a class="reference external" href="https://www.python.org/dev/peps/pep-0008/">PEP8</a>.</p></li>
+<li><p>As much as possible, comply with Jupyter notebook style guides - <a class="reference external" href="https://github.com/spacetelescope/style-guides/blob/master/guides/jupyter-notebooks.md">STScI style guide</a> and <a class="reference external" href="https://jupyter.readthedocs.io/en/latest/development_guide/coding_style.html">Official Coding Style</a>.</p></li>
+<li><dl class="simple">
+<dt>Imports</dt><dd><ul>
+<li><p>Do not use <code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">package</span> <span class="pre">import</span> <span class="pre">*</span></code>; import packages, classes, and
+functions explicitly</p></li>
+<li><dl class="simple">
+<dt>Follow recommended package name abbreviations:</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">numpy</span> <span class="pre">as</span> <span class="pre">np</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">matplotlib</span> <span class="pre">as</span> <span class="pre">mpl</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">matplotlib.pyplot</span> <span class="pre">as</span> <span class="pre">plt</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">astropy.units</span> <span class="pre">as</span> <span class="pre">u</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">astropy.coordinates</span> <span class="pre">as</span> <span class="pre">coord</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">astropy.io</span> <span class="pre">import</span> <span class="pre">fits</span></code></p></li>
 </ul>
 </dd>
 </dl>
@@ -224,10 +218,9 @@ functions explicitly</li>
 </dd>
 </dl>
 </li>
-<li><dl class="first docutils">
-<dt>Display figures inline using matplotlib’s inline backend:</dt>
-<dd><ul class="first last">
-<li><code class="docutils literal notranslate"><span class="pre">%matplotlib</span> <span class="pre">inline</span> <span class="pre">#</span> <span class="pre">make</span> <span class="pre">plots</span> <span class="pre">display</span> <span class="pre">in</span> <span class="pre">notebooks</span></code></li>
+<li><dl class="simple">
+<dt>Display figures inline using matplotlib’s inline backend:</dt><dd><ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">%matplotlib</span> <span class="pre">inline</span> <span class="pre">#</span> <span class="pre">make</span> <span class="pre">plots</span> <span class="pre">display</span> <span class="pre">in</span> <span class="pre">notebooks</span></code></p></li>
 </ul>
 </dd>
 </dl>
@@ -237,29 +230,29 @@ functions explicitly</li>
 <div class="section" id="narrative">
 <h3>Narrative<a class="headerlink" href="#narrative" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
-<li>Please read through the other tutorials to get a sense of the desired tone and
-length.</li>
-<li>Use <a class="reference external" href="http://jupyter-notebook.readthedocs.io/en/latest/examples/Notebook/Working%20With%20Markdown%20Cells.html">Markdown formatting</a> in text cells for
-formatting, links, latex, and code snippets.</li>
-<li>Titles should be short yet descriptive and emphasize the learning goals of the
+<li><p>Please read through the other tutorials to get a sense of the desired tone and
+length.</p></li>
+<li><p>Use <a class="reference external" href="http://jupyter-notebook.readthedocs.io/en/latest/examples/Notebook/Working%20With%20Markdown%20Cells.html">Markdown formatting</a> in text cells for
+formatting, links, latex, and code snippets.</p></li>
+<li><p>Titles should be short yet descriptive and emphasize the learning goals of the
 tutorial. Try to make the title appeal to a broad audience and avoid
-referencing a specific instrument, catalog, or anything wavelength dependent.</li>
-<li>List all authors’ full names (comma separated) and link to GitHub profiles
-and/or <a class="reference external" href="https://orcid.org/">ORCID iD</a> when relevant.</li>
-<li>Include <a class="reference external" href="http://tll.mit.edu/help/intended-learning-outcomes">Learning Goals</a>
-at the top as a bulleted list.</li>
-<li>Include Keywords as a comma separated list of topics, packages, and functions
-demonstrated.</li>
-<li>The first paragraph should give a brief overview of the entire tutorial
-including relevant astronomy concepts.</li>
-<li>Use the first-person inclusive plural (“we”). For example, “We are going to
-make a plot which…”, or “Above, we did it the hard way, but here is the easier way…”</li>
-<li>Section headings should be in the imperative mood. For example, “Download the
-data.”</li>
-<li>Avoid extraneous words such as “obviously”, “just”, “simply”, or “easily.” For example, avoid phrases like “we just have to do this one thing.”</li>
-<li>Use <code class="docutils literal notranslate"><span class="pre">&lt;div</span> <span class="pre">class=&quot;alert</span> <span class="pre">alert-info&quot;&gt;Note&lt;/div&gt;</span></code> for Notes and <code class="docutils literal notranslate"><span class="pre">&lt;div</span>
+referencing a specific instrument, catalog, or anything wavelength dependent.</p></li>
+<li><p>List all authors’ full names (comma separated) and link to GitHub profiles
+and/or <a class="reference external" href="https://orcid.org/">ORCID iD</a> when relevant.</p></li>
+<li><p>Include <a class="reference external" href="http://tll.mit.edu/help/intended-learning-outcomes">Learning Goals</a>
+at the top as a bulleted list.</p></li>
+<li><p>Include Keywords as a comma separated list of topics, packages, and functions
+demonstrated.</p></li>
+<li><p>The first paragraph should give a brief overview of the entire tutorial
+including relevant astronomy concepts.</p></li>
+<li><p>Use the first-person inclusive plural (“we”). For example, “We are going to
+make a plot which…”, or “Above, we did it the hard way, but here is the easier way…”</p></li>
+<li><p>Section headings should be in the imperative mood. For example, “Download the
+data.”</p></li>
+<li><p>Avoid extraneous words such as “obviously”, “just”, “simply”, or “easily.” For example, avoid phrases like “we just have to do this one thing.”</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">&lt;div</span> <span class="pre">class=&quot;alert</span> <span class="pre">alert-info&quot;&gt;Note&lt;/div&gt;</span></code> for Notes and <code class="docutils literal notranslate"><span class="pre">&lt;div</span>
 <span class="pre">class=&quot;alert</span> <span class="pre">alert-warning&quot;&gt;Warning&lt;/div&gt;</span></code> for Warnings (Markdown supports
-raw HTML)</li>
+raw HTML)</p></li>
 </ul>
 </div>
 </div>
@@ -273,12 +266,12 @@ editing and feedback for submitted tutorial notebooks via
 <a class="reference external" href="https://colab.research.google.com/">Colaboratory</a>. Follow this
 procedure to submit a Jupyter notebook:</p>
 <ul class="simple">
-<li>Upload the Jupyter notebook to Google drive</li>
-<li>Right click on the file in your Google drive and select <em>Get
+<li><p>Upload the Jupyter notebook to Google drive</p></li>
+<li><p>Right click on the file in your Google drive and select <em>Get
 shareable link</em>. Click on <em>Share settings</em> and change it so that
-“Anyone with a link can edit”. Then copy the url in the box.</li>
-<li><a class="reference external" href="https://github.com/astropy/astropy-tutorials/issues">Open an issue on the astropy-tutorials Github repo</a> and paste
-the url to your Jupyter notebook.</li>
+“Anyone with a link can edit”. Then copy the url in the box.</p></li>
+<li><p><a class="reference external" href="https://github.com/astropy/astropy-tutorials/issues">Open an issue on the astropy-tutorials Github repo</a> and paste
+the url to your Jupyter notebook.</p></li>
 </ul>
 <p>Learn Astropy maintainers will respond as soon as possible by
 downloading your notebook, testing it, and editing the file in your
@@ -342,16 +335,15 @@ use of the <code class="xref py py-obj docutils literal notranslate"><span class
 the <a class="reference external" href="http://data.astropy.org">http://data.astropy.org</a> server. To do this, use the following
 procedure:</p>
 <ul>
-<li><p class="first">When writing your tutorial, include the files in your tutorial’s directory
+<li><p>When writing your tutorial, include the files in your tutorial’s directory
 (e.g., <code class="docutils literal notranslate"><span class="pre">tutorials/notebooks/My-tutorial-name/mydatafile.fits</span></code>). Those who
 are reviewing your tutorial will have to download them, but they would need
 them anyway, so it’s ok. <strong>IMPORTANT</strong>: when you add or modify data files,
 make sure the only thing in that commit involves the data files.  That is, do
 <em>not</em> edit your notebook and add/change data files in the same commit.  This
 will make it much easier to remove the data files when your tutorial is
-actually merged.</p>
-</li>
-<li><p class="first">To actually access your data files in the notebook, do something like this at
+actually merged.</p></li>
+<li><p>To actually access your data files in the notebook, do something like this at
 the top of the notebook:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">astropy.utils.data</span> <span class="k">import</span> <span class="n">download_file</span>
 
@@ -372,9 +364,9 @@ the top of the notebook:</p>
 </ul>
 <p>If you need information or help with:</p>
 <ul class="simple">
-<li>previewing how the rendered Jupyter notebooks will look on the tutorial
-webpage</li>
-<li>marking a cell with an intentional / expected error</li>
+<li><p>previewing how the rendered Jupyter notebooks will look on the tutorial
+webpage</p></li>
+<li><p>marking a cell with an intentional / expected error</p></li>
 </ul>
 <p>please see the <a class="reference internal" href="dev.html#dev-page"><span class="std std-ref">Documentation on tutorials infrastructure</span></a>.</p>
 </div>
@@ -383,9 +375,9 @@ webpage</li>
 <p>If this above procedure is followed, you only need to do these three steps when
 merging your pull request:</p>
 <ol class="arabic simple">
-<li>Do <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rebase</span> <span class="pre">-i</span></code> and delete the commits that include the data files</li>
-<li>Upload the data files to <code class="docutils literal notranslate"><span class="pre">http://data.astropy.org/tutorials/My-tutorial-name/</span></code></li>
-<li>Update the <code class="docutils literal notranslate"><span class="pre">tutorialpath</span></code> variable</li>
+<li><p>Do <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">rebase</span> <span class="pre">-i</span></code> and delete the commits that include the data files</p></li>
+<li><p>Upload the data files to <code class="docutils literal notranslate"><span class="pre">http://data.astropy.org/tutorials/My-tutorial-name/</span></code></p></li>
+<li><p>Update the <code class="docutils literal notranslate"><span class="pre">tutorialpath</span></code> variable</p></li>
 </ol>
 </div>
 </div>
@@ -404,7 +396,7 @@ merging your pull request:</p>
       
     </p>
     <p>
-    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
     &copy; Copyright Astropy.   
     </p>
   </div>

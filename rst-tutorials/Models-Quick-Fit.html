@@ -2,8 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="filterTutorials, filterModeling, filterModelFitting, filterAstroquery, filterMatplotlib, filterAstrostatistics" name="keywords" />
+    <meta charset="utf-8" /><meta content="filterTutorials, filterModeling, filterModelFitting, filterAstroquery, filterMatplotlib, filterAstrostatistics" name="keywords" />
 <meta content="filterTutorials," name="keywords" />
 
     <title>Make a quick fit using astropy.modeling &#8212; astropy-tutorials v3.0.dev</title>
@@ -133,10 +132,10 @@
 <div class="section" id="learning-goals">
 <h2>Learning Goals<a class="headerlink" href="#learning-goals" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Know basic models in Astropy Modeling</li>
-<li>Learn common functions to fit</li>
-<li>Be able to make a quick fit of your data</li>
-<li>Visualize the fit</li>
+<li><p>Know basic models in Astropy Modeling</p></li>
+<li><p>Learn common functions to fit</p></li>
+<li><p>Be able to make a quick fit of your data</p></li>
+<li><p>Visualize the fit</p></li>
 </ul>
 </div>
 <div class="section" id="keywords">
@@ -151,10 +150,10 @@
 <div class="section" id="imports">
 <h3>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h3>
 <p><span class="inputnumrole">In[1]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">astropy.modeling</span> <span class="k">import</span> <span class="n">models</span><span class="p">,</span> <span class="n">fitting</span>
-<span class="kn">from</span> <span class="nn">astroquery.vizier</span> <span class="k">import</span> <span class="n">Vizier</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">astropy.modeling</span> <span class="kn">import</span> <span class="n">models</span><span class="p">,</span> <span class="n">fitting</span>
+<span class="kn">from</span> <span class="nn">astroquery.vizier</span> <span class="kn">import</span> <span class="n">Vizier</span>
 <span class="kn">import</span> <span class="nn">scipy.optimize</span>
 <span class="c1"># Make plots display in notebooks</span>
 <span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
@@ -177,7 +176,7 @@ higher.</p>
 <a class="reference external" href="http://vizier.u-strasbg.fr/viz-bin/VizieR">Vizier</a> using
 <a class="reference external" href="http://astroquery.readthedocs.io/en/latest/vizier/vizier.html">astroquery</a>.</p>
 <p><span class="inputnumrole">In[2]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">catalog</span> <span class="o">=</span> <span class="n">Vizier</span><span class="o">.</span><span class="n">get_catalogs</span><span class="p">(</span><span class="s1">&#39;J/A+A/605/A100&#39;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">catalog</span> <span class="o">=</span> <span class="n">Vizier</span><span class="o">.</span><span class="n">get_catalogs</span><span class="p">(</span><span class="s1">&#39;J/A+A/605/A100&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>This catalog has a lot of information, but for this tutorial we are
@@ -185,7 +184,7 @@ going to work only with periods and magnitudes. Let’s grab them using
 the keywords <code class="docutils literal notranslate"><span class="pre">'Period'</span></code> and <code class="docutils literal notranslate"><span class="pre">__Ksmag__</span></code>. Note that <code class="docutils literal notranslate"><span class="pre">'e__Ksmag_'</span></code>
 refers to the error bars in the magnitude measurements.</p>
 <p><span class="inputnumrole">In[3]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">period</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">catalog</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;Period&#39;</span><span class="p">])</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">period</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">catalog</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;Period&#39;</span><span class="p">])</span>
 <span class="n">log_period</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">period</span><span class="p">)</span>
 <span class="n">k_mag</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">catalog</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;__Ksmag_&#39;</span><span class="p">])</span>
 <span class="n">k_mag_err</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">catalog</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;e__Ksmag_&#39;</span><span class="p">])</span>
@@ -193,8 +192,8 @@ refers to the error bars in the magnitude measurements.</p>
 </div>
 <p>Let’s take a look at the magnitude measurements as a function of period:</p>
 <p><span class="inputnumrole">In[4]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">log_period</span><span class="p">,</span> <span class="n">k_mag</span><span class="p">,</span> <span class="n">k_mag_err</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;k.&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\log_</span><span class="si">{10}</span><span class="s1">$(Period [days])&#39;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">log_period</span><span class="p">,</span> <span class="n">k_mag</span><span class="p">,</span> <span class="n">k_mag_err</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;k.&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\log_{10}$(Period [days])&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Ks&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -217,14 +216,14 @@ to define and to use, given that we do not need to write the function
 expression every time we want to use a model, just the name. They can be
 linear or non-linear in the variables. Some examples of models are:</p>
 <ul class="simple">
-<li><a class="reference external" href="http://docs.astropy.org/en/stable/api/astropy.modeling.functional_models.Gaussian1D.html#astropy.modeling.functional_models.Gaussian1D">Gaussian1D</a></li>
-<li><a class="reference external" href="http://docs.astropy.org/en/stable/api/astropy.modeling.functional_models.Trapezoid1D.html#astropy.modeling.functional_models.Trapezoid1D">Trapezoid1D</a></li>
-<li><a class="reference external" href="http://docs.astropy.org/en/stable/api/astropy.modeling.polynomial.Polynomial1D.html#astropy.modeling.polynomial.Polynomial1D">Polynomial1D</a></li>
-<li><a class="reference external" href="http://docs.astropy.org/en/stable/api/astropy.modeling.functional_models.Sine1D.html#astropy.modeling.functional_models.Sine1D">Sine1D</a></li>
-<li><a class="reference external" href="http://docs.astropy.org/en/stable/api/astropy.modeling.functional_models.Linear1D.html#astropy.modeling.functional_models.Linear1D">Linear1D</a></li>
-<li>The
+<li><p><a class="reference external" href="http://docs.astropy.org/en/stable/api/astropy.modeling.functional_models.Gaussian1D.html#astropy.modeling.functional_models.Gaussian1D">Gaussian1D</a></p></li>
+<li><p><a class="reference external" href="http://docs.astropy.org/en/stable/api/astropy.modeling.functional_models.Trapezoid1D.html#astropy.modeling.functional_models.Trapezoid1D">Trapezoid1D</a></p></li>
+<li><p><a class="reference external" href="http://docs.astropy.org/en/stable/api/astropy.modeling.polynomial.Polynomial1D.html#astropy.modeling.polynomial.Polynomial1D">Polynomial1D</a></p></li>
+<li><p><a class="reference external" href="http://docs.astropy.org/en/stable/api/astropy.modeling.functional_models.Sine1D.html#astropy.modeling.functional_models.Sine1D">Sine1D</a></p></li>
+<li><p><a class="reference external" href="http://docs.astropy.org/en/stable/api/astropy.modeling.functional_models.Linear1D.html#astropy.modeling.functional_models.Linear1D">Linear1D</a></p></li>
+<li><p>The
 <a class="reference external" href="http://docs.astropy.org/en/stable/modeling/#module-astropy.modeling.functional_models">list</a>
-continues.</li>
+continues.</p></li>
 </ul>
 </div>
 <div class="section" id="fitters-in-astropy">
@@ -233,16 +232,16 @@ continues.</li>
 can be linear or non-linear in the parameters (no the variable, like
 models). Some examples are:</p>
 <ul class="simple">
-<li><a class="reference external" href="http://docs.astropy.org/en/stable/api/astropy.modeling.fitting.LevMarLSQFitter.html#astropy.modeling.fitting.LevMarLSQFitter">LevMarLSQFitter()</a>
-Levenberg-Marquardt algorithm and least squares statistic.</li>
-<li><a class="reference external" href="http://docs.astropy.org/en/stable/api/astropy.modeling.fitting.LinearLSQFitter.html#astropy.modeling.fitting.LinearLSQFitter">LinearLSQFitter()</a>
-A class performing a linear least square fitting.</li>
-<li><a class="reference external" href="http://docs.astropy.org/en/stable/api/astropy.modeling.fitting.SLSQPLSQFitter.html#astropy.modeling.fitting.SLSQPLSQFitter">SLSQPLSQFitter()</a>
-SLSQP optimization algorithm and least squares statistic.</li>
-<li><a class="reference external" href="http://docs.astropy.org/en/stable/api/astropy.modeling.fitting.SimplexLSQFitter.html#astropy.modeling.fitting.SimplexLSQFitter">SimplexLSQFitter()</a>
-Simplex algorithm and least squares statistic.</li>
-<li>More detailles
-<a class="reference external" href="http://docs.astropy.org/en/stable/modeling/#id21">here</a></li>
+<li><p><a class="reference external" href="http://docs.astropy.org/en/stable/api/astropy.modeling.fitting.LevMarLSQFitter.html#astropy.modeling.fitting.LevMarLSQFitter">LevMarLSQFitter()</a>
+Levenberg-Marquardt algorithm and least squares statistic.</p></li>
+<li><p><a class="reference external" href="http://docs.astropy.org/en/stable/api/astropy.modeling.fitting.LinearLSQFitter.html#astropy.modeling.fitting.LinearLSQFitter">LinearLSQFitter()</a>
+A class performing a linear least square fitting.</p></li>
+<li><p><a class="reference external" href="http://docs.astropy.org/en/stable/api/astropy.modeling.fitting.SLSQPLSQFitter.html#astropy.modeling.fitting.SLSQPLSQFitter">SLSQPLSQFitter()</a>
+SLSQP optimization algorithm and least squares statistic.</p></li>
+<li><p><a class="reference external" href="http://docs.astropy.org/en/stable/api/astropy.modeling.fitting.SimplexLSQFitter.html#astropy.modeling.fitting.SimplexLSQFitter">SimplexLSQFitter()</a>
+Simplex algorithm and least squares statistic.</p></li>
+<li><p>More detailles
+<a class="reference external" href="http://docs.astropy.org/en/stable/modeling/#id21">here</a></p></li>
 </ul>
 <p>Now we continue with our fitting.</p>
 <div class="section" id="step-1-model">
@@ -251,7 +250,7 @@ Simplex algorithm and least squares statistic.</li>
 data. As we said before, our data looks like a linear relation, so we
 are going to use a linear model.</p>
 <p><span class="inputnumrole">In[5]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">Linear1D</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">Linear1D</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -263,7 +262,7 @@ this case we are going to use the <a class="reference external" href="https://ww
 Fitting</a>.
 In the next exercise we are going to analyze how to choose the fitter.</p>
 <p><span class="inputnumrole">In[6]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fitter</span> <span class="o">=</span> <span class="n">fitting</span><span class="o">.</span><span class="n">LinearLSQFitter</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fitter</span> <span class="o">=</span> <span class="n">fitting</span><span class="o">.</span><span class="n">LinearLSQFitter</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -279,8 +278,8 @@ Least Squares</em> and you can find more information about it
 or
 <a class="reference external" href="https://en.wikipedia.org/wiki/Least_squares#Weighted_least_squares">here</a>.</p>
 <p><span class="inputnumrole">In[7]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">best_fit</span> <span class="o">=</span> <span class="n">fitter</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">log_period</span><span class="p">,</span> <span class="n">k_mag</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="mf">1.0</span><span class="o">/</span><span class="n">k_mag_err</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">best_fit</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">best_fit</span> <span class="o">=</span> <span class="n">fitter</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">log_period</span><span class="p">,</span> <span class="n">k_mag</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="mf">1.0</span><span class="o">/</span><span class="n">k_mag_err</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">best_fit</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[7]:</span></p>
@@ -298,9 +297,9 @@ or
 <p>We can evaluate the fit at our particular x axis by doing
 <code class="docutils literal notranslate"><span class="pre">best_fit(x)</span></code>.</p>
 <p><span class="inputnumrole">In[8]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">log_period</span><span class="p">,</span><span class="n">k_mag</span><span class="p">,</span><span class="n">k_mag_err</span><span class="p">,</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;k.&#39;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">log_period</span><span class="p">,</span><span class="n">k_mag</span><span class="p">,</span><span class="n">k_mag_err</span><span class="p">,</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;k.&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">log_period</span><span class="p">,</span> <span class="n">best_fit</span><span class="p">(</span><span class="n">log_period</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\log_</span><span class="si">{10}</span><span class="s1">$(Period [days])&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\log_{10}$(Period [days])&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Ks&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -311,11 +310,11 @@ or
 <img alt="../_images/Models-Quick-Fit_27_1.png" src="../_images/Models-Quick-Fit_27_1.png" />
 <p><strong>Conclusion:</strong> Remember, you can fit data with three lines of code:</p>
 <ol class="arabic simple">
-<li>Choose a
-<a class="reference external" href="http://docs.astropy.org/en/stable/modeling/#module-astropy.modeling.functional_models">model</a>.</li>
-<li>Choose a
-<a class="reference external" href="http://docs.astropy.org/en/stable/modeling/#id21">fitter</a>.</li>
-<li>Pass to the fitter the model and the data to perform fit.</li>
+<li><p>Choose a
+<a class="reference external" href="http://docs.astropy.org/en/stable/modeling/#module-astropy.modeling.functional_models">model</a>.</p></li>
+<li><p>Choose a
+<a class="reference external" href="http://docs.astropy.org/en/stable/modeling/#id21">fitter</a>.</p></li>
+<li><p>Pass to the fitter the model and the data to perform fit.</p></li>
 </ol>
 </div>
 </div>
@@ -334,7 +333,7 @@ we’re adding gaussian noise to the data with the function
 <code class="docutils literal notranslate"><span class="pre">np.random.normal(0,2)</span></code> which gives a random number from a gaussian
 distribution with mean 0 and standard deviation 2.</p>
 <p><span class="inputnumrole">In[9]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">100</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">100</span>
 <span class="n">x1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>  <span class="c1"># Makes an array from 0 to 4 of N elements</span>
 <span class="n">y1</span> <span class="o">=</span> <span class="n">x1</span><span class="o">**</span><span class="mi">3</span> <span class="o">-</span> <span class="mi">6</span><span class="o">*</span><span class="n">x1</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">12</span><span class="o">*</span><span class="n">x1</span> <span class="o">-</span> <span class="mi">9</span>
 <span class="c1"># Now we add some noise to the data</span>
@@ -345,7 +344,7 @@ distribution with mean 0 and standard deviation 2.</p>
 </div>
 <p>Let’s plot it to see how it looks:</p>
 <p><span class="inputnumrole">In[10]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">y1_err</span><span class="p">,</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;k.&#39;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">y1_err</span><span class="p">,</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;k.&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;$x_1$&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$y_1$&#39;</span><span class="p">)</span>
 </pre></div>
@@ -358,13 +357,13 @@ distribution with mean 0 and standard deviation 2.</p>
 <p>To fit this data let’s remember the three steps: model, fitter and
 perform fit.</p>
 <p><span class="inputnumrole">In[11]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">model_poly</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">Polynomial1D</span><span class="p">(</span><span class="n">degree</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model_poly</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">Polynomial1D</span><span class="p">(</span><span class="n">degree</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 <span class="n">fitter_poly</span> <span class="o">=</span> <span class="n">fitting</span><span class="o">.</span><span class="n">LinearLSQFitter</span><span class="p">()</span>
 <span class="n">best_fit_poly</span> <span class="o">=</span> <span class="n">fitter_poly</span><span class="p">(</span><span class="n">model_poly</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">weights</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="n">y1_err</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="inputnumrole">In[12]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">best_fit_poly</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">best_fit_poly</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[12]:</span></p>
@@ -376,13 +375,13 @@ perform fit.</p>
 <span class="n">Parameters</span><span class="p">:</span>
             <span class="n">c0</span>                 <span class="n">c1</span>                 <span class="n">c2</span>                 <span class="n">c3</span>
     <span class="o">------------------</span> <span class="o">------------------</span> <span class="o">------------------</span> <span class="o">------------------</span>
-    <span class="o">-</span><span class="mf">9.232183462142656</span> <span class="mf">11.799931893893698</span> <span class="o">-</span><span class="mf">5.727437904866404</span> <span class="mf">0.9420266273528117</span>
+    <span class="o">-</span><span class="mf">8.900591545761623</span> <span class="mf">13.655176445028355</span> <span class="o">-</span><span class="mf">7.327255293298203</span> <span class="mf">1.2321882395292627</span>
 </pre></div>
 </div>
 <p>What would happend if we use a different fitter (method)? Let’s use the
 same model but with <code class="docutils literal notranslate"><span class="pre">SimplexLSQFitter</span></code> as fitter.</p>
 <p><span class="inputnumrole">In[13]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fitter_poly_2</span> <span class="o">=</span> <span class="n">fitting</span><span class="o">.</span><span class="n">SimplexLSQFitter</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fitter_poly_2</span> <span class="o">=</span> <span class="n">fitting</span><span class="o">.</span><span class="n">SimplexLSQFitter</span><span class="p">()</span>
 <span class="n">best_fit_poly_2</span> <span class="o">=</span> <span class="n">fitter_poly_2</span><span class="p">(</span><span class="n">model_poly</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">weights</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="n">y1_err</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -392,7 +391,7 @@ same model but with <code class="docutils literal notranslate"><span class="pre"
 </pre></div>
 </div>
 <p><span class="inputnumrole">In[14]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">best_fit_poly_2</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">best_fit_poly_2</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[14]:</span></p>
@@ -402,9 +401,9 @@ same model but with <code class="docutils literal notranslate"><span class="pre"
 <span class="n">Model</span> <span class="nb">set</span> <span class="n">size</span><span class="p">:</span> <span class="mi">1</span>
 <span class="n">Degree</span><span class="p">:</span> <span class="mi">3</span>
 <span class="n">Parameters</span><span class="p">:</span>
-            <span class="n">c0</span>                  <span class="n">c1</span>                <span class="n">c2</span>                 <span class="n">c3</span>
-    <span class="o">------------------</span> <span class="o">-------------------</span> <span class="o">----------------</span> <span class="o">-------------------</span>
-    <span class="o">-</span><span class="mf">3.646915149435883</span> <span class="o">-</span><span class="mf">0.1770460158037977</span> <span class="mf">2.13692019146296</span> <span class="o">-</span><span class="mf">0.4471371307770722</span>
+            <span class="n">c0</span>                  <span class="n">c1</span>                   <span class="n">c2</span>                 <span class="n">c3</span>
+    <span class="o">------------------</span> <span class="o">--------------------</span> <span class="o">-------------------</span> <span class="o">------------------</span>
+    <span class="mf">0.4100755347545857</span> <span class="o">-</span><span class="mf">0.31320744462269634</span> <span class="o">-</span><span class="mf">1.0069866265310827</span> <span class="mf">0.3590510286394889</span>
 </pre></div>
 </div>
 <p>Note that we got a warning after using <code class="docutils literal notranslate"><span class="pre">SimplexLSQFitter</span></code> to fit the
@@ -427,7 +426,7 @@ Value</a>.
 Let’s define a function to do that because we’re going to use it several
 times.</p>
 <p><span class="inputnumrole">In[15]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">calc_reduced_chi_square</span><span class="p">(</span><span class="n">fit</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">yerr</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">n_free</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">calc_reduced_chi_square</span><span class="p">(</span><span class="n">fit</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">yerr</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">n_free</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    fit (array) values for the fit</span>
 <span class="sd">    x,y,yerr (arrays) data</span>
@@ -438,21 +437,21 @@ times.</p>
 </pre></div>
 </div>
 <p><span class="inputnumrole">In[16]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">reduced_chi_squared</span> <span class="o">=</span> <span class="n">calc_reduced_chi_square</span><span class="p">(</span><span class="n">best_fit_poly</span><span class="p">(</span><span class="n">x1</span><span class="p">),</span> <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">y1_err</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Reduced Chi Squared with LinearLSQFitter: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">reduced_chi_squared</span><span class="p">))</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">reduced_chi_squared</span> <span class="o">=</span> <span class="n">calc_reduced_chi_square</span><span class="p">(</span><span class="n">best_fit_poly</span><span class="p">(</span><span class="n">x1</span><span class="p">),</span> <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">y1_err</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Reduced Chi Squared with LinearLSQFitter: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">reduced_chi_squared</span><span class="p">))</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[16]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Reduced</span> <span class="n">Chi</span> <span class="n">Squared</span> <span class="k">with</span> <span class="n">LinearLSQFitter</span><span class="p">:</span> <span class="mf">1.3809647130795604</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Reduced</span> <span class="n">Chi</span> <span class="n">Squared</span> <span class="k">with</span> <span class="n">LinearLSQFitter</span><span class="p">:</span> <span class="mf">1.8693371053754353</span>
 </pre></div>
 </div>
 <p><span class="inputnumrole">In[17]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">reduced_chi_squared</span> <span class="o">=</span> <span class="n">calc_reduced_chi_square</span><span class="p">(</span><span class="n">best_fit_poly_2</span><span class="p">(</span><span class="n">x1</span><span class="p">),</span> <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">y1_err</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Reduced Chi Squared with SimplexLSQFitter: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">reduced_chi_squared</span><span class="p">))</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">reduced_chi_squared</span> <span class="o">=</span> <span class="n">calc_reduced_chi_square</span><span class="p">(</span><span class="n">best_fit_poly_2</span><span class="p">(</span><span class="n">x1</span><span class="p">),</span> <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">y1_err</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Reduced Chi Squared with SimplexLSQFitter: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">reduced_chi_squared</span><span class="p">))</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[17]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Reduced</span> <span class="n">Chi</span> <span class="n">Squared</span> <span class="k">with</span> <span class="n">SimplexLSQFitter</span><span class="p">:</span> <span class="mf">3.9638790170390763</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Reduced</span> <span class="n">Chi</span> <span class="n">Squared</span> <span class="k">with</span> <span class="n">SimplexLSQFitter</span><span class="p">:</span> <span class="mf">4.8893096645451655</span>
 </pre></div>
 </div>
 <p>As we can see, the <em>Reduced Chi Square</em> for the first fit is closer to
@@ -460,16 +459,16 @@ one, which means this fit is better. Note that this is what we expected
 after the discussion of the warnings.</p>
 <p>We can also compare the two fits visually:</p>
 <p><span class="inputnumrole">In[18]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">y1_err</span><span class="p">,</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;k.&#39;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">y1_err</span><span class="p">,</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;k.&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">best_fit_poly</span><span class="p">(</span><span class="n">x1</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;LinearLSQFitter()&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">best_fit_poly_2</span><span class="p">(</span><span class="n">x1</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;SimplexLSQFitter()&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\log_</span><span class="si">{10}</span><span class="s1">$(Period [days])&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$\log_{10}$(Period [days])&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Ks&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[18]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">legend</span><span class="o">.</span><span class="n">Legend</span> <span class="n">at</span> <span class="mh">0x7f99bc41cf98</span><span class="o">&gt;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">legend</span><span class="o">.</span><span class="n">Legend</span> <span class="n">at</span> <span class="mh">0x7f62a49cd630</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <img alt="../_images/Models-Quick-Fit_50_1.png" src="../_images/Models-Quick-Fit_50_1.png" />
@@ -484,7 +483,7 @@ better than the second, non linear one.</p>
 to fit in a similar way that we are doing. Let’s compare the two methods
 with fake data in the shape of a Gaussian.</p>
 <p><span class="inputnumrole">In[19]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">amplitude</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="mf">10.0</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mu</span><span class="p">,</span> <span class="n">sigma</span><span class="p">,</span> <span class="n">amplitude</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">,</span> <span class="mf">10.0</span>
 <span class="n">N2</span> <span class="o">=</span> <span class="mi">100</span>
 <span class="n">x2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
 <span class="n">y2</span> <span class="o">=</span> <span class="n">amplitude</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">x2</span><span class="o">-</span><span class="n">mu</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">sigma</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
@@ -494,7 +493,7 @@ with fake data in the shape of a Gaussian.</p>
 </pre></div>
 </div>
 <p><span class="inputnumrole">In[20]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">y2_err</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;k.&#39;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">y2_err</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;k.&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;$x_2$&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$y_2$&#39;</span><span class="p">)</span>
 </pre></div>
@@ -508,13 +507,13 @@ with fake data in the shape of a Gaussian.</p>
 going to use a non-linear fitter, <code class="docutils literal notranslate"><span class="pre">LevMarLSQFitter</span></code>, because the model
 we need (<code class="docutils literal notranslate"><span class="pre">Gaussian1D</span></code>) is non-linear in the parameters.</p>
 <p><span class="inputnumrole">In[21]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">model_gauss</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">Gaussian1D</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model_gauss</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">Gaussian1D</span><span class="p">()</span>
 <span class="n">fitter_gauss</span> <span class="o">=</span> <span class="n">fitting</span><span class="o">.</span><span class="n">LevMarLSQFitter</span><span class="p">()</span>
 <span class="n">best_fit_gauss</span> <span class="o">=</span> <span class="n">fitter_gauss</span><span class="p">(</span><span class="n">model_gauss</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="n">y2_err</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="inputnumrole">In[22]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">best_fit_gauss</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">best_fit_gauss</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[22]:</span></p>
@@ -523,9 +522,9 @@ we need (<code class="docutils literal notranslate"><span class="pre">Gaussian1D
 <span class="n">Outputs</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">,)</span>
 <span class="n">Model</span> <span class="nb">set</span> <span class="n">size</span><span class="p">:</span> <span class="mi">1</span>
 <span class="n">Parameters</span><span class="p">:</span>
-        <span class="n">amplitude</span>             <span class="n">mean</span>               <span class="n">stddev</span>
-    <span class="o">-----------------</span> <span class="o">--------------------</span> <span class="o">-----------------</span>
-    <span class="mf">9.727260451790261</span> <span class="o">-</span><span class="mf">0.09016496687377648</span> <span class="mf">10.43745677809063</span>
+        <span class="n">amplitude</span>              <span class="n">mean</span>             <span class="n">stddev</span>
+    <span class="o">------------------</span> <span class="o">-------------------</span> <span class="o">----------------</span>
+    <span class="mf">10.080133346690191</span> <span class="mf">0.15770096034853553</span> <span class="mf">9.97733049789614</span>
 </pre></div>
 </div>
 <p>We can get the <a class="reference external" href="http://mathworld.wolfram.com/CovarianceMatrix.html">covariance
@@ -535,7 +534,7 @@ doing <code class="docutils literal notranslate"><span class="pre">fitter.fit_in
 this matrix are the square of the errors. We can check the order of the
 parameters using:</p>
 <p><span class="inputnumrole">In[23]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">model_gauss</span><span class="o">.</span><span class="n">param_names</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model_gauss</span><span class="o">.</span><span class="n">param_names</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[23]:</span></p>
@@ -543,76 +542,72 @@ parameters using:</p>
 </pre></div>
 </div>
 <p><span class="inputnumrole">In[24]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">cov_diag</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">fitter_gauss</span><span class="o">.</span><span class="n">fit_info</span><span class="p">[</span><span class="s1">&#39;param_cov&#39;</span><span class="p">])</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">cov_diag</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cov_diag</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">fitter_gauss</span><span class="o">.</span><span class="n">fit_info</span><span class="p">[</span><span class="s1">&#39;param_cov&#39;</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">cov_diag</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[24]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mf">0.05601592</span> <span class="mf">0.08590427</span> <span class="mf">0.08639363</span><span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mf">0.05093297</span> <span class="mf">0.06649962</span> <span class="mf">0.06669622</span><span class="p">]</span>
 </pre></div>
 </div>
 <p>Then:</p>
 <p><span class="inputnumrole">In[25]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Amplitude: </span><span class="si">{}</span><span class="s1"> +\- </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">best_fit_gauss</span><span class="o">.</span><span class="n">amplitude</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">cov_diag</span><span class="p">[</span><span class="mi">0</span><span class="p">])))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Mean: </span><span class="si">{}</span><span class="s1"> +\- </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">best_fit_gauss</span><span class="o">.</span><span class="n">mean</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">cov_diag</span><span class="p">[</span><span class="mi">1</span><span class="p">])))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Standard Deviation: </span><span class="si">{}</span><span class="s1"> +\- </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">best_fit_gauss</span><span class="o">.</span><span class="n">stddev</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">cov_diag</span><span class="p">[</span><span class="mi">2</span><span class="p">])))</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;Amplitude: {} +\- {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">best_fit_gauss</span><span class="o">.</span><span class="n">amplitude</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">cov_diag</span><span class="p">[</span><span class="mi">0</span><span class="p">])))</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Mean: {} +\- {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">best_fit_gauss</span><span class="o">.</span><span class="n">mean</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">cov_diag</span><span class="p">[</span><span class="mi">1</span><span class="p">])))</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Standard Deviation: {} +\- {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">best_fit_gauss</span><span class="o">.</span><span class="n">stddev</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">cov_diag</span><span class="p">[</span><span class="mi">2</span><span class="p">])))</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[25]:</span></p>
-<pre class="literal-block">
-Amplitude: 9.727260451790261 +- 0.23667683004543322
-Mean: -0.09016496687377648 +- 0.29309430090628485
-Standard Deviation: 10.43745677809063 +- 0.29392793120787397
-</pre>
+<pre class="literal-block">Amplitude: 10.080133346690191 +- 0.22568334412569233
+Mean: 0.15770096034853553 +- 0.2578752071848881
+Standard Deviation: 9.97733049789614 +- 0.25825611211944544</pre>
 <p>We can apply the same method with <code class="docutils literal notranslate"><span class="pre">scipy.optimize.curve_fit</span></code>, and
 compare the results using again the <em>Reduced Chi Square Value</em>.</p>
 <p><span class="inputnumrole">In[26]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="n">x</span><span class="o">-</span><span class="n">b</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">/</span><span class="p">(</span><span class="mf">2.0</span><span class="o">*</span><span class="n">c</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
 </pre></div>
 </div>
 <p><span class="inputnumrole">In[27]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">p_opt</span><span class="p">,</span> <span class="n">p_cov</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">optimize</span><span class="o">.</span><span class="n">curve_fit</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">y1_err</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">p_opt</span><span class="p">,</span> <span class="n">p_cov</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">optimize</span><span class="o">.</span><span class="n">curve_fit</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">sigma</span><span class="o">=</span><span class="n">y1_err</span><span class="p">)</span>
 <span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span> <span class="o">=</span> <span class="n">p_opt</span>
 <span class="n">best_fit_gauss_2</span> <span class="o">=</span> <span class="n">f</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="inputnumrole">In[28]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">p_opt</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">p_opt</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[28]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span> <span class="mf">9.72724918</span> <span class="o">-</span><span class="mf">0.09016087</span> <span class="mf">10.43748099</span><span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mf">10.08012814</span>  <span class="mf">0.15769471</span>  <span class="mf">9.9773408</span> <span class="p">]</span>
 </pre></div>
 </div>
 <p><span class="inputnumrole">In[29]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Amplitude: </span><span class="si">{}</span><span class="s1"> +\- </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">p_opt</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">p_cov</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Mean: </span><span class="si">{}</span><span class="s1"> +\- </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">p_opt</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">p_cov</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Standard Deviation: </span><span class="si">{}</span><span class="s1"> +\- </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">p_opt</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">p_cov</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">])))</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;Amplitude: {} +\- {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">p_opt</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">p_cov</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])))</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Mean: {} +\- {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">p_opt</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">p_cov</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])))</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Standard Deviation: {} +\- {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">p_opt</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">p_cov</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">])))</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[29]:</span></p>
-<pre class="literal-block">
-Amplitude: 9.727249182276827 +- 0.23667402342733068
-Mean: -0.09016086559202277 +- 0.29310140677025126
-Standard Deviation: 10.437480991287455 +- 0.2939353688582143
-</pre>
+<pre class="literal-block">Amplitude: 10.080128140579168 +- 0.22568203722759925
+Mean: 0.15769471090823067 +- 0.2578782629654348
+Standard Deviation: 9.977340800449648 +- 0.2582592223091418</pre>
 <p><span class="inputnumrole">In[30]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">reduced_chi_squared</span> <span class="o">=</span> <span class="n">calc_reduced_chi_square</span><span class="p">(</span><span class="n">best_fit_gauss</span><span class="p">(</span><span class="n">x2</span><span class="p">),</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">y2_err</span><span class="p">,</span> <span class="n">N2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Reduced Chi Squared using astropy.modeling: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">reduced_chi_squared</span><span class="p">))</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">reduced_chi_squared</span> <span class="o">=</span> <span class="n">calc_reduced_chi_square</span><span class="p">(</span><span class="n">best_fit_gauss</span><span class="p">(</span><span class="n">x2</span><span class="p">),</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">y2_err</span><span class="p">,</span> <span class="n">N2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Reduced Chi Squared using astropy.modeling: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">reduced_chi_squared</span><span class="p">))</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[30]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Reduced</span> <span class="n">Chi</span> <span class="n">Squared</span> <span class="n">using</span> <span class="n">astropy</span><span class="o">.</span><span class="n">modeling</span><span class="p">:</span> <span class="mf">1.1379547684143285</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Reduced</span> <span class="n">Chi</span> <span class="n">Squared</span> <span class="n">using</span> <span class="n">astropy</span><span class="o">.</span><span class="n">modeling</span><span class="p">:</span> <span class="mf">0.9899207342576005</span>
 </pre></div>
 </div>
 <p><span class="inputnumrole">In[31]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">reduced_chi_squared</span> <span class="o">=</span> <span class="n">calc_reduced_chi_square</span><span class="p">(</span><span class="n">best_fit_gauss_2</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">y2_err</span><span class="p">,</span> <span class="n">N2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Reduced Chi Squared using scipy: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">reduced_chi_squared</span><span class="p">))</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">reduced_chi_squared</span> <span class="o">=</span> <span class="n">calc_reduced_chi_square</span><span class="p">(</span><span class="n">best_fit_gauss_2</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">y2_err</span><span class="p">,</span> <span class="n">N2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Reduced Chi Squared using scipy: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">reduced_chi_squared</span><span class="p">))</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[31]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Reduced</span> <span class="n">Chi</span> <span class="n">Squared</span> <span class="n">using</span> <span class="n">scipy</span><span class="p">:</span> <span class="mf">1.137954768315508</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Reduced</span> <span class="n">Chi</span> <span class="n">Squared</span> <span class="n">using</span> <span class="n">scipy</span><span class="p">:</span> <span class="mf">0.9899207343075058</span>
 </pre></div>
 </div>
 <p>As we can see there is a very small difference in the <em>Reduced Chi
@@ -622,7 +617,7 @@ Squared</em>. This actually needed to happen, because the fitter in
 and the model to perform a completely different fit, while scipy require
 us to remember the expression of the function we wanted to use.</p>
 <p><span class="inputnumrole">In[32]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">y2_err</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;k.&#39;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">y2_err</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;k.&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">best_fit_gauss</span><span class="p">(</span><span class="n">x2</span><span class="p">),</span> <span class="s1">&#39;g-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;astropy.modeling&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">best_fit_gauss_2</span><span class="p">,</span> <span class="s1">&#39;r-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;scipy&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;$x_2$&#39;</span><span class="p">)</span>
@@ -631,7 +626,7 @@ us to remember the expression of the function we wanted to use.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[32]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">legend</span><span class="o">.</span><span class="n">Legend</span> <span class="n">at</span> <span class="mh">0x7f99bc32d7f0</span><span class="o">&gt;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">legend</span><span class="o">.</span><span class="n">Legend</span> <span class="n">at</span> <span class="mh">0x7f62a48cc400</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <img alt="../_images/Models-Quick-Fit_73_1.png" src="../_images/Models-Quick-Fit_73_1.png" />
@@ -649,16 +644,17 @@ but that is another tutorial.</p>
 <h2>Summary:<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>Let’s review the conclusion we got in this tutorial:</p>
 <ol class="arabic simple">
-<li>You can fit data with <strong>three lines of code</strong>:<ul>
-<li>model</li>
-<li>fitter</li>
-<li>perform fit to data</li>
+<li><p>You can fit data with <strong>three lines of code</strong>:</p>
+<ul class="simple">
+<li><p>model</p></li>
+<li><p>fitter</p></li>
+<li><p>perform fit to data</p></li>
 </ul>
 </li>
-<li><strong>Pay attention</strong> when you choose the <strong>fitter</strong>.</li>
-<li>Choose the method most convenient for every case you need to fit. We
+<li><p><strong>Pay attention</strong> when you choose the <strong>fitter</strong>.</p></li>
+<li><p>Choose the method most convenient for every case you need to fit. We
 recomend <code class="docutils literal notranslate"><span class="pre">astropy.modeling</span></code> to make <strong>quick fits of known
-functions</strong>.</li>
+functions</strong>.</p></li>
 </ol>
 </div>
 <div class="section" id="exercise-your-turn-to-choose">
@@ -666,7 +662,7 @@ functions</strong>.</li>
 <p>For the next data: * Choose model and fitter to fit this data *
 Compare different options</p>
 <p><span class="inputnumrole">In[33]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">N3</span> <span class="o">=</span> <span class="mi">100</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">N3</span> <span class="o">=</span> <span class="mi">100</span>
 <span class="n">x3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">N3</span><span class="p">)</span>
 <span class="n">y3</span> <span class="o">=</span> <span class="mf">5.0</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">x3</span><span class="p">)</span>
 <span class="n">y3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">y_point</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="k">for</span> <span class="n">y_point</span> <span class="ow">in</span> <span class="n">y3</span><span class="p">])</span>
@@ -675,7 +671,7 @@ Compare different options</p>
 </pre></div>
 </div>
 <p><span class="inputnumrole">In[34]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">x3</span><span class="p">,</span> <span class="n">y3</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">y3_err</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;k.&#39;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">x3</span><span class="p">,</span> <span class="n">y3</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">y3_err</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;k.&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;$x_3$&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$y_3$&#39;</span><span class="p">)</span>
 </pre></div>
@@ -705,7 +701,7 @@ Compare different options</p>
       
     </p>
     <p>
-    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
     &copy; Copyright Astropy.   
     </p>
   </div>

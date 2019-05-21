@@ -2,8 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="filterTutorials" name="keywords" />
+    <meta charset="utf-8" /><meta content="filterTutorials" name="keywords" />
 <meta content="filterTutorials," name="keywords" />
 
     <title>Analyzing UVES Spectroscopy with Astropy &#8212; astropy-tutorials v3.0.dev</title>
@@ -139,20 +138,20 @@ formatting)</p>
 <div class="section" id="learning-goals">
 <h2>Learning Goals<a class="headerlink" href="#learning-goals" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><em>Input/Output</em>: Read in spectral data from a list of FITS files using
+<li><p><em>Input/Output</em>: Read in spectral data from a list of FITS files using
 <a class="reference external" href="http://docs.astropy.org/en/stable/io/fits/index.html">astropy.io</a>
 and
-<a class="reference external" href="http://docs.astropy.org/en/stable/wcs/index.html">astropy.wcs</a></li>
-<li><em>Coding</em>: Make code reusable as a function</li>
-<li><em>Analysis</em>: Analyze spectral data using
+<a class="reference external" href="http://docs.astropy.org/en/stable/wcs/index.html">astropy.wcs</a></p></li>
+<li><p><em>Coding</em>: Make code reusable as a function</p></li>
+<li><p><em>Analysis</em>: Analyze spectral data using
 <a class="reference external" href="http://docs.astropy.org/en/stable/units/index.html">astropy.units</a>,
 <a class="reference external" href="http://docs.astropy.org/en/stable/constants/index.html">astropy.constants</a>,
 and
-<a class="reference external" href="http://docs.astropy.org/en/stable/time/index.html">astropy.time</a></li>
-<li><em>Input/Output</em>: Generate a LaTeX table using
-<a class="reference external" href="http://docs.astropy.org/en/stable/table/index.html">astropy.table</a></li>
-<li><em>Visualization</em>: Plot spectral data using
-<a class="reference external" href="https://matplotlib.org/">matplotlib</a></li>
+<a class="reference external" href="http://docs.astropy.org/en/stable/time/index.html">astropy.time</a></p></li>
+<li><p><em>Input/Output</em>: Generate a LaTeX table using
+<a class="reference external" href="http://docs.astropy.org/en/stable/table/index.html">astropy.table</a></p></li>
+<li><p><em>Visualization</em>: Plot spectral data using
+<a class="reference external" href="https://matplotlib.org/">matplotlib</a></p></li>
 </ul>
 </div>
 <div class="section" id="keywords">
@@ -172,8 +171,8 @@ please execute all the code again.</p>
 <div class="section" id="before-you-proceed">
 <h2>Before you proceed<a class="headerlink" href="#before-you-proceed" title="Permalink to this headline">¶</a></h2>
 <p><span class="inputnumrole">In[1]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set up matplotlib</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set up matplotlib</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 <span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
 </pre></div>
 </div>
@@ -183,10 +182,10 @@ data necessary for this tutorial. By default it will run in whatever
 directory you have placed this notebook. If that’s some place you don’t
 want to fill with data files, change the <code class="docutils literal notranslate"><span class="pre">working_dir_path</span></code> variable.</p>
 <p><span class="inputnumrole">In[2]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tarfile</span>
-<span class="kn">from</span> <span class="nn">astropy.utils.data</span> <span class="k">import</span> <span class="n">download_file</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tarfile</span>
+<span class="kn">from</span> <span class="nn">astropy.utils.data</span> <span class="kn">import</span> <span class="n">download_file</span>
 <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;http://data.astropy.org/tutorials/UVES/data_UVES.tar.gz&#39;</span>
-<span class="n">f</span> <span class="o">=</span> <span class="n">tarfile</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">download_file</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">cache</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;r|*&#39;</span><span class="p">)</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">tarfile</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">download_file</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">cache</span><span class="o">=</span><span class="bp">True</span><span class="p">),</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;r|*&#39;</span><span class="p">)</span>
 <span class="n">working_dir_path</span> <span class="o">=</span> <span class="s1">&#39;.&#39;</span>  <span class="c1"># CHANGE TO WHEREVER YOU WANT THE DATA TO BE EXTRACTED</span>
 <span class="n">f</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">working_dir_path</span><span class="p">)</span>
 </pre></div>
@@ -216,18 +215,18 @@ explanation here is only very brief. Check the <a class="reference external" hre
 documentation</a> or the other two tutorials
 for more details:</p>
 <p><span class="inputnumrole">In[3]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">glob</span> <span class="k">import</span> <span class="n">glob</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">glob</span> <span class="kn">import</span> <span class="n">glob</span>
 <span class="kn">import</span> <span class="nn">os</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 
-<span class="kn">from</span> <span class="nn">astropy.wcs</span> <span class="k">import</span> <span class="n">WCS</span>
-<span class="kn">from</span> <span class="nn">astropy.io</span> <span class="k">import</span> <span class="n">fits</span>
+<span class="kn">from</span> <span class="nn">astropy.wcs</span> <span class="kn">import</span> <span class="n">WCS</span>
+<span class="kn">from</span> <span class="nn">astropy.io</span> <span class="kn">import</span> <span class="n">fits</span>
 
 <span class="c1"># os.path.join is a platform-independent way to join two directories</span>
 <span class="n">globpath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">working_dir_path</span><span class="p">,</span> <span class="s1">&#39;UVES/*.fits&#39;</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="n">globpath</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">globpath</span><span class="p">)</span>
 <span class="c1"># glob searches through directories similar to the Unix shell</span>
 <span class="n">filelist</span> <span class="o">=</span> <span class="n">glob</span><span class="p">(</span><span class="n">globpath</span><span class="p">)</span>
 
@@ -242,7 +241,7 @@ for more details:</p>
 </div>
 <p>Read the first FITS file in the list and check what is in there:</p>
 <p><span class="inputnumrole">In[4]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sp</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">filelist</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sp</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">filelist</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 <span class="n">sp</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -258,7 +257,7 @@ to get the wavelength coordinate. If you see warnings about a
 non-standard RADECSYS, don’t worry about this – the WCS will still
 work, it just doesn’t fully conform to the WCS standard.</p>
 <p><span class="inputnumrole">In[5]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">header</span> <span class="o">=</span> <span class="n">sp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">header</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">header</span> <span class="o">=</span> <span class="n">sp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">header</span>
 
 <span class="n">wcs</span> <span class="o">=</span> <span class="n">WCS</span><span class="p">(</span><span class="n">header</span><span class="p">)</span>
 <span class="c1">#make index array</span>
@@ -272,7 +271,7 @@ work, it just doesn’t fully conform to the WCS standard.</p>
 </div>
 <p>The flux is contained in the primary image.</p>
 <p><span class="inputnumrole">In[6]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">flux</span> <span class="o">=</span> <span class="n">sp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">flux</span> <span class="o">=</span> <span class="n">sp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
 </pre></div>
 </div>
 </div>
@@ -311,7 +310,7 @@ some documentation to the header, so that we can look up what parameters
 it needs when we come back to this project a while later. We like to
 comment every function that is longer than two lines.</p>
 <p><span class="inputnumrole">In[7]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">read_spec</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">read_spec</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;Read a UVES spectrum from the ESO pipeline</span>
 
 <span class="sd">    Parameters</span>
@@ -348,7 +347,7 @@ comment every function that is longer than two lines.</p>
 <p>Try to find out how you can read the help for this function from the
 command line.</p>
 <p><span class="inputnumrole">In[8]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span>help(read_spec)
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>help(read_spec)
 # or
 read_spec?
 # In the IPython notebook, the easiest way to see the help for a function is to type read_spec&lt;TAB&gt;
@@ -384,7 +383,7 @@ the wavelength zero point (<code class="docutils literal notranslate"><span clas
 and a blue arm - see keyword <code class="docutils literal notranslate"><span class="pre">HIERARCH</span> <span class="pre">ESO</span> <span class="pre">INS</span> <span class="pre">PATH</span></code>). Then check that
 all exposures have the same setup.</p>
 <p><span class="inputnumrole">In[9]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">read_setup</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">read_setup</span><span class="p">(</span><span class="n">filename</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;Get setup for UVES spectrum from the ESO pipeline</span>
 
 <span class="sd">    Parameters</span>
@@ -406,7 +405,7 @@ all exposures have the same setup.</p>
 <span class="c1"># Let&#39;s just print the setup on the screen</span>
 <span class="c1"># We&#39;ll see if it&#39;s all the same.</span>
 <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">filelist</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">read_setup</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">read_setup</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[9]:</span></p>
@@ -443,7 +442,7 @@ the <code class="docutils literal notranslate"><span class="pre">wavelength</spa
 define an array that can hold the fluxes of all observations. Then, we
 loop over the list of all filenames and fill this array with data.</p>
 <p><span class="inputnumrole">In[10]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">flux</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">filelist</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">wavelength</span><span class="p">)))</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">flux</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">filelist</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">wavelength</span><span class="p">)))</span>
 <span class="c1"># date comes as string with 23 characters (dtype = &#39;S23&#39;)</span>
 <span class="n">date</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">filelist</span><span class="p">)),</span> <span class="n">dtype</span> <span class="o">=</span> <span class="s1">&#39;U23&#39;</span><span class="p">)</span>
 
@@ -468,8 +467,8 @@ addition, division, multiplication). Furthermore,
 supplies the values of many physical and astronomical constants. The
 easiest way to attach a unit to a number is by multiplication.</p>
 <p><span class="inputnumrole">In[11]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">astropy.units</span> <span class="k">as</span> <span class="nn">u</span>
-<span class="kn">from</span> <span class="nn">astropy.constants.si</span> <span class="k">import</span> <span class="n">c</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">M_sun</span><span class="p">,</span> <span class="n">R_sun</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">astropy.units</span> <span class="kn">as</span> <span class="nn">u</span>
+<span class="kn">from</span> <span class="nn">astropy.constants.si</span> <span class="kn">import</span> <span class="n">c</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">M_sun</span><span class="p">,</span> <span class="n">R_sun</span>
 
 <span class="n">wavelength</span> <span class="o">=</span> <span class="n">wavelength</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">AA</span>
 
@@ -501,13 +500,13 @@ infall speed using simple energy conservation.</p>
 \[\frac{1}{2} m v^2  =  G \frac{m M_*}{R_*}\]</div>
 <p>So, let’s calculate the free-fall velocity for MN Lup.</p>
 <p><span class="inputnumrole">In[12]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">v_accr</span> <span class="o">=</span> <span class="p">(</span><span class="mf">2.</span><span class="o">*</span> <span class="n">G</span> <span class="o">*</span> <span class="n">M_MN_Lup</span><span class="o">/</span><span class="n">R_MN_Lup</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">v_accr</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">v_accr</span> <span class="o">=</span> <span class="p">(</span><span class="mf">2.</span><span class="o">*</span> <span class="n">G</span> <span class="o">*</span> <span class="n">M_MN_Lup</span><span class="o">/</span><span class="n">R_MN_Lup</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span>
+<span class="k">print</span><span class="p">(</span><span class="n">v_accr</span><span class="p">)</span>
 <span class="c1"># Maybe astronomers prefer it in the traditional cgs system?</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">v_accr</span><span class="o">.</span><span class="n">cgs</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">v_accr</span><span class="o">.</span><span class="n">cgs</span><span class="p">)</span>
 <span class="c1"># Or in some really obscure unit?</span>
-<span class="kn">from</span> <span class="nn">astropy.units</span> <span class="k">import</span> <span class="n">imperial</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">v_accr</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">imperial</span><span class="o">.</span><span class="n">yd</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">hour</span><span class="p">))</span>
+<span class="kn">from</span> <span class="nn">astropy.units</span> <span class="kn">import</span> <span class="n">imperial</span>
+<span class="k">print</span><span class="p">(</span><span class="n">v_accr</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">imperial</span><span class="o">.</span><span class="n">yd</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">hour</span><span class="p">))</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[12]:</span></p>
@@ -518,7 +517,7 @@ infall speed using simple energy conservation.</p>
 </div>
 <p>How does the accretion velocity relate to the rotational velocity?</p>
 <p><span class="inputnumrole">In[13]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">v_rot</span> <span class="o">=</span> <span class="n">vsini</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">incl</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">v_rot</span> <span class="o">=</span> <span class="n">vsini</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">incl</span><span class="p">)</span>
 <span class="n">v_accr</span> <span class="o">/</span> <span class="n">v_rot</span>
 </pre></div>
 </div>
@@ -528,7 +527,7 @@ infall speed using simple energy conservation.</p>
 <p>Oh, what is that? The seconds are gone, but <code class="docutils literal notranslate"><span class="pre">astropy.quantity</span></code> objects
 keep their different length units unless told otherwise.</p>
 <p><span class="inputnumrole">In[14]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">v_accr</span> <span class="o">/</span> <span class="n">v_rot</span><span class="p">)</span><span class="o">.</span><span class="n">decompose</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">v_accr</span> <span class="o">/</span> <span class="n">v_rot</span><span class="p">)</span><span class="o">.</span><span class="n">decompose</span><span class="p">()</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[14]:</span></p>
@@ -543,7 +542,7 @@ scale to the heliocentric velocity scale.</p>
 <p><span class="math notranslate nohighlight">\(\lambda_{heliocentric} = \lambda_{bariocentric} * (1 + \frac{v_{helio}}{c})\)</span></p>
 <p>We could try:</p>
 <p><span class="inputnumrole">In[15]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">wavelength</span> <span class="o">=</span> <span class="n">wavelength</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.</span> <span class="o">+</span> <span class="n">heliocentric</span><span class="o">/</span><span class="n">c</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">wavelength</span> <span class="o">=</span> <span class="n">wavelength</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.</span> <span class="o">+</span> <span class="n">heliocentric</span><span class="o">/</span><span class="n">c</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>However, this fails, because <code class="docutils literal notranslate"><span class="pre">heliocentric/c</span></code> is in units of “km/m”
@@ -555,7 +554,7 @@ make the instruction precise, but one is to explicitly add
 <code class="docutils literal notranslate"><span class="pre">u.dimensionless_unscaled</span></code> to <code class="docutils literal notranslate"><span class="pre">1.</span></code> to tell astropy that this number
 is dimensionless and does not carry any scaling.</p>
 <p><span class="inputnumrole">In[16]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">wavelength</span> <span class="o">=</span> <span class="n">wavelength</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="o">+</span> <span class="n">heliocentric</span><span class="o">/</span><span class="n">c</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">wavelength</span> <span class="o">=</span> <span class="n">wavelength</span> <span class="o">*</span> <span class="p">(</span><span class="mf">1.</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span><span class="o">+</span> <span class="n">heliocentric</span><span class="o">/</span><span class="n">c</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>We want to mention one more feature here (check out
@@ -565,7 +564,7 @@ energies. Normally, a unit of length is not equivalent to a unit of
 energy or to a frequency, but this conversion makes sense for the
 wavelength of a spectrum. This is how it can be done:</p>
 <p><span class="inputnumrole">In[17]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">wavelength</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">keV</span><span class="p">,</span> <span class="n">equivalencies</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">spectral</span><span class="p">())</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">wavelength</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">keV</span><span class="p">,</span> <span class="n">equivalencies</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">spectral</span><span class="p">())</span>
 <span class="n">wavelength</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">Hz</span><span class="p">,</span> <span class="n">equivalencies</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">spectral</span><span class="p">())</span>
 </pre></div>
 </div>
@@ -586,7 +585,7 @@ expected from spectroscopy.</p>
 <p>The values from evolutionary tracks are indeed consistent with the
 spectroscopically estimated surface gravity.</p>
 <p><span class="inputnumrole">In[18]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">((</span><span class="n">G</span><span class="o">*</span><span class="n">M_MN_Lup</span><span class="o">/</span><span class="n">R_MN_Lup</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">second</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">((</span><span class="n">G</span><span class="o">*</span><span class="n">M_MN_Lup</span><span class="o">/</span><span class="n">R_MN_Lup</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">second</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[18]:</span></p>
@@ -604,19 +603,19 @@ to make sure that the code below can use it later. You can test if your
 function works by calculating the Doppler shift of the following
 wavelengths relative to <span class="math notranslate nohighlight">\(H_\alpha\)</span>.</p>
 <p><span class="inputnumrole">In[19]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">waveclosetoHa</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">6562.</span><span class="p">,</span><span class="mi">6563</span><span class="p">,</span><span class="mf">6565.</span><span class="p">])</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">AA</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">waveclosetoHa</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">6562.</span><span class="p">,</span><span class="mi">6563</span><span class="p">,</span><span class="mf">6565.</span><span class="p">])</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">AA</span>
 </pre></div>
 </div>
 <p>We get -132, -86 and +5 km/s.</p>
 <p><span class="inputnumrole">In[20]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># This function uses the Doppler equivalency between wavelength and velocity</span>
-<span class="kn">import</span> <span class="nn">astropy.units</span> <span class="k">as</span> <span class="nn">u</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># This function uses the Doppler equivalency between wavelength and velocity</span>
+<span class="kn">import</span> <span class="nn">astropy.units</span> <span class="kn">as</span> <span class="nn">u</span>
 <span class="k">def</span> <span class="nf">wave2doppler</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">w0</span><span class="p">):</span>
     <span class="n">w0_equiv</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">doppler_optical</span><span class="p">(</span><span class="n">w0</span><span class="p">)</span>
     <span class="n">w_equiv</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">km</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">,</span> <span class="n">equivalencies</span><span class="o">=</span><span class="n">w0_equiv</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">w_equiv</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="n">wave2doppler</span><span class="p">(</span><span class="n">waveclosetoHa</span><span class="p">,</span> <span class="mf">656.489</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">nm</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">km</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">wave2doppler</span><span class="p">(</span><span class="n">waveclosetoHa</span><span class="p">,</span> <span class="mf">656.489</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">nm</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">km</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">))</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[20]:</span></p>
@@ -634,13 +633,13 @@ vsini. We need this function later to show the red- and blueshift of the
 spectrum relative to the Ca II H line. Use the following definition to
 make sure the that code below can use it later.</p>
 <p><span class="inputnumrole">In[21]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">w2vsini</span><span class="p">(</span><span class="n">wavelength_array</span><span class="p">,</span> <span class="n">wavelength_line</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">w2vsini</span><span class="p">(</span><span class="n">wavelength_array</span><span class="p">,</span> <span class="n">wavelength_line</span><span class="p">):</span>
     <span class="c1"># .. replace this with your implementation ..</span>
     <span class="k">return</span> <span class="n">array_of_shifts_in_vsini</span>
 </pre></div>
 </div>
 <p><span class="inputnumrole">In[22]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">w2vsini</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">w0</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">w2vsini</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">w0</span><span class="p">):</span>
     <span class="n">v</span> <span class="o">=</span> <span class="n">wave2doppler</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">w0</span><span class="p">)</span> <span class="o">-</span> <span class="mf">4.77</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">km</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">s</span>
     <span class="k">return</span> <span class="n">v</span> <span class="o">/</span> <span class="n">vsini</span>
 </pre></div>
@@ -660,14 +659,14 @@ format needs to be specified (e.g. a number could mean JD or MJD or
 year). Also, the time system needs to be given (e.g. UTC). Below are
 several examples, initialized from different header keywords.</p>
 <p><span class="inputnumrole">In[23]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">astropy.time</span> <span class="k">import</span> <span class="n">Time</span>
-<span class="n">t1</span> <span class="o">=</span> <span class="n">Time</span><span class="p">(</span><span class="n">header</span><span class="p">[</span><span class="s1">&#39;MJD-Obs&#39;</span><span class="p">],</span> <span class="nb">format</span> <span class="o">=</span> <span class="s1">&#39;mjd&#39;</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="s1">&#39;utc&#39;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">astropy.time</span> <span class="kn">import</span> <span class="n">Time</span>
+<span class="n">t1</span> <span class="o">=</span> <span class="n">Time</span><span class="p">(</span><span class="n">header</span><span class="p">[</span><span class="s1">&#39;MJD-Obs&#39;</span><span class="p">],</span> <span class="n">format</span> <span class="o">=</span> <span class="s1">&#39;mjd&#39;</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="s1">&#39;utc&#39;</span><span class="p">)</span>
 <span class="n">t2</span> <span class="o">=</span> <span class="n">Time</span><span class="p">(</span><span class="n">header</span><span class="p">[</span><span class="s1">&#39;Date-Obs&#39;</span><span class="p">],</span> <span class="n">scale</span> <span class="o">=</span> <span class="s1">&#39;utc&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Times can be expressed in different formats:</p>
 <p><span class="inputnumrole">In[24]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">t1</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">t1</span>
 <span class="n">t1</span><span class="o">.</span><span class="n">isot</span>
 <span class="n">t2</span>
 </pre></div>
@@ -678,7 +677,7 @@ several examples, initialized from different header keywords.</p>
 </div>
 <p>or be converted to a different time system.</p>
 <p><span class="inputnumrole">In[25]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">t1</span><span class="o">.</span><span class="n">tt</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">t1</span><span class="o">.</span><span class="n">tt</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[25]:</span></p>
@@ -688,7 +687,7 @@ several examples, initialized from different header keywords.</p>
 <p>Times can also be initialized from arrays and we can calculate time
 differences.</p>
 <p><span class="inputnumrole">In[26]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">obs_times</span> <span class="o">=</span> <span class="n">Time</span><span class="p">(</span><span class="n">date</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="s1">&#39;utc&#39;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">obs_times</span> <span class="o">=</span> <span class="n">Time</span><span class="p">(</span><span class="n">date</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="s1">&#39;utc&#39;</span><span class="p">)</span>
 <span class="n">delta_t</span> <span class="o">=</span> <span class="n">obs_times</span> <span class="o">-</span> <span class="n">Time</span><span class="p">(</span><span class="n">date</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">scale</span> <span class="o">=</span> <span class="s1">&#39;utc&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -698,7 +697,7 @@ is days, unfortunately <code class="docutils literal notranslate"><span class="p
 <code class="docutils literal notranslate"><span class="pre">astropy.units.Quantity</span></code> objects don’t work together yet, so we’ll
 have to convert from one to the other explicitly.</p>
 <p><span class="inputnumrole">In[27]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">delta_p</span> <span class="o">=</span> <span class="n">delta_t</span><span class="o">.</span><span class="n">value</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">day</span> <span class="o">/</span> <span class="n">period</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">delta_p</span> <span class="o">=</span> <span class="n">delta_t</span><span class="o">.</span><span class="n">value</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">day</span> <span class="o">/</span> <span class="n">period</span>
 </pre></div>
 </div>
 </div>
@@ -716,7 +715,7 @@ and <code class="docutils literal notranslate"><span class="pre">[3938*u.AA,</sp
 the flux by this polynomial.</p>
 <p>The following function will do that:</p>
 <p><span class="inputnumrole">In[28]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">region_around_line</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">flux</span><span class="p">,</span> <span class="n">cont</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">region_around_line</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">flux</span><span class="p">,</span> <span class="n">cont</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;cut out and normalize flux around a line</span>
 
 <span class="sd">    Parameters</span>
@@ -756,9 +755,9 @@ the flux by this polynomial.</p>
 <p>We’ll calculate the equivalent width in Angstroms of the emission line
 for the first spectrum.</p>
 <p><span class="inputnumrole">In[29]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ew</span> <span class="o">=</span> <span class="n">fcaII</span><span class="p">[</span><span class="mi">0</span><span class="p">,:]</span> <span class="o">-</span> <span class="mf">1.</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ew</span> <span class="o">=</span> <span class="n">fcaII</span><span class="p">[</span><span class="mi">0</span><span class="p">,:]</span> <span class="o">-</span> <span class="mf">1.</span>
 <span class="n">ew</span> <span class="o">=</span> <span class="n">ew</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">wcaII</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">AA</span><span class="p">)</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">ew</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">ew</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[29]:</span></p>
@@ -768,7 +767,7 @@ for the first spectrum.</p>
 <p>Using <code class="docutils literal notranslate"><span class="pre">numpy</span></code> array notation we can actually process all spectra at
 once.</p>
 <p><span class="inputnumrole">In[30]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">delta_lam</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">wcaII</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">AA</span><span class="p">)</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">delta_lam</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">wcaII</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">AA</span><span class="p">)</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
 <span class="n">ew</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">((</span><span class="n">fcaII</span> <span class="o">-</span> <span class="mf">1.</span><span class="p">)[:,:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">delta_lam</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,</span> <span class="p">:],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -780,12 +779,12 @@ do so, we first collect all the columns and make an
 or <code class="docutils literal notranslate"><span class="pre">tabular-data</span></code> for more details on <code class="docutils literal notranslate"><span class="pre">Table</span></code>). So, here is the
 code:</p>
 <p><span class="inputnumrole">In[31]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">astropy.table</span> <span class="k">import</span> <span class="n">Column</span><span class="p">,</span> <span class="n">Table</span>
-<span class="kn">from</span> <span class="nn">astropy.io</span> <span class="k">import</span> <span class="n">ascii</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">astropy.table</span> <span class="kn">import</span> <span class="n">Column</span><span class="p">,</span> <span class="n">Table</span>
+<span class="kn">from</span> <span class="nn">astropy.io</span> <span class="kn">import</span> <span class="n">ascii</span>
 
 <span class="n">datecol</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Obs Date&#39;</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">date</span><span class="p">)</span>
-<span class="n">pcol</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;phase&#39;</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">delta_p</span><span class="p">,</span> <span class="nb">format</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:.1f}</span><span class="s1">&#39;</span><span class="p">)</span>
-<span class="n">ewcol</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;EW&#39;</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">ew</span><span class="p">,</span> <span class="nb">format</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:.1f}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">AA&#39;</span><span class="p">)</span>
+<span class="n">pcol</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;phase&#39;</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">delta_p</span><span class="p">,</span> <span class="n">format</span> <span class="o">=</span> <span class="s1">&#39;{:.1f}&#39;</span><span class="p">)</span>
+<span class="n">ewcol</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;EW&#39;</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">ew</span><span class="p">,</span> <span class="n">format</span> <span class="o">=</span> <span class="s1">&#39;{:.1f}&#39;</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">AA&#39;</span><span class="p">)</span>
 <span class="n">tab</span> <span class="o">=</span> <span class="n">Table</span><span class="p">((</span><span class="n">datecol</span><span class="p">,</span> <span class="n">pcol</span><span class="p">,</span> <span class="n">ewcol</span><span class="p">))</span>
 <span class="c1"># latexdicts[&#39;AA&#39;] contains the style specifics for A&amp;A (\hline etc.)</span>
 <span class="n">tab</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">working_dir_path</span><span class="p">,</span> <span class="s1">&#39;EWtab.tex&#39;</span><span class="p">),</span> <span class="n">latexdict</span> <span class="o">=</span> <span class="n">ascii</span><span class="o">.</span><span class="n">latexdicts</span><span class="p">[</span><span class="s1">&#39;AA&#39;</span><span class="p">])</span>
@@ -807,12 +806,12 @@ below appear in very similar form in Guenther et al. 2013 (ApJ, 771,
 units of the rotational velocity. In this way, features that are
 rotationally modulated will stick out between -1 and +1.</p>
 <p><span class="inputnumrole">In[32]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">w2vsini</span><span class="p">(</span><span class="n">wcaII</span><span class="p">,</span> <span class="mf">393.366</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">nm</span><span class="p">)</span><span class="o">.</span><span class="n">decompose</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">w2vsini</span><span class="p">(</span><span class="n">wcaII</span><span class="p">,</span> <span class="mf">393.366</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">nm</span><span class="p">)</span><span class="o">.</span><span class="n">decompose</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>First, we’ll show the line profile.</p>
 <p><span class="inputnumrole">In[33]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># set reasonable figsize for 1-column figures</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># set reasonable figsize for 1-column figures</span>
 <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fcaII</span><span class="p">[</span><span class="mi">0</span><span class="p">,:],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">drawstyle</span><span class="o">=</span><span class="s1">&#39;steps-mid&#39;</span><span class="p">)</span>
@@ -835,7 +834,7 @@ follow the time evolution of the line.</p>
 <p>There are clearly several ways to produce a well-looking plot. Here is
 one way:</p>
 <p><span class="inputnumrole">In[34]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">yshift</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">((</span><span class="n">fcaII</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span> <span class="o">*</span> <span class="mf">0.5</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">yshift</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">((</span><span class="n">fcaII</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span> <span class="o">*</span> <span class="mf">0.5</span>
 <span class="c1">#shift the second night up by a little more</span>
 <span class="n">yshift</span><span class="p">[:]</span> <span class="o">+=</span> <span class="mf">1.5</span>
 <span class="n">yshift</span><span class="p">[</span><span class="mi">13</span><span class="p">:]</span> <span class="o">+=</span> <span class="mi">1</span>
@@ -861,7 +860,7 @@ one way:</p>
 <p>Next, we’ll make a more advanced plot. For each spectrum we calculate
 the difference to the mean flux.</p>
 <p><span class="inputnumrole">In[35]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fmean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">fcaII</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fmean</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">fcaII</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">fdiff</span> <span class="o">=</span> <span class="n">fcaII</span> <span class="o">-</span> <span class="n">fmean</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">,:]</span>
 </pre></div>
 </div>
@@ -869,7 +868,7 @@ the difference to the mean flux.</p>
 the line. However, the axis scales are not right, the gap between both
 nights is not visible and there is no proper labeling.</p>
 <p><span class="inputnumrole">In[36]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">fdiff</span><span class="p">,</span> <span class="n">aspect</span> <span class="o">=</span> <span class="s2">&quot;auto&quot;</span><span class="p">,</span> <span class="n">origin</span> <span class="o">=</span> <span class="s1">&#39;lower&#39;</span><span class="p">)</span>
 </pre></div>
@@ -880,7 +879,7 @@ nights is not visible and there is no proper labeling.</p>
 Also, we’ll pass the <code class="docutils literal notranslate"><span class="pre">extent</span></code> keyword to <code class="docutils literal notranslate"><span class="pre">ax.imshow</span></code> which takes
 care of the axis.</p>
 <p><span class="inputnumrole">In[37]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ind1</span> <span class="o">=</span> <span class="n">delta_p</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ind1</span> <span class="o">=</span> <span class="n">delta_p</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span>
 <span class="n">ind2</span> <span class="o">=</span> <span class="n">delta_p</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">dimensionless_unscaled</span>
 
 <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
@@ -899,17 +898,17 @@ care of the axis.</p>
 <p>Now, this plot is already much better, but there are still some things
 that can be improved:</p>
 <ul class="simple">
-<li>Introduce an offset on the y-axis to reduce the amount of white
-space.</li>
-<li>Strictly speaking, the image shown is not quite the right scale
+<li><p>Introduce an offset on the y-axis to reduce the amount of white
+space.</p></li>
+<li><p>Strictly speaking, the image shown is not quite the right scale
 because the <code class="docutils literal notranslate"><span class="pre">extent</span></code> keyword gives the edges of the image shown,
-while <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">delta_p</span></code> contain the bin mid-points.</li>
-<li>Use a gray scale instead of color to save publication charges.</li>
-<li>Add labels to the axis.</li>
+while <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">delta_p</span></code> contain the bin mid-points.</p></li>
+<li><p>Use a gray scale instead of color to save publication charges.</p></li>
+<li><p>Add labels to the axis.</p></li>
 </ul>
 <p>The following code addresses these points.</p>
 <p><span class="inputnumrole">In[38]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># shift a little for plotting purposes</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># shift a little for plotting purposes</span>
 <span class="n">pplot</span> <span class="o">=</span> <span class="n">delta_p</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span><span class="o">.</span><span class="n">value</span>
 <span class="n">pplot</span><span class="p">[</span><span class="n">ind2</span><span class="p">]</span> <span class="o">-=</span> <span class="mf">1.5</span>
 <span class="c1"># image goes from x1 to x2, but really x1 should be middle of first pixel</span>
@@ -1006,7 +1005,7 @@ version or Linux version).</p>
       
     </p>
     <p>
-    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
     &copy; Copyright Astropy.   
     </p>
   </div>

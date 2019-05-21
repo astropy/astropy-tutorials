@@ -2,8 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="filterTutorials, filterTable, filterFileInputOutput, filterMatplotlib, filterFitsTable" name="keywords" />
+    <meta charset="utf-8" /><meta content="filterTutorials, filterTable, filterFileInputOutput, filterMatplotlib, filterFitsTable" name="keywords" />
 <meta content="filterTutorials," name="keywords" />
 
     <title>Viewing and manipulating data from FITS tables &#8212; astropy-tutorials v3.0.dev</title>
@@ -123,7 +122,7 @@
 <div class="section" id="learning-goals">
 <h2>Learning Goals<a class="headerlink" href="#learning-goals" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>TODO</li>
+<li><p>TODO</p></li>
 </ul>
 </div>
 <div class="section" id="keywords">
@@ -136,20 +135,20 @@
 a data file, then uses <code class="docutils literal notranslate"><span class="pre">astropy.io.fits</span></code> and <code class="docutils literal notranslate"><span class="pre">astropy.table</span></code> to open
 the file. Lastly, we’ll use <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> to visualize the data.</p>
 <p><span class="inputnumrole">In[1]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">astropy.io</span> <span class="k">import</span> <span class="n">fits</span>
-<span class="kn">from</span> <span class="nn">astropy.table</span> <span class="k">import</span> <span class="n">Table</span>
-<span class="kn">from</span> <span class="nn">matplotlib.colors</span> <span class="k">import</span> <span class="n">LogNorm</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">astropy.io</span> <span class="kn">import</span> <span class="n">fits</span>
+<span class="kn">from</span> <span class="nn">astropy.table</span> <span class="kn">import</span> <span class="n">Table</span>
+<span class="kn">from</span> <span class="nn">matplotlib.colors</span> <span class="kn">import</span> <span class="n">LogNorm</span>
 
 <span class="c1"># Set up matplotlib</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 <span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
 </pre></div>
 </div>
 <p>The following line is needed to download the example FITS files used in
 this tutorial.</p>
 <p><span class="inputnumrole">In[2]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">astropy.utils.data</span> <span class="k">import</span> <span class="n">download_file</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">astropy.utils.data</span> <span class="kn">import</span> <span class="n">download_file</span>
 </pre></div>
 </div>
 <p>FITS files often contain large amounts of multi-dimensional data and
@@ -159,8 +158,8 @@ observation of the Galactic Center. The file contains a list of events
 with x and y coordinates, energy, and various other pieces of
 information.</p>
 <p><span class="inputnumrole">In[3]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">event_filename</span> <span class="o">=</span> <span class="n">download_file</span><span class="p">(</span><span class="s1">&#39;http://data.astropy.org/tutorials/FITS-tables/chandra_events.fits&#39;</span><span class="p">,</span>
-                               <span class="n">cache</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">event_filename</span> <span class="o">=</span> <span class="n">download_file</span><span class="p">(</span><span class="s1">&#39;http://data.astropy.org/tutorials/FITS-tables/chandra_events.fits&#39;</span><span class="p">,</span>
+                               <span class="n">cache</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -169,11 +168,11 @@ information.</p>
 <p>Since the file is big, let’s open it with <code class="docutils literal notranslate"><span class="pre">memmap=True</span></code> to prevent RAM
 storage issues.</p>
 <p><span class="inputnumrole">In[4]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">hdu_list</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">event_filename</span><span class="p">,</span> <span class="n">memmap</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">hdu_list</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">event_filename</span><span class="p">,</span> <span class="n">memmap</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="inputnumrole">In[5]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">hdu_list</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">hdu_list</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[5]:</span></p>
@@ -193,7 +192,7 @@ information about each X-ray photon that hit the detector.</p>
 <p>To find out what information the table contains, let’s print the column
 names.</p>
 <p><span class="inputnumrole">In[6]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">hdu_list</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">hdu_list</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[6]:</span></p>
@@ -226,18 +225,18 @@ to access FITS tables directly from the <code class="docutils literal notranslat
 <a class="reference external" href="http://docs.astropy.org/en/stable/api/astropy.table.Table.html#astropy.table.Table">Table</a>
 tends to make a variety of common tasks more convenient.</p>
 <p><span class="inputnumrole">In[7]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">evt_data</span> <span class="o">=</span> <span class="n">Table</span><span class="p">(</span><span class="n">hdu_list</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">evt_data</span> <span class="o">=</span> <span class="n">Table</span><span class="p">(</span><span class="n">hdu_list</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>For example, a preview of the table is easily viewed by simply running a
 cell with the table as the last line:</p>
 <p><span class="inputnumrole">In[8]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">evt_data</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">evt_data</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[8]:</span></p>
 <i>Table length=483964</i>
-<table id="table140314642732704" class="table-striped table-bordered table-condensed">
+<table id="table140313749154896" class="table-striped table-bordered table-condensed">
 <thead><tr><th>time</th><th>ccd_id</th><th>node_id</th><th>expno</th><th>chipx</th><th>chipy</th><th>tdetx</th><th>tdety</th><th>detx</th><th>dety</th><th>x</th><th>y</th><th>pha</th><th>pha_ro</th><th>energy</th><th>pi</th><th>fltgrade</th><th>grade</th><th>status [32]</th></tr></thead>
 <thead><tr><th>float64</th><th>int16</th><th>int16</th><th>int32</th><th>int16</th><th>int16</th><th>int16</th><th>int16</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>int32</th><th>int32</th><th>float32</th><th>int32</th><th>int16</th><th>int16</th><th>bool</th></tr></thead>
 <tr><td>238623220.9093583</td><td>3</td><td>3</td><td>68</td><td>920</td><td>8</td><td>5124</td><td>3981</td><td>5095.641</td><td>4138.995</td><td>4168.0723</td><td>5087.772</td><td>3548</td><td>3534</td><td>13874.715</td><td>951</td><td>16</td><td>4</td><td>False .. False</td></tr>
@@ -265,7 +264,7 @@ cell with the table as the last line:</p>
 try making a histogram for the energy of each photon, which will give us
 a sense for the spectrum (folded with the detector’s efficiency).</p>
 <p><span class="inputnumrole">In[9]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">energy_hist</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">evt_data</span><span class="p">[</span><span class="s1">&#39;energy&#39;</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">energy_hist</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">evt_data</span><span class="p">[</span><span class="s1">&#39;energy&#39;</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[9]:</span></p>
@@ -279,7 +278,7 @@ into a 2-D histogram.</p>
 the events that only fell on the main (ACIS-I) chips, which have number
 ids 0, 1, 2, and 3.</p>
 <p><span class="inputnumrole">In[10]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ii</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">in1d</span><span class="p">(</span><span class="n">evt_data</span><span class="p">[</span><span class="s1">&#39;ccd_id&#39;</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ii</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">in1d</span><span class="p">(</span><span class="n">evt_data</span><span class="p">[</span><span class="s1">&#39;ccd_id&#39;</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
 <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">ii</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -291,7 +290,7 @@ ids 0, 1, 2, and 3.</p>
 <h3>Method 1: Use numpy to make a 2-D histogram and imshow to display it<a class="headerlink" href="#method-1-use-numpy-to-make-a-2-d-histogram-and-imshow-to-display-it" title="Permalink to this headline">¶</a></h3>
 <p>This method allows us to create an image without stretching:</p>
 <p><span class="inputnumrole">In[11]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">NBINS</span> <span class="o">=</span> <span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">NBINS</span> <span class="o">=</span> <span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
 
 <span class="n">img_zero</span><span class="p">,</span> <span class="n">yedges</span><span class="p">,</span> <span class="n">xedges</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">histogram2d</span><span class="p">(</span><span class="n">evt_data</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">][</span><span class="n">ii</span><span class="p">],</span> <span class="n">evt_data</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">][</span><span class="n">ii</span><span class="p">],</span> <span class="n">NBINS</span><span class="p">)</span>
 
@@ -315,7 +314,7 @@ ids 0, 1, 2, and 3.</p>
 <div class="section" id="method-2-use-hist2d-with-a-log-normal-color-scheme">
 <h3>Method 2: Use hist2d with a log-normal color scheme<a class="headerlink" href="#method-2-use-hist2d-with-a-log-normal-color-scheme" title="Permalink to this headline">¶</a></h3>
 <p><span class="inputnumrole">In[12]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">NBINS</span> <span class="o">=</span> <span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">NBINS</span> <span class="o">=</span> <span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
 <span class="n">img_zero_mpl</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">hist2d</span><span class="p">(</span><span class="n">evt_data</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">][</span><span class="n">ii</span><span class="p">],</span> <span class="n">evt_data</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">][</span><span class="n">ii</span><span class="p">],</span> <span class="n">NBINS</span><span class="p">,</span>
                           <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="n">LogNorm</span><span class="p">())</span>
 
@@ -340,7 +339,7 @@ That way you can be sure it won’t continue using up excess memory or
 file handles on your computer. (This happens automatically when you
 close Python, but you never know how long that might be…)</p>
 <p><span class="inputnumrole">In[13]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">hdu_list</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">hdu_list</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -378,7 +377,7 @@ How does the image change with different energy ranges?</p>
       
     </p>
     <p>
-    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
     &copy; Copyright Astropy.   
     </p>
   </div>

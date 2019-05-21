@@ -2,8 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="filterTutorials" name="keywords" />
+    <meta charset="utf-8" /><meta content="filterTutorials" name="keywords" />
 <meta content="filterTutorials," name="keywords" />
 
     <title>Using astropy.coordinates to Match Catalogs and Plan Observations &#8212; astropy-tutorials v3.0.dev</title>
@@ -124,21 +123,21 @@ package and related astropy functionality can be used to help in
 planning observations or other exercises focused on large coordinate
 catalogs.</p>
 <p><span class="inputnumrole">In[1]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Python standard-library</span>
-<span class="kn">from</span> <span class="nn">urllib.parse</span> <span class="k">import</span> <span class="n">urlencode</span>
-<span class="kn">from</span> <span class="nn">urllib.request</span> <span class="k">import</span> <span class="n">urlretrieve</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Python standard-library</span>
+<span class="kn">from</span> <span class="nn">urllib.parse</span> <span class="kn">import</span> <span class="n">urlencode</span>
+<span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">urlretrieve</span>
 
 <span class="c1"># Third-party dependencies</span>
-<span class="kn">from</span> <span class="nn">astropy</span> <span class="k">import</span> <span class="n">units</span> <span class="k">as</span> <span class="n">u</span>
-<span class="kn">from</span> <span class="nn">astropy.coordinates</span> <span class="k">import</span> <span class="n">SkyCoord</span>
-<span class="kn">from</span> <span class="nn">astropy.table</span> <span class="k">import</span> <span class="n">Table</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="k">import</span> <span class="n">Image</span>
+<span class="kn">from</span> <span class="nn">astropy</span> <span class="kn">import</span> <span class="n">units</span> <span class="k">as</span> <span class="n">u</span>
+<span class="kn">from</span> <span class="nn">astropy.coordinates</span> <span class="kn">import</span> <span class="n">SkyCoord</span>
+<span class="kn">from</span> <span class="nn">astropy.table</span> <span class="kn">import</span> <span class="n">Table</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
 </pre></div>
 </div>
 <p><span class="inputnumrole">In[2]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set up matplotlib and use a nicer set of plot parameters</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set up matplotlib and use a nicer set of plot parameters</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
 <span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
 </pre></div>
 </div>
@@ -155,7 +154,7 @@ the default is ICRS.</p>
 <p>(If you’re not sure what ICRS is, it’s basically safe to think of it as
 an approximation to an equatorial system at the J2000 equinox).</p>
 <p><span class="inputnumrole">In[3]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">hcg7_center</span> <span class="o">=</span> <span class="n">SkyCoord</span><span class="p">(</span><span class="mf">9.81625</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">deg</span><span class="p">,</span> <span class="mf">0.88806</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">deg</span><span class="p">,</span> <span class="n">frame</span><span class="o">=</span><span class="s1">&#39;icrs&#39;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">hcg7_center</span> <span class="o">=</span> <span class="n">SkyCoord</span><span class="p">(</span><span class="mf">9.81625</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">deg</span><span class="p">,</span> <span class="mf">0.88806</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">deg</span><span class="p">,</span> <span class="n">frame</span><span class="o">=</span><span class="s1">&#39;icrs&#39;</span><span class="p">)</span>
 <span class="n">hcg7_center</span>
 </pre></div>
 </div>
@@ -168,7 +167,7 @@ an approximation to an equatorial system at the J2000 equinox).</p>
 separate strings for ra/dec or a single string. You’ll have to give
 units, though, if they aren’t part of the string itself.</p>
 <p><span class="inputnumrole">In[4]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SkyCoord</span><span class="p">(</span><span class="s1">&#39;0h39m15.9s&#39;</span><span class="p">,</span> <span class="s1">&#39;0d53m17.016s&#39;</span><span class="p">,</span> <span class="n">frame</span><span class="o">=</span><span class="s1">&#39;icrs&#39;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">SkyCoord</span><span class="p">(</span><span class="s1">&#39;0h39m15.9s&#39;</span><span class="p">,</span> <span class="s1">&#39;0d53m17.016s&#39;</span><span class="p">,</span> <span class="n">frame</span><span class="o">=</span><span class="s1">&#39;icrs&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[4]:</span></p>
@@ -177,7 +176,7 @@ units, though, if they aren’t part of the string itself.</p>
 </pre></div>
 </div>
 <p><span class="inputnumrole">In[5]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SkyCoord</span><span class="p">(</span><span class="s1">&#39;0:39:15.9 0:53:17.016&#39;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">hour</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">deg</span><span class="p">),</span> <span class="n">frame</span><span class="o">=</span><span class="s1">&#39;icrs&#39;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">SkyCoord</span><span class="p">(</span><span class="s1">&#39;0:39:15.9 0:53:17.016&#39;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">hour</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">deg</span><span class="p">),</span> <span class="n">frame</span><span class="o">=</span><span class="s1">&#39;icrs&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[5]:</span></p>
@@ -197,13 +196,13 @@ object. For more detailed background on what class methods are and when
 they’re useful, see `this
 page &lt;https://julien.danjou.info/blog/2013/guide-python-static-class-abstract-methods&gt;`__.</em></p>
 <p><span class="inputnumrole">In[6]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">hcg7_center</span> <span class="o">=</span> <span class="n">SkyCoord</span><span class="o">.</span><span class="n">from_name</span><span class="p">(</span><span class="s1">&#39;HCG 7&#39;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">hcg7_center</span> <span class="o">=</span> <span class="n">SkyCoord</span><span class="o">.</span><span class="n">from_name</span><span class="p">(</span><span class="s1">&#39;HCG 7&#39;</span><span class="p">)</span>
 <span class="n">hcg7_center</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[6]:</span></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">SkyCoord</span> <span class="p">(</span><span class="n">ICRS</span><span class="p">):</span> <span class="p">(</span><span class="n">ra</span><span class="p">,</span> <span class="n">dec</span><span class="p">)</span> <span class="ow">in</span> <span class="n">deg</span>
-    <span class="p">(</span><span class="mf">9.81625</span><span class="p">,</span> <span class="mf">0.88805556</span><span class="p">)</span><span class="o">&gt;</span>
+    <span class="p">(</span><span class="mf">9.81625</span><span class="p">,</span> <span class="mf">0.88806</span><span class="p">)</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <p>This object we just created has various useful ways of accessing the
@@ -220,7 +219,7 @@ These objects store angles and provide pretty representations of those
 angles, as well as some useful attributes to quickly convert to common
 angle units:</p>
 <p><span class="inputnumrole">In[7]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">hcg7_center</span><span class="o">.</span><span class="n">ra</span><span class="p">),</span> <span class="nb">type</span><span class="p">(</span><span class="n">hcg7_center</span><span class="o">.</span><span class="n">dec</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">hcg7_center</span><span class="o">.</span><span class="n">ra</span><span class="p">),</span> <span class="nb">type</span><span class="p">(</span><span class="n">hcg7_center</span><span class="o">.</span><span class="n">dec</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[7]:</span></p>
@@ -228,21 +227,21 @@ angle units:</p>
 </pre></div>
 </div>
 <p><span class="inputnumrole">In[8]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">hcg7_center</span><span class="o">.</span><span class="n">dec</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">hcg7_center</span><span class="o">.</span><span class="n">dec</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[8]:</span></p>
 <div class="math notranslate nohighlight">
-\[0^\circ53{}^\prime17{}^{\prime\prime}\]</div>
+\[0^\circ53{}^\prime17.016{}^{\prime\prime}\]</div>
 <p><span class="inputnumrole">In[9]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">hcg7_center</span><span class="o">.</span><span class="n">ra</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">hcg7_center</span><span class="o">.</span><span class="n">ra</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[9]:</span></p>
 <div class="math notranslate nohighlight">
 \[9^\circ48{}^\prime58.5{}^{\prime\prime}\]</div>
 <p><span class="inputnumrole">In[10]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">hcg7_center</span><span class="o">.</span><span class="n">ra</span><span class="o">.</span><span class="n">hour</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">hcg7_center</span><span class="o">.</span><span class="n">ra</span><span class="o">.</span><span class="n">hour</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[10]:</span></p>
@@ -258,7 +257,7 @@ image quality.</p>
 file is included in the repository so you can just let it use the local
 file<code class="docutils literal notranslate"><span class="pre">'HCG7_SDSS_cutout.jpg'</span></code>, defined at the top of the cell.</p>
 <p><span class="inputnumrole">In[11]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">impix</span> <span class="o">=</span> <span class="mi">1024</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">impix</span> <span class="o">=</span> <span class="mi">1024</span>
 <span class="n">imsize</span> <span class="o">=</span> <span class="mi">12</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">arcmin</span>
 <span class="n">cutoutbaseurl</span> <span class="o">=</span> <span class="s1">&#39;http://skyservice.pha.jhu.edu/DR12/ImgCutout/getjpeg.aspx&#39;</span>
 <span class="n">query_string</span> <span class="o">=</span> <span class="n">urlencode</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">ra</span><span class="o">=</span><span class="n">hcg7_center</span><span class="o">.</span><span class="n">ra</span><span class="o">.</span><span class="n">deg</span><span class="p">,</span>
@@ -272,12 +271,12 @@ file<code class="docutils literal notranslate"><span class="pre">'HCG7_SDSS_cuto
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[11]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="s1">&#39;HCG7_SDSS_cutout.jpg&#39;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">http</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">HTTPMessage</span> <span class="n">at</span> <span class="mh">0x7f5d8caec8d0</span><span class="o">&gt;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="s1">&#39;HCG7_SDSS_cutout.jpg&#39;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">http</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">HTTPMessage</span> <span class="n">at</span> <span class="mh">0x7f39712df0b8</span><span class="o">&gt;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Now lets take a look at the image.</p>
 <p><span class="inputnumrole">In[12]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="s1">&#39;HCG7_SDSS_cutout.jpg&#39;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Image</span><span class="p">(</span><span class="s1">&#39;HCG7_SDSS_cutout.jpg&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[12]:</span></p>
@@ -319,9 +318,9 @@ because the data files are provided with the repository. Depending on
 your version of astroquery it might also issue a warning, which you
 should be able to safely ignore.</p>
 <p><span class="inputnumrole">In[13]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">astroquery.sdss</span> <span class="k">import</span> <span class="n">SDSS</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">astroquery.sdss</span> <span class="kn">import</span> <span class="n">SDSS</span>
 <span class="n">sdss</span> <span class="o">=</span> <span class="n">SDSS</span><span class="o">.</span><span class="n">query_region</span><span class="p">(</span><span class="n">coordinates</span><span class="o">=</span><span class="n">hcg7_center</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mi">20</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">arcmin</span><span class="p">,</span>
-                         <span class="n">spectro</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                         <span class="n">spectro</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
                          <span class="n">photoobj_fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ra&#39;</span><span class="p">,</span><span class="s1">&#39;dec&#39;</span><span class="p">,</span><span class="s1">&#39;u&#39;</span><span class="p">,</span><span class="s1">&#39;g&#39;</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="s1">&#39;i&#39;</span><span class="p">,</span><span class="s1">&#39;z&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
@@ -340,7 +339,7 @@ the query a second time.</p>
 worry, you can just skip to the next cell with <code class="docutils literal notranslate"><span class="pre">Table.read</span></code> and use
 the copy of this table included in the tutorial.)</p>
 <p><span class="inputnumrole">In[14]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sdss</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;HCG7_SDSS_photo.dat&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sdss</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;HCG7_SDSS_photo.dat&#39;</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[14]:</span></p>
@@ -352,7 +351,7 @@ running the cell below. But if you did the astroquery step above, you
 could skip this, as the table is already in memory as the <code class="docutils literal notranslate"><span class="pre">sdss</span></code>
 variable.</p>
 <p><span class="inputnumrole">In[15]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sdss</span> <span class="o">=</span> <span class="n">Table</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;HCG7_SDSS_photo.dat&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sdss</span> <span class="o">=</span> <span class="n">Table</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;HCG7_SDSS_photo.dat&#39;</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Ok, so we have a catalog of objects we got from the SDSS. Now lets say
@@ -361,7 +360,7 @@ match to this SDSS catalog. In this case, we will use a catalog
 extracted from the <a class="reference external" href="http://www.ipac.caltech.edu/2mass/">2MASS</a>. We
 first load up this catalog into python.</p>
 <p><span class="inputnumrole">In[16]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">twomass</span> <span class="o">=</span> <span class="n">Table</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;HCG7_2MASS.tbl&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">twomass</span> <span class="o">=</span> <span class="n">Table</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;HCG7_2MASS.tbl&#39;</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="s1">&#39;ascii&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Now to do matching we need <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> objects. We’ll have to build
@@ -370,42 +369,42 @@ straightforward: we grab the RA and dec columns from the table and
 provide them to the <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> constructor. Lets first have a look at
 the tables to see just what everything is that’s in them.</p>
 <p><span class="inputnumrole">In[17]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sdss</span> <span class="c1"># just to see an example of the format</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sdss</span> <span class="c1"># just to see an example of the format</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[17]:</span></p>
 <i>Table length=679</i>
-<table id="table140041578824480" class="table-striped table-bordered table-condensed">
+<table id="table139886364641376" class="table-striped table-bordered table-condensed">
 <thead><tr><th>ra</th><th>dec</th><th>u</th><th>g</th><th>r</th><th>i</th><th>z</th></tr></thead>
 <thead><tr><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th></tr></thead>
-<tr><td>9.61398851506203</td><td>1.05971076370606</td><td>17.26002</td><td>16.15506</td><td>15.92259</td><td>15.84914</td><td>15.87802</td></tr>
-<tr><td>9.71176047711958</td><td>0.871862230486968</td><td>21.49192</td><td>19.27791</td><td>17.83691</td><td>16.67158</td><td>16.01962</td></tr>
-<tr><td>9.48888651229277</td><td>1.06993016543505</td><td>20.22784</td><td>19.54857</td><td>19.22943</td><td>18.89268</td><td>18.8688</td></tr>
-<tr><td>9.64660213560046</td><td>0.831651609872796</td><td>25.29283</td><td>21.81893</td><td>20.09989</td><td>19.15535</td><td>18.64575</td></tr>
-<tr><td>9.92479824811096</td><td>0.566285592453675</td><td>23.67856</td><td>21.90378</td><td>20.31027</td><td>18.86597</td><td>18.07197</td></tr>
-<tr><td>9.87176425009693</td><td>1.06285056163394</td><td>19.61703</td><td>19.02859</td><td>24.41901</td><td>19.52514</td><td>23.2501</td></tr>
-<tr><td>9.91935172553804</td><td>0.964707041342282</td><td>24.20257</td><td>20.93686</td><td>19.51228</td><td>18.00406</td><td>17.19375</td></tr>
-<tr><td>9.65118638542555</td><td>0.663017577566666</td><td>19.90236</td><td>19.00065</td><td>18.66231</td><td>18.52809</td><td>18.47345</td></tr>
-<tr><td>9.7383556136881</td><td>1.09568097336577</td><td>19.90043</td><td>18.83958</td><td>18.32859</td><td>18.04872</td><td>17.99837</td></tr>
-<tr><td>10.1359655290211</td><td>0.68807336899639</td><td>22.81427</td><td>21.87743</td><td>20.52916</td><td>19.51682</td><td>19.35656</td></tr>
+<tr><td>10.0775826925982</td><td>0.790111126438688</td><td>21.14568</td><td>18.76275</td><td>17.45607</td><td>16.95887</td><td>16.72254</td></tr>
+<tr><td>10.1303393482758</td><td>1.1523773556596</td><td>22.96277</td><td>21.15212</td><td>19.39642</td><td>18.78123</td><td>18.43637</td></tr>
+<tr><td>9.56078248603797</td><td>0.619560657217678</td><td>19.78478</td><td>17.88036</td><td>16.91253</td><td>16.49844</td><td>16.16783</td></tr>
+<tr><td>9.92247283186737</td><td>0.97775766332052</td><td>20.43676</td><td>17.94613</td><td>16.50844</td><td>15.79941</td><td>15.41096</td></tr>
+<tr><td>9.85015240594311</td><td>1.00941389131306</td><td>22.79017</td><td>19.93356</td><td>18.57176</td><td>17.65981</td><td>17.13897</td></tr>
+<tr><td>9.78676663673889</td><td>0.884631488113326</td><td>19.60848</td><td>18.68292</td><td>17.76442</td><td>17.38597</td><td>17.11522</td></tr>
+<tr><td>9.85142233276181</td><td>0.660021031158792</td><td>22.8327</td><td>20.50534</td><td>19.02676</td><td>17.70129</td><td>16.97601</td></tr>
+<tr><td>9.86140974949097</td><td>0.745947843824639</td><td>23.01928</td><td>21.50809</td><td>20.29095</td><td>19.78649</td><td>19.47331</td></tr>
+<tr><td>9.73001716011208</td><td>0.991258981941023</td><td>21.43877</td><td>21.11119</td><td>21.30741</td><td>21.09469</td><td>21.74804</td></tr>
+<tr><td>10.0195110549215</td><td>0.747784712598379</td><td>22.44757</td><td>20.61082</td><td>18.8336</td><td>18.19663</td><td>17.71837</td></tr>
 <tr><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr>
 <tr><td>9.88764154576302</td><td>0.774708573056835</td><td>20.93136</td><td>18.50433</td><td>17.22737</td><td>16.70348</td><td>16.36004</td></tr>
+<tr><td>10.1284323154954</td><td>1.11643222876458</td><td>24.42382</td><td>22.36564</td><td>20.55899</td><td>19.63096</td><td>19.18675</td></tr>
+<tr><td>9.72415081087502</td><td>1.01695284609459</td><td>19.5293</td><td>18.08487</td><td>17.5839</td><td>17.4127</td><td>17.343</td></tr>
+<tr><td>9.95929214793534</td><td>0.834029720435658</td><td>23.57963</td><td>20.76326</td><td>19.21141</td><td>18.59468</td><td>18.13548</td></tr>
 <tr><td>9.69237561215357</td><td>0.574391475113263</td><td>23.84506</td><td>23.06815</td><td>21.54927</td><td>20.17263</td><td>19.41592</td></tr>
 <tr><td>9.76608254390783</td><td>1.03520634125337</td><td>19.9899</td><td>18.59686</td><td>17.76029</td><td>17.32713</td><td>17.00906</td></tr>
-<tr><td>10.1284323154954</td><td>1.11643222876458</td><td>24.42382</td><td>22.36564</td><td>20.55899</td><td>19.63096</td><td>19.18675</td></tr>
-<tr><td>9.55833347738036</td><td>0.769527984035449</td><td>19.05654</td><td>18.07906</td><td>17.75168</td><td>17.61264</td><td>17.5596</td></tr>
 <tr><td>9.94116503164753</td><td>0.981943675128564</td><td>21.18425</td><td>20.23814</td><td>19.99445</td><td>19.91923</td><td>19.86276</td></tr>
-<tr><td>9.91540148604273</td><td>0.674738379145682</td><td>19.07686</td><td>17.09867</td><td>16.26528</td><td>15.95058</td><td>15.74596</td></tr>
-<tr><td>9.58233332439067</td><td>1.07004458396688</td><td>18.24713</td><td>16.2078</td><td>15.40039</td><td>15.08652</td><td>14.92325</td></tr>
-<tr><td>9.84107008973598</td><td>0.604306931861882</td><td>22.03356</td><td>21.2319</td><td>20.18646</td><td>19.43456</td><td>18.98174</td></tr>
-<tr><td>9.7126041894569</td><td>0.588436636043213</td><td>21.30454</td><td>19.05305</td><td>17.66012</td><td>16.67806</td><td>16.13704</td></tr>
+<tr><td>9.55833347738036</td><td>0.769527984035449</td><td>19.05654</td><td>18.07906</td><td>17.75168</td><td>17.61264</td><td>17.5596</td></tr>
+<tr><td>10.0136709646511</td><td>0.714933978750518</td><td>19.0865</td><td>17.80096</td><td>17.32457</td><td>17.14161</td><td>17.04391</td></tr>
+<tr><td>9.81266610259058</td><td>0.615892215079729</td><td>20.17811</td><td>17.65602</td><td>16.34286</td><td>15.81563</td><td>15.51489</td></tr>
 </table><p><span class="inputnumrole">In[18]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">twomass</span> <span class="c1"># just to see an example of the format</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">twomass</span> <span class="c1"># just to see an example of the format</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[18]:</span></p>
 <i>Table masked=True length=23</i>
-<table id="table140041579121520" class="table-striped table-bordered table-condensed">
+<table id="table139886364773008" class="table-striped table-bordered table-condensed">
 <thead><tr><th>designation</th><th>ra</th><th>dec</th><th>r_k20fe</th><th>j_m_k20fe</th><th>j_msig_k20fe</th><th>j_flg_k20fe</th><th>h_m_k20fe</th><th>h_msig_k20fe</th><th>h_flg_k20fe</th><th>k_m_k20fe</th><th>k_msig_k20fe</th><th>k_flg_k20fe</th><th>k_ba</th><th>k_phi</th><th>sup_ba</th><th>sup_phi</th><th>r_ext</th><th>j_m_ext</th><th>j_msig_ext</th><th>h_m_ext</th><th>h_msig_ext</th><th>k_m_ext</th><th>k_msig_ext</th><th>cc_flg</th><th>dist</th><th>angle</th></tr></thead>
 <thead><tr><th></th><th>deg</th><th>deg</th><th>arcsec</th><th>mag</th><th>mag</th><th></th><th>mag</th><th>mag</th><th></th><th>mag</th><th>mag</th><th></th><th></th><th>deg</th><th></th><th>deg</th><th>arcsec</th><th>mag</th><th>mag</th><th>mag</th><th>mag</th><th>mag</th><th>mag</th><th></th><th>arcsec</th><th>deg</th></tr></thead>
 <thead><tr><th>str16</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>int64</th><th>float64</th><th>float64</th><th>int64</th><th>float64</th><th>float64</th><th>int64</th><th>float64</th><th>int64</th><th>float64</th><th>int64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>str1</th><th>float64</th><th>float64</th></tr></thead>
@@ -439,7 +438,7 @@ coordinate values - you just pass in array-like inputs (array
 <code class="docutils literal notranslate"><span class="pre">Quantity</span></code>s, lists of strings, <code class="docutils literal notranslate"><span class="pre">Table</span></code> columns, etc.), and
 <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> will happily do all of its operations element-wise.</p>
 <p><span class="inputnumrole">In[19]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">coo_sdss</span> <span class="o">=</span> <span class="n">SkyCoord</span><span class="p">(</span><span class="n">sdss</span><span class="p">[</span><span class="s1">&#39;ra&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">deg</span><span class="p">,</span> <span class="n">sdss</span><span class="p">[</span><span class="s1">&#39;dec&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">deg</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">coo_sdss</span> <span class="o">=</span> <span class="n">SkyCoord</span><span class="p">(</span><span class="n">sdss</span><span class="p">[</span><span class="s1">&#39;ra&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">deg</span><span class="p">,</span> <span class="n">sdss</span><span class="p">[</span><span class="s1">&#39;dec&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">deg</span><span class="p">)</span>
 <span class="n">coo_twomass</span> <span class="o">=</span> <span class="n">SkyCoord</span><span class="p">(</span><span class="n">twomass</span><span class="p">[</span><span class="s1">&#39;ra&#39;</span><span class="p">],</span> <span class="n">twomass</span><span class="p">[</span><span class="s1">&#39;dec&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
@@ -452,7 +451,7 @@ the two catalogs. Note that order matters: we’re matching 2MASS to SDSS
 because there are many <em>more</em> entires in the SDSS, so it seems likely
 that most 2MASS objects are in SDSS (but not vice versa).</p>
 <p><span class="inputnumrole">In[20]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">idx_sdss</span><span class="p">,</span> <span class="n">d2d_sdss</span><span class="p">,</span> <span class="n">d3d_sdss</span> <span class="o">=</span> <span class="n">coo_twomass</span><span class="o">.</span><span class="n">match_to_catalog_sky</span><span class="p">(</span><span class="n">coo_sdss</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">idx_sdss</span><span class="p">,</span> <span class="n">d2d_sdss</span><span class="p">,</span> <span class="n">d3d_sdss</span> <span class="o">=</span> <span class="n">coo_twomass</span><span class="o">.</span><span class="n">match_to_catalog_sky</span><span class="p">(</span><span class="n">coo_sdss</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">idx</span></code> are the indecies into <code class="docutils literal notranslate"><span class="pre">coo_sdss</span></code> that get the closest matches,
@@ -462,7 +461,7 @@ didn’t give a line-of-sight distance, so its value is not particularly
 useful. But <code class="docutils literal notranslate"><span class="pre">d2d</span></code> provides a good diagnosis of whether we actually
 have real matches:</p>
 <p><span class="inputnumrole">In[21]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">d2d_sdss</span><span class="o">.</span><span class="n">arcsec</span><span class="p">,</span> <span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;step&#39;</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">d2d_sdss</span><span class="o">.</span><span class="n">arcsec</span><span class="p">,</span> <span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;step&#39;</span><span class="p">,</span> <span class="nb">range</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;separation [arcsec]&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
@@ -476,22 +475,22 @@ check by comparing to a set of <em>random</em> points.</p>
 <code class="docutils literal notranslate"><span class="pre">coo_twomass</span></code>) that cover the same range of RA/Decs that are in
 <code class="docutils literal notranslate"><span class="pre">coo_sdss</span></code>.</p>
 <p><span class="inputnumrole">In[22]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ras_sim</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">coo_twomass</span><span class="p">))</span><span class="o">*</span><span class="n">coo_sdss</span><span class="o">.</span><span class="n">ra</span><span class="o">.</span><span class="n">ptp</span><span class="p">()</span> <span class="o">+</span> <span class="n">coo_sdss</span><span class="o">.</span><span class="n">ra</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ras_sim</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">coo_twomass</span><span class="p">))</span><span class="o">*</span><span class="n">coo_sdss</span><span class="o">.</span><span class="n">ra</span><span class="o">.</span><span class="n">ptp</span><span class="p">()</span> <span class="o">+</span> <span class="n">coo_sdss</span><span class="o">.</span><span class="n">ra</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
 <span class="n">decs_sim</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">coo_twomass</span><span class="p">))</span><span class="o">*</span><span class="n">coo_sdss</span><span class="o">.</span><span class="n">dec</span><span class="o">.</span><span class="n">ptp</span><span class="p">()</span> <span class="o">+</span> <span class="n">coo_sdss</span><span class="o">.</span><span class="n">dec</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
 <span class="n">ras_sim</span><span class="p">,</span> <span class="n">decs_sim</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[22]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="o">&lt;</span><span class="n">Angle</span> <span class="p">[</span> <span class="mf">9.88010694</span><span class="p">,</span>  <span class="mf">9.55383312</span><span class="p">,</span>  <span class="mf">9.56841608</span><span class="p">,</span>  <span class="mf">9.70881765</span><span class="p">,</span> <span class="mf">10.03498184</span><span class="p">,</span>
-          <span class="mf">9.68514446</span><span class="p">,</span>  <span class="mf">9.88237646</span><span class="p">,</span>  <span class="mf">9.96998179</span><span class="p">,</span> <span class="mf">10.07885192</span><span class="p">,</span>  <span class="mf">9.65985863</span><span class="p">,</span>
-          <span class="mf">9.90711903</span><span class="p">,</span>  <span class="mf">9.96926978</span><span class="p">,</span>  <span class="mf">9.75439399</span><span class="p">,</span>  <span class="mf">9.83548014</span><span class="p">,</span> <span class="mf">10.02132218</span><span class="p">,</span>
-          <span class="mf">9.72674293</span><span class="p">,</span>  <span class="mf">9.96824761</span><span class="p">,</span>  <span class="mf">9.52807824</span><span class="p">,</span>  <span class="mf">9.54844526</span><span class="p">,</span>  <span class="mf">9.70525598</span><span class="p">,</span>
-         <span class="mf">10.02815617</span><span class="p">,</span> <span class="mf">10.00339458</span><span class="p">,</span>  <span class="mf">9.49941119</span><span class="p">]</span> <span class="n">deg</span><span class="o">&gt;</span><span class="p">,</span>
- <span class="o">&lt;</span><span class="n">Angle</span> <span class="p">[</span><span class="mf">0.83926821</span><span class="p">,</span> <span class="mf">0.60438361</span><span class="p">,</span> <span class="mf">0.82064958</span><span class="p">,</span> <span class="mf">0.67571271</span><span class="p">,</span> <span class="mf">1.07175386</span><span class="p">,</span>
-         <span class="mf">0.80239122</span><span class="p">,</span> <span class="mf">0.89066448</span><span class="p">,</span> <span class="mf">0.57450745</span><span class="p">,</span> <span class="mf">0.98297816</span><span class="p">,</span> <span class="mf">1.11858443</span><span class="p">,</span>
-         <span class="mf">1.08618432</span><span class="p">,</span> <span class="mf">1.14461005</span><span class="p">,</span> <span class="mf">0.60367961</span><span class="p">,</span> <span class="mf">0.66837666</span><span class="p">,</span> <span class="mf">1.14178339</span><span class="p">,</span>
-         <span class="mf">1.13460065</span><span class="p">,</span> <span class="mf">0.67406568</span><span class="p">,</span> <span class="mf">0.80410312</span><span class="p">,</span> <span class="mf">0.84172437</span><span class="p">,</span> <span class="mf">0.98538535</span><span class="p">,</span>
-         <span class="mf">1.00546901</span><span class="p">,</span> <span class="mf">1.15781977</span><span class="p">,</span> <span class="mf">0.95229428</span><span class="p">]</span> <span class="n">deg</span><span class="o">&gt;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="o">&lt;</span><span class="n">Angle</span> <span class="p">[</span><span class="mf">10.06084913</span><span class="p">,</span>  <span class="mf">9.70078368</span><span class="p">,</span>  <span class="mf">9.73327995</span><span class="p">,</span>  <span class="mf">9.73937297</span><span class="p">,</span>  <span class="mf">9.7485207</span> <span class="p">,</span>
+          <span class="mf">9.93058867</span><span class="p">,</span>  <span class="mf">9.81881412</span><span class="p">,</span>  <span class="mf">9.72556006</span><span class="p">,</span>  <span class="mf">9.52985177</span><span class="p">,</span>  <span class="mf">9.87345684</span><span class="p">,</span>
+          <span class="mf">9.92850737</span><span class="p">,</span>  <span class="mf">9.96371357</span><span class="p">,</span>  <span class="mf">9.73466541</span><span class="p">,</span>  <span class="mf">9.93855898</span><span class="p">,</span>  <span class="mf">9.48675004</span><span class="p">,</span>
+          <span class="mf">9.7839013</span> <span class="p">,</span>  <span class="mf">9.68047208</span><span class="p">,</span>  <span class="mf">9.91350364</span><span class="p">,</span> <span class="mf">10.08530341</span><span class="p">,</span>  <span class="mf">9.52418572</span><span class="p">,</span>
+          <span class="mf">9.8286702</span> <span class="p">,</span>  <span class="mf">9.84305397</span><span class="p">,</span>  <span class="mf">9.52552388</span><span class="p">]</span> <span class="n">deg</span><span class="o">&gt;</span><span class="p">,</span>
+ <span class="o">&lt;</span><span class="n">Angle</span> <span class="p">[</span><span class="mf">0.91959558</span><span class="p">,</span> <span class="mf">0.73815329</span><span class="p">,</span> <span class="mf">0.82353719</span><span class="p">,</span> <span class="mf">1.20663926</span><span class="p">,</span> <span class="mf">0.84894284</span><span class="p">,</span>
+         <span class="mf">0.8787073</span> <span class="p">,</span> <span class="mf">1.00246034</span><span class="p">,</span> <span class="mf">0.75131107</span><span class="p">,</span> <span class="mf">0.59045786</span><span class="p">,</span> <span class="mf">0.59076242</span><span class="p">,</span>
+         <span class="mf">0.78679257</span><span class="p">,</span> <span class="mf">0.72643391</span><span class="p">,</span> <span class="mf">0.78842137</span><span class="p">,</span> <span class="mf">0.91642837</span><span class="p">,</span> <span class="mf">1.12149942</span><span class="p">,</span>
+         <span class="mf">0.70300911</span><span class="p">,</span> <span class="mf">0.92777998</span><span class="p">,</span> <span class="mf">1.17646168</span><span class="p">,</span> <span class="mf">0.66433022</span><span class="p">,</span> <span class="mf">0.71361908</span><span class="p">,</span>
+         <span class="mf">0.55609924</span><span class="p">,</span> <span class="mf">0.92067338</span><span class="p">,</span> <span class="mf">1.11296844</span><span class="p">]</span> <span class="n">deg</span><span class="o">&gt;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Now we create a <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> from these points and match it to
@@ -500,14 +499,14 @@ check by comparing to a set of <em>random</em> points.</p>
 <code class="docutils literal notranslate"><span class="pre">decs_sim</span></code>, because they already are unitful <code class="docutils literal notranslate"><span class="pre">Angle</span></code> objects because
 they were created from <code class="docutils literal notranslate"><span class="pre">coo_sdss.ra</span></code>/<code class="docutils literal notranslate"><span class="pre">coo_sdss.dec</span></code>.</p>
 <p><span class="inputnumrole">In[23]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">coo_simulated</span> <span class="o">=</span> <span class="n">SkyCoord</span><span class="p">(</span><span class="n">ras_sim</span><span class="p">,</span> <span class="n">decs_sim</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">coo_simulated</span> <span class="o">=</span> <span class="n">SkyCoord</span><span class="p">(</span><span class="n">ras_sim</span><span class="p">,</span> <span class="n">decs_sim</span><span class="p">)</span>
 <span class="n">idx_sim</span><span class="p">,</span> <span class="n">d2d_sim</span><span class="p">,</span> <span class="n">d3d_sim</span> <span class="o">=</span> <span class="n">coo_simulated</span><span class="o">.</span><span class="n">match_to_catalog_sky</span><span class="p">(</span><span class="n">coo_sdss</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Now lets plot up the histogram of separations from our simulated catalog
 so we can compare to the above results from the <em>real</em> catalog.</p>
 <p><span class="inputnumrole">In[24]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">d2d_sim</span><span class="o">.</span><span class="n">arcsec</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span> <span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;step&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Simulated&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">d2d_sim</span><span class="o">.</span><span class="n">arcsec</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span> <span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;step&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Simulated&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;dashed&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">d2d_sdss</span><span class="o">.</span><span class="n">arcsec</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">,</span> <span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;step&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;2MASS&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;separation [arcsec]&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
@@ -522,7 +521,7 @@ which were within an arc<em>second</em> are valid. So with that in mind, we
 can start computing things like colors that combine the SDSS and 2MASS
 photometry.</p>
 <p><span class="inputnumrole">In[25]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">rmag</span> <span class="o">=</span> <span class="n">sdss</span><span class="p">[</span><span class="s1">&#39;r&#39;</span><span class="p">][</span><span class="n">idx_sdss</span><span class="p">]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">rmag</span> <span class="o">=</span> <span class="n">sdss</span><span class="p">[</span><span class="s1">&#39;r&#39;</span><span class="p">][</span><span class="n">idx_sdss</span><span class="p">]</span>
 <span class="n">grcolor</span> <span class="o">=</span> <span class="n">sdss</span><span class="p">[</span><span class="s1">&#39;g&#39;</span><span class="p">][</span><span class="n">idx_sdss</span><span class="p">]</span> <span class="o">-</span> <span class="n">rmag</span>
 <span class="n">rKcolor</span> <span class="o">=</span> <span class="n">rmag</span> <span class="o">-</span> <span class="n">twomass</span><span class="p">[</span><span class="s1">&#39;k_m_ext&#39;</span><span class="p">]</span>
 
@@ -582,31 +581,31 @@ particular “frames”, and we can transform between a specific
 transform our previously-defined center of HCG7 from ICRS to Galactic
 coordinates:</p>
 <p><span class="inputnumrole">In[26]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">hcg7_center</span><span class="o">.</span><span class="n">galactic</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">hcg7_center</span><span class="o">.</span><span class="n">galactic</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[26]:</span></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">SkyCoord</span> <span class="p">(</span><span class="n">Galactic</span><span class="p">):</span> <span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="ow">in</span> <span class="n">deg</span>
-    <span class="p">(</span><span class="mf">116.47556718</span><span class="p">,</span> <span class="o">-</span><span class="mf">61.83099914</span><span class="p">)</span><span class="o">&gt;</span>
+    <span class="p">(</span><span class="mf">116.47556813</span><span class="p">,</span> <span class="o">-</span><span class="mf">61.83099472</span><span class="p">)</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <p>The above is actually a special “quick-access” form which internally
 does the same as what’s in the cell below: uses the <code class="docutils literal notranslate"><span class="pre">transform_to()</span></code>
 method to convert from one frame to another.</p>
 <p><span class="inputnumrole">In[27]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">astropy.coordinates</span> <span class="k">import</span> <span class="n">Galactic</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">astropy.coordinates</span> <span class="kn">import</span> <span class="n">Galactic</span>
 <span class="n">hcg7_center</span><span class="o">.</span><span class="n">transform_to</span><span class="p">(</span><span class="n">Galactic</span><span class="p">())</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[27]:</span></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">SkyCoord</span> <span class="p">(</span><span class="n">Galactic</span><span class="p">):</span> <span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="ow">in</span> <span class="n">deg</span>
-    <span class="p">(</span><span class="mf">116.47556718</span><span class="p">,</span> <span class="o">-</span><span class="mf">61.83099914</span><span class="p">)</span><span class="o">&gt;</span>
+    <span class="p">(</span><span class="mf">116.47556813</span><span class="p">,</span> <span class="o">-</span><span class="mf">61.83099472</span><span class="p">)</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <p>Note that changing frames also changes some of the attributes of the
 object, but usually in a way that makes sense:</p>
 <p><span class="inputnumrole">In[28]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">hcg7_center</span><span class="o">.</span><span class="n">galactic</span><span class="o">.</span><span class="n">ra</span>  <span class="c1"># should fail because galactic coordinates are l/b not RA/Dec</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">hcg7_center</span><span class="o">.</span><span class="n">galactic</span><span class="o">.</span><span class="n">ra</span>  <span class="c1"># should fail because galactic coordinates are l/b not RA/Dec</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[28]:</span></p>
@@ -628,12 +627,12 @@ object, but usually in a way that makes sense:</p>
 </pre></div>
 </div>
 <p><span class="inputnumrole">In[29]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">hcg7_center</span><span class="o">.</span><span class="n">galactic</span><span class="o">.</span><span class="n">b</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">hcg7_center</span><span class="o">.</span><span class="n">galactic</span><span class="o">.</span><span class="n">b</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[29]:</span></p>
 <div class="math notranslate nohighlight">
-\[-61^\circ49{}^\prime51.5969{}^{\prime\prime}\]</div>
+\[-61^\circ49{}^\prime51.581{}^{\prime\prime}\]</div>
 </div>
 <div class="section" id="using-frame-transformations-to-get-to-altaz">
 <h3>Using frame transformations to get to AltAz<a class="headerlink" href="#using-frame-transformations-to-get-to-altaz" title="Permalink to this headline">¶</a></h3>
@@ -642,8 +641,8 @@ local to an on-earth observer. By far the most common choice is
 horizontal coordinates, or “AltAz” coordinates. We first need to specify
 both where and when we want to try to observe.</p>
 <p><span class="inputnumrole">In[30]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">astropy.coordinates</span> <span class="k">import</span> <span class="n">EarthLocation</span>
-<span class="kn">from</span> <span class="nn">astropy.time</span> <span class="k">import</span> <span class="n">Time</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">astropy.coordinates</span> <span class="kn">import</span> <span class="n">EarthLocation</span>
+<span class="kn">from</span> <span class="nn">astropy.time</span> <span class="kn">import</span> <span class="n">Time</span>
 
 <span class="n">observing_location</span> <span class="o">=</span> <span class="n">EarthLocation</span><span class="p">(</span><span class="n">lat</span><span class="o">=</span><span class="s1">&#39;31d57.5m&#39;</span><span class="p">,</span> <span class="n">lon</span><span class="o">=</span><span class="s1">&#39;-111d35.8m&#39;</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">2096</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">m</span><span class="p">)</span>  <span class="c1"># Kitt Peak, Arizona</span>
 <span class="c1"># If you&#39;re using astropy v1.1 or later, you can replace the above with this:</span>
@@ -657,7 +656,7 @@ frame has some other information about the atmosphere, which can be used
 to correct for atmospheric refraction. Here we leave that alone, because
 the default is to ignore this effect (by setting the pressure to 0).</p>
 <p><span class="inputnumrole">In[31]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">astropy.coordinates</span> <span class="k">import</span> <span class="n">AltAz</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">astropy.coordinates</span> <span class="kn">import</span> <span class="n">AltAz</span>
 
 <span class="n">aa</span> <span class="o">=</span> <span class="n">AltAz</span><span class="p">(</span><span class="n">location</span><span class="o">=</span><span class="n">observing_location</span><span class="p">,</span> <span class="n">obstime</span><span class="o">=</span><span class="n">observing_time</span><span class="p">)</span>
 <span class="n">aa</span>
@@ -670,19 +669,19 @@ the default is to ignore this effect (by setting the pressure to 0).</p>
 <p>Now we can just transform our ICRS <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> to <code class="docutils literal notranslate"><span class="pre">AltAz</span></code> to get the
 location in the sky over Kitt Peak at the requested time.</p>
 <p><span class="inputnumrole">In[32]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">hcg7_center</span><span class="o">.</span><span class="n">transform_to</span><span class="p">(</span><span class="n">aa</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">hcg7_center</span><span class="o">.</span><span class="n">transform_to</span><span class="p">(</span><span class="n">aa</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[32]:</span></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">SkyCoord</span> <span class="p">(</span><span class="n">AltAz</span><span class="p">:</span> <span class="n">obstime</span><span class="o">=</span><span class="mi">2010</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">21</span> <span class="mi">01</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mf">00.000</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">1994310.09211632</span><span class="p">,</span> <span class="o">-</span><span class="mf">5037908.60633759</span><span class="p">,</span> <span class="mf">3357621.75212217</span><span class="p">)</span> <span class="n">m</span><span class="p">,</span> <span class="n">pressure</span><span class="o">=</span><span class="mf">0.0</span> <span class="n">hPa</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mf">0.0</span> <span class="n">deg_C</span><span class="p">,</span> <span class="n">relative_humidity</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">obswl</span><span class="o">=</span><span class="mf">1.0</span> <span class="n">micron</span><span class="p">):</span> <span class="p">(</span><span class="n">az</span><span class="p">,</span> <span class="n">alt</span><span class="p">)</span> <span class="ow">in</span> <span class="n">deg</span>
-    <span class="p">(</span><span class="mf">149.19392373</span><span class="p">,</span> <span class="mf">55.0624696</span><span class="p">)</span><span class="o">&gt;</span>
+    <span class="p">(</span><span class="mf">149.19392036</span><span class="p">,</span> <span class="mf">55.0624736</span><span class="p">)</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <p>Alright, it’s up at 6pm, but that’s pretty early to be observing. We
 could just try various times one at a time to see if the airmass is at a
 darker time, but we can do better: lets try to create an airmass plot.</p>
 <p><span class="inputnumrole">In[33]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># this gives a Time object with an *array* of times</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># this gives a Time object with an *array* of times</span>
 <span class="n">delta_hours</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">hour</span>
 <span class="n">full_night_times</span> <span class="o">=</span> <span class="n">observing_time</span> <span class="o">+</span> <span class="n">delta_hours</span>
 <span class="n">full_night_aa_frames</span> <span class="o">=</span> <span class="n">AltAz</span><span class="p">(</span><span class="n">location</span><span class="o">=</span><span class="n">observing_location</span><span class="p">,</span> <span class="n">obstime</span><span class="o">=</span><span class="n">full_night_times</span><span class="p">)</span>
@@ -703,7 +702,7 @@ observing for proper dark skies? Fortunately, astropy provides a
 <code class="docutils literal notranslate"><span class="pre">get_sun</span></code> function that can be used to check this. Lets use it to
 check if we’re in 18-degree twilight or not.</p>
 <p><span class="inputnumrole">In[34]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">astropy.coordinates</span> <span class="k">import</span> <span class="n">get_sun</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">astropy.coordinates</span> <span class="kn">import</span> <span class="n">get_sun</span>
 
 <span class="n">full_night_sun_coos</span> <span class="o">=</span> <span class="n">get_sun</span><span class="p">(</span><span class="n">full_night_times</span><span class="p">)</span><span class="o">.</span><span class="n">transform_to</span><span class="p">(</span><span class="n">full_night_aa_frames</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">delta_hours</span><span class="p">,</span> <span class="n">full_night_sun_coos</span><span class="o">.</span><span class="n">alt</span><span class="o">.</span><span class="n">deg</span><span class="p">)</span>
@@ -761,7 +760,7 @@ last section of this tutorial.</p>
       
     </p>
     <p>
-    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
     &copy; Copyright Astropy.   
     </p>
   </div>

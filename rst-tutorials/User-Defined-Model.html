@@ -2,8 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><meta content="filterTutorials, filterModeling, filterUserDefinedModel, filterCustomModels, filterCompoundModels" name="keywords" />
+    <meta charset="utf-8" /><meta content="filterTutorials, filterModeling, filterUserDefinedModel, filterCustomModels, filterCompoundModels" name="keywords" />
 <meta content="filterTutorials," name="keywords" />
 
     <title>Create a User Defined Model using astropy.modeling &#8212; astropy-tutorials v3.0.dev</title>
@@ -136,11 +135,12 @@
 <div class="section" id="learning-goals">
 <h2>Learning Goals<a class="headerlink" href="#learning-goals" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Know and understand tools to make user defined models with
-<code class="docutils literal notranslate"><span class="pre">astropy</span></code> and in which cases it could be useful</li>
-<li>We will define models usign two different tools:<ul>
-<li>Compound models</li>
-<li>Custom models</li>
+<li><p>Know and understand tools to make user defined models with
+<code class="docutils literal notranslate"><span class="pre">astropy</span></code> and in which cases it could be useful</p></li>
+<li><p>We will define models usign two different tools:</p>
+<ul>
+<li><p>Compound models</p></li>
+<li><p>Custom models</p></li>
 </ul>
 </li>
 </ul>
@@ -159,13 +159,13 @@ with a compound model and with a custom model.</p>
 <div class="section" id="imports">
 <h3>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h3>
 <p><span class="inputnumrole">In[1]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="kn">from</span> <span class="nn">astropy.io</span> <span class="k">import</span> <span class="n">fits</span>
-<span class="kn">from</span> <span class="nn">astropy.modeling</span> <span class="k">import</span> <span class="n">models</span><span class="p">,</span> <span class="n">fitting</span>
-<span class="kn">from</span> <span class="nn">astropy.modeling.models</span> <span class="k">import</span> <span class="n">custom_model</span>
-<span class="kn">from</span> <span class="nn">astropy.modeling</span> <span class="k">import</span> <span class="n">Fittable1DModel</span><span class="p">,</span> <span class="n">Parameter</span>
-<span class="kn">from</span> <span class="nn">astroquery.sdss</span> <span class="k">import</span> <span class="n">SDSS</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">astropy.io</span> <span class="kn">import</span> <span class="n">fits</span>
+<span class="kn">from</span> <span class="nn">astropy.modeling</span> <span class="kn">import</span> <span class="n">models</span><span class="p">,</span> <span class="n">fitting</span>
+<span class="kn">from</span> <span class="nn">astropy.modeling.models</span> <span class="kn">import</span> <span class="n">custom_model</span>
+<span class="kn">from</span> <span class="nn">astropy.modeling</span> <span class="kn">import</span> <span class="n">Fittable1DModel</span><span class="p">,</span> <span class="n">Parameter</span>
+<span class="kn">from</span> <span class="nn">astroquery.sdss</span> <span class="kn">import</span> <span class="n">SDSS</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[1]:</span></p>
@@ -199,7 +199,7 @@ from
 We can get the spectrum using the plate, fiber and mjd in the following
 way:</p>
 <p><span class="inputnumrole">In[2]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">spectrum</span> <span class="o">=</span> <span class="n">SDSS</span><span class="o">.</span><span class="n">get_spectra</span><span class="p">(</span><span class="n">plate</span><span class="o">=</span><span class="mi">1349</span><span class="p">,</span> <span class="n">fiberID</span><span class="o">=</span><span class="mi">216</span><span class="p">,</span> <span class="n">mjd</span><span class="o">=</span><span class="mi">52797</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">spectrum</span> <span class="o">=</span> <span class="n">SDSS</span><span class="o">.</span><span class="n">get_spectra</span><span class="p">(</span><span class="n">plate</span><span class="o">=</span><span class="mi">1349</span><span class="p">,</span> <span class="n">fiberID</span><span class="o">=</span><span class="mi">216</span><span class="p">,</span> <span class="n">mjd</span><span class="o">=</span><span class="mi">52797</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[2]:</span></p>
@@ -212,7 +212,7 @@ way:</p>
 <p>One way to check what is inside the fits file <code class="docutils literal notranslate"><span class="pre">spectrum</span></code> is the
 following:</p>
 <p><span class="inputnumrole">In[3]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">spectrum</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">columns</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">spectrum</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">columns</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[3]:</span></p>
@@ -233,7 +233,7 @@ wavelength (usually called lambda or <span class="math notranslate nohighlight">
 wavelength is in log scale: loglam, so we are going to calculate
 <span class="math notranslate nohighlight">\(10^\lambda\)</span> to remove this scale.</p>
 <p><span class="inputnumrole">In[4]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">flux</span> <span class="o">=</span> <span class="n">spectrum</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;flux&#39;</span><span class="p">]</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">flux</span> <span class="o">=</span> <span class="n">spectrum</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;flux&#39;</span><span class="p">]</span>
 <span class="n">lam</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="n">spectrum</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;loglam&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
@@ -244,9 +244,9 @@ have the units from the flux and wavelength. For SDSS spectrum we found
 where the units are in this <a class="reference external" href="https://www.sdss.org/dr12/tutorials/quicklook/#python">SDSS
 tutorial</a>:</p>
 <p><span class="inputnumrole">In[5]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#Units of the flux</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#Units of the flux</span>
 <span class="n">units_flux</span> <span class="o">=</span> <span class="n">spectrum</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="s1">&#39;bunit&#39;</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">units_flux</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">units_flux</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[5]:</span></p>
@@ -254,9 +254,9 @@ tutorial</a>:</p>
 </pre></div>
 </div>
 <p><span class="inputnumrole">In[6]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1">#Units of the wavelegth</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#Units of the wavelegth</span>
 <span class="n">units_wavelength_full</span> <span class="o">=</span> <span class="n">spectrum</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="s1">&#39;WAT1_001&#39;</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">units_wavelength_full</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">units_wavelength_full</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[6]:</span></p>
@@ -266,8 +266,8 @@ tutorial</a>:</p>
 <p>We are going to select only the characters of the unit we care about:
 Angstroms</p>
 <p><span class="inputnumrole">In[7]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">units_wavelength</span> <span class="o">=</span> <span class="n">units_wavelength_full</span><span class="p">[</span><span class="mi">36</span><span class="p">:]</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">units_wavelength</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">units_wavelength</span> <span class="o">=</span> <span class="n">units_wavelength_full</span><span class="p">[</span><span class="mi">36</span><span class="p">:]</span>
+<span class="k">print</span><span class="p">(</span><span class="n">units_wavelength</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[7]:</span></p>
@@ -276,11 +276,11 @@ Angstroms</p>
 </div>
 <p>Now we are ready to plot the spectrum with all the information.</p>
 <p><span class="inputnumrole">In[8]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lam</span><span class="p">,</span> <span class="n">flux</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lam</span><span class="p">,</span> <span class="n">flux</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">6300</span><span class="p">,</span><span class="mi">6700</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">6563</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Wavelength (</span><span class="si">{}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">units_wavelength</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Flux (</span><span class="si">{}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">units_flux</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Wavelength ({})&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">units_wavelength</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Flux ({})&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">units_flux</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -306,19 +306,19 @@ involves fitting with <code class="docutils literal notranslate"><span class="pr
 <a class="reference external" href="http://www.astropy.org/astropy-tutorials/rst-tutorials/Models-Quick-Fit.html">Models-Quick-Fit
 tutorial</a>.</p>
 <p><span class="inputnumrole">In[9]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">gausian_model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">Gaussian1D</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6563</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">gausian_model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">Gaussian1D</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6563</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
 <span class="n">fitter</span> <span class="o">=</span> <span class="n">fitting</span><span class="o">.</span><span class="n">LevMarLSQFitter</span><span class="p">()</span>
 <span class="n">gaussian_fit</span> <span class="o">=</span> <span class="n">fitter</span><span class="p">(</span><span class="n">gausian_model</span><span class="p">,</span> <span class="n">lam</span><span class="p">,</span> <span class="n">flux</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Let’s plot the results.</p>
 <p><span class="inputnumrole">In[10]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lam</span><span class="p">,</span> <span class="n">flux</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lam</span><span class="p">,</span> <span class="n">gaussian_fit</span><span class="p">(</span><span class="n">lam</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;darkorange&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">6300</span><span class="p">,</span><span class="mi">6700</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Wavelength (Angstroms)&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Flux (</span><span class="si">{}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">units_flux</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Flux ({})&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">units_flux</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -327,7 +327,7 @@ tutorial</a>.</p>
 <p>We can see the fit is not doing a good job. Let’s print the parameters
 of this fit:</p>
 <p><span class="inputnumrole">In[11]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">gaussian_fit</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">gaussian_fit</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[11]:</span></p>
@@ -369,23 +369,23 @@ of degree 1 to account for the background spectrum close to the
 yourself that this is the case.</p>
 <p>Now let’s make our compound model!</p>
 <p><span class="inputnumrole">In[12]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">compound_model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">Gaussian1D</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6563</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="o">+</span> <span class="n">models</span><span class="o">.</span><span class="n">Polynomial1D</span><span class="p">(</span><span class="n">degree</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">compound_model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">Gaussian1D</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6563</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="o">+</span> <span class="n">models</span><span class="o">.</span><span class="n">Polynomial1D</span><span class="p">(</span><span class="n">degree</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>After this point, the algorithm to fit the data works exactly the same
 as before except we use a compound model instead of the gaussian model.</p>
 <p><span class="inputnumrole">In[13]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fitter</span> <span class="o">=</span> <span class="n">fitting</span><span class="o">.</span><span class="n">LevMarLSQFitter</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fitter</span> <span class="o">=</span> <span class="n">fitting</span><span class="o">.</span><span class="n">LevMarLSQFitter</span><span class="p">()</span>
 <span class="n">compound_fit</span> <span class="o">=</span> <span class="n">fitter</span><span class="p">(</span><span class="n">compound_model</span><span class="p">,</span> <span class="n">lam</span><span class="p">,</span> <span class="n">flux</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="inputnumrole">In[14]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lam</span><span class="p">,</span> <span class="n">flux</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lam</span><span class="p">,</span> <span class="n">compound_fit</span><span class="p">(</span><span class="n">lam</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;darkorange&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">6300</span><span class="p">,</span><span class="mi">6700</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Wavelength (Angstroms)&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Flux (</span><span class="si">{}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">units_flux</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Flux ({})&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">units_flux</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -393,7 +393,7 @@ as before except we use a compound model instead of the gaussian model.</p>
 <img alt="../_images/User-Defined-Model_32_0.png" src="../_images/User-Defined-Model_32_0.png" />
 <p>It works! Let’s take a look to the fit we just made.</p>
 <p><span class="inputnumrole">In[15]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">compound_fit</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">compound_fit</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[15]:</span></p>
@@ -414,8 +414,8 @@ as before except we use a compound model instead of the gaussian model.</p>
 </div>
 <p>Let’s print all the parameters in a fancy way:</p>
 <p><span class="inputnumrole">In[16]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">compound_fit</span><span class="o">.</span><span class="n">param_names</span><span class="p">,</span> <span class="n">compound_fit</span><span class="o">.</span><span class="n">parameters</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">compound_fit</span><span class="o">.</span><span class="n">param_names</span><span class="p">,</span> <span class="n">compound_fit</span><span class="o">.</span><span class="n">parameters</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[16]:</span></p>
@@ -430,7 +430,7 @@ as before except we use a compound model instead of the gaussian model.</p>
 gaussian (mean, std and amplitude) and the two coefficients from the
 polynomial of degree 1. So now if we want to see just the amplitude:</p>
 <p><span class="inputnumrole">In[17]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">compound_fit</span><span class="o">.</span><span class="n">amplitude_0</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">compound_fit</span><span class="o">.</span><span class="n">amplitude_0</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[17]:</span></p>
@@ -449,31 +449,31 @@ some of the parameters of the model. In <code class="docutils literal notranslat
 called <strong>`fixed
 parameters &lt;http://docs.astropy.org/en/stable/api/astropy.modeling.Parameter.html#astropy.modeling.Parameter.fixed&gt;`__</strong>.</p>
 <p><span class="inputnumrole">In[18]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">compound_model_fixed</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">Gaussian1D</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6563</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="o">+</span> <span class="n">models</span><span class="o">.</span><span class="n">Polynomial1D</span><span class="p">(</span><span class="n">degree</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">compound_model_fixed</span><span class="o">.</span><span class="n">mean_0</span><span class="o">.</span><span class="n">fixed</span> <span class="o">=</span> <span class="kc">True</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">compound_model_fixed</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">Gaussian1D</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6563</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="o">+</span> <span class="n">models</span><span class="o">.</span><span class="n">Polynomial1D</span><span class="p">(</span><span class="n">degree</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">compound_model_fixed</span><span class="o">.</span><span class="n">mean_0</span><span class="o">.</span><span class="n">fixed</span> <span class="o">=</span> <span class="bp">True</span>
 </pre></div>
 </div>
 <p>Now let’s use this new model with a fixed parameter to fit the data the
 same way we did before.</p>
 <p><span class="inputnumrole">In[19]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fitter</span> <span class="o">=</span> <span class="n">fitting</span><span class="o">.</span><span class="n">LevMarLSQFitter</span><span class="p">()</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fitter</span> <span class="o">=</span> <span class="n">fitting</span><span class="o">.</span><span class="n">LevMarLSQFitter</span><span class="p">()</span>
 <span class="n">compound_fit_fixed</span> <span class="o">=</span> <span class="n">fitter</span><span class="p">(</span><span class="n">compound_model_fixed</span><span class="p">,</span> <span class="n">lam</span><span class="p">,</span> <span class="n">flux</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="inputnumrole">In[20]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lam</span><span class="p">,</span> <span class="n">flux</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lam</span><span class="p">,</span> <span class="n">compound_fit_fixed</span><span class="p">(</span><span class="n">lam</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;darkorange&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">6300</span><span class="p">,</span><span class="mi">6700</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Wavelength (Angstroms)&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Flux (</span><span class="si">{}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">units_flux</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Flux ({})&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">units_flux</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[20]:</span></p>
 <img alt="../_images/User-Defined-Model_44_0.png" src="../_images/User-Defined-Model_44_0.png" />
 <p><span class="inputnumrole">In[21]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">compound_fit_fixed</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">compound_fit_fixed</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[21]:</span></p>
@@ -500,7 +500,7 @@ thing we can do is to define a <a class="reference external" href="http://docs.a
 value**</a>
 for the mean.</p>
 <p><span class="inputnumrole">In[22]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">compound_model_bounded</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">Gaussian1D</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6563</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="o">+</span> <span class="n">models</span><span class="o">.</span><span class="n">Polynomial1D</span><span class="p">(</span><span class="n">degree</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">compound_model_bounded</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">Gaussian1D</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6563</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="o">+</span> <span class="n">models</span><span class="o">.</span><span class="n">Polynomial1D</span><span class="p">(</span><span class="n">degree</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">delta</span> <span class="o">=</span> <span class="mf">0.5</span>
 <span class="n">compound_model_bounded</span><span class="o">.</span><span class="n">mean_0</span><span class="o">.</span><span class="n">max</span> <span class="o">=</span> <span class="mi">6563</span> <span class="o">+</span> <span class="n">delta</span>
 <span class="n">compound_model_bounded</span><span class="o">.</span><span class="n">mean_0</span><span class="o">.</span><span class="n">min</span> <span class="o">=</span> <span class="mi">6563</span> <span class="o">-</span> <span class="n">delta</span>
@@ -510,19 +510,19 @@ for the mean.</p>
 </pre></div>
 </div>
 <p><span class="inputnumrole">In[23]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lam</span><span class="p">,</span> <span class="n">flux</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lam</span><span class="p">,</span> <span class="n">compound_fit_bounded</span><span class="p">(</span><span class="n">lam</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;darkorange&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">6300</span><span class="p">,</span><span class="mi">6700</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Wavelength (Angstroms)&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Flux (</span><span class="si">{}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">units_flux</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Flux ({})&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">units_flux</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[23]:</span></p>
 <img alt="../_images/User-Defined-Model_48_0.png" src="../_images/User-Defined-Model_48_0.png" />
 <p><span class="inputnumrole">In[24]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">compound_fit_bounded</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">compound_fit_bounded</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[24]:</span></p>
@@ -572,7 +572,7 @@ example to understand each one of the custom models.</p>
 one example of basic custom model for this case. First, let’s simulate a
 dataset that follows an exponential:</p>
 <p><span class="inputnumrole">In[25]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
 
 <span class="n">a</span> <span class="o">=</span> <span class="mi">3</span>
 <span class="n">b</span> <span class="o">=</span> <span class="o">-</span><span class="mi">2</span>
@@ -583,7 +583,7 @@ dataset that follows an exponential:</p>
 </pre></div>
 </div>
 <p><span class="inputnumrole">In[26]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">x1</span> <span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">y1_err</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">x1</span> <span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">y1_err</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -592,7 +592,7 @@ dataset that follows an exponential:</p>
 <p>We can define a simple custom model by specifying which parameters we
 want to fit.</p>
 <p><span class="inputnumrole">In[27]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nd">@custom_model</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@custom_model</span>
 <span class="k">def</span> <span class="nf">exponential</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mf">1.</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    f(x)=a*exp(b*x + c)</span>
@@ -603,13 +603,13 @@ want to fit.</p>
 <p>Now we have one more available model to use in the same way we fit data
 with <code class="docutils literal notranslate"><span class="pre">astropy.modeling</span></code>.</p>
 <p><span class="inputnumrole">In[28]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">exp_model</span> <span class="o">=</span> <span class="n">exponential</span><span class="p">(</span><span class="mf">1.</span><span class="p">,</span><span class="o">-</span><span class="mf">1.</span><span class="p">,</span><span class="mf">1.</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">exp_model</span> <span class="o">=</span> <span class="n">exponential</span><span class="p">(</span><span class="mf">1.</span><span class="p">,</span><span class="o">-</span><span class="mf">1.</span><span class="p">,</span><span class="mf">1.</span><span class="p">)</span>
 <span class="n">fitter</span> <span class="o">=</span> <span class="n">fitting</span><span class="o">.</span><span class="n">LevMarLSQFitter</span><span class="p">()</span>
 <span class="n">exp_fit</span> <span class="o">=</span> <span class="n">fitter</span><span class="p">(</span><span class="n">exp_model</span><span class="p">,</span> <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">weights</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="n">y1_err</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="inputnumrole">In[29]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">x1</span> <span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">y1_err</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">x1</span> <span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">y1_err</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">exp_fit</span><span class="p">(</span><span class="n">x1</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
@@ -617,7 +617,7 @@ with <code class="docutils literal notranslate"><span class="pre">astropy.modeli
 <p><span class="outputnumrole">Out[29]:</span></p>
 <img alt="../_images/User-Defined-Model_62_0.png" src="../_images/User-Defined-Model_62_0.png" />
 <p><span class="inputnumrole">In[30]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">exp_fit</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">exp_fit</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[30]:</span></p>
@@ -627,15 +627,15 @@ with <code class="docutils literal notranslate"><span class="pre">astropy.modeli
 <span class="n">Model</span> <span class="nb">set</span> <span class="n">size</span><span class="p">:</span> <span class="mi">1</span>
 <span class="n">Parameters</span><span class="p">:</span>
             <span class="n">a</span>                  <span class="n">b</span>                  <span class="n">c</span>
-    <span class="o">------------------</span> <span class="o">------------------</span> <span class="o">------------------</span>
-    <span class="mf">1.6874663150914468</span> <span class="o">-</span><span class="mf">2.140957690188585</span> <span class="mf">0.5952057219866241</span>
+    <span class="o">-----------------</span> <span class="o">-------------------</span> <span class="o">-----------------</span>
+    <span class="mf">1.035387915835584</span> <span class="o">-</span><span class="mf">2.0419536430310794</span> <span class="mf">1.080061635049837</span>
 </pre></div>
 </div>
 <p>The fit looks good in the plot. Let’s check the parameters and the
 Reduced Chi Square value, which will give us information about the
 goodness of the fit.</p>
 <p><span class="inputnumrole">In[31]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">calc_reduced_chi_square</span><span class="p">(</span><span class="n">fit</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">yerr</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">n_free</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">calc_reduced_chi_square</span><span class="p">(</span><span class="n">fit</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">yerr</span><span class="p">,</span> <span class="n">N</span><span class="p">,</span> <span class="n">n_free</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    fit (array) values for the fit</span>
 <span class="sd">    x,y,yerr (arrays) data</span>
@@ -646,11 +646,11 @@ goodness of the fit.</p>
 </pre></div>
 </div>
 <p><span class="inputnumrole">In[32]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">calc_reduced_chi_square</span><span class="p">(</span><span class="n">exp_fit</span><span class="p">(</span><span class="n">x1</span><span class="p">),</span> <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">y1_err</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">x1</span><span class="p">),</span> <span class="mi">3</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">calc_reduced_chi_square</span><span class="p">(</span><span class="n">exp_fit</span><span class="p">(</span><span class="n">x1</span><span class="p">),</span> <span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">,</span> <span class="n">y1_err</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">x1</span><span class="p">),</span> <span class="mi">3</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[32]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">0.9859373131273007</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">1.0142685793677733</span>
 </pre></div>
 </div>
 <p>The Reduced Chi Square value is close to 1. Great! This means our fit is
@@ -678,7 +678,7 @@ It has a very particular definition of the frequency and phase. Let’s
 define a new Sine function with a full custom model. Again, first let’s
 create a simulated dataset.</p>
 <p><span class="inputnumrole">In[33]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
 <span class="n">a</span> <span class="o">=</span> <span class="mi">3</span>
 <span class="n">b</span> <span class="o">=</span> <span class="mi">2</span>
 <span class="n">c</span> <span class="o">=</span> <span class="mi">4</span>
@@ -689,7 +689,7 @@ create a simulated dataset.</p>
 </pre></div>
 </div>
 <p><span class="inputnumrole">In[34]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">y2_err</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">y2_err</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -700,7 +700,7 @@ function</strong>, which is used by different
 <a class="reference external" href="http://docs.astropy.org/en/stable/modeling/#id21">fitters</a>, for
 example the <code class="docutils literal notranslate"><span class="pre">LevMarLSQFitter()</span></code>.</p>
 <p><span class="inputnumrole">In[35]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SineNew</span><span class="p">(</span><span class="n">Fittable1DModel</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">SineNew</span><span class="p">(</span><span class="n">Fittable1DModel</span><span class="p">):</span>
     <span class="n">a</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mf">1.</span><span class="p">)</span>
     <span class="n">b</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mf">1.</span><span class="p">)</span>
     <span class="n">c</span> <span class="o">=</span> <span class="n">Parameter</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mf">1.</span><span class="p">)</span>
@@ -725,13 +725,13 @@ a model as <code class="docutils literal notranslate"><span class="pre">model=Si
 is very <strong>sensitive to the initial conditions</strong> due to the non-linearity
 of the parameters.</p>
 <p><span class="inputnumrole">In[36]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sine_model</span> <span class="o">=</span> <span class="n">SineNew</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mf">4.</span><span class="p">,</span><span class="n">b</span><span class="o">=</span><span class="mf">2.</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="mf">4.</span><span class="p">,</span><span class="n">d</span><span class="o">=</span><span class="mf">0.</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sine_model</span> <span class="o">=</span> <span class="n">SineNew</span><span class="p">(</span><span class="n">a</span><span class="o">=</span><span class="mf">4.</span><span class="p">,</span><span class="n">b</span><span class="o">=</span><span class="mf">2.</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="mf">4.</span><span class="p">,</span><span class="n">d</span><span class="o">=</span><span class="mf">0.</span><span class="p">)</span>
 <span class="n">fitter</span> <span class="o">=</span> <span class="n">fitting</span><span class="o">.</span><span class="n">LevMarLSQFitter</span><span class="p">()</span>
 <span class="n">sine_fit</span> <span class="o">=</span> <span class="n">fitter</span><span class="p">(</span><span class="n">sine_model</span><span class="p">,</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">weights</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">/</span><span class="n">y2_err</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="inputnumrole">In[37]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">y2_err</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">y2_err</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span><span class="n">sine_fit</span><span class="p">(</span><span class="n">x2</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
@@ -739,7 +739,7 @@ of the parameters.</p>
 <p><span class="outputnumrole">Out[37]:</span></p>
 <img alt="../_images/User-Defined-Model_77_0.png" src="../_images/User-Defined-Model_77_0.png" />
 <p><span class="inputnumrole">In[38]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">sine_fit</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">sine_fit</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[38]:</span></p>
@@ -748,17 +748,17 @@ of the parameters.</p>
 <span class="n">Outputs</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">,)</span>
 <span class="n">Model</span> <span class="nb">set</span> <span class="n">size</span><span class="p">:</span> <span class="mi">1</span>
 <span class="n">Parameters</span><span class="p">:</span>
-            <span class="n">a</span>                 <span class="n">b</span>                <span class="n">c</span>                 <span class="n">d</span>
-    <span class="o">------------------</span> <span class="o">---------------</span> <span class="o">-----------------</span> <span class="o">------------------</span>
-    <span class="mf">3.0490759466184727</span> <span class="mf">2.0029847175469</span> <span class="mf">3.952363230047323</span> <span class="mf">1.0352352372534839</span>
+            <span class="n">a</span>                  <span class="n">b</span>                 <span class="n">c</span>                 <span class="n">d</span>
+    <span class="o">------------------</span> <span class="o">-----------------</span> <span class="o">-----------------</span> <span class="o">------------------</span>
+    <span class="mf">3.4248264624330966</span> <span class="mf">2.014219063460163</span> <span class="mf">3.757625111447915</span> <span class="mf">0.9892880034110894</span>
 </pre></div>
 </div>
 <p><span class="inputnumrole">In[39]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">calc_reduced_chi_square</span><span class="p">(</span><span class="n">sine_fit</span><span class="p">(</span><span class="n">x2</span><span class="p">),</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">y2_err</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">x2</span><span class="p">),</span> <span class="mi">3</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">calc_reduced_chi_square</span><span class="p">(</span><span class="n">sine_fit</span><span class="p">(</span><span class="n">x2</span><span class="p">),</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">y2_err</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">x2</span><span class="p">),</span> <span class="mi">3</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[39]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">2.6823996283365967</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">5.445680022568641</span>
 </pre></div>
 </div>
 <p>The Reduced Chi Squared value is showing the same as the plot: this fit
@@ -779,14 +779,14 @@ Squared value. No need to do it here, but feel free to try.</p>
 function</strong> to our data. As an example, create a full custom model to fit
 the following data.</p>
 <p><span class="inputnumrole">In[40]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">x3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">x3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
 <span class="n">y3</span> <span class="o">=</span> <span class="n">x3</span><span class="o">**</span><span class="mi">2</span><span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">x3</span><span class="p">)</span><span class="o">**</span><span class="mi">3</span> <span class="o">/</span> <span class="mi">2</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 <span class="n">y3</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mf">0.</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">x3</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 <span class="n">y3_err</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">x3</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span><span class="o">*</span><span class="mf">0.5</span>
 </pre></div>
 </div>
 <p><span class="inputnumrole">In[41]:</span></p>
-<div class="code python highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">x3</span><span class="p">,</span><span class="n">y3</span><span class="p">,</span><span class="n">yerr</span><span class="o">=</span><span class="n">y3_err</span><span class="p">,</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">x3</span><span class="p">,</span><span class="n">y3</span><span class="p">,</span><span class="n">yerr</span><span class="o">=</span><span class="n">y3_err</span><span class="p">,</span><span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -812,7 +812,7 @@ the following data.</p>
       
     </p>
     <p>
-    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.5.
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
     &copy; Copyright Astropy.   
     </p>
   </div>
