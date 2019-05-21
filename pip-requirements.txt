@@ -1,7 +1,7 @@
 IPython>=6.1
 astropy>=3
 astroquery>=0.3.7
-matplotlib>=2.0
+matplotlib==3.0.2
 numpy>=1.15
 jupyter>=1.0
 scipy>=1.0
