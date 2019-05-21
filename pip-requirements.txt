@@ -9,4 +9,7 @@ notebook>=5.7.2
 aplpy
 spectral-cube
 reproject
+dust_extinction>=0.7
 astro-gala
+dust_extinction>=0.7
+synphot

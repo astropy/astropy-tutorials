@@ -16,3 +16,4 @@ dependencies:
   - aplpy # used in FITS-cube tutorial
   - spectral-cube # used in FITS-cube tutorial
   - reproject # used in FITS-cube tutorial
+  - dust_extinction>=0.7
