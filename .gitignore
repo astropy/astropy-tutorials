@@ -3,7 +3,8 @@ build/
 tutorials/rst-tutorials/
 tutorials/notebooks/FITS-cubes/Maps/
 IPython-*
-*.fits
+*.fits*
+*.gz
 *.pdf
 *.jpg
 *.pyc
