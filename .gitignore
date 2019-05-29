@@ -1,0 +1,13 @@
+.ipynb_checkpoints/
+build/
+tutorials/rst-tutorials/
+tutorials/notebooks/FITS-cubes/Maps/
+IPython-*
+*.fits*
+*.gz
+*.pdf
+*.jpg
+*.pyc
+*.tex
+exec*.ipynb
+.DS_Store

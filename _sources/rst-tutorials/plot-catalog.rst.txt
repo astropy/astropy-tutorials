@@ -116,7 +116,7 @@ data are:
 .. raw:: html
 
     <i>Table length=4</i>
-    <table id="table140232766260504" class="table-striped table-bordered table-condensed">
+    <table id="table140083026600904" class="table-striped table-bordered table-condensed">
     <thead><tr><th>name</th><th>ra</th><th>dec</th></tr></thead>
     <thead><tr><th>str6</th><th>str10</th><th>str9</th></tr></thead>
     <tr><td>BLG100</td><td>17:51:00.0</td><td>-29:59:48</td></tr>
@@ -281,7 +281,7 @@ first row of data are strings -- something else went wrong!
 .. raw:: html
 
     <i>Row index=0 masked=True</i>
-    <table id="table140232727187696">
+    <table id="table140082982758328">
     <thead><tr><th>col1</th><th>col2</th><th>col3</th><th>col4</th><th>col5</th><th>col6</th><th>col7</th><th>col8</th><th>col9</th><th>col10</th><th>col11</th><th>col12</th><th>col13</th><th>col14</th><th>col15</th><th>col16</th><th>col17</th><th>col18</th><th>col19</th><th>col20</th><th>col21</th><th>col22</th><th>col23</th><th>col24</th><th>col25</th><th>col26</th><th>col27</th><th>col28</th><th>col29</th><th>col30</th><th>col31</th><th>col32</th><th>col33</th><th>col34</th></tr></thead>
     <thead><tr><th>str24</th><th>str25</th><th>str9</th><th>str6</th><th>str16</th><th>str5</th><th>str5</th><th>str5</th><th>str5</th><th>str5</th><th>str15</th><th>str6</th><th>str5</th><th>str6</th><th>str5</th><th>str6</th><th>str4</th><th>str6</th><th>str13</th><th>str14</th><th>str26</th><th>str23</th><th>str11</th><th>str9</th><th>str12</th><th>str10</th><th>str8</th><th>str6</th><th>str22</th><th>str6</th><th>str19</th><th>str23</th><th>str9</th><th>str38</th></tr></thead>
     <tr><td>--</td><td>--</td><td>--</td><td>--</td><td>2MASS Photometry</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td>WISE Photometry</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td>Spectra</td><td>--</td><td>--</td><td>--</td><td>Astrometry</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td></tr>
@@ -564,7 +564,7 @@ class.
 
 .. parsed-literal::
 
-    <matplotlib.collections.PathCollection at 0x7f8a79c6f8d0>
+    <matplotlib.collections.PathCollection at 0x7f679c5f7208>
 
 
 

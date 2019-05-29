@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" /><meta content="filterTutorials, filterFits, filterRadioAstronomy, filterDataCubes, filterContourPlots" name="keywords" />
+<meta content="filterTutorials," name="keywords" />
+
+    <title>Working with FITS-cubes &#8212; astropy-tutorials v3.0.dev</title>
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bootstrap_sandstone.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/astropy.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <script type="text/javascript" src="../_static/searchtools.js"></script>
+    <script type="text/javascript" src="https://use.fontawesome.com/3168e95f94.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <link rel="shortcut icon" href="../_static/astropy_favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  
+  <script type="text/javascript">  
+    if( (window.location.href.search("tutorials.html") != -1) && (window.location.href.search("q=filterTutorials") == -1) ){
+      var url = window.location.href.split("tutorials.html")[0] + "tutorials.html?q=filterTutorials";
+      window.location.href = url;
+    }
+  </script>
+  <script type="text/javascript">
+    jQuery(function() { Search.loadIndex("../searchindex.js"); });
+  </script>
+  
+  <script type="text/javascript" id="searchindexloader"></script>
+   
+
+  </head><body>
+
+
+<nav class="navbar navbar-expand-lg bg-navbar">
+  <a class="navbar-brand" href="/" style="padding: 0px 5px;">
+    <img src="../../_static/astropy_logo.png" onerror="this.onerror=null;this.src='../_static/astropy_logo.png';" style="height: 38px;">
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarColor01">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="http://www.astropy.org"/>Astropy<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Modules</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0" action="../search.html" method="get">
+      <div class="input-group-prepend">
+          <button class="input-group-text" style="padding: 0.7rem"><i class="fa fa-search fa-fw"></i></button>
+      </div>
+      <input class="form-control mr-sm-3" name="q" type="text" placeholder="Search the universe" />
+    </form>
+  </div>
+</nav>
+
+
+<div class="container">
+  <div class="row">
+
+    
+    
+    
+    
+    
+    <div class="col-md-3">
+      <div id="sidebar" class="bs-sidenav card" role="complementary">
+        <h3>Table of contents</h3>
+        <ul>
+<li><a class="reference internal" href="#">Working with FITS-cubes</a><ul>
+<li><a class="reference internal" href="#authors">Authors</a></li>
+<li><a class="reference internal" href="#learning-goals">Learning Goals</a></li>
+<li><a class="reference internal" href="#keywords">Keywords</a></li>
+<li><a class="reference internal" href="#summary">Summary</a></li>
+<li><a class="reference internal" href="#download-the-hi-data">Download the HI Data</a></li>
+<li><a class="reference internal" href="#download-the-hi-fits-cube">Download the HI Fits Cube</a><ul>
+<li><a class="reference internal" href="#some-things-to-pay-attention-to-here">Some things to pay attention to here:</a><ul>
+<li><a class="reference internal" href="#try-messing-around-with-slicing-the-cube-along-different-axes-or-picking-out-different-spectra">Try messing around with slicing the cube along different axes, or picking out different spectra</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="reference internal" href="#make-a-smaller-cube-focusing-on-the-magellanic-clouds">Make a smaller cube, focusing on the Magellanic Clouds</a></li>
+<li><a class="reference internal" href="#cut-along-the-spectral-axis">Cut along the Spectral Axis:</a></li>
+<li><a class="reference internal" href="#moment-maps">Moment Maps</a></li>
+<li><a class="reference internal" href="#try">Try:</a><ul>
+<li><a class="reference internal" href="#create-a-new-spectral-slab-isolating-just-the-smc-and-slice-along-a-different-dimension-to-create-a-latitude-velocity-diagram">Create a new spectral slab isolating just the SMC and slice along a different dimension to create a latitude-velocity diagram</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#find-and-download-a-herschel-image">Find and Download a Herschel Image</a></li>
+<li><a class="reference internal" href="#overlay-hi-21-cm-contours-on-the-ir-30-micron-image">Overlay HI 21 cm Contours on the IR 30 micron Image</a></li>
+<li><a class="reference internal" href="#using-reproject-to-match-image-resolutions">Using reproject to match image resolutions</a></li>
+<li><a class="reference internal" href="#challenge">Challenge:</a></li>
+</ul>
+</li>
+</ul>
+
+      </div>    
+    </div>
+    
+
+    <div class="col-md-9">
+      <div class="content-padding card">
+        <div>
+  <a href="../_static/FITS-cubes/FITS-cubes.ipynb"><button id="download">Download tutorial notebook</button></a>
+<a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/FITS-cubes/FITS-cubes.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
+
+<div id="spacer"></div><div class="section" id="working-with-fits-cubes">
+<span id="fits-cubes"></span><h1>Working with FITS-cubes<a class="headerlink" href="#working-with-fits-cubes" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="authors">
+<h2>Authors<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="http://www.astronomy.dk">Dhanesh Krishnarao (DK)</a>, <a class="reference external" href="http://www.astro.wisc.edu/our-people/post-doctoral-students/shetty-shravan/">Shravan
+Shetty</a>,
+<a class="reference external" href="http://www.astro.wisc.edu/our-people/graduate-students/gonzalez-casanova-diego/">Diego
+Gonzalez-Casanova</a>,
+<a class="reference external" href="http://www.astro.wisc.edu/our-people/scientists/hernandez-audra/">Audra
+Hernandez</a>,
+Kris Stern</p>
+</div>
+<div class="section" id="learning-goals">
+<h2>Learning Goals<a class="headerlink" href="#learning-goals" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Find and download data using <code class="docutils literal notranslate"><span class="pre">astroquery</span></code></p></li>
+<li><p>Read and plot slices across different dimensions of a data cube</p></li>
+<li><p>Compare different data sets (2D and 3D) by overploting contours</p></li>
+<li><p>Transform coordinate projections and match data resolutions with
+<code class="docutils literal notranslate"><span class="pre">reproject</span></code></p></li>
+<li><p>Create intensity moment maps / velocity maps with <code class="docutils literal notranslate"><span class="pre">spectral_cube</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="keywords">
+<h2>Keywords<a class="headerlink" href="#keywords" title="Permalink to this headline">¶</a></h2>
+<p>FITS, radio astronomy, data cubes, contour plots</p>
+</div>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p>In this tutorial we will visualize 2D and 3D data sets in different
+coordinates (Galactic and equatorial).</p>
+<p>The tutorial will walk you though a simple visual analysis of the Small
+Magellanic Cloud (SMC) using HI 21cm emission and a Herschel 250 micron
+map. We will learn how to read in data from VizieR, query and download
+matching data from Herschel using astroquery, and plot the resulting
+images in a multitude of ways.</p>
+<p>The primary libraries we’ll be using are:
+<a class="reference external" href="http://www.astropy.org/astroquery/">astroquery</a>,
+<a class="reference external" href="https://spectral-cube.readthedocs.io/en/latest/">spectral_cube</a>,
+<a class="reference external" href="https://reproject.readthedocs.io/en/stable/#">reproject</a>,
+<a class="reference external" href="https://matplotlib.org/">matplotlib</a>)</p>
+<p>They can be installed using conda:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">astropy</span> <span class="n">astroquery</span>
+<span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">astropy</span> <span class="n">spectral</span><span class="o">-</span><span class="n">cube</span>
+<span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">astropy</span> <span class="n">reproject</span>
+</pre></div>
+</div>
+<p>Alternatively, if you don’t use conda, you can use pip.</p>
+<p><span class="inputnumrole">In[1]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">matplotlib.colors</span> <span class="kn">import</span> <span class="n">LogNorm</span>
+
+<span class="kn">import</span> <span class="nn">astropy.units</span> <span class="kn">as</span> <span class="nn">u</span>
+<span class="kn">from</span> <span class="nn">astropy.utils.data</span> <span class="kn">import</span> <span class="n">download_file</span>
+<span class="kn">from</span> <span class="nn">astropy.io</span> <span class="kn">import</span> <span class="n">fits</span>  <span class="c1"># We use fits to open the actual data file</span>
+
+<span class="kn">from</span> <span class="nn">astropy.utils</span> <span class="kn">import</span> <span class="n">data</span>
+<span class="n">data</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">remote_timeout</span> <span class="o">=</span> <span class="mi">60</span>
+
+<span class="kn">from</span> <span class="nn">spectral_cube</span> <span class="kn">import</span> <span class="n">SpectralCube</span>
+
+<span class="kn">from</span> <span class="nn">astroquery.esasky</span> <span class="kn">import</span> <span class="n">ESASky</span>
+<span class="kn">from</span> <span class="nn">astroquery.utils</span> <span class="kn">import</span> <span class="n">TableList</span>
+<span class="kn">from</span> <span class="nn">astropy.wcs</span> <span class="kn">import</span> <span class="n">WCS</span>
+<span class="kn">from</span> <span class="nn">reproject</span> <span class="kn">import</span> <span class="n">reproject_interp</span>
+
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="download-the-hi-data">
+<h2>Download the HI Data<a class="headerlink" href="#download-the-hi-data" title="Permalink to this headline">¶</a></h2>
+<p>We’ll be using HI 21 cm emission data from the <a class="reference external" href="http://adsabs.harvard.edu/cgi-bin/bib_query?arXiv:1610.06175">HI4Pi
+survey</a>.
+We want to look at neutral gas emission from the Magellanic Clouds and
+learn about the kinematics of the system and column densities. Using the
+VizieR catalog, we’ve found a relevant data cube to use that covers this
+region of the sky. You can also download an allsky data cube, but this
+is a very large file, so picking out sub-sections can be useful!</p>
+<p>For us, the <a class="reference external" href="http://cdsarc.u-strasbg.fr/vizier/ftp/cats/J/A+A/594/A116/CUBES/GAL/TAN/TAN_C14.fits">relevant file is available via ftp from CDS
+Strasbourg</a>.
+We have a reduced version of it which will be a FITS data cube in
+Galactic coordinates using the tangential sky projection.</p>
+<p>Sure, we could download this file directly, but why do that when we can
+load it up via one line of code and have it ready to use in our cache?</p>
+</div>
+<div class="section" id="download-the-hi-fits-cube">
+<h2>Download the HI Fits Cube<a class="headerlink" href="#download-the-hi-fits-cube" title="Permalink to this headline">¶</a></h2>
+<p><span class="inputnumrole">In[2]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Downloads the HI data in a fits file format</span>
+<span class="n">hi_datafile</span> <span class="o">=</span> <span class="n">download_file</span><span class="p">(</span>
+    <span class="s1">&#39;http://data.astropy.org/tutorials/FITS-cubes/&#39;</span><span class="o">+</span><span class="s1">&#39;reduced_TAN_C14.fits&#39;</span><span class="p">,</span>
+    <span class="n">cache</span><span class="o">=</span> <span class="bp">False</span><span class="p">,</span> <span class="n">show_progress</span> <span class="o">=</span> <span class="bp">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Awesome, so now we have a copy of the data file (a FITS file). So how do
+we do anything with it?</p>
+<p>Luckily for us, the
+<a class="reference external" href="https://spectral-cube.readthedocs.io/en/latest/">spectral_cube</a>
+package does a lot of the nitty gritty work for us to manipulate this
+data and even quickly look through it. So let’s open up our data file
+and read in the data as a SpectralCube!</p>
+<p>The variable <code class="docutils literal notranslate"><span class="pre">cube</span></code> has the data using SpectralCube and <code class="docutils literal notranslate"><span class="pre">hi_data</span></code> is
+the data cube from the FITS file without the special formating from
+SpectralCube.</p>
+<p><span class="inputnumrole">In[3]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">hi_data</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">hi_datafile</span><span class="p">)</span>  <span class="c1"># Open the FITS file for reading</span>
+<span class="n">cube</span> <span class="o">=</span> <span class="n">SpectralCube</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">hi_data</span><span class="p">)</span>  <span class="c1"># Initiate a SpectralCube</span>
+<span class="n">hi_data</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>  <span class="c1"># Close the FITS file - we already read it in and don&#39;t need it anymore!</span>
+</pre></div>
+</div>
+<div class="alert alert-info"><p>If you happen to already have the FITS file on your system, you can also
+skip the fits.open step and just directly read a FITS file with
+SpectralCube like this:</p>
+<p><code class="docutils literal notranslate"><span class="pre">#cube</span> <span class="pre">=</span> <span class="pre">SpectralCube.read('path_to_data_file/TAN_C14.fits')</span></code></p>
+</div><p>So what does this SpectralCube object actually look like? Let’s find
+out! The first check is to print out the cube.</p>
+<p><span class="inputnumrole">In[4]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">cube</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[4]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SpectralCube</span> <span class="k">with</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">450</span><span class="p">,</span> <span class="mi">150</span><span class="p">,</span> <span class="mi">150</span><span class="p">)</span> <span class="ow">and</span> <span class="n">unit</span><span class="o">=</span><span class="n">K</span><span class="p">:</span>
+ <span class="n">n_x</span><span class="p">:</span>    <span class="mi">150</span>  <span class="n">type_x</span><span class="p">:</span> <span class="n">GLON</span><span class="o">-</span><span class="n">TAN</span>  <span class="n">unit_x</span><span class="p">:</span> <span class="n">deg</span>    <span class="nb">range</span><span class="p">:</span>   <span class="mf">286.727203</span> <span class="n">deg</span><span class="p">:</span>  <span class="mf">320.797623</span> <span class="n">deg</span>
+ <span class="n">n_y</span><span class="p">:</span>    <span class="mi">150</span>  <span class="n">type_y</span><span class="p">:</span> <span class="n">GLAT</span><span class="o">-</span><span class="n">TAN</span>  <span class="n">unit_y</span><span class="p">:</span> <span class="n">deg</span>    <span class="nb">range</span><span class="p">:</span>   <span class="o">-</span><span class="mf">50.336450</span> <span class="n">deg</span><span class="p">:</span>  <span class="o">-</span><span class="mf">28.401234</span> <span class="n">deg</span>
+ <span class="n">n_s</span><span class="p">:</span>    <span class="mi">450</span>  <span class="n">type_s</span><span class="p">:</span> <span class="n">VRAD</span>      <span class="n">unit_s</span><span class="p">:</span> <span class="n">m</span> <span class="o">/</span> <span class="n">s</span>  <span class="nb">range</span><span class="p">:</span>  <span class="o">-</span><span class="mf">598824.534</span> <span class="n">m</span> <span class="o">/</span> <span class="n">s</span><span class="p">:</span>  <span class="mf">600409.133</span> <span class="n">m</span> <span class="o">/</span> <span class="n">s</span>
+</pre></div>
+</div>
+<div class="section" id="some-things-to-pay-attention-to-here">
+<h3>Some things to pay attention to here:<a class="headerlink" href="#some-things-to-pay-attention-to-here" title="Permalink to this headline">¶</a></h3>
+<p>As we know, a data cube has three axes. In this case, there is Galactic
+Longitude (x), Galactic Latitude (y), and a spectral axis in terms of a
+LSR Velocity (z - listed as s with <code class="docutils literal notranslate"><span class="pre">spectral_cube</span></code>).</p>
+<p>The data hidden in the cube lives as an ndarray with shape (n_s, n_y,
+n_x) so that axis 0 corresponds with the Spectral Axis, axis 1
+corresponds with the Galactic Latitude Axis, and axis 2 corresponds with
+the Galactic Longitude Axis.</p>
+<p>When we <code class="docutils literal notranslate"><span class="pre">print(cube)</span></code> we can see the shape, size, and units of all
+axes as well as the data stored in the cube. With this cube, the units
+of the data in the cube are temperatures (K). The spatial axes are in
+degrees and the Spectral Axis is in (meters / second).</p>
+<p>The cube also contains information about the coordinates corresponding
+to the data in the form of a WCS (World Coordinate System) object.</p>
+<p>SpectralCube is clever and keeps all the data masked until you really
+need it so that you can work with large sets of data. So let’s see what
+our data actually looks like!</p>
+<p>SpectralCube has a <code class="docutils literal notranslate"><span class="pre">quicklook()</span></code> method which can give a handy
+sneak-peek preview of the data. It’s useful when you just need to glance
+at a slice or spectrum without knowing any other information (say, to
+make sure the data isn’t corrupted or is looking at the right region.)</p>
+<p>To do this, we simply have to index our cube along one axis (for a
+slice) or two axes (for a spectrum):</p>
+<p><span class="inputnumrole">In[5]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cube</span><span class="p">[</span><span class="mi">300</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span><span class="o">.</span><span class="n">quicklook</span><span class="p">()</span>  <span class="c1"># Slice the cube along the spectral axis, and display a quick image</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[5]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">INFO</span><span class="p">:</span> <span class="n">Auto</span><span class="o">-</span><span class="n">setting</span> <span class="n">vmin</span> <span class="n">to</span> <span class="o">-</span><span class="mf">1.603e+00</span> <span class="p">[</span><span class="n">aplpy</span><span class="o">.</span><span class="n">core</span><span class="p">]</span>
+<span class="n">INFO</span><span class="p">:</span> <span class="n">Auto</span><span class="o">-</span><span class="n">setting</span> <span class="n">vmax</span> <span class="n">to</span>  <span class="mf">1.644e+01</span> <span class="p">[</span><span class="n">aplpy</span><span class="o">.</span><span class="n">core</span><span class="p">]</span>
+</pre></div>
+</div>
+<img alt="../_images/FITS-cubes_11_1.png" src="../_images/FITS-cubes_11_1.png" />
+<p><span class="inputnumrole">In[6]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cube</span><span class="p">[:,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">75</span><span class="p">]</span><span class="o">.</span><span class="n">quicklook</span><span class="p">()</span>  <span class="c1"># Extract a single spectrum through the data cube</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[6]:</span></p>
+<img alt="../_images/FITS-cubes_12_0.png" src="../_images/FITS-cubes_12_0.png" />
+<div class="section" id="try-messing-around-with-slicing-the-cube-along-different-axes-or-picking-out-different-spectra">
+<h4>Try messing around with slicing the cube along different axes, or picking out different spectra<a class="headerlink" href="#try-messing-around-with-slicing-the-cube-along-different-axes-or-picking-out-different-spectra" title="Permalink to this headline">¶</a></h4>
+<p><span class="inputnumrole">In[None]:</span></p>
+<p><span class="inputnumrole">In[None]:</span></p>
+</div>
+</div>
+</div>
+<div class="section" id="make-a-smaller-cube-focusing-on-the-magellanic-clouds">
+<h2>Make a smaller cube, focusing on the Magellanic Clouds<a class="headerlink" href="#make-a-smaller-cube-focusing-on-the-magellanic-clouds" title="Permalink to this headline">¶</a></h2>
+<p>The HI data cube we downloaded is bigger than we actually need it to be.
+Let’s try zooming in on just the part we need and make a new
+<code class="docutils literal notranslate"><span class="pre">sub_cube</span></code>.</p>
+<p>The easiest way to do this is to cut out part of the cube with indices
+or coordinates.</p>
+<p>We can extract the world coordinates from the cube using the
+<code class="docutils literal notranslate"><span class="pre">.world()</span></code> method.</p>
+<div class="alert alert-warning"><p>Warning: using .world() will extract coordinates from every position you
+ask for. This can be a TON of data if you don’t slice through the cube.
+One work around is to slice along two axes and extract coordinates just
+along a single dimension.</p>
+</div><p>The output of <code class="docutils literal notranslate"><span class="pre">.world()</span></code> is an Astropy <code class="docutils literal notranslate"><span class="pre">Quantity</span></code> representing the
+pixel coordinates, which includes units. You can extract these Astropy
+<code class="docutils literal notranslate"><span class="pre">Quantity</span></code> objects by slicing the data.</p>
+<p><span class="inputnumrole">In[7]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">cube</span><span class="o">.</span><span class="n">world</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:,</span> <span class="mi">0</span><span class="p">]</span>  <span class="c1">#extract latitude world coordinates from cube</span>
+<span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">l</span> <span class="o">=</span> <span class="n">cube</span><span class="o">.</span><span class="n">world</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="p">:]</span>  <span class="c1">#extract longitude world coordinates from cube</span>
+</pre></div>
+</div>
+<p>You can then extract a <code class="docutils literal notranslate"><span class="pre">sub_cube</span></code> in the spatial coordinates of the
+cube</p>
+<p><span class="inputnumrole">In[8]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define desired latitude and longitude range</span>
+<span class="n">lat_range</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">46</span><span class="p">,</span> <span class="o">-</span><span class="mi">40</span><span class="p">]</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">deg</span>
+<span class="n">lon_range</span> <span class="o">=</span> <span class="p">[</span><span class="mi">306</span><span class="p">,</span> <span class="mi">295</span><span class="p">]</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">deg</span>
+
+<span class="c1"># Create a sub_cube cut to these coordinates</span>
+<span class="n">sub_cube</span> <span class="o">=</span> <span class="n">cube</span><span class="o">.</span><span class="n">subcube</span><span class="p">(</span><span class="n">xlo</span><span class="o">=</span><span class="n">lon_range</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">xhi</span><span class="o">=</span><span class="n">lon_range</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">ylo</span><span class="o">=</span><span class="n">lat_range</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">yhi</span><span class="o">=</span><span class="n">lat_range</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">sub_cube</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[8]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SpectralCube</span> <span class="k">with</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">450</span><span class="p">,</span> <span class="mi">41</span><span class="p">,</span> <span class="mi">48</span><span class="p">)</span> <span class="ow">and</span> <span class="n">unit</span><span class="o">=</span><span class="n">K</span><span class="p">:</span>
+ <span class="n">n_x</span><span class="p">:</span>     <span class="mi">48</span>  <span class="n">type_x</span><span class="p">:</span> <span class="n">GLON</span><span class="o">-</span><span class="n">TAN</span>  <span class="n">unit_x</span><span class="p">:</span> <span class="n">deg</span>    <span class="nb">range</span><span class="p">:</span>   <span class="mf">295.647485</span> <span class="n">deg</span><span class="p">:</span>  <span class="mf">305.831248</span> <span class="n">deg</span>
+ <span class="n">n_y</span><span class="p">:</span>     <span class="mi">41</span>  <span class="n">type_y</span><span class="p">:</span> <span class="n">GLAT</span><span class="o">-</span><span class="n">TAN</span>  <span class="n">unit_y</span><span class="p">:</span> <span class="n">deg</span>    <span class="nb">range</span><span class="p">:</span>   <span class="o">-</span><span class="mf">47.080781</span> <span class="n">deg</span><span class="p">:</span>  <span class="o">-</span><span class="mf">40.745361</span> <span class="n">deg</span>
+ <span class="n">n_s</span><span class="p">:</span>    <span class="mi">450</span>  <span class="n">type_s</span><span class="p">:</span> <span class="n">VRAD</span>      <span class="n">unit_s</span><span class="p">:</span> <span class="n">m</span> <span class="o">/</span> <span class="n">s</span>  <span class="nb">range</span><span class="p">:</span>  <span class="o">-</span><span class="mf">598824.534</span> <span class="n">m</span> <span class="o">/</span> <span class="n">s</span><span class="p">:</span>  <span class="mf">600409.133</span> <span class="n">m</span> <span class="o">/</span> <span class="n">s</span>
+</pre></div>
+</div>
+<pre class="literal-block">/home/circleci/project/venv/lib/python3.6/site-packages/spectral_cube/base_class.py:158: FutureWarning: Using a non-tuple sequence for multidimensional indexing is deprecated; use <code class="xref py py-obj docutils literal notranslate"><span class="pre">arr[tuple(seq)]</span></code> instead of <code class="xref py py-obj docutils literal notranslate"><span class="pre">arr[seq]</span></code>. In the future this will be interpreted as an array index, <code class="xref py py-obj docutils literal notranslate"><span class="pre">arr[np.array(seq)]</span></code>, which will result either in an error or a different result.
+  inds = [i[view] for i in inds[::-1]]  # numpy -&gt; wcs order
+/home/circleci/project/venv/lib/python3.6/site-packages/spectral_cube/masks.py:632: FutureWarning: Using a non-tuple sequence for multidimensional indexing is deprecated; use <code class="xref py py-obj docutils literal notranslate"><span class="pre">arr[tuple(seq)]</span></code> instead of <code class="xref py py-obj docutils literal notranslate"><span class="pre">arr[seq]</span></code>. In the future this will be interpreted as an array index, <code class="xref py py-obj docutils literal notranslate"><span class="pre">arr[np.array(seq)]</span></code>, which will result either in an error or a different result.
+  return LazyMask(self._function, data=self._data[view],
+/home/circleci/project/venv/lib/python3.6/site-packages/spectral_cube/spectral_cube.py:1222: FutureWarning: Using a non-tuple sequence for multidimensional indexing is deprecated; use <code class="xref py py-obj docutils literal notranslate"><span class="pre">arr[tuple(seq)]</span></code> instead of <code class="xref py py-obj docutils literal notranslate"><span class="pre">arr[seq]</span></code>. In the future this will be interpreted as an array index, <code class="xref py py-obj docutils literal notranslate"><span class="pre">arr[np.array(seq)]</span></code>, which will result either in an error or a different result.
+  return self._new_cube_with(data=self._data[view],</pre>
+</div>
+<div class="section" id="cut-along-the-spectral-axis">
+<h2>Cut along the Spectral Axis:<a class="headerlink" href="#cut-along-the-spectral-axis" title="Permalink to this headline">¶</a></h2>
+<p>We don’t really need data from such a large velocity range so let’s just
+extract a little slab. We can do this easily, in any units that we want
+using the <code class="docutils literal notranslate"><span class="pre">.spectral_slab()</span></code> method.</p>
+<p><span class="inputnumrole">In[9]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sub_cube_slab</span> <span class="o">=</span> <span class="n">sub_cube</span><span class="o">.</span><span class="n">spectral_slab</span><span class="p">(</span><span class="o">-</span><span class="mf">300.</span> <span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">km</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">,</span> <span class="mf">300.</span> <span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">km</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">sub_cube_slab</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[9]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SpectralCube</span> <span class="k">with</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">226</span><span class="p">,</span> <span class="mi">41</span><span class="p">,</span> <span class="mi">48</span><span class="p">)</span> <span class="ow">and</span> <span class="n">unit</span><span class="o">=</span><span class="n">K</span><span class="p">:</span>
+ <span class="n">n_x</span><span class="p">:</span>     <span class="mi">48</span>  <span class="n">type_x</span><span class="p">:</span> <span class="n">GLON</span><span class="o">-</span><span class="n">TAN</span>  <span class="n">unit_x</span><span class="p">:</span> <span class="n">deg</span>    <span class="nb">range</span><span class="p">:</span>   <span class="mf">295.647485</span> <span class="n">deg</span><span class="p">:</span>  <span class="mf">305.831248</span> <span class="n">deg</span>
+ <span class="n">n_y</span><span class="p">:</span>     <span class="mi">41</span>  <span class="n">type_y</span><span class="p">:</span> <span class="n">GLAT</span><span class="o">-</span><span class="n">TAN</span>  <span class="n">unit_y</span><span class="p">:</span> <span class="n">deg</span>    <span class="nb">range</span><span class="p">:</span>   <span class="o">-</span><span class="mf">47.080781</span> <span class="n">deg</span><span class="p">:</span>  <span class="o">-</span><span class="mf">40.745361</span> <span class="n">deg</span>
+ <span class="n">n_s</span><span class="p">:</span>    <span class="mi">226</span>  <span class="n">type_s</span><span class="p">:</span> <span class="n">VRAD</span>      <span class="n">unit_s</span><span class="p">:</span> <span class="n">m</span> <span class="o">/</span> <span class="n">s</span>  <span class="nb">range</span><span class="p">:</span>  <span class="o">-</span><span class="mf">299683.842</span> <span class="n">m</span> <span class="o">/</span> <span class="n">s</span><span class="p">:</span>  <span class="mf">301268.441</span> <span class="n">m</span> <span class="o">/</span> <span class="n">s</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="moment-maps">
+<h2>Moment Maps<a class="headerlink" href="#moment-maps" title="Permalink to this headline">¶</a></h2>
+<p>Moment maps are a useful analysis tool to study data cubes. In short, a
+moment is a weighted integral along an axis (typically the Spectral
+Axis) that can give information about the total Intensity (or column
+density), mean velocity, or velocity dispersion along lines of sight.</p>
+<p>SpectralCube makes this very simple with the <code class="docutils literal notranslate"><span class="pre">.moment()</span></code> method. We
+can convert to friendlier spectral units of km/s and these new 2D
+projections can be saved as new FITS files, complete with modified WCS
+information as well.</p>
+<p><span class="inputnumrole">In[10]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">moment_0</span> <span class="o">=</span> <span class="n">sub_cube_slab</span><span class="o">.</span><span class="n">with_spectral_unit</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">km</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">)</span><span class="o">.</span><span class="n">moment</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># Zero-th moment</span>
+<span class="n">moment_1</span> <span class="o">=</span> <span class="n">sub_cube_slab</span><span class="o">.</span><span class="n">with_spectral_unit</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">km</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">)</span><span class="o">.</span><span class="n">moment</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># First moment</span>
+
+<span class="c1"># Write the moments as a FITS image</span>
+<span class="c1"># moment_0.write(&#39;hi_moment_0.fits&#39;)</span>
+<span class="c1"># moment_1.write(&#39;hi_moment_1.fits&#39;)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Moment_0 has units of: &#39;</span><span class="p">,</span> <span class="n">moment_0</span><span class="o">.</span><span class="n">unit</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Moment_1 has units of: &#39;</span><span class="p">,</span> <span class="n">moment_1</span><span class="o">.</span><span class="n">unit</span><span class="p">)</span>
+
+<span class="c1"># Convert Moment_0 to a Column Density assuming optically thin media</span>
+<span class="n">hi_column_density</span> <span class="o">=</span> <span class="n">moment_0</span> <span class="o">*</span> <span class="mf">1.82</span> <span class="o">*</span> <span class="mi">10</span><span class="o">**</span><span class="mi">18</span> <span class="o">/</span> <span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">cm</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="p">)</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">K</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">km</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[10]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>   <span class="n">Moment_0</span> <span class="n">has</span> <span class="n">units</span> <span class="n">of</span><span class="p">:</span>  <span class="n">K</span> <span class="n">km</span> <span class="o">/</span> <span class="n">s</span>
+   <span class="n">Moment_1</span> <span class="n">has</span> <span class="n">units</span> <span class="n">of</span><span class="p">:</span>  <span class="n">km</span> <span class="o">/</span> <span class="n">s</span>
+
+
+<span class="c1">## Display the Moment Maps</span>
+</pre></div>
+</div>
+<p>The
+<a class="reference external" href="http://docs.astropy.org/en/stable/visualization/wcsaxes/">WCSAxes</a>
+framework in Astropy allows us to easily display images with different
+coordinate axes and projections.</p>
+<p>As long as we have a WCS object associated with the data, it is easy to
+transfer that projection to a matplotlib axis. SpectralCube makes it
+easy to access just the WCS object associated with a cube object.</p>
+<p><span class="inputnumrole">In[11]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">moment_1</span><span class="o">.</span><span class="n">wcs</span><span class="p">)</span>  <span class="c1"># Examine the WCS object associated with the moment map</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[11]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">WCS</span> <span class="n">Keywords</span>
+
+<span class="n">Number</span> <span class="n">of</span> <span class="n">WCS</span> <span class="n">axes</span><span class="p">:</span> <span class="mi">2</span>
+<span class="n">CTYPE</span> <span class="p">:</span> <span class="s1">&#39;GLON-TAN&#39;</span>  <span class="s1">&#39;GLAT-TAN&#39;</span>
+<span class="n">CRVAL</span> <span class="p">:</span> <span class="mf">303.75</span>  <span class="o">-</span><span class="mf">40.0</span>
+<span class="n">CRPIX</span> <span class="p">:</span> <span class="mf">10.557620817843869</span>  <span class="mf">47.3723930634757</span>
+<span class="n">PC1_1</span> <span class="n">PC1_2</span>  <span class="p">:</span> <span class="mf">1.0</span>  <span class="mf">0.0</span>
+<span class="n">PC2_1</span> <span class="n">PC2_2</span>  <span class="p">:</span> <span class="mf">0.0</span>  <span class="mf">1.0</span>
+<span class="n">CDELT</span> <span class="p">:</span> <span class="o">-</span><span class="mf">0.1494444443846667</span>  <span class="mf">0.1538888888273333</span>
+<span class="n">NAXIS</span> <span class="p">:</span> <span class="mi">0</span>  <span class="mi">0</span>
+</pre></div>
+</div>
+<p>As expected, the first moment image we created only has two axes
+(Galactic Longitude and Galactic Latitude). We can pass in this WCS
+object directly into a matplotlib axis instance.</p>
+<p><span class="inputnumrole">In[12]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initiate a figure and axis object with WCS projection information</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="n">moment_1</span><span class="o">.</span><span class="n">wcs</span><span class="p">)</span>
+
+<span class="c1"># Display the moment map image</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">moment_1</span><span class="o">.</span><span class="n">hdu</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;RdBu_r&#39;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>  <span class="c1"># Flips the Y axis</span>
+
+<span class="c1"># Add axes labels</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Galactic Longitude (degrees)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Galactic Latitude (degrees)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+
+<span class="c1"># Add a colorbar</span>
+<span class="n">cbar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">pad</span><span class="o">=.</span><span class="mo">07</span><span class="p">)</span>
+<span class="n">cbar</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s1">&#39;Velocity (km/s)&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+
+<span class="c1"># Overlay set of RA/Dec Axes</span>
+<span class="n">overlay</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_coords_overlay</span><span class="p">(</span><span class="s1">&#39;fk5&#39;</span><span class="p">)</span>
+<span class="n">overlay</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;dotted&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">overlay</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_axislabel</span><span class="p">(</span><span class="s1">&#39;Right Ascension (J2000)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">overlay</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_axislabel</span><span class="p">(</span><span class="s1">&#39;Declination (J2000)&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+
+<span class="c1"># Overplot column density contours</span>
+<span class="n">levels</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1e20</span><span class="p">,</span> <span class="mf">5e20</span><span class="p">,</span> <span class="mf">1e21</span><span class="p">,</span> <span class="mf">3e21</span><span class="p">,</span> <span class="mf">5e21</span><span class="p">,</span> <span class="mf">7e21</span><span class="p">,</span> <span class="mf">1e22</span><span class="p">)</span>  <span class="c1"># Define contour levels to use</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">hi_column_density</span><span class="o">.</span><span class="n">hdu</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Greys_r&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+           <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="n">levels</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[12]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">circleci</span><span class="o">/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">6</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">matplotlib</span><span class="o">/</span><span class="n">contour</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">1000</span><span class="p">:</span> <span class="ne">UserWarning</span><span class="p">:</span> <span class="n">The</span> <span class="n">following</span> <span class="n">kwargs</span> <span class="n">were</span> <span class="ow">not</span> <span class="n">used</span> <span class="n">by</span> <span class="n">contour</span><span class="p">:</span> <span class="s1">&#39;lw&#39;</span>
+  <span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">contour</span><span class="o">.</span><span class="n">QuadContourSet</span> <span class="n">at</span> <span class="mh">0x7f19d75b1f60</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<img alt="../_images/FITS-cubes_27_2.png" src="../_images/FITS-cubes_27_2.png" />
+<p>As you can see, the WCSAxes framework is very powerful and as easy as
+making any matplotlib style plot.</p>
+<blockquote>
+<div><p>## Display a Longitude-Velocity Slice</p>
+</div></blockquote>
+<p>The
+<a class="reference external" href="http://docs.astropy.org/en/stable/visualization/wcsaxes/">WCSAxes</a>
+framework in Astropy also lets us slice the data accross different
+dimensions. It is often useful to slice along a single latitude and
+display an image showing longtitude and velocity information only
+(position-velocity or longitude-velocity diagram).</p>
+<p>This can be done by specifying the <code class="docutils literal notranslate"><span class="pre">slices</span></code> keyword and selecting the
+appropriate slice through the data.</p>
+<p><code class="docutils literal notranslate"><span class="pre">slices</span></code> requires a 3D tuple containing the index to be sliced along
+and where we want the two axes to be displayed. This should be specified
+in the same order as the WCS object (longitude, latitude, velocity) as
+opposed to the order of numpy array holding the data (velocity,
+latitude, longitude).</p>
+<p>We then select the appropriate data by indexing along the numpy array.</p>
+<p><span class="inputnumrole">In[13]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">lat_slice</span> <span class="o">=</span> <span class="mi">18</span>  <span class="c1"># Index of latitude dimension to slice along</span>
+
+<span class="c1"># Initiate a figure and axis object with WCS projection information</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="n">sub_cube_slab</span><span class="o">.</span><span class="n">wcs</span><span class="p">,</span> <span class="n">slices</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">lat_slice</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">))</span>
+<span class="c1"># Above, we have specified to plot the longitude along the y axis, pick just the lat_slice indicated,</span>
+<span class="c1"># and plot the velocity along the x axis</span>
+
+<span class="c1"># Display the slice</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">sub_cube_slab</span><span class="p">[:,</span> <span class="n">lat_slice</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>  <span class="c1"># Display the image slice</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>  <span class="c1"># Flips the Y axis</span>
+
+<span class="c1"># Add axes labels</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;LSR Velocity (m/s)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Galactic Longitude (degrees)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+
+<span class="c1"># Add a colorbar</span>
+<span class="n">cbar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">pad</span><span class="o">=.</span><span class="mo">07</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="s1">&#39;horizontal&#39;</span><span class="p">)</span>
+<span class="n">cbar</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s1">&#39;Temperature (K)&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[13]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">WARNING</span><span class="p">:</span> <span class="n">WCSWarning</span><span class="p">:</span> <span class="n">Slicing</span> <span class="n">across</span> <span class="n">a</span> <span class="n">celestial</span> <span class="n">axis</span> <span class="n">results</span> <span class="ow">in</span> <span class="n">an</span> <span class="n">invalid</span> <span class="n">WCS</span><span class="p">,</span> <span class="n">so</span> <span class="n">the</span> <span class="n">celestial</span> <span class="n">projection</span> <span class="p">(</span><span class="n">TAN</span><span class="p">)</span> <span class="ow">is</span> <span class="n">being</span> <span class="n">removed</span><span class="o">.</span>  <span class="n">The</span> <span class="n">WCS</span> <span class="n">indices</span> <span class="n">being</span> <span class="n">kept</span> <span class="n">were</span> <span class="p">[</span><span class="mi">0</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span> <span class="p">[</span><span class="n">spectral_cube</span><span class="o">.</span><span class="n">wcs_utils</span><span class="p">]</span>
+<span class="n">WARNING</span><span class="p">:</span> <span class="n">WCSWarning</span><span class="p">:</span> <span class="n">Slicing</span> <span class="n">across</span> <span class="n">a</span> <span class="n">celestial</span> <span class="n">axis</span> <span class="n">results</span> <span class="ow">in</span> <span class="n">an</span> <span class="n">invalid</span> <span class="n">WCS</span><span class="p">,</span> <span class="n">so</span> <span class="n">the</span> <span class="n">celestial</span> <span class="n">projection</span> <span class="p">(</span><span class="n">TAN</span><span class="p">)</span> <span class="ow">is</span> <span class="n">being</span> <span class="n">removed</span><span class="o">.</span>  <span class="n">The</span> <span class="n">view</span> <span class="n">used</span> <span class="n">was</span> <span class="p">(</span><span class="nb">slice</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span> <span class="mi">18</span><span class="p">,</span> <span class="nb">slice</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span><span class="o">.</span> <span class="p">[</span><span class="n">spectral_cube</span><span class="o">.</span><span class="n">wcs_utils</span><span class="p">]</span>
+</pre></div>
+</div>
+<img alt="../_images/FITS-cubes_30_1.png" src="../_images/FITS-cubes_30_1.png" />
+<p>As we can see, the SMC seems to be only along positive velocities.</p>
+</div>
+<div class="section" id="try">
+<h2>Try:<a class="headerlink" href="#try" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="create-a-new-spectral-slab-isolating-just-the-smc-and-slice-along-a-different-dimension-to-create-a-latitude-velocity-diagram">
+<h3>Create a new spectral slab isolating just the SMC and slice along a different dimension to create a latitude-velocity diagram<a class="headerlink" href="#create-a-new-spectral-slab-isolating-just-the-smc-and-slice-along-a-different-dimension-to-create-a-latitude-velocity-diagram" title="Permalink to this headline">¶</a></h3>
+<p><span class="inputnumrole">In[None]:</span></p>
+<p><span class="inputnumrole">In[None]:</span></p>
+<p><span class="inputnumrole">In[None]:</span></p>
+</div>
+</div>
+<div class="section" id="find-and-download-a-herschel-image">
+<h2>Find and Download a Herschel Image<a class="headerlink" href="#find-and-download-a-herschel-image" title="Permalink to this headline">¶</a></h2>
+<p>This is great, but we want to compare the HI emission data with Herschel
+350 micron emission to trace some dust. This can be easily done with
+<a class="reference external" href="http://www.astropy.org/astroquery/">astroquery</a>. We can query for
+the data by mission, take a quick look at the table of results, and
+download data after selecting a specific wavelength or filter.</p>
+<p>Since we are looking for Herschel data from an ESA mission, we will use
+the
+<a class="reference external" href="http://astroquery.readthedocs.io/en/latest/esasky/esasky.html">astroquery.ESASky</a>
+class.</p>
+<p>Specifically, the <code class="docutils literal notranslate"><span class="pre">ESASKY.query_region_maps()</span></code> method allows us to
+search for a specific region of the sky either using an Astropy SkyCoord
+object or a string specifying an object name. In this case, we can just
+search for the SMC. A radius to search around the object can also be
+specified.</p>
+<p><span class="inputnumrole">In[14]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Query for Herschel data in a 1 degree radius around the SMC</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">ESASky</span><span class="o">.</span><span class="n">query_region_maps</span><span class="p">(</span><span class="s1">&#39;SMC&#39;</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mi">1</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">deg</span><span class="p">,</span> <span class="n">missions</span><span class="o">=</span><span class="s1">&#39;Herschel&#39;</span><span class="p">)</span>
+
+<span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[14]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">TableList</span> <span class="k">with</span> <span class="mi">1</span> <span class="n">tables</span><span class="p">:</span>
+    <span class="s1">&#39;0:HERSCHEL&#39;</span> <span class="k">with</span> <span class="mi">12</span> <span class="n">column</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="ow">and</span> <span class="mi">28</span> <span class="n">row</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">WARNING</span><span class="p">:</span> <span class="n">W35</span><span class="p">:</span> <span class="kc">None</span><span class="p">:</span><span class="mi">4</span><span class="p">:</span><span class="mi">0</span><span class="p">:</span> <span class="n">W35</span><span class="p">:</span> <span class="s1">&#39;value&#39;</span> <span class="n">attribute</span> <span class="n">required</span> <span class="k">for</span> <span class="n">INFO</span> <span class="n">elements</span> <span class="p">[</span><span class="n">astropy</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">votable</span><span class="o">.</span><span class="n">tree</span><span class="p">]</span>
+<span class="n">WARNING</span><span class="p">:</span> <span class="n">W35</span><span class="p">:</span> <span class="kc">None</span><span class="p">:</span><span class="mi">5</span><span class="p">:</span><span class="mi">0</span><span class="p">:</span> <span class="n">W35</span><span class="p">:</span> <span class="s1">&#39;value&#39;</span> <span class="n">attribute</span> <span class="n">required</span> <span class="k">for</span> <span class="n">INFO</span> <span class="n">elements</span> <span class="p">[</span><span class="n">astropy</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">votable</span><span class="o">.</span><span class="n">tree</span><span class="p">]</span>
+<span class="n">WARNING</span><span class="p">:</span> <span class="n">W35</span><span class="p">:</span> <span class="kc">None</span><span class="p">:</span><span class="mi">6</span><span class="p">:</span><span class="mi">0</span><span class="p">:</span> <span class="n">W35</span><span class="p">:</span> <span class="s1">&#39;value&#39;</span> <span class="n">attribute</span> <span class="n">required</span> <span class="k">for</span> <span class="n">INFO</span> <span class="n">elements</span> <span class="p">[</span><span class="n">astropy</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">votable</span><span class="o">.</span><span class="n">tree</span><span class="p">]</span>
+<span class="n">WARNING</span><span class="p">:</span> <span class="n">W35</span><span class="p">:</span> <span class="kc">None</span><span class="p">:</span><span class="mi">7</span><span class="p">:</span><span class="mi">0</span><span class="p">:</span> <span class="n">W35</span><span class="p">:</span> <span class="s1">&#39;value&#39;</span> <span class="n">attribute</span> <span class="n">required</span> <span class="k">for</span> <span class="n">INFO</span> <span class="n">elements</span> <span class="p">[</span><span class="n">astropy</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">votable</span><span class="o">.</span><span class="n">tree</span><span class="p">]</span>
+<span class="n">WARNING</span><span class="p">:</span> <span class="n">W35</span><span class="p">:</span> <span class="kc">None</span><span class="p">:</span><span class="mi">9</span><span class="p">:</span><span class="mi">0</span><span class="p">:</span> <span class="n">W35</span><span class="p">:</span> <span class="s1">&#39;value&#39;</span> <span class="n">attribute</span> <span class="n">required</span> <span class="k">for</span> <span class="n">INFO</span> <span class="n">elements</span> <span class="p">[</span><span class="n">astropy</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">votable</span><span class="o">.</span><span class="n">tree</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Here, the result is a TableList which contains 24 Herschel data products
+that can be downloaded. We can see what information is available in this
+TableList by examining the keys in the Herschel Table.</p>
+<p><span class="inputnumrole">In[15]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;HERSCHEL&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[15]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="s1">&#39;postcard_url&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;product_url&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;observation_id&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;observation_oid&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;ra_deg&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;dec_deg&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;target_name&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;instrument&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;filter&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;start_time&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;duration&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;stc_s&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>We want to find a 350 micron image, so we need to look closer at the
+filters used for these observations.</p>
+<p><span class="inputnumrole">In[16]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;HERSCHEL&#39;</span><span class="p">][</span><span class="s1">&#39;filter&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[16]:</span></p>
+&lt;MaskedColumn name=&apos;filter&apos; dtype=&apos;object&apos; length=28&gt;
+<table>
+<tr><td>70, 160</td></tr>
+<tr><td>100, 160</td></tr>
+<tr><td>70, 160</td></tr>
+<tr><td>100, 160</td></tr>
+<tr><td>70, 160</td></tr>
+<tr><td>70, 160</td></tr>
+<tr><td>250, 350, 500</td></tr>
+<tr><td>100, 160</td></tr>
+<tr><td>70, 160</td></tr>
+<tr><td>70, 160</td></tr>
+<tr><td>70, 160</td></tr>
+<tr><td>70, 160</td></tr>
+<tr><td>...</td></tr>
+<tr><td>250, 350, 500</td></tr>
+<tr><td>100, 160</td></tr>
+<tr><td>250, 350, 500</td></tr>
+<tr><td>70, 160</td></tr>
+<tr><td>250, 350, 500</td></tr>
+<tr><td>100, 160</td></tr>
+<tr><td>70, 160</td></tr>
+<tr><td>250, 350, 500</td></tr>
+<tr><td>70, 160</td></tr>
+<tr><td>70, 160</td></tr>
+<tr><td>100, 160</td></tr>
+<tr><td>70, 160</td></tr>
+</table><p>Luckily for us, there is an observation made with three filters:
+250,350, and 500 microns. This is the object we will want to download.
+One way to do this is by making a boolean mask to select out the Table
+entry corresponding with the desired filter. Then,
+<code class="docutils literal notranslate"><span class="pre">the</span> <span class="pre">ESASky.get_maps()</span></code> method will download our data provided a
+TableList argument.</p>
+<p><span class="inputnumrole">In[17]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">filters</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;HERSCHEL&#39;</span><span class="p">][</span><span class="s1">&#39;filter&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>  <span class="c1"># Convert the list of filters from the query to a string</span>
+
+<span class="c1"># Construct a boolean mask, searching for only the desired filters</span>
+<span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s1">&#39;250, 350, 500&#39;</span> <span class="o">==</span> <span class="n">s</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">filters</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;bool&#39;</span><span class="p">)</span>
+
+<span class="c1"># Re-construct a new TableList object containing only our desired query entry</span>
+<span class="n">target_obs</span> <span class="o">=</span> <span class="n">TableList</span><span class="p">({</span><span class="s2">&quot;HERSCHEL&quot;</span><span class="p">:</span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;HERSCHEL&#39;</span><span class="p">][</span><span class="n">mask</span><span class="p">]})</span>  <span class="c1"># This will be passed into ESASky.get_maps()</span>
+
+<span class="n">IR_images</span> <span class="o">=</span> <span class="n">ESASky</span><span class="o">.</span><span class="n">get_maps</span><span class="p">(</span><span class="n">target_obs</span><span class="p">)</span>  <span class="c1"># Download the images</span>
+<span class="n">IR_images</span><span class="p">[</span><span class="s1">&#39;HERSCHEL&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;350&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>  <span class="c1"># Display some information about the 350 micron image</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[17]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>INFO: Starting download of HERSCHEL data. (5 files) [astroquery.esasky.core]
+INFO: Downloading Observation ID: 1342198566 from http://archives.esac.esa.int/hsa/whsa-tap-server/data?RETRIEVAL_TYPE=STANDALONE&amp;observation_oid=8634358&amp;DATA_RETRIEVAL_ORIGIN=UI [astroquery.esasky.core]
+INFO: [Done] [astroquery.esasky.core]
+INFO: Downloading Observation ID: 1342198565 from http://archives.esac.esa.int/hsa/whsa-tap-server/data?RETRIEVAL_TYPE=STANDALONE&amp;observation_oid=8613787&amp;DATA_RETRIEVAL_ORIGIN=UI [astroquery.esasky.core]
+INFO: [Done] [astroquery.esasky.core]
+INFO: Downloading Observation ID: 1342205055 from http://archives.esac.esa.int/hsa/whsa-tap-server/data?RETRIEVAL_TYPE=STANDALONE&amp;observation_oid=8614152&amp;DATA_RETRIEVAL_ORIGIN=UI [astroquery.esasky.core]
+INFO: [Done] [astroquery.esasky.core]
+INFO: Downloading Observation ID: 1342198590 from http://archives.esac.esa.int/hsa/whsa-tap-server/data?RETRIEVAL_TYPE=STANDALONE&amp;observation_oid=8634359&amp;DATA_RETRIEVAL_ORIGIN=UI [astroquery.esasky.core]
+INFO: [Done] [astroquery.esasky.core]
+INFO: Downloading Observation ID: 1342205092 from http://archives.esac.esa.int/hsa/whsa-tap-server/data?RETRIEVAL_TYPE=STANDALONE&amp;observation_oid=8614195&amp;DATA_RETRIEVAL_ORIGIN=UI [astroquery.esasky.core]
+INFO: [Done] [astroquery.esasky.core]
+INFO: Downloading of HERSCHEL data complete. [astroquery.esasky.core]
+INFO: Maps available at /home/circleci/project/tutorials/notebooks/FITS-cubes/Maps. [astroquery.esasky.core]
+Filename: Maps/HERSCHEL/anonymous1559154114/hspirepmw401_25pxmp_0110_m7303_1342198565_1342198566_1462476888800.fits.gz
+No.    Name      Ver    Type      Cards   Dimensions   Format
+  0  PRIMARY       1 PrimaryHDU     184   ()
+  1  image         1 ImageHDU        47   (2407, 2141)   float64
+  2  error         1 ImageHDU        47   (2407, 2141)   float64
+  3  coverage      1 ImageHDU        47   (2407, 2141)   float64
+  4  History       1 ImageHDU        23   ()
+  5  HistoryScript    1 BinTableHDU     39   84R x 1C   [326A]
+  6  HistoryTasks    1 BinTableHDU     46   65R x 4C   [1K, 27A, 1K, 9A]
+  7  HistoryParameters    1 BinTableHDU     74   450R x 10C   [1K, 20A, 13A, 196A, 1L, 1K, 1L, 74A, 11A, 41A]
+</pre></div>
+</div>
+<p>Since we are just doing some qualitative analysis, we only need the
+image, but you can easily access lots of other information from our
+downloaded object, such as errors.</p>
+<p>Let’s go ahead and extract just the WCS information and image data from
+the 350 micron image.</p>
+<p><span class="inputnumrole">In[18]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">herschel_header</span> <span class="o">=</span> <span class="n">IR_images</span><span class="p">[</span><span class="s1">&#39;HERSCHEL&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;350&#39;</span><span class="p">][</span><span class="s1">&#39;image&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">header</span>
+<span class="n">herschel_wcs</span> <span class="o">=</span> <span class="n">WCS</span><span class="p">(</span><span class="n">IR_images</span><span class="p">[</span><span class="s1">&#39;HERSCHEL&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;350&#39;</span><span class="p">][</span><span class="s1">&#39;image&#39;</span><span class="p">])</span>  <span class="c1"># Extract WCS information</span>
+<span class="n">herschel_imagehdu</span> <span class="o">=</span> <span class="n">IR_images</span><span class="p">[</span><span class="s1">&#39;HERSCHEL&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;350&#39;</span><span class="p">][</span><span class="s1">&#39;image&#39;</span><span class="p">]</span>  <span class="c1"># Extract Image data</span>
+<span class="k">print</span><span class="p">(</span><span class="n">herschel_wcs</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[18]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">WCS</span> <span class="n">Keywords</span>
+
+<span class="n">Number</span> <span class="n">of</span> <span class="n">WCS</span> <span class="n">axes</span><span class="p">:</span> <span class="mi">2</span>
+<span class="n">CTYPE</span> <span class="p">:</span> <span class="s1">&#39;RA---TAN&#39;</span>  <span class="s1">&#39;DEC--TAN&#39;</span>
+<span class="n">CRVAL</span> <span class="p">:</span> <span class="mf">18.99666058287459</span>  <span class="o">-</span><span class="mf">71.82876374906319</span>
+<span class="n">CRPIX</span> <span class="p">:</span> <span class="mf">1063.0</span>  <span class="mf">1517.0</span>
+<span class="n">NAXIS</span> <span class="p">:</span> <span class="mi">2407</span>  <span class="mi">2141</span>
+</pre></div>
+</div>
+<p>With this, it’s just as easy as before to display this image using
+matplotlib with
+<a class="reference external" href="http://docs.astropy.org/en/stable/visualization/wcsaxes/index.html">WCSAxes</a>
+and the <code class="docutils literal notranslate"><span class="pre">LogNorm()</span></code> object so we can log scale our image.</p>
+<p><span class="inputnumrole">In[19]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initiate a figure and axis object with WCS projection information</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="n">herschel_wcs</span><span class="p">)</span>
+
+<span class="c1"># Display the moment map image</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">herschel_imagehdu</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span>
+               <span class="n">norm</span><span class="o">=</span><span class="n">LogNorm</span><span class="p">(),</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+<span class="c1"># ax.invert_yaxis() # Flips the Y axis</span>
+
+<span class="c1"># Add axes labels</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Right Ascension&quot;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">16</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Declination&quot;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">16</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">ls</span> <span class="o">=</span> <span class="s1">&#39;dotted&#39;</span><span class="p">,</span> <span class="n">lw</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># Add a colorbar</span>
+<span class="n">cbar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">pad</span><span class="o">=.</span><span class="mo">07</span><span class="p">)</span>
+<span class="n">cbar</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;Herschel 350&#39;</span><span class="sa">r</span><span class="s1">&#39;$\mu$m &#39;</span><span class="p">,</span><span class="s1">&#39;(&#39;</span><span class="p">,</span> <span class="n">herschel_header</span><span class="p">[</span><span class="s1">&#39;BUNIT&#39;</span><span class="p">],</span> <span class="s1">&#39;)&#39;</span><span class="p">]),</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">16</span><span class="p">)</span>
+
+<span class="c1"># Overlay set of Galactic Coordinate Axes</span>
+<span class="n">overlay</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_coords_overlay</span><span class="p">(</span><span class="s1">&#39;galactic&#39;</span><span class="p">)</span>
+<span class="n">overlay</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;dotted&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">overlay</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_axislabel</span><span class="p">(</span><span class="s1">&#39;Galactic Longitude&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">overlay</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_axislabel</span><span class="p">(</span><span class="s1">&#39;Galactic Latitude&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[19]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">circleci</span><span class="o">/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">6</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">matplotlib</span><span class="o">/</span><span class="n">colors</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">1028</span><span class="p">:</span> <span class="ne">RuntimeWarning</span><span class="p">:</span> <span class="n">invalid</span> <span class="n">value</span> <span class="n">encountered</span> <span class="ow">in</span> <span class="n">less_equal</span>
+  <span class="n">mask</span> <span class="o">|=</span> <span class="n">resdat</span> <span class="o">&lt;=</span> <span class="mi">0</span>
+<span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">circleci</span><span class="o">/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">6</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">matplotlib</span><span class="o">/</span><span class="n">colors</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">1028</span><span class="p">:</span> <span class="ne">RuntimeWarning</span><span class="p">:</span> <span class="n">invalid</span> <span class="n">value</span> <span class="n">encountered</span> <span class="ow">in</span> <span class="n">less_equal</span>
+  <span class="n">mask</span> <span class="o">|=</span> <span class="n">resdat</span> <span class="o">&lt;=</span> <span class="mi">0</span>
+<span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">circleci</span><span class="o">/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">6</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">matplotlib</span><span class="o">/</span><span class="n">colors</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">1028</span><span class="p">:</span> <span class="ne">RuntimeWarning</span><span class="p">:</span> <span class="n">invalid</span> <span class="n">value</span> <span class="n">encountered</span> <span class="ow">in</span> <span class="n">less_equal</span>
+  <span class="n">mask</span> <span class="o">|=</span> <span class="n">resdat</span> <span class="o">&lt;=</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<img alt="../_images/FITS-cubes_46_1.png" src="../_images/FITS-cubes_46_1.png" />
+</div>
+<div class="section" id="overlay-hi-21-cm-contours-on-the-ir-30-micron-image">
+<h2>Overlay HI 21 cm Contours on the IR 30 micron Image<a class="headerlink" href="#overlay-hi-21-cm-contours-on-the-ir-30-micron-image" title="Permalink to this headline">¶</a></h2>
+<p>To visually compare the neutral gas and dust as traced by HI 21 cm
+emission and IR 30 micron emission, we can use contours and colorscale
+images produced using the
+<a class="reference external" href="http://docs.astropy.org/en/stable/visualization/wcsaxes/index.html">WCSAxes</a>
+framework and the <code class="docutils literal notranslate"><span class="pre">.get_transform()</span></code> method.</p>
+<p>The
+<a class="reference external" href="http://docs.astropy.org/en/stable/api/astropy.visualization.wcsaxes.WCSAxes.html#astropy.visualization.wcsaxes.WCSAxes.get_transform">WCSAxes.get_transform()</a>
+method returns a transformation from a specified frame to the pixel/data
+coordinates. It accepts a string specifying the frame or a WCS object.</p>
+<p><span class="inputnumrole">In[20]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initiate a figure and axis object with WCS projection information</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="n">herschel_wcs</span><span class="p">)</span>
+
+<span class="c1"># Display the moment map image</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">herschel_imagehdu</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span>
+               <span class="n">norm</span><span class="o">=</span><span class="n">LogNorm</span><span class="p">(),</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=.</span><span class="mi">8</span><span class="p">)</span>
+<span class="c1"># ax.invert_yaxis() # Flips the Y axis</span>
+
+<span class="c1"># Add axes labels</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Right Ascension&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Declination&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;dotted&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># Extract x and y coordinate limits</span>
+<span class="n">x_lim</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_xlim</span><span class="p">()</span>
+<span class="n">y_lim</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_ylim</span><span class="p">()</span>
+
+<span class="c1"># Add a colorbar</span>
+<span class="n">cbar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">fraction</span><span class="o">=</span><span class="mf">0.046</span><span class="p">,</span> <span class="n">pad</span><span class="o">=-</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">cbar</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;Herschel 350&#39;</span><span class="sa">r</span><span class="s1">&#39;$\mu$m &#39;</span><span class="p">,</span><span class="s1">&#39;(&#39;</span><span class="p">,</span> <span class="n">herschel_header</span><span class="p">[</span><span class="s1">&#39;BUNIT&#39;</span><span class="p">],</span> <span class="s1">&#39;)&#39;</span><span class="p">]),</span> <span class="n">size</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+
+<span class="c1"># Overlay set of RA/Dec Axes</span>
+<span class="n">overlay</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_coords_overlay</span><span class="p">(</span><span class="s1">&#39;galactic&#39;</span><span class="p">)</span>
+<span class="n">overlay</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;dotted&#39;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">overlay</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_axislabel</span><span class="p">(</span><span class="s1">&#39;Galactic Longitude&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+<span class="n">overlay</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_axislabel</span><span class="p">(</span><span class="s1">&#39;Galactic Latitude&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+
+<span class="n">hi_transform</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_transform</span><span class="p">(</span><span class="n">hi_column_density</span><span class="o">.</span><span class="n">wcs</span><span class="p">)</span>  <span class="c1"># extract axes Transform information for the HI data</span>
+
+<span class="c1"># Overplot column density contours</span>
+<span class="n">levels</span> <span class="o">=</span> <span class="p">(</span><span class="mf">2e21</span><span class="p">,</span> <span class="mf">3e21</span><span class="p">,</span> <span class="mf">5e21</span><span class="p">,</span> <span class="mf">7e21</span><span class="p">,</span> <span class="mf">8e21</span><span class="p">,</span> <span class="mf">1e22</span><span class="p">)</span>  <span class="c1"># Define contour levels to use</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">hi_column_density</span><span class="o">.</span><span class="n">hdu</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Greys_r&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="n">levels</span><span class="p">,</span>
+           <span class="n">transform</span><span class="o">=</span><span class="n">hi_transform</span><span class="p">)</span>  <span class="c1"># include the transform information with the keyword &quot;transform&quot;</span>
+
+<span class="c1"># Overplot velocity image so we can also see the Gas velocities</span>
+<span class="n">im_hi</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">moment_1</span><span class="o">.</span><span class="n">hdu</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;RdBu_r&#39;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">hi_transform</span><span class="p">)</span>
+
+<span class="c1"># Add a second colorbar for the HI Velocity information</span>
+<span class="n">cbar_hi</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im_hi</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="s1">&#39;horizontal&#39;</span><span class="p">,</span> <span class="n">fraction</span><span class="o">=</span><span class="mf">0.046</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mf">0.07</span><span class="p">)</span>
+<span class="n">cbar_hi</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s1">&#39;HI &#39;</span><span class="sa">r</span><span class="s1">&#39;$21$cm Mean Velocity (km/s)&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
+
+<span class="c1"># Apply original image x and y coordinate limits</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">x_lim</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">y_lim</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[20]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">circleci</span><span class="o">/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">6</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">matplotlib</span><span class="o">/</span><span class="n">contour</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">1000</span><span class="p">:</span> <span class="ne">UserWarning</span><span class="p">:</span> <span class="n">The</span> <span class="n">following</span> <span class="n">kwargs</span> <span class="n">were</span> <span class="ow">not</span> <span class="n">used</span> <span class="n">by</span> <span class="n">contour</span><span class="p">:</span> <span class="s1">&#39;lw&#39;</span>
+  <span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">2140.5</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">circleci</span><span class="o">/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">6</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">matplotlib</span><span class="o">/</span><span class="n">colors</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">1028</span><span class="p">:</span> <span class="ne">RuntimeWarning</span><span class="p">:</span> <span class="n">invalid</span> <span class="n">value</span> <span class="n">encountered</span> <span class="ow">in</span> <span class="n">less_equal</span>
+  <span class="n">mask</span> <span class="o">|=</span> <span class="n">resdat</span> <span class="o">&lt;=</span> <span class="mi">0</span>
+<span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">circleci</span><span class="o">/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">6</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">matplotlib</span><span class="o">/</span><span class="n">colors</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">1028</span><span class="p">:</span> <span class="ne">RuntimeWarning</span><span class="p">:</span> <span class="n">invalid</span> <span class="n">value</span> <span class="n">encountered</span> <span class="ow">in</span> <span class="n">less_equal</span>
+  <span class="n">mask</span> <span class="o">|=</span> <span class="n">resdat</span> <span class="o">&lt;=</span> <span class="mi">0</span>
+<span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">circleci</span><span class="o">/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">6</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">matplotlib</span><span class="o">/</span><span class="n">colors</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">1028</span><span class="p">:</span> <span class="ne">RuntimeWarning</span><span class="p">:</span> <span class="n">invalid</span> <span class="n">value</span> <span class="n">encountered</span> <span class="ow">in</span> <span class="n">less_equal</span>
+  <span class="n">mask</span> <span class="o">|=</span> <span class="n">resdat</span> <span class="o">&lt;=</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<img alt="../_images/FITS-cubes_48_3.png" src="../_images/FITS-cubes_48_3.png" />
+</div>
+<div class="section" id="using-reproject-to-match-image-resolutions">
+<h2>Using reproject to match image resolutions<a class="headerlink" href="#using-reproject-to-match-image-resolutions" title="Permalink to this headline">¶</a></h2>
+<p>The <a class="reference external" href="https://reproject.readthedocs.io/en/stable/">reproject</a> package
+is a powerful tool allowing for image data to be transformed into a
+variety of projections and resolutions. It’s most powerful use is in
+fact to transform data from one map projection to another without losing
+any information and still properly conserving flux values within the
+data. It even has a method to perform a fast reprojection if you are not
+too concerned with the absolute accuracy of the data values.</p>
+<p>A simple use of the reproject package is to scale down (or up)
+resolutions of an image artificially. This could be a useful step if you
+are trying to get emission line ratios or directly compare the Intensity
+or Flux from a tracer to that of another tracer in the same physical
+point of the sky.</p>
+<p>From our previously made images, it should be clear that the IR Herschel
+Image has a higher spatial resolution than that of the HI data cube. We
+can look into this more by taking a better look at both header objects
+and using reproject to downscale the Herschel Image.</p>
+<p><span class="inputnumrole">In[21]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;IR Resolution (dx,dy) = &#39;</span><span class="p">,</span> <span class="n">herschel_header</span><span class="p">[</span><span class="s1">&#39;cdelt1&#39;</span><span class="p">],</span> <span class="n">herschel_header</span><span class="p">[</span><span class="s1">&#39;cdelt2&#39;</span><span class="p">])</span>
+
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;HI Resolution (dx,dy) = &#39;</span><span class="p">,</span> <span class="n">hi_column_density</span><span class="o">.</span><span class="n">hdu</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="s1">&#39;cdelt1&#39;</span><span class="p">],</span> <span class="n">hi_column_density</span><span class="o">.</span><span class="n">hdu</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="s1">&#39;cdelt1&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[21]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">IR</span> <span class="n">Resolution</span> <span class="p">(</span><span class="n">dx</span><span class="p">,</span><span class="n">dy</span><span class="p">)</span> <span class="o">=</span>  <span class="o">-</span><span class="mf">0.002777777777778</span> <span class="mf">0.002777777777777778</span>
+<span class="n">HI</span> <span class="n">Resolution</span> <span class="p">(</span><span class="n">dx</span><span class="p">,</span><span class="n">dy</span><span class="p">)</span> <span class="o">=</span>  <span class="o">-</span><span class="mf">0.14944444438467</span> <span class="o">-</span><span class="mf">0.14944444438467</span>
+</pre></div>
+</div>
+<div class="alert alert-info"><p>Note: Different ways of accessing the header are shown above
+corresponding to the different object types (coming from SpectralCube vs
+astropy.io.fits)</p>
+</div><p>As we can see, the IR data has over 10 times higher spatial resolution.
+In order to create a new projection of an image, all we need to specifiy
+is a new header containing WCS information to transform into. These can
+be created manually if you wanted to completely change something about
+the projection type (i.e. going from a Mercator map projection to a
+Tangential map projection). For us, since we want to match our
+resolutions, we can just “steal” the WCS object from the HI data.
+Specifically, we will be using the
+<a class="reference external" href="https://reproject.readthedocs.io/en/stable/api/reproject.reproject_interp.html#reproject.reproject_interp">reproject_interp()</a>
+function. This takes two arguments: an HDU object that you want to
+reproject, and a header containing WCS information to reproject onto.</p>
+<p><span class="inputnumrole">In[22]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">rescaled_herschel_data</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">reproject_interp</span><span class="p">(</span><span class="n">herschel_imagehdu</span><span class="p">,</span>
+                                             <span class="c1"># reproject the Herschal image to match the HI data</span>
+                                             <span class="n">hi_column_density</span><span class="o">.</span><span class="n">hdu</span><span class="o">.</span><span class="n">header</span><span class="p">)</span>
+
+<span class="n">rescaled_herschel_imagehdu</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">PrimaryHDU</span><span class="p">(</span><span class="n">data</span> <span class="o">=</span> <span class="n">rescaled_herschel_data</span><span class="p">,</span>
+                                             <span class="c1"># wrap up our reprojection as a new fits HDU object</span>
+                                             <span class="n">header</span> <span class="o">=</span> <span class="n">hi_column_density</span><span class="o">.</span><span class="n">hdu</span><span class="o">.</span><span class="n">header</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">rescaled_herschel_imagehdu</span></code> will now behave just like the other FITS
+images we have been working with, but now with a degraded resolution
+matching the HI data. This includes having its native coordinates in
+Galactic rather than RA and Dec.</p>
+<p><span class="inputnumrole">In[23]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initiate a figure and axis object with WCS projection information</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">18</span><span class="p">,</span><span class="mi">12</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span><span class="n">projection</span> <span class="o">=</span> <span class="n">WCS</span><span class="p">(</span><span class="n">rescaled_herschel_imagehdu</span><span class="p">))</span>
+
+<span class="c1"># Display the moment map image</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">rescaled_herschel_imagehdu</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s1">&#39;viridis&#39;</span><span class="p">,</span>
+               <span class="n">norm</span> <span class="o">=</span> <span class="n">LogNorm</span><span class="p">(),</span> <span class="n">vmin</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">vmax</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="o">.</span><span class="mi">8</span><span class="p">)</span>
+<span class="c1">#ax.invert_yaxis() # Flips the Y axis</span>
+
+<span class="c1"># Add axes labels</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Galactic Longitude&quot;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">16</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Galactic Latitude&quot;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">16</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">ls</span> <span class="o">=</span> <span class="s1">&#39;dotted&#39;</span><span class="p">,</span> <span class="n">lw</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># Extract x and y coordinate limits</span>
+<span class="n">x_lim</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_xlim</span><span class="p">()</span>
+<span class="n">y_lim</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_ylim</span><span class="p">()</span>
+
+<span class="c1"># Add a colorbar</span>
+<span class="n">cbar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">fraction</span><span class="o">=</span><span class="mf">0.046</span><span class="p">,</span> <span class="n">pad</span><span class="o">=-</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">cbar</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;Herschel 350&#39;</span><span class="sa">r</span><span class="s1">&#39;$\mu$m &#39;</span><span class="p">,</span><span class="s1">&#39;(&#39;</span><span class="p">,</span> <span class="n">herschel_header</span><span class="p">[</span><span class="s1">&#39;BUNIT&#39;</span><span class="p">],</span> <span class="s1">&#39;)&#39;</span><span class="p">]),</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">16</span><span class="p">)</span>
+
+<span class="c1"># Overlay set of RA/Dec Axes</span>
+<span class="n">overlay</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_coords_overlay</span><span class="p">(</span><span class="s1">&#39;fk5&#39;</span><span class="p">)</span>
+<span class="n">overlay</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;dotted&#39;</span><span class="p">,</span> <span class="n">lw</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">overlay</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_axislabel</span><span class="p">(</span><span class="s1">&#39;Right Ascension&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">14</span><span class="p">)</span>
+<span class="n">overlay</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_axislabel</span><span class="p">(</span><span class="s1">&#39;Declination&#39;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">14</span><span class="p">)</span>
+
+<span class="n">hi_transform</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_transform</span><span class="p">(</span><span class="n">hi_column_density</span><span class="o">.</span><span class="n">wcs</span><span class="p">)</span> <span class="c1"># extract axes Transform information for the HI data</span>
+
+<span class="c1"># Overplot column density contours</span>
+<span class="n">levels</span> <span class="o">=</span> <span class="p">(</span><span class="mf">2e21</span><span class="p">,</span> <span class="mf">3e21</span><span class="p">,</span> <span class="mf">5e21</span><span class="p">,</span> <span class="mf">7e21</span><span class="p">,</span> <span class="mf">8e21</span><span class="p">,</span> <span class="mf">1e22</span><span class="p">)</span> <span class="c1"># Define contour levels to use</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">hi_column_density</span><span class="o">.</span><span class="n">hdu</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s1">&#39;Greys_r&#39;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.8</span><span class="p">,</span> <span class="n">lw</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">levels</span> <span class="o">=</span> <span class="n">levels</span><span class="p">,</span>
+           <span class="n">transform</span> <span class="o">=</span> <span class="n">hi_transform</span><span class="p">)</span> <span class="c1"># include the transform information with the keyword &quot;transform&quot;</span>
+
+<span class="c1"># Overplot velocity image so we can also see the Gas velocities</span>
+<span class="n">im_hi</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">moment_1</span><span class="o">.</span><span class="n">hdu</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s1">&#39;RdBu_r&#39;</span><span class="p">,</span> <span class="n">vmin</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span> <span class="o">=</span> <span class="mi">200</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span> <span class="n">transform</span> <span class="o">=</span> <span class="n">hi_transform</span><span class="p">)</span>
+
+<span class="c1"># Add a second colorbar for the HI Velocity information</span>
+<span class="n">cbar_hi</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im_hi</span><span class="p">,</span> <span class="n">orientation</span> <span class="o">=</span> <span class="s1">&#39;horizontal&#39;</span><span class="p">,</span> <span class="n">fraction</span><span class="o">=</span><span class="mf">0.046</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mf">0.07</span><span class="p">)</span>
+<span class="n">cbar_hi</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s1">&#39;HI &#39;</span><span class="sa">r</span><span class="s1">&#39;$21$cm Mean Velocity (km/s)&#39;</span><span class="p">,</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">16</span><span class="p">)</span>
+
+<span class="c1"># Apply original image x and y coordinate limits</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">x_lim</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">y_lim</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[23]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">circleci</span><span class="o">/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">6</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">matplotlib</span><span class="o">/</span><span class="n">contour</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">1000</span><span class="p">:</span> <span class="ne">UserWarning</span><span class="p">:</span> <span class="n">The</span> <span class="n">following</span> <span class="n">kwargs</span> <span class="n">were</span> <span class="ow">not</span> <span class="n">used</span> <span class="n">by</span> <span class="n">contour</span><span class="p">:</span> <span class="s1">&#39;lw&#39;</span>
+  <span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">40.5</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">circleci</span><span class="o">/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">6</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">matplotlib</span><span class="o">/</span><span class="n">colors</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">1028</span><span class="p">:</span> <span class="ne">RuntimeWarning</span><span class="p">:</span> <span class="n">invalid</span> <span class="n">value</span> <span class="n">encountered</span> <span class="ow">in</span> <span class="n">less_equal</span>
+  <span class="n">mask</span> <span class="o">|=</span> <span class="n">resdat</span> <span class="o">&lt;=</span> <span class="mi">0</span>
+<span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">circleci</span><span class="o">/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">6</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">matplotlib</span><span class="o">/</span><span class="n">colors</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">1028</span><span class="p">:</span> <span class="ne">RuntimeWarning</span><span class="p">:</span> <span class="n">invalid</span> <span class="n">value</span> <span class="n">encountered</span> <span class="ow">in</span> <span class="n">less_equal</span>
+  <span class="n">mask</span> <span class="o">|=</span> <span class="n">resdat</span> <span class="o">&lt;=</span> <span class="mi">0</span>
+<span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">circleci</span><span class="o">/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">6</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">matplotlib</span><span class="o">/</span><span class="n">colors</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">1028</span><span class="p">:</span> <span class="ne">RuntimeWarning</span><span class="p">:</span> <span class="n">invalid</span> <span class="n">value</span> <span class="n">encountered</span> <span class="ow">in</span> <span class="n">less_equal</span>
+  <span class="n">mask</span> <span class="o">|=</span> <span class="n">resdat</span> <span class="o">&lt;=</span> <span class="mi">0</span>
+</pre></div>
+</div>
+<img alt="../_images/FITS-cubes_54_3.png" src="../_images/FITS-cubes_54_3.png" />
+<p>The real power of reproject is in actually changing the map projection
+used to display the data. This is done by creating a WCS object that
+contains a different projection type such as
+<code class="docutils literal notranslate"><span class="pre">CTYPE</span> <span class="pre">:</span> <span class="pre">'RA---CAR'</span>&#160; <span class="pre">'DEC--CAR'</span></code> as opposed to
+<code class="docutils literal notranslate"><span class="pre">CTYPE</span> <span class="pre">:</span> <span class="pre">'RA---TAN'</span>&#160; <span class="pre">'DEC--TAN'</span></code>.</p>
+</div>
+<div class="section" id="challenge">
+<h2>Challenge:<a class="headerlink" href="#challenge" title="Permalink to this headline">¶</a></h2>
+<p>Use <a class="reference external" href="https://reproject.readthedocs.io/en/stable/#">reproject</a> and WCS
+to create a new WCS object in a different map projection and see how
+distortions in the image can change.</p>
+<p><span class="inputnumrole">In[None]:</span></p>
+<p><span class="inputnumrole">In[None]:</span></p>
+<p><span class="inputnumrole">In[None]:</span></p>
+<div id="spacer"></div>
+
+<a href="../_static//.ipynb"><button id="download">Download tutorial notebook</button></a>
+<a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks//.ipynb"><button id="binder">Interactive tutorial notebook</button></a></div>
+</div>
+
+</div>
+      </div>  
+      
+    </div>
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+    &copy; Copyright Astropy.   
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" /><meta content="filterTutorials" name="keywords" />
+<meta content="filterTutorials," name="keywords" />
+
+    <title>Dereddening a spectrum and calculating reddening &#8212; astropy-tutorials v3.0.dev</title>
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bootstrap_sandstone.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/astropy.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
+    <script type="text/javascript" src="../_static/searchtools.js"></script>
+    <script type="text/javascript" src="https://use.fontawesome.com/3168e95f94.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <link rel="shortcut icon" href="../_static/astropy_favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  
+  <script type="text/javascript">  
+    if( (window.location.href.search("tutorials.html") != -1) && (window.location.href.search("q=filterTutorials") == -1) ){
+      var url = window.location.href.split("tutorials.html")[0] + "tutorials.html?q=filterTutorials";
+      window.location.href = url;
+    }
+  </script>
+  <script type="text/javascript">
+    jQuery(function() { Search.loadIndex("../searchindex.js"); });
+  </script>
+  
+  <script type="text/javascript" id="searchindexloader"></script>
+   
+
+  </head><body>
+
+
+<nav class="navbar navbar-expand-lg bg-navbar">
+  <a class="navbar-brand" href="/" style="padding: 0px 5px;">
+    <img src="../../_static/astropy_logo.png" onerror="this.onerror=null;this.src='../_static/astropy_logo.png';" style="height: 38px;">
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarColor01">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="http://www.astropy.org"/>Astropy<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Modules</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0" action="../search.html" method="get">
+      <div class="input-group-prepend">
+          <button class="input-group-text" style="padding: 0.7rem"><i class="fa fa-search fa-fw"></i></button>
+      </div>
+      <input class="form-control mr-sm-3" name="q" type="text" placeholder="Search the universe" />
+    </form>
+  </div>
+</nav>
+
+
+<div class="container">
+  <div class="row">
+
+    
+    
+    
+    
+    
+    <div class="col-md-3">
+      <div id="sidebar" class="bs-sidenav card" role="complementary">
+        <h3>Table of contents</h3>
+        <ul>
+<li><a class="reference internal" href="#">Dereddening a spectrum and calculating reddening</a><ul>
+<li><a class="reference internal" href="#learning-goals">Learning Goals</a></li>
+<li><a class="reference internal" href="#keywords">Keywords</a></li>
+<li><a class="reference internal" href="#companion-content">Companion Content</a></li>
+<li><a class="reference internal" href="#summary">Summary</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#example-1-investigate-extinction-models">Example 1: Investigate Extinction Models</a></li>
+<li><a class="reference internal" href="#example-2-deredden-a-spectrum">Example 2: Deredden a Spectrum</a></li>
+<li><a class="reference internal" href="#example-3-calculate-color-excess-with-synphot">Example 3: Calculate Color Excess with <code class="docutils literal notranslate"><span class="pre">synphot</span></code></a><ul>
+<li><a class="reference internal" href="#exercise">Exercise</a></li>
+</ul>
+</li>
+</ul>
+
+      </div>    
+    </div>
+    
+
+    <div class="col-md-9">
+      <div class="content-padding card">
+        <div>
+  <a href="../_static/color-excess/color-excess.ipynb"><button id="download">Download tutorial notebook</button></a>
+<a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/color-excess/color-excess.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
+
+<div id="spacer"></div><div class="section" id="dereddening-a-spectrum-and-calculating-reddening">
+<span id="color-excess"></span><h1>Dereddening a spectrum and calculating reddening<a class="headerlink" href="#dereddening-a-spectrum-and-calculating-reddening" title="Permalink to this headline">¶</a></h1>
+<p>Kristen Larson (&#64;krislars) with ideas Emir Karamehmetoglu and feedback
+from Pey Lian Lim, Karl Gordon, and Kevin Covey. Edited by Lia Corrales.</p>
+<div class="section" id="learning-goals">
+<h2>Learning Goals<a class="headerlink" href="#learning-goals" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Investigate extinction curve shapes</p></li>
+<li><p>Deredden spectral energy distributions and spectra</p></li>
+<li><p>Calculate photometric extinction and reddening</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">dust_extinction</span></code> and <code class="docutils literal notranslate"><span class="pre">synphot</span></code> together</p></li>
+<li><p>Converting from frequency to wavelength with <code class="docutils literal notranslate"><span class="pre">astropy.unit</span></code>
+equivalencies</p></li>
+<li><p>Unit support for plotting with <code class="docutils literal notranslate"><span class="pre">astropy.visualization</span></code></p></li>
+</ul>
+</div>
+<div class="section" id="keywords">
+<h2>Keywords<a class="headerlink" href="#keywords" title="Permalink to this headline">¶</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">dust_extinction</span></code>, <code class="docutils literal notranslate"><span class="pre">synphot</span></code></p>
+</div>
+<div class="section" id="companion-content">
+<h2>Companion Content<a class="headerlink" href="#companion-content" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">Documentation</span> <span class="pre">for</span> <span class="pre">``dust_extinction`</span></code>
+package &lt;<a class="reference external" href="https://dust-extinction.readthedocs.io/en/latest/">https://dust-extinction.readthedocs.io/en/latest/</a>&gt;`__</p></li>
+<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">Documentation</span> <span class="pre">for</span> <span class="pre">``synphot`</span></code>
+package &lt;<a class="reference external" href="https://synphot.readthedocs.io/en/latest/">https://synphot.readthedocs.io/en/latest/</a>&gt;`__</p></li>
+<li><p><a class="reference external" href="https://ui.adsabs.harvard.edu/#abs/2012PASP..124..140B/abstract">Bessell &amp; Murphy
+(2012)</a></p></li>
+</ul>
+</div>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p>In this tutorial, we will look at some extinction curves from the
+literature, use one of those curves to deredden an observed spectrum,
+and practice invoking a background source flux in order to calculate
+magnitudes from an extinction model.</p>
+<p>The primary libraries we’ll be using are
+<a class="reference external" href="https://dust-extinction.readthedocs.io/en/latest/">dust_extinction</a>
+and <a class="reference external" href="https://synphot.readthedocs.io/en/latest/">synphot</a>, which are
+<a class="reference external" href="https://www.astropy.org/affiliated/">Astropy affiliated packages</a>.</p>
+<p>We recommend installing the two packages in this fashion:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">install</span> <span class="o">-</span><span class="n">c</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">ssb</span><span class="o">.</span><span class="n">stsci</span><span class="o">.</span><span class="n">edu</span><span class="o">/</span><span class="n">astroconda</span> <span class="n">synphot</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">dust_extinction</span>
+</pre></div>
+</div>
+<p>Notice that the structure of <code class="docutils literal notranslate"><span class="pre">dust_extinction</span></code> changed significantly
+from v0.6 to v0.7, so updating your installation may be required. If so,
+you can upgrade the package with pip:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">upgrade</span> <span class="n">dust_extinction</span>
+</pre></div>
+</div>
+<p><span class="inputnumrole">In[1]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">astropy.units</span> <span class="kn">as</span> <span class="nn">u</span>
+<span class="kn">from</span> <span class="nn">astropy.table</span> <span class="kn">import</span> <span class="n">Table</span>
+<span class="kn">from</span> <span class="nn">dust_extinction.parameter_averages</span> <span class="kn">import</span> <span class="n">CCM89</span><span class="p">,</span> <span class="n">F99</span>
+<span class="kn">from</span> <span class="nn">synphot</span> <span class="kn">import</span> <span class="n">units</span><span class="p">,</span> <span class="n">config</span>
+<span class="kn">from</span> <span class="nn">synphot</span> <span class="kn">import</span> <span class="n">SourceSpectrum</span><span class="p">,</span><span class="n">SpectralElement</span><span class="p">,</span><span class="n">Observation</span><span class="p">,</span><span class="n">ExtinctionModel1D</span>
+<span class="kn">from</span> <span class="nn">synphot.models</span> <span class="kn">import</span> <span class="n">BlackBodyNorm1D</span>
+<span class="kn">from</span> <span class="nn">synphot.spectrum</span> <span class="kn">import</span> <span class="n">BaseUnitlessSpectrum</span>
+<span class="kn">from</span> <span class="nn">synphot.reddening</span> <span class="kn">import</span> <span class="n">ExtinctionCurve</span>
+<span class="kn">from</span> <span class="nn">astroquery.simbad</span> <span class="kn">import</span> <span class="n">Simbad</span>
+<span class="kn">from</span> <span class="nn">astroquery.mast</span> <span class="kn">import</span> <span class="n">Observations</span>
+<span class="kn">import</span> <span class="nn">astropy.visualization</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<p>Dust in the interstellar medium (ISM) extinguishes background starlight.
+The wavelength dependence of the extinction is such that
+short-wavelength light is extinguished more than long-wavelength light,
+and we call this effect <em>reddening</em>.</p>
+<p>If you’re new to extinction, here is a brief introduction to the types
+of quantities involved. The fractional change to the flux of starlight
+is</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}  \frac{dF_\lambda}{F_\lambda} = -\tau_\lambda\\where :math:`\tau` is the optical depth and depends on wavelength.\end{aligned}\end{align} \]</div>
+<p>Integrating along the line of sight, the resultant flux is an
+exponential function of optical depth,</p>
+<div class="math notranslate nohighlight">
+\[\tau_\lambda = -\ln\left(\frac{F_\lambda}{F_{\lambda,0}}\right).\]</div>
+<div class="line-block">
+<div class="line">With an eye to how we define magnitudes, we usually change the base
+from <span class="math notranslate nohighlight">\(e\)</span> to 10,</div>
+<div class="line"><br /></div>
+</div>
+<blockquote>
+<div><div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}  \tau_\lambda = -2.303\log\left(\frac{F_\lambda}{F_{\lambda,0}}\right),\\and define an extinction :math:`A_\lambda = 1.086 \,\tau_\lambda` so\end{aligned}\end{align} \]</div>
+<p>that</p>
+<div class="math notranslate nohighlight">
+\[A_\lambda = -2.5\log\left(\frac{F_\lambda}{F_{\lambda,0}}\right).\]</div>
+</div></blockquote>
+<p>There are two basic take-home messages from this derivation:</p>
+<ul class="simple">
+<li><p>Extinction introduces a multiplying factor
+<span class="math notranslate nohighlight">\(10^{-0.4 A_\lambda}\)</span> to the flux.</p></li>
+<li><p>Extinction is defined relative to the flux without dust,
+<span class="math notranslate nohighlight">\(F_{\lambda,0}\)</span>.</p></li>
+</ul>
+<p>Once astropy and the affiliated packages are installed, we can import
+from them as needed:</p>
+</div>
+<div class="section" id="example-1-investigate-extinction-models">
+<h1>Example 1: Investigate Extinction Models<a class="headerlink" href="#example-1-investigate-extinction-models" title="Permalink to this headline">¶</a></h1>
+<p>The <code class="docutils literal notranslate"><span class="pre">dust_extinction</span></code> package provides various models for extinction
+<span class="math notranslate nohighlight">\(A_\lambda\)</span> normalized to <span class="math notranslate nohighlight">\(A_V\)</span>. The shapes of normalized
+curves are relatively (and perhaps surprisingly) uniform in the Milky
+Way. The little variation that exists is often parameterized by the
+ratio of extinction (<span class="math notranslate nohighlight">\(A_V\)</span>) to reddening in the blue-visual
+(<span class="math notranslate nohighlight">\(E_{B-V}\)</span>),</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}  R_V \equiv \frac{A_V}{E_{B-V}}\\where :math:`E_{B-V}` is differential extinction :math:`A_B-A_V`. In\end{aligned}\end{align} \]</div>
+<p>this example, we show the <span class="math notranslate nohighlight">\(R_V\)</span>-parameterization for the Clayton,
+Cardelli, &amp; Mathis (1989, CCM) and the Fitzpatrick (1999) models. <code class="xref py py-obj docutils literal notranslate"><span class="pre">More</span>
+<span class="pre">model</span> <span class="pre">options</span> <span class="pre">are</span> <span class="pre">available</span> <span class="pre">in</span> <span class="pre">the</span> <span class="pre">``dust_extinction`</span></code>
+documentation. &lt;<a class="reference external" href="https://dust-extinction.readthedocs.io/en/latest/dust_extinction/model_flavors.html">https://dust-extinction.readthedocs.io/en/latest/dust_extinction/model_flavors.html</a>&gt;`__</p>
+<p><span class="inputnumrole">In[2]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create wavelengths array.</span>
+<span class="n">wav</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">)</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">micron</span>
+
+<span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="p">[</span><span class="n">CCM89</span><span class="p">,</span> <span class="n">F99</span><span class="p">]:</span>
+   <span class="k">for</span> <span class="n">R</span> <span class="ow">in</span> <span class="p">(</span><span class="mf">2.0</span><span class="p">,</span><span class="mf">3.0</span><span class="p">,</span><span class="mf">4.0</span><span class="p">):</span>
+     <span class="c1"># Initialize the extinction model</span>
+     <span class="n">ext</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">Rv</span><span class="o">=</span><span class="n">R</span><span class="p">)</span>
+     <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">wav</span><span class="p">,</span> <span class="n">ext</span><span class="p">(</span><span class="n">wav</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="n">model</span><span class="o">.</span><span class="n">name</span><span class="o">+</span><span class="s1">&#39; R=&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">R</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;$\lambda^{-1}$ ($\mu$m$^{-1}$)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;A($\lambda$) / A(V)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Some Extinction Laws&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[2]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">circleci</span><span class="o">/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">6</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">dust_extinction</span><span class="o">/</span><span class="n">helpers</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">28</span><span class="p">:</span> <span class="ne">UserWarning</span><span class="p">:</span> <span class="n">x</span> <span class="n">has</span> <span class="n">no</span> <span class="n">units</span><span class="p">,</span> <span class="n">assuming</span> <span class="n">x</span> <span class="n">units</span> <span class="n">are</span> <span class="n">inverse</span> <span class="n">microns</span>
+  <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;x has no units, assuming x units are inverse microns&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../_images/color-excess_9_1.png" src="../_images/color-excess_9_1.png" />
+<p>Astronomers studying the ISM often display extinction curves against
+inverse wavelength (wavenumber) to show the ultraviolet variation, as we
+do here. Infrared extinction varies much less and approaches zero at
+long wavelength in the absence of wavelength-independent, or grey,
+extinction.</p>
+</div>
+<div class="section" id="example-2-deredden-a-spectrum">
+<h1>Example 2: Deredden a Spectrum<a class="headerlink" href="#example-2-deredden-a-spectrum" title="Permalink to this headline">¶</a></h1>
+<p>Here we deredden (unextinguish) the IUE ultraviolet spectrum and optical
+photometry of the star <span class="math notranslate nohighlight">\(\rho\)</span> Oph (HD 147933).</p>
+<p>First, we will use astroquery to fetch the archival <a class="reference external" href="https://archive.stsci.edu/iue/">IUE spectrum from
+MAST</a>:</p>
+<p><span class="inputnumrole">In[3]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">obsTable</span> <span class="o">=</span> <span class="n">Observations</span><span class="o">.</span><span class="n">query_object</span><span class="p">(</span><span class="s2">&quot;HD 147933&quot;</span><span class="p">,</span><span class="n">radius</span><span class="o">=</span><span class="s2">&quot;1 arcsec&quot;</span><span class="p">)</span>
+<span class="n">obsTable_spec</span><span class="o">=</span><span class="n">obsTable</span><span class="p">[</span><span class="n">obsTable</span><span class="p">[</span><span class="s1">&#39;dataproduct_type&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;spectrum&#39;</span><span class="p">]</span>
+<span class="c1"># obsTable_spec.pprint()</span>
+
+<span class="n">obsids</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;3000022829&#39;</span><span class="p">]</span>
+<span class="n">dataProductsByID</span> <span class="o">=</span> <span class="n">Observations</span><span class="o">.</span><span class="n">get_product_list</span><span class="p">(</span><span class="n">obsids</span><span class="p">)</span>
+<span class="n">manifest</span> <span class="o">=</span> <span class="n">Observations</span><span class="o">.</span><span class="n">download_products</span><span class="p">(</span><span class="n">dataProductsByID</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[3]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:IUE/url/pub/iue/data/lwr/05000/lwr05639.elbll.gz to ./mastDownload/IUE/lwr05639/lwr05639.elbll.gz ... [Done]
+Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:IUE/url/pub/iue/data/lwr/05000/lwr05639.lilo.gz to ./mastDownload/IUE/lwr05639/lwr05639.lilo.gz ... [Done]
+Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:IUE/url/pub/iue/data/lwr/05000/lwr05639.melol.gz to ./mastDownload/IUE/lwr05639/lwr05639.melol.gz ... [Done]
+Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:IUE/url/pub/iue/data/lwr/05000/lwr05639.raw.gz to ./mastDownload/IUE/lwr05639/lwr05639.raw.gz ... [Done]
+Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:IUE/url/pub/iue/data/lwr/05000/lwr05639.rilo.gz to ./mastDownload/IUE/lwr05639/lwr05639.rilo.gz ... [Done]
+Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:IUE/url/pub/iue/data/lwr/05000/lwr05639.silo.gz to ./mastDownload/IUE/lwr05639/lwr05639.silo.gz ... [Done]
+Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:IUE/url/browse/previews/iue/mx/lwr/05000/gif/lwr05639.gif to ./mastDownload/IUE/lwr05639/lwr05639.gif ... [Done]
+Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:IUE/url/pub/iue/data/lwr/05000/lwr05639.mxlo.gz to ./mastDownload/IUE/lwr05639/lwr05639.mxlo.gz ... [Done]
+Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:IUE/url/pub/vospectra/iue2/lwr05639mxlo_vo.fits to ./mastDownload/IUE/lwr05639/lwr05639mxlo_vo.fits ... [Done]
+</pre></div>
+</div>
+<p>We read the downloaded files into an astropy table:</p>
+<p><span class="inputnumrole">In[4]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">t_lwr</span> <span class="o">=</span> <span class="n">Table</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;./mastDownload/IUE/lwr05639/lwr05639mxlo_vo.fits&#39;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">t_lwr</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[4]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>      <span class="n">WAVE</span> <span class="p">[</span><span class="mi">562</span><span class="p">]</span>              <span class="n">FLUX</span> <span class="p">[</span><span class="mi">562</span><span class="p">]</span>         <span class="o">...</span> <span class="n">QUALITY</span> <span class="p">[</span><span class="mi">562</span><span class="p">]</span>
+       <span class="n">Angstrom</span>         <span class="n">erg</span> <span class="o">/</span> <span class="p">(</span><span class="n">Angstrom</span> <span class="n">cm2</span> <span class="n">s</span><span class="p">)</span>   <span class="o">...</span>
+<span class="o">---------------------</span> <span class="o">--------------------------</span> <span class="o">...</span> <span class="o">-------------</span>
+<span class="mf">1851.4327</span> <span class="o">..</span> <span class="mf">3348.901</span> <span class="mf">2.08651e-10</span> <span class="o">..</span> <span class="mf">7.39839e-11</span> <span class="o">...</span>       <span class="mi">0</span> <span class="o">..</span> <span class="mi">16</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">WARNING</span><span class="p">:</span> <span class="n">UnitsWarning</span><span class="p">:</span> <span class="s1">&#39;erg/cm**2/s/angstrom&#39;</span> <span class="n">contains</span> <span class="n">multiple</span> <span class="n">slashes</span><span class="p">,</span> <span class="n">which</span> <span class="ow">is</span> <span class="n">discouraged</span> <span class="n">by</span> <span class="n">the</span> <span class="n">FITS</span> <span class="n">standard</span> <span class="p">[</span><span class="n">astropy</span><span class="o">.</span><span class="n">units</span><span class="o">.</span><span class="n">format</span><span class="o">.</span><span class="n">generic</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">.quantity</span></code> extension in the next lines will read the Table
+columns into Quantity vectors. Quantities keep the units of the Table
+column attached to the numpy array values.</p>
+<p><span class="inputnumrole">In[5]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">wav_UV</span> <span class="o">=</span> <span class="n">t_lwr</span><span class="p">[</span><span class="s1">&#39;WAVE&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">,]</span><span class="o">.</span><span class="n">quantity</span>
+<span class="n">UVflux</span> <span class="o">=</span> <span class="n">t_lwr</span><span class="p">[</span><span class="s1">&#39;FLUX&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">,]</span><span class="o">.</span><span class="n">quantity</span>
+</pre></div>
+</div>
+<p>Now, we use astroquery again to fetch photometry from Simbad to go with
+the IUE spectrum:</p>
+<p><span class="inputnumrole">In[6]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">custom_query</span> <span class="o">=</span> <span class="n">Simbad</span><span class="p">()</span>
+<span class="n">custom_query</span><span class="o">.</span><span class="n">add_votable_fields</span><span class="p">(</span><span class="s1">&#39;fluxdata(U)&#39;</span><span class="p">,</span><span class="s1">&#39;fluxdata(B)&#39;</span><span class="p">,</span><span class="s1">&#39;fluxdata(V)&#39;</span><span class="p">)</span>
+<span class="n">phot_table</span><span class="o">=</span><span class="n">custom_query</span><span class="o">.</span><span class="n">query_object</span><span class="p">(</span><span class="s1">&#39;HD 147933&#39;</span><span class="p">)</span>
+<span class="n">Umag</span><span class="o">=</span><span class="n">phot_table</span><span class="p">[</span><span class="s1">&#39;FLUX_U&#39;</span><span class="p">]</span>
+<span class="n">Bmag</span><span class="o">=</span><span class="n">phot_table</span><span class="p">[</span><span class="s1">&#39;FLUX_B&#39;</span><span class="p">]</span>
+<span class="n">Vmag</span><span class="o">=</span><span class="n">phot_table</span><span class="p">[</span><span class="s1">&#39;FLUX_V&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>To convert the photometry to flux, we look up some <a class="reference external" href="http://ned.ipac.caltech.edu/help/photoband.lst">properties of the
+photometric
+passbands</a>, including
+the flux of a magnitude zero star through the each passband, also known
+as the zero-point of the passband.</p>
+<p><span class="inputnumrole">In[7]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">wav_U</span> <span class="o">=</span> <span class="mf">0.3660</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">micron</span>
+<span class="n">zeroflux_U_nu</span> <span class="o">=</span> <span class="mf">1.81E-23</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">Watt</span><span class="o">/</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">m</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">m</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">Hz</span><span class="p">)</span>
+<span class="n">wav_B</span> <span class="o">=</span> <span class="mf">0.4400</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">micron</span>
+<span class="n">zeroflux_B_nu</span> <span class="o">=</span> <span class="mf">4.26E-23</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">Watt</span><span class="o">/</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">m</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">m</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">Hz</span><span class="p">)</span>
+<span class="n">wav_V</span> <span class="o">=</span> <span class="mf">0.5530</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">micron</span>
+<span class="n">zeroflux_V_nu</span> <span class="o">=</span> <span class="mf">3.64E-23</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">Watt</span><span class="o">/</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">m</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">m</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">Hz</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The zero-points that we found for the optical passbands are not in the
+same units as the IUE fluxes. To make matters worse, the zero-point
+fluxes are <span class="math notranslate nohighlight">\(F_\nu\)</span> and the IUE fluxes are <span class="math notranslate nohighlight">\(F_\lambda\)</span>. To
+convert between them, the wavelength is needed. Fortunately, astropy
+provides an easy way to make the conversion with <em>equivalencies</em>:</p>
+<p><span class="inputnumrole">In[8]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">zeroflux_U</span> <span class="o">=</span> <span class="n">zeroflux_U_nu</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">erg</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">AA</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">,</span>
+                              <span class="n">equivalencies</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">spectral_density</span><span class="p">(</span><span class="n">wav_U</span><span class="p">))</span>
+<span class="n">zeroflux_B</span> <span class="o">=</span> <span class="n">zeroflux_B_nu</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">erg</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">AA</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">,</span>
+                              <span class="n">equivalencies</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">spectral_density</span><span class="p">(</span><span class="n">wav_B</span><span class="p">))</span>
+<span class="n">zeroflux_V</span> <span class="o">=</span> <span class="n">zeroflux_V_nu</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">erg</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">AA</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">,</span>
+                              <span class="n">equivalencies</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">spectral_density</span><span class="p">(</span><span class="n">wav_V</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Now we can convert from photometry to flux using the definition of
+magnitude:</p>
+<div class="math notranslate nohighlight">
+\[F=F_0\ 10^{-0.4\, m}\]</div>
+<p><span class="inputnumrole">In[9]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Uflux</span> <span class="o">=</span> <span class="n">zeroflux_U</span> <span class="o">*</span> <span class="mf">10.</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mf">0.4</span><span class="o">*</span><span class="n">Umag</span><span class="p">)</span>
+<span class="n">Bflux</span> <span class="o">=</span> <span class="n">zeroflux_B</span> <span class="o">*</span> <span class="mf">10.</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mf">0.4</span><span class="o">*</span><span class="n">Bmag</span><span class="p">)</span>
+<span class="n">Vflux</span> <span class="o">=</span> <span class="n">zeroflux_V</span> <span class="o">*</span> <span class="mf">10.</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mf">0.4</span><span class="o">*</span><span class="n">Vmag</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Using astropy quantities allow us to take advantage of astropy’s unit
+support in plotting. <code class="xref py py-obj docutils literal notranslate"><span class="pre">Calling</span> <span class="pre">``astropy.visualization.quantity_support`</span></code>
+explicitly turns the feature
+on. &lt;<a class="reference external" href="http://docs.astropy.org/en/stable/units/quantity.html#plotting-quantities">http://docs.astropy.org/en/stable/units/quantity.html#plotting-quantities</a>&gt;`__
+Then, when quantity objects are passed to matplotlib plotting functions,
+the axis labels are automatically labeled with the unit of the quantity.
+In addition, quantities are converted automatically into the same units
+when combining multiple plots on the same axes.</p>
+<p><span class="inputnumrole">In[10]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">astropy</span><span class="o">.</span><span class="n">visualization</span><span class="o">.</span><span class="n">quantity_support</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wav_UV</span><span class="p">,</span><span class="n">UVflux</span><span class="p">,</span><span class="s1">&#39;m&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;UV&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wav_V</span><span class="p">,</span><span class="n">Vflux</span><span class="p">,</span><span class="s1">&#39;ko&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;U, B, V&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wav_B</span><span class="p">,</span><span class="n">Bflux</span><span class="p">,</span><span class="s1">&#39;ko&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wav_U</span><span class="p">,</span><span class="n">Uflux</span><span class="p">,</span><span class="s1">&#39;ko&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mf">3E-10</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;rho Oph&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[10]:</span></p>
+<img alt="../_images/color-excess_27_0.png" src="../_images/color-excess_27_0.png" />
+<p>Finally, we initialize the extinction model, choosing values
+<span class="math notranslate nohighlight">\(R_V = 5\)</span> and <span class="math notranslate nohighlight">\(E_{B-V} = 0.5\)</span>. This star is famous in the
+ISM community for having large-<span class="math notranslate nohighlight">\(R_V\)</span> dust in the line of sight.</p>
+<p><span class="inputnumrole">In[11]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Rv</span> <span class="o">=</span> <span class="mf">5.0</span>  <span class="c1"># Usually around 3, but about 5 for this star.</span>
+<span class="n">Ebv</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">ext</span> <span class="o">=</span> <span class="n">F99</span><span class="p">(</span><span class="n">Rv</span><span class="o">=</span><span class="n">Rv</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To extinguish (redden) a spectrum, multiply by the <code class="docutils literal notranslate"><span class="pre">ext.extinguish</span></code>
+function. To unextinguish (deredden), divide by the same
+<code class="docutils literal notranslate"><span class="pre">ext.extinguish</span></code>, as we do here:</p>
+<p><span class="inputnumrole">In[12]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">wav_UV</span><span class="p">,</span><span class="n">UVflux</span><span class="p">,</span><span class="s1">&#39;m&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;UV&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">wav_V</span><span class="p">,</span><span class="n">Vflux</span><span class="p">,</span><span class="s1">&#39;ko&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;U, B, V&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">wav_B</span><span class="p">,</span><span class="n">Bflux</span><span class="p">,</span><span class="s1">&#39;ko&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">wav_U</span><span class="p">,</span><span class="n">Uflux</span><span class="p">,</span><span class="s1">&#39;ko&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">wav_UV</span><span class="p">,</span><span class="n">UVflux</span><span class="o">/</span><span class="n">ext</span><span class="o">.</span><span class="n">extinguish</span><span class="p">(</span><span class="n">wav_UV</span><span class="p">,</span><span class="n">Ebv</span><span class="o">=</span><span class="n">Ebv</span><span class="p">),</span><span class="s1">&#39;b&#39;</span><span class="p">,</span>
+             <span class="n">label</span><span class="o">=</span><span class="s1">&#39;dereddened: EBV=0.5, RV=5&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">wav_V</span><span class="p">,</span><span class="n">Vflux</span><span class="o">/</span><span class="n">ext</span><span class="o">.</span><span class="n">extinguish</span><span class="p">(</span><span class="n">wav_V</span><span class="p">,</span><span class="n">Ebv</span><span class="o">=</span><span class="n">Ebv</span><span class="p">),</span><span class="s1">&#39;ro&#39;</span><span class="p">,</span>
+             <span class="n">label</span><span class="o">=</span><span class="s1">&#39;dereddened: EBV=0.5, RV=5&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">wav_B</span><span class="p">,</span><span class="n">Bflux</span><span class="o">/</span><span class="n">ext</span><span class="o">.</span><span class="n">extinguish</span><span class="p">(</span><span class="n">wav_B</span><span class="p">,</span><span class="n">Ebv</span><span class="o">=</span><span class="n">Ebv</span><span class="p">),</span><span class="s1">&#39;ro&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">wav_U</span><span class="p">,</span><span class="n">Uflux</span><span class="o">/</span><span class="n">ext</span><span class="o">.</span><span class="n">extinguish</span><span class="p">(</span><span class="n">wav_U</span><span class="p">,</span><span class="n">Ebv</span><span class="o">=</span><span class="n">Ebv</span><span class="p">),</span><span class="s1">&#39;ro&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;rho Oph&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[12]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">circleci</span><span class="o">/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">6</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">dust_extinction</span><span class="o">/</span><span class="n">helpers</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">28</span><span class="p">:</span> <span class="ne">UserWarning</span><span class="p">:</span> <span class="n">x</span> <span class="n">has</span> <span class="n">no</span> <span class="n">units</span><span class="p">,</span> <span class="n">assuming</span> <span class="n">x</span> <span class="n">units</span> <span class="n">are</span> <span class="n">inverse</span> <span class="n">microns</span>
+  <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;x has no units, assuming x units are inverse microns&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../_images/color-excess_31_1.png" src="../_images/color-excess_31_1.png" />
+<p>Notice that, by dereddening the spectrum, the absorption feature at 2175
+Angstrom is removed. This feature can also be seen as the prominent bump
+in the extinction curves in Example 1. That we have smoothly removed the
+2175 Angstrom feature suggests that the values we chose, <span class="math notranslate nohighlight">\(R_V = 5\)</span>
+and <span class="math notranslate nohighlight">\(E_{B-V} = 0.5\)</span>, are a reasonable model for the foreground
+dust.</p>
+<p>Those experienced with dereddening should notice that that
+<code class="docutils literal notranslate"><span class="pre">dust_extinction</span></code> returns <span class="math notranslate nohighlight">\(A_\lambda/A_V\)</span>, while other routines
+like the IDL fm_unred procedure often return <span class="math notranslate nohighlight">\(A_\lambda/E_{B-V}\)</span>
+by default and need to be divided by <span class="math notranslate nohighlight">\(R_V\)</span> in order to compare
+directly with <code class="docutils literal notranslate"><span class="pre">dust_extinction</span></code>.</p>
+</div>
+<div class="section" id="example-3-calculate-color-excess-with-synphot">
+<h1>Example 3: Calculate Color Excess with <code class="docutils literal notranslate"><span class="pre">synphot</span></code><a class="headerlink" href="#example-3-calculate-color-excess-with-synphot" title="Permalink to this headline">¶</a></h1>
+<p>Calculating broadband <em>photometric</em> extinction is harder than it might
+look at first. All we have to do is look up <span class="math notranslate nohighlight">\(A_\lambda\)</span> for a
+particular passband, right? Under the right conditions, yes. In general,
+no.</p>
+<p>Remember that we have to integrate over a passband to get synthetic
+photometry,</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}  A = -2.5\log\left(\frac{\int W_\lambda F_{\lambda,0} 10^{-0.4A_\lambda} d\lambda}{\int W_\lambda F_{\lambda,0} d\lambda} \right),\\where :math:`W_\lambda` is the fraction of incident energy transmitted\end{aligned}\end{align} \]</div>
+<p>through a filter. See the detailed appendix in <a class="reference external" href="https://ui.adsabs.harvard.edu/#abs/2012PASP..124..140B/abstract">Bessell &amp; Murphy
+(2012)</a>
+for an excellent review of the issues and common misunderstandings in
+synthetic photometry.</p>
+<p>There is an important point to be made here. The expression above does
+not simplify any further. Strictly speaking, it is impossible to convert
+spectral extinction <span class="math notranslate nohighlight">\(A_\lambda\)</span> into a magnitude system without
+knowing the wavelength dependence of the source’s original flux across
+the filter in question. As a special case, if we assume that the source
+flux is constant in the band (i.e. <span class="math notranslate nohighlight">\(F_\lambda = F\)</span>), then we can
+cancel these factors out from the integrals, and extinction in
+magnitudes becomes the weighted average of the extinction factor across
+the filter in question. In that special case, <span class="math notranslate nohighlight">\(A_\lambda\)</span> at
+<span class="math notranslate nohighlight">\(\lambda_{\rm eff}\)</span> is a good approximation for magnitude
+extinction.</p>
+<p>In this example, we will demonstrate the more general calculation of
+photometric extinction. We use a blackbody curve for the flux before the
+dust, apply an extinction curve, and perform synthetic photometry to
+calculate extinction and reddening in a magnitude system.</p>
+<p>First, let’s get the filter transmission curves:</p>
+<p><span class="inputnumrole">In[13]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Optional, for when the STScI ftp server is not answering:</span>
+<span class="n">config</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">vega_file</span><span class="o">=</span><span class="s1">&#39;http://ssb.stsci.edu/cdbs/calspec/alpha_lyr_stis_008.fits&#39;</span>
+<span class="n">config</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">johnson_u_file</span><span class="o">=</span><span class="s1">&#39;http://ssb.stsci.edu/cdbs/comp/nonhst/johnson_u_004_syn.fits&#39;</span>
+<span class="n">config</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">johnson_b_file</span><span class="o">=</span><span class="s1">&#39;http://ssb.stsci.edu/cdbs/comp/nonhst/johnson_b_004_syn.fits&#39;</span>
+<span class="n">config</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">johnson_v_file</span><span class="o">=</span><span class="s1">&#39;http://ssb.stsci.edu/cdbs/comp/nonhst/johnson_v_004_syn.fits&#39;</span>
+<span class="n">config</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">johnson_r_file</span><span class="o">=</span><span class="s1">&#39;http://ssb.stsci.edu/cdbs/comp/nonhst/johnson_r_003_syn.fits&#39;</span>
+<span class="n">config</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">johnson_i_file</span><span class="o">=</span><span class="s1">&#39;http://ssb.stsci.edu/cdbs/comp/nonhst/johnson_i_003_syn.fits&#39;</span>
+<span class="n">config</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">bessel_j_file</span><span class="o">=</span><span class="s1">&#39;http://ssb.stsci.edu/cdbs/comp/nonhst/bessell_j_003_syn.fits&#39;</span>
+<span class="n">config</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">bessel_h_file</span><span class="o">=</span><span class="s1">&#39;http://ssb.stsci.edu/cdbs/comp/nonhst/bessell_h_004_syn.fits&#39;</span>
+<span class="n">config</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">bessel_k_file</span><span class="o">=</span><span class="s1">&#39;http://ssb.stsci.edu/cdbs/comp/nonhst/bessell_k_003_syn.fits&#39;</span>
+
+<span class="n">u_band</span> <span class="o">=</span> <span class="n">SpectralElement</span><span class="o">.</span><span class="n">from_filter</span><span class="p">(</span><span class="s1">&#39;johnson_u&#39;</span><span class="p">)</span>
+<span class="n">b_band</span> <span class="o">=</span> <span class="n">SpectralElement</span><span class="o">.</span><span class="n">from_filter</span><span class="p">(</span><span class="s1">&#39;johnson_b&#39;</span><span class="p">)</span>
+<span class="n">v_band</span> <span class="o">=</span> <span class="n">SpectralElement</span><span class="o">.</span><span class="n">from_filter</span><span class="p">(</span><span class="s1">&#39;johnson_v&#39;</span><span class="p">)</span>
+<span class="n">r_band</span> <span class="o">=</span> <span class="n">SpectralElement</span><span class="o">.</span><span class="n">from_filter</span><span class="p">(</span><span class="s1">&#39;johnson_r&#39;</span><span class="p">)</span>
+<span class="n">i_band</span> <span class="o">=</span> <span class="n">SpectralElement</span><span class="o">.</span><span class="n">from_filter</span><span class="p">(</span><span class="s1">&#39;johnson_i&#39;</span><span class="p">)</span>
+<span class="n">j_band</span> <span class="o">=</span> <span class="n">SpectralElement</span><span class="o">.</span><span class="n">from_filter</span><span class="p">(</span><span class="s1">&#39;bessel_j&#39;</span><span class="p">)</span>
+<span class="n">h_band</span> <span class="o">=</span> <span class="n">SpectralElement</span><span class="o">.</span><span class="n">from_filter</span><span class="p">(</span><span class="s1">&#39;bessel_h&#39;</span><span class="p">)</span>
+<span class="n">k_band</span> <span class="o">=</span> <span class="n">SpectralElement</span><span class="o">.</span><span class="n">from_filter</span><span class="p">(</span><span class="s1">&#39;bessel_k&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If you are running this with your own python, see the <a class="reference external" href="https://synphot.readthedocs.io/en/latest/#installation-and-setup">synphot
+documentation</a>
+on how to install your own copy of the necessary files.</p>
+<p>Next, let’s make a background flux to which we will apply extinction.
+Here we make a 10,000 K blackbody using the model mechanism from within
+<code class="docutils literal notranslate"><span class="pre">synphot</span></code> and normalize it to <span class="math notranslate nohighlight">\(V\)</span> = 10 in the Vega-based
+magnitude system.</p>
+<p><span class="inputnumrole">In[14]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># First, create a blackbody at some temperature.</span>
+<span class="n">sp</span> <span class="o">=</span> <span class="n">SourceSpectrum</span><span class="p">(</span><span class="n">BlackBodyNorm1D</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mi">10000</span><span class="p">)</span>
+<span class="c1"># sp.plot(left=1, right=15000, flux_unit=&#39;flam&#39;, title=&#39;Blackbody&#39;)</span>
+
+<span class="c1"># Get the Vega spectrum as the zero point flux.</span>
+<span class="n">vega</span> <span class="o">=</span> <span class="n">SourceSpectrum</span><span class="o">.</span><span class="n">from_vega</span><span class="p">()</span>
+<span class="c1"># vega.plot(left=1, right=15000)</span>
+
+<span class="c1"># Normalize the blackbody to some chosen magnitude, say V = 10.</span>
+<span class="n">vmag</span> <span class="o">=</span> <span class="mf">10.</span>
+<span class="n">v_band</span> <span class="o">=</span> <span class="n">SpectralElement</span><span class="o">.</span><span class="n">from_filter</span><span class="p">(</span><span class="s1">&#39;johnson_v&#39;</span><span class="p">)</span>
+<span class="n">sp_norm</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="n">vmag</span> <span class="o">*</span> <span class="n">units</span><span class="o">.</span><span class="n">VEGAMAG</span><span class="p">,</span> <span class="n">v_band</span><span class="p">,</span> <span class="n">vegaspec</span><span class="o">=</span><span class="n">vega</span><span class="p">)</span>
+<span class="n">sp_norm</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">left</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="mi">15000</span><span class="p">,</span> <span class="n">flux_unit</span><span class="o">=</span><span class="s1">&#39;flam&#39;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Normed Blackbody&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[14]:</span></p>
+<img alt="../_images/color-excess_39_0.png" src="../_images/color-excess_39_0.png" />
+<p>Now we initialize the extinction model and choose an extinction of
+<span class="math notranslate nohighlight">\(A_V\)</span> = 2. To get the <code class="docutils literal notranslate"><span class="pre">dust_extinction</span></code> model working with
+<code class="docutils literal notranslate"><span class="pre">synphot</span></code>, we create a wavelength array and make a spectral element
+with the extinction model as a lookup table.</p>
+<p><span class="inputnumrole">In[15]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialize the extinction model and choose the extinction, here Av = 2.</span>
+<span class="n">ext</span> <span class="o">=</span> <span class="n">CCM89</span><span class="p">(</span><span class="n">Rv</span><span class="o">=</span><span class="mf">3.1</span><span class="p">)</span>
+<span class="n">Av</span> <span class="o">=</span> <span class="mf">2.</span>
+
+<span class="c1"># Create a wavelength array.</span>
+<span class="n">wav</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">)</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">micron</span>
+
+<span class="c1"># Make the extinction model in synphot using a lookup table.</span>
+<span class="n">ex</span> <span class="o">=</span> <span class="n">ExtinctionCurve</span><span class="p">(</span><span class="n">ExtinctionModel1D</span><span class="p">,</span>
+                     <span class="n">points</span><span class="o">=</span><span class="n">wav</span><span class="p">,</span> <span class="n">lookup_table</span><span class="o">=</span><span class="n">ext</span><span class="o">.</span><span class="n">extinguish</span><span class="p">(</span><span class="n">wav</span><span class="p">,</span> <span class="n">Av</span><span class="o">=</span><span class="n">Av</span><span class="p">))</span>
+<span class="n">sp_ext</span> <span class="o">=</span> <span class="n">sp_norm</span><span class="o">*</span><span class="n">ex</span>
+<span class="n">sp_ext</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">left</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="mi">15000</span><span class="p">,</span> <span class="n">flux_unit</span><span class="o">=</span><span class="s1">&#39;flam&#39;</span><span class="p">,</span>
+            <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Normed Blackbody with Extinction&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[15]:</span></p>
+<img alt="../_images/color-excess_41_0.png" src="../_images/color-excess_41_0.png" />
+<p>Synthetic photometry refers to modeling an observation of a star by
+multiplying the theoretical model for the astronomical flux through a
+certain filter response function, then integrating.</p>
+<p><span class="inputnumrole">In[16]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># &quot;Observe&quot; the star through the filter and integrate to get photometric mag.</span>
+<span class="n">sp_obs</span> <span class="o">=</span> <span class="n">Observation</span><span class="p">(</span><span class="n">sp_ext</span><span class="p">,</span> <span class="n">v_band</span><span class="p">)</span>
+<span class="n">sp_obs_before</span> <span class="o">=</span> <span class="n">Observation</span><span class="p">(</span><span class="n">sp_norm</span><span class="p">,</span> <span class="n">v_band</span><span class="p">)</span>
+<span class="c1"># sp_obs.plot(left=1, right=15000, flux_unit=&#39;flam&#39;,</span>
+<span class="c1">#             title=&#39;Normed Blackbody with Extinction through V Filter&#39;)</span>
+</pre></div>
+</div>
+<p>Next, <code class="docutils literal notranslate"><span class="pre">synphot</span></code> performs the integration and computes magnitudes in
+the Vega system.</p>
+<p><span class="inputnumrole">In[17]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sp_stim_before</span> <span class="o">=</span> <span class="n">sp_obs_before</span><span class="o">.</span><span class="n">effstim</span><span class="p">(</span><span class="n">flux_unit</span><span class="o">=</span><span class="s1">&#39;vegamag&#39;</span><span class="p">,</span> <span class="n">vegaspec</span><span class="o">=</span><span class="n">vega</span><span class="p">)</span>
+<span class="n">sp_stim</span> <span class="o">=</span> <span class="n">sp_obs</span><span class="o">.</span><span class="n">effstim</span><span class="p">(</span><span class="n">flux_unit</span><span class="o">=</span><span class="s1">&#39;vegamag&#39;</span><span class="p">,</span> <span class="n">vegaspec</span><span class="o">=</span><span class="n">vega</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;before dust, V =&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">sp_stim_before</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;after dust, V =&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">sp_stim</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+
+<span class="c1"># Calculate extinction and compare to our chosen value.</span>
+<span class="n">Av_calc</span> <span class="o">=</span> <span class="n">sp_stim</span> <span class="o">-</span> <span class="n">sp_stim_before</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;$A_V$ = &#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">Av_calc</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[17]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>before dust, V = 10.0 VEGAMAG
+after dust, V = 12.0 VEGAMAG
+$A_V$ =  2.0 VEGAMAG
+</pre></div>
+</div>
+<p>This is a good check for us to do. We normalized our spectrum to
+<span class="math notranslate nohighlight">\(V\)</span> = 10 mag and added 2 mag of visual extinction, so the
+synthetic photometry procedure should reproduce these chosen values, and
+it does. Now we are ready to find the extinction in other passbands.</p>
+<p>We calculate the new photometry for the rest of the Johnson optical and
+the Bessell infrared filters. We calculate extinction
+<span class="math notranslate nohighlight">\(A = \Delta m\)</span> and plot color excess,
+<span class="math notranslate nohighlight">\(E(\lambda - V) = A_\lambda - A_V\)</span>.</p>
+<p>Notice that <code class="docutils literal notranslate"><span class="pre">synphot</span></code> calculates the effective wavelength of the
+observations for us, which is very useful for plotting the results. We
+show reddening with the model extinction curve for comparison in the
+plot.</p>
+<p><span class="inputnumrole">In[18]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bands</span> <span class="o">=</span> <span class="p">[</span><span class="n">u_band</span><span class="p">,</span><span class="n">b_band</span><span class="p">,</span><span class="n">v_band</span><span class="p">,</span><span class="n">r_band</span><span class="p">,</span><span class="n">i_band</span><span class="p">,</span><span class="n">j_band</span><span class="p">,</span><span class="n">h_band</span><span class="p">,</span><span class="n">k_band</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">band</span> <span class="ow">in</span> <span class="n">bands</span><span class="p">:</span>
+    <span class="c1"># Calculate photometry with dust:</span>
+    <span class="n">sp_obs</span> <span class="o">=</span> <span class="n">Observation</span><span class="p">(</span><span class="n">sp_ext</span><span class="p">,</span> <span class="n">band</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="s1">&#39;extrap&#39;</span><span class="p">)</span>
+    <span class="n">obs_effstim</span> <span class="o">=</span> <span class="n">sp_obs</span><span class="o">.</span><span class="n">effstim</span><span class="p">(</span><span class="n">flux_unit</span><span class="o">=</span><span class="s1">&#39;vegamag&#39;</span><span class="p">,</span> <span class="n">vegaspec</span><span class="o">=</span><span class="n">vega</span><span class="p">)</span>
+    <span class="c1"># Calculate photometry without dust:</span>
+    <span class="n">sp_obs_i</span> <span class="o">=</span> <span class="n">Observation</span><span class="p">(</span><span class="n">sp_norm</span><span class="p">,</span> <span class="n">band</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="s1">&#39;extrap&#39;</span><span class="p">)</span>
+    <span class="n">obs_i_effstim</span> <span class="o">=</span> <span class="n">sp_obs_i</span><span class="o">.</span><span class="n">effstim</span><span class="p">(</span><span class="n">flux_unit</span><span class="o">=</span><span class="s1">&#39;vegamag&#39;</span><span class="p">,</span> <span class="n">vegaspec</span><span class="o">=</span><span class="n">vega</span><span class="p">)</span>
+
+    <span class="c1"># Extinction = mag with dust - mag without dust</span>
+    <span class="c1"># Color excess = extinction at lambda - extinction at V</span>
+    <span class="n">color_excess</span> <span class="o">=</span> <span class="n">obs_effstim</span> <span class="o">-</span> <span class="n">obs_i_effstim</span> <span class="o">-</span> <span class="n">Av_calc</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sp_obs_i</span><span class="o">.</span><span class="n">effective_wavelength</span><span class="p">(),</span> <span class="n">color_excess</span><span class="p">,</span><span class="s1">&#39;or&#39;</span><span class="p">)</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">sp_obs_i</span><span class="o">.</span><span class="n">effective_wavelength</span><span class="p">(),</span><span class="mi">1</span><span class="p">),</span> <span class="s1">&#39;,&#39;</span><span class="p">,</span>
+          <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">color_excess</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+
+<span class="c1"># Plot the model extinction curve for comparison</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wav</span><span class="p">,</span><span class="n">Av</span><span class="o">*</span><span class="n">ext</span><span class="p">(</span><span class="n">wav</span><span class="p">)</span><span class="o">-</span><span class="n">Av</span><span class="p">,</span><span class="s1">&#39;--k&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;$\lambda$ (Angstrom)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;E($\lambda$-V)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Reddening of T=10,000K Background Source with Av=2&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[18]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">3601.5</span> <span class="n">Angstrom</span> <span class="p">,</span> <span class="mf">1.12</span> <span class="n">VEGAMAG</span>
+<span class="mf">4368.9</span> <span class="n">Angstrom</span> <span class="p">,</span> <span class="mf">0.63</span> <span class="n">VEGAMAG</span>
+<span class="mf">5463.8</span> <span class="n">Angstrom</span> <span class="p">,</span> <span class="mf">0.0</span> <span class="n">VEGAMAG</span>
+<span class="mf">6810.6</span> <span class="n">Angstrom</span> <span class="p">,</span> <span class="o">-</span><span class="mf">0.48</span> <span class="n">VEGAMAG</span>
+<span class="mf">8619.6</span> <span class="n">Angstrom</span> <span class="p">,</span> <span class="o">-</span><span class="mf">0.97</span> <span class="n">VEGAMAG</span>
+<span class="mf">12266.5</span> <span class="n">Angstrom</span> <span class="p">,</span> <span class="o">-</span><span class="mf">1.43</span> <span class="n">VEGAMAG</span>
+<span class="mf">16351.9</span> <span class="n">Angstrom</span> <span class="p">,</span> <span class="o">-</span><span class="mf">1.65</span> <span class="n">VEGAMAG</span>
+<span class="mf">21956.7</span> <span class="n">Angstrom</span> <span class="p">,</span> <span class="o">-</span><span class="mf">1.79</span> <span class="n">VEGAMAG</span>
+</pre></div>
+</div>
+<img alt="../_images/color-excess_48_1.png" src="../_images/color-excess_48_1.png" />
+<div class="section" id="exercise">
+<h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">¶</a></h2>
+<p>Try changing the blackbody temperature to something very hot or very
+cool. Are the color excess values the same? Have the effective
+wavelengths changed?</p>
+<p>Note that the photometric extinction changes because the filter
+transmission is not uniform. The observed throughput of the filter
+depends on the shape of the background source flux.</p>
+<div id="spacer"></div>
+
+<a href="../_static//.ipynb"><button id="download">Download tutorial notebook</button></a>
+<a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks//.ipynb"><button id="binder">Interactive tutorial notebook</button></a></div>
+</div>
+
+</div>
+      </div>  
+      
+    </div>
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.0.1.
+    &copy; Copyright Astropy.   
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

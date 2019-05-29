@@ -202,7 +202,7 @@ page &lt;https://julien.danjou.info/blog/2013/guide-python-static-class-abstract
 </div>
 <p><span class="outputnumrole">Out[6]:</span></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">SkyCoord</span> <span class="p">(</span><span class="n">ICRS</span><span class="p">):</span> <span class="p">(</span><span class="n">ra</span><span class="p">,</span> <span class="n">dec</span><span class="p">)</span> <span class="ow">in</span> <span class="n">deg</span>
-    <span class="p">(</span><span class="mf">9.81625</span><span class="p">,</span> <span class="mf">0.88806</span><span class="p">)</span><span class="o">&gt;</span>
+    <span class="p">(</span><span class="mf">9.81625</span><span class="p">,</span> <span class="mf">0.88805556</span><span class="p">)</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <p>This object we just created has various useful ways of accessing the
@@ -232,7 +232,7 @@ angle units:</p>
 </div>
 <p><span class="outputnumrole">Out[8]:</span></p>
 <div class="math notranslate nohighlight">
-\[0^\circ53{}^\prime17.016{}^{\prime\prime}\]</div>
+\[0^\circ53{}^\prime17{}^{\prime\prime}\]</div>
 <p><span class="inputnumrole">In[9]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">hcg7_center</span><span class="o">.</span><span class="n">ra</span>
 </pre></div>
@@ -271,7 +271,7 @@ file<code class="docutils literal notranslate"><span class="pre">'HCG7_SDSS_cuto
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[11]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="s1">&#39;HCG7_SDSS_cutout.jpg&#39;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">http</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">HTTPMessage</span> <span class="n">at</span> <span class="mh">0x7f85d2868080</span><span class="o">&gt;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="s1">&#39;HCG7_SDSS_cutout.jpg&#39;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">http</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">HTTPMessage</span> <span class="n">at</span> <span class="mh">0x7f0397be50f0</span><span class="o">&gt;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Now lets take a look at the image.</p>
@@ -374,37 +374,37 @@ the tables to see just what everything is that’s in them.</p>
 </div>
 <p><span class="outputnumrole">Out[17]:</span></p>
 <i>Table length=679</i>
-<table id="table140214343485648" class="table-striped table-bordered table-condensed">
+<table id="table139653414349288" class="table-striped table-bordered table-condensed">
 <thead><tr><th>ra</th><th>dec</th><th>u</th><th>g</th><th>r</th><th>i</th><th>z</th></tr></thead>
 <thead><tr><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th></tr></thead>
-<tr><td>10.1307290306241</td><td>0.836081065369529</td><td>19.53773</td><td>18.28045</td><td>17.67952</td><td>17.31405</td><td>17.09687</td></tr>
-<tr><td>9.77671799921805</td><td>0.751356875166806</td><td>22.36938</td><td>21.29412</td><td>20.14603</td><td>19.65756</td><td>19.39209</td></tr>
-<tr><td>9.77226352003038</td><td>1.08772051032637</td><td>19.3459</td><td>18.18987</td><td>17.78777</td><td>17.6289</td><td>17.60235</td></tr>
-<tr><td>10.0654707290494</td><td>0.595214029511537</td><td>19.12723</td><td>18.21047</td><td>17.97034</td><td>17.88815</td><td>17.8364</td></tr>
-<tr><td>10.1384468865657</td><td>0.608841745204223</td><td>22.90436</td><td>20.51319</td><td>19.07403</td><td>17.64244</td><td>16.87299</td></tr>
-<tr><td>9.50881763297576</td><td>0.952659480876111</td><td>23.14136</td><td>22.04438</td><td>20.78414</td><td>19.95302</td><td>19.53971</td></tr>
-<tr><td>9.52318666268366</td><td>0.982256987613436</td><td>18.36884</td><td>16.84995</td><td>16.30858</td><td>16.13083</td><td>16.01591</td></tr>
-<tr><td>9.63699942831033</td><td>1.16412271163636</td><td>19.60619</td><td>18.62202</td><td>18.25113</td><td>18.1231</td><td>18.08956</td></tr>
-<tr><td>9.89665095055904</td><td>0.802469605980228</td><td>18.13757</td><td>16.8143</td><td>16.29248</td><td>16.12416</td><td>16.00822</td></tr>
-<tr><td>9.98153607208258</td><td>0.701449510003319</td><td>22.46251</td><td>19.97594</td><td>18.54476</td><td>17.4755</td><td>16.88063</td></tr>
+<tr><td>9.49121307546292</td><td>0.740765417008783</td><td>21.9436</td><td>19.68445</td><td>18.25978</td><td>17.53341</td><td>17.07395</td></tr>
+<tr><td>9.50474614299014</td><td>0.932782356350175</td><td>21.6948</td><td>19.03238</td><td>17.51821</td><td>16.44926</td><td>15.85192</td></tr>
+<tr><td>9.6128417796337</td><td>0.621675948883377</td><td>21.16611</td><td>19.84035</td><td>19.29253</td><td>19.07323</td><td>18.96066</td></tr>
+<tr><td>9.81444144742625</td><td>0.942584493635296</td><td>19.55784</td><td>17.89278</td><td>17.24308</td><td>16.94552</td><td>16.73516</td></tr>
+<tr><td>10.077827682578</td><td>0.923865878609736</td><td>19.62583</td><td>19.39541</td><td>19.22466</td><td>19.05589</td><td>18.77663</td></tr>
+<tr><td>9.68049011238099</td><td>0.760478071950252</td><td>22.81021</td><td>22.23054</td><td>20.45968</td><td>19.49698</td><td>19.0829</td></tr>
+<tr><td>9.76092345259269</td><td>0.771626841958683</td><td>18.78187</td><td>17.72768</td><td>17.20328</td><td>16.89744</td><td>16.74848</td></tr>
+<tr><td>9.51193996953498</td><td>1.08573853686057</td><td>22.60775</td><td>21.85825</td><td>20.00755</td><td>19.10017</td><td>18.70797</td></tr>
+<tr><td>9.55019434449878</td><td>1.019150849517</td><td>18.70042</td><td>17.84459</td><td>17.57727</td><td>17.48415</td><td>17.41936</td></tr>
+<tr><td>9.94096384906567</td><td>1.10418417130823</td><td>21.5859</td><td>20.96224</td><td>20.08104</td><td>19.79259</td><td>19.4037</td></tr>
 <tr><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr>
-<tr><td>9.76526481340665</td><td>1.11025715723902</td><td>23.08809</td><td>20.36509</td><td>19.15283</td><td>18.57097</td><td>18.27168</td></tr>
-<tr><td>10.0056751271474</td><td>0.968537392803374</td><td>25.26649</td><td>21.57767</td><td>19.99406</td><td>18.29663</td><td>17.32404</td></tr>
-<tr><td>9.56968904351038</td><td>0.616521499941333</td><td>23.3889</td><td>22.16236</td><td>20.90684</td><td>20.09143</td><td>19.78767</td></tr>
-<tr><td>9.55967213595852</td><td>1.14197217695781</td><td>17.33894</td><td>15.82193</td><td>15.2818</td><td>15.10409</td><td>15.042</td></tr>
-<tr><td>10.0830901513424</td><td>0.903950156760821</td><td>21.51036</td><td>19.44423</td><td>18.5394</td><td>18.1705</td><td>17.8817</td></tr>
-<tr><td>9.67971869421905</td><td>1.14379730010902</td><td>22.56212</td><td>21.79695</td><td>20.32478</td><td>19.40183</td><td>18.89165</td></tr>
-<tr><td>10.1362143658316</td><td>1.06773373711531</td><td>18.37123</td><td>16.89977</td><td>16.37099</td><td>16.19061</td><td>16.11848</td></tr>
-<tr><td>9.89745316064841</td><td>0.906217934759494</td><td>22.4401</td><td>21.72479</td><td>21.67038</td><td>21.54628</td><td>21.21512</td></tr>
-<tr><td>9.98503997951661</td><td>0.864612487235364</td><td>19.83141</td><td>18.48904</td><td>17.96615</td><td>17.77186</td><td>17.712</td></tr>
-<tr><td>9.63652226276227</td><td>0.632028557280211</td><td>22.60129</td><td>19.94017</td><td>18.48149</td><td>17.70333</td><td>17.27515</td></tr>
+<tr><td>9.95111586639823</td><td>0.757818700822403</td><td>18.29218</td><td>17.24857</td><td>16.89534</td><td>16.7544</td><td>16.69137</td></tr>
+<tr><td>9.77241340925264</td><td>0.563648085047705</td><td>21.25503</td><td>25.10675</td><td>17.49487</td><td>24.33658</td><td>22.81359</td></tr>
+<tr><td>9.60789535944741</td><td>0.911310381995464</td><td>21.77917</td><td>21.23202</td><td>20.26343</td><td>19.57923</td><td>19.09467</td></tr>
+<tr><td>9.8106313231585</td><td>0.785864593243232</td><td>20.40488</td><td>18.95988</td><td>18.3924</td><td>18.22067</td><td>18.11437</td></tr>
+<tr><td>9.925637619128</td><td>0.73258580733317</td><td>22.81577</td><td>20.91645</td><td>19.55301</td><td>18.7193</td><td>18.25737</td></tr>
+<tr><td>9.8885497830355</td><td>1.04943099328677</td><td>23.64839</td><td>22.21111</td><td>20.40163</td><td>19.58071</td><td>19.11833</td></tr>
+<tr><td>9.65152327129505</td><td>0.976530355197512</td><td>25.22205</td><td>21.1363</td><td>19.25802</td><td>18.63688</td><td>18.20443</td></tr>
+<tr><td>9.62916539479289</td><td>0.657230230495834</td><td>20.48149</td><td>18.28599</td><td>17.3311</td><td>16.99112</td><td>16.80156</td></tr>
+<tr><td>9.94656045090352</td><td>1.12940034345333</td><td>20.56419</td><td>19.88178</td><td>19.28829</td><td>19.00352</td><td>18.76828</td></tr>
+<tr><td>9.84605283747015</td><td>0.792218888709829</td><td>22.86397</td><td>20.35279</td><td>18.74836</td><td>18.08321</td><td>17.65773</td></tr>
 </table><p><span class="inputnumrole">In[18]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">twomass</span> <span class="c1"># just to see an example of the format</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[18]:</span></p>
 <i>Table masked=True length=23</i>
-<table id="table140214343643488" class="table-striped table-bordered table-condensed">
+<table id="table139655089166880" class="table-striped table-bordered table-condensed">
 <thead><tr><th>designation</th><th>ra</th><th>dec</th><th>r_k20fe</th><th>j_m_k20fe</th><th>j_msig_k20fe</th><th>j_flg_k20fe</th><th>h_m_k20fe</th><th>h_msig_k20fe</th><th>h_flg_k20fe</th><th>k_m_k20fe</th><th>k_msig_k20fe</th><th>k_flg_k20fe</th><th>k_ba</th><th>k_phi</th><th>sup_ba</th><th>sup_phi</th><th>r_ext</th><th>j_m_ext</th><th>j_msig_ext</th><th>h_m_ext</th><th>h_msig_ext</th><th>k_m_ext</th><th>k_msig_ext</th><th>cc_flg</th><th>dist</th><th>angle</th></tr></thead>
 <thead><tr><th></th><th>deg</th><th>deg</th><th>arcsec</th><th>mag</th><th>mag</th><th></th><th>mag</th><th>mag</th><th></th><th>mag</th><th>mag</th><th></th><th></th><th>deg</th><th></th><th>deg</th><th>arcsec</th><th>mag</th><th>mag</th><th>mag</th><th>mag</th><th>mag</th><th>mag</th><th></th><th>arcsec</th><th>deg</th></tr></thead>
 <thead><tr><th>str16</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>int64</th><th>float64</th><th>float64</th><th>int64</th><th>float64</th><th>float64</th><th>int64</th><th>float64</th><th>int64</th><th>float64</th><th>int64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>str1</th><th>float64</th><th>float64</th></tr></thead>
@@ -481,16 +481,16 @@ check by comparing to a set of <em>random</em> points.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[22]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="o">&lt;</span><span class="n">Angle</span> <span class="p">[</span> <span class="mf">9.76060374</span><span class="p">,</span> <span class="mf">10.13015204</span><span class="p">,</span>  <span class="mf">9.85747374</span><span class="p">,</span>  <span class="mf">9.93151934</span><span class="p">,</span>  <span class="mf">9.7251996</span> <span class="p">,</span>
-          <span class="mf">9.79371219</span><span class="p">,</span>  <span class="mf">9.76396461</span><span class="p">,</span>  <span class="mf">9.5456755</span> <span class="p">,</span>  <span class="mf">9.54979699</span><span class="p">,</span>  <span class="mf">9.56739653</span><span class="p">,</span>
-         <span class="mf">10.05165546</span><span class="p">,</span>  <span class="mf">9.55405238</span><span class="p">,</span>  <span class="mf">9.63595013</span><span class="p">,</span>  <span class="mf">9.96079306</span><span class="p">,</span>  <span class="mf">9.84357172</span><span class="p">,</span>
-          <span class="mf">9.85572481</span><span class="p">,</span>  <span class="mf">9.5115915</span> <span class="p">,</span> <span class="mf">10.00480671</span><span class="p">,</span> <span class="mf">10.09181754</span><span class="p">,</span>  <span class="mf">9.67748413</span><span class="p">,</span>
-          <span class="mf">9.62490935</span><span class="p">,</span>  <span class="mf">9.64703781</span><span class="p">,</span>  <span class="mf">9.92220444</span><span class="p">]</span> <span class="n">deg</span><span class="o">&gt;</span><span class="p">,</span>
- <span class="o">&lt;</span><span class="n">Angle</span> <span class="p">[</span><span class="mf">0.75127367</span><span class="p">,</span> <span class="mf">1.16039047</span><span class="p">,</span> <span class="mf">0.61531924</span><span class="p">,</span> <span class="mf">1.20535619</span><span class="p">,</span> <span class="mf">0.60640515</span><span class="p">,</span>
-         <span class="mf">0.76067977</span><span class="p">,</span> <span class="mf">1.13414689</span><span class="p">,</span> <span class="mf">0.98816736</span><span class="p">,</span> <span class="mf">0.96616272</span><span class="p">,</span> <span class="mf">0.61170761</span><span class="p">,</span>
-         <span class="mf">0.664029</span>  <span class="p">,</span> <span class="mf">0.65686457</span><span class="p">,</span> <span class="mf">1.16801319</span><span class="p">,</span> <span class="mf">1.1655831</span> <span class="p">,</span> <span class="mf">1.00632643</span><span class="p">,</span>
-         <span class="mf">0.64294013</span><span class="p">,</span> <span class="mf">1.04902041</span><span class="p">,</span> <span class="mf">0.85356667</span><span class="p">,</span> <span class="mf">1.01501664</span><span class="p">,</span> <span class="mf">1.14857728</span><span class="p">,</span>
-         <span class="mf">0.58087207</span><span class="p">,</span> <span class="mf">0.97029456</span><span class="p">,</span> <span class="mf">0.67400511</span><span class="p">]</span> <span class="n">deg</span><span class="o">&gt;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="o">&lt;</span><span class="n">Angle</span> <span class="p">[</span> <span class="mf">9.89704421</span><span class="p">,</span>  <span class="mf">9.53775344</span><span class="p">,</span>  <span class="mf">9.6092556</span> <span class="p">,</span>  <span class="mf">9.65166249</span><span class="p">,</span> <span class="mf">10.14611793</span><span class="p">,</span>
+          <span class="mf">9.90827015</span><span class="p">,</span> <span class="mf">10.11306399</span><span class="p">,</span>  <span class="mf">9.51800091</span><span class="p">,</span>  <span class="mf">9.9609174</span> <span class="p">,</span>  <span class="mf">9.94006017</span><span class="p">,</span>
+          <span class="mf">9.52799906</span><span class="p">,</span> <span class="mf">10.08770575</span><span class="p">,</span>  <span class="mf">9.95229899</span><span class="p">,</span> <span class="mf">10.11854986</span><span class="p">,</span>  <span class="mf">9.77170122</span><span class="p">,</span>
+          <span class="mf">9.98311192</span><span class="p">,</span>  <span class="mf">9.79682073</span><span class="p">,</span>  <span class="mf">9.50202317</span><span class="p">,</span>  <span class="mf">9.58729973</span><span class="p">,</span>  <span class="mf">9.99795976</span><span class="p">,</span>
+          <span class="mf">9.64266427</span><span class="p">,</span>  <span class="mf">9.6420616</span> <span class="p">,</span>  <span class="mf">9.57272334</span><span class="p">]</span> <span class="n">deg</span><span class="o">&gt;</span><span class="p">,</span>
+ <span class="o">&lt;</span><span class="n">Angle</span> <span class="p">[</span><span class="mf">0.57446922</span><span class="p">,</span> <span class="mf">0.59714262</span><span class="p">,</span> <span class="mf">0.84356932</span><span class="p">,</span> <span class="mf">0.91885564</span><span class="p">,</span> <span class="mf">1.01471016</span><span class="p">,</span>
+         <span class="mf">0.57726275</span><span class="p">,</span> <span class="mf">0.833307</span>  <span class="p">,</span> <span class="mf">0.66925927</span><span class="p">,</span> <span class="mf">1.1790433</span> <span class="p">,</span> <span class="mf">0.92858133</span><span class="p">,</span>
+         <span class="mf">0.77539858</span><span class="p">,</span> <span class="mf">0.62723238</span><span class="p">,</span> <span class="mf">0.57568437</span><span class="p">,</span> <span class="mf">0.61497272</span><span class="p">,</span> <span class="mf">0.93466156</span><span class="p">,</span>
+         <span class="mf">0.60702805</span><span class="p">,</span> <span class="mf">1.01027979</span><span class="p">,</span> <span class="mf">0.70710717</span><span class="p">,</span> <span class="mf">1.13300236</span><span class="p">,</span> <span class="mf">0.80196846</span><span class="p">,</span>
+         <span class="mf">1.04322804</span><span class="p">,</span> <span class="mf">1.13548705</span><span class="p">,</span> <span class="mf">1.16068393</span><span class="p">]</span> <span class="n">deg</span><span class="o">&gt;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Now we create a <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> from these points and match it to
@@ -586,7 +586,7 @@ coordinates:</p>
 </div>
 <p><span class="outputnumrole">Out[26]:</span></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">SkyCoord</span> <span class="p">(</span><span class="n">Galactic</span><span class="p">):</span> <span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="ow">in</span> <span class="n">deg</span>
-    <span class="p">(</span><span class="mf">116.47556813</span><span class="p">,</span> <span class="o">-</span><span class="mf">61.83099472</span><span class="p">)</span><span class="o">&gt;</span>
+    <span class="p">(</span><span class="mf">116.47556718</span><span class="p">,</span> <span class="o">-</span><span class="mf">61.83099914</span><span class="p">)</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <p>The above is actually a special “quick-access” form which internally
@@ -599,7 +599,7 @@ method to convert from one frame to another.</p>
 </div>
 <p><span class="outputnumrole">Out[27]:</span></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">SkyCoord</span> <span class="p">(</span><span class="n">Galactic</span><span class="p">):</span> <span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="ow">in</span> <span class="n">deg</span>
-    <span class="p">(</span><span class="mf">116.47556813</span><span class="p">,</span> <span class="o">-</span><span class="mf">61.83099472</span><span class="p">)</span><span class="o">&gt;</span>
+    <span class="p">(</span><span class="mf">116.47556718</span><span class="p">,</span> <span class="o">-</span><span class="mf">61.83099914</span><span class="p">)</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <p>Note that changing frames also changes some of the attributes of the
@@ -632,7 +632,7 @@ object, but usually in a way that makes sense:</p>
 </div>
 <p><span class="outputnumrole">Out[29]:</span></p>
 <div class="math notranslate nohighlight">
-\[-61^\circ49{}^\prime51.581{}^{\prime\prime}\]</div>
+\[-61^\circ49{}^\prime51.5969{}^{\prime\prime}\]</div>
 </div>
 <div class="section" id="using-frame-transformations-to-get-to-altaz">
 <h3>Using frame transformations to get to AltAz<a class="headerlink" href="#using-frame-transformations-to-get-to-altaz" title="Permalink to this headline">¶</a></h3>
@@ -674,7 +674,7 @@ location in the sky over Kitt Peak at the requested time.</p>
 </div>
 <p><span class="outputnumrole">Out[32]:</span></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">SkyCoord</span> <span class="p">(</span><span class="n">AltAz</span><span class="p">:</span> <span class="n">obstime</span><span class="o">=</span><span class="mi">2010</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">21</span> <span class="mi">01</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mf">00.000</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">1994310.09211632</span><span class="p">,</span> <span class="o">-</span><span class="mf">5037908.60633759</span><span class="p">,</span> <span class="mf">3357621.75212217</span><span class="p">)</span> <span class="n">m</span><span class="p">,</span> <span class="n">pressure</span><span class="o">=</span><span class="mf">0.0</span> <span class="n">hPa</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mf">0.0</span> <span class="n">deg_C</span><span class="p">,</span> <span class="n">relative_humidity</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">obswl</span><span class="o">=</span><span class="mf">1.0</span> <span class="n">micron</span><span class="p">):</span> <span class="p">(</span><span class="n">az</span><span class="p">,</span> <span class="n">alt</span><span class="p">)</span> <span class="ow">in</span> <span class="n">deg</span>
-    <span class="p">(</span><span class="mf">149.19392036</span><span class="p">,</span> <span class="mf">55.0624736</span><span class="p">)</span><span class="o">&gt;</span>
+    <span class="p">(</span><span class="mf">149.19392373</span><span class="p">,</span> <span class="mf">55.0624696</span><span class="p">)</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <p>Alright, it’s up at 6pm, but that’s pretty early to be observing. We
