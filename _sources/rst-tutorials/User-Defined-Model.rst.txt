@@ -800,9 +800,9 @@ with ``astropy.modeling``.
     Outputs: ('x',)
     Model set size: 1
     Parameters:
-                a                  b                   c         
-        ------------------ ------------------ -------------------
-        1.9975879677259318 -2.021509765748891 0.43293568246161246
+                a                 b                  c         
+        ----------------- ------------------ ------------------
+        1.019011278151609 -1.802021744671395 1.0342294667290035
 
 
 The fit looks good in the plot. Let's check the parameters and the
@@ -840,7 +840,7 @@ goodness of the fit.
 
 .. parsed-literal::
 
-    0.8771483432802616
+    1.1066751258958696
 
 
 
@@ -989,9 +989,9 @@ of the parameters.
     Outputs: ('y',)
     Model set size: 1
     Parameters:
-                a                  b                 c                 d         
-        ------------------ ------------------ ---------------- ------------------
-        3.3358253423299664 2.0130882618228183 3.74655927966049 0.9947704764645409
+                a                  b                  c                 d         
+        ------------------ ------------------ ----------------- ------------------
+        3.4209303585846227 2.0068725289302622 3.776154085528395 0.9866340850298886
 
 
 
@@ -1010,7 +1010,7 @@ of the parameters.
 
 .. parsed-literal::
 
-    5.582679455020848
+    6.156290146376254
 
 
 
@@ -1070,10 +1070,13 @@ the following data.
 
 
 
+
+
+
 .. raw:: html
 
     <div id="spacer"></div>
 
-    <a href="../_static//.ipynb"><button id="download">Download tutorial notebook</button></a>
-    <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks//.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
+    <a href="../_static/User-Defined-Model/User-Defined-Model.ipynb"><button id="download">Download tutorial notebook</button></a>
+    <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/User-Defined-Model/User-Defined-Model.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
 

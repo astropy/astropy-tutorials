@@ -243,8 +243,8 @@ slice) or two axes (for a spectrum):
 
 .. parsed-literal::
 
-    INFO: Auto-setting vmin to -1.603e+00 [aplpy.core]
-    INFO: Auto-setting vmax to  1.644e+01 [aplpy.core]
+    INFO: Auto-setting vmin to -1.750e+00 [aplpy.core]
+    INFO: Auto-setting vmax to  1.808e+01 [aplpy.core]
 
 
 
@@ -520,7 +520,7 @@ object directly into a matplotlib axis instance.
 
 .. parsed-literal::
 
-    <matplotlib.contour.QuadContourSet at 0x7f19d75b1f60>
+    <matplotlib.contour.QuadContourSet at 0x7f88696c8b70>
 
 
 
@@ -795,7 +795,7 @@ TableList argument.
     INFO: [Done] [astroquery.esasky.core]
     INFO: Downloading of HERSCHEL data complete. [astroquery.esasky.core]
     INFO: Maps available at /home/circleci/project/tutorials/notebooks/FITS-cubes/Maps. [astroquery.esasky.core]
-    Filename: Maps/HERSCHEL/anonymous1559154114/hspirepmw401_25pxmp_0110_m7303_1342198565_1342198566_1462476888800.fits.gz
+    Filename: Maps/HERSCHEL/anonymous1559669245/hspirepmw401_25pxmp_0110_m7303_1342198565_1342198566_1462476888800.fits.gz
     No.    Name      Ver    Type      Cards   Dimensions   Format
       0  PRIMARY       1 PrimaryHDU     184   ()      
       1  image         1 ImageHDU        47   (2407, 2141)   float64   
@@ -1192,10 +1192,13 @@ distortions in the image can change.
 
 
 
+
+
+
 .. raw:: html
 
     <div id="spacer"></div>
 
-    <a href="../_static//.ipynb"><button id="download">Download tutorial notebook</button></a>
-    <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks//.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
+    <a href="../_static/FITS-cubes/FITS-cubes.ipynb"><button id="download">Download tutorial notebook</button></a>
+    <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/FITS-cubes/FITS-cubes.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
 

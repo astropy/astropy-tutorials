@@ -194,7 +194,7 @@ Viewing the image data and getting basic statistics
 
 .. parsed-literal::
 
-    <matplotlib.colorbar.Colorbar at 0x7f765a26a828>
+    <matplotlib.colorbar.Colorbar at 0x7f69e2906828>
 
 
 
@@ -393,7 +393,7 @@ scaling for ``imshow``.
 
 .. parsed-literal::
 
-    <matplotlib.colorbar.Colorbar at 0x7f764ff33550>
+    <matplotlib.colorbar.Colorbar at 0x7f69da7f2588>
 
 
 
@@ -456,10 +456,13 @@ data.)
 
 
 
+
+
+
 .. raw:: html
 
     <div id="spacer"></div>
 
-    <a href="../_static//.ipynb"><button id="download">Download tutorial notebook</button></a>
-    <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks//.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
+    <a href="../_static/FITS-images/FITS-images.ipynb"><button id="download">Download tutorial notebook</button></a>
+    <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/FITS-images/FITS-images.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
 

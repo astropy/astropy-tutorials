@@ -787,8 +787,8 @@ We can also look at the object altitude at the present time and date:
 
 .. parsed-literal::
 
-    <SkyCoord (AltAz: obstime=2019-05-29 18:19:46.076052, location=(-1994502.60430614, -5037538.54232911, 3358104.99690298) m, pressure=0.0 hPa, temperature=0.0 deg_C, relative_humidity=0.0, obswl=1.0 micron): (az, alt) in deg
-        (238.94312469, 41.02649082)>
+    <SkyCoord (AltAz: obstime=2019-06-04 17:25:36.510645, location=(-1994502.60430614, -5037538.54232911, 3358104.99690298) m, pressure=0.0 hPa, temperature=0.0 deg_C, relative_humidity=0.0, obswl=1.0 micron): (az, alt) in deg
+        (231.32719235, 46.36476999)>
 
 
 Exercises
@@ -850,10 +850,13 @@ last section of this tutorial.
 
 
 
+
+
+
 .. raw:: html
 
     <div id="spacer"></div>
 
-    <a href="../_static//.ipynb"><button id="download">Download tutorial notebook</button></a>
-    <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks//.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
+    <a href="../_static/Coordinates-Transform/Coordinates-Transform.ipynb"><button id="download">Download tutorial notebook</button></a>
+    <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/Coordinates-Transform/Coordinates-Transform.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
 
