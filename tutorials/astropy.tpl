@@ -23,6 +23,9 @@
 
 {% block footer %}
 
+{# Remove the exec_ prefix #}
+{% set nb_name = resources.metadata.name[5:] %}
+
 .. raw:: html
 
     <div id="spacer"></div>
