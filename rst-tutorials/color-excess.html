@@ -194,8 +194,9 @@ and we call this effect <em>reddening</em>.</p>
 of quantities involved. The fractional change to the flux of starlight
 is</p>
 <div class="math notranslate nohighlight">
-\[ \begin{align}\begin{aligned}  \frac{dF_\lambda}{F_\lambda} = -\tau_\lambda\\where :math:`\tau` is the optical depth and depends on wavelength.\end{aligned}\end{align} \]</div>
-<p>Integrating along the line of sight, the resultant flux is an
+\[\frac{dF_\lambda}{F_\lambda} = -\tau_\lambda\]</div>
+<p>where <span class="math notranslate nohighlight">\(\tau\)</span> is the optical depth and depends on wavelength.
+Integrating along the line of sight, the resultant flux is an
 exponential function of optical depth,</p>
 <div class="math notranslate nohighlight">
 \[\tau_\lambda = -\ln\left(\frac{F_\lambda}{F_{\lambda,0}}\right).\]</div>
@@ -206,11 +207,12 @@ from <span class="math notranslate nohighlight">\(e\)</span> to 10,</div>
 </div>
 <blockquote>
 <div><div class="math notranslate nohighlight">
-\[ \begin{align}\begin{aligned}  \tau_\lambda = -2.303\log\left(\frac{F_\lambda}{F_{\lambda,0}}\right),\\and define an extinction :math:`A_\lambda = 1.086 \,\tau_\lambda` so\end{aligned}\end{align} \]</div>
-<p>that</p>
+\[\tau_\lambda = -2.303\log\left(\frac{F_\lambda}{F_{\lambda,0}}\right),\]</div>
+</div></blockquote>
+<p>and define an extinction <span class="math notranslate nohighlight">\(A_\lambda = 1.086 \,\tau_\lambda\)</span> so
+that</p>
 <div class="math notranslate nohighlight">
 \[A_\lambda = -2.5\log\left(\frac{F_\lambda}{F_{\lambda,0}}\right).\]</div>
-</div></blockquote>
 <p>There are two basic take-home messages from this derivation:</p>
 <ul class="simple">
 <li><p>Extinction introduces a multiplying factor
@@ -230,8 +232,9 @@ Way. The little variation that exists is often parameterized by the
 ratio of extinction (<span class="math notranslate nohighlight">\(A_V\)</span>) to reddening in the blue-visual
 (<span class="math notranslate nohighlight">\(E_{B-V}\)</span>),</p>
 <div class="math notranslate nohighlight">
-\[ \begin{align}\begin{aligned}  R_V \equiv \frac{A_V}{E_{B-V}}\\where :math:`E_{B-V}` is differential extinction :math:`A_B-A_V`. In\end{aligned}\end{align} \]</div>
-<p>this example, we show the <span class="math notranslate nohighlight">\(R_V\)</span>-parameterization for the Clayton,
+\[R_V \equiv \frac{A_V}{E_{B-V}}\]</div>
+<p>where <span class="math notranslate nohighlight">\(E_{B-V}\)</span> is differential extinction <span class="math notranslate nohighlight">\(A_B-A_V\)</span>. In
+this example, we show the <span class="math notranslate nohighlight">\(R_V\)</span>-parameterization for the Clayton,
 Cardelli, &amp; Mathis (1989, CCM) and the Fitzpatrick (1999) models. <code class="xref py py-obj docutils literal notranslate"><span class="pre">More</span>
 <span class="pre">model</span> <span class="pre">options</span> <span class="pre">are</span> <span class="pre">available</span> <span class="pre">in</span> <span class="pre">the</span> <span class="pre">``dust_extinction`</span></code>
 documentation. &lt;<a class="reference external" href="https://dust-extinction.readthedocs.io/en/latest/dust_extinction/model_flavors.html">https://dust-extinction.readthedocs.io/en/latest/dust_extinction/model_flavors.html</a>&gt;`__</p>
@@ -445,8 +448,9 @@ no.</p>
 <p>Remember that we have to integrate over a passband to get synthetic
 photometry,</p>
 <div class="math notranslate nohighlight">
-\[ \begin{align}\begin{aligned}  A = -2.5\log\left(\frac{\int W_\lambda F_{\lambda,0} 10^{-0.4A_\lambda} d\lambda}{\int W_\lambda F_{\lambda,0} d\lambda} \right),\\where :math:`W_\lambda` is the fraction of incident energy transmitted\end{aligned}\end{align} \]</div>
-<p>through a filter. See the detailed appendix in <a class="reference external" href="https://ui.adsabs.harvard.edu/#abs/2012PASP..124..140B/abstract">Bessell &amp; Murphy
+\[A = -2.5\log\left(\frac{\int W_\lambda F_{\lambda,0} 10^{-0.4A_\lambda} d\lambda}{\int W_\lambda F_{\lambda,0} d\lambda} \right),\]</div>
+<p>where <span class="math notranslate nohighlight">\(W_\lambda\)</span> is the fraction of incident energy transmitted
+through a filter. See the detailed appendix in <a class="reference external" href="https://ui.adsabs.harvard.edu/#abs/2012PASP..124..140B/abstract">Bessell &amp; Murphy
 (2012)</a>
 for an excellent review of the issues and common misunderstandings in
 synthetic photometry.</p>

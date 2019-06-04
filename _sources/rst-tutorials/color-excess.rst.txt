@@ -120,7 +120,7 @@ is
 
    \frac{dF_\lambda}{F_\lambda} = -\tau_\lambda
 
- where :math:`\tau` is the optical depth and depends on wavelength.
+where :math:`\tau` is the optical depth and depends on wavelength.
 Integrating along the line of sight, the resultant flux is an
 exponential function of optical depth,
 
@@ -138,13 +138,13 @@ exponential function of optical depth,
 
      \tau_\lambda = -2.303\log\left(\frac{F_\lambda}{F_{\lambda,0}}\right),
 
-   and define an extinction :math:`A_\lambda = 1.086 \,\tau_\lambda` so
-  that
+and define an extinction :math:`A_\lambda = 1.086 \,\tau_\lambda` so
+that
 
-  .. math::
+.. math::
 
 
-     A_\lambda = -2.5\log\left(\frac{F_\lambda}{F_{\lambda,0}}\right).
+   A_\lambda = -2.5\log\left(\frac{F_\lambda}{F_{\lambda,0}}\right).
 
 There are two basic take-home messages from this derivation:
 
@@ -171,7 +171,7 @@ ratio of extinction (:math:`A_V`) to reddening in the blue-visual
 
    R_V \equiv \frac{A_V}{E_{B-V}}
 
- where :math:`E_{B-V}` is differential extinction :math:`A_B-A_V`. In
+where :math:`E_{B-V}` is differential extinction :math:`A_B-A_V`. In
 this example, we show the :math:`R_V`-parameterization for the Clayton,
 Cardelli, & Mathis (1989, CCM) and the Fitzpatrick (1999) models. `More
 model options are available in the ``dust_extinction``
@@ -491,7 +491,7 @@ photometry,
 
    A = -2.5\log\left(\frac{\int W_\lambda F_{\lambda,0} 10^{-0.4A_\lambda} d\lambda}{\int W_\lambda F_{\lambda,0} d\lambda} \right),
 
- where :math:`W_\lambda` is the fraction of incident energy transmitted
+where :math:`W_\lambda` is the fraction of incident energy transmitted
 through a filter. See the detailed appendix in `Bessell & Murphy
 (2012) <https://ui.adsabs.harvard.edu/#abs/2012PASP..124..140B/abstract>`__
 for an excellent review of the issues and common misunderstandings in
