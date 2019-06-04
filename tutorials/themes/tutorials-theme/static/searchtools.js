@@ -337,9 +337,12 @@ var Search = {
       var params = $.getQueryParameters();
       if (params.q) {
           var query = params.q[0];
-          $('input[name="q"]')[0].value = query;
-          this.performSearch(query);
+      } else {
+          // If no query string is passed, assume we want to filterTutorials
+          var query = "filterTutorials";
       }
+      $('input[name="q"]')[0].value = query;
+      this.performSearch(query);
   },
 
   loadIndex : function(url) {
@@ -410,7 +413,7 @@ var Search = {
       this.deferQuery(query);
 
     //Perform search in Astropy Documentation
-      if(window.location.search.search("filterTutorials")==-1){    //if filtered by tutorials, then no need to search in Astropy Documentation
+      if (query.includes("filterTutorials")) { // don't search docs if we are just looking for tutorials
         var docResponse = null;
         var docResult = '';
         $.get('https://readthedocs.org/api/v2/docsearch/?q=' + window.location.search.split('=')[1] + '&project=astropy&version=stable&language=en', function(response){
