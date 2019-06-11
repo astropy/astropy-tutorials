@@ -77,6 +77,7 @@ Imports
 
 .. parsed-literal::
 
+    WARNING: AstropyDeprecationWarning: astropy.extern.six will be removed in 4.0, use the six module directly if it is still needed [astropy.extern.six]
     /home/circleci/project/venv/lib/python3.6/site-packages/astroquery/sdss/__init__.py:29: UserWarning: Experimental: SDSS has not yet been refactored to have its API match the rest of astroquery (but it's nearly there).
       warnings.warn("Experimental: SDSS has not yet been refactored to have its API "
 
@@ -802,7 +803,7 @@ with ``astropy.modeling``.
     Parameters:
                 a                   b                  c         
         ------------------ ------------------- ------------------
-        1.2403836468019147 -1.9480626682019324 0.8916777957130028
+        1.1062210344313237 -2.0992105694016434 0.9899420850088078
 
 
 The fit looks good in the plot. Let's check the parameters and the
@@ -840,7 +841,7 @@ goodness of the fit.
 
 .. parsed-literal::
 
-    1.0649805347680616
+    0.775654647282506
 
 
 
@@ -989,9 +990,9 @@ of the parameters.
     Outputs: ('y',)
     Model set size: 1
     Parameters:
-                a                 b                 c                  d         
-        ----------------- ----------------- ------------------ ------------------
-        3.534913543576627 2.016129982258802 3.7378810645089655 0.9732428390143939
+                a                  b                 c                  d         
+        ------------------ ----------------- ------------------ ------------------
+        3.3779675031100282 2.012819222709864 3.7521235307896754 0.9493300416770957
 
 
 
@@ -1010,7 +1011,7 @@ of the parameters.
 
 .. parsed-literal::
 
-    5.269136169211464
+    6.026525242281625
 
 
 

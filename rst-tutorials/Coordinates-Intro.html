@@ -31,13 +31,6 @@
   <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
   <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
   <meta name="apple-mobile-web-app-capable" content="yes">
-  
-  <script type="text/javascript">  
-    if( (window.location.href.search("tutorials.html") != -1) && (window.location.href.search("q=filterTutorials") == -1) ){
-      var url = window.location.href.split("tutorials.html")[0] + "tutorials.html?q=filterTutorials";
-      window.location.href = url;
-    }
-  </script>
   <script type="text/javascript">
     jQuery(function() { Search.loadIndex("../searchindex.js"); });
   </script>
@@ -80,7 +73,7 @@
     
     
     
-    
+
     
     <div class="col-md-3">
       <div id="sidebar" class="bs-sidenav card" role="complementary">
@@ -103,7 +96,7 @@
 </li>
 </ul>
 
-      </div>    
+      </div>
     </div>
     
 
@@ -240,12 +233,14 @@ created called <code class="docutils literal notranslate"><span class="pre">hcg7
  <span class="s1">&#39;_sky_coord_frame&#39;</span><span class="p">,</span>
  <span class="s1">&#39;altaz&#39;</span><span class="p">,</span>
  <span class="s1">&#39;apply_space_motion&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;barycentricmeanecliptic&#39;</span><span class="p">,</span>
  <span class="s1">&#39;barycentrictrueecliptic&#39;</span><span class="p">,</span>
  <span class="s1">&#39;cache&#39;</span><span class="p">,</span>
  <span class="s1">&#39;cartesian&#39;</span><span class="p">,</span>
  <span class="s1">&#39;cirs&#39;</span><span class="p">,</span>
  <span class="s1">&#39;contained_by&#39;</span><span class="p">,</span>
  <span class="s1">&#39;copy&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;custombarycentricecliptic&#39;</span><span class="p">,</span>
  <span class="s1">&#39;data&#39;</span><span class="p">,</span>
  <span class="s1">&#39;dec&#39;</span><span class="p">,</span>
  <span class="s1">&#39;default_differential&#39;</span><span class="p">,</span>
@@ -271,6 +266,7 @@ created called <code class="docutils literal notranslate"><span class="pre">hcg7
  <span class="s1">&#39;galcen_distance&#39;</span><span class="p">,</span>
  <span class="s1">&#39;galcen_v_sun&#39;</span><span class="p">,</span>
  <span class="s1">&#39;gcrs&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;geocentricmeanecliptic&#39;</span><span class="p">,</span>
  <span class="s1">&#39;geocentrictrueecliptic&#39;</span><span class="p">,</span>
  <span class="s1">&#39;get_constellation&#39;</span><span class="p">,</span>
  <span class="s1">&#39;get_frame_attr_names&#39;</span><span class="p">,</span>
@@ -280,6 +276,8 @@ created called <code class="docutils literal notranslate"><span class="pre">hcg7
  <span class="s1">&#39;guess_from_table&#39;</span><span class="p">,</span>
  <span class="s1">&#39;has_data&#39;</span><span class="p">,</span>
  <span class="s1">&#39;hcrs&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;heliocentriceclipticiau76&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;heliocentricmeanecliptic&#39;</span><span class="p">,</span>
  <span class="s1">&#39;heliocentrictrueecliptic&#39;</span><span class="p">,</span>
  <span class="s1">&#39;icrs&#39;</span><span class="p">,</span>
  <span class="s1">&#39;info&#39;</span><span class="p">,</span>
@@ -294,6 +292,7 @@ created called <code class="docutils literal notranslate"><span class="pre">hcg7
  <span class="s1">&#39;match_to_catalog_sky&#39;</span><span class="p">,</span>
  <span class="s1">&#39;name&#39;</span><span class="p">,</span>
  <span class="s1">&#39;ndim&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;obliquity&#39;</span><span class="p">,</span>
  <span class="s1">&#39;obsgeoloc&#39;</span><span class="p">,</span>
  <span class="s1">&#39;obsgeovel&#39;</span><span class="p">,</span>
  <span class="s1">&#39;obstime&#39;</span><span class="p">,</span>
@@ -451,7 +450,7 @@ file<code class="docutils literal notranslate"><span class="pre">'HCG7_SDSS_cuto
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[13]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="s1">&#39;HCG7_SDSS_cutout.jpg&#39;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">http</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">HTTPMessage</span> <span class="n">at</span> <span class="mh">0x7fdedceade48</span><span class="o">&gt;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="s1">&#39;HCG7_SDSS_cutout.jpg&#39;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">http</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">HTTPMessage</span> <span class="n">at</span> <span class="mh">0x7f1d56e01518</span><span class="o">&gt;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="inputnumrole">In[14]:</span></p>
@@ -494,7 +493,7 @@ web URL is
 </div>
 
 </div>
-      </div>  
+      </div>
       
     </div>
   </div>
@@ -506,8 +505,8 @@ web URL is
       
     </p>
     <p>
-    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.0.
-    &copy; Copyright Astropy.   
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.1.
+    &copy; Copyright Astropy.
     </p>
   </div>
 </footer>

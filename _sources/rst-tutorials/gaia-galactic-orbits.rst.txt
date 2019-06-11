@@ -118,6 +118,11 @@ Imports
 
 .. parsed-literal::
 
+    WARNING: AstropyDeprecationWarning: astropy.extern.six will be removed in 4.0, use the six module directly if it is still needed [astropy.extern.six]
+
+
+.. parsed-literal::
+
     Created TAP+ (v1.0.1) - Connection:
     	Host: gea.esac.esa.int
     	Use HTTPS: False
@@ -247,7 +252,7 @@ first four rows of the table:
 .. raw:: html
 
     <i>QTable length=4</i>
-    <table id="table139702338153496" class="table-striped table-bordered table-condensed">
+    <table id="table140186931121624" class="table-striped table-bordered table-condensed">
     <thead><tr><th>ra</th><th>dec</th><th>parallax</th><th>pmra</th><th>pmdec</th><th>radial_velocity</th><th>phot_g_mean_mag</th><th>phot_bp_mean_mag</th><th>phot_rp_mean_mag</th></tr></thead>
     <thead><tr><th>deg</th><th>deg</th><th>mas</th><th>mas / yr</th><th>mas / yr</th><th>km / s</th><th>mag</th><th>mag</th><th>mag</th></tr></thead>
     <thead><tr><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float32</th><th>float32</th><th>float32</th></tr></thead>
@@ -612,9 +617,9 @@ and it's safe to ignore them.
 
 .. parsed-literal::
 
-    /home/circleci/project/venv/lib/python3.6/site-packages/astropy/units/quantity.py:463: RuntimeWarning: invalid value encountered in greater
+    /home/circleci/project/venv/lib/python3.6/site-packages/astropy/units/quantity.py:464: RuntimeWarning: invalid value encountered in greater
       result = super().__array_ufunc__(function, method, *arrays, **kwargs)
-    /home/circleci/project/venv/lib/python3.6/site-packages/astropy/units/quantity.py:463: RuntimeWarning: invalid value encountered in less
+    /home/circleci/project/venv/lib/python3.6/site-packages/astropy/units/quantity.py:464: RuntimeWarning: invalid value encountered in less
       result = super().__array_ufunc__(function, method, *arrays, **kwargs)
 
 

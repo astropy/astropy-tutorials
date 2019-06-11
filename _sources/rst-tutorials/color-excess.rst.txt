@@ -103,6 +103,15 @@ you can upgrade the package with pip:
     from astroquery.mast import Observations
     import astropy.visualization
 
+
+:outputnumrole:`Out[1]:`
+
+
+.. parsed-literal::
+
+    WARNING: AstropyDeprecationWarning: astropy.extern.six will be removed in 4.0, use the six module directly if it is still needed [astropy.extern.six]
+
+
 Introduction
 ============
 

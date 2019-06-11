@@ -31,13 +31,6 @@
   <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
   <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
   <meta name="apple-mobile-web-app-capable" content="yes">
-  
-  <script type="text/javascript">  
-    if( (window.location.href.search("tutorials.html") != -1) && (window.location.href.search("q=filterTutorials") == -1) ){
-      var url = window.location.href.split("tutorials.html")[0] + "tutorials.html?q=filterTutorials";
-      window.location.href = url;
-    }
-  </script>
   <script type="text/javascript">
     jQuery(function() { Search.loadIndex("../searchindex.js"); });
   </script>
@@ -80,7 +73,7 @@
     
     
     
-    
+
     
     <div class="col-md-3">
       <div id="sidebar" class="bs-sidenav card" role="complementary">
@@ -106,7 +99,7 @@
 </li>
 </ul>
 
-      </div>    
+      </div>
     </div>
     
 
@@ -196,6 +189,9 @@ vertical amplitudes.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[1]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">WARNING</span><span class="p">:</span> <span class="n">AstropyDeprecationWarning</span><span class="p">:</span> <span class="n">astropy</span><span class="o">.</span><span class="n">extern</span><span class="o">.</span><span class="n">six</span> <span class="n">will</span> <span class="n">be</span> <span class="n">removed</span> <span class="ow">in</span> <span class="mf">4.0</span><span class="p">,</span> <span class="n">use</span> <span class="n">the</span> <span class="n">six</span> <span class="n">module</span> <span class="n">directly</span> <span class="k">if</span> <span class="n">it</span> <span class="ow">is</span> <span class="n">still</span> <span class="n">needed</span> <span class="p">[</span><span class="n">astropy</span><span class="o">.</span><span class="n">extern</span><span class="o">.</span><span class="n">six</span><span class="p">]</span>
+</pre></div>
+</div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Created</span> <span class="n">TAP</span><span class="o">+</span> <span class="p">(</span><span class="n">v1</span><span class="o">.</span><span class="mf">0.1</span><span class="p">)</span> <span class="o">-</span> <span class="n">Connection</span><span class="p">:</span>
     <span class="n">Host</span><span class="p">:</span> <span class="n">gea</span><span class="o">.</span><span class="n">esac</span><span class="o">.</span><span class="n">esa</span><span class="o">.</span><span class="n">int</span>
     <span class="n">Use</span> <span class="n">HTTPS</span><span class="p">:</span> <span class="kc">False</span>
@@ -295,7 +291,7 @@ first four rows of the table:</p>
 </div>
 <p><span class="outputnumrole">Out[5]:</span></p>
 <i>QTable length=4</i>
-<table id="table139702338153496" class="table-striped table-bordered table-condensed">
+<table id="table140186931121624" class="table-striped table-bordered table-condensed">
 <thead><tr><th>ra</th><th>dec</th><th>parallax</th><th>pmra</th><th>pmdec</th><th>radial_velocity</th><th>phot_g_mean_mag</th><th>phot_bp_mean_mag</th><th>phot_rp_mean_mag</th></tr></thead>
 <thead><tr><th>deg</th><th>deg</th><th>mas</th><th>mas / yr</th><th>mas / yr</th><th>km / s</th><th>mag</th><th>mag</th><th>mag</th></tr></thead>
 <thead><tr><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float32</th><th>float32</th><th>float32</th></tr></thead>
@@ -516,9 +512,9 @@ and it’s safe to ignore them.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[17]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">circleci</span><span class="o">/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">6</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astropy</span><span class="o">/</span><span class="n">units</span><span class="o">/</span><span class="n">quantity</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">463</span><span class="p">:</span> <span class="ne">RuntimeWarning</span><span class="p">:</span> <span class="n">invalid</span> <span class="n">value</span> <span class="n">encountered</span> <span class="ow">in</span> <span class="n">greater</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">circleci</span><span class="o">/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">6</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astropy</span><span class="o">/</span><span class="n">units</span><span class="o">/</span><span class="n">quantity</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">464</span><span class="p">:</span> <span class="ne">RuntimeWarning</span><span class="p">:</span> <span class="n">invalid</span> <span class="n">value</span> <span class="n">encountered</span> <span class="ow">in</span> <span class="n">greater</span>
   <span class="n">result</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__array_ufunc__</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="o">*</span><span class="n">arrays</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">circleci</span><span class="o">/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">6</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astropy</span><span class="o">/</span><span class="n">units</span><span class="o">/</span><span class="n">quantity</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">463</span><span class="p">:</span> <span class="ne">RuntimeWarning</span><span class="p">:</span> <span class="n">invalid</span> <span class="n">value</span> <span class="n">encountered</span> <span class="ow">in</span> <span class="n">less</span>
+<span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">circleci</span><span class="o">/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">6</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astropy</span><span class="o">/</span><span class="n">units</span><span class="o">/</span><span class="n">quantity</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">464</span><span class="p">:</span> <span class="ne">RuntimeWarning</span><span class="p">:</span> <span class="n">invalid</span> <span class="n">value</span> <span class="n">encountered</span> <span class="ow">in</span> <span class="n">less</span>
   <span class="n">result</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__array_ufunc__</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="o">*</span><span class="n">arrays</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -775,7 +771,7 @@ of eccentricity values.</p></li>
 </div>
 
 </div>
-      </div>  
+      </div>
       
     </div>
   </div>
@@ -787,8 +783,8 @@ of eccentricity values.</p></li>
       
     </p>
     <p>
-    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.0.
-    &copy; Copyright Astropy.   
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.1.
+    &copy; Copyright Astropy.
     </p>
   </div>
 </footer>

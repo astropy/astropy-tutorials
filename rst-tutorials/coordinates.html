@@ -31,13 +31,6 @@
   <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
   <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
   <meta name="apple-mobile-web-app-capable" content="yes">
-  
-  <script type="text/javascript">  
-    if( (window.location.href.search("tutorials.html") != -1) && (window.location.href.search("q=filterTutorials") == -1) ){
-      var url = window.location.href.split("tutorials.html")[0] + "tutorials.html?q=filterTutorials";
-      window.location.href = url;
-    }
-  </script>
   <script type="text/javascript">
     jQuery(function() { Search.loadIndex("../searchindex.js"); });
   </script>
@@ -80,7 +73,7 @@
     
     
     
-    
+
     
     <div class="col-md-3">
       <div id="sidebar" class="bs-sidenav card" role="complementary">
@@ -106,7 +99,7 @@
 </li>
 </ul>
 
-      </div>    
+      </div>
     </div>
     
 
@@ -271,7 +264,7 @@ file<code class="docutils literal notranslate"><span class="pre">'HCG7_SDSS_cuto
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[11]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="s1">&#39;HCG7_SDSS_cutout.jpg&#39;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">http</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">HTTPMessage</span> <span class="n">at</span> <span class="mh">0x7fa540739160</span><span class="o">&gt;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="s1">&#39;HCG7_SDSS_cutout.jpg&#39;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">http</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">HTTPMessage</span> <span class="n">at</span> <span class="mh">0x7f7810f24320</span><span class="o">&gt;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Now lets take a look at the image.</p>
@@ -325,7 +318,8 @@ should be able to safely ignore.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[13]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">circleci</span><span class="o">/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">6</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astroquery</span><span class="o">/</span><span class="n">sdss</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">29</span><span class="p">:</span> <span class="ne">UserWarning</span><span class="p">:</span> <span class="n">Experimental</span><span class="p">:</span> <span class="n">SDSS</span> <span class="n">has</span> <span class="ow">not</span> <span class="n">yet</span> <span class="n">been</span> <span class="n">refactored</span> <span class="n">to</span> <span class="n">have</span> <span class="n">its</span> <span class="n">API</span> <span class="n">match</span> <span class="n">the</span> <span class="n">rest</span> <span class="n">of</span> <span class="n">astroquery</span> <span class="p">(</span><span class="n">but</span> <span class="n">it</span><span class="s1">&#39;s nearly there).</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">WARNING</span><span class="p">:</span> <span class="n">AstropyDeprecationWarning</span><span class="p">:</span> <span class="n">astropy</span><span class="o">.</span><span class="n">extern</span><span class="o">.</span><span class="n">six</span> <span class="n">will</span> <span class="n">be</span> <span class="n">removed</span> <span class="ow">in</span> <span class="mf">4.0</span><span class="p">,</span> <span class="n">use</span> <span class="n">the</span> <span class="n">six</span> <span class="n">module</span> <span class="n">directly</span> <span class="k">if</span> <span class="n">it</span> <span class="ow">is</span> <span class="n">still</span> <span class="n">needed</span> <span class="p">[</span><span class="n">astropy</span><span class="o">.</span><span class="n">extern</span><span class="o">.</span><span class="n">six</span><span class="p">]</span>
+<span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">circleci</span><span class="o">/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">6</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astroquery</span><span class="o">/</span><span class="n">sdss</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">29</span><span class="p">:</span> <span class="ne">UserWarning</span><span class="p">:</span> <span class="n">Experimental</span><span class="p">:</span> <span class="n">SDSS</span> <span class="n">has</span> <span class="ow">not</span> <span class="n">yet</span> <span class="n">been</span> <span class="n">refactored</span> <span class="n">to</span> <span class="n">have</span> <span class="n">its</span> <span class="n">API</span> <span class="n">match</span> <span class="n">the</span> <span class="n">rest</span> <span class="n">of</span> <span class="n">astroquery</span> <span class="p">(</span><span class="n">but</span> <span class="n">it</span><span class="s1">&#39;s nearly there).</span>
   <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Experimental: SDSS has not yet been refactored to have its API &quot;</span>
 </pre></div>
 </div>
@@ -374,37 +368,37 @@ the tables to see just what everything is that’s in them.</p>
 </div>
 <p><span class="outputnumrole">Out[17]:</span></p>
 <i>Table length=679</i>
-<table id="table140347734519592" class="table-striped table-bordered table-condensed">
+<table id="table140155404150376" class="table-striped table-bordered table-condensed">
 <thead><tr><th>ra</th><th>dec</th><th>u</th><th>g</th><th>r</th><th>i</th><th>z</th></tr></thead>
 <thead><tr><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th></tr></thead>
-<tr><td>9.74546663598161</td><td>0.804785379785538</td><td>23.40089</td><td>22.80742</td><td>21.17173</td><td>20.07909</td><td>19.74573</td></tr>
-<tr><td>9.6117016554133</td><td>1.06366800597759</td><td>21.48008</td><td>20.48495</td><td>18.98479</td><td>18.39204</td><td>18.08545</td></tr>
-<tr><td>9.92112559653924</td><td>0.907689189590104</td><td>20.51148</td><td>20.49785</td><td>20.70594</td><td>20.87635</td><td>21.31508</td></tr>
-<tr><td>9.70612154678523</td><td>0.688411024325877</td><td>20.90669</td><td>19.90285</td><td>18.9021</td><td>18.51294</td><td>18.2186</td></tr>
-<tr><td>9.53729913945995</td><td>0.855434437201292</td><td>22.17931</td><td>20.77754</td><td>19.05077</td><td>18.44905</td><td>18.08414</td></tr>
-<tr><td>9.69587283975639</td><td>0.637716650638272</td><td>22.61642</td><td>22.52868</td><td>20.93116</td><td>19.99687</td><td>19.56346</td></tr>
-<tr><td>9.53055821092903</td><td>0.960512767184623</td><td>25.156</td><td>23.86622</td><td>22.75501</td><td>21.1689</td><td>21.09199</td></tr>
-<tr><td>9.99949344772466</td><td>1.06522715882485</td><td>17.11143</td><td>15.3926</td><td>14.51749</td><td>14.11533</td><td>13.7892</td></tr>
-<tr><td>9.93099932805407</td><td>0.638142996054846</td><td>23.25417</td><td>22.10502</td><td>20.48582</td><td>19.46803</td><td>18.93533</td></tr>
-<tr><td>9.48516597655112</td><td>1.06970371767879</td><td>19.18206</td><td>17.42762</td><td>16.71963</td><td>16.45744</td><td>16.32053</td></tr>
+<tr><td>9.79293339427181</td><td>0.659829329156064</td><td>16.9821</td><td>15.47834</td><td>15.42514</td><td>14.61907</td><td>14.47095</td></tr>
+<tr><td>9.53331141392175</td><td>1.09981305021434</td><td>21.11045</td><td>18.78089</td><td>17.75572</td><td>17.39869</td><td>17.19268</td></tr>
+<tr><td>9.97504216856794</td><td>0.960430039213302</td><td>21.2758</td><td>20.61082</td><td>20.37434</td><td>19.8638</td><td>19.55642</td></tr>
+<tr><td>9.77189392633511</td><td>1.08851778782272</td><td>22.1365</td><td>19.42289</td><td>18.11884</td><td>17.5613</td><td>17.25852</td></tr>
+<tr><td>10.0298203018955</td><td>0.785404231428639</td><td>20.93396</td><td>19.98706</td><td>19.61393</td><td>19.46158</td><td>19.38252</td></tr>
+<tr><td>9.91404352649283</td><td>1.10767806592904</td><td>23.92247</td><td>23.17045</td><td>21.37167</td><td>20.181</td><td>19.5382</td></tr>
+<tr><td>9.79537845566955</td><td>0.849932759023708</td><td>18.19011</td><td>16.74625</td><td>16.20456</td><td>16.02315</td><td>15.95449</td></tr>
+<tr><td>10.1283614953755</td><td>1.20359549821362</td><td>18.65038</td><td>17.38721</td><td>16.93356</td><td>16.68318</td><td>16.53578</td></tr>
+<tr><td>9.61437355125906</td><td>0.897181551680556</td><td>21.41825</td><td>20.93266</td><td>21.23333</td><td>21.52931</td><td>21.53144</td></tr>
+<tr><td>9.75049627023623</td><td>0.914219689498682</td><td>18.36325</td><td>16.91472</td><td>16.33982</td><td>16.10022</td><td>15.98897</td></tr>
 <tr><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr>
-<tr><td>9.73847685388353</td><td>1.16983663512977</td><td>22.38898</td><td>21.16708</td><td>19.3354</td><td>18.68488</td><td>18.22485</td></tr>
-<tr><td>9.97515880434088</td><td>0.820496835228423</td><td>21.20617</td><td>18.63054</td><td>17.16262</td><td>16.26178</td><td>15.75765</td></tr>
-<tr><td>9.52337957980524</td><td>0.915504134310753</td><td>21.20991</td><td>18.46498</td><td>17.3218</td><td>16.86685</td><td>16.59235</td></tr>
-<tr><td>9.75268946272243</td><td>0.660692453452431</td><td>18.63825</td><td>17.8296</td><td>17.53754</td><td>17.42028</td><td>17.36843</td></tr>
-<tr><td>9.93661694913578</td><td>0.979944095005431</td><td>21.08061</td><td>18.39243</td><td>17.18438</td><td>16.7105</td><td>16.46581</td></tr>
-<tr><td>9.78323245275084</td><td>0.588725447943636</td><td>22.70772</td><td>20.44354</td><td>18.98971</td><td>18.24967</td><td>17.79917</td></tr>
-<tr><td>9.8794075701253</td><td>1.02369099853801</td><td>20.55361</td><td>18.92159</td><td>17.76138</td><td>17.27625</td><td>16.96942</td></tr>
-<tr><td>9.532145188306</td><td>1.11700744260966</td><td>21.29014</td><td>18.92362</td><td>17.57302</td><td>16.72579</td><td>16.25694</td></tr>
-<tr><td>10.1017089115464</td><td>0.784214169142576</td><td>19.77284</td><td>18.77817</td><td>18.34847</td><td>18.05351</td><td>17.84816</td></tr>
-<tr><td>9.59987908471277</td><td>0.781110947033136</td><td>22.09785</td><td>21.31044</td><td>20.15155</td><td>19.69155</td><td>19.13445</td></tr>
+<tr><td>9.63379865775846</td><td>1.04451580716087</td><td>20.88008</td><td>19.80103</td><td>18.69122</td><td>18.20208</td><td>17.96495</td></tr>
+<tr><td>9.69389626832606</td><td>1.1142566255406</td><td>26.13163</td><td>20.6128</td><td>20.56435</td><td>20.34916</td><td>19.66869</td></tr>
+<tr><td>9.68881501269831</td><td>0.766316730900438</td><td>22.79572</td><td>20.11252</td><td>18.80546</td><td>18.14293</td><td>17.74013</td></tr>
+<tr><td>10.0775826925982</td><td>0.790111126438688</td><td>21.14568</td><td>18.76275</td><td>17.45607</td><td>16.95887</td><td>16.72254</td></tr>
+<tr><td>10.1303393482758</td><td>1.1523773556596</td><td>22.96277</td><td>21.15212</td><td>19.39642</td><td>18.78123</td><td>18.43637</td></tr>
+<tr><td>10.056542658354</td><td>0.59110327546726</td><td>20.35315</td><td>18.69015</td><td>18.22211</td><td>18.12444</td><td>17.8771</td></tr>
+<tr><td>9.55446133730533</td><td>1.14220591660834</td><td>23.06536</td><td>23.08205</td><td>22.12111</td><td>21.67837</td><td>21.63256</td></tr>
+<tr><td>9.86140974949097</td><td>0.745947843824639</td><td>23.01928</td><td>21.50809</td><td>20.29095</td><td>19.78649</td><td>19.47331</td></tr>
+<tr><td>9.49788438832076</td><td>0.886448603055719</td><td>20.81937</td><td>20.45431</td><td>20.41823</td><td>19.98793</td><td>19.76102</td></tr>
+<tr><td>9.73001716011208</td><td>0.991258981941023</td><td>21.43877</td><td>21.11119</td><td>21.30741</td><td>21.09469</td><td>21.74804</td></tr>
 </table><p><span class="inputnumrole">In[18]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">twomass</span> <span class="c1"># just to see an example of the format</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[18]:</span></p>
 <i>Table masked=True length=23</i>
-<table id="table140347734518808" class="table-striped table-bordered table-condensed">
+<table id="table140153554951528" class="table-striped table-bordered table-condensed">
 <thead><tr><th>designation</th><th>ra</th><th>dec</th><th>r_k20fe</th><th>j_m_k20fe</th><th>j_msig_k20fe</th><th>j_flg_k20fe</th><th>h_m_k20fe</th><th>h_msig_k20fe</th><th>h_flg_k20fe</th><th>k_m_k20fe</th><th>k_msig_k20fe</th><th>k_flg_k20fe</th><th>k_ba</th><th>k_phi</th><th>sup_ba</th><th>sup_phi</th><th>r_ext</th><th>j_m_ext</th><th>j_msig_ext</th><th>h_m_ext</th><th>h_msig_ext</th><th>k_m_ext</th><th>k_msig_ext</th><th>cc_flg</th><th>dist</th><th>angle</th></tr></thead>
 <thead><tr><th></th><th>deg</th><th>deg</th><th>arcsec</th><th>mag</th><th>mag</th><th></th><th>mag</th><th>mag</th><th></th><th>mag</th><th>mag</th><th></th><th></th><th>deg</th><th></th><th>deg</th><th>arcsec</th><th>mag</th><th>mag</th><th>mag</th><th>mag</th><th>mag</th><th>mag</th><th></th><th>arcsec</th><th>deg</th></tr></thead>
 <thead><tr><th>str16</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>int64</th><th>float64</th><th>float64</th><th>int64</th><th>float64</th><th>float64</th><th>int64</th><th>float64</th><th>int64</th><th>float64</th><th>int64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>str1</th><th>float64</th><th>float64</th></tr></thead>
@@ -481,16 +475,16 @@ check by comparing to a set of <em>random</em> points.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[22]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="o">&lt;</span><span class="n">Angle</span> <span class="p">[</span><span class="mf">10.14056234</span><span class="p">,</span>  <span class="mf">9.77636333</span><span class="p">,</span>  <span class="mf">9.53011764</span><span class="p">,</span>  <span class="mf">9.63969956</span><span class="p">,</span>  <span class="mf">9.94656137</span><span class="p">,</span>
-          <span class="mf">9.62338063</span><span class="p">,</span>  <span class="mf">9.4983647</span> <span class="p">,</span>  <span class="mf">9.76482086</span><span class="p">,</span> <span class="mf">10.01917796</span><span class="p">,</span>  <span class="mf">9.79735512</span><span class="p">,</span>
-          <span class="mf">9.65112901</span><span class="p">,</span>  <span class="mf">9.73944741</span><span class="p">,</span> <span class="mf">10.02797756</span><span class="p">,</span> <span class="mf">10.02322902</span><span class="p">,</span>  <span class="mf">9.73340432</span><span class="p">,</span>
-          <span class="mf">9.87485074</span><span class="p">,</span>  <span class="mf">9.67354455</span><span class="p">,</span> <span class="mf">10.02046331</span><span class="p">,</span>  <span class="mf">9.83183538</span><span class="p">,</span>  <span class="mf">9.66576951</span><span class="p">,</span>
-          <span class="mf">9.98859163</span><span class="p">,</span>  <span class="mf">9.55644709</span><span class="p">,</span>  <span class="mf">9.92588186</span><span class="p">]</span> <span class="n">deg</span><span class="o">&gt;</span><span class="p">,</span>
- <span class="o">&lt;</span><span class="n">Angle</span> <span class="p">[</span><span class="mf">0.92111861</span><span class="p">,</span> <span class="mf">1.19337195</span><span class="p">,</span> <span class="mf">0.92271106</span><span class="p">,</span> <span class="mf">0.90795807</span><span class="p">,</span> <span class="mf">0.63935882</span><span class="p">,</span>
-         <span class="mf">0.60556191</span><span class="p">,</span> <span class="mf">0.99504049</span><span class="p">,</span> <span class="mf">0.67341183</span><span class="p">,</span> <span class="mf">0.73088148</span><span class="p">,</span> <span class="mf">1.14764701</span><span class="p">,</span>
-         <span class="mf">1.13430464</span><span class="p">,</span> <span class="mf">1.0913984</span> <span class="p">,</span> <span class="mf">1.10219229</span><span class="p">,</span> <span class="mf">0.87719665</span><span class="p">,</span> <span class="mf">0.6648392</span> <span class="p">,</span>
-         <span class="mf">0.86607941</span><span class="p">,</span> <span class="mf">1.10764522</span><span class="p">,</span> <span class="mf">0.80894399</span><span class="p">,</span> <span class="mf">0.62934606</span><span class="p">,</span> <span class="mf">0.97452404</span><span class="p">,</span>
-         <span class="mf">1.13199091</span><span class="p">,</span> <span class="mf">1.09148239</span><span class="p">,</span> <span class="mf">0.80833343</span><span class="p">]</span> <span class="n">deg</span><span class="o">&gt;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="o">&lt;</span><span class="n">Angle</span> <span class="p">[</span> <span class="mf">9.99523656</span><span class="p">,</span> <span class="mf">10.10831313</span><span class="p">,</span>  <span class="mf">9.75391418</span><span class="p">,</span>  <span class="mf">9.76302104</span><span class="p">,</span> <span class="mf">10.12838229</span><span class="p">,</span>
+          <span class="mf">9.89319317</span><span class="p">,</span>  <span class="mf">9.8878832</span> <span class="p">,</span>  <span class="mf">9.72124725</span><span class="p">,</span>  <span class="mf">9.81695643</span><span class="p">,</span>  <span class="mf">9.77358296</span><span class="p">,</span>
+          <span class="mf">9.60375732</span><span class="p">,</span>  <span class="mf">9.58831659</span><span class="p">,</span>  <span class="mf">9.92523881</span><span class="p">,</span>  <span class="mf">9.9755321</span> <span class="p">,</span>  <span class="mf">9.65093385</span><span class="p">,</span>
+          <span class="mf">9.62521516</span><span class="p">,</span>  <span class="mf">9.55677035</span><span class="p">,</span>  <span class="mf">9.58486172</span><span class="p">,</span> <span class="mf">10.13212478</span><span class="p">,</span>  <span class="mf">9.86926218</span><span class="p">,</span>
+          <span class="mf">9.80544489</span><span class="p">,</span> <span class="mf">10.08102953</span><span class="p">,</span>  <span class="mf">9.67137576</span><span class="p">]</span> <span class="n">deg</span><span class="o">&gt;</span><span class="p">,</span>
+ <span class="o">&lt;</span><span class="n">Angle</span> <span class="p">[</span><span class="mf">0.69395318</span><span class="p">,</span> <span class="mf">0.91718024</span><span class="p">,</span> <span class="mf">0.88207703</span><span class="p">,</span> <span class="mf">0.94126608</span><span class="p">,</span> <span class="mf">0.72742883</span><span class="p">,</span>
+         <span class="mf">0.95412749</span><span class="p">,</span> <span class="mf">0.94563105</span><span class="p">,</span> <span class="mf">0.85743469</span><span class="p">,</span> <span class="mf">0.71898354</span><span class="p">,</span> <span class="mf">1.20736322</span><span class="p">,</span>
+         <span class="mf">0.64205646</span><span class="p">,</span> <span class="mf">0.8125344</span> <span class="p">,</span> <span class="mf">1.15722281</span><span class="p">,</span> <span class="mf">0.61906946</span><span class="p">,</span> <span class="mf">0.95817625</span><span class="p">,</span>
+         <span class="mf">0.82961139</span><span class="p">,</span> <span class="mf">0.61427912</span><span class="p">,</span> <span class="mf">0.71679145</span><span class="p">,</span> <span class="mf">0.5778088</span> <span class="p">,</span> <span class="mf">0.55974248</span><span class="p">,</span>
+         <span class="mf">0.71180613</span><span class="p">,</span> <span class="mf">0.79953254</span><span class="p">,</span> <span class="mf">1.04526032</span><span class="p">]</span> <span class="n">deg</span><span class="o">&gt;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Now we create a <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> from these points and match it to
@@ -748,7 +742,7 @@ last section of this tutorial.</p>
 </div>
 
 </div>
-      </div>  
+      </div>
       
     </div>
   </div>
@@ -760,8 +754,8 @@ last section of this tutorial.</p>
       
     </p>
     <p>
-    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.0.
-    &copy; Copyright Astropy.   
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.1.
+    &copy; Copyright Astropy.
     </p>
   </div>
 </footer>

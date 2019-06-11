@@ -305,7 +305,7 @@ file\ ``'HCG7_SDSS_cutout.jpg'``, defined at the top of the cell.
 
 .. parsed-literal::
 
-    ('HCG7_SDSS_cutout.jpg', <http.client.HTTPMessage at 0x7fa540739160>)
+    ('HCG7_SDSS_cutout.jpg', <http.client.HTTPMessage at 0x7f7810f24320>)
 
 
 
@@ -397,6 +397,7 @@ should be able to safely ignore.
 
 .. parsed-literal::
 
+    WARNING: AstropyDeprecationWarning: astropy.extern.six will be removed in 4.0, use the six module directly if it is still needed [astropy.extern.six]
     /home/circleci/project/venv/lib/python3.6/site-packages/astroquery/sdss/__init__.py:29: UserWarning: Experimental: SDSS has not yet been refactored to have its API match the rest of astroquery (but it's nearly there).
       warnings.warn("Experimental: SDSS has not yet been refactored to have its API "
 
@@ -479,30 +480,30 @@ the tables to see just what everything is that's in them.
 .. raw:: html
 
     <i>Table length=679</i>
-    <table id="table140347734519592" class="table-striped table-bordered table-condensed">
+    <table id="table140155404150376" class="table-striped table-bordered table-condensed">
     <thead><tr><th>ra</th><th>dec</th><th>u</th><th>g</th><th>r</th><th>i</th><th>z</th></tr></thead>
     <thead><tr><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th></tr></thead>
-    <tr><td>9.74546663598161</td><td>0.804785379785538</td><td>23.40089</td><td>22.80742</td><td>21.17173</td><td>20.07909</td><td>19.74573</td></tr>
-    <tr><td>9.6117016554133</td><td>1.06366800597759</td><td>21.48008</td><td>20.48495</td><td>18.98479</td><td>18.39204</td><td>18.08545</td></tr>
-    <tr><td>9.92112559653924</td><td>0.907689189590104</td><td>20.51148</td><td>20.49785</td><td>20.70594</td><td>20.87635</td><td>21.31508</td></tr>
-    <tr><td>9.70612154678523</td><td>0.688411024325877</td><td>20.90669</td><td>19.90285</td><td>18.9021</td><td>18.51294</td><td>18.2186</td></tr>
-    <tr><td>9.53729913945995</td><td>0.855434437201292</td><td>22.17931</td><td>20.77754</td><td>19.05077</td><td>18.44905</td><td>18.08414</td></tr>
-    <tr><td>9.69587283975639</td><td>0.637716650638272</td><td>22.61642</td><td>22.52868</td><td>20.93116</td><td>19.99687</td><td>19.56346</td></tr>
-    <tr><td>9.53055821092903</td><td>0.960512767184623</td><td>25.156</td><td>23.86622</td><td>22.75501</td><td>21.1689</td><td>21.09199</td></tr>
-    <tr><td>9.99949344772466</td><td>1.06522715882485</td><td>17.11143</td><td>15.3926</td><td>14.51749</td><td>14.11533</td><td>13.7892</td></tr>
-    <tr><td>9.93099932805407</td><td>0.638142996054846</td><td>23.25417</td><td>22.10502</td><td>20.48582</td><td>19.46803</td><td>18.93533</td></tr>
-    <tr><td>9.48516597655112</td><td>1.06970371767879</td><td>19.18206</td><td>17.42762</td><td>16.71963</td><td>16.45744</td><td>16.32053</td></tr>
+    <tr><td>9.79293339427181</td><td>0.659829329156064</td><td>16.9821</td><td>15.47834</td><td>15.42514</td><td>14.61907</td><td>14.47095</td></tr>
+    <tr><td>9.53331141392175</td><td>1.09981305021434</td><td>21.11045</td><td>18.78089</td><td>17.75572</td><td>17.39869</td><td>17.19268</td></tr>
+    <tr><td>9.97504216856794</td><td>0.960430039213302</td><td>21.2758</td><td>20.61082</td><td>20.37434</td><td>19.8638</td><td>19.55642</td></tr>
+    <tr><td>9.77189392633511</td><td>1.08851778782272</td><td>22.1365</td><td>19.42289</td><td>18.11884</td><td>17.5613</td><td>17.25852</td></tr>
+    <tr><td>10.0298203018955</td><td>0.785404231428639</td><td>20.93396</td><td>19.98706</td><td>19.61393</td><td>19.46158</td><td>19.38252</td></tr>
+    <tr><td>9.91404352649283</td><td>1.10767806592904</td><td>23.92247</td><td>23.17045</td><td>21.37167</td><td>20.181</td><td>19.5382</td></tr>
+    <tr><td>9.79537845566955</td><td>0.849932759023708</td><td>18.19011</td><td>16.74625</td><td>16.20456</td><td>16.02315</td><td>15.95449</td></tr>
+    <tr><td>10.1283614953755</td><td>1.20359549821362</td><td>18.65038</td><td>17.38721</td><td>16.93356</td><td>16.68318</td><td>16.53578</td></tr>
+    <tr><td>9.61437355125906</td><td>0.897181551680556</td><td>21.41825</td><td>20.93266</td><td>21.23333</td><td>21.52931</td><td>21.53144</td></tr>
+    <tr><td>9.75049627023623</td><td>0.914219689498682</td><td>18.36325</td><td>16.91472</td><td>16.33982</td><td>16.10022</td><td>15.98897</td></tr>
     <tr><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr>
-    <tr><td>9.73847685388353</td><td>1.16983663512977</td><td>22.38898</td><td>21.16708</td><td>19.3354</td><td>18.68488</td><td>18.22485</td></tr>
-    <tr><td>9.97515880434088</td><td>0.820496835228423</td><td>21.20617</td><td>18.63054</td><td>17.16262</td><td>16.26178</td><td>15.75765</td></tr>
-    <tr><td>9.52337957980524</td><td>0.915504134310753</td><td>21.20991</td><td>18.46498</td><td>17.3218</td><td>16.86685</td><td>16.59235</td></tr>
-    <tr><td>9.75268946272243</td><td>0.660692453452431</td><td>18.63825</td><td>17.8296</td><td>17.53754</td><td>17.42028</td><td>17.36843</td></tr>
-    <tr><td>9.93661694913578</td><td>0.979944095005431</td><td>21.08061</td><td>18.39243</td><td>17.18438</td><td>16.7105</td><td>16.46581</td></tr>
-    <tr><td>9.78323245275084</td><td>0.588725447943636</td><td>22.70772</td><td>20.44354</td><td>18.98971</td><td>18.24967</td><td>17.79917</td></tr>
-    <tr><td>9.8794075701253</td><td>1.02369099853801</td><td>20.55361</td><td>18.92159</td><td>17.76138</td><td>17.27625</td><td>16.96942</td></tr>
-    <tr><td>9.532145188306</td><td>1.11700744260966</td><td>21.29014</td><td>18.92362</td><td>17.57302</td><td>16.72579</td><td>16.25694</td></tr>
-    <tr><td>10.1017089115464</td><td>0.784214169142576</td><td>19.77284</td><td>18.77817</td><td>18.34847</td><td>18.05351</td><td>17.84816</td></tr>
-    <tr><td>9.59987908471277</td><td>0.781110947033136</td><td>22.09785</td><td>21.31044</td><td>20.15155</td><td>19.69155</td><td>19.13445</td></tr>
+    <tr><td>9.63379865775846</td><td>1.04451580716087</td><td>20.88008</td><td>19.80103</td><td>18.69122</td><td>18.20208</td><td>17.96495</td></tr>
+    <tr><td>9.69389626832606</td><td>1.1142566255406</td><td>26.13163</td><td>20.6128</td><td>20.56435</td><td>20.34916</td><td>19.66869</td></tr>
+    <tr><td>9.68881501269831</td><td>0.766316730900438</td><td>22.79572</td><td>20.11252</td><td>18.80546</td><td>18.14293</td><td>17.74013</td></tr>
+    <tr><td>10.0775826925982</td><td>0.790111126438688</td><td>21.14568</td><td>18.76275</td><td>17.45607</td><td>16.95887</td><td>16.72254</td></tr>
+    <tr><td>10.1303393482758</td><td>1.1523773556596</td><td>22.96277</td><td>21.15212</td><td>19.39642</td><td>18.78123</td><td>18.43637</td></tr>
+    <tr><td>10.056542658354</td><td>0.59110327546726</td><td>20.35315</td><td>18.69015</td><td>18.22211</td><td>18.12444</td><td>17.8771</td></tr>
+    <tr><td>9.55446133730533</td><td>1.14220591660834</td><td>23.06536</td><td>23.08205</td><td>22.12111</td><td>21.67837</td><td>21.63256</td></tr>
+    <tr><td>9.86140974949097</td><td>0.745947843824639</td><td>23.01928</td><td>21.50809</td><td>20.29095</td><td>19.78649</td><td>19.47331</td></tr>
+    <tr><td>9.49788438832076</td><td>0.886448603055719</td><td>20.81937</td><td>20.45431</td><td>20.41823</td><td>19.98793</td><td>19.76102</td></tr>
+    <tr><td>9.73001716011208</td><td>0.991258981941023</td><td>21.43877</td><td>21.11119</td><td>21.30741</td><td>21.09469</td><td>21.74804</td></tr>
     </table>
 
 
@@ -524,7 +525,7 @@ the tables to see just what everything is that's in them.
 .. raw:: html
 
     <i>Table masked=True length=23</i>
-    <table id="table140347734518808" class="table-striped table-bordered table-condensed">
+    <table id="table140153554951528" class="table-striped table-bordered table-condensed">
     <thead><tr><th>designation</th><th>ra</th><th>dec</th><th>r_k20fe</th><th>j_m_k20fe</th><th>j_msig_k20fe</th><th>j_flg_k20fe</th><th>h_m_k20fe</th><th>h_msig_k20fe</th><th>h_flg_k20fe</th><th>k_m_k20fe</th><th>k_msig_k20fe</th><th>k_flg_k20fe</th><th>k_ba</th><th>k_phi</th><th>sup_ba</th><th>sup_phi</th><th>r_ext</th><th>j_m_ext</th><th>j_msig_ext</th><th>h_m_ext</th><th>h_msig_ext</th><th>k_m_ext</th><th>k_msig_ext</th><th>cc_flg</th><th>dist</th><th>angle</th></tr></thead>
     <thead><tr><th></th><th>deg</th><th>deg</th><th>arcsec</th><th>mag</th><th>mag</th><th></th><th>mag</th><th>mag</th><th></th><th>mag</th><th>mag</th><th></th><th></th><th>deg</th><th></th><th>deg</th><th>arcsec</th><th>mag</th><th>mag</th><th>mag</th><th>mag</th><th>mag</th><th>mag</th><th></th><th>arcsec</th><th>deg</th></tr></thead>
     <thead><tr><th>str16</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>int64</th><th>float64</th><th>float64</th><th>int64</th><th>float64</th><th>float64</th><th>int64</th><th>float64</th><th>int64</th><th>float64</th><th>int64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>str1</th><th>float64</th><th>float64</th></tr></thead>
@@ -642,16 +643,16 @@ We first create a set of uniformly random points (with size matching
 
 .. parsed-literal::
 
-    (<Angle [10.14056234,  9.77636333,  9.53011764,  9.63969956,  9.94656137,
-              9.62338063,  9.4983647 ,  9.76482086, 10.01917796,  9.79735512,
-              9.65112901,  9.73944741, 10.02797756, 10.02322902,  9.73340432,
-              9.87485074,  9.67354455, 10.02046331,  9.83183538,  9.66576951,
-              9.98859163,  9.55644709,  9.92588186] deg>,
-     <Angle [0.92111861, 1.19337195, 0.92271106, 0.90795807, 0.63935882,
-             0.60556191, 0.99504049, 0.67341183, 0.73088148, 1.14764701,
-             1.13430464, 1.0913984 , 1.10219229, 0.87719665, 0.6648392 ,
-             0.86607941, 1.10764522, 0.80894399, 0.62934606, 0.97452404,
-             1.13199091, 1.09148239, 0.80833343] deg>)
+    (<Angle [ 9.99523656, 10.10831313,  9.75391418,  9.76302104, 10.12838229,
+              9.89319317,  9.8878832 ,  9.72124725,  9.81695643,  9.77358296,
+              9.60375732,  9.58831659,  9.92523881,  9.9755321 ,  9.65093385,
+              9.62521516,  9.55677035,  9.58486172, 10.13212478,  9.86926218,
+              9.80544489, 10.08102953,  9.67137576] deg>,
+     <Angle [0.69395318, 0.91718024, 0.88207703, 0.94126608, 0.72742883,
+             0.95412749, 0.94563105, 0.85743469, 0.71898354, 1.20736322,
+             0.64205646, 0.8125344 , 1.15722281, 0.61906946, 0.95817625,
+             0.82961139, 0.61427912, 0.71679145, 0.5778088 , 0.55974248,
+             0.71180613, 0.79953254, 1.04526032] deg>)
 
 
 

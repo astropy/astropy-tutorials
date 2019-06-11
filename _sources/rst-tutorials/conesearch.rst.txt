@@ -84,6 +84,15 @@ This tutorial requires ``astroquery`` 0.3.5 or greater.
     import matplotlib.pyplot as plt
     %matplotlib inline
 
+
+:outputnumrole:`Out[1]:`
+
+
+.. parsed-literal::
+
+    WARNING: AstropyDeprecationWarning: astropy.extern.six will be removed in 4.0, use the six module directly if it is still needed [astropy.extern.six]
+
+
 To start, it might be useful to list the available Cone Search catalogs
 first. By default, catalogs that pass nightly validation are included.
 Validation is hosted by Space Telescope Science Institute (STScI).
@@ -109,6 +118,7 @@ Validation is hosted by Space Telescope Science Institute (STScI).
      'SDSS DR7 - Sloan Digital Sky Survey Data Release 7 2',
      'SDSS DR7 - Sloan Digital Sky Survey Data Release 7 3',
      'SDSS DR7 - Sloan Digital Sky Survey Data Release 7 4',
+     'SDSS DR8 - Sloan Digital Sky Survey Data Release 8 1',
      'SDSS DR8 - Sloan Digital Sky Survey Data Release 8 2',
      'The HST Guide Star Catalog, Version 1.1 (Lasker+ 1992) 1',
      'The HST Guide Star Catalog, Version 1.2 (Lasker+ 1996) 1',
@@ -4431,11 +4441,11 @@ catalog.
             "W50"
         ],
         "validate_warnings": [
-            "/eng/ssb/websites/astropy/aux/vo_databases/daily_20190604/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:154:0: W50: Invalid unit string 'pixel'",
-            "/eng/ssb/websites/astropy/aux/vo_databases/daily_20190604/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:154:0: W50: Invalid unit string 'pixel'"
+            "/eng/ssb/websites/astropy/aux/vo_databases/daily_20190611/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:154:0: W50: Invalid unit string 'pixel'",
+            "/eng/ssb/websites/astropy/aux/vo_databases/daily_20190611/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:154:0: W50: Invalid unit string 'pixel'"
         ],
         "validate_xmllint": true,
-        "validate_xmllint_content": "/eng/ssb/websites/astropy/aux/vo_databases/daily_20190604/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml validates\n",
+        "validate_xmllint_content": "/eng/ssb/websites/astropy/aux/vo_databases/daily_20190611/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml validates\n",
         "waveband": "optical",
         "wsdl_url": ""
     }
@@ -4782,7 +4792,7 @@ This might take a while.
 
 .. parsed-literal::
 
-    Predicted run time is 1.1419071455564993 seconds
+    Predicted run time is 1.105650001565152 seconds
     Predicted number of rows is 2617
 
 
@@ -4811,7 +4821,7 @@ the service provider.
 
 .. parsed-literal::
 
-    INFO: conesearch_timer took 0.9161562919616699 s on AVERAGE for 1 call(s). [astropy.utils.timer]
+    INFO: conesearch_timer took 0.9453029632568359 s on AVERAGE for 1 call(s). [astropy.utils.timer]
 
 
 
@@ -4829,7 +4839,7 @@ the service provider.
 
 .. parsed-literal::
 
-    Actual run time is 0.9161562919616699 seconds
+    Actual run time is 0.9453029632568359 seconds
     Actual number of rows is 4028
 
 

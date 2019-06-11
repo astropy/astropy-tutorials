@@ -198,12 +198,14 @@ created called ``hcg7_center``
      '_sky_coord_frame',
      'altaz',
      'apply_space_motion',
+     'barycentricmeanecliptic',
      'barycentrictrueecliptic',
      'cache',
      'cartesian',
      'cirs',
      'contained_by',
      'copy',
+     'custombarycentricecliptic',
      'data',
      'dec',
      'default_differential',
@@ -229,6 +231,7 @@ created called ``hcg7_center``
      'galcen_distance',
      'galcen_v_sun',
      'gcrs',
+     'geocentricmeanecliptic',
      'geocentrictrueecliptic',
      'get_constellation',
      'get_frame_attr_names',
@@ -238,6 +241,8 @@ created called ``hcg7_center``
      'guess_from_table',
      'has_data',
      'hcrs',
+     'heliocentriceclipticiau76',
+     'heliocentricmeanecliptic',
      'heliocentrictrueecliptic',
      'icrs',
      'info',
@@ -252,6 +257,7 @@ created called ``hcg7_center``
      'match_to_catalog_sky',
      'name',
      'ndim',
+     'obliquity',
      'obsgeoloc',
      'obsgeovel',
      'obstime',
@@ -508,7 +514,7 @@ file\ ``'HCG7_SDSS_cutout.jpg'``, defined at the top of the cell.
 
 .. parsed-literal::
 
-    ('HCG7_SDSS_cutout.jpg', <http.client.HTTPMessage at 0x7fdedceade48>)
+    ('HCG7_SDSS_cutout.jpg', <http.client.HTTPMessage at 0x7f1d56e01518>)
 
 
 

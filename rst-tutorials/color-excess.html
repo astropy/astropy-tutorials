@@ -31,13 +31,6 @@
   <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
   <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
   <meta name="apple-mobile-web-app-capable" content="yes">
-  
-  <script type="text/javascript">  
-    if( (window.location.href.search("tutorials.html") != -1) && (window.location.href.search("q=filterTutorials") == -1) ){
-      var url = window.location.href.split("tutorials.html")[0] + "tutorials.html?q=filterTutorials";
-      window.location.href = url;
-    }
-  </script>
   <script type="text/javascript">
     jQuery(function() { Search.loadIndex("../searchindex.js"); });
   </script>
@@ -80,7 +73,7 @@
     
     
     
-    
+
     
     <div class="col-md-3">
       <div id="sidebar" class="bs-sidenav card" role="complementary">
@@ -102,7 +95,7 @@
 </li>
 </ul>
 
-      </div>    
+      </div>
     </div>
     
 
@@ -180,6 +173,10 @@ you can upgrade the package with pip:</p>
 <span class="kn">from</span> <span class="nn">astroquery.simbad</span> <span class="kn">import</span> <span class="n">Simbad</span>
 <span class="kn">from</span> <span class="nn">astroquery.mast</span> <span class="kn">import</span> <span class="n">Observations</span>
 <span class="kn">import</span> <span class="nn">astropy.visualization</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[1]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">WARNING</span><span class="p">:</span> <span class="n">AstropyDeprecationWarning</span><span class="p">:</span> <span class="n">astropy</span><span class="o">.</span><span class="n">extern</span><span class="o">.</span><span class="n">six</span> <span class="n">will</span> <span class="n">be</span> <span class="n">removed</span> <span class="ow">in</span> <span class="mf">4.0</span><span class="p">,</span> <span class="n">use</span> <span class="n">the</span> <span class="n">six</span> <span class="n">module</span> <span class="n">directly</span> <span class="k">if</span> <span class="n">it</span> <span class="ow">is</span> <span class="n">still</span> <span class="n">needed</span> <span class="p">[</span><span class="n">astropy</span><span class="o">.</span><span class="n">extern</span><span class="o">.</span><span class="n">six</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -635,7 +632,7 @@ depends on the shape of the background source flux.</p>
 </div>
 
 </div>
-      </div>  
+      </div>
       
     </div>
   </div>
@@ -647,8 +644,8 @@ depends on the shape of the background source flux.</p>
       
     </p>
     <p>
-    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.0.
-    &copy; Copyright Astropy.   
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.1.
+    &copy; Copyright Astropy.
     </p>
   </div>
 </footer>

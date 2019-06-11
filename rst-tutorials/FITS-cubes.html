@@ -31,13 +31,6 @@
   <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
   <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
   <meta name="apple-mobile-web-app-capable" content="yes">
-  
-  <script type="text/javascript">  
-    if( (window.location.href.search("tutorials.html") != -1) && (window.location.href.search("q=filterTutorials") == -1) ){
-      var url = window.location.href.split("tutorials.html")[0] + "tutorials.html?q=filterTutorials";
-      window.location.href = url;
-    }
-  </script>
   <script type="text/javascript">
     jQuery(function() { Search.loadIndex("../searchindex.js"); });
   </script>
@@ -80,7 +73,7 @@
     
     
     
-    
+
     
     <div class="col-md-3">
       <div id="sidebar" class="bs-sidenav card" role="complementary">
@@ -114,7 +107,7 @@
 </li>
 </ul>
 
-      </div>    
+      </div>
     </div>
     
 
@@ -192,6 +185,10 @@ images in a multitude of ways.</p>
 <span class="kn">from</span> <span class="nn">reproject</span> <span class="kn">import</span> <span class="n">reproject_interp</span>
 
 <span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[1]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">WARNING</span><span class="p">:</span> <span class="n">AstropyDeprecationWarning</span><span class="p">:</span> <span class="n">astropy</span><span class="o">.</span><span class="n">extern</span><span class="o">.</span><span class="n">six</span> <span class="n">will</span> <span class="n">be</span> <span class="n">removed</span> <span class="ow">in</span> <span class="mf">4.0</span><span class="p">,</span> <span class="n">use</span> <span class="n">the</span> <span class="n">six</span> <span class="n">module</span> <span class="n">directly</span> <span class="k">if</span> <span class="n">it</span> <span class="ow">is</span> <span class="n">still</span> <span class="n">needed</span> <span class="p">[</span><span class="n">astropy</span><span class="o">.</span><span class="n">extern</span><span class="o">.</span><span class="n">six</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -282,8 +279,8 @@ slice) or two axes (for a spectrum):</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[5]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">INFO</span><span class="p">:</span> <span class="n">Auto</span><span class="o">-</span><span class="n">setting</span> <span class="n">vmin</span> <span class="n">to</span> <span class="o">-</span><span class="mf">1.401e+00</span> <span class="p">[</span><span class="n">aplpy</span><span class="o">.</span><span class="n">core</span><span class="p">]</span>
-<span class="n">INFO</span><span class="p">:</span> <span class="n">Auto</span><span class="o">-</span><span class="n">setting</span> <span class="n">vmax</span> <span class="n">to</span>  <span class="mf">1.424e+01</span> <span class="p">[</span><span class="n">aplpy</span><span class="o">.</span><span class="n">core</span><span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">INFO</span><span class="p">:</span> <span class="n">Auto</span><span class="o">-</span><span class="n">setting</span> <span class="n">vmin</span> <span class="n">to</span> <span class="o">-</span><span class="mf">1.733e+00</span> <span class="p">[</span><span class="n">aplpy</span><span class="o">.</span><span class="n">core</span><span class="p">]</span>
+<span class="n">INFO</span><span class="p">:</span> <span class="n">Auto</span><span class="o">-</span><span class="n">setting</span> <span class="n">vmax</span> <span class="n">to</span>  <span class="mf">1.792e+01</span> <span class="p">[</span><span class="n">aplpy</span><span class="o">.</span><span class="n">core</span><span class="p">]</span>
 </pre></div>
 </div>
 <img alt="../_images/FITS-cubes_11_1.png" src="../_images/FITS-cubes_11_1.png" />
@@ -412,16 +409,26 @@ easy to access just the WCS object associated with a cube object.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[11]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">WCS</span> <span class="n">Keywords</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">WCS</span> <span class="n">Transformation</span>
 
-<span class="n">Number</span> <span class="n">of</span> <span class="n">WCS</span> <span class="n">axes</span><span class="p">:</span> <span class="mi">2</span>
-<span class="n">CTYPE</span> <span class="p">:</span> <span class="s1">&#39;GLON-TAN&#39;</span>  <span class="s1">&#39;GLAT-TAN&#39;</span>
-<span class="n">CRVAL</span> <span class="p">:</span> <span class="mf">303.75</span>  <span class="o">-</span><span class="mf">40.0</span>
-<span class="n">CRPIX</span> <span class="p">:</span> <span class="mf">10.557620817843869</span>  <span class="mf">47.3723930634757</span>
-<span class="n">PC1_1</span> <span class="n">PC1_2</span>  <span class="p">:</span> <span class="mf">1.0</span>  <span class="mf">0.0</span>
-<span class="n">PC2_1</span> <span class="n">PC2_2</span>  <span class="p">:</span> <span class="mf">0.0</span>  <span class="mf">1.0</span>
-<span class="n">CDELT</span> <span class="p">:</span> <span class="o">-</span><span class="mf">0.1494444443846667</span>  <span class="mf">0.1538888888273333</span>
-<span class="n">NAXIS</span> <span class="p">:</span> <span class="mi">0</span>  <span class="mi">0</span>
+<span class="n">This</span> <span class="n">transformation</span> <span class="n">has</span> <span class="mi">2</span> <span class="n">pixel</span> <span class="ow">and</span> <span class="mi">2</span> <span class="n">world</span> <span class="n">dimensions</span>
+
+<span class="n">Array</span> <span class="n">shape</span> <span class="p">(</span><span class="n">Numpy</span> <span class="n">order</span><span class="p">):</span> <span class="kc">None</span>
+
+<span class="n">Pixel</span> <span class="n">Dim</span>  <span class="n">Data</span> <span class="n">size</span>  <span class="n">Bounds</span>
+        <span class="mi">0</span>       <span class="kc">None</span>  <span class="kc">None</span>
+        <span class="mi">1</span>       <span class="kc">None</span>  <span class="kc">None</span>
+
+<span class="n">World</span> <span class="n">Dim</span>  <span class="n">Physical</span> <span class="n">Type</span>     <span class="n">Units</span>
+        <span class="mi">0</span>  <span class="n">pos</span><span class="o">.</span><span class="n">galactic</span><span class="o">.</span><span class="n">lon</span>  <span class="n">deg</span>
+        <span class="mi">1</span>  <span class="n">pos</span><span class="o">.</span><span class="n">galactic</span><span class="o">.</span><span class="n">lat</span>  <span class="n">deg</span>
+
+<span class="n">Correlation</span> <span class="n">between</span> <span class="n">pixel</span> <span class="ow">and</span> <span class="n">world</span> <span class="n">axes</span><span class="p">:</span>
+
+           <span class="n">Pixel</span> <span class="n">Dim</span>
+<span class="n">World</span> <span class="n">Dim</span>    <span class="mi">0</span>    <span class="mi">1</span>
+        <span class="mi">0</span>  <span class="n">yes</span>  <span class="n">yes</span>
+        <span class="mi">1</span>  <span class="n">yes</span>  <span class="n">yes</span>
 </pre></div>
 </div>
 <p>As expected, the first moment image we created only has two axes
@@ -461,7 +468,7 @@ object directly into a matplotlib axis instance.</p>
   <span class="n">s</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">contour</span><span class="o">.</span><span class="n">QuadContourSet</span> <span class="n">at</span> <span class="mh">0x7fdb21356fd0</span><span class="o">&gt;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">contour</span><span class="o">.</span><span class="n">QuadContourSet</span> <span class="n">at</span> <span class="mh">0x7fcf7a4adfd0</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <img alt="../_images/FITS-cubes_27_2.png" src="../_images/FITS-cubes_27_2.png" />
@@ -647,7 +654,7 @@ INFO: Downloading Observation ID: 1342205092 from http://archives.esac.esa.int/h
 INFO: [Done] [astroquery.esasky.core]
 INFO: Downloading of HERSCHEL data complete. [astroquery.esasky.core]
 INFO: Maps available at /home/circleci/project/tutorials/notebooks/FITS-cubes/Maps. [astroquery.esasky.core]
-Filename: Maps/HERSCHEL/anonymous1559670621/hspirepmw401_25pxmp_0110_m7303_1342198565_1342198566_1462476888800.fits.gz
+Filename: Maps/HERSCHEL/anonymous1560276352/hspirepmw401_25pxmp_0110_m7303_1342198565_1342198566_1462476888800.fits.gz
 No.    Name      Ver    Type      Cards   Dimensions   Format
   0  PRIMARY       1 PrimaryHDU     184   ()
   1  image         1 ImageHDU        47   (2407, 2141)   float64
@@ -672,13 +679,26 @@ the 350 micron image.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[18]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">WCS</span> <span class="n">Keywords</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">WCS</span> <span class="n">Transformation</span>
 
-<span class="n">Number</span> <span class="n">of</span> <span class="n">WCS</span> <span class="n">axes</span><span class="p">:</span> <span class="mi">2</span>
-<span class="n">CTYPE</span> <span class="p">:</span> <span class="s1">&#39;RA---TAN&#39;</span>  <span class="s1">&#39;DEC--TAN&#39;</span>
-<span class="n">CRVAL</span> <span class="p">:</span> <span class="mf">18.99666058287459</span>  <span class="o">-</span><span class="mf">71.82876374906319</span>
-<span class="n">CRPIX</span> <span class="p">:</span> <span class="mf">1063.0</span>  <span class="mf">1517.0</span>
-<span class="n">NAXIS</span> <span class="p">:</span> <span class="mi">2407</span>  <span class="mi">2141</span>
+<span class="n">This</span> <span class="n">transformation</span> <span class="n">has</span> <span class="mi">2</span> <span class="n">pixel</span> <span class="ow">and</span> <span class="mi">2</span> <span class="n">world</span> <span class="n">dimensions</span>
+
+<span class="n">Array</span> <span class="n">shape</span> <span class="p">(</span><span class="n">Numpy</span> <span class="n">order</span><span class="p">):</span> <span class="p">(</span><span class="mi">2141</span><span class="p">,</span> <span class="mi">2407</span><span class="p">)</span>
+
+<span class="n">Pixel</span> <span class="n">Dim</span>  <span class="n">Data</span> <span class="n">size</span>  <span class="n">Bounds</span>
+        <span class="mi">0</span>       <span class="mi">2407</span>  <span class="kc">None</span>
+        <span class="mi">1</span>       <span class="mi">2141</span>  <span class="kc">None</span>
+
+<span class="n">World</span> <span class="n">Dim</span>  <span class="n">Physical</span> <span class="n">Type</span>  <span class="n">Units</span>
+        <span class="mi">0</span>  <span class="n">pos</span><span class="o">.</span><span class="n">eq</span><span class="o">.</span><span class="n">ra</span>      <span class="n">deg</span>
+        <span class="mi">1</span>  <span class="n">pos</span><span class="o">.</span><span class="n">eq</span><span class="o">.</span><span class="n">dec</span>     <span class="n">deg</span>
+
+<span class="n">Correlation</span> <span class="n">between</span> <span class="n">pixel</span> <span class="ow">and</span> <span class="n">world</span> <span class="n">axes</span><span class="p">:</span>
+
+           <span class="n">Pixel</span> <span class="n">Dim</span>
+<span class="n">World</span> <span class="n">Dim</span>    <span class="mi">0</span>    <span class="mi">1</span>
+        <span class="mi">0</span>  <span class="n">yes</span>  <span class="n">yes</span>
+        <span class="mi">1</span>  <span class="n">yes</span>  <span class="n">yes</span>
 </pre></div>
 </div>
 <p>With this, it’s just as easy as before to display this image using
@@ -942,7 +962,7 @@ distortions in the image can change.</p>
 </div>
 
 </div>
-      </div>  
+      </div>
       
     </div>
   </div>
@@ -954,8 +974,8 @@ distortions in the image can change.</p>
       
     </p>
     <p>
-    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.0.
-    &copy; Copyright Astropy.   
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.1.
+    &copy; Copyright Astropy.
     </p>
   </div>
 </footer>

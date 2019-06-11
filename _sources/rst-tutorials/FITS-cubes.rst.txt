@@ -104,6 +104,15 @@ Alternatively, if you don't use conda, you can use pip.
     
     %matplotlib inline
 
+
+:outputnumrole:`Out[1]:`
+
+
+.. parsed-literal::
+
+    WARNING: AstropyDeprecationWarning: astropy.extern.six will be removed in 4.0, use the six module directly if it is still needed [astropy.extern.six]
+
+
 Download the HI Data
 --------------------
 
@@ -243,8 +252,8 @@ slice) or two axes (for a spectrum):
 
 .. parsed-literal::
 
-    INFO: Auto-setting vmin to -1.401e+00 [aplpy.core]
-    INFO: Auto-setting vmax to  1.424e+01 [aplpy.core]
+    INFO: Auto-setting vmin to -1.733e+00 [aplpy.core]
+    INFO: Auto-setting vmax to  1.792e+01 [aplpy.core]
 
 
 
@@ -457,16 +466,26 @@ easy to access just the WCS object associated with a cube object.
 
 .. parsed-literal::
 
-    WCS Keywords
+    WCS Transformation
     
-    Number of WCS axes: 2
-    CTYPE : 'GLON-TAN'  'GLAT-TAN'  
-    CRVAL : 303.75  -40.0  
-    CRPIX : 10.557620817843869  47.3723930634757  
-    PC1_1 PC1_2  : 1.0  0.0  
-    PC2_1 PC2_2  : 0.0  1.0  
-    CDELT : -0.1494444443846667  0.1538888888273333  
-    NAXIS : 0  0
+    This transformation has 2 pixel and 2 world dimensions
+    
+    Array shape (Numpy order): None
+    
+    Pixel Dim  Data size  Bounds
+            0       None  None
+            1       None  None
+    
+    World Dim  Physical Type     Units
+            0  pos.galactic.lon  deg
+            1  pos.galactic.lat  deg
+    
+    Correlation between pixel and world axes:
+    
+               Pixel Dim
+    World Dim    0    1
+            0  yes  yes
+            1  yes  yes
 
 
 As expected, the first moment image we created only has two axes
@@ -520,7 +539,7 @@ object directly into a matplotlib axis instance.
 
 .. parsed-literal::
 
-    <matplotlib.contour.QuadContourSet at 0x7fdb21356fd0>
+    <matplotlib.contour.QuadContourSet at 0x7fcf7a4adfd0>
 
 
 
@@ -795,7 +814,7 @@ TableList argument.
     INFO: [Done] [astroquery.esasky.core]
     INFO: Downloading of HERSCHEL data complete. [astroquery.esasky.core]
     INFO: Maps available at /home/circleci/project/tutorials/notebooks/FITS-cubes/Maps. [astroquery.esasky.core]
-    Filename: Maps/HERSCHEL/anonymous1559670621/hspirepmw401_25pxmp_0110_m7303_1342198565_1342198566_1462476888800.fits.gz
+    Filename: Maps/HERSCHEL/anonymous1560276352/hspirepmw401_25pxmp_0110_m7303_1342198565_1342198566_1462476888800.fits.gz
     No.    Name      Ver    Type      Cards   Dimensions   Format
       0  PRIMARY       1 PrimaryHDU     184   ()      
       1  image         1 ImageHDU        47   (2407, 2141)   float64   
@@ -831,13 +850,26 @@ the 350 micron image.
 
 .. parsed-literal::
 
-    WCS Keywords
+    WCS Transformation
     
-    Number of WCS axes: 2
-    CTYPE : 'RA---TAN'  'DEC--TAN'  
-    CRVAL : 18.99666058287459  -71.82876374906319  
-    CRPIX : 1063.0  1517.0  
-    NAXIS : 2407  2141
+    This transformation has 2 pixel and 2 world dimensions
+    
+    Array shape (Numpy order): (2141, 2407)
+    
+    Pixel Dim  Data size  Bounds
+            0       2407  None
+            1       2141  None
+    
+    World Dim  Physical Type  Units
+            0  pos.eq.ra      deg
+            1  pos.eq.dec     deg
+    
+    Correlation between pixel and world axes:
+    
+               Pixel Dim
+    World Dim    0    1
+            0  yes  yes
+            1  yes  yes
 
 
 With this, it's just as easy as before to display this image using

@@ -31,13 +31,6 @@
   <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
   <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
   <meta name="apple-mobile-web-app-capable" content="yes">
-  
-  <script type="text/javascript">  
-    if( (window.location.href.search("tutorials.html") != -1) && (window.location.href.search("q=filterTutorials") == -1) ){
-      var url = window.location.href.split("tutorials.html")[0] + "tutorials.html?q=filterTutorials";
-      window.location.href = url;
-    }
-  </script>
   <script type="text/javascript">
     jQuery(function() { Search.loadIndex("../searchindex.js"); });
   </script>
@@ -80,7 +73,7 @@
     
     
     
-    
+
     
     <div class="col-md-3">
       <div id="sidebar" class="bs-sidenav card" role="complementary">
@@ -116,7 +109,7 @@
 </li>
 </ul>
 
-      </div>    
+      </div>
     </div>
     
 
@@ -169,7 +162,8 @@ with a compound model and with a custom model.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[1]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">circleci</span><span class="o">/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">6</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astroquery</span><span class="o">/</span><span class="n">sdss</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">29</span><span class="p">:</span> <span class="ne">UserWarning</span><span class="p">:</span> <span class="n">Experimental</span><span class="p">:</span> <span class="n">SDSS</span> <span class="n">has</span> <span class="ow">not</span> <span class="n">yet</span> <span class="n">been</span> <span class="n">refactored</span> <span class="n">to</span> <span class="n">have</span> <span class="n">its</span> <span class="n">API</span> <span class="n">match</span> <span class="n">the</span> <span class="n">rest</span> <span class="n">of</span> <span class="n">astroquery</span> <span class="p">(</span><span class="n">but</span> <span class="n">it</span><span class="s1">&#39;s nearly there).</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">WARNING</span><span class="p">:</span> <span class="n">AstropyDeprecationWarning</span><span class="p">:</span> <span class="n">astropy</span><span class="o">.</span><span class="n">extern</span><span class="o">.</span><span class="n">six</span> <span class="n">will</span> <span class="n">be</span> <span class="n">removed</span> <span class="ow">in</span> <span class="mf">4.0</span><span class="p">,</span> <span class="n">use</span> <span class="n">the</span> <span class="n">six</span> <span class="n">module</span> <span class="n">directly</span> <span class="k">if</span> <span class="n">it</span> <span class="ow">is</span> <span class="n">still</span> <span class="n">needed</span> <span class="p">[</span><span class="n">astropy</span><span class="o">.</span><span class="n">extern</span><span class="o">.</span><span class="n">six</span><span class="p">]</span>
+<span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">circleci</span><span class="o">/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">6</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astroquery</span><span class="o">/</span><span class="n">sdss</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">29</span><span class="p">:</span> <span class="ne">UserWarning</span><span class="p">:</span> <span class="n">Experimental</span><span class="p">:</span> <span class="n">SDSS</span> <span class="n">has</span> <span class="ow">not</span> <span class="n">yet</span> <span class="n">been</span> <span class="n">refactored</span> <span class="n">to</span> <span class="n">have</span> <span class="n">its</span> <span class="n">API</span> <span class="n">match</span> <span class="n">the</span> <span class="n">rest</span> <span class="n">of</span> <span class="n">astroquery</span> <span class="p">(</span><span class="n">but</span> <span class="n">it</span><span class="s1">&#39;s nearly there).</span>
   <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;Experimental: SDSS has not yet been refactored to have its API &quot;</span>
 </pre></div>
 </div>
@@ -628,7 +622,7 @@ with <code class="docutils literal notranslate"><span class="pre">astropy.modeli
 <span class="n">Parameters</span><span class="p">:</span>
             <span class="n">a</span>                   <span class="n">b</span>                  <span class="n">c</span>
     <span class="o">------------------</span> <span class="o">-------------------</span> <span class="o">------------------</span>
-    <span class="mf">1.2403836468019147</span> <span class="o">-</span><span class="mf">1.9480626682019324</span> <span class="mf">0.8916777957130028</span>
+    <span class="mf">1.1062210344313237</span> <span class="o">-</span><span class="mf">2.0992105694016434</span> <span class="mf">0.9899420850088078</span>
 </pre></div>
 </div>
 <p>The fit looks good in the plot. Let’s check the parameters and the
@@ -650,7 +644,7 @@ goodness of the fit.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[32]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">1.0649805347680616</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">0.775654647282506</span>
 </pre></div>
 </div>
 <p>The Reduced Chi Square value is close to 1. Great! This means our fit is
@@ -748,9 +742,9 @@ of the parameters.</p>
 <span class="n">Outputs</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">,)</span>
 <span class="n">Model</span> <span class="nb">set</span> <span class="n">size</span><span class="p">:</span> <span class="mi">1</span>
 <span class="n">Parameters</span><span class="p">:</span>
-            <span class="n">a</span>                 <span class="n">b</span>                 <span class="n">c</span>                  <span class="n">d</span>
-    <span class="o">-----------------</span> <span class="o">-----------------</span> <span class="o">------------------</span> <span class="o">------------------</span>
-    <span class="mf">3.534913543576627</span> <span class="mf">2.016129982258802</span> <span class="mf">3.7378810645089655</span> <span class="mf">0.9732428390143939</span>
+            <span class="n">a</span>                  <span class="n">b</span>                 <span class="n">c</span>                  <span class="n">d</span>
+    <span class="o">------------------</span> <span class="o">-----------------</span> <span class="o">------------------</span> <span class="o">------------------</span>
+    <span class="mf">3.3779675031100282</span> <span class="mf">2.012819222709864</span> <span class="mf">3.7521235307896754</span> <span class="mf">0.9493300416770957</span>
 </pre></div>
 </div>
 <p><span class="inputnumrole">In[39]:</span></p>
@@ -758,7 +752,7 @@ of the parameters.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[39]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">5.269136169211464</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">6.026525242281625</span>
 </pre></div>
 </div>
 <p>The Reduced Chi Squared value is showing the same as the plot: this fit
@@ -800,7 +794,7 @@ the following data.</p>
 </div>
 
 </div>
-      </div>  
+      </div>
       
     </div>
   </div>
@@ -812,8 +806,8 @@ the following data.</p>
       
     </p>
     <p>
-    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.0.
-    &copy; Copyright Astropy.   
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.1.
+    &copy; Copyright Astropy.
     </p>
   </div>
 </footer>
