@@ -48,13 +48,6 @@
   <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
   <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
   <meta name="apple-mobile-web-app-capable" content="yes">
-  {# this script is to redirect /tutorials.html to /tutorials.html?q=filterTutorials #}
-  <script type="text/javascript">  
-    if( (window.location.href.search("tutorials.html") != -1) && (window.location.href.search("q=filterTutorials") == -1) ){
-      var url = window.location.href.split("tutorials.html")[0] + "tutorials.html?q=filterTutorials";
-      window.location.href = url;
-    }
-  </script>
   <script type="text/javascript">
     jQuery(function() { Search.loadIndex("{{ pathto('searchindex.js', 1) }}"); });
   </script>
@@ -82,13 +75,13 @@
     {% else %}
       {%- set content_card = "content-padding card" %}
     {% endif %}
-    
+
     {% if pagename != "search" and pagename != "index" and pagename != "tutorials" and pagename != "documentation" and pagename != "examples" and pagename != "guides" %}
     <div class="{{ bs_span_prefix }}3">
       <div id="sidebar" class="bs-sidenav card" role="complementary">
         <h3>Table of contents</h3>
         {{toc}}
-      </div>    
+      </div>
     </div>
     {%- set bs_content_width = "9" %}
     {% endif %}
@@ -96,10 +89,10 @@
     <div class="{{ bs_span_prefix }}{{ bs_content_width }}">
       <div class="{{content_card}}">
         <div>{% block body %}{% endblock %}</div>
-      </div>  
+      </div>
       {% if pagename == "tutorials" %}
         {# This is where the tutorials will be injected based on the filters #}
-        <div id="search-results" class="tut-results"></div>  
+        <div id="search-results" class="tut-results"></div>
       {% endif %}
     </div>
   </div>
@@ -118,7 +111,7 @@
     </p>
     <p>
     {% trans sphinx_version=sphinx_version|e %}Created using <a href="http://sphinx-doc.org/">Sphinx</a> {{ sphinx_version }}.{% endtrans %}
-    {% trans copyright=copyright|e %}&copy; Copyright Astropy.{% endtrans %}   
+    {% trans copyright=copyright|e %}&copy; Copyright Astropy.{% endtrans %}
     </p>
   </div>
 </footer>
