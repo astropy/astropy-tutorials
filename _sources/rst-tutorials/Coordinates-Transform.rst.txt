@@ -675,6 +675,7 @@ location in the sky over Kitt Peak at the requested time.
 .. parsed-literal::
 
     WARNING: failed to download http://maia.usno.navy.mil/ser7/finals2000A.all and http://toshi.nofs.navy.mil/ser7/finals2000A.all, using local IERS-B: <urlopen error [Errno -2] Name or service not known>;HTTP Error 503: Service Unavailable [astropy.utils.iers.iers]
+    WARNING: failed to download http://maia.usno.navy.mil/ser7/finals2000A.all and http://toshi.nofs.navy.mil/ser7/finals2000A.all, using local IERS-B: <urlopen error [Errno -2] Name or service not known>;<urlopen error timed out> [astropy.utils.iers.iers]
 
 
 
@@ -792,8 +793,8 @@ We can also look at the object altitude at the present time and date:
 
 .. parsed-literal::
 
-    <SkyCoord (AltAz: obstime=2019-06-18 17:50:21.920294, location=(-1994502.60430614, -5037538.54232911, 3358104.99690298) m, pressure=0.0 hPa, temperature=0.0 deg_C, relative_humidity=0.0, obswl=1.0 micron): (az, alt) in deg
-        (248.8872575, 31.62054308)>
+    <SkyCoord (AltAz: obstime=2019-06-18 17:51:58.870248, location=(-1994502.60430614, -5037538.54232911, 3358104.99690298) m, pressure=0.0 hPa, temperature=0.0 deg_C, relative_humidity=0.0, obswl=1.0 micron): (az, alt) in deg
+        (249.17693156, 31.29964849)>
 
 
 Exercises
