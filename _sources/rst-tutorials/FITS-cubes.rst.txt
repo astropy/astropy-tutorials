@@ -252,8 +252,8 @@ slice) or two axes (for a spectrum):
 
 .. parsed-literal::
 
-    INFO: Auto-setting vmin to -1.733e+00 [aplpy.core]
-    INFO: Auto-setting vmax to  1.792e+01 [aplpy.core]
+    INFO: Auto-setting vmin to -1.688e+00 [aplpy.core]
+    INFO: Auto-setting vmax to  1.743e+01 [aplpy.core]
 
 
 
@@ -539,7 +539,7 @@ object directly into a matplotlib axis instance.
 
 .. parsed-literal::
 
-    <matplotlib.contour.QuadContourSet at 0x7fcf7a4adfd0>
+    <matplotlib.contour.QuadContourSet at 0x7fb0352f19b0>
 
 
 
@@ -814,7 +814,7 @@ TableList argument.
     INFO: [Done] [astroquery.esasky.core]
     INFO: Downloading of HERSCHEL data complete. [astroquery.esasky.core]
     INFO: Maps available at /home/circleci/project/tutorials/notebooks/FITS-cubes/Maps. [astroquery.esasky.core]
-    Filename: Maps/HERSCHEL/anonymous1560276352/hspirepmw401_25pxmp_0110_m7303_1342198565_1342198566_1462476888800.fits.gz
+    Filename: Maps/HERSCHEL/anonymous1560880253/hspirepmw401_25pxmp_0110_m7303_1342198565_1342198566_1462476888800.fits.gz
     No.    Name      Ver    Type      Cards   Dimensions   Format
       0  PRIMARY       1 PrimaryHDU     184   ()      
       1  image         1 ImageHDU        47   (2407, 2141)   float64   
@@ -1104,6 +1104,16 @@ reproject, and a header containing WCS information to reproject onto.
     rescaled_herschel_imagehdu = fits.PrimaryHDU(data = rescaled_herschel_data, 
                                                  # wrap up our reprojection as a new fits HDU object
                                                  header = hi_column_density.hdu.header)
+
+
+:outputnumrole:`Out[22]:`
+
+
+.. parsed-literal::
+
+    /home/circleci/project/venv/lib/python3.6/site-packages/reproject/interpolation/core_celestial.py:26: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+      if not np.issubdtype(array.dtype, np.float):
+
 
 ``rescaled_herschel_imagehdu`` will now behave just like the other FITS
 images we have been working with, but now with a degraded resolution

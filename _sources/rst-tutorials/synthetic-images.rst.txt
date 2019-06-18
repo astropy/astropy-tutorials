@@ -211,7 +211,7 @@ proper range (``vmin`` and ``vmax``).
 
 .. parsed-literal::
 
-    <matplotlib.image.AxesImage at 0x7ff79ff8d048>
+    <matplotlib.image.AxesImage at 0x7f082cae3f60>
 
 
 
@@ -328,18 +328,18 @@ Let's take a look at the header. ``CDELT1``, ``CDELT2``, ``CUNIT1``,
     EXTNAME = 'NN_EMISSIVITY_I_LOBE_150.0MHZ' / extension name                      
     BTYPE   = 'nn_emissivity_i_lobe_150.0MHz'                                       
     BUNIT   = 'Jy/arcsec**2'                                                        
-    WCSAXES =                    2                                                  
-    CRPIX1  =                726.0                                                  
-    CRPIX2  =                512.0                                                  
-    CDELT1  = -8.7492222399083E-06                                                  
-    CDELT2  =  8.7492222399083E-06                                                  
-    CUNIT1  = 'deg     '                                                            
-    CUNIT2  = 'deg     '                                                            
+    WCSAXES =                    2 / Number of coordinate axes                      
+    CRPIX1  =                726.0 / Pixel coordinate of reference point            
+    CRPIX2  =                512.0 / Pixel coordinate of reference point            
+    CDELT1  = -8.7492222399083E-06 / [deg] Coordinate increment at reference point  
+    CDELT2  =  8.7492222399083E-06 / [deg] Coordinate increment at reference point  
+    CUNIT1  = 'deg     '           / Units of coordinate increment and value        
+    CUNIT2  = 'deg     '           / Units of coordinate increment and value        
     CTYPE1  = 'LINEAR  '                                                            
     CTYPE2  = 'LINEAR  '                                                            
-    CRVAL1  =          299.8681525                                                  
-    CRVAL2  =      40.733915555556                                                  
-    LATPOLE =                 90.0                                                  
+    CRVAL1  =          299.8681525 / [deg] Coordinate value at reference point      
+    CRVAL2  =      40.733915555556 / [deg] Coordinate value at reference point      
+    LATPOLE =                 90.0 / [deg] Native latitude of celestial pole        
     WCSNAME = 'yt      '                                                            
 
 
@@ -411,7 +411,7 @@ pixels by using our pixel scale keyword ``cdelt2`` from above.
 
 .. parsed-literal::
 
-    <matplotlib.image.AxesImage at 0x7ff79dd00160>
+    <matplotlib.image.AxesImage at 0x7f082682c160>
 
 
 
@@ -456,7 +456,7 @@ this, using a 2D Lorentzian
 
 .. parsed-literal::
 
-    <matplotlib.image.AxesImage at 0x7ff79dc5ceb8>
+    <matplotlib.image.AxesImage at 0x7f0826804eb8>
 
 
 
@@ -519,7 +519,7 @@ Now let's take a look at the convolved image.
 
 .. parsed-literal::
 
-    <matplotlib.colorbar.Colorbar at 0x7ff79dbba828>
+    <matplotlib.colorbar.Colorbar at 0x7f08266e4828>
 
 
 
@@ -608,7 +608,7 @@ Let's plot the Q and U images.
 
 .. parsed-literal::
 
-    <matplotlib.colorbar.Colorbar at 0x7ff7a0015198>
+    <matplotlib.colorbar.Colorbar at 0x7f082cacd198>
 
 
 
@@ -683,7 +683,7 @@ vectors along the x/right-ascention axis.
 
 .. parsed-literal::
 
-    <matplotlib.quiver.Quiver at 0x7ff7a00762b0>
+    <matplotlib.quiver.Quiver at 0x7f082cc322e8>
 
 
 

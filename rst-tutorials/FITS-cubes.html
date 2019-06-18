@@ -279,8 +279,8 @@ slice) or two axes (for a spectrum):</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[5]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">INFO</span><span class="p">:</span> <span class="n">Auto</span><span class="o">-</span><span class="n">setting</span> <span class="n">vmin</span> <span class="n">to</span> <span class="o">-</span><span class="mf">1.733e+00</span> <span class="p">[</span><span class="n">aplpy</span><span class="o">.</span><span class="n">core</span><span class="p">]</span>
-<span class="n">INFO</span><span class="p">:</span> <span class="n">Auto</span><span class="o">-</span><span class="n">setting</span> <span class="n">vmax</span> <span class="n">to</span>  <span class="mf">1.792e+01</span> <span class="p">[</span><span class="n">aplpy</span><span class="o">.</span><span class="n">core</span><span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">INFO</span><span class="p">:</span> <span class="n">Auto</span><span class="o">-</span><span class="n">setting</span> <span class="n">vmin</span> <span class="n">to</span> <span class="o">-</span><span class="mf">1.688e+00</span> <span class="p">[</span><span class="n">aplpy</span><span class="o">.</span><span class="n">core</span><span class="p">]</span>
+<span class="n">INFO</span><span class="p">:</span> <span class="n">Auto</span><span class="o">-</span><span class="n">setting</span> <span class="n">vmax</span> <span class="n">to</span>  <span class="mf">1.743e+01</span> <span class="p">[</span><span class="n">aplpy</span><span class="o">.</span><span class="n">core</span><span class="p">]</span>
 </pre></div>
 </div>
 <img alt="../_images/FITS-cubes_11_1.png" src="../_images/FITS-cubes_11_1.png" />
@@ -468,7 +468,7 @@ object directly into a matplotlib axis instance.</p>
   <span class="n">s</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">contour</span><span class="o">.</span><span class="n">QuadContourSet</span> <span class="n">at</span> <span class="mh">0x7fcf7a4adfd0</span><span class="o">&gt;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">contour</span><span class="o">.</span><span class="n">QuadContourSet</span> <span class="n">at</span> <span class="mh">0x7fb0352f19b0</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <img alt="../_images/FITS-cubes_27_2.png" src="../_images/FITS-cubes_27_2.png" />
@@ -654,7 +654,7 @@ INFO: Downloading Observation ID: 1342205092 from http://archives.esac.esa.int/h
 INFO: [Done] [astroquery.esasky.core]
 INFO: Downloading of HERSCHEL data complete. [astroquery.esasky.core]
 INFO: Maps available at /home/circleci/project/tutorials/notebooks/FITS-cubes/Maps. [astroquery.esasky.core]
-Filename: Maps/HERSCHEL/anonymous1560276352/hspirepmw401_25pxmp_0110_m7303_1342198565_1342198566_1462476888800.fits.gz
+Filename: Maps/HERSCHEL/anonymous1560880253/hspirepmw401_25pxmp_0110_m7303_1342198565_1342198566_1462476888800.fits.gz
 No.    Name      Ver    Type      Cards   Dimensions   Format
   0  PRIMARY       1 PrimaryHDU     184   ()
   1  image         1 ImageHDU        47   (2407, 2141)   float64
@@ -872,6 +872,9 @@ reproject, and a header containing WCS information to reproject onto.</p>
                                              <span class="n">header</span> <span class="o">=</span> <span class="n">hi_column_density</span><span class="o">.</span><span class="n">hdu</span><span class="o">.</span><span class="n">header</span><span class="p">)</span>
 </pre></div>
 </div>
+<p><span class="outputnumrole">Out[22]:</span></p>
+<pre class="literal-block">/home/circleci/project/venv/lib/python3.6/site-packages/reproject/interpolation/core_celestial.py:26: FutureWarning: Conversion of the second argument of issubdtype from <a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.7)"><code class="xref py py-obj docutils literal notranslate"><span class="pre">float</span></code></a> to <code class="xref py py-obj docutils literal notranslate"><span class="pre">np.floating</span></code> is deprecated. In future, it will be treated as <code class="xref py py-obj docutils literal notranslate"><span class="pre">np.float64</span> <span class="pre">==</span> <span class="pre">np.dtype(float).type</span></code>.
+  if not np.issubdtype(array.dtype, np.float):</pre>
 <p><code class="docutils literal notranslate"><span class="pre">rescaled_herschel_imagehdu</span></code> will now behave just like the other FITS
 images we have been working with, but now with a degraded resolution
 matching the HI data. This includes having its native coordinates in
