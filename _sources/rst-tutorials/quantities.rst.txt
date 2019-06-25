@@ -32,7 +32,20 @@ Ana Bonaca, Erik Tollerud, Jonathan Foster
 Learning Goals
 --------------
 
--  TODO
+-  Learn how to instantiate ``astropy.units.Quantity`` objects
+-  Take advantage of constants in the ``astropy.constants`` library
+-  Print formatted unit strings
+-  Plot ``Quantity`` objects with unit labels, using
+   ``astropy.visualization.quantity_support``
+-  Do math with ``Quantity`` objects
+-  Convert quantities with ``astropy.units``
+-  Convert between wavelength and energy with ``astropy.units.spectral``
+   equivalencies
+-  Use the small angle approximation with
+   ``astropy.units.dimensionless_angles`` equivalencies
+-  Write functions with explicit units to prevent your Mars orbiter from
+   crashing
+-  Make synthetic radio observations
 
 Keywords
 --------
@@ -95,6 +108,18 @@ Boltzmann's constant, ``k_B``.
     import astropy.units as u
     from astropy.constants import G, h, k_B
 
+We will also show an example of plotting while taking advantage of the
+``astropy.visualization`` package, which provides support for
+``Quantity`` units.
+
+
+:inputnumrole:`In[3]:`
+
+
+.. code:: python
+
+    from astropy.visualization import quantity_support
+
 1. Galaxy mass
 --------------
 
@@ -110,7 +135,7 @@ object is by multiplying the value with its unit. Units are accessed as
 u."unit", in this case u.pc.
 
 
-:inputnumrole:`In[3]:`
+:inputnumrole:`In[4]:`
 
 
 .. code:: python
@@ -126,7 +151,7 @@ reference documentation on
 Quantity <http://docs.astropy.org/en/stable/api/astropy.units.quantity.Quantity.html>`__.
 
 
-:inputnumrole:`In[4]:`
+:inputnumrole:`In[5]:`
 
 
 .. code:: python
@@ -137,7 +162,7 @@ We can access the value and unit of a ``Quantity`` using the ``value``
 and ``unit`` attributes.
 
 
-:inputnumrole:`In[5]:`
+:inputnumrole:`In[6]:`
 
 
 .. code:: python
@@ -147,7 +172,7 @@ and ``unit`` attributes.
     unit: {1}""".format(Reff.value, Reff.unit))
 
 
-:outputnumrole:`Out[5]:`
+:outputnumrole:`Out[6]:`
 
 
 .. parsed-literal::
@@ -161,7 +186,7 @@ The ``value`` and ``unit`` attributes can also be accessed within the
 print function.
 
 
-:inputnumrole:`In[6]:`
+:inputnumrole:`In[7]:`
 
 
 .. code:: python
@@ -171,7 +196,7 @@ print function.
     unit: {0.unit}""".format(Reff))
 
 
-:outputnumrole:`Out[6]:`
+:outputnumrole:`Out[7]:`
 
 
 .. parsed-literal::
@@ -185,7 +210,7 @@ Furthermore, we can convert the radius in parsecs to any other unit of
 length using the ``to()`` method. Here, we convert it to meters.
 
 
-:inputnumrole:`In[7]:`
+:inputnumrole:`In[8]:`
 
 
 .. code:: python
@@ -193,7 +218,7 @@ length using the ``to()`` method. Here, we convert it to meters.
     print("{0:.3g}".format(Reff.to(u.m)))
 
 
-:outputnumrole:`Out[7]:`
+:outputnumrole:`Out[8]:`
 
 
 .. parsed-literal::
@@ -206,7 +231,7 @@ measurements, assuming a normal distribution with a mean velocity of 206
 km/s and a velocity dispersion of 4.3 km/s.
 
 
-:inputnumrole:`In[8]:`
+:inputnumrole:`In[9]:`
 
 
 .. code:: python
@@ -216,7 +241,7 @@ km/s and a velocity dispersion of 4.3 km/s.
     v = np.random.normal(vmean, sigin, 500)*u.km/u.s
 
 
-:inputnumrole:`In[9]:`
+:inputnumrole:`In[10]:`
 
 
 .. code:: python
@@ -226,7 +251,7 @@ km/s and a velocity dispersion of 4.3 km/s.
     {1}""".format(v[:10], v.to(u.m/u.s)[:10]))
 
 
-:outputnumrole:`Out[9]:`
+:outputnumrole:`Out[10]:`
 
 
 .. parsed-literal::
@@ -239,19 +264,50 @@ km/s and a velocity dispersion of 4.3 km/s.
      209306.79704073 211359.66936646] m / s
 
 
+One can ocassionally run into issues when attempting to plot
+``Quantity`` objects with ``matplotlib`` libraries. It is always
+possible to fix this by passing the value array (e.g., ``v.value``) to
+``matplotlib`` functions. However, calling the
+``astropy.visualization.quantity_support()`` function will change the
+settings on your ``matplotlib`` session to better handle astropy
+``Quantity`` objects:
 
-:inputnumrole:`In[10]:`
+
+:inputnumrole:`In[11]:`
+
+
+.. code:: python
+
+    quantity_support()
+
+
+:outputnumrole:`Out[11]:`
+
+
+
+
+.. parsed-literal::
+
+    <astropy.visualization.units.quantity_support.<locals>.MplQuantityConverter at 0x7f16f90c86a0>
+
+
+
+Now we can plot a histogram of the velocity dataset. Note that, due to
+calling ``quantity_support``, the x-axis is automatically labeled with
+the correct units.
+
+
+:inputnumrole:`In[12]:`
 
 
 .. code:: python
 
     plt.figure()
     plt.hist(v, bins='auto', histtype="step")
-    plt.xlabel("Velocity (km/s)")
     plt.ylabel("N")
 
 
-:outputnumrole:`Out[10]:`
+:outputnumrole:`Out[12]:`
 
 
 
@@ -263,18 +319,18 @@ km/s and a velocity dispersion of 4.3 km/s.
 
 
 
-.. image:: nboutput/quantities_21_1.png
+.. image:: nboutput/quantities_26_1.png
 
 
 
-Then we calculate the velocity dispersion of the galaxy. This
+Now we can calculate the velocity dispersion of the galaxy. This
 demonstrates how you can perform basic operations like subtraction and
 division with ``Quantity`` objects, and also use them in standard numpy
 functions such as ``mean()`` and ``size()``. They retain their units
 through these operations just as you would expect them to.
 
 
-:inputnumrole:`In[11]:`
+:inputnumrole:`In[13]:`
 
 
 .. code:: python
@@ -283,7 +339,7 @@ through these operations just as you would expect them to.
     print("Velocity dispersion: {0:.2f}".format(sigma))
 
 
-:outputnumrole:`Out[11]:`
+:outputnumrole:`Out[13]:`
 
 
 .. parsed-literal::
@@ -297,7 +353,7 @@ the python standard ``math`` library's ``sqrt`` function instead, we get
 an error.
 
 
-:inputnumrole:`In[12]:`
+:inputnumrole:`In[14]:`
 
 
 .. code:: python
@@ -318,7 +374,7 @@ enough. For the calculation, we can multiply the quantities together,
 and ``astropy`` will keep track of the units.
 
 
-:inputnumrole:`In[13]:`
+:inputnumrole:`In[15]:`
 
 
 .. code:: python
@@ -327,7 +383,7 @@ and ``astropy`` will keep track of the units.
     M
 
 
-:outputnumrole:`Out[13]:`
+:outputnumrole:`Out[15]:`
 
 
 
@@ -343,7 +399,7 @@ mass. However, it can be decomposed to cancel all of the length units
 (:math:`km^2 pc/m^3`) using the ``decompose()`` method.
 
 
-:inputnumrole:`In[14]:`
+:inputnumrole:`In[16]:`
 
 
 .. code:: python
@@ -351,7 +407,7 @@ mass. However, it can be decomposed to cancel all of the length units
     M.decompose()
 
 
-:outputnumrole:`Out[14]:`
+:outputnumrole:`Out[16]:`
 
 
 
@@ -367,7 +423,7 @@ masses are common in astronomy, or maybe you want the default SI and CGS
 units.
 
 
-:inputnumrole:`In[15]:`
+:inputnumrole:`In[17]:`
 
 
 .. code:: python
@@ -378,7 +434,7 @@ units.
     CGS units: {2:.3g}""".format(M.to(u.Msun), M.si, M.cgs))
 
 
-:outputnumrole:`Out[15]:`
+:outputnumrole:`Out[17]:`
 
 
 .. parsed-literal::
@@ -393,7 +449,7 @@ Or, if you want the log of the mass, you can just use ``np.log10`` as
 long as the logarithm's argument is dimensionless.
 
 
-:inputnumrole:`In[16]:`
+:inputnumrole:`In[18]:`
 
 
 .. code:: python
@@ -401,7 +457,7 @@ long as the logarithm's argument is dimensionless.
     np.log10(M / u.Msun)
 
 
-:outputnumrole:`Out[16]:`
+:outputnumrole:`Out[18]:`
 
 
 
@@ -416,7 +472,7 @@ However, you can't take the log of something with units, as that is not
 mathematically sensible.
 
 
-:inputnumrole:`In[17]:`
+:inputnumrole:`In[19]:`
 
 
 .. code:: python
@@ -424,7 +480,7 @@ mathematically sensible.
     np.log10(M)
 
 
-:outputnumrole:`Out[17]:`
+:outputnumrole:`Out[19]:`
 
 
 ::
@@ -480,7 +536,7 @@ mathematically sensible.
 
     UnitTypeErrorTraceback (most recent call last)
 
-    <ipython-input-17-1faee346a12e> in <module>
+    <ipython-input-19-1faee346a12e> in <module>
     ----> 1 np.log10(M)
     
 
@@ -569,7 +625,7 @@ that we have an independent measurement of distance to the cloud
 constant throughout the cloud: :math:`T_{ex}=25` K.
 
 
-:inputnumrole:`In[18]:`
+:inputnumrole:`In[20]:`
 
 
 .. code:: python
@@ -591,7 +647,7 @@ the center in each dimension shown below. Note in particular that the
 the exponential.
 
 
-:inputnumrole:`In[19]:`
+:inputnumrole:`In[21]:`
 
 
 .. code:: python
@@ -627,7 +683,7 @@ temperature scale (T:math:`_{\rm MB}`) which is the closest we can
 normally get to the actual brightness temperature of our source.
 
 
-:inputnumrole:`In[20]:`
+:inputnumrole:`In[22]:`
 
 
 .. code:: python
@@ -638,7 +694,7 @@ We will also need to know the width of each velocity bin and the size of
 each pixel, so let's calculate that now.
 
 
-:inputnumrole:`In[21]:`
+:inputnumrole:`In[23]:`
 
 
 .. code:: python
@@ -655,7 +711,7 @@ each pixel, so let's calculate that now.
     dv = {2}""".format(dra.to(u.arcsec), ddec.to(u.arcsec), dv))
 
 
-:outputnumrole:`Out[21]:`
+:outputnumrole:`Out[23]:`
 
 
 .. parsed-literal::
@@ -670,7 +726,7 @@ channels, so let's create a 2D quantity array by summing our data cube
 along the velocity axis (multiplying by the velocity width of a pixel).
 
 
-:inputnumrole:`In[22]:`
+:inputnumrole:`In[24]:`
 
 
 .. code:: python
@@ -679,7 +735,7 @@ along the velocity axis (multiplying by the velocity width of a pixel).
     intcloud.unit
 
 
-:outputnumrole:`Out[22]:`
+:outputnumrole:`Out[24]:`
 
 
 
@@ -696,7 +752,7 @@ using the values of :math:`x_i` and :math:`x_f`. Finally, we can set the
 colorbar label to have proper units.
 
 
-:inputnumrole:`In[23]:`
+:inputnumrole:`In[25]:`
 
 
 .. code:: python
@@ -713,11 +769,11 @@ colorbar label to have proper units.
     plt.ylabel("Dec (deg)");
 
 
-:outputnumrole:`Out[23]:`
+:outputnumrole:`Out[25]:`
 
 
 
-.. image:: nboutput/quantities_58_0.png
+.. image:: nboutput/quantities_63_0.png
 
 
 
@@ -755,7 +811,7 @@ First, we look up the wavelength for these emission lines and store them
 as quantities.
 
 
-:inputnumrole:`In[24]:`
+:inputnumrole:`In[26]:`
 
 
 .. code:: python
@@ -769,7 +825,7 @@ of light, we can convert between them. However, doing so just using the
 convertible:
 
 
-:inputnumrole:`In[25]:`
+:inputnumrole:`In[27]:`
 
 
 .. code:: python
@@ -778,7 +834,7 @@ convertible:
     nu18 = lambda18.to(u.Hz)
 
 
-:outputnumrole:`Out[25]:`
+:outputnumrole:`Out[27]:`
 
 
 ::
@@ -788,7 +844,7 @@ convertible:
 
     UnitConversionErrorTraceback (most recent call last)
 
-    <ipython-input-25-2e9e7e5707cb> in <module>
+    <ipython-input-27-2e9e7e5707cb> in <module>
     ----> 1 nu13 = lambda13.to(u.Hz)
           2 nu18 = lambda18.to(u.Hz)
 
@@ -857,7 +913,7 @@ frequency. To use it, provide the equivalencies to the ``equivalencies``
 keyword of the ``to()`` call:
 
 
-:inputnumrole:`In[26]:`
+:inputnumrole:`In[28]:`
 
 
 .. code:: python
@@ -871,7 +927,7 @@ frequency and Einstein coefficient units are dimensionless, so the unit
 of :math:`C` is unchanged.
 
 
-:inputnumrole:`In[27]:`
+:inputnumrole:`In[29]:`
 
 
 .. code:: python
@@ -885,7 +941,7 @@ of :math:`C` is unchanged.
     C
 
 
-:outputnumrole:`Out[27]:`
+:outputnumrole:`Out[29]:`
 
 
 
@@ -904,7 +960,7 @@ constants were imported from ``astropy.constants``, and the other two
 values are already calculated, so here we just take the ratio.
 
 
-:inputnumrole:`In[28]:`
+:inputnumrole:`In[30]:`
 
 
 .. code:: python
@@ -918,7 +974,7 @@ without worrying about intermediate units, and only convert at the very
 end when you want a final answer.
 
 
-:inputnumrole:`In[29]:`
+:inputnumrole:`In[31]:`
 
 
 .. code:: python
@@ -926,7 +982,7 @@ end when you want a final answer.
     print('{0}\n{1}'.format(B, B.decompose()))
 
 
-:outputnumrole:`Out[29]:`
+:outputnumrole:`Out[31]:`
 
 
 .. parsed-literal::
@@ -943,7 +999,7 @@ column density of CO for each spatial pixel in our map. We can then
 print out the peak column column density.
 
 
-:inputnumrole:`In[30]:`
+:inputnumrole:`In[32]:`
 
 
 .. code:: python
@@ -953,7 +1009,7 @@ print out the peak column column density.
     np.max(NCO)
 
 
-:outputnumrole:`Out[30]:`
+:outputnumrole:`Out[32]:`
 
 
 .. parsed-literal::
@@ -978,7 +1034,7 @@ in H\ :math:`_2`, we calculate its column density by multiplying the CO
 column density with the (known/assumed) H\ :math:`_2`/CO ratio.
 
 
-:inputnumrole:`In[31]:`
+:inputnumrole:`In[33]:`
 
 
 .. code:: python
@@ -989,7 +1045,7 @@ column density with the (known/assumed) H\ :math:`_2`/CO ratio.
     np.max(NH2)
 
 
-:outputnumrole:`Out[31]:`
+:outputnumrole:`Out[33]:`
 
 
 .. parsed-literal::
@@ -1014,7 +1070,7 @@ We obtain the mass column density by multiplying the number column
 density by the mass of an individual H\ :math:`_2` molecule.
 
 
-:inputnumrole:`In[32]:`
+:inputnumrole:`In[34]:`
 
 
 .. code:: python
@@ -1027,7 +1083,7 @@ the area area. If we do this in the straightforward way of length x
 width of a pixel, this area is then in units of :math:`{\rm deg}^2`.
 
 
-:inputnumrole:`In[33]:`
+:inputnumrole:`In[35]:`
 
 
 .. code:: python
@@ -1036,7 +1092,7 @@ width of a pixel, this area is then in units of :math:`{\rm deg}^2`.
     print(dap)
 
 
-:outputnumrole:`Out[33]:`
+:outputnumrole:`Out[35]:`
 
 
 .. parsed-literal::
@@ -1051,7 +1107,7 @@ units, rather than angular units. So it's tempting to just multiply the
 area and the square of the distance.
 
 
-:inputnumrole:`In[34]:`
+:inputnumrole:`In[36]:`
 
 
 .. code:: python
@@ -1060,7 +1116,7 @@ area and the square of the distance.
     print(da)
 
 
-:outputnumrole:`Out[34]:`
+:outputnumrole:`Out[36]:`
 
 
 .. parsed-literal::
@@ -1069,7 +1125,7 @@ area and the square of the distance.
 
 
 
-:inputnumrole:`In[35]:`
+:inputnumrole:`In[37]:`
 
 
 .. code:: python
@@ -1077,7 +1133,7 @@ area and the square of the distance.
     dap.to(u.steradian).value * d**2
 
 
-:outputnumrole:`Out[35]:`
+:outputnumrole:`Out[37]:`
 
 
 
@@ -1094,7 +1150,7 @@ approximation assumes angles are dimensionless. So if you, e.g., try to
 convert to a different area unit, it will fail:
 
 
-:inputnumrole:`In[36]:`
+:inputnumrole:`In[38]:`
 
 
 .. code:: python
@@ -1102,7 +1158,7 @@ convert to a different area unit, it will fail:
     da.to(u.cm**2)
 
 
-:outputnumrole:`Out[36]:`
+:outputnumrole:`Out[38]:`
 
 
 ::
@@ -1112,7 +1168,7 @@ convert to a different area unit, it will fail:
 
     UnitConversionErrorTraceback (most recent call last)
 
-    <ipython-input-36-a7ea5a2a0bb2> in <module>
+    <ipython-input-38-a7ea5a2a0bb2> in <module>
     ----> 1 da.to(u.cm**2)
     
 
@@ -1173,7 +1229,7 @@ will automatically convert to radians and become dimensionless when a
 conversion is needed.
 
 
-:inputnumrole:`In[37]:`
+:inputnumrole:`In[39]:`
 
 
 .. code:: python
@@ -1182,7 +1238,7 @@ conversion is needed.
     da
 
 
-:outputnumrole:`Out[37]:`
+:outputnumrole:`Out[39]:`
 
 
 
@@ -1194,7 +1250,7 @@ conversion is needed.
 
 
 
-:inputnumrole:`In[38]:`
+:inputnumrole:`In[40]:`
 
 
 .. code:: python
@@ -1202,7 +1258,7 @@ conversion is needed.
     da.to(u.cm**2)
 
 
-:outputnumrole:`Out[38]:`
+:outputnumrole:`Out[40]:`
 
 
 
@@ -1217,7 +1273,7 @@ Finally, multiplying the column density with the pixel area and summing
 over all the pixels gives us the cloud mass.
 
 
-:inputnumrole:`In[39]:`
+:inputnumrole:`In[41]:`
 
 
 .. code:: python
@@ -1226,7 +1282,7 @@ over all the pixels gives us the cloud mass.
     M.decompose().to(u.solMass)
 
 
-:outputnumrole:`Out[39]:`
+:outputnumrole:`Out[41]:`
 
 
 
@@ -1277,7 +1333,7 @@ different scale along the two axes. Your first thought might be to do
 this:
 
 
-:inputnumrole:`In[40]:`
+:inputnumrole:`In[42]:`
 
 
 .. code:: python
@@ -1295,7 +1351,7 @@ collaborator and they don't look closely and think the inputs are
 instead supposed to be in arcmin. So they do:
 
 
-:inputnumrole:`In[41]:`
+:inputnumrole:`In[43]:`
 
 
 .. code:: python
@@ -1303,7 +1359,7 @@ instead supposed to be in arcmin. So they do:
     response_func(1.0, 1.2)
 
 
-:outputnumrole:`Out[41]:`
+:outputnumrole:`Out[43]:`
 
 
 
@@ -1321,7 +1377,7 @@ this by requiring they pass in ``Quantity`` objects. The new function
 could simply be:
 
 
-:inputnumrole:`In[42]:`
+:inputnumrole:`In[44]:`
 
 
 .. code:: python
@@ -1338,7 +1394,7 @@ And your collaborator now has to pay attention. If they just blindly put
 in a number they get an error:
 
 
-:inputnumrole:`In[43]:`
+:inputnumrole:`In[45]:`
 
 
 .. code:: python
@@ -1346,7 +1402,7 @@ in a number they get an error:
     response_func(1.0, 1.2)
 
 
-:outputnumrole:`Out[43]:`
+:outputnumrole:`Out[45]:`
 
 
 ::
@@ -1356,11 +1412,11 @@ in a number they get an error:
 
     UnitConversionErrorTraceback (most recent call last)
 
-    <ipython-input-43-5a4a987a8177> in <module>
+    <ipython-input-45-5a4a987a8177> in <module>
     ----> 1 response_func(1.0, 1.2)
     
 
-    <ipython-input-42-f7171be85f1d> in response_func(x, y)
+    <ipython-input-44-f7171be85f1d> in response_func(x, y)
           2     xscale = 0.9 * u.arcsec
           3     yscale = 0.85 * u.arcsec
     ----> 4     xfactor = 1 / (1 + x/xscale)
@@ -1390,7 +1446,7 @@ in a number they get an error:
 Which is their cue to provide the units explicitly:
 
 
-:inputnumrole:`In[44]:`
+:inputnumrole:`In[46]:`
 
 
 .. code:: python
@@ -1398,7 +1454,7 @@ Which is their cue to provide the units explicitly:
     response_func(1.0*u.arcmin, 1.2*u.arcmin)
 
 
-:outputnumrole:`Out[44]:`
+:outputnumrole:`Out[46]:`
 
 
 

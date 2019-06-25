@@ -171,7 +171,7 @@ page <https://julien.danjou.info/blog/2013/guide-python-static-class-abstract-me
 .. parsed-literal::
 
     <SkyCoord (ICRS): (ra, dec) in deg
-        (9.81625, 0.88805556)>
+        (9.81625, 0.88806)>
 
 
 
@@ -225,7 +225,7 @@ angle units:
 
 .. math::
 
-    0^\circ53{}^\prime17{}^{\prime\prime}
+    0^\circ53{}^\prime17.016{}^{\prime\prime}
 
 
 
@@ -305,7 +305,7 @@ file\ ``'HCG7_SDSS_cutout.jpg'``, defined at the top of the cell.
 
 .. parsed-literal::
 
-    ('HCG7_SDSS_cutout.jpg', <http.client.HTTPMessage at 0x7fd6144b0278>)
+    ('HCG7_SDSS_cutout.jpg', <http.client.HTTPMessage at 0x7fb82f5cd278>)
 
 
 
@@ -480,30 +480,30 @@ the tables to see just what everything is that's in them.
 .. raw:: html
 
     <i>Table length=679</i>
-    <table id="table140559112541464" class="table-striped table-bordered table-condensed">
+    <table id="table140429010004288" class="table-striped table-bordered table-condensed">
     <thead><tr><th>ra</th><th>dec</th><th>u</th><th>g</th><th>r</th><th>i</th><th>z</th></tr></thead>
     <thead><tr><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th></tr></thead>
-    <tr><td>9.6128417796337</td><td>0.621675948883377</td><td>21.16611</td><td>19.84035</td><td>19.29253</td><td>19.07323</td><td>18.96066</td></tr>
-    <tr><td>9.49121307546292</td><td>0.740765417008783</td><td>21.9436</td><td>19.68445</td><td>18.25978</td><td>17.53341</td><td>17.07395</td></tr>
-    <tr><td>9.76092345259269</td><td>0.771626841958683</td><td>18.78187</td><td>17.72768</td><td>17.20328</td><td>16.89744</td><td>16.74848</td></tr>
-    <tr><td>9.68049011238099</td><td>0.760478071950252</td><td>22.81021</td><td>22.23054</td><td>20.45968</td><td>19.49698</td><td>19.0829</td></tr>
-    <tr><td>9.50474614299014</td><td>0.932782356350175</td><td>21.6948</td><td>19.03238</td><td>17.51821</td><td>16.44926</td><td>15.85192</td></tr>
-    <tr><td>9.81444144742625</td><td>0.942584493635296</td><td>19.55784</td><td>17.89278</td><td>17.24308</td><td>16.94552</td><td>16.73516</td></tr>
-    <tr><td>10.077827682578</td><td>0.923865878609736</td><td>19.62583</td><td>19.39541</td><td>19.22466</td><td>19.05589</td><td>18.77663</td></tr>
-    <tr><td>9.51193996953498</td><td>1.08573853686057</td><td>22.60775</td><td>21.85825</td><td>20.00755</td><td>19.10017</td><td>18.70797</td></tr>
-    <tr><td>9.55019434449878</td><td>1.019150849517</td><td>18.70042</td><td>17.84459</td><td>17.57727</td><td>17.48415</td><td>17.41936</td></tr>
-    <tr><td>9.53853316540022</td><td>0.560793643683023</td><td>19.72024</td><td>17.28436</td><td>16.17188</td><td>15.71497</td><td>15.42104</td></tr>
+    <tr><td>9.88207916982174</td><td>1.10313035713439</td><td>21.07207</td><td>20.8425</td><td>20.77447</td><td>20.78056</td><td>20.6364</td></tr>
+    <tr><td>9.54514888846552</td><td>1.17997219486376</td><td>23.43145</td><td>20.05218</td><td>18.45117</td><td>16.90807</td><td>16.04298</td></tr>
+    <tr><td>9.75695980820154</td><td>0.993395228574004</td><td>22.27362</td><td>19.66747</td><td>18.34109</td><td>17.73268</td><td>17.30463</td></tr>
+    <tr><td>9.81350978205137</td><td>0.952917997968779</td><td>23.72781</td><td>22.90138</td><td>21.1949</td><td>20.14838</td><td>19.9722</td></tr>
+    <tr><td>9.86920962193142</td><td>1.14732159839393</td><td>18.14069</td><td>17.26402</td><td>16.98971</td><td>16.88275</td><td>16.84156</td></tr>
+    <tr><td>9.74611247630673</td><td>0.591449231550166</td><td>23.05453</td><td>20.36864</td><td>18.89596</td><td>17.70506</td><td>17.03628</td></tr>
+    <tr><td>9.7759128638229</td><td>1.16282719518892</td><td>18.66272</td><td>17.50573</td><td>17.04795</td><td>16.83212</td><td>16.72537</td></tr>
+    <tr><td>9.71988610968663</td><td>1.09339890765928</td><td>19.13156</td><td>16.66429</td><td>15.63464</td><td>15.2711</td><td>15.0678</td></tr>
+    <tr><td>9.89007058144352</td><td>0.865355031465202</td><td>21.66543</td><td>20.87825</td><td>20.65047</td><td>20.56294</td><td>20.81351</td></tr>
+    <tr><td>9.82433382639942</td><td>0.912766204845535</td><td>15.65309</td><td>13.79814</td><td>12.99945</td><td>12.60293</td><td>12.30192</td></tr>
     <tr><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr>
-    <tr><td>9.86490873317439</td><td>1.0558725411841</td><td>18.6012</td><td>16.61659</td><td>15.74706</td><td>15.41056</td><td>15.24632</td></tr>
-    <tr><td>10.1064617164382</td><td>1.01628523284111</td><td>23.76406</td><td>21.2065</td><td>19.66559</td><td>18.59074</td><td>18.13247</td></tr>
-    <tr><td>9.66620291965347</td><td>1.16445500972915</td><td>20.5155</td><td>19.80439</td><td>19.30492</td><td>19.08816</td><td>19.02397</td></tr>
-    <tr><td>9.9691435372078</td><td>0.752651545166108</td><td>20.26007</td><td>17.7839</td><td>16.67926</td><td>16.17594</td><td>15.89118</td></tr>
-    <tr><td>9.74388710033321</td><td>0.836223409236646</td><td>22.21119</td><td>19.8227</td><td>18.55273</td><td>17.97419</td><td>17.6595</td></tr>
-    <tr><td>9.61014314310012</td><td>0.655816550477058</td><td>22.02665</td><td>20.23462</td><td>19.33456</td><td>18.93131</td><td>18.76113</td></tr>
-    <tr><td>9.96997316081763</td><td>0.953720445514193</td><td>23.14264</td><td>20.07439</td><td>18.68902</td><td>17.49402</td><td>16.85771</td></tr>
-    <tr><td>10.0933462127081</td><td>0.994355007266277</td><td>22.13363</td><td>20.24328</td><td>19.59873</td><td>19.14313</td><td>18.62855</td></tr>
-    <tr><td>9.86052794325951</td><td>1.13214577999742</td><td>19.89374</td><td>18.69294</td><td>18.2431</td><td>17.934</td><td>17.8842</td></tr>
-    <tr><td>10.1297202089901</td><td>0.918971123152954</td><td>19.02413</td><td>18.06669</td><td>17.76485</td><td>17.65621</td><td>17.6351</td></tr>
+    <tr><td>9.78788692126642</td><td>1.14240364889993</td><td>21.88085</td><td>19.62179</td><td>18.1226</td><td>16.40912</td><td>15.48559</td></tr>
+    <tr><td>9.67030199069393</td><td>0.792576991595946</td><td>21.52925</td><td>21.73903</td><td>20.18559</td><td>19.08188</td><td>18.65605</td></tr>
+    <tr><td>9.97504512537563</td><td>0.663335072544381</td><td>21.41835</td><td>18.71138</td><td>17.34012</td><td>16.69449</td><td>16.28335</td></tr>
+    <tr><td>9.73831736920636</td><td>0.94211229152903</td><td>22.38732</td><td>21.8447</td><td>21.52183</td><td>21.30737</td><td>21.36905</td></tr>
+    <tr><td>9.83155187287036</td><td>1.12125275960271</td><td>22.2616</td><td>19.92106</td><td>18.55919</td><td>17.5119</td><td>16.92615</td></tr>
+    <tr><td>10.0415469152829</td><td>0.635646285762971</td><td>21.13953</td><td>20.48887</td><td>20.39896</td><td>20.51342</td><td>20.62932</td></tr>
+    <tr><td>9.89699525490238</td><td>0.985577903182473</td><td>22.64499</td><td>19.86383</td><td>18.56006</td><td>17.95849</td><td>17.62663</td></tr>
+    <tr><td>10.0104563060003</td><td>0.646277076885904</td><td>22.73625</td><td>20.06712</td><td>18.59985</td><td>17.60085</td><td>17.0357</td></tr>
+    <tr><td>9.89665095055904</td><td>0.802469605980228</td><td>18.13757</td><td>16.8143</td><td>16.29248</td><td>16.12416</td><td>16.00822</td></tr>
+    <tr><td>9.98153607208258</td><td>0.701449510003319</td><td>22.46251</td><td>19.97594</td><td>18.54476</td><td>17.4755</td><td>16.88063</td></tr>
     </table>
 
 
@@ -525,7 +525,7 @@ the tables to see just what everything is that's in them.
 .. raw:: html
 
     <i>Table masked=True length=23</i>
-    <table id="table140559112543928" class="table-striped table-bordered table-condensed">
+    <table id="table140430958608960" class="table-striped table-bordered table-condensed">
     <thead><tr><th>designation</th><th>ra</th><th>dec</th><th>r_k20fe</th><th>j_m_k20fe</th><th>j_msig_k20fe</th><th>j_flg_k20fe</th><th>h_m_k20fe</th><th>h_msig_k20fe</th><th>h_flg_k20fe</th><th>k_m_k20fe</th><th>k_msig_k20fe</th><th>k_flg_k20fe</th><th>k_ba</th><th>k_phi</th><th>sup_ba</th><th>sup_phi</th><th>r_ext</th><th>j_m_ext</th><th>j_msig_ext</th><th>h_m_ext</th><th>h_msig_ext</th><th>k_m_ext</th><th>k_msig_ext</th><th>cc_flg</th><th>dist</th><th>angle</th></tr></thead>
     <thead><tr><th></th><th>deg</th><th>deg</th><th>arcsec</th><th>mag</th><th>mag</th><th></th><th>mag</th><th>mag</th><th></th><th>mag</th><th>mag</th><th></th><th></th><th>deg</th><th></th><th>deg</th><th>arcsec</th><th>mag</th><th>mag</th><th>mag</th><th>mag</th><th>mag</th><th>mag</th><th></th><th>arcsec</th><th>deg</th></tr></thead>
     <thead><tr><th>str16</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>int64</th><th>float64</th><th>float64</th><th>int64</th><th>float64</th><th>float64</th><th>int64</th><th>float64</th><th>int64</th><th>float64</th><th>int64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>str1</th><th>float64</th><th>float64</th></tr></thead>
@@ -643,16 +643,16 @@ We first create a set of uniformly random points (with size matching
 
 .. parsed-literal::
 
-    (<Angle [10.06107222,  9.49521444,  9.92793425,  9.59832902,  9.57945467,
-              9.97843902,  9.92386956,  9.59466217, 10.04057538,  9.6643703 ,
-              9.62672939,  9.89464937,  9.89551462, 10.00903393,  9.59617399,
-              9.69250999, 10.06697322, 10.029499  ,  9.50933072, 10.04847513,
-              9.62951662, 10.0779787 , 10.01191688] deg>,
-     <Angle [0.58954518, 0.64914149, 0.81415943, 0.65330831, 0.75735082,
-             1.18234871, 0.66487245, 0.63357127, 1.13586474, 0.95273217,
-             1.20119883, 0.83923027, 1.03671954, 1.08833775, 0.60756172,
-             0.68877268, 1.13026771, 0.8943311 , 0.66225424, 1.1598402 ,
-             0.70252471, 0.85862582, 0.67312361] deg>)
+    (<Angle [10.13736676,  9.79257237,  9.69251052,  9.61552531,  9.63455729,
+              9.91345446, 10.02750388,  9.76241348,  9.52153405,  9.54556793,
+              9.56700356,  9.7249421 ,  9.75521759,  9.56803191, 10.01004283,
+              9.71238562,  9.50460572,  9.58732804,  9.55768584, 10.14473994,
+              9.62376625,  9.57509183,  9.84845871] deg>,
+     <Angle [0.60481652, 0.77865863, 1.0683754 , 0.6054727 , 0.68777063,
+             0.76544583, 0.62907237, 0.62730614, 0.63738147, 0.66042358,
+             0.62406125, 1.06339997, 0.5862269 , 1.17770926, 0.99868357,
+             0.63391862, 1.0549335 , 1.12998038, 1.15074811, 1.09443432,
+             0.61573774, 1.21407115, 1.10412482] deg>)
 
 
 
@@ -806,7 +806,7 @@ coordinates:
 .. parsed-literal::
 
     <SkyCoord (Galactic): (l, b) in deg
-        (116.47556718, -61.83099914)>
+        (116.47556813, -61.83099472)>
 
 
 
@@ -832,7 +832,7 @@ method to convert from one frame to another.
 .. parsed-literal::
 
     <SkyCoord (Galactic): (l, b) in deg
-        (116.47556718, -61.83099914)>
+        (116.47556813, -61.83099472)>
 
 
 
@@ -889,7 +889,7 @@ object, but usually in a way that makes sense:
 
 .. math::
 
-    -61^\circ49{}^\prime51.5969{}^{\prime\prime}
+    -61^\circ49{}^\prime51.581{}^{\prime\prime}
 
 
 
@@ -964,7 +964,7 @@ location in the sky over Kitt Peak at the requested time.
 .. parsed-literal::
 
     <SkyCoord (AltAz: obstime=2010-12-21 01:00:00.000, location=(-1994310.09211632, -5037908.60633759, 3357621.75212217) m, pressure=0.0 hPa, temperature=0.0 deg_C, relative_humidity=0.0, obswl=1.0 micron): (az, alt) in deg
-        (149.19392373, 55.0624696)>
+        (149.19392036, 55.0624736)>
 
 
 

@@ -252,8 +252,8 @@ slice) or two axes (for a spectrum):
 
 .. parsed-literal::
 
-    INFO: Auto-setting vmin to -1.492e+00 [aplpy.core]
-    INFO: Auto-setting vmax to  1.526e+01 [aplpy.core]
+    INFO: Auto-setting vmin to -1.374e+00 [aplpy.core]
+    INFO: Auto-setting vmax to  1.390e+01 [aplpy.core]
 
 
 
@@ -539,7 +539,7 @@ object directly into a matplotlib axis instance.
 
 .. parsed-literal::
 
-    <matplotlib.contour.QuadContourSet at 0x7fd3b9b01f60>
+    <matplotlib.contour.QuadContourSet at 0x7f9ab1adf6d8>
 
 
 
@@ -814,7 +814,7 @@ TableList argument.
     INFO: [Done] [astroquery.esasky.core]
     INFO: Downloading of HERSCHEL data complete. [astroquery.esasky.core]
     INFO: Maps available at /home/circleci/project/tutorials/notebooks/FITS-cubes/Maps. [astroquery.esasky.core]
-    Filename: Maps/HERSCHEL/anonymous1560880420/hspirepmw401_25pxmp_0110_m7303_1342198565_1342198566_1462476888800.fits.gz
+    Filename: Maps/HERSCHEL/anonymous1561484239/hspirepmw401_25pxmp_0110_m7303_1342198565_1342198566_1462476888800.fits.gz
     No.    Name      Ver    Type      Cards   Dimensions   Format
       0  PRIMARY       1 PrimaryHDU     184   ()      
       1  image         1 ImageHDU        47   (2407, 2141)   float64   
