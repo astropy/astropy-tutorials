@@ -27,12 +27,12 @@ Using Astropy Quantities for astrophysical calculations
 Authors
 -------
 
-Ana Bonaca, Erik Tollerud, Jonathan Foster
+Ana Bonaca, Erik Tollerud, Jonathan Foster, Kris Stern
 
 Learning Goals
 --------------
 
--  Learn how to instantiate ``astropy.units.Quantity`` objects
+-  Use ``Quantity`` objects to estimate a hypothetical galaxy's mass
 -  Take advantage of constants in the ``astropy.constants`` library
 -  Print formatted unit strings
 -  Plot ``Quantity`` objects with unit labels, using
@@ -43,9 +43,11 @@ Learning Goals
    equivalencies
 -  Use the small angle approximation with
    ``astropy.units.dimensionless_angles`` equivalencies
--  Write functions with explicit units to prevent your Mars orbiter from
-   crashing
+-  Write functions that take ``Quantity`` objects instead of numpy
+   arrays
 -  Make synthetic radio observations
+-  Use ``Quantity`` objects such as data cubes to facilitate a full
+   derivation of the total mass of a molecular cloud
 
 Keywords
 --------
@@ -288,7 +290,7 @@ settings on your ``matplotlib`` session to better handle astropy
 
 .. parsed-literal::
 
-    <astropy.visualization.units.quantity_support.<locals>.MplQuantityConverter at 0x7f16f90c86a0>
+    <astropy.visualization.units.quantity_support.<locals>.MplQuantityConverter at 0x7ff8cff49cc0>
 
 
 

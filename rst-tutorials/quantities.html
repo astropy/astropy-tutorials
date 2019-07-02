@@ -114,12 +114,12 @@
 <span id="quantities"></span><h1>Using Astropy Quantities for astrophysical calculations<a class="headerlink" href="#using-astropy-quantities-for-astrophysical-calculations" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="authors">
 <h2>Authors<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a></h2>
-<p>Ana Bonaca, Erik Tollerud, Jonathan Foster</p>
+<p>Ana Bonaca, Erik Tollerud, Jonathan Foster, Kris Stern</p>
 </div>
 <div class="section" id="learning-goals">
 <h2>Learning Goals<a class="headerlink" href="#learning-goals" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>Learn how to instantiate <code class="docutils literal notranslate"><span class="pre">astropy.units.Quantity</span></code> objects</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">Quantity</span></code> objects to estimate a hypothetical galaxy’s mass</p></li>
 <li><p>Take advantage of constants in the <code class="docutils literal notranslate"><span class="pre">astropy.constants</span></code> library</p></li>
 <li><p>Print formatted unit strings</p></li>
 <li><p>Plot <code class="docutils literal notranslate"><span class="pre">Quantity</span></code> objects with unit labels, using
@@ -130,9 +130,11 @@
 equivalencies</p></li>
 <li><p>Use the small angle approximation with
 <code class="docutils literal notranslate"><span class="pre">astropy.units.dimensionless_angles</span></code> equivalencies</p></li>
-<li><p>Write functions with explicit units to prevent your Mars orbiter from
-crashing</p></li>
+<li><p>Write functions that take <code class="docutils literal notranslate"><span class="pre">Quantity</span></code> objects instead of numpy
+arrays</p></li>
 <li><p>Make synthetic radio observations</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">Quantity</span></code> objects such as data cubes to facilitate a full
+derivation of the total mass of a molecular cloud</p></li>
 </ul>
 </div>
 <div class="section" id="keywords">
@@ -289,7 +291,7 @@ settings on your <code class="docutils literal notranslate"><span class="pre">ma
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[11]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">astropy</span><span class="o">.</span><span class="n">visualization</span><span class="o">.</span><span class="n">units</span><span class="o">.</span><span class="n">quantity_support</span><span class="o">.&lt;</span><span class="nb">locals</span><span class="o">&gt;.</span><span class="n">MplQuantityConverter</span> <span class="n">at</span> <span class="mh">0x7f16f90c86a0</span><span class="o">&gt;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">astropy</span><span class="o">.</span><span class="n">visualization</span><span class="o">.</span><span class="n">units</span><span class="o">.</span><span class="n">quantity_support</span><span class="o">.&lt;</span><span class="nb">locals</span><span class="o">&gt;.</span><span class="n">MplQuantityConverter</span> <span class="n">at</span> <span class="mh">0x7ff8cff49cc0</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <p>Now we can plot a histogram of the velocity dataset. Note that, due to
