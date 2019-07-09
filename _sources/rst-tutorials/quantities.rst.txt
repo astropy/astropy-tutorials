@@ -21,13 +21,13 @@
 
 .. _quantities:
 
-Using Astropy Quantities for astrophysical calculations
-=======================================================
+Using Astropy Quantities and Units for astrophysical calculations
+=================================================================
 
 Authors
 -------
 
-Ana Bonaca, Erik Tollerud, Jonathan Foster, Kris Stern
+Ana Bonaca, Erik Tollerud, Jonathan Foster, Lia Corrales, Kris Stern
 
 Learning Goals
 --------------
@@ -290,7 +290,7 @@ settings on your ``matplotlib`` session to better handle astropy
 
 .. parsed-literal::
 
-    <astropy.visualization.units.quantity_support.<locals>.MplQuantityConverter at 0x7ff8cff49cc0>
+    <astropy.visualization.units.quantity_support.<locals>.MplQuantityConverter at 0x7f30a54bdb00>
 
 
 
