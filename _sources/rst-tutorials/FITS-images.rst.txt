@@ -27,15 +27,12 @@ Viewing and manipulating FITS images
 Authors
 -------
 
-Lia Corrales, Kris Stern
+Lia Corrales
 
 Learning Goals
 --------------
 
-1. Learn how to open FITS files and load the image data
-2. Learn how to visualize the image data
-3. Learn about basic image math: image stacking
-4. Learn how to write image data to a FITS file
+-  TODO
 
 Keywords
 --------
@@ -197,7 +194,7 @@ Viewing the image data and getting basic statistics
 
 .. parsed-literal::
 
-    <matplotlib.colorbar.Colorbar at 0x7f04388475f8>
+    <matplotlib.colorbar.Colorbar at 0x7fce964aa5f8>
 
 
 
@@ -396,7 +393,7 @@ scaling for ``imshow``.
 
 .. parsed-literal::
 
-    <matplotlib.colorbar.Colorbar at 0x7f0435fc3f60>
+    <matplotlib.colorbar.Colorbar at 0x7fce8e4716a0>
 
 
 

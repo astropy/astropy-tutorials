@@ -514,7 +514,7 @@ file\ ``'HCG7_SDSS_cutout.jpg'``, defined at the top of the cell.
 
 .. parsed-literal::
 
-    ('HCG7_SDSS_cutout.jpg', <http.client.HTTPMessage at 0x7f4c5a8e0eb8>)
+    ('HCG7_SDSS_cutout.jpg', <http.client.HTTPMessage at 0x7fe9353a8dd8>)
 
 
 
