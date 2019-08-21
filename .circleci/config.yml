@@ -2,6 +2,11 @@
 # Check https://circleci.com/docs/2.0/language-python/ for more details
 version: 2
 
+ssl-hack: &ssl-hackery
+  name: SSL TLS hack
+  command: |
+    sudo cp .circleci/openssl_hack.cnf /etc/ssl/openssl.cnf
+
 apt-run: &apt-install
   name: Install apt packages
   command: |
@@ -22,7 +27,7 @@ jobs:
 
   build:
     docker:
-      - image: circleci/python:3.6
+      - image: circleci/python:3.7
 
     branches:
       ignore:
@@ -34,6 +39,7 @@ jobs:
       - add_ssh_keys: # add GitHub SSH keys
           fingerprints:
             - 32:53:df:4a:53:71:25:8b:73:42:71:c8:57:8a:3f:f7
+      - run: *ssl-hackery
       - run: *apt-install # run the apt install defined above
       - run: *pip-install # run the pip install defined above
 
