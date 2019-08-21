@@ -1,5 +1,5 @@
 .. meta::
-    :keywords: filterTutorials, filterAstrometry, filterWcs, filterFitsImage, filterRadioAstronomy, filterVisualization, filterMatplotlib
+    :keywords: filterTutorials, filterModeling, filterConvolution, filterCoordinates, filterWcs, filterFits, filterRadioAstronomy, filterMatplotlib, filterColorbar
 
 .. raw:: html
 
@@ -22,7 +22,7 @@ Synthetic Images from simulated data
 Authors
 -------
 
-Yi-Hao Chen & Sebastian Heinz
+Yi-Hao Chen, Sebastian Heinz, Kelle Cruz, Stephanie T. Douglas
 
 Learning Goals
 --------------
@@ -36,7 +36,8 @@ Learning Goals
 Keywords
 --------
 
-astrometry, WCS, FITS image, radio astronomy, visualization, matplotlib
+modeling, convolution, coordinates, WCS, FITS, radio astronomy,
+matplotlib, colorbar
 
 Summary
 -------
@@ -147,10 +148,10 @@ load a FITS file and examine the header.
 
 
 
-We can see this FITS file, which was created in yt, has x and y
-coordinate in physical units (cm). We want to convert it into sky
-coordinates. Before we proceed, let’s find out the range of the data and
-plot a histogram.
+We can see this FITS file, which was created in
+`yt <https://yt-project.org/>`__, has x and y coordinate in physical
+units (cm). We want to convert it into sky coordinates. Before we
+proceed, let’s find out the range of the data and plot a histogram.
 
 
 :inputnumrole:`In[3]:`
@@ -160,6 +161,7 @@ plot a histogram.
 
     print(hdu.data.max())
     print(hdu.data.min())
+    np.seterr(divide='ignore') #suppress the warnings raised by taking log10 of data with zeros
     plt.hist(np.log10(hdu.data.flatten()), range=(-3, 2), bins=100);
 
 
@@ -172,14 +174,8 @@ plot a histogram.
     0.0
 
 
-.. parsed-literal::
 
-    /home/circleci/project/venv/lib/python3.7/site-packages/ipykernel_launcher.py:3: RuntimeWarning: divide by zero encountered in log10
-      This is separate from the ipykernel package so we can avoid doing imports until
-
-
-
-.. image:: nboutput/synthetic-images_5_2.png
+.. image:: nboutput/synthetic-images_5_1.png
 
 
 
@@ -206,7 +202,7 @@ proper range (``vmin`` and ``vmax``).
 
 .. parsed-literal::
 
-    <matplotlib.image.AxesImage at 0x7fdd831ac210>
+    <matplotlib.image.AxesImage at 0x7f69dff43c10>
 
 
 
@@ -406,7 +402,7 @@ pixels by using our pixel scale keyword ``cdelt2`` from above.
 
 .. parsed-literal::
 
-    <matplotlib.image.AxesImage at 0x7fdd80e92610>
+    <matplotlib.image.AxesImage at 0x7f69ddc55490>
 
 
 
@@ -451,7 +447,7 @@ this, using a 2D Lorentzian
 
 .. parsed-literal::
 
-    <matplotlib.image.AxesImage at 0x7fdd80e7c550>
+    <matplotlib.image.AxesImage at 0x7f69ddc40450>
 
 
 
@@ -514,7 +510,7 @@ Now let’s take a look at the convolved image.
 
 .. parsed-literal::
 
-    <matplotlib.colorbar.Colorbar at 0x7fdd80d9fb50>
+    <matplotlib.colorbar.Colorbar at 0x7f69ddbfdfd0>
 
 
 
@@ -603,7 +599,7 @@ Let’s plot the Q and U images.
 
 .. parsed-literal::
 
-    <matplotlib.colorbar.Colorbar at 0x7fdd80090f50>
+    <matplotlib.colorbar.Colorbar at 0x7f69dc2f8e10>
 
 
 
@@ -678,7 +674,7 @@ vectors along the x/right-ascention axis.
 
 .. parsed-literal::
 
-    <matplotlib.quiver.Quiver at 0x7fdd83e56850>
+    <matplotlib.quiver.Quiver at 0x7f69ddc935d0>
 
 
 
@@ -687,8 +683,11 @@ vectors along the x/right-ascention axis.
 
 
 
-Exercise: convert the units of the data from Jy/arcsec^2 to Jy/beam
--------------------------------------------------------------------
+Exercise
+--------
+
+Convert the units of the data from Jy/arcsec^2 to Jy/beam
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The intensity of the data is given in unit of Jy/arcsec^2. Observational
 data usually have the intensity unit in Jy/beam. Assuming a beam size or

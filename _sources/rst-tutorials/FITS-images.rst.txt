@@ -1,5 +1,5 @@
 .. meta::
-    :keywords: filterTutorials, filterMatplotlib, filterFitsImage, filterTable
+    :keywords: filterTutorials, filterFits, filterFileInputOutput, filterImageManipulation, filterNumpy, filterMatplotlib, filterHistogram, filterColorbar
 
 .. raw:: html
 
@@ -22,20 +22,22 @@ Viewing and manipulating FITS images
 Authors
 -------
 
-Lia Corrales, Kris Stern
+Lia Corrales, Kris Stern, Stephanie T. Douglas, Kelle Cruz
 
 Learning Goals
 --------------
 
-1. Learn how to open FITS files and load the image data
-2. Learn how to visualize the image data
-3. Learn about basic image math: image stacking
-4. Learn how to write image data to a FITS file
+-  Open FITS files and load image data
+
+2. Make a 2D histogram with image data
+3. Stack several images into a single image
+4. Write image data to a FITS file
 
 Keywords
 --------
 
-matplotlib, FITS image, table
+FITS, file input/output, image manipulation, numpy, matplotlib,
+histogram, colorbar
 
 Summary
 -------
@@ -60,8 +62,7 @@ demonstration of simple image stacking.
     
     from astropy.io import fits
 
-The following cell is needed to download the example FITS files used
-here.
+Download the example FITS files for this tutorial.
 
 
 :inputnumrole:`In[2]:`
@@ -109,9 +110,8 @@ blocks are numbered and can be accessed by indexing hdu_list.
 
     image_data = hdu_list[0].data
 
-Our data is now stored as a 2-D numpy array. But how do we know the
-dimensions of the image? We can simply look at the ``shape`` of the
-array.
+Our data is now stored as a 2D numpy array. But how do we know the
+dimensions of the image? We can look at the ``shape`` of the array.
 
 
 :inputnumrole:`In[5]:`
@@ -192,7 +192,7 @@ Viewing the image data and getting basic statistics
 
 .. parsed-literal::
 
-    <matplotlib.colorbar.Colorbar at 0x7f50b80de850>
+    <matplotlib.colorbar.Colorbar at 0x7fd5ae5cb890>
 
 
 
@@ -230,9 +230,9 @@ Plotting a histogram
 ~~~~~~~~~~~~~~~~~~~~
 
 To make a histogram with ``matplotlib.pyplot.hist()``, we’ll need to
-cast the data from a 2-D array to something one dimensional.
+cast the data from a 2D array to something one dimensional.
 
-In this case, let’s use the ``ndarray.flatten()`` to return a 1-D numpy
+In this case, let’s use the ``ndarray.flatten()`` to return a 1D numpy
 array.
 
 
@@ -391,7 +391,7 @@ scaling for ``imshow``.
 
 .. parsed-literal::
 
-    <matplotlib.colorbar.Colorbar at 0x7f50b58b6090>
+    <matplotlib.colorbar.Colorbar at 0x7fd5a74b1f90>
 
 
 
@@ -403,7 +403,7 @@ scaling for ``imshow``.
 Writing image data to a FITS file
 ---------------------------------
 
-We can easily do this with the ``writeto()`` method.
+We can do this with the ``writeto()`` method.
 
 Warning: you’ll receive an error if the file you are trying to write
 already exists. That’s why we’ve set ``overwrite=True``.

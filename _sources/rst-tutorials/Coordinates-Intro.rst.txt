@@ -1,5 +1,5 @@
 .. meta::
-    :keywords: filterTutorials, filterCoordinates, filterOop
+    :keywords: filterTutorials, filterCoordinates, filterOop, filterFileInputOutput
 
 .. raw:: html
 
@@ -16,26 +16,28 @@
 
 .. _Coordinates-Intro:
 
-Getting Started with astropy.coordinates
-========================================
+Coords 1: Getting Started with astropy.coordinates
+==================================================
 
 Authors
 -------
 
-Erik Tollerud, Kelle Cruz, Stephen Pardy
+Erik Tollerud, Kelle Cruz, Stephen Pardy, Stephanie T. Douglas
 
 Learning Goals
 --------------
 
 -  Create ``astropy.coordinates.SkyCoord`` objects using names and
    coordinates
+-  Use SkyCoord objects to become familiar with object oriented
+   programming (OOP)
 -  Interact with a ``SkyCoord`` object and access its attributes
 -  Use a ``SkyCoord`` object to query a database
 
 Keywords
 --------
 
-coordinates, OOP
+coordinates, OOP, file input/output
 
 Summary
 -------
@@ -60,15 +62,7 @@ Imports
     # Third-party dependencies
     from astropy import units as u
     from astropy.coordinates import SkyCoord
-    from astropy.table import Table
-    import numpy as np
     from IPython.display import Image
-    
-    # Set up matplotlib and use a nicer set of plot parameters
-    from astropy.visualization import astropy_mpl_style
-    import matplotlib.pyplot as plt
-    plt.style.use(astropy_mpl_style)
-    %matplotlib inline
 
 Describing on-sky locations with ``coordinates``
 ------------------------------------------------
@@ -96,8 +90,8 @@ method <https://julien.danjou.info/blog/2013/guide-python-static-class-abstract-
 
    <div class="alert alert-info">
 
-Note that this requires an internet connection. If you don’t have one,
-execute this line instead:
+Note that the above command requires an internet connection. If you
+don’t have one, execute the following line instead:
 
 .. raw:: html
 
@@ -329,13 +323,13 @@ dec = 0.878 deg.
 This object we’ve just created has various useful ways of accessing the
 information contained within it. In particular, the ``ra`` and ``dec``
 attributes are specialized
-```Quantity`` <http://docs.astropy.org/en/stable/units/index.html>`__
+`Quantity <http://docs.astropy.org/en/stable/units/index.html>`__
 objects (actually, a subclass called
-```Angle`` <http://docs.astropy.org/en/stable/api/astropy.coordinates.Angle.html>`__,
+`Angle <http://docs.astropy.org/en/stable/api/astropy.coordinates.Angle.html>`__,
 which in turn is subclassed by
-```Latitude`` <http://docs.astropy.org/en/stable/api/astropy.coordinates.Latitude.html>`__
+`Latitude <http://docs.astropy.org/en/stable/api/astropy.coordinates.Latitude.html>`__
 and
-```Longitude`` <http://docs.astropy.org/en/stable/api/astropy.coordinates.Longitude.html>`__).
+`Longitude <http://docs.astropy.org/en/stable/api/astropy.coordinates.Longitude.html>`__).
 These objects store angles and provide pretty representations of those
 angles, as well as some useful attributes to quickly convert to common
 angle units:
@@ -506,7 +500,7 @@ file\ ``'HCG7_SDSS_cutout.jpg'``, defined at the top of the cell.
 
 .. parsed-literal::
 
-    ('HCG7_SDSS_cutout.jpg', <http.client.HTTPMessage at 0x7fb157090c90>)
+    ('HCG7_SDSS_cutout.jpg', <http.client.HTTPMessage at 0x7f4c12c40890>)
 
 
 
@@ -529,6 +523,10 @@ file\ ``'HCG7_SDSS_cutout.jpg'``, defined at the top of the cell.
 
 
 Very pretty!
+
+The saga of HCG 7 continues in `Coords 2: Transforming between
+coordinate
+systems <http://learn.astropy.org/rst-tutorials/Coordinates-Transform.html>`__.
 
 Exercises
 ---------

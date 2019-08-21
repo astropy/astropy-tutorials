@@ -25,7 +25,7 @@ Introduction
 Authors
 ~~~~~~~
 
-Adrian Price-Whelan
+Adrian Price-Whelan, Stephanie T. Douglas
 
 Learning Goals
 ~~~~~~~~~~~~~~
@@ -41,17 +41,8 @@ Learning Goals
 Keywords
 ~~~~~~~~
 
-   **astropy packages:** coordinates, gala, astroquery
-
-..
-
-   **python packages:**
-
-   **task:**
-
-..
-
-   **science:** galaxy dynamics
+coordinates, astroquery, gala, galactic dynamics, astrometry,
+matplotlib, scatter plot, histogram
 
 Companion Content
 ~~~~~~~~~~~~~~~~~
@@ -251,7 +242,7 @@ first four rows of the table:
 .. raw:: html
 
     <i>QTable length=4</i>
-    <table id="table140167204865616" class="table-striped table-bordered table-condensed">
+    <table id="table140310541577360" class="table-striped table-bordered table-condensed">
     <thead><tr><th>ra</th><th>dec</th><th>parallax</th><th>pmra</th><th>pmdec</th><th>radial_velocity</th><th>phot_g_mean_mag</th><th>phot_bp_mean_mag</th><th>phot_rp_mean_mag</th></tr></thead>
     <thead><tr><th>deg</th><th>deg</th><th>mas</th><th>mas / yr</th><th>mas / yr</th><th>km / s</th><th>mag</th><th>mag</th><th>mag</th></tr></thead>
     <thead><tr><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float32</th><th>float32</th><th>float32</th></tr></thead>
@@ -602,6 +593,7 @@ and it’s safe to ignore them.
 
 .. code:: python
 
+    np.seterr(invalid="ignore")
     hi_mass_mask = ((BP_RP > 0.5*u.mag) & (BP_RP < 0.7*u.mag) & 
                     (M_G > 2*u.mag) & (M_G < 3.75*u.mag) & 
                     (np.abs(galcen.v_y - 220*u.km/u.s) < 50*u.km/u.s))
@@ -609,18 +601,6 @@ and it’s safe to ignore them.
     lo_mass_mask = ((BP_RP > 2*u.mag) & (BP_RP < 2.4*u.mag) & 
                     (M_G > 8.2*u.mag) & (M_G < 9.7*u.mag) &
                     (np.abs(galcen.v_y - 220*u.km/u.s) < 50*u.km/u.s))
-
-
-:outputnumrole:`Out[17]:`
-
-
-.. parsed-literal::
-
-    /home/circleci/project/venv/lib/python3.7/site-packages/astropy/units/quantity.py:466: RuntimeWarning: invalid value encountered in greater
-      result = super().__array_ufunc__(function, method, *arrays, **kwargs)
-    /home/circleci/project/venv/lib/python3.7/site-packages/astropy/units/quantity.py:466: RuntimeWarning: invalid value encountered in less
-      result = super().__array_ufunc__(function, method, *arrays, **kwargs)
-
 
 Let’s also define default colors to use when visualizing the high- and
 low-mass stars:
@@ -1010,7 +990,7 @@ Exercises
    of eccentricity values.
 
 
-:inputnumrole:`In[0]:`
+:inputnumrole:`In[None]:`
 
 
 

@@ -2,10 +2,10 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta charset="utf-8" /><meta content="filterTutorials, filterCoordinates, filterUnits" name="keywords" />
+    <meta charset="utf-8" /><meta content="filterTutorials, filterCoordinates, filterUnits, filterObservationalAstronomy" name="keywords" />
 <meta content="filterTutorials," name="keywords" />
 
-    <title>Transforming between coordinate systems &#8212; astropy-tutorials v3.0.dev</title>
+    <title>Coords 2: Transforming between coordinate systems &#8212; astropy-tutorials v3.0.dev</title>
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
@@ -79,7 +79,7 @@
       <div id="sidebar" class="bs-sidenav card" role="complementary">
         <h3>Table of contents</h3>
         <ul>
-<li><a class="reference internal" href="#">Transforming between coordinate systems</a><ul>
+<li><a class="reference internal" href="#">Coords 2: Transforming between coordinate systems</a><ul>
 <li><a class="reference internal" href="#authors">Authors</a></li>
 <li><a class="reference internal" href="#learning-goals">Learning Goals</a></li>
 <li><a class="reference internal" href="#keywords">Keywords</a></li>
@@ -120,44 +120,39 @@
   <a href="../_static/Coordinates-Transform/Coordinates-Transform.ipynb"><button id="download">Download tutorial notebook</button></a>
 <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/Coordinates-Transform/Coordinates-Transform.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
 
-<div id="spacer"></div><div class="section" id="transforming-between-coordinate-systems">
-<span id="coordinates-transform"></span><h1>Transforming between coordinate systems<a class="headerlink" href="#transforming-between-coordinate-systems" title="Permalink to this headline">¶</a></h1>
+<div id="spacer"></div><div class="section" id="coords-2-transforming-between-coordinate-systems">
+<span id="coordinates-transform"></span><h1>Coords 2: Transforming between coordinate systems<a class="headerlink" href="#coords-2-transforming-between-coordinate-systems" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="authors">
 <h2>Authors<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a></h2>
-<p>Erik Tollerud, Kelle Cruz, Stephen Pardy</p>
+<p>Erik Tollerud, Kelle Cruz, Stephen Pardy, Stephanie T. Douglas</p>
 </div>
 <div class="section" id="learning-goals">
 <h2>Learning Goals<a class="headerlink" href="#learning-goals" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>Make coordinate objects</p></li>
-<li><p>Transform to different coordinate systems</p></li>
-<li><p>See how to track an object’s altitude from certain observing
-locations</p></li>
+<li><p>Create <code class="docutils literal notranslate"><span class="pre">astropy.coordinates.SkyCoord</span></code> objects</p></li>
+<li><p>Transform to different coordinate systems on the sky</p></li>
+<li><p>Transform to altitude/azimuth coordinates from a specific observing
+site</p></li>
 </ul>
 </div>
 <div class="section" id="keywords">
 <h2>Keywords<a class="headerlink" href="#keywords" title="Permalink to this headline">¶</a></h2>
-<p>coordinates, units</p>
+<p>coordinates, units, observational astronomy</p>
 </div>
 <div class="section" id="summary">
 <h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
 <p>In this tutorial we demonstrate how to define astronomical coordinates
 using the <code class="docutils literal notranslate"><span class="pre">astropy.coordinates</span></code> “frame” classes. We then show how to
 transform between the different built-in coordinate frames, such as from
-ICRS (RA, Dec) to Galactic (l, b).</p>
+ICRS (RA, Dec) to Galactic (l, b). Finally, we show how to compute
+altitude and azimuth from a specific observing site.</p>
 <div class="section" id="imports">
 <h3>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h3>
 <p><span class="inputnumrole">In[1]:</span></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Python standard-library</span>
-<span class="kn">from</span> <span class="nn">urllib.parse</span> <span class="kn">import</span> <span class="n">urlencode</span>
-<span class="kn">from</span> <span class="nn">urllib.request</span> <span class="kn">import</span> <span class="n">urlretrieve</span>
-
-<span class="c1"># Third-party dependencies</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Third-party dependencies</span>
 <span class="kn">from</span> <span class="nn">astropy</span> <span class="kn">import</span> <span class="n">units</span> <span class="k">as</span> <span class="n">u</span>
 <span class="kn">from</span> <span class="nn">astropy.coordinates</span> <span class="kn">import</span> <span class="n">SkyCoord</span>
-<span class="kn">from</span> <span class="nn">astropy.table</span> <span class="kn">import</span> <span class="n">Table</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
 </pre></div>
 </div>
 <p><span class="inputnumrole">In[2]:</span></p>
@@ -172,8 +167,9 @@ ICRS (RA, Dec) to Galactic (l, b).</p>
 </div>
 <div class="section" id="section-0-quickstart">
 <h2>Section 0: Quickstart<a class="headerlink" href="#section-0-quickstart" title="Permalink to this headline">¶</a></h2>
-<div class="alert alert-info"><p><strong>Note:</strong> If you already worked through the first in this series you can
-feel free to skip to <a class="reference external" href="#Section-1:">Section 1</a>.</p>
+<div class="alert alert-info"><p><strong>Note:</strong> If you already worked through <a class="reference external" href="http://learn.astropy.org/rst-tutorials/Coordinates-Intro.html?highlight=coordinates">Coords
+1</a>
+you can feel free to skip to <a class="reference external" href="#Section-1:">Section 1</a>.</p>
 </div><p>In Astropy, the most common object you’ll work with for coordinates is
 <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code>. A <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> can most easily be created directly from
 angles as shown below.</p>
@@ -560,7 +556,7 @@ the default is to ignore this effect (by setting the pressure to 0).</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">AltAz</span> <span class="n">Frame</span> <span class="p">(</span><span class="n">obstime</span><span class="o">=</span><span class="mi">2010</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">21</span> <span class="mi">01</span><span class="p">:</span><span class="mi">00</span><span class="p">:</span><span class="mf">00.000</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">1994502.60430614</span><span class="p">,</span> <span class="o">-</span><span class="mf">5037538.54232911</span><span class="p">,</span> <span class="mf">3358104.99690298</span><span class="p">)</span> <span class="n">m</span><span class="p">,</span> <span class="n">pressure</span><span class="o">=</span><span class="mf">0.0</span> <span class="n">hPa</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mf">0.0</span> <span class="n">deg_C</span><span class="p">,</span> <span class="n">relative_humidity</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">obswl</span><span class="o">=</span><span class="mf">1.0</span> <span class="n">micron</span><span class="p">)</span><span class="o">&gt;</span>
 </pre></div>
 </div>
-<p>Now we can just transform our ICRS <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> to <code class="docutils literal notranslate"><span class="pre">AltAz</span></code> to get the
+<p>Now we can transform our ICRS <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> to <code class="docutils literal notranslate"><span class="pre">AltAz</span></code> to get the
 location in the sky over Kitt Peak at the requested time.</p>
 <p><span class="inputnumrole">In[20]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">hcg7_center</span><span class="o">.</span><span class="n">transform_to</span><span class="p">(</span><span class="n">aa</span><span class="p">)</span>
@@ -628,8 +624,8 @@ go!</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[24]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">SkyCoord</span> <span class="p">(</span><span class="n">AltAz</span><span class="p">:</span> <span class="n">obstime</span><span class="o">=</span><span class="mi">2019</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">21</span> <span class="mi">20</span><span class="p">:</span><span class="mi">28</span><span class="p">:</span><span class="mf">20.775280</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">1994502.60430614</span><span class="p">,</span> <span class="o">-</span><span class="mf">5037538.54232911</span><span class="p">,</span> <span class="mf">3358104.99690298</span><span class="p">)</span> <span class="n">m</span><span class="p">,</span> <span class="n">pressure</span><span class="o">=</span><span class="mf">0.0</span> <span class="n">hPa</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mf">0.0</span> <span class="n">deg_C</span><span class="p">,</span> <span class="n">relative_humidity</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">obswl</span><span class="o">=</span><span class="mf">1.0</span> <span class="n">micron</span><span class="p">):</span> <span class="p">(</span><span class="n">az</span><span class="p">,</span> <span class="n">alt</span><span class="p">)</span> <span class="ow">in</span> <span class="n">deg</span>
-    <span class="p">(</span><span class="mf">319.85030742</span><span class="p">,</span> <span class="o">-</span><span class="mf">49.58419071</span><span class="p">)</span><span class="o">&gt;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">SkyCoord</span> <span class="p">(</span><span class="n">AltAz</span><span class="p">:</span> <span class="n">obstime</span><span class="o">=</span><span class="mi">2019</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">21</span> <span class="mi">22</span><span class="p">:</span><span class="mi">03</span><span class="p">:</span><span class="mf">14.450842</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">1994502.60430614</span><span class="p">,</span> <span class="o">-</span><span class="mf">5037538.54232911</span><span class="p">,</span> <span class="mf">3358104.99690298</span><span class="p">)</span> <span class="n">m</span><span class="p">,</span> <span class="n">pressure</span><span class="o">=</span><span class="mf">0.0</span> <span class="n">hPa</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mf">0.0</span> <span class="n">deg_C</span><span class="p">,</span> <span class="n">relative_humidity</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">obswl</span><span class="o">=</span><span class="mf">1.0</span> <span class="n">micron</span><span class="p">):</span> <span class="p">(</span><span class="n">az</span><span class="p">,</span> <span class="n">alt</span><span class="p">)</span> <span class="ow">in</span> <span class="n">deg</span>
+    <span class="p">(</span><span class="mf">358.29863378</span><span class="p">,</span> <span class="o">-</span><span class="mf">57.02917156</span><span class="p">)</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 </div>
@@ -667,7 +663,6 @@ documentation</a>.</p>
 package</a>, which uses the
 <code class="docutils literal notranslate"><span class="pre">astropy.coordinates</span></code> to do more advanced versions of the tasks in the
 last section of this tutorial.</p>
-<p><span class="inputnumrole">In[None]:</span></p>
 <div id="spacer"></div>
 
 <a href="../_static/Coordinates-Transform/Coordinates-Transform.ipynb"><button id="download">Download tutorial notebook</button></a>

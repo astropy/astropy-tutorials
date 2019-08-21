@@ -2,7 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta charset="utf-8" /><meta content="filterTutorials, filterMatplotlib, filterFitsImage, filterTable" name="keywords" />
+    <meta charset="utf-8" /><meta content="filterTutorials, filterFits, filterFileInputOutput, filterImageManipulation, filterNumpy, filterMatplotlib, filterHistogram, filterColorbar" name="keywords" />
 <meta content="filterTutorials," name="keywords" />
 
     <title>Viewing and manipulating FITS images &#8212; astropy-tutorials v3.0.dev</title>
@@ -114,20 +114,23 @@
 <span id="fits-images"></span><h1>Viewing and manipulating FITS images<a class="headerlink" href="#viewing-and-manipulating-fits-images" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="authors">
 <h2>Authors<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a></h2>
-<p>Lia Corrales, Kris Stern</p>
+<p>Lia Corrales, Kris Stern, Stephanie T. Douglas, Kelle Cruz</p>
 </div>
 <div class="section" id="learning-goals">
 <h2>Learning Goals<a class="headerlink" href="#learning-goals" title="Permalink to this headline">¶</a></h2>
-<ol class="arabic simple">
-<li><p>Learn how to open FITS files and load the image data</p></li>
-<li><p>Learn how to visualize the image data</p></li>
-<li><p>Learn about basic image math: image stacking</p></li>
-<li><p>Learn how to write image data to a FITS file</p></li>
+<ul class="simple">
+<li><p>Open FITS files and load image data</p></li>
+</ul>
+<ol class="arabic simple" start="2">
+<li><p>Make a 2D histogram with image data</p></li>
+<li><p>Stack several images into a single image</p></li>
+<li><p>Write image data to a FITS file</p></li>
 </ol>
 </div>
 <div class="section" id="keywords">
 <h2>Keywords<a class="headerlink" href="#keywords" title="Permalink to this headline">¶</a></h2>
-<p>matplotlib, FITS image, table</p>
+<p>FITS, file input/output, image manipulation, numpy, matplotlib,
+histogram, colorbar</p>
 </div>
 <div class="section" id="summary">
 <h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
@@ -146,8 +149,7 @@ demonstration of simple image stacking.</p>
 <span class="kn">from</span> <span class="nn">astropy.io</span> <span class="kn">import</span> <span class="n">fits</span>
 </pre></div>
 </div>
-<p>The following cell is needed to download the example FITS files used
-here.</p>
+<p>Download the example FITS files for this tutorial.</p>
 <p><span class="inputnumrole">In[2]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">astropy.utils.data</span> <span class="kn">import</span> <span class="n">download_file</span>
 <span class="n">image_file</span> <span class="o">=</span> <span class="n">download_file</span><span class="p">(</span><span class="s1">&#39;http://data.astropy.org/tutorials/FITS-images/HorseHead.fits&#39;</span><span class="p">,</span> <span class="n">cache</span><span class="o">=</span><span class="bp">True</span> <span class="p">)</span>
@@ -175,9 +177,8 @@ blocks are numbered and can be accessed by indexing hdu_list.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">image_data</span> <span class="o">=</span> <span class="n">hdu_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
 </pre></div>
 </div>
-<p>Our data is now stored as a 2-D numpy array. But how do we know the
-dimensions of the image? We can simply look at the <code class="docutils literal notranslate"><span class="pre">shape</span></code> of the
-array.</p>
+<p>Our data is now stored as a 2D numpy array. But how do we know the
+dimensions of the image? We can look at the <code class="docutils literal notranslate"><span class="pre">shape</span></code> of the array.</p>
 <p><span class="inputnumrole">In[5]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">image_data</span><span class="p">))</span>
 <span class="k">print</span><span class="p">(</span><span class="n">image_data</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
@@ -222,7 +223,7 @@ everything we wanted to a variable.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[8]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">colorbar</span><span class="o">.</span><span class="n">Colorbar</span> <span class="n">at</span> <span class="mh">0x7f50b80de850</span><span class="o">&gt;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">colorbar</span><span class="o">.</span><span class="n">Colorbar</span> <span class="n">at</span> <span class="mh">0x7fd5ae5cb890</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <img alt="../_images/FITS-images_17_1.png" src="../_images/FITS-images_17_1.png" />
@@ -244,8 +245,8 @@ everything we wanted to a variable.</p>
 <div class="section" id="plotting-a-histogram">
 <h3>Plotting a histogram<a class="headerlink" href="#plotting-a-histogram" title="Permalink to this headline">¶</a></h3>
 <p>To make a histogram with <code class="docutils literal notranslate"><span class="pre">matplotlib.pyplot.hist()</span></code>, we’ll need to
-cast the data from a 2-D array to something one dimensional.</p>
-<p>In this case, let’s use the <code class="docutils literal notranslate"><span class="pre">ndarray.flatten()</span></code> to return a 1-D numpy
+cast the data from a 2D array to something one dimensional.</p>
+<p>In this case, let’s use the <code class="docutils literal notranslate"><span class="pre">ndarray.flatten()</span></code> to return a 1D numpy
 array.</p>
 <p><span class="inputnumrole">In[10]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">image_data</span><span class="o">.</span><span class="n">flatten</span><span class="p">()))</span>
@@ -328,14 +329,14 @@ scaling for <code class="docutils literal notranslate"><span class="pre">imshow<
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[17]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">colorbar</span><span class="o">.</span><span class="n">Colorbar</span> <span class="n">at</span> <span class="mh">0x7f50b58b6090</span><span class="o">&gt;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">colorbar</span><span class="o">.</span><span class="n">Colorbar</span> <span class="n">at</span> <span class="mh">0x7fd5a74b1f90</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <img alt="../_images/FITS-images_38_1.png" src="../_images/FITS-images_38_1.png" />
 </div>
 <div class="section" id="writing-image-data-to-a-fits-file">
 <h2>Writing image data to a FITS file<a class="headerlink" href="#writing-image-data-to-a-fits-file" title="Permalink to this headline">¶</a></h2>
-<p>We can easily do this with the <code class="docutils literal notranslate"><span class="pre">writeto()</span></code> method.</p>
+<p>We can do this with the <code class="docutils literal notranslate"><span class="pre">writeto()</span></code> method.</p>
 <p>Warning: you’ll receive an error if the file you are trying to write
 already exists. That’s why we’ve set <code class="docutils literal notranslate"><span class="pre">overwrite=True</span></code>.</p>
 <p><span class="inputnumrole">In[18]:</span></p>

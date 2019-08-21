@@ -115,7 +115,7 @@
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="authors">
 <h3>Authors<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a></h3>
-<p>Adrian Price-Whelan</p>
+<p>Adrian Price-Whelan, Stephanie T. Douglas</p>
 </div>
 <div class="section" id="learning-goals">
 <h3>Learning Goals<a class="headerlink" href="#learning-goals" title="Permalink to this headline">¶</a></h3>
@@ -131,16 +131,8 @@ smaller vertical excursions</p></li>
 </div>
 <div class="section" id="keywords">
 <h3>Keywords<a class="headerlink" href="#keywords" title="Permalink to this headline">¶</a></h3>
-<blockquote>
-<div><p><strong>astropy packages:</strong> coordinates, gala, astroquery</p>
-</div></blockquote>
-<blockquote>
-<div><p><strong>python packages:</strong></p>
-<p><strong>task:</strong></p>
-</div></blockquote>
-<blockquote>
-<div><p><strong>science:</strong> galaxy dynamics</p>
-</div></blockquote>
+<p>coordinates, astroquery, gala, galactic dynamics, astrometry,
+matplotlib, scatter plot, histogram</p>
 </div>
 <div class="section" id="companion-content">
 <h3>Companion Content<a class="headerlink" href="#companion-content" title="Permalink to this headline">¶</a></h3>
@@ -295,7 +287,7 @@ first four rows of the table:</p>
 </div>
 <p><span class="outputnumrole">Out[5]:</span></p>
 <i>QTable length=4</i>
-<table id="table140167204865616" class="table-striped table-bordered table-condensed">
+<table id="table140310541577360" class="table-striped table-bordered table-condensed">
 <thead><tr><th>ra</th><th>dec</th><th>parallax</th><th>pmra</th><th>pmdec</th><th>radial_velocity</th><th>phot_g_mean_mag</th><th>phot_bp_mean_mag</th><th>phot_rp_mean_mag</th></tr></thead>
 <thead><tr><th>deg</th><th>deg</th><th>mas</th><th>mas / yr</th><th>mas / yr</th><th>km / s</th><th>mag</th><th>mag</th><th>mag</th></tr></thead>
 <thead><tr><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float32</th><th>float32</th><th>float32</th></tr></thead>
@@ -506,20 +498,14 @@ main sequence stars from the CMD for comparison. You may see two
 <code class="docutils literal notranslate"><span class="pre">RuntimeWarning</span></code>(s) from running the next cell — these are expected
 and it’s safe to ignore them.</p>
 <p><span class="inputnumrole">In[17]:</span></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">hi_mass_mask</span> <span class="o">=</span> <span class="p">((</span><span class="n">BP_RP</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">mag</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">BP_RP</span> <span class="o">&lt;</span> <span class="mf">0.7</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">mag</span><span class="p">)</span> <span class="o">&amp;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">seterr</span><span class="p">(</span><span class="n">invalid</span><span class="o">=</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+<span class="n">hi_mass_mask</span> <span class="o">=</span> <span class="p">((</span><span class="n">BP_RP</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">mag</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">BP_RP</span> <span class="o">&lt;</span> <span class="mf">0.7</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">mag</span><span class="p">)</span> <span class="o">&amp;</span>
                 <span class="p">(</span><span class="n">M_G</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">mag</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">M_G</span> <span class="o">&lt;</span> <span class="mf">3.75</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">mag</span><span class="p">)</span> <span class="o">&amp;</span>
                 <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">galcen</span><span class="o">.</span><span class="n">v_y</span> <span class="o">-</span> <span class="mi">220</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">km</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">50</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">km</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">))</span>
 
 <span class="n">lo_mass_mask</span> <span class="o">=</span> <span class="p">((</span><span class="n">BP_RP</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">mag</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">BP_RP</span> <span class="o">&lt;</span> <span class="mf">2.4</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">mag</span><span class="p">)</span> <span class="o">&amp;</span>
                 <span class="p">(</span><span class="n">M_G</span> <span class="o">&gt;</span> <span class="mf">8.2</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">mag</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">M_G</span> <span class="o">&lt;</span> <span class="mf">9.7</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">mag</span><span class="p">)</span> <span class="o">&amp;</span>
                 <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">galcen</span><span class="o">.</span><span class="n">v_y</span> <span class="o">-</span> <span class="mi">220</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">km</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">50</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">km</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">))</span>
-</pre></div>
-</div>
-<p><span class="outputnumrole">Out[17]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">circleci</span><span class="o">/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astropy</span><span class="o">/</span><span class="n">units</span><span class="o">/</span><span class="n">quantity</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">466</span><span class="p">:</span> <span class="ne">RuntimeWarning</span><span class="p">:</span> <span class="n">invalid</span> <span class="n">value</span> <span class="n">encountered</span> <span class="ow">in</span> <span class="n">greater</span>
-  <span class="n">result</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__array_ufunc__</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="o">*</span><span class="n">arrays</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">circleci</span><span class="o">/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astropy</span><span class="o">/</span><span class="n">units</span><span class="o">/</span><span class="n">quantity</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">466</span><span class="p">:</span> <span class="ne">RuntimeWarning</span><span class="p">:</span> <span class="n">invalid</span> <span class="n">value</span> <span class="n">encountered</span> <span class="ow">in</span> <span class="n">less</span>
-  <span class="n">result</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__array_ufunc__</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="o">*</span><span class="n">arrays</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Let’s also define default colors to use when visualizing the high- and
@@ -767,7 +753,7 @@ low-mass) tend to have high eccentricity orbits within the Galaxy?
 Similar to the plot above, make a plot showing the two distributions
 of eccentricity values.</p></li>
 </ol>
-<p><span class="inputnumrole">In[0]:</span></p>
+<p><span class="inputnumrole">In[None]:</span></p>
 <div id="spacer"></div>
 
 <a href="../_static/gaia-galactic-orbits/gaia-galactic-orbits.ipynb"><button id="download">Download tutorial notebook</button></a>

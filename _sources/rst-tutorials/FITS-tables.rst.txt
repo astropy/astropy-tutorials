@@ -1,5 +1,5 @@
 .. meta::
-    :keywords: filterTutorials, filterTable, filterFileInputOutput(IO), filterMatplotlib, filterFitsTable
+    :keywords: filterTutorials, filterFits, filterFileInputOutput, filterTable, filterNumpy, filterMatplotlib, filterHistogram
 
 .. raw:: html
 
@@ -27,21 +27,23 @@ Lia Corrales, Kris Stern
 Learning Goals
 --------------
 
-1. Learn how to open a FITS file and view table contents
-2. Learn how to make a 2-D histogram with some table data
-3. Learn how to close the FITS file after use
+-  Download a FITS table file from a URL
+-  Open a FITS table file and view table contents
+-  Make a 2D histogram with the table data
+-  Close the FITS file after use
 
 Keywords
 --------
 
-table, file input/output (i/o), matplotlib, FITS table
+FITS, file input/output, table, numpy, matplotlib, histogram
 
 Summary
 -------
 
 This tutorial demonstrates the use of ``astropy.utils.data`` to download
 a data file, then uses ``astropy.io.fits`` and ``astropy.table`` to open
-the file. Lastly, we’ll use ``matplotlib`` to visualize the data.
+the file. Lastly, ``matplotlib`` is used to visualize the data as a
+histogram.
 
 
 :inputnumrole:`In[1]:`
@@ -202,7 +204,7 @@ cell with the table as the last line:
 .. raw:: html
 
     <i>Table length=483964</i>
-    <table id="table140379072257744" class="table-striped table-bordered table-condensed">
+    <table id="table139873229505552" class="table-striped table-bordered table-condensed">
     <thead><tr><th>time</th><th>ccd_id</th><th>node_id</th><th>expno</th><th>chipx</th><th>chipy</th><th>tdetx</th><th>tdety</th><th>detx</th><th>dety</th><th>x</th><th>y</th><th>pha</th><th>pha_ro</th><th>energy</th><th>pi</th><th>fltgrade</th><th>grade</th><th>status [32]</th></tr></thead>
     <thead><tr><th>float64</th><th>int16</th><th>int16</th><th>int32</th><th>int16</th><th>int16</th><th>int16</th><th>int16</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>int32</th><th>int32</th><th>float32</th><th>int32</th><th>int16</th><th>int16</th><th>bool</th></tr></thead>
     <tr><td>238623220.9093583</td><td>3</td><td>3</td><td>68</td><td>920</td><td>8</td><td>5124</td><td>3981</td><td>5095.641</td><td>4138.995</td><td>4168.0723</td><td>5087.772</td><td>3548</td><td>3534</td><td>13874.715</td><td>951</td><td>16</td><td>4</td><td>False .. False</td></tr>
@@ -251,11 +253,11 @@ a sense for the spectrum (folded with the detector’s efficiency).
 
 
 
-Making a 2-D histogram with some table data
--------------------------------------------
+Making a 2D histogram with some table data
+------------------------------------------
 
 We’ll make an image by binning the x and y coordinates of the events
-into a 2-D histogram.
+into a 2D histogram.
 
 This particular observation spans five CCD chips. First, we determine
 the events that only fell on the main (ACIS-I) chips, which have number
@@ -282,8 +284,8 @@ ids 0, 1, 2, and 3.
 
 
 
-Method 1: Use numpy to make a 2-D histogram and imshow to display it
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Method 1: Use numpy to make a 2D histogram and imshow to display it
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 This method allows us to create an image without stretching:
 

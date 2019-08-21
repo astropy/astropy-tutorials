@@ -1,5 +1,5 @@
 .. meta::
-    :keywords: filterTutorials, filterUnits, filterMatplotlib, filterRadioAstronomy, filterDataCubes
+    :keywords: filterTutorials, filterUnits, filterRadioAstronomy, filterDataCubes, filterMatplotlib
 
 .. raw:: html
 
@@ -22,7 +22,8 @@ Using Astropy Quantities and Units for astrophysical calculations
 Authors
 -------
 
-Ana Bonaca, Erik Tollerud, Jonathan Foster, Lia Corrales, Kris Stern
+Ana Bonaca, Erik Tollerud, Jonathan Foster, Lia Corrales, Kris Stern,
+Stephanie T. Douglas
 
 Learning Goals
 --------------
@@ -47,7 +48,14 @@ Learning Goals
 Keywords
 --------
 
-units, matplotlib, radio astronomy, data cubes
+units, radio astronomy, data cubes, matplotlib
+
+Companion Content
+-----------------
+
+`Tools for Radio
+Astronomy <https://www.springer.com/gp/book/9783662053942>`__ by Rohlfs
+& Wilson
 
 Summary
 -------
@@ -285,7 +293,7 @@ settings on your ``matplotlib`` session to better handle astropy
 
 .. parsed-literal::
 
-    <astropy.visualization.units.quantity_support.<locals>.MplQuantityConverter at 0x7f8adae1f210>
+    <astropy.visualization.units.quantity_support.<locals>.MplQuantityConverter at 0x7f6702b1cf10>
 
 
 
@@ -795,7 +803,8 @@ where the constants :math:`C` and :math:`B` are given by:
 
 :math:`B=\frac{h\nu}{k_B T}`
 
-(Rohlfs & Wilson “Tools of Radio Astronomy”).
+(Rohlfs & Wilson `Tools for Radio
+Astronomy <https://www.springer.com/gp/book/9783662053942>`__).
 
 Here we have given an expression for :math:`C` scaled to the values for
 :math:`{\rm C}^{13}{\rm O}` (:math:`\nu_{13}` and :math:`A_{13}`). In

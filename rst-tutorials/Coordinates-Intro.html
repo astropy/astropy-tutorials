@@ -2,10 +2,10 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta charset="utf-8" /><meta content="filterTutorials, filterCoordinates, filterOop" name="keywords" />
+    <meta charset="utf-8" /><meta content="filterTutorials, filterCoordinates, filterOop, filterFileInputOutput" name="keywords" />
 <meta content="filterTutorials," name="keywords" />
 
-    <title>Getting Started with astropy.coordinates &#8212; astropy-tutorials v3.0.dev</title>
+    <title>Coords 1: Getting Started with astropy.coordinates &#8212; astropy-tutorials v3.0.dev</title>
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
@@ -79,7 +79,7 @@
       <div id="sidebar" class="bs-sidenav card" role="complementary">
         <h3>Table of contents</h3>
         <ul>
-<li><a class="reference internal" href="#">Getting Started with astropy.coordinates</a><ul>
+<li><a class="reference internal" href="#">Coords 1: Getting Started with astropy.coordinates</a><ul>
 <li><a class="reference internal" href="#authors">Authors</a></li>
 <li><a class="reference internal" href="#learning-goals">Learning Goals</a></li>
 <li><a class="reference internal" href="#keywords">Keywords</a></li>
@@ -106,24 +106,26 @@
   <a href="../_static/Coordinates-Intro/Coordinates-Intro.ipynb"><button id="download">Download tutorial notebook</button></a>
 <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/Coordinates-Intro/Coordinates-Intro.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
 
-<div id="spacer"></div><div class="section" id="getting-started-with-astropy-coordinates">
-<span id="coordinates-intro"></span><h1>Getting Started with astropy.coordinates<a class="headerlink" href="#getting-started-with-astropy-coordinates" title="Permalink to this headline">¶</a></h1>
+<div id="spacer"></div><div class="section" id="coords-1-getting-started-with-astropy-coordinates">
+<span id="coordinates-intro"></span><h1>Coords 1: Getting Started with astropy.coordinates<a class="headerlink" href="#coords-1-getting-started-with-astropy-coordinates" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="authors">
 <h2>Authors<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a></h2>
-<p>Erik Tollerud, Kelle Cruz, Stephen Pardy</p>
+<p>Erik Tollerud, Kelle Cruz, Stephen Pardy, Stephanie T. Douglas</p>
 </div>
 <div class="section" id="learning-goals">
 <h2>Learning Goals<a class="headerlink" href="#learning-goals" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>Create <code class="docutils literal notranslate"><span class="pre">astropy.coordinates.SkyCoord</span></code> objects using names and
 coordinates</p></li>
+<li><p>Use SkyCoord objects to become familiar with object oriented
+programming (OOP)</p></li>
 <li><p>Interact with a <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> object and access its attributes</p></li>
 <li><p>Use a <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> object to query a database</p></li>
 </ul>
 </div>
 <div class="section" id="keywords">
 <h2>Keywords<a class="headerlink" href="#keywords" title="Permalink to this headline">¶</a></h2>
-<p>coordinates, OOP</p>
+<p>coordinates, OOP, file input/output</p>
 </div>
 <div class="section" id="summary">
 <h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
@@ -141,15 +143,7 @@ download an image, and do something with its coordinates.</p>
 <span class="c1"># Third-party dependencies</span>
 <span class="kn">from</span> <span class="nn">astropy</span> <span class="kn">import</span> <span class="n">units</span> <span class="k">as</span> <span class="n">u</span>
 <span class="kn">from</span> <span class="nn">astropy.coordinates</span> <span class="kn">import</span> <span class="n">SkyCoord</span>
-<span class="kn">from</span> <span class="nn">astropy.table</span> <span class="kn">import</span> <span class="n">Table</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">Image</span>
-
-<span class="c1"># Set up matplotlib and use a nicer set of plot parameters</span>
-<span class="kn">from</span> <span class="nn">astropy.visualization</span> <span class="kn">import</span> <span class="n">astropy_mpl_style</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="n">astropy_mpl_style</span><span class="p">)</span>
-<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
 </pre></div>
 </div>
 </div>
@@ -169,8 +163,8 @@ method</a>:</p>
 <span class="n">hcg7_center</span> <span class="o">=</span> <span class="n">SkyCoord</span><span class="o">.</span><span class="n">from_name</span><span class="p">(</span><span class="s1">&#39;HCG 7&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="alert alert-info"><p>Note that this requires an internet connection. If you don’t have one,
-execute this line instead:</p>
+<div class="alert alert-info"><p>Note that the above command requires an internet connection. If you
+don’t have one, execute the following line instead:</p>
 </div><p><span class="inputnumrole">In[3]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># uncomment and run this line if you don&#39;t have an internet connection</span>
 <span class="c1"># hcg7_center = SkyCoord(9.81625*u.deg, 0.88806*u.deg, frame=&#39;icrs&#39;)</span>
@@ -357,13 +351,13 @@ dec = 0.878 deg.</p>
 <p>This object we’ve just created has various useful ways of accessing the
 information contained within it. In particular, the <code class="docutils literal notranslate"><span class="pre">ra</span></code> and <code class="docutils literal notranslate"><span class="pre">dec</span></code>
 attributes are specialized
-<code class="docutils literal notranslate"><span class="pre">`Quantity</span></code> &lt;<a class="reference external" href="http://docs.astropy.org/en/stable/units/index.html">http://docs.astropy.org/en/stable/units/index.html</a>&gt;`__
+<a class="reference external" href="http://docs.astropy.org/en/stable/units/index.html">Quantity</a>
 objects (actually, a subclass called
-<code class="docutils literal notranslate"><span class="pre">`Angle</span></code> &lt;<a class="reference external" href="http://docs.astropy.org/en/stable/api/astropy.coordinates.Angle.html">http://docs.astropy.org/en/stable/api/astropy.coordinates.Angle.html</a>&gt;`__,
+<a class="reference external" href="http://docs.astropy.org/en/stable/api/astropy.coordinates.Angle.html">Angle</a>,
 which in turn is subclassed by
-<code class="docutils literal notranslate"><span class="pre">`Latitude</span></code> &lt;<a class="reference external" href="http://docs.astropy.org/en/stable/api/astropy.coordinates.Latitude.html">http://docs.astropy.org/en/stable/api/astropy.coordinates.Latitude.html</a>&gt;`__
+<a class="reference external" href="http://docs.astropy.org/en/stable/api/astropy.coordinates.Latitude.html">Latitude</a>
 and
-<code class="docutils literal notranslate"><span class="pre">`Longitude</span></code> &lt;<a class="reference external" href="http://docs.astropy.org/en/stable/api/astropy.coordinates.Longitude.html">http://docs.astropy.org/en/stable/api/astropy.coordinates.Longitude.html</a>&gt;`__).
+<a class="reference external" href="http://docs.astropy.org/en/stable/api/astropy.coordinates.Longitude.html">Longitude</a>).
 These objects store angles and provide pretty representations of those
 angles, as well as some useful attributes to quickly convert to common
 angle units:</p>
@@ -447,7 +441,7 @@ file<code class="docutils literal notranslate"><span class="pre">'HCG7_SDSS_cuto
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[13]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="s1">&#39;HCG7_SDSS_cutout.jpg&#39;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">http</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">HTTPMessage</span> <span class="n">at</span> <span class="mh">0x7fb157090c90</span><span class="o">&gt;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="s1">&#39;HCG7_SDSS_cutout.jpg&#39;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">http</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">HTTPMessage</span> <span class="n">at</span> <span class="mh">0x7f4c12c40890</span><span class="o">&gt;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="inputnumrole">In[14]:</span></p>
@@ -457,6 +451,9 @@ file<code class="docutils literal notranslate"><span class="pre">'HCG7_SDSS_cuto
 <p><span class="outputnumrole">Out[14]:</span></p>
 <img alt="../_images/Coordinates-Intro_24_0.jpeg" src="../_images/Coordinates-Intro_24_0.jpeg" />
 <p>Very pretty!</p>
+<p>The saga of HCG 7 continues in <a class="reference external" href="http://learn.astropy.org/rst-tutorials/Coordinates-Transform.html">Coords 2: Transforming between
+coordinate
+systems</a>.</p>
 </div>
 <div class="section" id="exercises">
 <h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>

@@ -1,5 +1,5 @@
 .. meta::
-    :keywords: filterTutorials, filterUnits, filterCosmology, filterMatplotlib
+    :keywords: filterTutorials, filterUnits, filterPhysics, filterCosmology, filterMatplotlib
 
 .. raw:: html
 
@@ -22,17 +22,20 @@ Make a plot with both redshift and universe age axes using astropy.cosmology
 Authors
 -------
 
-Neil Crighton
+Neil Crighton, Stephanie T. Douglas
 
 Learning Goals
 --------------
 
--  TODO
+-  Plot relationships using ``matplotlib``
+-  Add a second axis to a ``matplotlib`` plot
+-  Relate distance, redshift, and age for two different types of
+   cosmology using ``astropy.cosmology``
 
 Keywords
 --------
 
-units, cosmology, matplotlib
+units, physics, cosmology, matplotlib
 
 Summary
 -------
@@ -88,14 +91,15 @@ because :math:`\Omega_M + \Omega_\Lambda + \Omega_k = 1`.
 .. code:: python
 
     from astropy.cosmology import FlatLambdaCDM
+    import astropy.units as u
     
     # In this case we just need to define the matter density 
     # and hubble parameter at z=0.
     
     # Note the default units for the hubble parameter H0 are km/s/Mpc. 
-    # You can also pass an astropy `Quantity` with the units specified. 
+    # We will pass in a `Quantity` object with the units specified. 
     
-    cosmo = FlatLambdaCDM(H0=70, Om0=0.3)
+    cosmo = FlatLambdaCDM(H0=70*u.km/u.s/u.Mpc, Om0=0.3)
 
 Note that we could instead use one of the built-in cosmologies, like
 ``WMAP9`` or ``Planck13``, in which case we would just redefine the
@@ -127,27 +131,24 @@ array of distance values, one for each redshift. Let’s plot them:
 
 .. code:: python
 
-    plt.rc('xtick.major', size=4)
-    plt.rc('ytick.major', size=4)
-    plt.rc('xtick.minor', size=2)
-    plt.rc('ytick.minor', size=2)
-    plt.rc('axes', grid=False)
-    plt.rc('xtick.major', width=1)
-    plt.rc('xtick.minor', width=1)
-    plt.rc('ytick.major', width=1)
-    plt.rc('ytick.minor', width=1)
-    plt.rc('lines', marker='')
-    
     fig = plt.figure(figsize=(6,4))
     ax = fig.add_subplot(111)
-    ax.plot(zvals, dist);
+    ax.plot(zvals, dist)
 
 
 :outputnumrole:`Out[5]:`
 
 
 
-.. image:: nboutput/redshift-plot_8_0.png
+
+.. parsed-literal::
+
+    [<matplotlib.lines.Line2D at 0x7f93d4100950>]
+
+
+
+
+.. image:: nboutput/redshift-plot_8_1.png
 
 
 
@@ -185,7 +186,6 @@ spaced ticks.
 
 .. code:: python
 
-    import astropy.units as u
     ages = np.array([13, 10, 8, 6, 5, 4, 3, 2, 1.5, 1.2, 1])*u.Gyr
 
 To link the redshift and age axes, we have to find the redshift
@@ -213,14 +213,32 @@ values.
     ax = fig.add_subplot(111)
     ax.plot(zvals, dist)
     ax2 = ax.twiny()
-    ax2.set_xticks(ageticks);
+    ax2.set_xticks(ageticks)
 
 
 :outputnumrole:`Out[9]:`
 
 
 
-.. image:: nboutput/redshift-plot_16_0.png
+
+.. parsed-literal::
+
+    [<matplotlib.axis.XTick at 0x7f93c8637f10>,
+     <matplotlib.axis.XTick at 0x7f93c8637050>,
+     <matplotlib.axis.XTick at 0x7f93c86374d0>,
+     <matplotlib.axis.XTick at 0x7f93c8659cd0>,
+     <matplotlib.axis.XTick at 0x7f93c8662310>,
+     <matplotlib.axis.XTick at 0x7f93c8662810>,
+     <matplotlib.axis.XTick at 0x7f93c8662dd0>,
+     <matplotlib.axis.XTick at 0x7f93c86683d0>,
+     <matplotlib.axis.XTick at 0x7f93c8668990>,
+     <matplotlib.axis.XTick at 0x7f93c8668810>,
+     <matplotlib.axis.XTick at 0x7f93c8668910>]
+
+
+
+
+.. image:: nboutput/redshift-plot_16_1.png
 
 
 
@@ -239,14 +257,32 @@ labels by hand.
     ax.plot(zvals, dist)
     ax2 = ax.twiny()
     ax2.set_xticks(ageticks)
-    ax2.set_xticklabels(['{:g}'.format(age) for age in ages.value]);
+    ax2.set_xticklabels(['{:g}'.format(age) for age in ages.value])
 
 
 :outputnumrole:`Out[10]:`
 
 
 
-.. image:: nboutput/redshift-plot_18_0.png
+
+.. parsed-literal::
+
+    [Text(0, 1, '13'),
+     Text(0, 1, '10'),
+     Text(0, 1, '8'),
+     Text(0, 1, '6'),
+     Text(0, 1, '5'),
+     Text(0, 1, '4'),
+     Text(0, 1, '3'),
+     Text(0, 1, '2'),
+     Text(0, 1, '1.5'),
+     Text(0, 1, '1.2'),
+     Text(0, 1, '1')]
+
+
+
+
+.. image:: nboutput/redshift-plot_18_1.png
 
 
 
@@ -269,14 +305,22 @@ z=0).
     ax2.set_xticklabels(['{:g}'.format(age) for age in ages.value])
     zmin, zmax = 0.0, 5.9
     ax.set_xlim(zmin, zmax)
-    ax2.set_xlim(zmin, zmax);
+    ax2.set_xlim(zmin, zmax)
 
 
 :outputnumrole:`Out[11]:`
 
 
 
-.. image:: nboutput/redshift-plot_20_0.png
+
+.. parsed-literal::
+
+    (0.0, 5.9)
+
+
+
+
+.. image:: nboutput/redshift-plot_20_1.png
 
 
 

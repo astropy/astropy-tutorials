@@ -2,10 +2,10 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta charset="utf-8" /><meta content="filterTutorials, filterModeling, filterUserDefinedModel, filterCustomModels, filterCompoundModels" name="keywords" />
+    <meta charset="utf-8" /><meta content="filterTutorials, filterModeling, filterFits, filterAstrostatistics, filterMatplotlib, filterModelFitting, filterErrorBars, filterScatterPlots" name="keywords" />
 <meta content="filterTutorials," name="keywords" />
 
-    <title>Create a User Defined Model using astropy.modeling &#8212; astropy-tutorials v3.0.dev</title>
+    <title>Modeling 2: Create a User Defined Model using astropy.modeling &#8212; astropy-tutorials v3.0.dev</title>
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
@@ -79,13 +79,13 @@
       <div id="sidebar" class="bs-sidenav card" role="complementary">
         <h3>Table of contents</h3>
         <ul>
-<li><a class="reference internal" href="#">Create a User Defined Model using astropy.modeling</a><ul>
+<li><a class="reference internal" href="#">Modeling 2: Create a User Defined Model using astropy.modeling</a><ul>
 <li><a class="reference internal" href="#authors">Authors</a></li>
 <li><a class="reference internal" href="#learning-goals">Learning Goals</a></li>
 <li><a class="reference internal" href="#keywords">Keywords</a></li>
 <li><a class="reference internal" href="#summary">Summary</a><ul>
 <li><a class="reference internal" href="#imports">Imports</a></li>
-<li><a class="reference internal" href="#fit-an-emission-line-from-a-star-spectrum-with-astropy-modeling">Fit an Emission Line from a star spectrum with <code class="docutils literal notranslate"><span class="pre">astropy.modeling</span></code></a><ul>
+<li><a class="reference internal" href="#fit-an-emission-line-in-a-stellar-spectrum">Fit an emission line in a stellar spectrum</a><ul>
 <li><a class="reference internal" href="#now-that-we-have-the-spectrum">Now that we have the spectrum…</a></li>
 </ul>
 </li>
@@ -119,18 +119,18 @@
   <a href="../_static/User-Defined-Model/User-Defined-Model.ipynb"><button id="download">Download tutorial notebook</button></a>
 <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/User-Defined-Model/User-Defined-Model.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
 
-<div id="spacer"></div><div class="section" id="create-a-user-defined-model-using-astropy-modeling">
-<span id="user-defined-model"></span><h1>Create a User Defined Model using astropy.modeling<a class="headerlink" href="#create-a-user-defined-model-using-astropy-modeling" title="Permalink to this headline">¶</a></h1>
+<div id="spacer"></div><div class="section" id="modeling-2-create-a-user-defined-model-using-astropy-modeling">
+<span id="user-defined-model"></span><h1>Modeling 2: Create a User Defined Model using astropy.modeling<a class="headerlink" href="#modeling-2-create-a-user-defined-model-using-astropy-modeling" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="authors">
 <h2>Authors<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a></h2>
-<p>Rocio Kiman, Lia Corrales and Zé Vinícius.</p>
+<p>Rocio Kiman, Lia Corrales, Zé Vinícius, Stephanie T. Douglas</p>
 </div>
 <div class="section" id="learning-goals">
 <h2>Learning Goals<a class="headerlink" href="#learning-goals" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>Know and understand tools to make user defined models with
-<code class="docutils literal notranslate"><span class="pre">astropy</span></code> and in which cases it could be useful</p></li>
-<li><p>We will define models usign two different tools:</p>
+<li><p>Define a new model with <code class="docutils literal notranslate"><span class="pre">astropy</span></code></p></li>
+<li><p>Identify cases were a user-defined model could be useful</p></li>
+<li><p>Define models in two different ways:</p>
 <ul>
 <li><p>Compound models</p></li>
 <li><p>Custom models</p></li>
@@ -143,13 +143,17 @@ tutorial</a>.</p>
 </div>
 <div class="section" id="keywords">
 <h2>Keywords<a class="headerlink" href="#keywords" title="Permalink to this headline">¶</a></h2>
-<p>Modeling, User Defined Model, Custom Models, Compound Models</p>
+<p>modeling, FITS, astrostatistics, matplotlib, model fitting, error bars,
+scatter plots</p>
 </div>
 <div class="section" id="summary">
 <h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
 <p>In this tutorial, we will learn how to define a new model in two ways:
 with a compound model and with a custom model.</p>
-<div class="section" id="imports">
+<div class="alert alert-info"><p><strong>Note:</strong> This tutorial assumes you have already gone through <a class="reference external" href="http://www.astropy.org/astropy-tutorials/rst-tutorials/Models-Quick-Fit.html">Modeling
+1</a>,
+which provides an introduction to <code class="docutils literal notranslate"><span class="pre">astropy.modeling</span></code></p>
+</div><div class="section" id="imports">
 <h3>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h3>
 <p><span class="inputnumrole">In[1]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
@@ -168,8 +172,8 @@ with a compound model and with a custom model.</p>
 </pre></div>
 </div>
 </div>
-<div class="section" id="fit-an-emission-line-from-a-star-spectrum-with-astropy-modeling">
-<h3>Fit an Emission Line from a star spectrum with <code class="docutils literal notranslate"><span class="pre">astropy.modeling</span></code><a class="headerlink" href="#fit-an-emission-line-from-a-star-spectrum-with-astropy-modeling" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="fit-an-emission-line-in-a-stellar-spectrum">
+<h3>Fit an emission line in a stellar spectrum<a class="headerlink" href="#fit-an-emission-line-in-a-stellar-spectrum" title="Permalink to this headline">¶</a></h3>
 <p>M dwarfs are low mass stars (less than half of the mass of the sun).
 Currently we do not understand completely the physics inside low mass
 stars because they do not behave the same way higher mass stars do. For
@@ -222,21 +226,20 @@ following:</p>
 <span class="p">)</span>
 </pre></div>
 </div>
-<p>To plot the spectrum we need the flux of light as a function of the
-wavelength (usually called lambda or <span class="math notranslate nohighlight">\(\lambda\)</span>). Note that the
-wavelength is in log scale: loglam, so we are going to calculate
-<span class="math notranslate nohighlight">\(10^\lambda\)</span> to remove this scale.</p>
+<p>To plot the spectrum we need the flux as a function of wavelength
+(usually called lambda or <span class="math notranslate nohighlight">\(\lambda\)</span>). Note that the wavelength is
+in log scale: loglam, so we calculate <span class="math notranslate nohighlight">\(10^\lambda\)</span> to remove this
+scale.</p>
 <p><span class="inputnumrole">In[4]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">flux</span> <span class="o">=</span> <span class="n">spectrum</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;flux&#39;</span><span class="p">]</span>
 <span class="n">lam</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="n">spectrum</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;loglam&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
-<p>Each fits file is different according to what the person who made it
-wanted to include and how the observation was made. The information
-about the file usually is in <code class="docutils literal notranslate"><span class="pre">fitsfile[0].header</span></code>. We would like to
-have the units from the flux and wavelength. For SDSS spectrum we found
-where the units are in this <a class="reference external" href="https://www.sdss.org/dr12/tutorials/quicklook/#python">SDSS
-tutorial</a>:</p>
+<p>To find the units for flux and wavelength, we look in
+<code class="docutils literal notranslate"><span class="pre">fitsfile[0].header</span></code>.</p>
+<p>FITS standard requires that the header keyword ‘bunit’ or ‘BUNIT’
+contains the physical units of the array values. That’s where we’ll find
+the flux units.</p>
 <p><span class="inputnumrole">In[5]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#Units of the flux</span>
 <span class="n">units_flux</span> <span class="o">=</span> <span class="n">spectrum</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="s1">&#39;bunit&#39;</span><span class="p">]</span>
@@ -247,6 +250,10 @@ tutorial</a>:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">1E-17</span> <span class="n">erg</span><span class="o">/</span><span class="n">cm</span><span class="o">^</span><span class="mi">2</span><span class="o">/</span><span class="n">s</span><span class="o">/</span><span class="n">Ang</span>
 </pre></div>
 </div>
+<p>Different sources will definite wavelength information differently, so
+we need to check the documentation. For example, this <a class="reference external" href="https://www.sdss.org/dr12/tutorials/quicklook/#python">SDSS
+tutorial</a>
+tells us what header keyword to look at.</p>
 <p><span class="inputnumrole">In[6]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#Units of the wavelegth</span>
 <span class="n">units_wavelength_full</span> <span class="o">=</span> <span class="n">spectrum</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="s1">&#39;WAT1_001&#39;</span><span class="p">]</span>
@@ -279,15 +286,15 @@ Angstroms</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[8]:</span></p>
-<img alt="../_images/User-Defined-Model_18_0.png" src="../_images/User-Defined-Model_18_0.png" />
+<img alt="../_images/User-Defined-Model_20_0.png" src="../_images/User-Defined-Model_20_0.png" />
+<p>We just plotted our spectrum! Check different ranges of wavelength to
+see how the full spectrum looks like in comparison to the one we saw
+before.</p>
 </div>
 </div>
 </div>
 <div class="section" id="fit-an-emission-line-with-a-gaussian-model">
 <h2>Fit an Emission Line with a Gaussian Model<a class="headerlink" href="#fit-an-emission-line-with-a-gaussian-model" title="Permalink to this headline">¶</a></h2>
-<p>We just plotted our spectrum! Check different ranges of wavelength to
-see how the full spectrum looks like in comparison to the one we saw
-before.</p>
 <p>The blue dashed line marks the <span class="math notranslate nohighlight">\(H\alpha\)</span> emission line. We can
 tell this is an active star because it has a strong emission line.</p>
 <p>Now, we would like to measure the height of this line. Let’s use
@@ -295,10 +302,6 @@ tell this is an active star because it has a strong emission line.</p>
 are going to initialize a gaussian model at the position of the
 <span class="math notranslate nohighlight">\(H\alpha\)</span> line. The idea is that the gaussian amplitude will tell
 us the height of the line.</p>
-<p>We are going to go quickly over this part of the tutorial because it
-involves fitting with <code class="docutils literal notranslate"><span class="pre">astropy.modeling</span></code> and this was explained in the
-<a class="reference external" href="http://www.astropy.org/astropy-tutorials/rst-tutorials/Models-Quick-Fit.html">Models-Quick-Fit
-tutorial</a>.</p>
 <p><span class="inputnumrole">In[9]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">gausian_model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">Gaussian1D</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6563</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
 <span class="n">fitter</span> <span class="o">=</span> <span class="n">fitting</span><span class="o">.</span><span class="n">LevMarLSQFitter</span><span class="p">()</span>
@@ -317,7 +320,7 @@ tutorial</a>.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[10]:</span></p>
-<img alt="../_images/User-Defined-Model_23_0.png" src="../_images/User-Defined-Model_23_0.png" />
+<img alt="../_images/User-Defined-Model_26_0.png" src="../_images/User-Defined-Model_26_0.png" />
 <p>We can see the fit is not doing a good job. Let’s print the parameters
 of this fit:</p>
 <p><span class="inputnumrole">In[11]:</span></p>
@@ -353,9 +356,9 @@ working because how we are plotting the data?</p>
 <p>One model is not enough to make this fit work. We need to combine a
 couple of models to make a <a class="reference external" href="http://docs.astropy.org/en/stable/modeling/#compound-models">compound
 model</a>
-in <code class="docutils literal notranslate"><span class="pre">astropy</span></code>. The idea is that we can sum, rest, divide or multiply
-models that already exist in
-<code class="docutils literal notranslate"><span class="pre">`astropy.modeling</span></code> &lt;<a class="reference external" href="http://docs.astropy.org/en/stable/modeling/#models-and-fitting-astropy-modeling">http://docs.astropy.org/en/stable/modeling/#models-and-fitting-astropy-modeling</a>&gt;`__
+in <code class="docutils literal notranslate"><span class="pre">astropy</span></code>. The idea is that we can add, divide or multiply models
+that already exist in
+<a class="reference external" href="http://docs.astropy.org/en/stable/modeling/#models-and-fitting-astropy-modeling">astropy.modeling</a>
 and fit the compound model to our data.</p>
 <p>For our problem we are going to combine the gaussian with a polynomial
 of degree 1 to account for the background spectrum close to the
@@ -366,8 +369,8 @@ yourself that this is the case.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">compound_model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">Gaussian1D</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6563</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="o">+</span> <span class="n">models</span><span class="o">.</span><span class="n">Polynomial1D</span><span class="p">(</span><span class="n">degree</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>After this point, the algorithm to fit the data works exactly the same
-as before except we use a compound model instead of the gaussian model.</p>
+<p>After this point, we fit the data in exactly the same way as before,
+except we use a compound model instead of the gaussian model.</p>
 <p><span class="inputnumrole">In[13]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fitter</span> <span class="o">=</span> <span class="n">fitting</span><span class="o">.</span><span class="n">LevMarLSQFitter</span><span class="p">()</span>
 <span class="n">compound_fit</span> <span class="o">=</span> <span class="n">fitter</span><span class="p">(</span><span class="n">compound_model</span><span class="p">,</span> <span class="n">lam</span><span class="p">,</span> <span class="n">flux</span><span class="p">)</span>
@@ -384,7 +387,7 @@ as before except we use a compound model instead of the gaussian model.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[14]:</span></p>
-<img alt="../_images/User-Defined-Model_32_0.png" src="../_images/User-Defined-Model_32_0.png" />
+<img alt="../_images/User-Defined-Model_35_0.png" src="../_images/User-Defined-Model_35_0.png" />
 <p>It works! Let’s take a look to the fit we just made.</p>
 <p><span class="inputnumrole">In[15]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">compound_fit</span><span class="p">)</span>
@@ -465,7 +468,7 @@ same way we did before.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[20]:</span></p>
-<img alt="../_images/User-Defined-Model_44_0.png" src="../_images/User-Defined-Model_44_0.png" />
+<img alt="../_images/User-Defined-Model_47_0.png" src="../_images/User-Defined-Model_47_0.png" />
 <p><span class="inputnumrole">In[21]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">compound_fit_fixed</span><span class="p">)</span>
 </pre></div>
@@ -514,7 +517,7 @@ for the mean.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[23]:</span></p>
-<img alt="../_images/User-Defined-Model_48_0.png" src="../_images/User-Defined-Model_48_0.png" />
+<img alt="../_images/User-Defined-Model_51_0.png" src="../_images/User-Defined-Model_51_0.png" />
 <p><span class="inputnumrole">In[24]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">compound_fit_bounded</span><span class="p">)</span>
 </pre></div>
@@ -552,7 +555,7 @@ provide? To solve that problem, Astropy has another tool called <a class="refere
 model</a>. Using
 this tool, we can create any model we want.</p>
 <div class="line-block">
-<div class="line">We will describe two way to create a custom model: *
+<div class="line">We will describe two ways to create a custom model: *
 <a class="reference external" href="http://docs.astropy.org/en/stable/modeling/new.html#basic-custom-models">basic</a></div>
 <div class="line">*
 <a class="reference external" href="http://docs.astropy.org/en/stable/modeling/new.html#a-step-by-step-definition-of-a-1-d-gaussian-model">full</a></div>
@@ -582,7 +585,7 @@ dataset that follows an exponential:</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[26]:</span></p>
-<img alt="../_images/User-Defined-Model_57_0.png" src="../_images/User-Defined-Model_57_0.png" />
+<img alt="../_images/User-Defined-Model_60_0.png" src="../_images/User-Defined-Model_60_0.png" />
 <p>We can define a simple custom model by specifying which parameters we
 want to fit.</p>
 <p><span class="inputnumrole">In[27]:</span></p>
@@ -609,7 +612,7 @@ with <code class="docutils literal notranslate"><span class="pre">astropy.modeli
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[29]:</span></p>
-<img alt="../_images/User-Defined-Model_62_0.png" src="../_images/User-Defined-Model_62_0.png" />
+<img alt="../_images/User-Defined-Model_65_0.png" src="../_images/User-Defined-Model_65_0.png" />
 <p><span class="inputnumrole">In[30]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">exp_fit</span><span class="p">)</span>
 </pre></div>
@@ -620,9 +623,9 @@ with <code class="docutils literal notranslate"><span class="pre">astropy.modeli
 <span class="n">Outputs</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,)</span>
 <span class="n">Model</span> <span class="nb">set</span> <span class="n">size</span><span class="p">:</span> <span class="mi">1</span>
 <span class="n">Parameters</span><span class="p">:</span>
-            <span class="n">a</span>                 <span class="n">b</span>                   <span class="n">c</span>
-    <span class="o">-----------------</span> <span class="o">------------------</span> <span class="o">-------------------</span>
-    <span class="mf">2.017141975725537</span> <span class="o">-</span><span class="mf">2.077757598143473</span> <span class="mf">0.43349051052044163</span>
+            <span class="n">a</span>                   <span class="n">b</span>                   <span class="n">c</span>
+    <span class="o">------------------</span> <span class="o">-------------------</span> <span class="o">-------------------</span>
+    <span class="mf">2.3855413997937474</span> <span class="o">-</span><span class="mf">2.1246422198618586</span> <span class="mf">0.26049209009458285</span>
 </pre></div>
 </div>
 <p>The fit looks good in the plot. Let’s check the parameters and the
@@ -644,7 +647,7 @@ goodness of the fit.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[32]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">1.0633894640596793</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">0.8991169465184395</span>
 </pre></div>
 </div>
 <p>The Reduced Chi Square value is close to 1. Great! This means our fit is
@@ -688,7 +691,7 @@ create a simulated dataset.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[34]:</span></p>
-<img alt="../_images/User-Defined-Model_72_0.png" src="../_images/User-Defined-Model_72_0.png" />
+<img alt="../_images/User-Defined-Model_75_0.png" src="../_images/User-Defined-Model_75_0.png" />
 <p>For the full custom model we can easily set the <strong>derivative of the
 function</strong>, which is used by different
 <a class="reference external" href="http://docs.astropy.org/en/stable/modeling/#id21">fitters</a>, for
@@ -731,7 +734,7 @@ of the parameters.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[37]:</span></p>
-<img alt="../_images/User-Defined-Model_77_0.png" src="../_images/User-Defined-Model_77_0.png" />
+<img alt="../_images/User-Defined-Model_80_0.png" src="../_images/User-Defined-Model_80_0.png" />
 <p><span class="inputnumrole">In[38]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">sine_fit</span><span class="p">)</span>
 </pre></div>
@@ -744,7 +747,7 @@ of the parameters.</p>
 <span class="n">Parameters</span><span class="p">:</span>
             <span class="n">a</span>                 <span class="n">b</span>                 <span class="n">c</span>                 <span class="n">d</span>
     <span class="o">-----------------</span> <span class="o">-----------------</span> <span class="o">-----------------</span> <span class="o">------------------</span>
-    <span class="mf">3.367575484330802</span> <span class="mf">2.011666522174178</span> <span class="mf">3.755090588659896</span> <span class="mf">0.9155314075065906</span>
+    <span class="mf">3.388691116668007</span> <span class="mf">2.020743065306693</span> <span class="mf">3.747977596349872</span> <span class="mf">0.9942938435161137</span>
 </pre></div>
 </div>
 <p><span class="inputnumrole">In[39]:</span></p>
@@ -752,7 +755,7 @@ of the parameters.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[39]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">5.506601097640629</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">5.472427908131628</span>
 </pre></div>
 </div>
 <p>The Reduced Chi Squared value is showing the same as the plot: this fit
@@ -785,7 +788,7 @@ the following data.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[41]:</span></p>
-<img alt="../_images/User-Defined-Model_84_0.png" src="../_images/User-Defined-Model_84_0.png" />
+<img alt="../_images/User-Defined-Model_87_0.png" src="../_images/User-Defined-Model_87_0.png" />
 <p><span class="inputnumrole">In[None]:</span></p>
 <div id="spacer"></div>
 

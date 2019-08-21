@@ -1,5 +1,5 @@
 .. meta::
-    :keywords: filterTutorials, filterFits, filterRadioAstronomy, filterDataCubes, filterContourPlots
+    :keywords: filterTutorials, filterFits, filterImageManipulation, filterDataCubes, filterRadioAstronomy, filterWcs, filterAstroquery, filterReproject, filterSpectralCube, filterMatplotlib, filterContourPlots, filterColorbar
 
 .. raw:: html
 
@@ -28,7 +28,7 @@ Shetty <http://www.astro.wisc.edu/our-people/post-doctoral-students/shetty-shrav
 Gonzalez-Casanova <http://www.astro.wisc.edu/our-people/graduate-students/gonzalez-casanova-diego/>`__,
 `Audra
 Hernandez <http://www.astro.wisc.edu/our-people/scientists/hernandez-audra/>`__,
-Kris Stern
+Kris Stern, Kelle Cruz, Stephanie Douglas
 
 Learning Goals
 --------------
@@ -43,17 +43,18 @@ Learning Goals
 Keywords
 --------
 
-FITS, radio astronomy, data cubes, contour plots
+FITS, image manipulation, data cubes, radio astronomy, WCS, astroquery,
+reproject, spectral cube, matplotlib, contour plots, colorbar
 
 Summary
 -------
 
-In this tutorial we will visualize 2D and 3D data sets in different
-coordinates (Galactic and equatorial).
+In this tutorial we will visualize 2D and 3D data sets in Galactic and
+equartorial coordinates.
 
-The tutorial will walk you though a simple visual analysis of the Small
+The tutorial will walk you though a visual analysis of the Small
 Magellanic Cloud (SMC) using HI 21cm emission and a Herschel 250 micron
-map. We will learn how to read in data from VizieR, query and download
+map. We will learn how to read in data from a file, query and download
 matching data from Herschel using astroquery, and plot the resulting
 images in a multitude of ways.
 
@@ -96,8 +97,6 @@ Alternatively, if you don’t use conda, you can use pip.
     from astroquery.utils import TableList
     from astropy.wcs import WCS
     from reproject import reproject_interp
-    
-    %matplotlib inline
 
 
 :outputnumrole:`Out[1]:`
@@ -204,9 +203,9 @@ out! The first check is to print out the cube.
 Some things to pay attention to here:
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-As we know, a data cube has three axes. In this case, there is Galactic
-Longitude (x), Galactic Latitude (y), and a spectral axis in terms of a
-LSR Velocity (z - listed as s with ``spectral_cube``).
+A data cube has three axes. In this case, there is Galactic Longitude
+(x), Galactic Latitude (y), and a spectral axis in terms of a LSR
+Velocity (z - listed as s with ``spectral_cube``).
 
 The data hidden in the cube lives as an ndarray with shape (n_s, n_y,
 n_x) so that axis 0 corresponds with the Spectral Axis, axis 1
@@ -230,8 +229,8 @@ sneak-peek preview of the data. It’s useful when you just need to glance
 at a slice or spectrum without knowing any other information (say, to
 make sure the data isn’t corrupted or is looking at the right region.)
 
-To do this, we simply have to index our cube along one axis (for a
-slice) or two axes (for a spectrum):
+To do this, we index our cube along one axis (for a slice) or two axes
+(for a spectrum):
 
 
 :inputnumrole:`In[5]:`
@@ -247,8 +246,8 @@ slice) or two axes (for a spectrum):
 
 .. parsed-literal::
 
-    INFO: Auto-setting vmin to -1.615e+00 [aplpy.core]
-    INFO: Auto-setting vmax to  1.659e+01 [aplpy.core]
+    INFO: Auto-setting vmin to -1.764e+00 [aplpy.core]
+    INFO: Auto-setting vmax to  1.825e+01 [aplpy.core]
 
 
 
@@ -369,8 +368,8 @@ Cut along the Spectral Axis:
 ----------------------------
 
 We don’t really need data from such a large velocity range so let’s just
-extract a little slab. We can do this easily, in any units that we want
-using the ``.spectral_slab()`` method.
+extract a little slab. We can do this in any units that we want using
+the ``.spectral_slab()`` method.
 
 
 :inputnumrole:`In[9]:`
@@ -440,12 +439,12 @@ information as well.
 
 The
 `WCSAxes <http://docs.astropy.org/en/stable/visualization/wcsaxes/>`__
-framework in Astropy allows us to easily display images with different
+framework in Astropy allows us to display images with different
 coordinate axes and projections.
 
-As long as we have a WCS object associated with the data, it is easy to
+As long as we have a WCS object associated with the data, we can
 transfer that projection to a matplotlib axis. SpectralCube makes it
-easy to access just the WCS object associated with a cube object.
+possible to access just the WCS object associated with a cube object.
 
 
 :inputnumrole:`In[11]:`
@@ -517,33 +516,26 @@ object directly into a matplotlib axis instance.
     
     # Overplot column density contours 
     levels = (1e20, 5e20, 1e21, 3e21, 5e21, 7e21, 1e22)  # Define contour levels to use
-    ax.contour(hi_column_density.hdu.data, cmap='Greys_r', alpha=0.5, 
-               lw=3, levels=levels)
+    ax.contour(hi_column_density.hdu.data, cmap='Greys_r', alpha=0.5, levels=levels)
 
 
 :outputnumrole:`Out[12]:`
 
 
-.. parsed-literal::
-
-    /home/circleci/project/venv/lib/python3.7/site-packages/matplotlib/contour.py:1000: UserWarning: The following kwargs were not used by contour: 'lw'
-      s)
-
-
 
 
 .. parsed-literal::
 
-    <matplotlib.contour.QuadContourSet at 0x7f13adb43050>
+    <matplotlib.contour.QuadContourSet at 0x7f8de091e750>
 
 
 
 
-.. image:: nboutput/FITS-cubes_27_2.png
+.. image:: nboutput/FITS-cubes_27_1.png
 
 
 
-As you can see, the WCSAxes framework is very powerful and as easy as
+As you can see, the WCSAxes framework is very powerful and similiar to
 making any matplotlib style plot.
 
  ## Display a Longitude-Velocity Slice
@@ -577,8 +569,8 @@ We then select the appropriate data by indexing along the numpy array.
     # Initiate a figure and axis object with WCS projection information
     fig = plt.figure(figsize=(18, 12))
     ax = fig.add_subplot(111, projection=sub_cube_slab.wcs, slices=('y', lat_slice, 'x'))
-    # Above, we have specified to plot the longitude along the y axis, pick just the lat_slice indicated, 
-    # and plot the velocity along the x axis
+    # Above, we have specified to plot the longitude along the y axis, pick only the lat_slice 
+    # indicated, and plot the velocity along the x axis
     
     # Display the slice
     im = ax.imshow(sub_cube_slab[:, lat_slice, :].transpose().data)  # Display the image slice
@@ -635,7 +627,7 @@ Find and Download a Herschel Image
 ----------------------------------
 
 This is great, but we want to compare the HI emission data with Herschel
-350 micron emission to trace some dust. This can be easily done with
+350 micron emission to trace some dust. This can be done with
 `astroquery <http://www.astropy.org/astroquery/>`__. We can query for
 the data by mission, take a quick look at the table of results, and
 download data after selecting a specific wavelength or filter.
@@ -766,12 +758,22 @@ filters used for these observations.
 
 
 
-Luckily for us, there is an observation made with three filters:
-250,350, and 500 microns. This is the object we will want to download.
-One way to do this is by making a boolean mask to select out the Table
-entry corresponding with the desired filter. Then,
-``the ESASky.get_maps()`` method will download our data provided a
-TableList argument.
+Luckily for us, there is an observation made with three filters: 250,
+350, and 500 microns. This is the object we will want to download. One
+way to do this is by making a boolean mask to select out the Table entry
+corresponding with the desired filter. Then, the ``ESASky.get_maps()``
+method will download our data provided a TableList argument.
+
+.. raw:: html
+
+   <div class="alert alert-info">
+
+Note that the below command requires an internet connection to download
+five quite large files. It could take several minutes to complete.
+
+.. raw:: html
+
+   </div>
 
 
 :inputnumrole:`In[17]:`
@@ -809,7 +811,7 @@ TableList argument.
     INFO: [Done] [astroquery.esasky.core]
     INFO: Downloading of HERSCHEL data complete. [astroquery.esasky.core]
     INFO: Maps available at /home/circleci/project/tutorials/notebooks/FITS-cubes/Maps. [astroquery.esasky.core]
-    Filename: Maps/HERSCHEL/anonymous1566419157/hspirepmw401_25pxmp_0110_m7303_1342198565_1342198566_1462476888800.fits.gz
+    Filename: Maps/HERSCHEL/anonymous1566424847/hspirepmw401_25pxmp_0110_m7303_1342198565_1342198566_1462476888800.fits.gz
     No.    Name      Ver    Type      Cards   Dimensions   Format
       0  PRIMARY       1 PrimaryHDU     184   ()      
       1  image         1 ImageHDU        47   (2407, 2141)   float64   
@@ -822,7 +824,7 @@ TableList argument.
 
 
 Since we are just doing some qualitative analysis, we only need the
-image, but you can easily access lots of other information from our
+image, but you can also access lots of other information from our
 downloaded object, such as errors.
 
 Let’s go ahead and extract just the WCS information and image data from
@@ -867,8 +869,7 @@ the 350 micron image.
             1  yes  yes
 
 
-With this, it’s just as easy as before to display this image using
-matplotlib with
+With this, we can display this image using matplotlib with
 `WCSAxes <http://docs.astropy.org/en/stable/visualization/wcsaxes/index.html>`__
 and the ``LogNorm()`` object so we can log scale our image.
 
@@ -878,12 +879,17 @@ and the ``LogNorm()`` object so we can log scale our image.
 
 .. code:: python
 
+    # Set Nans to zero
+    himage_nan_locs = np.isnan(herschel_imagehdu.data)
+    herschel_data_nonans = herschel_imagehdu.data
+    herschel_data_nonans[himage_nan_locs] = 0
+    
     # Initiate a figure and axis object with WCS projection information
     fig = plt.figure(figsize=(18, 12))
     ax = fig.add_subplot(111, projection=herschel_wcs)
     
     # Display the moment map image
-    im = ax.imshow(herschel_imagehdu.data, cmap='viridis', 
+    im = ax.imshow(herschel_data_nonans, cmap='viridis', 
                    norm=LogNorm(), vmin=2, vmax=50)
     # ax.invert_yaxis() # Flips the Y axis 
     
@@ -906,18 +912,8 @@ and the ``LogNorm()`` object so we can log scale our image.
 :outputnumrole:`Out[19]:`
 
 
-.. parsed-literal::
 
-    /home/circleci/project/venv/lib/python3.7/site-packages/matplotlib/colors.py:1028: RuntimeWarning: invalid value encountered in less_equal
-      mask |= resdat <= 0
-    /home/circleci/project/venv/lib/python3.7/site-packages/matplotlib/colors.py:1028: RuntimeWarning: invalid value encountered in less_equal
-      mask |= resdat <= 0
-    /home/circleci/project/venv/lib/python3.7/site-packages/matplotlib/colors.py:1028: RuntimeWarning: invalid value encountered in less_equal
-      mask |= resdat <= 0
-
-
-
-.. image:: nboutput/FITS-cubes_46_1.png
+.. image:: nboutput/FITS-cubes_47_0.png
 
 
 
@@ -946,7 +942,7 @@ coordinates. It accepts a string specifying the frame or a WCS object.
     ax = fig.add_subplot(111, projection=herschel_wcs)
     
     # Display the moment map image
-    im = ax.imshow(herschel_imagehdu.data, cmap='viridis', 
+    im = ax.imshow(herschel_data_nonans, cmap='viridis', 
                    norm=LogNorm(), vmin=5, vmax=50, alpha=.8)
     # ax.invert_yaxis() # Flips the Y axis 
     
@@ -973,7 +969,7 @@ coordinates. It accepts a string specifying the frame or a WCS object.
     
     # Overplot column density contours 
     levels = (2e21, 3e21, 5e21, 7e21, 8e21, 1e22)  # Define contour levels to use
-    ax.contour(hi_column_density.hdu.data, cmap='Greys_r', alpha=0.8, lw=5, levels=levels,
+    ax.contour(hi_column_density.hdu.data, cmap='Greys_r', alpha=0.8, levels=levels,
                transform=hi_transform)  # include the transform information with the keyword "transform"
     
     # Overplot velocity image so we can also see the Gas velocities
@@ -991,12 +987,6 @@ coordinates. It accepts a string specifying the frame or a WCS object.
 :outputnumrole:`Out[20]:`
 
 
-.. parsed-literal::
-
-    /home/circleci/project/venv/lib/python3.7/site-packages/matplotlib/contour.py:1000: UserWarning: The following kwargs were not used by contour: 'lw'
-      s)
-
-
 
 
 .. parsed-literal::
@@ -1005,18 +995,8 @@ coordinates. It accepts a string specifying the frame or a WCS object.
 
 
 
-.. parsed-literal::
 
-    /home/circleci/project/venv/lib/python3.7/site-packages/matplotlib/colors.py:1028: RuntimeWarning: invalid value encountered in less_equal
-      mask |= resdat <= 0
-    /home/circleci/project/venv/lib/python3.7/site-packages/matplotlib/colors.py:1028: RuntimeWarning: invalid value encountered in less_equal
-      mask |= resdat <= 0
-    /home/circleci/project/venv/lib/python3.7/site-packages/matplotlib/colors.py:1028: RuntimeWarning: invalid value encountered in less_equal
-      mask |= resdat <= 0
-
-
-
-.. image:: nboutput/FITS-cubes_48_3.png
+.. image:: nboutput/FITS-cubes_49_1.png
 
 
 
@@ -1037,10 +1017,10 @@ are trying to get emission line ratios or directly compare the Intensity
 or Flux from a tracer to that of another tracer in the same physical
 point of the sky.
 
-From our previously made images, it should be clear that the IR Herschel
-Image has a higher spatial resolution than that of the HI data cube. We
-can look into this more by taking a better look at both header objects
-and using reproject to downscale the Herschel Image.
+From our previously made images, we can see that the IR Herschel Image
+has a higher spatial resolution than that of the HI data cube. We can
+look into this more by taking a better look at both header objects and
+using reproject to downscale the Herschel Image.
 
 
 :inputnumrole:`In[21]:`
@@ -1121,14 +1101,21 @@ Galactic rather than RA and Dec.
 
 .. code:: python
 
+    # Set Nans to zero
+    image_nan_locs = np.isnan(rescaled_herschel_imagehdu.data)
+    rescaled_herschel_data_nonans = rescaled_herschel_imagehdu.data
+    rescaled_herschel_data_nonans[image_nan_locs] = 0
+    
     # Initiate a figure and axis object with WCS projection information
     fig = plt.figure(figsize = (18,12))
     ax = fig.add_subplot(111,projection = WCS(rescaled_herschel_imagehdu))
     
     # Display the moment map image
-    im = ax.imshow(rescaled_herschel_imagehdu.data, cmap = 'viridis', 
+    im = ax.imshow(rescaled_herschel_data_nonans, cmap = 'viridis', 
                    norm = LogNorm(), vmin = 5, vmax = 50, alpha = .8)
-    #ax.invert_yaxis() # Flips the Y axis 
+    #im = ax.imshow(rescaled_herschel_imagehdu.data, cmap = 'viridis', 
+    #               norm = LogNorm(), vmin = 5, vmax = 50, alpha = .8)
+    ax.invert_yaxis() # Flips the Y axis 
     
     # Add axes labels
     ax.set_xlabel("Galactic Longitude", fontsize = 16)
@@ -1153,7 +1140,7 @@ Galactic rather than RA and Dec.
     
     # Overplot column density contours 
     levels = (2e21, 3e21, 5e21, 7e21, 8e21, 1e22) # Define contour levels to use
-    ax.contour(hi_column_density.hdu.data, cmap = 'Greys_r', alpha = 0.8, lw = 5, levels = levels,
+    ax.contour(hi_column_density.hdu.data, cmap = 'Greys_r', alpha = 0.8, levels = levels,
                transform = hi_transform) # include the transform information with the keyword "transform"
     
     # Overplot velocity image so we can also see the Gas velocities
@@ -1171,32 +1158,16 @@ Galactic rather than RA and Dec.
 :outputnumrole:`Out[23]:`
 
 
-.. parsed-literal::
-
-    /home/circleci/project/venv/lib/python3.7/site-packages/matplotlib/contour.py:1000: UserWarning: The following kwargs were not used by contour: 'lw'
-      s)
-
-
 
 
 .. parsed-literal::
 
-    (-0.5, 40.5)
+    (40.5, -0.5)
 
 
 
-.. parsed-literal::
 
-    /home/circleci/project/venv/lib/python3.7/site-packages/matplotlib/colors.py:1028: RuntimeWarning: invalid value encountered in less_equal
-      mask |= resdat <= 0
-    /home/circleci/project/venv/lib/python3.7/site-packages/matplotlib/colors.py:1028: RuntimeWarning: invalid value encountered in less_equal
-      mask |= resdat <= 0
-    /home/circleci/project/venv/lib/python3.7/site-packages/matplotlib/colors.py:1028: RuntimeWarning: invalid value encountered in less_equal
-      mask |= resdat <= 0
-
-
-
-.. image:: nboutput/FITS-cubes_54_3.png
+.. image:: nboutput/FITS-cubes_55_1.png
 
 
 

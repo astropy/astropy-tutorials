@@ -16,11 +16,12 @@
 
 .. _color-excess:
 
-Dereddening a spectrum and calculating reddening
-================================================
+Analyzing interstellar reddening and calculating synthetic photometry
+=====================================================================
 
-Kristen Larson (@krislars) with ideas Emir Karamehmetoglu and feedback
-from Pey Lian Lim, Karl Gordon, and Kevin Covey. Edited by Lia Corrales.
+Kristen Larson, Lia Corrales, Stephanie T. Douglas, Kelle Cruz
+
+Input from Emir Karamehmetoglu, Pey Lian Lim, Karl Gordon, Kevin Covey
 
 Learning Goals
 --------------
@@ -28,23 +29,21 @@ Learning Goals
 -  Investigate extinction curve shapes
 -  Deredden spectral energy distributions and spectra
 -  Calculate photometric extinction and reddening
--  Use ``dust_extinction`` and ``synphot`` together
--  Converting from frequency to wavelength with ``astropy.unit``
+-  Calculate synthetic photometry for a dust-reddened star by combining
+   ``dust_extinction`` and ``synphot``
+-  Convert from frequency to wavelength with ``astropy.unit``
    equivalencies
 -  Unit support for plotting with ``astropy.visualization``
 
 Keywords
 --------
 
-``dust_extinction``, ``synphot``
+dust extinction, synphot, astroquery, units, photometry, extinction,
+physics, observational astronomy
 
 Companion Content
 -----------------
 
--  `Documentation for ``dust_extinction``
-   package <https://dust-extinction.readthedocs.io/en/latest/>`__
--  `Documentation for ``synphot``
-   package <https://synphot.readthedocs.io/en/latest/>`__
 -  `Bessell & Murphy
    (2012) <https://ui.adsabs.harvard.edu/#abs/2012PASP..124..140B/abstract>`__
 
@@ -68,13 +67,14 @@ We recommend installing the two packages in this fashion:
    conda install -c http://ssb.stsci.edu/astroconda synphot
    pip install dust_extinction
 
-Notice that the structure of ``dust_extinction`` changed significantly
-from v0.6 to v0.7, so updating your installation may be required. If so,
-you can upgrade the package with pip:
+This tutorial requires v0.7 or later of ``dust_extinction``. To ensure
+that all commands work properly, make sure you have the correct version
+installed. If you have v0.6 or earlier installed, run the following
+command to upgrade
 
 ::
 
-   pip install --upgrade dust_extinction
+   pip install dust_extinction --upgrade
 
 
 :inputnumrole:`In[1]:`
@@ -191,10 +191,10 @@ documentation. <https://dust-extinction.readthedocs.io/en/latest/dust_extinction
     wav = np.arange(0.1, 3.0, 0.001)*u.micron
     
     for model in [CCM89, F99]:
-       for R in (2.0,3.0,4.0):
-         # Initialize the extinction model
-         ext = model(Rv=R)
-         plt.plot(1/wav, ext(wav), label=model.name+' R='+str(R))
+        for R in (2.0,3.0,4.0):
+            # Initialize the extinction model
+            ext = model(Rv=R)
+            plt.plot(1/wav, ext(wav), label=model.name+' R='+str(R))
             
     plt.xlabel('$\lambda^{-1}$ ($\mu$m$^{-1}$)')
     plt.ylabel('A($\lambda$) / A(V)')
@@ -234,7 +234,7 @@ MAST <https://archive.stsci.edu/iue/>`__:
 
     obsTable = Observations.query_object("HD 147933",radius="1 arcsec")
     obsTable_spec=obsTable[obsTable['dataproduct_type']=='spectrum']
-    # obsTable_spec.pprint()
+    obsTable_spec.pprint()
     
     obsids = ['3000022829']
     dataProductsByID = Observations.get_product_list(obsids)
@@ -246,6 +246,31 @@ MAST <https://archive.stsci.edu/iue/>`__:
 
 .. parsed-literal::
 
+    intentType obs_collection provenance_name ...   objID         distance     
+    ---------- -------------- --------------- ... ---------- ------------------
+       science            IUE              -- ... 3500014392                0.0
+       science            IUE              -- ... 3500014393                0.0
+       science            IUE              -- ... 3500014394                0.0
+       science            IUE              -- ... 3500014395                0.0
+       science            IUE              -- ... 3500014396                0.0
+       science            IUE              -- ... 3500014397                0.0
+       science            IUE              -- ... 3500014398                0.0
+       science            IUE              -- ... 3500014399                0.0
+       science            IUE              -- ... 3500014400                0.0
+       science            IUE              -- ... 3500014401                0.0
+           ...            ...             ... ...        ...                ...
+       science            IUE              -- ... 3500011964                0.0
+       science            IUE              -- ... 3500011965                0.0
+       science            IUE              -- ... 3500011966                0.0
+       science            IUE              -- ... 3500011967                0.0
+       science            IUE              -- ... 3500009330                0.0
+       science            IUE              -- ... 3500011968                0.0
+       science            IUE              -- ... 3500011969                0.0
+       science            IUE              -- ... 3500008878                0.0
+       science            HST         CALSTIS ... 2025086267 0.5751893673409462
+       science            HST         CALSTIS ... 2038207407 0.5751893673409462
+       science            HST         CALSTIS ... 2029206188 0.5751893673409462
+    Length = 109 rows
     Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:IUE/url/pub/iue/data/lwr/05000/lwr05639.elbll.gz to ./mastDownload/IUE/lwr05639/lwr05639.elbll.gz ... [Done]
     Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:IUE/url/pub/iue/data/lwr/05000/lwr05639.lilo.gz to ./mastDownload/IUE/lwr05639/lwr05639.lilo.gz ... [Done]
     Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:IUE/url/pub/iue/data/lwr/05000/lwr05639.melol.gz to ./mastDownload/IUE/lwr05639/lwr05639.melol.gz ... [Done]
@@ -728,6 +753,11 @@ wavelengths changed?
 Note that the photometric extinction changes because the filter
 transmission is not uniform. The observed throughput of the filter
 depends on the shape of the background source flux.
+
+
+:inputnumrole:`In[None]:`
+
+
 
 
 

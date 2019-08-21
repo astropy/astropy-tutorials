@@ -2,7 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta charset="utf-8" /><meta content="filterTutorials, filterOop, filterLatex, filterAstrostatistics, filterMatplotlib, filterModeling, filterUnits" name="keywords" />
+    <meta charset="utf-8" /><meta content="filterTutorials, filterModeling, filterUnits, filterSynphot, filterOop, filterLatex, filterAstrostatistics, filterMatplotlib, filterUnits, filterPhysics" name="keywords" />
 <meta content="filterTutorials," name="keywords" />
 
     <title>Using scipy.integrate &#8212; astropy-tutorials v3.0.dev</title>
@@ -120,7 +120,7 @@
 <span id="units-and-integration"></span><h1>Using <code class="docutils literal notranslate"><span class="pre">scipy.integrate</span></code><a class="headerlink" href="#using-scipy-integrate" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="authors">
 <h2>Authors<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a></h2>
-<p>Zach Pace, Lia Corrales</p>
+<p>Zach Pace, Lia Corrales, Stephanie T. Douglas</p>
 </div>
 <div class="section" id="learning-goals">
 <h2>Learning Goals<a class="headerlink" href="#learning-goals" title="Permalink to this headline">¶</a></h2>
@@ -131,7 +131,7 @@ python context</p></li>
 <li><p>gaussian quadrature</p></li>
 <li><p>use <code class="docutils literal notranslate"><span class="pre">astropy</span></code>’s built-in black-body curves</p></li>
 <li><p>understand how <code class="docutils literal notranslate"><span class="pre">astropy</span></code>’s units interact with one another</p></li>
-<li><p>write a mini Python class</p></li>
+<li><p>define a Python class</p></li>
 <li><p>how the <code class="docutils literal notranslate"><span class="pre">__call__</span></code> method works</p></li>
 <li><p>add <span class="math notranslate nohighlight">\(\LaTeX\)</span> labels to <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> figures using the
 <code class="docutils literal notranslate"><span class="pre">latex_inline</span></code> formatter</p></li>
@@ -139,7 +139,8 @@ python context</p></li>
 </div>
 <div class="section" id="keywords">
 <h2>Keywords<a class="headerlink" href="#keywords" title="Permalink to this headline">¶</a></h2>
-<p>OOP, LaTeX, astrostatistics, matplotlib, modeling, units</p>
+<p>modeling, units, synphot, OOP, LaTeX, astrostatistics, matplotlib,
+units, physics</p>
 </div>
 <div class="section" id="companion-content">
 <h2>Companion Content<a class="headerlink" href="#companion-content" title="Permalink to this headline">¶</a></h2>
@@ -212,6 +213,7 @@ To do that, we enclose <span class="math notranslate nohighlight">\(LaTeX\)</spa
 a string <code class="docutils literal notranslate"><span class="pre">r'\$</span> <span class="pre">...</span> <span class="pre">\$'</span></code>. The <code class="docutils literal notranslate"><span class="pre">r</span></code> before the open-quote denotes that
 the string is “raw,” and backslashes are treated literally. This is the
 suggested format for axis label text that includes markup.</p>
+<p>Now we numerically integrate using the trapezoid rule.</p>
 <p><span class="inputnumrole">In[3]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">nu</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">bb5000K_nu</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;erg s-1 cm-2 sr-1&#39;</span><span class="p">)</span>
 </pre></div>
@@ -432,6 +434,7 @@ low-mass end).</p></li>
 implements a broken-power-law (Kroupa) or log-parabola (Chabrier)
 IMF. Perform the same calculations as above.</p></li>
 </ul>
+<p><span class="inputnumrole">In[None]:</span></p>
 <div id="spacer"></div>
 
 <a href="../_static/units-and-integration/units-and-integration.ipynb"><button id="download">Download tutorial notebook</button></a>

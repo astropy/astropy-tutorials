@@ -2,7 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta charset="utf-8" /><meta content="filterTutorials, filterFits, filterRadioAstronomy, filterDataCubes, filterContourPlots" name="keywords" />
+    <meta charset="utf-8" /><meta content="filterTutorials, filterFits, filterImageManipulation, filterDataCubes, filterRadioAstronomy, filterWcs, filterAstroquery, filterReproject, filterSpectralCube, filterMatplotlib, filterContourPlots, filterColorbar" name="keywords" />
 <meta content="filterTutorials," name="keywords" />
 
     <title>Working with FITS-cubes &#8212; astropy-tutorials v3.0.dev</title>
@@ -127,7 +127,7 @@ Shetty</a>,
 Gonzalez-Casanova</a>,
 <a class="reference external" href="http://www.astro.wisc.edu/our-people/scientists/hernandez-audra/">Audra
 Hernandez</a>,
-Kris Stern</p>
+Kris Stern, Kelle Cruz, Stephanie Douglas</p>
 </div>
 <div class="section" id="learning-goals">
 <h2>Learning Goals<a class="headerlink" href="#learning-goals" title="Permalink to this headline">¶</a></h2>
@@ -142,15 +142,16 @@ Kris Stern</p>
 </div>
 <div class="section" id="keywords">
 <h2>Keywords<a class="headerlink" href="#keywords" title="Permalink to this headline">¶</a></h2>
-<p>FITS, radio astronomy, data cubes, contour plots</p>
+<p>FITS, image manipulation, data cubes, radio astronomy, WCS, astroquery,
+reproject, spectral cube, matplotlib, contour plots, colorbar</p>
 </div>
 <div class="section" id="summary">
 <h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
-<p>In this tutorial we will visualize 2D and 3D data sets in different
-coordinates (Galactic and equatorial).</p>
-<p>The tutorial will walk you though a simple visual analysis of the Small
+<p>In this tutorial we will visualize 2D and 3D data sets in Galactic and
+equartorial coordinates.</p>
+<p>The tutorial will walk you though a visual analysis of the Small
 Magellanic Cloud (SMC) using HI 21cm emission and a Herschel 250 micron
-map. We will learn how to read in data from VizieR, query and download
+map. We will learn how to read in data from a file, query and download
 matching data from Herschel using astroquery, and plot the resulting
 images in a multitude of ways.</p>
 <p>The primary libraries we’ll be using are:
@@ -183,8 +184,6 @@ images in a multitude of ways.</p>
 <span class="kn">from</span> <span class="nn">astroquery.utils</span> <span class="kn">import</span> <span class="n">TableList</span>
 <span class="kn">from</span> <span class="nn">astropy.wcs</span> <span class="kn">import</span> <span class="n">WCS</span>
 <span class="kn">from</span> <span class="nn">reproject</span> <span class="kn">import</span> <span class="n">reproject_interp</span>
-
-<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[1]:</span></p>
@@ -252,9 +251,9 @@ out! The first check is to print out the cube.</p>
 </div>
 <div class="section" id="some-things-to-pay-attention-to-here">
 <h3>Some things to pay attention to here:<a class="headerlink" href="#some-things-to-pay-attention-to-here" title="Permalink to this headline">¶</a></h3>
-<p>As we know, a data cube has three axes. In this case, there is Galactic
-Longitude (x), Galactic Latitude (y), and a spectral axis in terms of a
-LSR Velocity (z - listed as s with <code class="docutils literal notranslate"><span class="pre">spectral_cube</span></code>).</p>
+<p>A data cube has three axes. In this case, there is Galactic Longitude
+(x), Galactic Latitude (y), and a spectral axis in terms of a LSR
+Velocity (z - listed as s with <code class="docutils literal notranslate"><span class="pre">spectral_cube</span></code>).</p>
 <p>The data hidden in the cube lives as an ndarray with shape (n_s, n_y,
 n_x) so that axis 0 corresponds with the Spectral Axis, axis 1
 corresponds with the Galactic Latitude Axis, and axis 2 corresponds with
@@ -272,15 +271,15 @@ our data actually looks like!</p>
 sneak-peek preview of the data. It’s useful when you just need to glance
 at a slice or spectrum without knowing any other information (say, to
 make sure the data isn’t corrupted or is looking at the right region.)</p>
-<p>To do this, we simply have to index our cube along one axis (for a
-slice) or two axes (for a spectrum):</p>
+<p>To do this, we index our cube along one axis (for a slice) or two axes
+(for a spectrum):</p>
 <p><span class="inputnumrole">In[5]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cube</span><span class="p">[</span><span class="mi">300</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span><span class="o">.</span><span class="n">quicklook</span><span class="p">()</span>  <span class="c1"># Slice the cube along the spectral axis, and display a quick image</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[5]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">INFO</span><span class="p">:</span> <span class="n">Auto</span><span class="o">-</span><span class="n">setting</span> <span class="n">vmin</span> <span class="n">to</span> <span class="o">-</span><span class="mf">1.615e+00</span> <span class="p">[</span><span class="n">aplpy</span><span class="o">.</span><span class="n">core</span><span class="p">]</span>
-<span class="n">INFO</span><span class="p">:</span> <span class="n">Auto</span><span class="o">-</span><span class="n">setting</span> <span class="n">vmax</span> <span class="n">to</span>  <span class="mf">1.659e+01</span> <span class="p">[</span><span class="n">aplpy</span><span class="o">.</span><span class="n">core</span><span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">INFO</span><span class="p">:</span> <span class="n">Auto</span><span class="o">-</span><span class="n">setting</span> <span class="n">vmin</span> <span class="n">to</span> <span class="o">-</span><span class="mf">1.764e+00</span> <span class="p">[</span><span class="n">aplpy</span><span class="o">.</span><span class="n">core</span><span class="p">]</span>
+<span class="n">INFO</span><span class="p">:</span> <span class="n">Auto</span><span class="o">-</span><span class="n">setting</span> <span class="n">vmax</span> <span class="n">to</span>  <span class="mf">1.825e+01</span> <span class="p">[</span><span class="n">aplpy</span><span class="o">.</span><span class="n">core</span><span class="p">]</span>
 </pre></div>
 </div>
 <img alt="../_images/FITS-cubes_11_1.png" src="../_images/FITS-cubes_11_1.png" />
@@ -348,8 +347,8 @@ cube</p>
 <div class="section" id="cut-along-the-spectral-axis">
 <h2>Cut along the Spectral Axis:<a class="headerlink" href="#cut-along-the-spectral-axis" title="Permalink to this headline">¶</a></h2>
 <p>We don’t really need data from such a large velocity range so let’s just
-extract a little slab. We can do this easily, in any units that we want
-using the <code class="docutils literal notranslate"><span class="pre">.spectral_slab()</span></code> method.</p>
+extract a little slab. We can do this in any units that we want using
+the <code class="docutils literal notranslate"><span class="pre">.spectral_slab()</span></code> method.</p>
 <p><span class="inputnumrole">In[9]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sub_cube_slab</span> <span class="o">=</span> <span class="n">sub_cube</span><span class="o">.</span><span class="n">spectral_slab</span><span class="p">(</span><span class="o">-</span><span class="mf">300.</span> <span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">km</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">,</span> <span class="mf">300.</span> <span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">km</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">)</span>
 
@@ -399,11 +398,11 @@ information as well.</p>
 </div>
 <p>The
 <a class="reference external" href="http://docs.astropy.org/en/stable/visualization/wcsaxes/">WCSAxes</a>
-framework in Astropy allows us to easily display images with different
+framework in Astropy allows us to display images with different
 coordinate axes and projections.</p>
-<p>As long as we have a WCS object associated with the data, it is easy to
+<p>As long as we have a WCS object associated with the data, we can
 transfer that projection to a matplotlib axis. SpectralCube makes it
-easy to access just the WCS object associated with a cube object.</p>
+possible to access just the WCS object associated with a cube object.</p>
 <p><span class="inputnumrole">In[11]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">moment_1</span><span class="o">.</span><span class="n">wcs</span><span class="p">)</span>  <span class="c1"># Examine the WCS object associated with the moment map</span>
 </pre></div>
@@ -459,20 +458,15 @@ object directly into a matplotlib axis instance.</p>
 
 <span class="c1"># Overplot column density contours</span>
 <span class="n">levels</span> <span class="o">=</span> <span class="p">(</span><span class="mf">1e20</span><span class="p">,</span> <span class="mf">5e20</span><span class="p">,</span> <span class="mf">1e21</span><span class="p">,</span> <span class="mf">3e21</span><span class="p">,</span> <span class="mf">5e21</span><span class="p">,</span> <span class="mf">7e21</span><span class="p">,</span> <span class="mf">1e22</span><span class="p">)</span>  <span class="c1"># Define contour levels to use</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">hi_column_density</span><span class="o">.</span><span class="n">hdu</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Greys_r&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
-           <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="n">levels</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">hi_column_density</span><span class="o">.</span><span class="n">hdu</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Greys_r&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="n">levels</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[12]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">circleci</span><span class="o">/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">matplotlib</span><span class="o">/</span><span class="n">contour</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">1000</span><span class="p">:</span> <span class="ne">UserWarning</span><span class="p">:</span> <span class="n">The</span> <span class="n">following</span> <span class="n">kwargs</span> <span class="n">were</span> <span class="ow">not</span> <span class="n">used</span> <span class="n">by</span> <span class="n">contour</span><span class="p">:</span> <span class="s1">&#39;lw&#39;</span>
-  <span class="n">s</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">contour</span><span class="o">.</span><span class="n">QuadContourSet</span> <span class="n">at</span> <span class="mh">0x7f8de091e750</span><span class="o">&gt;</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">contour</span><span class="o">.</span><span class="n">QuadContourSet</span> <span class="n">at</span> <span class="mh">0x7f13adb43050</span><span class="o">&gt;</span>
-</pre></div>
-</div>
-<img alt="../_images/FITS-cubes_27_2.png" src="../_images/FITS-cubes_27_2.png" />
-<p>As you can see, the WCSAxes framework is very powerful and as easy as
+<img alt="../_images/FITS-cubes_27_1.png" src="../_images/FITS-cubes_27_1.png" />
+<p>As you can see, the WCSAxes framework is very powerful and similiar to
 making any matplotlib style plot.</p>
 <blockquote>
 <div><p>## Display a Longitude-Velocity Slice</p>
@@ -497,8 +491,8 @@ latitude, longitude).</p>
 <span class="c1"># Initiate a figure and axis object with WCS projection information</span>
 <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="n">sub_cube_slab</span><span class="o">.</span><span class="n">wcs</span><span class="p">,</span> <span class="n">slices</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="n">lat_slice</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">))</span>
-<span class="c1"># Above, we have specified to plot the longitude along the y axis, pick just the lat_slice indicated,</span>
-<span class="c1"># and plot the velocity along the x axis</span>
+<span class="c1"># Above, we have specified to plot the longitude along the y axis, pick only the lat_slice</span>
+<span class="c1"># indicated, and plot the velocity along the x axis</span>
 
 <span class="c1"># Display the slice</span>
 <span class="n">im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">sub_cube_slab</span><span class="p">[:,</span> <span class="n">lat_slice</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>  <span class="c1"># Display the image slice</span>
@@ -533,7 +527,7 @@ latitude, longitude).</p>
 <div class="section" id="find-and-download-a-herschel-image">
 <h2>Find and Download a Herschel Image<a class="headerlink" href="#find-and-download-a-herschel-image" title="Permalink to this headline">¶</a></h2>
 <p>This is great, but we want to compare the HI emission data with Herschel
-350 micron emission to trace some dust. This can be easily done with
+350 micron emission to trace some dust. This can be done with
 <a class="reference external" href="http://www.astropy.org/astroquery/">astroquery</a>. We can query for
 the data by mission, take a quick look at the table of results, and
 download data after selecting a specific wavelength or filter.</p>
@@ -621,13 +615,14 @@ filters used for these observations.</p>
 <tr><td>70, 160</td></tr>
 <tr><td>100, 160</td></tr>
 <tr><td>70, 160</td></tr>
-</table><p>Luckily for us, there is an observation made with three filters:
-250,350, and 500 microns. This is the object we will want to download.
-One way to do this is by making a boolean mask to select out the Table
-entry corresponding with the desired filter. Then,
-<code class="docutils literal notranslate"><span class="pre">the</span> <span class="pre">ESASky.get_maps()</span></code> method will download our data provided a
-TableList argument.</p>
-<p><span class="inputnumrole">In[17]:</span></p>
+</table><p>Luckily for us, there is an observation made with three filters: 250,
+350, and 500 microns. This is the object we will want to download. One
+way to do this is by making a boolean mask to select out the Table entry
+corresponding with the desired filter. Then, the <code class="docutils literal notranslate"><span class="pre">ESASky.get_maps()</span></code>
+method will download our data provided a TableList argument.</p>
+<div class="alert alert-info"><p>Note that the below command requires an internet connection to download
+five quite large files. It could take several minutes to complete.</p>
+</div><p><span class="inputnumrole">In[17]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">filters</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;HERSCHEL&#39;</span><span class="p">][</span><span class="s1">&#39;filter&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>  <span class="c1"># Convert the list of filters from the query to a string</span>
 
 <span class="c1"># Construct a boolean mask, searching for only the desired filters</span>
@@ -654,7 +649,7 @@ INFO: Downloading Observation ID: 1342205092 from http://archives.esac.esa.int/h
 INFO: [Done] [astroquery.esasky.core]
 INFO: Downloading of HERSCHEL data complete. [astroquery.esasky.core]
 INFO: Maps available at /home/circleci/project/tutorials/notebooks/FITS-cubes/Maps. [astroquery.esasky.core]
-Filename: Maps/HERSCHEL/anonymous1566419157/hspirepmw401_25pxmp_0110_m7303_1342198565_1342198566_1462476888800.fits.gz
+Filename: Maps/HERSCHEL/anonymous1566424847/hspirepmw401_25pxmp_0110_m7303_1342198565_1342198566_1462476888800.fits.gz
 No.    Name      Ver    Type      Cards   Dimensions   Format
   0  PRIMARY       1 PrimaryHDU     184   ()
   1  image         1 ImageHDU        47   (2407, 2141)   float64
@@ -667,7 +662,7 @@ No.    Name      Ver    Type      Cards   Dimensions   Format
 </pre></div>
 </div>
 <p>Since we are just doing some qualitative analysis, we only need the
-image, but you can easily access lots of other information from our
+image, but you can also access lots of other information from our
 downloaded object, such as errors.</p>
 <p>Let’s go ahead and extract just the WCS information and image data from
 the 350 micron image.</p>
@@ -701,17 +696,21 @@ the 350 micron image.</p>
         <span class="mi">1</span>  <span class="n">yes</span>  <span class="n">yes</span>
 </pre></div>
 </div>
-<p>With this, it’s just as easy as before to display this image using
-matplotlib with
+<p>With this, we can display this image using matplotlib with
 <a class="reference external" href="http://docs.astropy.org/en/stable/visualization/wcsaxes/index.html">WCSAxes</a>
 and the <code class="docutils literal notranslate"><span class="pre">LogNorm()</span></code> object so we can log scale our image.</p>
 <p><span class="inputnumrole">In[19]:</span></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initiate a figure and axis object with WCS projection information</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set Nans to zero</span>
+<span class="n">himage_nan_locs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">herschel_imagehdu</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+<span class="n">herschel_data_nonans</span> <span class="o">=</span> <span class="n">herschel_imagehdu</span><span class="o">.</span><span class="n">data</span>
+<span class="n">herschel_data_nonans</span><span class="p">[</span><span class="n">himage_nan_locs</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="c1"># Initiate a figure and axis object with WCS projection information</span>
 <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="n">herschel_wcs</span><span class="p">)</span>
 
 <span class="c1"># Display the moment map image</span>
-<span class="n">im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">herschel_imagehdu</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">herschel_data_nonans</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span>
                <span class="n">norm</span><span class="o">=</span><span class="n">LogNorm</span><span class="p">(),</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
 <span class="c1"># ax.invert_yaxis() # Flips the Y axis</span>
 
@@ -732,15 +731,7 @@ and the <code class="docutils literal notranslate"><span class="pre">LogNorm()</
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[19]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">circleci</span><span class="o">/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">matplotlib</span><span class="o">/</span><span class="n">colors</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">1028</span><span class="p">:</span> <span class="ne">RuntimeWarning</span><span class="p">:</span> <span class="n">invalid</span> <span class="n">value</span> <span class="n">encountered</span> <span class="ow">in</span> <span class="n">less_equal</span>
-  <span class="n">mask</span> <span class="o">|=</span> <span class="n">resdat</span> <span class="o">&lt;=</span> <span class="mi">0</span>
-<span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">circleci</span><span class="o">/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">matplotlib</span><span class="o">/</span><span class="n">colors</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">1028</span><span class="p">:</span> <span class="ne">RuntimeWarning</span><span class="p">:</span> <span class="n">invalid</span> <span class="n">value</span> <span class="n">encountered</span> <span class="ow">in</span> <span class="n">less_equal</span>
-  <span class="n">mask</span> <span class="o">|=</span> <span class="n">resdat</span> <span class="o">&lt;=</span> <span class="mi">0</span>
-<span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">circleci</span><span class="o">/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">matplotlib</span><span class="o">/</span><span class="n">colors</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">1028</span><span class="p">:</span> <span class="ne">RuntimeWarning</span><span class="p">:</span> <span class="n">invalid</span> <span class="n">value</span> <span class="n">encountered</span> <span class="ow">in</span> <span class="n">less_equal</span>
-  <span class="n">mask</span> <span class="o">|=</span> <span class="n">resdat</span> <span class="o">&lt;=</span> <span class="mi">0</span>
-</pre></div>
-</div>
-<img alt="../_images/FITS-cubes_46_1.png" src="../_images/FITS-cubes_46_1.png" />
+<img alt="../_images/FITS-cubes_47_0.png" src="../_images/FITS-cubes_47_0.png" />
 </div>
 <div class="section" id="overlay-hi-21-cm-contours-on-the-ir-30-micron-image">
 <h2>Overlay HI 21 cm Contours on the IR 30 micron Image<a class="headerlink" href="#overlay-hi-21-cm-contours-on-the-ir-30-micron-image" title="Permalink to this headline">¶</a></h2>
@@ -759,7 +750,7 @@ coordinates. It accepts a string specifying the frame or a WCS object.</p>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="n">herschel_wcs</span><span class="p">)</span>
 
 <span class="c1"># Display the moment map image</span>
-<span class="n">im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">herschel_imagehdu</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">herschel_data_nonans</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span>
                <span class="n">norm</span><span class="o">=</span><span class="n">LogNorm</span><span class="p">(),</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=.</span><span class="mi">8</span><span class="p">)</span>
 <span class="c1"># ax.invert_yaxis() # Flips the Y axis</span>
 
@@ -786,7 +777,7 @@ coordinates. It accepts a string specifying the frame or a WCS object.</p>
 
 <span class="c1"># Overplot column density contours</span>
 <span class="n">levels</span> <span class="o">=</span> <span class="p">(</span><span class="mf">2e21</span><span class="p">,</span> <span class="mf">3e21</span><span class="p">,</span> <span class="mf">5e21</span><span class="p">,</span> <span class="mf">7e21</span><span class="p">,</span> <span class="mf">8e21</span><span class="p">,</span> <span class="mf">1e22</span><span class="p">)</span>  <span class="c1"># Define contour levels to use</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">hi_column_density</span><span class="o">.</span><span class="n">hdu</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Greys_r&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="n">levels</span><span class="p">,</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">hi_column_density</span><span class="o">.</span><span class="n">hdu</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Greys_r&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">levels</span><span class="o">=</span><span class="n">levels</span><span class="p">,</span>
            <span class="n">transform</span><span class="o">=</span><span class="n">hi_transform</span><span class="p">)</span>  <span class="c1"># include the transform information with the keyword &quot;transform&quot;</span>
 
 <span class="c1"># Overplot velocity image so we can also see the Gas velocities</span>
@@ -802,22 +793,10 @@ coordinates. It accepts a string specifying the frame or a WCS object.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[20]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">circleci</span><span class="o">/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">matplotlib</span><span class="o">/</span><span class="n">contour</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">1000</span><span class="p">:</span> <span class="ne">UserWarning</span><span class="p">:</span> <span class="n">The</span> <span class="n">following</span> <span class="n">kwargs</span> <span class="n">were</span> <span class="ow">not</span> <span class="n">used</span> <span class="n">by</span> <span class="n">contour</span><span class="p">:</span> <span class="s1">&#39;lw&#39;</span>
-  <span class="n">s</span><span class="p">)</span>
-</pre></div>
-</div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">2140.5</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">circleci</span><span class="o">/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">matplotlib</span><span class="o">/</span><span class="n">colors</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">1028</span><span class="p">:</span> <span class="ne">RuntimeWarning</span><span class="p">:</span> <span class="n">invalid</span> <span class="n">value</span> <span class="n">encountered</span> <span class="ow">in</span> <span class="n">less_equal</span>
-  <span class="n">mask</span> <span class="o">|=</span> <span class="n">resdat</span> <span class="o">&lt;=</span> <span class="mi">0</span>
-<span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">circleci</span><span class="o">/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">matplotlib</span><span class="o">/</span><span class="n">colors</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">1028</span><span class="p">:</span> <span class="ne">RuntimeWarning</span><span class="p">:</span> <span class="n">invalid</span> <span class="n">value</span> <span class="n">encountered</span> <span class="ow">in</span> <span class="n">less_equal</span>
-  <span class="n">mask</span> <span class="o">|=</span> <span class="n">resdat</span> <span class="o">&lt;=</span> <span class="mi">0</span>
-<span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">circleci</span><span class="o">/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">matplotlib</span><span class="o">/</span><span class="n">colors</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">1028</span><span class="p">:</span> <span class="ne">RuntimeWarning</span><span class="p">:</span> <span class="n">invalid</span> <span class="n">value</span> <span class="n">encountered</span> <span class="ow">in</span> <span class="n">less_equal</span>
-  <span class="n">mask</span> <span class="o">|=</span> <span class="n">resdat</span> <span class="o">&lt;=</span> <span class="mi">0</span>
-</pre></div>
-</div>
-<img alt="../_images/FITS-cubes_48_3.png" src="../_images/FITS-cubes_48_3.png" />
+<img alt="../_images/FITS-cubes_49_1.png" src="../_images/FITS-cubes_49_1.png" />
 </div>
 <div class="section" id="using-reproject-to-match-image-resolutions">
 <h2>Using reproject to match image resolutions<a class="headerlink" href="#using-reproject-to-match-image-resolutions" title="Permalink to this headline">¶</a></h2>
@@ -833,10 +812,10 @@ resolutions of an image artificially. This could be a useful step if you
 are trying to get emission line ratios or directly compare the Intensity
 or Flux from a tracer to that of another tracer in the same physical
 point of the sky.</p>
-<p>From our previously made images, it should be clear that the IR Herschel
-Image has a higher spatial resolution than that of the HI data cube. We
-can look into this more by taking a better look at both header objects
-and using reproject to downscale the Herschel Image.</p>
+<p>From our previously made images, we can see that the IR Herschel Image
+has a higher spatial resolution than that of the HI data cube. We can
+look into this more by taking a better look at both header objects and
+using reproject to downscale the Herschel Image.</p>
 <p><span class="inputnumrole">In[21]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;IR Resolution (dx,dy) = &#39;</span><span class="p">,</span> <span class="n">herschel_header</span><span class="p">[</span><span class="s1">&#39;cdelt1&#39;</span><span class="p">],</span> <span class="n">herschel_header</span><span class="p">[</span><span class="s1">&#39;cdelt2&#39;</span><span class="p">])</span>
 
@@ -880,14 +859,21 @@ images we have been working with, but now with a degraded resolution
 matching the HI data. This includes having its native coordinates in
 Galactic rather than RA and Dec.</p>
 <p><span class="inputnumrole">In[23]:</span></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initiate a figure and axis object with WCS projection information</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set Nans to zero</span>
+<span class="n">image_nan_locs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">rescaled_herschel_imagehdu</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+<span class="n">rescaled_herschel_data_nonans</span> <span class="o">=</span> <span class="n">rescaled_herschel_imagehdu</span><span class="o">.</span><span class="n">data</span>
+<span class="n">rescaled_herschel_data_nonans</span><span class="p">[</span><span class="n">image_nan_locs</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="c1"># Initiate a figure and axis object with WCS projection information</span>
 <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">18</span><span class="p">,</span><span class="mi">12</span><span class="p">))</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span><span class="n">projection</span> <span class="o">=</span> <span class="n">WCS</span><span class="p">(</span><span class="n">rescaled_herschel_imagehdu</span><span class="p">))</span>
 
 <span class="c1"># Display the moment map image</span>
-<span class="n">im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">rescaled_herschel_imagehdu</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s1">&#39;viridis&#39;</span><span class="p">,</span>
+<span class="n">im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">rescaled_herschel_data_nonans</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s1">&#39;viridis&#39;</span><span class="p">,</span>
                <span class="n">norm</span> <span class="o">=</span> <span class="n">LogNorm</span><span class="p">(),</span> <span class="n">vmin</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">vmax</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="o">.</span><span class="mi">8</span><span class="p">)</span>
-<span class="c1">#ax.invert_yaxis() # Flips the Y axis</span>
+<span class="c1">#im = ax.imshow(rescaled_herschel_imagehdu.data, cmap = &#39;viridis&#39;,</span>
+<span class="c1">#               norm = LogNorm(), vmin = 5, vmax = 50, alpha = .8)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span> <span class="c1"># Flips the Y axis</span>
 
 <span class="c1"># Add axes labels</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Galactic Longitude&quot;</span><span class="p">,</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">16</span><span class="p">)</span>
@@ -912,7 +898,7 @@ Galactic rather than RA and Dec.</p>
 
 <span class="c1"># Overplot column density contours</span>
 <span class="n">levels</span> <span class="o">=</span> <span class="p">(</span><span class="mf">2e21</span><span class="p">,</span> <span class="mf">3e21</span><span class="p">,</span> <span class="mf">5e21</span><span class="p">,</span> <span class="mf">7e21</span><span class="p">,</span> <span class="mf">8e21</span><span class="p">,</span> <span class="mf">1e22</span><span class="p">)</span> <span class="c1"># Define contour levels to use</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">hi_column_density</span><span class="o">.</span><span class="n">hdu</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s1">&#39;Greys_r&#39;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.8</span><span class="p">,</span> <span class="n">lw</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">levels</span> <span class="o">=</span> <span class="n">levels</span><span class="p">,</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">contour</span><span class="p">(</span><span class="n">hi_column_density</span><span class="o">.</span><span class="n">hdu</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s1">&#39;Greys_r&#39;</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.8</span><span class="p">,</span> <span class="n">levels</span> <span class="o">=</span> <span class="n">levels</span><span class="p">,</span>
            <span class="n">transform</span> <span class="o">=</span> <span class="n">hi_transform</span><span class="p">)</span> <span class="c1"># include the transform information with the keyword &quot;transform&quot;</span>
 
 <span class="c1"># Overplot velocity image so we can also see the Gas velocities</span>
@@ -928,22 +914,10 @@ Galactic rather than RA and Dec.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[23]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">circleci</span><span class="o">/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">matplotlib</span><span class="o">/</span><span class="n">contour</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">1000</span><span class="p">:</span> <span class="ne">UserWarning</span><span class="p">:</span> <span class="n">The</span> <span class="n">following</span> <span class="n">kwargs</span> <span class="n">were</span> <span class="ow">not</span> <span class="n">used</span> <span class="n">by</span> <span class="n">contour</span><span class="p">:</span> <span class="s1">&#39;lw&#39;</span>
-  <span class="n">s</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mf">40.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">40.5</span><span class="p">)</span>
-</pre></div>
-</div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">circleci</span><span class="o">/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">matplotlib</span><span class="o">/</span><span class="n">colors</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">1028</span><span class="p">:</span> <span class="ne">RuntimeWarning</span><span class="p">:</span> <span class="n">invalid</span> <span class="n">value</span> <span class="n">encountered</span> <span class="ow">in</span> <span class="n">less_equal</span>
-  <span class="n">mask</span> <span class="o">|=</span> <span class="n">resdat</span> <span class="o">&lt;=</span> <span class="mi">0</span>
-<span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">circleci</span><span class="o">/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">matplotlib</span><span class="o">/</span><span class="n">colors</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">1028</span><span class="p">:</span> <span class="ne">RuntimeWarning</span><span class="p">:</span> <span class="n">invalid</span> <span class="n">value</span> <span class="n">encountered</span> <span class="ow">in</span> <span class="n">less_equal</span>
-  <span class="n">mask</span> <span class="o">|=</span> <span class="n">resdat</span> <span class="o">&lt;=</span> <span class="mi">0</span>
-<span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">circleci</span><span class="o">/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">matplotlib</span><span class="o">/</span><span class="n">colors</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">1028</span><span class="p">:</span> <span class="ne">RuntimeWarning</span><span class="p">:</span> <span class="n">invalid</span> <span class="n">value</span> <span class="n">encountered</span> <span class="ow">in</span> <span class="n">less_equal</span>
-  <span class="n">mask</span> <span class="o">|=</span> <span class="n">resdat</span> <span class="o">&lt;=</span> <span class="mi">0</span>
-</pre></div>
-</div>
-<img alt="../_images/FITS-cubes_54_3.png" src="../_images/FITS-cubes_54_3.png" />
+<img alt="../_images/FITS-cubes_55_1.png" src="../_images/FITS-cubes_55_1.png" />
 <p>The real power of reproject is in actually changing the map projection
 used to display the data. This is done by creating a WCS object that
 contains a different projection type such as

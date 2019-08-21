@@ -1,5 +1,5 @@
 .. meta::
-    :keywords: filterTutorials
+    :keywords: filterTutorials, filterCoordinates, filterCatalogMatching, filterObservationalAstronomy, filterAstroquery
 
 .. raw:: html
 
@@ -18,6 +18,24 @@
 
 Using ``astropy.coordinates`` to Match Catalogs and Plan Observations
 =====================================================================
+
+Authors
+-------
+
+Erik Tollerud, Kelle Cruz
+
+Learning Goals
+--------------
+
+-  TBD
+
+Keywords
+--------
+
+coordinates, catalog matching, observational astronomy, astroquery
+
+Summary
+-------
 
 In this tutorial, we will explore how the ``astropy.coordinates``
 package and related astropy functionality can be used to help in
@@ -40,6 +58,17 @@ catalogs.
     from astropy.table import Table
     import numpy as np
     from IPython.display import Image
+    
+    # Set up matplotlib and use a nicer set of plot parameters
+    import matplotlib.pyplot as plt
+    %matplotlib inline
+
+Section 0: Describing on-sky locations with ``coordinates``
+-----------------------------------------------------------
+
+Let’s start by considering a field around the picturesque Hickson
+Compact Group 7. To do anything with this, we need to get an object that
+represents the coordinates of the center of this group.
 
 
 :inputnumrole:`In[2]:`
@@ -47,16 +76,33 @@ catalogs.
 
 .. code:: python
 
-    # Set up matplotlib and use a nicer set of plot parameters
-    import matplotlib.pyplot as plt
-    %matplotlib inline
+    hcg7_center = SkyCoord(9.81625*u.deg, 0.88806*u.deg, frame='icrs')
+    hcg7_center
 
-Describing on-sky locations with ``coordinates``
-------------------------------------------------
 
-Let’s start by considering a field around the picturesque Hickson
-Compact Group 7. To do anything with this, we need to get an object that
-represents the coordinates of the center of this group.
+:outputnumrole:`Out[2]:`
+
+
+
+
+.. parsed-literal::
+
+    <SkyCoord (ICRS): (ra, dec) in deg
+        (9.81625, 0.88806)>
+
+
+
+.. raw:: html
+
+   <div class="alert alert-info">
+
+**Note:** If you already worked through `Coords 1: Getting Started with
+Coordinates <http://learn.astropy.org/rst-tutorials/Coordinates-Intro.html>`__,
+feel free to skip to `Section 1 <#Section-1:>`__.
+
+.. raw:: html
+
+   </div>
 
 In Astropy, the most common object you’ll work with for coordinates is
 ``SkyCoord``. A ``SkyCoord`` can be created most easily directly from
@@ -67,14 +113,17 @@ the default is ICRS.
 (If you’re not sure what ICRS is, it’s basically safe to think of it as
 an approximation to an equatorial system at the J2000 equinox).
 
+SkyCoord will also accept string-formatted coordinates either as
+separate strings for ra/dec or a single string. You’ll have to give
+units, though, if they aren’t part of the string itself.
+
 
 :inputnumrole:`In[3]:`
 
 
 .. code:: python
 
-    hcg7_center = SkyCoord(9.81625*u.deg, 0.88806*u.deg, frame='icrs')
-    hcg7_center
+    SkyCoord('0h39m15.9s', '0d53m17.016s', frame='icrs')
 
 
 :outputnumrole:`Out[3]:`
@@ -89,33 +138,8 @@ an approximation to an equatorial system at the J2000 equinox).
 
 
 
-SkyCoord will also accept string-formatted coordinates either as
-separate strings for ra/dec or a single string. You’ll have to give
-units, though, if they aren’t part of the string itself.
-
 
 :inputnumrole:`In[4]:`
-
-
-.. code:: python
-
-    SkyCoord('0h39m15.9s', '0d53m17.016s', frame='icrs')
-
-
-:outputnumrole:`Out[4]:`
-
-
-
-
-.. parsed-literal::
-
-    <SkyCoord (ICRS): (ra, dec) in deg
-        (9.81625, 0.88806)>
-
-
-
-
-:inputnumrole:`In[5]:`
 
 
 .. code:: python
@@ -123,7 +147,7 @@ units, though, if they aren’t part of the string itself.
     SkyCoord('0:39:15.9 0:53:17.016', unit=(u.hour, u.deg), frame='icrs')
 
 
-:outputnumrole:`Out[5]:`
+:outputnumrole:`Out[4]:`
 
 
 
@@ -141,15 +165,15 @@ look it up directly from its name using the ``SkyCoord.from_name()``
 class method1. Note that this requires an internet connection. It’s safe
 to skip if you don’t have one, because we defined it above explicitly.
 
-*If you don’t know what a class method is, think of it like an
+If you don’t know what a class method is, think of it like an
 alternative constructor for a ``SkyCoord`` object – calling
 ``SkyCoord.from_name()`` with a name gives you a new ``SkyCoord``
 object. For more detailed background on what class methods are and when
-they’re useful, see*\ `this
-page <https://julien.danjou.info/blog/2013/guide-python-static-class-abstract-methods>`__\ *.*
+they’re useful, see `this
+page <https://julien.danjou.info/blog/2013/guide-python-static-class-abstract-methods>`__.
 
 
-:inputnumrole:`In[6]:`
+:inputnumrole:`In[5]:`
 
 
 .. code:: python
@@ -158,7 +182,7 @@ page <https://julien.danjou.info/blog/2013/guide-python-static-class-abstract-me
     hcg7_center
 
 
-:outputnumrole:`Out[6]:`
+:outputnumrole:`Out[5]:`
 
 
 
@@ -173,19 +197,19 @@ page <https://julien.danjou.info/blog/2013/guide-python-static-class-abstract-me
 This object we just created has various useful ways of accessing the
 information contained within it. In particular, the ``ra`` and ``dec``
 attributes are specialized
-```Quantity`` <http://docs.astropy.org/en/stable/units/index.html>`__
+`Quantity <http://docs.astropy.org/en/stable/units/index.html>`__
 objects (actually, a subclass called
-```Angle`` <http://docs.astropy.org/en/stable/api/astropy.coordinates.Angle.html>`__,
+`Angle <http://docs.astropy.org/en/stable/api/astropy.coordinates.Angle.html>`__,
 which in turn is subclassed by
-```Latitude`` <http://docs.astropy.org/en/stable/api/astropy.coordinates.Latitude.html>`__
+`Latitude <http://docs.astropy.org/en/stable/api/astropy.coordinates.Latitude.html>`__
 and
-```Longitude`` <http://docs.astropy.org/en/stable/api/astropy.coordinates.Longitude.html>`__).
+`Longitude <http://docs.astropy.org/en/stable/api/astropy.coordinates.Longitude.html>`__).
 These objects store angles and provide pretty representations of those
 angles, as well as some useful attributes to quickly convert to common
 angle units:
 
 
-:inputnumrole:`In[7]:`
+:inputnumrole:`In[6]:`
 
 
 .. code:: python
@@ -193,7 +217,7 @@ angle units:
     type(hcg7_center.ra), type(hcg7_center.dec)
 
 
-:outputnumrole:`Out[7]:`
+:outputnumrole:`Out[6]:`
 
 
 
@@ -205,7 +229,7 @@ angle units:
 
 
 
-:inputnumrole:`In[8]:`
+:inputnumrole:`In[7]:`
 
 
 .. code:: python
@@ -213,7 +237,7 @@ angle units:
     hcg7_center.dec
 
 
-:outputnumrole:`Out[8]:`
+:outputnumrole:`Out[7]:`
 
 
 
@@ -225,7 +249,7 @@ angle units:
 
 
 
-:inputnumrole:`In[9]:`
+:inputnumrole:`In[8]:`
 
 
 .. code:: python
@@ -233,7 +257,7 @@ angle units:
     hcg7_center.ra
 
 
-:outputnumrole:`Out[9]:`
+:outputnumrole:`Out[8]:`
 
 
 
@@ -245,7 +269,7 @@ angle units:
 
 
 
-:inputnumrole:`In[10]:`
+:inputnumrole:`In[9]:`
 
 
 .. code:: python
@@ -253,7 +277,7 @@ angle units:
     hcg7_center.ra.hour
 
 
-:outputnumrole:`Out[10]:`
+:outputnumrole:`Out[9]:`
 
 
 
@@ -275,7 +299,7 @@ file is included in the repository so you can just let it use the local
 file\ ``'HCG7_SDSS_cutout.jpg'``, defined at the top of the cell.
 
 
-:inputnumrole:`In[11]:`
+:inputnumrole:`In[10]:`
 
 
 .. code:: python
@@ -293,21 +317,21 @@ file\ ``'HCG7_SDSS_cutout.jpg'``, defined at the top of the cell.
     urlretrieve(url, 'HCG7_SDSS_cutout.jpg')
 
 
-:outputnumrole:`Out[11]:`
+:outputnumrole:`Out[10]:`
 
 
 
 
 .. parsed-literal::
 
-    ('HCG7_SDSS_cutout.jpg', <http.client.HTTPMessage at 0x7f9a097413d0>)
+    ('HCG7_SDSS_cutout.jpg', <http.client.HTTPMessage at 0x7f0854791790>)
 
 
 
 Now lets take a look at the image.
 
 
-:inputnumrole:`In[12]:`
+:inputnumrole:`In[11]:`
 
 
 .. code:: python
@@ -315,7 +339,7 @@ Now lets take a look at the image.
     Image('HCG7_SDSS_cutout.jpg')
 
 
-:outputnumrole:`Out[12]:`
+:outputnumrole:`Out[11]:`
 
 
 
@@ -324,42 +348,8 @@ Now lets take a look at the image.
 
 
 
-Very pretty!
-
-Exercises
-~~~~~~~~~
-
-Create a ``SkyCoord`` of some other astronomical object you find
-interesting. Using only a single method/function call, get a string with
-the RA/Dec in the form ‘HH:MM:SS.S DD:MM:SS.S’. Check your answer
-against an academic paper or some web site like
-`SIMBAD <http://simbad.u-strasbg.fr/simbad/>`__ that will show you
-sexigesimal coordinates for the object.
-
-(Hint: ``SkyCoord.to_string()`` might be worth reading up on)
-
-
-:inputnumrole:`In[None]:`
-
-
-
-Now get an image of that object from the Digitized Sky Survey and
-download it and/or show it in the notebook. Bonus points if you figure
-out the (one-line) trick to get it to display in the notebook *without*
-ever downloading the file yourself.
-
-(Hint: STScI has an easy-to-access `copy of the
-DSS <https://archive.stsci.edu/dss/>`__. The pattern to follow for the
-web URL is
-``http://archive.stsci.edu/cgi-bin/dss_search?f=GIF&ra=RA&dec=DEC``)
-
-
-:inputnumrole:`In[None]:`
-
-
-
-Using ``coordinates`` and ``table`` to match and compare catalogs
------------------------------------------------------------------
+Section 1: Using ``coordinates`` and ``table`` to match and compare catalogs
+----------------------------------------------------------------------------
 
 At the end of the last section, we determined that HCG7 is in the SDSS
 imaging survey, so that means we can use the cells below to download
@@ -376,7 +366,7 @@ your version of astroquery it might also issue a warning, which you
 should be able to safely ignore.
 
 
-:inputnumrole:`In[13]:`
+:inputnumrole:`In[12]:`
 
 
 .. code:: python
@@ -387,7 +377,7 @@ should be able to safely ignore.
                              photoobj_fields=['ra','dec','u','g','r','i','z'])
 
 
-:outputnumrole:`Out[13]:`
+:outputnumrole:`Out[12]:`
 
 
 .. parsed-literal::
@@ -397,19 +387,19 @@ should be able to safely ignore.
       warnings.warn("Experimental: SDSS has not yet been refactored to have its API "
 
 
-``astroquery`` queries gives us back an ```astropy.table.Table``
-object <http://docs.astropy.org/en/stable/table/index.html>`__. We could
-just work with this directly without saving anything to disk if we
-wanted to. But here we will use the capability to write to disk. That
-way, if you quit the session and come back later, you don’t have to run
-the query a second time.
+``astroquery`` queries gives us back an
+`astropy.table.Table <http://docs.astropy.org/en/stable/table/index.html>`__
+object. We could just work with this directly without saving anything to
+disk if we wanted to. But here we will use the capability to write to
+disk. That way, if you quit the session and come back later, you don’t
+have to run the query a second time.
 
 (Note that this won’t work fail if you skipped the last step. Don’t
 worry, you can just skip to the next cell with ``Table.read`` and use
 the copy of this table included in the tutorial.)
 
 
-:inputnumrole:`In[14]:`
+:inputnumrole:`In[13]:`
 
 
 .. code:: python
@@ -417,7 +407,7 @@ the copy of this table included in the tutorial.)
     sdss.write('HCG7_SDSS_photo.dat', format='ascii')
 
 
-:outputnumrole:`Out[14]:`
+:outputnumrole:`Out[13]:`
 
 
 .. parsed-literal::
@@ -431,7 +421,7 @@ could skip this, as the table is already in memory as the ``sdss``
 variable.
 
 
-:inputnumrole:`In[15]:`
+:inputnumrole:`In[14]:`
 
 
 .. code:: python
@@ -445,7 +435,7 @@ extracted from the `2MASS <http://www.ipac.caltech.edu/2mass/>`__. We
 first load up this catalog into python.
 
 
-:inputnumrole:`In[16]:`
+:inputnumrole:`In[15]:`
 
 
 .. code:: python
@@ -459,12 +449,57 @@ provide them to the ``SkyCoord`` constructor. Lets first have a look at
 the tables to see just what everything is that’s in them.
 
 
-:inputnumrole:`In[17]:`
+:inputnumrole:`In[16]:`
 
 
 .. code:: python
 
     sdss # just to see an example of the format
+
+
+:outputnumrole:`Out[16]:`
+
+
+
+
+.. raw:: html
+
+    <i>Table length=679</i>
+    <table id="table139675383031504" class="table-striped table-bordered table-condensed">
+    <thead><tr><th>ra</th><th>dec</th><th>u</th><th>g</th><th>r</th><th>i</th><th>z</th></tr></thead>
+    <thead><tr><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th></tr></thead>
+    <tr><td>9.63926688269316</td><td>1.0910365032623</td><td>22.13566</td><td>21.99696</td><td>20.66645</td><td>19.85435</td><td>20.04063</td></tr>
+    <tr><td>9.73899104935128</td><td>1.21275695479465</td><td>20.65073</td><td>19.24755</td><td>18.71561</td><td>18.51509</td><td>18.35635</td></tr>
+    <tr><td>9.50636373615529</td><td>0.673465810373603</td><td>22.21774</td><td>21.80013</td><td>20.92109</td><td>20.38004</td><td>20.06734</td></tr>
+    <tr><td>9.52337926155599</td><td>0.579330766247204</td><td>19.23508</td><td>18.33377</td><td>18.02214</td><td>17.91326</td><td>17.86429</td></tr>
+    <tr><td>10.1139326437175</td><td>0.796522770203905</td><td>26.20445</td><td>22.74818</td><td>20.97065</td><td>19.90827</td><td>19.28423</td></tr>
+    <tr><td>9.50366065731791</td><td>0.793218219038104</td><td>22.58909</td><td>20.25769</td><td>18.87632</td><td>17.72581</td><td>17.10891</td></tr>
+    <tr><td>9.5501989275237</td><td>0.966225046071113</td><td>21.93111</td><td>19.62377</td><td>18.36501</td><td>17.83527</td><td>17.46578</td></tr>
+    <tr><td>9.86847698879299</td><td>0.80365559825926</td><td>20.46826</td><td>17.88408</td><td>16.59048</td><td>16.05468</td><td>15.71724</td></tr>
+    <tr><td>10.0160771375213</td><td>0.981737613430234</td><td>22.97636</td><td>22.02778</td><td>20.61851</td><td>19.84849</td><td>19.12682</td></tr>
+    <tr><td>9.60200800382256</td><td>0.933219805093671</td><td>19.89957</td><td>17.36447</td><td>15.94055</td><td>14.91007</td><td>14.34426</td></tr>
+    <tr><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr>
+    <tr><td>9.92809488353549</td><td>0.627803319913435</td><td>19.96299</td><td>18.11505</td><td>16.97595</td><td>16.50987</td><td>16.12702</td></tr>
+    <tr><td>9.58806459925745</td><td>1.1314497831472</td><td>20.80091</td><td>19.18027</td><td>17.83714</td><td>17.33448</td><td>16.96271</td></tr>
+    <tr><td>9.71323224034862</td><td>0.714462822232334</td><td>20.39685</td><td>18.42277</td><td>17.37318</td><td>16.84696</td><td>16.43039</td></tr>
+    <tr><td>9.97439594087331</td><td>0.986306344313058</td><td>21.88963</td><td>19.67065</td><td>18.35802</td><td>17.73614</td><td>17.36986</td></tr>
+    <tr><td>10.1004964143571</td><td>1.15670540586993</td><td>19.78674</td><td>18.66197</td><td>18.16735</td><td>17.83388</td><td>17.59916</td></tr>
+    <tr><td>9.70735084670682</td><td>0.773349526573342</td><td>20.97201</td><td>18.68302</td><td>17.81904</td><td>17.37067</td><td>17.01577</td></tr>
+    <tr><td>9.75854525459033</td><td>0.577393856013417</td><td>18.97672</td><td>17.3353</td><td>16.69562</td><td>16.47812</td><td>16.35851</td></tr>
+    <tr><td>9.67805190789801</td><td>0.978063092604916</td><td>19.82045</td><td>18.17598</td><td>17.27152</td><td>16.82992</td><td>16.47521</td></tr>
+    <tr><td>10.001526644975</td><td>0.989081016611435</td><td>20.94188</td><td>18.52371</td><td>17.45651</td><td>17.02363</td><td>16.76776</td></tr>
+    <tr><td>10.0777061349142</td><td>0.725711701258196</td><td>21.85427</td><td>19.24766</td><td>17.7151</td><td>16.26826</td><td>15.51393</td></tr>
+    </table>
+
+
+
+
+:inputnumrole:`In[17]:`
+
+
+.. code:: python
+
+    twomass # just to see an example of the format
 
 
 :outputnumrole:`Out[17]:`
@@ -474,53 +509,8 @@ the tables to see just what everything is that’s in them.
 
 .. raw:: html
 
-    <i>Table length=679</i>
-    <table id="table140301558051792" class="table-striped table-bordered table-condensed">
-    <thead><tr><th>ra</th><th>dec</th><th>u</th><th>g</th><th>r</th><th>i</th><th>z</th></tr></thead>
-    <thead><tr><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th></tr></thead>
-    <tr><td>10.1139326437175</td><td>0.796522770203905</td><td>26.20445</td><td>22.74818</td><td>20.97065</td><td>19.90827</td><td>19.28423</td></tr>
-    <tr><td>9.63926688269316</td><td>1.0910365032623</td><td>22.13566</td><td>21.99696</td><td>20.66645</td><td>19.85435</td><td>20.04063</td></tr>
-    <tr><td>9.73899104935128</td><td>1.21275695479465</td><td>20.65073</td><td>19.24755</td><td>18.71561</td><td>18.51509</td><td>18.35635</td></tr>
-    <tr><td>9.52337926155599</td><td>0.579330766247204</td><td>19.23508</td><td>18.33377</td><td>18.02214</td><td>17.91326</td><td>17.86429</td></tr>
-    <tr><td>9.86847698879299</td><td>0.80365559825926</td><td>20.46826</td><td>17.88408</td><td>16.59048</td><td>16.05468</td><td>15.71724</td></tr>
-    <tr><td>9.60200800382256</td><td>0.933219805093671</td><td>19.89957</td><td>17.36447</td><td>15.94055</td><td>14.91007</td><td>14.34426</td></tr>
-    <tr><td>10.0459048074932</td><td>0.586799971838443</td><td>20.65983</td><td>18.04074</td><td>16.72026</td><td>16.1683</td><td>15.8758</td></tr>
-    <tr><td>9.82344685945253</td><td>0.763393080707574</td><td>22.12629</td><td>19.49228</td><td>18.10991</td><td>16.7961</td><td>16.10499</td></tr>
-    <tr><td>9.58614559578677</td><td>1.01165111413398</td><td>24.41747</td><td>22.37227</td><td>20.72713</td><td>19.80469</td><td>19.32136</td></tr>
-    <tr><td>10.0160771375213</td><td>0.981737613430234</td><td>22.97636</td><td>22.02778</td><td>20.61851</td><td>19.84849</td><td>19.12682</td></tr>
-    <tr><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td><td>...</td></tr>
-    <tr><td>10.1036057743441</td><td>0.933972422931203</td><td>23.35407</td><td>21.22462</td><td>19.88978</td><td>18.78084</td><td>18.1538</td></tr>
-    <tr><td>10.0909319911967</td><td>0.621740232627271</td><td>19.87787</td><td>18.72928</td><td>18.23044</td><td>18.05644</td><td>17.96887</td></tr>
-    <tr><td>9.56194739638346</td><td>0.699360926824669</td><td>20.7895</td><td>18.29245</td><td>16.87933</td><td>15.9298</td><td>15.41873</td></tr>
-    <tr><td>9.84050786675891</td><td>0.895097828205758</td><td>18.6116</td><td>17.69099</td><td>17.39797</td><td>17.28403</td><td>17.25241</td></tr>
-    <tr><td>9.85060432393954</td><td>0.980080279860027</td><td>18.03686</td><td>16.88342</td><td>16.48944</td><td>16.35156</td><td>16.27061</td></tr>
-    <tr><td>9.49921020648341</td><td>0.71000751581882</td><td>18.7386</td><td>17.74489</td><td>17.24795</td><td>17.04988</td><td>16.91525</td></tr>
-    <tr><td>9.92383659460276</td><td>0.777110644782147</td><td>21.29772</td><td>18.96935</td><td>17.90094</td><td>17.519</td><td>17.27034</td></tr>
-    <tr><td>9.94351861131469</td><td>0.614367546800538</td><td>24.0223</td><td>21.31916</td><td>19.97082</td><td>18.88003</td><td>18.29224</td></tr>
-    <tr><td>10.1399018880141</td><td>0.797036670583469</td><td>22.83873</td><td>20.80933</td><td>19.21896</td><td>17.77832</td><td>17.01213</td></tr>
-    <tr><td>9.77977042604397</td><td>1.06834740795684</td><td>19.74381</td><td>18.58787</td><td>18.14315</td><td>17.95931</td><td>17.87066</td></tr>
-    </table>
-
-
-
-
-:inputnumrole:`In[18]:`
-
-
-.. code:: python
-
-    twomass # just to see an example of the format
-
-
-:outputnumrole:`Out[18]:`
-
-
-
-
-.. raw:: html
-
     <i>Table masked=True length=23</i>
-    <table id="table140299563853584" class="table-striped table-bordered table-condensed">
+    <table id="table139673754025872" class="table-striped table-bordered table-condensed">
     <thead><tr><th>designation</th><th>ra</th><th>dec</th><th>r_k20fe</th><th>j_m_k20fe</th><th>j_msig_k20fe</th><th>j_flg_k20fe</th><th>h_m_k20fe</th><th>h_msig_k20fe</th><th>h_flg_k20fe</th><th>k_m_k20fe</th><th>k_msig_k20fe</th><th>k_flg_k20fe</th><th>k_ba</th><th>k_phi</th><th>sup_ba</th><th>sup_phi</th><th>r_ext</th><th>j_m_ext</th><th>j_msig_ext</th><th>h_m_ext</th><th>h_msig_ext</th><th>k_m_ext</th><th>k_msig_ext</th><th>cc_flg</th><th>dist</th><th>angle</th></tr></thead>
     <thead><tr><th></th><th>deg</th><th>deg</th><th>arcsec</th><th>mag</th><th>mag</th><th></th><th>mag</th><th>mag</th><th></th><th>mag</th><th>mag</th><th></th><th></th><th>deg</th><th></th><th>deg</th><th>arcsec</th><th>mag</th><th>mag</th><th>mag</th><th>mag</th><th>mag</th><th>mag</th><th></th><th>arcsec</th><th>deg</th></tr></thead>
     <thead><tr><th>str16</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>int64</th><th>float64</th><th>float64</th><th>int64</th><th>float64</th><th>float64</th><th>int64</th><th>float64</th><th>int64</th><th>float64</th><th>int64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>str1</th><th>float64</th><th>float64</th></tr></thead>
@@ -560,7 +550,7 @@ coordinate values - you just pass in array-like inputs (array
 ``SkyCoord`` will happily do all of its operations element-wise.
 
 
-:inputnumrole:`In[19]:`
+:inputnumrole:`In[18]:`
 
 
 .. code:: python
@@ -579,7 +569,7 @@ because there are many *more* entires in the SDSS, so it seems likely
 that most 2MASS objects are in SDSS (but not vice versa).
 
 
-:inputnumrole:`In[20]:`
+:inputnumrole:`In[19]:`
 
 
 .. code:: python
@@ -594,7 +584,7 @@ useful. But ``d2d`` provides a good diagnosis of whether we actually
 have real matches:
 
 
-:inputnumrole:`In[21]:`
+:inputnumrole:`In[20]:`
 
 
 .. code:: python
@@ -604,11 +594,11 @@ have real matches:
     plt.tight_layout()
 
 
-:outputnumrole:`Out[21]:`
+:outputnumrole:`Out[20]:`
 
 
 
-.. image:: nboutput/coordinates_45_0.png
+.. image:: nboutput/coordinates_39_0.png
 
 
 
@@ -621,7 +611,7 @@ We first create a set of uniformly random points (with size matching
 ``coo_sdss``.
 
 
-:inputnumrole:`In[22]:`
+:inputnumrole:`In[21]:`
 
 
 .. code:: python
@@ -631,23 +621,23 @@ We first create a set of uniformly random points (with size matching
     ras_sim, decs_sim
 
 
-:outputnumrole:`Out[22]:`
+:outputnumrole:`Out[21]:`
 
 
 
 
 .. parsed-literal::
 
-    (<Angle [10.05014045,  9.8543147 , 10.11464163,  9.8286096 ,  9.87226217,
-              9.77853254,  9.86460322,  9.93787701,  9.60326502,  9.74756614,
-              9.53597778,  9.6599562 ,  9.48764646,  9.52386645,  9.49559523,
-              9.93699129,  9.60790111,  9.99718325,  9.87886109,  9.48319795,
-             10.06888059,  9.68391014, 10.07069355] deg>,
-     <Angle [0.83395066, 0.87993669, 0.62390151, 1.14745221, 1.01078124,
-             0.79827356, 0.71466369, 1.11804059, 1.0773379 , 0.74260846,
-             0.66020193, 1.18572051, 1.00798588, 0.87682849, 0.92569114,
-             0.75334203, 0.64340731, 0.93372357, 0.68489117, 1.08785018,
-             0.62784728, 1.13348325, 1.01029857] deg>)
+    (<Angle [10.08698225, 10.00139206,  9.68930063,  9.87396287,  9.56850406,
+              9.64653502,  9.8193474 ,  9.77694263, 10.02984733, 10.05486656,
+             10.05220378, 10.09306022, 10.14407439,  9.60896697,  9.58340652,
+              9.89719536, 10.07360558,  9.50084523,  9.69856217, 10.12977041,
+              9.79429542,  9.55842963,  9.6463728 ] deg>,
+     <Angle [0.98300306, 0.91763857, 0.86822645, 1.16890229, 0.90594187,
+             0.99222073, 1.06680263, 0.99861849, 0.61208819, 0.88639543,
+             1.15167478, 0.77574675, 1.09691566, 0.69238534, 0.88844974,
+             1.15628811, 1.21512719, 0.71970637, 1.11315809, 0.64702278,
+             1.05424509, 0.56838838, 0.72128833] deg>)
 
 
 
@@ -659,7 +649,7 @@ Note that we do not need to explicitly specify units for ``ras_sim`` and
 they were created from ``coo_sdss.ra``/``coo_sdss.dec``.
 
 
-:inputnumrole:`In[23]:`
+:inputnumrole:`In[22]:`
 
 
 .. code:: python
@@ -671,7 +661,7 @@ Now lets plot up the histogram of separations from our simulated catalog
 so we can compare to the above results from the *real* catalog.
 
 
-:inputnumrole:`In[24]:`
+:inputnumrole:`In[23]:`
 
 
 .. code:: python
@@ -683,11 +673,11 @@ so we can compare to the above results from the *real* catalog.
     plt.tight_layout()
 
 
-:outputnumrole:`Out[24]:`
+:outputnumrole:`Out[23]:`
 
 
 
-.. image:: nboutput/coordinates_51_0.png
+.. image:: nboutput/coordinates_45_0.png
 
 
 
@@ -698,7 +688,7 @@ can start computing things like colors that combine the SDSS and 2MASS
 photometry.
 
 
-:inputnumrole:`In[25]:`
+:inputnumrole:`In[24]:`
 
 
 .. code:: python
@@ -723,11 +713,11 @@ photometry.
     plt.tight_layout()
 
 
-:outputnumrole:`Out[25]:`
+:outputnumrole:`Out[24]:`
 
 
 
-.. image:: nboutput/coordinates_53_0.png
+.. image:: nboutput/coordinates_47_0.png
 
 
 
@@ -785,7 +775,7 @@ transform our previously-defined center of HCG7 from ICRS to Galactic
 coordinates:
 
 
-:inputnumrole:`In[26]:`
+:inputnumrole:`In[25]:`
 
 
 .. code:: python
@@ -793,7 +783,7 @@ coordinates:
     hcg7_center.galactic
 
 
-:outputnumrole:`Out[26]:`
+:outputnumrole:`Out[25]:`
 
 
 
@@ -810,7 +800,7 @@ does the same as what’s in the cell below: uses the ``transform_to()``
 method to convert from one frame to another.
 
 
-:inputnumrole:`In[27]:`
+:inputnumrole:`In[26]:`
 
 
 .. code:: python
@@ -819,7 +809,7 @@ method to convert from one frame to another.
     hcg7_center.transform_to(Galactic())
 
 
-:outputnumrole:`Out[27]:`
+:outputnumrole:`Out[26]:`
 
 
 
@@ -835,7 +825,7 @@ Note that changing frames also changes some of the attributes of the
 object, but usually in a way that makes sense:
 
 
-:inputnumrole:`In[28]:`
+:inputnumrole:`In[27]:`
 
 
 .. code:: python
@@ -843,7 +833,7 @@ object, but usually in a way that makes sense:
     hcg7_center.galactic.ra  # should fail because galactic coordinates are l/b not RA/Dec
 
 
-:outputnumrole:`Out[28]:`
+:outputnumrole:`Out[27]:`
 
 
 ::
@@ -853,7 +843,7 @@ object, but usually in a way that makes sense:
 
     AttributeErrorTraceback (most recent call last)
 
-    <ipython-input-28-db41d046b9c9> in <module>
+    <ipython-input-27-db41d046b9c9> in <module>
     ----> 1 hcg7_center.galactic.ra  # should fail because galactic coordinates are l/b not RA/Dec
     
 
@@ -869,7 +859,7 @@ object, but usually in a way that makes sense:
 
 
 
-:inputnumrole:`In[29]:`
+:inputnumrole:`In[28]:`
 
 
 .. code:: python
@@ -877,7 +867,7 @@ object, but usually in a way that makes sense:
     hcg7_center.galactic.b
 
 
-:outputnumrole:`Out[29]:`
+:outputnumrole:`Out[28]:`
 
 
 
@@ -897,7 +887,7 @@ horizontal coordinates, or “AltAz” coordinates. We first need to specify
 both where and when we want to try to observe.
 
 
-:inputnumrole:`In[30]:`
+:inputnumrole:`In[29]:`
 
 
 .. code:: python
@@ -917,7 +907,7 @@ to correct for atmospheric refraction. Here we leave that alone, because
 the default is to ignore this effect (by setting the pressure to 0).
 
 
-:inputnumrole:`In[31]:`
+:inputnumrole:`In[30]:`
 
 
 .. code:: python
@@ -928,7 +918,7 @@ the default is to ignore this effect (by setting the pressure to 0).
     aa
 
 
-:outputnumrole:`Out[31]:`
+:outputnumrole:`Out[30]:`
 
 
 
@@ -943,7 +933,7 @@ Now we can just transform our ICRS ``SkyCoord`` to ``AltAz`` to get the
 location in the sky over Kitt Peak at the requested time.
 
 
-:inputnumrole:`In[32]:`
+:inputnumrole:`In[31]:`
 
 
 .. code:: python
@@ -951,7 +941,7 @@ location in the sky over Kitt Peak at the requested time.
     hcg7_center.transform_to(aa)
 
 
-:outputnumrole:`Out[32]:`
+:outputnumrole:`Out[31]:`
 
 
 
@@ -968,7 +958,7 @@ could just try various times one at a time to see if the airmass is at a
 darker time, but we can do better: lets try to create an airmass plot.
 
 
-:inputnumrole:`In[33]:`
+:inputnumrole:`In[32]:`
 
 
 .. code:: python
@@ -986,11 +976,11 @@ darker time, but we can do better: lets try to create an airmass plot.
     plt.tight_layout()
 
 
-:outputnumrole:`Out[33]:`
+:outputnumrole:`Out[32]:`
 
 
 
-.. image:: nboutput/coordinates_78_0.png
+.. image:: nboutput/coordinates_72_0.png
 
 
 
@@ -1001,7 +991,7 @@ observing for proper dark skies? Fortunately, astropy provides a
 check if we’re in 18-degree twilight or not.
 
 
-:inputnumrole:`In[34]:`
+:inputnumrole:`In[33]:`
 
 
 .. code:: python
@@ -1016,11 +1006,11 @@ check if we’re in 18-degree twilight or not.
     plt.tight_layout()
 
 
-:outputnumrole:`Out[34]:`
+:outputnumrole:`Out[33]:`
 
 
 
-.. image:: nboutput/coordinates_80_0.png
+.. image:: nboutput/coordinates_74_0.png
 
 
 

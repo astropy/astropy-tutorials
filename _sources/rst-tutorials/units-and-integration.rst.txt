@@ -1,5 +1,5 @@
 .. meta::
-    :keywords: filterTutorials, filterOop, filterLatex, filterAstrostatistics, filterMatplotlib, filterModeling, filterUnits
+    :keywords: filterTutorials, filterModeling, filterUnits, filterSynphot, filterOop, filterLatex, filterAstrostatistics, filterMatplotlib, filterUnits, filterPhysics
 
 .. raw:: html
 
@@ -22,7 +22,7 @@ Using ``scipy.integrate``
 Authors
 -------
 
-Zach Pace, Lia Corrales
+Zach Pace, Lia Corrales, Stephanie T. Douglas
 
 Learning Goals
 --------------
@@ -33,7 +33,7 @@ Learning Goals
 -  gaussian quadrature
 -  use ``astropy``\ ’s built-in black-body curves
 -  understand how ``astropy``\ ’s units interact with one another
--  write a mini Python class
+-  define a Python class
 -  how the ``__call__`` method works
 -  add :math:`\LaTeX` labels to ``matplotlib`` figures using the
    ``latex_inline`` formatter
@@ -41,7 +41,8 @@ Learning Goals
 Keywords
 --------
 
-OOP, LaTeX, astrostatistics, matplotlib, modeling, units
+modeling, units, synphot, OOP, LaTeX, astrostatistics, matplotlib,
+units, physics
 
 Companion Content
 -----------------
@@ -144,6 +145,8 @@ To do that, we enclose :math:`LaTeX` markup text in dollar signs, within
 a string ``r'\$ ... \$'``. The ``r`` before the open-quote denotes that
 the string is “raw,” and backslashes are treated literally. This is the
 suggested format for axis label text that includes markup.
+
+Now we numerically integrate using the trapezoid rule.
 
 
 :inputnumrole:`In[3]:`
@@ -452,6 +455,11 @@ Challenge problems
 -  If you’re not tired of IMFs yet, try defining a new class that
    implements a broken-power-law (Kroupa) or log-parabola (Chabrier)
    IMF. Perform the same calculations as above.
+
+
+:inputnumrole:`In[None]:`
+
+
 
 
 

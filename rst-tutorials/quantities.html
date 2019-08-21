@@ -2,7 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta charset="utf-8" /><meta content="filterTutorials, filterUnits, filterMatplotlib, filterRadioAstronomy, filterDataCubes" name="keywords" />
+    <meta charset="utf-8" /><meta content="filterTutorials, filterUnits, filterRadioAstronomy, filterDataCubes, filterMatplotlib" name="keywords" />
 <meta content="filterTutorials," name="keywords" />
 
     <title>Using Astropy Quantities and Units for astrophysical calculations &#8212; astropy-tutorials v3.0.dev</title>
@@ -83,6 +83,7 @@
 <li><a class="reference internal" href="#authors">Authors</a></li>
 <li><a class="reference internal" href="#learning-goals">Learning Goals</a></li>
 <li><a class="reference internal" href="#keywords">Keywords</a></li>
+<li><a class="reference internal" href="#companion-content">Companion Content</a></li>
 <li><a class="reference internal" href="#summary">Summary</a></li>
 <li><a class="reference internal" href="#preliminaries">Preliminaries</a></li>
 <li><a class="reference internal" href="#galaxy-mass">1. Galaxy mass</a></li>
@@ -114,7 +115,8 @@
 <span id="quantities"></span><h1>Using Astropy Quantities and Units for astrophysical calculations<a class="headerlink" href="#using-astropy-quantities-and-units-for-astrophysical-calculations" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="authors">
 <h2>Authors<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a></h2>
-<p>Ana Bonaca, Erik Tollerud, Jonathan Foster, Lia Corrales, Kris Stern</p>
+<p>Ana Bonaca, Erik Tollerud, Jonathan Foster, Lia Corrales, Kris Stern,
+Stephanie T. Douglas</p>
 </div>
 <div class="section" id="learning-goals">
 <h2>Learning Goals<a class="headerlink" href="#learning-goals" title="Permalink to this headline">¶</a></h2>
@@ -139,7 +141,13 @@ derivation of the total mass of a molecular cloud</p></li>
 </div>
 <div class="section" id="keywords">
 <h2>Keywords<a class="headerlink" href="#keywords" title="Permalink to this headline">¶</a></h2>
-<p>units, matplotlib, radio astronomy, data cubes</p>
+<p>units, radio astronomy, data cubes, matplotlib</p>
+</div>
+<div class="section" id="companion-content">
+<h2>Companion Content<a class="headerlink" href="#companion-content" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://www.springer.com/gp/book/9783662053942">Tools for Radio
+Astronomy</a> by Rohlfs
+&amp; Wilson</p>
 </div>
 <div class="section" id="summary">
 <h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
@@ -291,7 +299,7 @@ settings on your <code class="docutils literal notranslate"><span class="pre">ma
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[11]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">astropy</span><span class="o">.</span><span class="n">visualization</span><span class="o">.</span><span class="n">units</span><span class="o">.</span><span class="n">quantity_support</span><span class="o">.&lt;</span><span class="nb">locals</span><span class="o">&gt;.</span><span class="n">MplQuantityConverter</span> <span class="n">at</span> <span class="mh">0x7f8adae1f210</span><span class="o">&gt;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">astropy</span><span class="o">.</span><span class="n">visualization</span><span class="o">.</span><span class="n">units</span><span class="o">.</span><span class="n">quantity_support</span><span class="o">.&lt;</span><span class="nb">locals</span><span class="o">&gt;.</span><span class="n">MplQuantityConverter</span> <span class="n">at</span> <span class="mh">0x7f6702b1cf10</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <p>Now we can plot a histogram of the velocity dataset. Note that, due to
@@ -629,7 +637,8 @@ beam of the telescope, the total column density for
 <p>where the constants <span class="math notranslate nohighlight">\(C\)</span> and <span class="math notranslate nohighlight">\(B\)</span> are given by:</p>
 <p><span class="math notranslate nohighlight">\(C=3.0\times10^{14} \left(\frac{\nu}{\nu_{13}}\right)^2 \frac{A_{13}}{A} {\rm K^{-1} cm^{-2} \, km^{-1} \, s}\)</span></p>
 <p><span class="math notranslate nohighlight">\(B=\frac{h\nu}{k_B T}\)</span></p>
-<p>(Rohlfs &amp; Wilson “Tools of Radio Astronomy”).</p>
+<p>(Rohlfs &amp; Wilson <a class="reference external" href="https://www.springer.com/gp/book/9783662053942">Tools for Radio
+Astronomy</a>).</p>
 <p>Here we have given an expression for <span class="math notranslate nohighlight">\(C\)</span> scaled to the values for
 <span class="math notranslate nohighlight">\({\rm C}^{13}{\rm O}\)</span> (<span class="math notranslate nohighlight">\(\nu_{13}\)</span> and <span class="math notranslate nohighlight">\(A_{13}\)</span>). In
 order to use this relation for <span class="math notranslate nohighlight">\({\rm C}^{18}{\rm O}\)</span>, we need to

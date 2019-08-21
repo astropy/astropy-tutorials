@@ -5,7 +5,7 @@
     <meta charset="utf-8" /><meta content="filterTutorials" name="keywords" />
 <meta content="filterTutorials," name="keywords" />
 
-    <title>Dereddening a spectrum and calculating reddening &#8212; astropy-tutorials v3.0.dev</title>
+    <title>Analyzing interstellar reddening and calculating synthetic photometry &#8212; astropy-tutorials v3.0.dev</title>
     <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
@@ -79,7 +79,7 @@
       <div id="sidebar" class="bs-sidenav card" role="complementary">
         <h3>Table of contents</h3>
         <ul>
-<li><a class="reference internal" href="#">Dereddening a spectrum and calculating reddening</a><ul>
+<li><a class="reference internal" href="#">Analyzing interstellar reddening and calculating synthetic photometry</a><ul>
 <li><a class="reference internal" href="#learning-goals">Learning Goals</a></li>
 <li><a class="reference internal" href="#keywords">Keywords</a></li>
 <li><a class="reference internal" href="#companion-content">Companion Content</a></li>
@@ -105,33 +105,31 @@
   <a href="../_static/color-excess/color-excess.ipynb"><button id="download">Download tutorial notebook</button></a>
 <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/color-excess/color-excess.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
 
-<div id="spacer"></div><div class="section" id="dereddening-a-spectrum-and-calculating-reddening">
-<span id="color-excess"></span><h1>Dereddening a spectrum and calculating reddening<a class="headerlink" href="#dereddening-a-spectrum-and-calculating-reddening" title="Permalink to this headline">¶</a></h1>
-<p>Kristen Larson (&#64;krislars) with ideas Emir Karamehmetoglu and feedback
-from Pey Lian Lim, Karl Gordon, and Kevin Covey. Edited by Lia Corrales.</p>
+<div id="spacer"></div><div class="section" id="analyzing-interstellar-reddening-and-calculating-synthetic-photometry">
+<span id="color-excess"></span><h1>Analyzing interstellar reddening and calculating synthetic photometry<a class="headerlink" href="#analyzing-interstellar-reddening-and-calculating-synthetic-photometry" title="Permalink to this headline">¶</a></h1>
+<p>Kristen Larson, Lia Corrales, Stephanie T. Douglas, Kelle Cruz</p>
+<p>Input from Emir Karamehmetoglu, Pey Lian Lim, Karl Gordon, Kevin Covey</p>
 <div class="section" id="learning-goals">
 <h2>Learning Goals<a class="headerlink" href="#learning-goals" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>Investigate extinction curve shapes</p></li>
 <li><p>Deredden spectral energy distributions and spectra</p></li>
 <li><p>Calculate photometric extinction and reddening</p></li>
-<li><p>Use <code class="docutils literal notranslate"><span class="pre">dust_extinction</span></code> and <code class="docutils literal notranslate"><span class="pre">synphot</span></code> together</p></li>
-<li><p>Converting from frequency to wavelength with <code class="docutils literal notranslate"><span class="pre">astropy.unit</span></code>
+<li><p>Calculate synthetic photometry for a dust-reddened star by combining
+<code class="docutils literal notranslate"><span class="pre">dust_extinction</span></code> and <code class="docutils literal notranslate"><span class="pre">synphot</span></code></p></li>
+<li><p>Convert from frequency to wavelength with <code class="docutils literal notranslate"><span class="pre">astropy.unit</span></code>
 equivalencies</p></li>
 <li><p>Unit support for plotting with <code class="docutils literal notranslate"><span class="pre">astropy.visualization</span></code></p></li>
 </ul>
 </div>
 <div class="section" id="keywords">
 <h2>Keywords<a class="headerlink" href="#keywords" title="Permalink to this headline">¶</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">dust_extinction</span></code>, <code class="docutils literal notranslate"><span class="pre">synphot</span></code></p>
+<p>dust extinction, synphot, astroquery, units, photometry, extinction,
+physics, observational astronomy</p>
 </div>
 <div class="section" id="companion-content">
 <h2>Companion Content<a class="headerlink" href="#companion-content" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">Documentation</span> <span class="pre">for</span> <span class="pre">``dust_extinction`</span></code>
-package &lt;<a class="reference external" href="https://dust-extinction.readthedocs.io/en/latest/">https://dust-extinction.readthedocs.io/en/latest/</a>&gt;`__</p></li>
-<li><p><code class="xref py py-obj docutils literal notranslate"><span class="pre">Documentation</span> <span class="pre">for</span> <span class="pre">``synphot`</span></code>
-package &lt;<a class="reference external" href="https://synphot.readthedocs.io/en/latest/">https://synphot.readthedocs.io/en/latest/</a>&gt;`__</p></li>
 <li><p><a class="reference external" href="https://ui.adsabs.harvard.edu/#abs/2012PASP..124..140B/abstract">Bessell &amp; Murphy
 (2012)</a></p></li>
 </ul>
@@ -151,10 +149,11 @@ and <a class="reference external" href="https://synphot.readthedocs.io/en/latest
 <span class="n">pip</span> <span class="n">install</span> <span class="n">dust_extinction</span>
 </pre></div>
 </div>
-<p>Notice that the structure of <code class="docutils literal notranslate"><span class="pre">dust_extinction</span></code> changed significantly
-from v0.6 to v0.7, so updating your installation may be required. If so,
-you can upgrade the package with pip:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">upgrade</span> <span class="n">dust_extinction</span>
+<p>This tutorial requires v0.7 or later of <code class="docutils literal notranslate"><span class="pre">dust_extinction</span></code>. To ensure
+that all commands work properly, make sure you have the correct version
+installed. If you have v0.6 or earlier installed, run the following
+command to upgrade</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">dust_extinction</span> <span class="o">--</span><span class="n">upgrade</span>
 </pre></div>
 </div>
 <p><span class="inputnumrole">In[1]:</span></p>
@@ -240,10 +239,10 @@ documentation. &lt;<a class="reference external" href="https://dust-extinction.r
 <span class="n">wav</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="mf">0.001</span><span class="p">)</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">micron</span>
 
 <span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="p">[</span><span class="n">CCM89</span><span class="p">,</span> <span class="n">F99</span><span class="p">]:</span>
-   <span class="k">for</span> <span class="n">R</span> <span class="ow">in</span> <span class="p">(</span><span class="mf">2.0</span><span class="p">,</span><span class="mf">3.0</span><span class="p">,</span><span class="mf">4.0</span><span class="p">):</span>
-     <span class="c1"># Initialize the extinction model</span>
-     <span class="n">ext</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">Rv</span><span class="o">=</span><span class="n">R</span><span class="p">)</span>
-     <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">wav</span><span class="p">,</span> <span class="n">ext</span><span class="p">(</span><span class="n">wav</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="n">model</span><span class="o">.</span><span class="n">name</span><span class="o">+</span><span class="s1">&#39; R=&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">R</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">R</span> <span class="ow">in</span> <span class="p">(</span><span class="mf">2.0</span><span class="p">,</span><span class="mf">3.0</span><span class="p">,</span><span class="mf">4.0</span><span class="p">):</span>
+        <span class="c1"># Initialize the extinction model</span>
+        <span class="n">ext</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">Rv</span><span class="o">=</span><span class="n">R</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">wav</span><span class="p">,</span> <span class="n">ext</span><span class="p">(</span><span class="n">wav</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="n">model</span><span class="o">.</span><span class="n">name</span><span class="o">+</span><span class="s1">&#39; R=&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">R</span><span class="p">))</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;$\lambda^{-1}$ ($\mu$m$^{-1}$)&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;A($\lambda$) / A(V)&#39;</span><span class="p">)</span>
@@ -269,7 +268,7 @@ MAST</a>:</p>
 <p><span class="inputnumrole">In[3]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">obsTable</span> <span class="o">=</span> <span class="n">Observations</span><span class="o">.</span><span class="n">query_object</span><span class="p">(</span><span class="s2">&quot;HD 147933&quot;</span><span class="p">,</span><span class="n">radius</span><span class="o">=</span><span class="s2">&quot;1 arcsec&quot;</span><span class="p">)</span>
 <span class="n">obsTable_spec</span><span class="o">=</span><span class="n">obsTable</span><span class="p">[</span><span class="n">obsTable</span><span class="p">[</span><span class="s1">&#39;dataproduct_type&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;spectrum&#39;</span><span class="p">]</span>
-<span class="c1"># obsTable_spec.pprint()</span>
+<span class="n">obsTable_spec</span><span class="o">.</span><span class="n">pprint</span><span class="p">()</span>
 
 <span class="n">obsids</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;3000022829&#39;</span><span class="p">]</span>
 <span class="n">dataProductsByID</span> <span class="o">=</span> <span class="n">Observations</span><span class="o">.</span><span class="n">get_product_list</span><span class="p">(</span><span class="n">obsids</span><span class="p">)</span>
@@ -277,7 +276,32 @@ MAST</a>:</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[3]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:IUE/url/pub/iue/data/lwr/05000/lwr05639.elbll.gz to ./mastDownload/IUE/lwr05639/lwr05639.elbll.gz ... [Done]
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>intentType obs_collection provenance_name ...   objID         distance
+---------- -------------- --------------- ... ---------- ------------------
+   science            IUE              -- ... 3500014392                0.0
+   science            IUE              -- ... 3500014393                0.0
+   science            IUE              -- ... 3500014394                0.0
+   science            IUE              -- ... 3500014395                0.0
+   science            IUE              -- ... 3500014396                0.0
+   science            IUE              -- ... 3500014397                0.0
+   science            IUE              -- ... 3500014398                0.0
+   science            IUE              -- ... 3500014399                0.0
+   science            IUE              -- ... 3500014400                0.0
+   science            IUE              -- ... 3500014401                0.0
+       ...            ...             ... ...        ...                ...
+   science            IUE              -- ... 3500011964                0.0
+   science            IUE              -- ... 3500011965                0.0
+   science            IUE              -- ... 3500011966                0.0
+   science            IUE              -- ... 3500011967                0.0
+   science            IUE              -- ... 3500009330                0.0
+   science            IUE              -- ... 3500011968                0.0
+   science            IUE              -- ... 3500011969                0.0
+   science            IUE              -- ... 3500008878                0.0
+   science            HST         CALSTIS ... 2025086267 0.5751893673409462
+   science            HST         CALSTIS ... 2038207407 0.5751893673409462
+   science            HST         CALSTIS ... 2029206188 0.5751893673409462
+Length = 109 rows
+Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:IUE/url/pub/iue/data/lwr/05000/lwr05639.elbll.gz to ./mastDownload/IUE/lwr05639/lwr05639.elbll.gz ... [Done]
 Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:IUE/url/pub/iue/data/lwr/05000/lwr05639.lilo.gz to ./mastDownload/IUE/lwr05639/lwr05639.lilo.gz ... [Done]
 Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:IUE/url/pub/iue/data/lwr/05000/lwr05639.melol.gz to ./mastDownload/IUE/lwr05639/lwr05639.melol.gz ... [Done]
 Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:IUE/url/pub/iue/data/lwr/05000/lwr05639.raw.gz to ./mastDownload/IUE/lwr05639/lwr05639.raw.gz ... [Done]
@@ -617,6 +641,7 @@ wavelengths changed?</p>
 <p>Note that the photometric extinction changes because the filter
 transmission is not uniform. The observed throughput of the filter
 depends on the shape of the background source flux.</p>
+<p><span class="inputnumrole">In[None]:</span></p>
 <div id="spacer"></div>
 
 <a href="../_static/color-excess/color-excess.ipynb"><button id="download">Download tutorial notebook</button></a>

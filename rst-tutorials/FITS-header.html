@@ -2,7 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta charset="utf-8" /><meta content="filterTutorials, filterFitsHeader, filterFileInputOutput" name="keywords" />
+    <meta charset="utf-8" /><meta content="filterTutorials, filterFits, filterFileInputOutput" name="keywords" />
 <meta content="filterTutorials," name="keywords" />
 
     <title>Edit a FITS header &#8212; astropy-tutorials v3.0.dev</title>
@@ -103,51 +103,40 @@
 <span id="fits-header"></span><h1>Edit a FITS header<a class="headerlink" href="#edit-a-fits-header" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="authors">
 <h2>Authors<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a></h2>
-<p>Adrian Price-Whelan, Adam Ginsburg</p>
+<p>Adrian Price-Whelan, Adam Ginsburg, Stephanie T. Douglas, Kelle Cruz</p>
 </div>
 <div class="section" id="learning-goals">
 <h2>Learning Goals<a class="headerlink" href="#learning-goals" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li><p>Read a FITS file and retrieve the header metadata</p></li>
-<li><p>Edit the FITS header and write the modified file as a FITS file</p></li>
+<li><p>Read a FITS file</p></li>
+<li><p>Retrieve FITS header metadata</p></li>
+<li><p>Edit the FITS header</p></li>
+<li><p>Write the modified file as a FITS file</p></li>
 </ul>
 </div>
 <div class="section" id="keywords">
 <h2>Keywords<a class="headerlink" href="#keywords" title="Permalink to this headline">¶</a></h2>
-<p>FITS header, file input/output</p>
+<p>FITS, file input/output</p>
 </div>
 <div class="section" id="summary">
 <h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
-<p>This tutorial describes how to read in, edit a FITS header, and then
+<p>This tutorial describes how to read in and edit a FITS header, and then
 write it back out to disk. For this example we’re going to change the
 <code class="docutils literal notranslate"><span class="pre">OBJECT</span></code> keyword.</p>
-<p>This tutorial uses
-<a class="reference external" href="http://docs.astropy.org/en/latest/io/fits/index.html">astropy.io.fits</a>,
-which was formerly released separately as <code class="docutils literal notranslate"><span class="pre">pyfits</span></code>. If you have used
-<code class="docutils literal notranslate"><span class="pre">pyfits</span></code> to manipulate FITS files then you may already be familiar
-with the features and syntax of the package. We start by importing the
-subpackage into our local namespace, which allows us to access the
-functions and classes as <code class="docutils literal notranslate"><span class="pre">fits.name_of_function()</span></code>. For example, to
-access the <code class="docutils literal notranslate"><span class="pre">getdata()</span></code> function, we <em>don’t</em> have to do
-<code class="docutils literal notranslate"><span class="pre">astropy.io.fits.getdata()</span></code> and can instead simply use
-<code class="docutils literal notranslate"><span class="pre">fits.getdata()</span></code>. You may run across old documentation or tutorials
-that use the name <code class="docutils literal notranslate"><span class="pre">pyfits</span></code>. Such examples will begin with
-<code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">pyfits</span></code> and then the command <code class="docutils literal notranslate"><span class="pre">fits.getdata()</span></code> (for example)
-would be written as <code class="docutils literal notranslate"><span class="pre">pyfits.getdata()</span></code>.</p>
 <p><span class="inputnumrole">In[1]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">astropy.io</span> <span class="kn">import</span> <span class="n">fits</span>
 </pre></div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">astropy.io.fits</span></code> provides a lot of flexibility for reading FITS files
 and headers, but most of the time the convenience functions are the
-easiest way to access the data. <code class="docutils literal notranslate"><span class="pre">fits.getdata()</span></code> reads just the data
+easiest way to access the data. <code class="docutils literal notranslate"><span class="pre">fits.getdata()</span></code> reads only the data
 from a FITS file, but with the <code class="docutils literal notranslate"><span class="pre">header=True</span></code> keyword argument will
 also read the header.</p>
 <p><span class="inputnumrole">In[2]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">getdata</span><span class="p">(</span><span class="s2">&quot;input_file.fits&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>There is also a dedicated function for reading just the header:</p>
+<p>There is also a dedicated function for reading only the header:</p>
 <p><span class="inputnumrole">In[3]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">hdu_number</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># HDU means header data unit</span>
 <span class="n">fits</span><span class="o">.</span><span class="n">getheader</span><span class="p">(</span><span class="s1">&#39;input_file.fits&#39;</span><span class="p">,</span> <span class="n">hdu_number</span><span class="p">)</span>
@@ -190,8 +179,8 @@ stored in an object that acts like a standard Python dictionary.</p>
 <span class="n">OBJECT</span>  <span class="o">=</span> <span class="s1">&#39;KITTEN  &#39;</span>
 </pre></div>
 </div>
-<p>Using <code class="docutils literal notranslate"><span class="pre">fits.open</span></code> allowed us to look more generally at our data.
-<code class="docutils literal notranslate"><span class="pre">fits_inf[0].header</span></code> gave us the same output as <code class="docutils literal notranslate"><span class="pre">fits.getheader</span></code>.
+<p>Using <code class="docutils literal notranslate"><span class="pre">fits.open</span></code> allows us to look more generally at our data.
+<code class="docutils literal notranslate"><span class="pre">fits_inf[0].header</span></code> gives us the same output as <code class="docutils literal notranslate"><span class="pre">fits.getheader</span></code>.
 What will you learn if you type <code class="docutils literal notranslate"><span class="pre">fits_inf[1].header</span></code>? Based on
 <code class="docutils literal notranslate"><span class="pre">fits_inf.info()</span></code> can you guess what will happen if you type
 <code class="docutils literal notranslate"><span class="pre">fits_inf[2].header</span></code>?</p>

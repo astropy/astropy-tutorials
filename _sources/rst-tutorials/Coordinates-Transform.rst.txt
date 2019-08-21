@@ -1,5 +1,5 @@
 .. meta::
-    :keywords: filterTutorials, filterCoordinates, filterUnits
+    :keywords: filterTutorials, filterCoordinates, filterUnits, filterObservationalAstronomy
 
 .. raw:: html
 
@@ -16,26 +16,26 @@
 
 .. _Coordinates-Transform:
 
-Transforming between coordinate systems
-=======================================
+Coords 2: Transforming between coordinate systems
+=================================================
 
 Authors
 -------
 
-Erik Tollerud, Kelle Cruz, Stephen Pardy
+Erik Tollerud, Kelle Cruz, Stephen Pardy, Stephanie T. Douglas
 
 Learning Goals
 --------------
 
--  Make coordinate objects
--  Transform to different coordinate systems
--  See how to track an object’s altitude from certain observing
-   locations
+-  Create ``astropy.coordinates.SkyCoord`` objects
+-  Transform to different coordinate systems on the sky
+-  Transform to altitude/azimuth coordinates from a specific observing
+   site
 
 Keywords
 --------
 
-coordinates, units
+coordinates, units, observational astronomy
 
 Summary
 -------
@@ -43,7 +43,8 @@ Summary
 In this tutorial we demonstrate how to define astronomical coordinates
 using the ``astropy.coordinates`` “frame” classes. We then show how to
 transform between the different built-in coordinate frames, such as from
-ICRS (RA, Dec) to Galactic (l, b).
+ICRS (RA, Dec) to Galactic (l, b). Finally, we show how to compute
+altitude and azimuth from a specific observing site.
 
 Imports
 ~~~~~~~
@@ -54,16 +55,10 @@ Imports
 
 .. code:: python
 
-    # Python standard-library
-    from urllib.parse import urlencode
-    from urllib.request import urlretrieve
-    
     # Third-party dependencies
     from astropy import units as u
     from astropy.coordinates import SkyCoord
-    from astropy.table import Table
     import numpy as np
-    from IPython.display import Image
 
 
 :inputnumrole:`In[2]:`
@@ -84,8 +79,9 @@ Section 0: Quickstart
 
    <div class="alert alert-info">
 
-**Note:** If you already worked through the first in this series you can
-feel free to skip to `Section 1 <#Section-1:>`__.
+**Note:** If you already worked through `Coords
+1 <http://learn.astropy.org/rst-tutorials/Coordinates-Intro.html?highlight=coordinates>`__
+you can feel free to skip to `Section 1 <#Section-1:>`__.
 
 .. raw:: html
 
@@ -652,7 +648,7 @@ the default is to ignore this effect (by setting the pressure to 0).
     <AltAz Frame (obstime=2010-12-21 01:00:00.000, location=(-1994502.60430614, -5037538.54232911, 3358104.99690298) m, pressure=0.0 hPa, temperature=0.0 deg_C, relative_humidity=0.0, obswl=1.0 micron)>
 
 
-Now we can just transform our ICRS ``SkyCoord`` to ``AltAz`` to get the
+Now we can transform our ICRS ``SkyCoord`` to ``AltAz`` to get the
 location in the sky over Kitt Peak at the requested time.
 
 
@@ -782,8 +778,8 @@ We can also look at the object altitude at the present time and date:
 
 .. parsed-literal::
 
-    <SkyCoord (AltAz: obstime=2019-08-21 20:28:20.775280, location=(-1994502.60430614, -5037538.54232911, 3358104.99690298) m, pressure=0.0 hPa, temperature=0.0 deg_C, relative_humidity=0.0, obswl=1.0 micron): (az, alt) in deg
-        (319.85030742, -49.58419071)>
+    <SkyCoord (AltAz: obstime=2019-08-21 22:03:14.450842, location=(-1994502.60430614, -5037538.54232911, 3358104.99690298) m, pressure=0.0 hPa, temperature=0.0 deg_C, relative_humidity=0.0, obswl=1.0 micron): (az, alt) in deg
+        (358.29863378, -57.02917156)>
 
 
 Exercises
@@ -838,9 +834,6 @@ You might also be interested in `the astroplan affiliated
 package <http://astroplan.readthedocs.org/>`__, which uses the
 ``astropy.coordinates`` to do more advanced versions of the tasks in the
 last section of this tutorial.
-
-
-:inputnumrole:`In[None]:`
 
 
 

@@ -1,5 +1,5 @@
 .. meta::
-    :keywords: filterTutorials, filterModeling, filterUserDefinedModel, filterCustomModels, filterCompoundModels
+    :keywords: filterTutorials, filterModeling, filterFits, filterAstrostatistics, filterMatplotlib, filterModelFitting, filterErrorBars, filterScatterPlots
 
 .. raw:: html
 
@@ -16,20 +16,20 @@
 
 .. _User-Defined-Model:
 
-Create a User Defined Model using astropy.modeling
-==================================================
+Modeling 2: Create a User Defined Model using astropy.modeling
+==============================================================
 
 Authors
 -------
 
-Rocio Kiman, Lia Corrales and Zé Vinícius.
+Rocio Kiman, Lia Corrales, Zé Vinícius, Stephanie T. Douglas
 
 Learning Goals
 --------------
 
--  Know and understand tools to make user defined models with
-   ``astropy`` and in which cases it could be useful
--  We will define models usign two different tools:
+-  Define a new model with ``astropy``
+-  Identify cases were a user-defined model could be useful
+-  Define models in two different ways:
 
    -  Compound models
    -  Custom models
@@ -41,13 +41,26 @@ tutorial <http://www.astropy.org/astropy-tutorials/rst-tutorials/Models-Quick-Fi
 Keywords
 --------
 
-Modeling, User Defined Model, Custom Models, Compound Models
+modeling, FITS, astrostatistics, matplotlib, model fitting, error bars,
+scatter plots
 
 Summary
 -------
 
 In this tutorial, we will learn how to define a new model in two ways:
 with a compound model and with a custom model.
+
+.. raw:: html
+
+   <div class="alert alert-info">
+
+**Note:** This tutorial assumes you have already gone through `Modeling
+1 <http://www.astropy.org/astropy-tutorials/rst-tutorials/Models-Quick-Fit.html>`__,
+which provides an introduction to ``astropy.modeling``
+
+.. raw:: html
+
+   </div>
 
 Imports
 ~~~~~~~
@@ -77,8 +90,8 @@ Imports
       warnings.warn("Experimental: SDSS has not yet been refactored to have its API "
 
 
-Fit an Emission Line from a star spectrum with ``astropy.modeling``
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Fit an emission line in a stellar spectrum
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 M dwarfs are low mass stars (less than half of the mass of the sun).
 Currently we do not understand completely the physics inside low mass
@@ -159,10 +172,10 @@ following:
 
 
 
-To plot the spectrum we need the flux of light as a function of the
-wavelength (usually called lambda or :math:`\lambda`). Note that the
-wavelength is in log scale: loglam, so we are going to calculate
-:math:`10^\lambda` to remove this scale.
+To plot the spectrum we need the flux as a function of wavelength
+(usually called lambda or :math:`\lambda`). Note that the wavelength is
+in log scale: loglam, so we calculate :math:`10^\lambda` to remove this
+scale.
 
 
 :inputnumrole:`In[4]:`
@@ -173,12 +186,12 @@ wavelength is in log scale: loglam, so we are going to calculate
     flux = spectrum[1].data['flux']
     lam = 10**(spectrum[1].data['loglam'])
 
-Each fits file is different according to what the person who made it
-wanted to include and how the observation was made. The information
-about the file usually is in ``fitsfile[0].header``. We would like to
-have the units from the flux and wavelength. For SDSS spectrum we found
-where the units are in this `SDSS
-tutorial <https://www.sdss.org/dr12/tutorials/quicklook/#python>`__:
+To find the units for flux and wavelength, we look in
+``fitsfile[0].header``.
+
+FITS standard requires that the header keyword ‘bunit’ or ‘BUNIT’
+contains the physical units of the array values. That’s where we’ll find
+the flux units.
 
 
 :inputnumrole:`In[5]:`
@@ -198,6 +211,11 @@ tutorial <https://www.sdss.org/dr12/tutorials/quicklook/#python>`__:
 
     1E-17 erg/cm^2/s/Ang
 
+
+Different sources will definite wavelength information differently, so
+we need to check the documentation. For example, this `SDSS
+tutorial <https://www.sdss.org/dr12/tutorials/quicklook/#python>`__
+tells us what header keyword to look at.
 
 
 :inputnumrole:`In[6]:`
@@ -259,16 +277,16 @@ Now we are ready to plot the spectrum with all the information.
 
 
 
-.. image:: nboutput/User-Defined-Model_18_0.png
+.. image:: nboutput/User-Defined-Model_20_0.png
 
 
-
-Fit an Emission Line with a Gaussian Model
-------------------------------------------
 
 We just plotted our spectrum! Check different ranges of wavelength to
 see how the full spectrum looks like in comparison to the one we saw
 before.
+
+Fit an Emission Line with a Gaussian Model
+------------------------------------------
 
 The blue dashed line marks the :math:`H\alpha` emission line. We can
 tell this is an active star because it has a strong emission line.
@@ -278,11 +296,6 @@ Now, we would like to measure the height of this line. Let’s use
 are going to initialize a gaussian model at the position of the
 :math:`H\alpha` line. The idea is that the gaussian amplitude will tell
 us the height of the line.
-
-We are going to go quickly over this part of the tutorial because it
-involves fitting with ``astropy.modeling`` and this was explained in the
-`Models-Quick-Fit
-tutorial <http://www.astropy.org/astropy-tutorials/rst-tutorials/Models-Quick-Fit.html>`__.
 
 
 :inputnumrole:`In[9]:`
@@ -315,7 +328,7 @@ Let’s plot the results.
 
 
 
-.. image:: nboutput/User-Defined-Model_23_0.png
+.. image:: nboutput/User-Defined-Model_26_0.png
 
 
 
@@ -364,9 +377,9 @@ Compound models
 One model is not enough to make this fit work. We need to combine a
 couple of models to make a `compound
 model <http://docs.astropy.org/en/stable/modeling/#compound-models>`__
-in ``astropy``. The idea is that we can sum, rest, divide or multiply
-models that already exist in
-```astropy.modeling`` <http://docs.astropy.org/en/stable/modeling/#models-and-fitting-astropy-modeling>`__
+in ``astropy``. The idea is that we can add, divide or multiply models
+that already exist in
+`astropy.modeling <http://docs.astropy.org/en/stable/modeling/#models-and-fitting-astropy-modeling>`__
 and fit the compound model to our data.
 
 For our problem we are going to combine the gaussian with a polynomial
@@ -384,8 +397,8 @@ Now let’s make our compound model!
 
     compound_model = models.Gaussian1D(1, 6563, 10) + models.Polynomial1D(degree=1)
 
-After this point, the algorithm to fit the data works exactly the same
-as before except we use a compound model instead of the gaussian model.
+After this point, we fit the data in exactly the same way as before,
+except we use a compound model instead of the gaussian model.
 
 
 :inputnumrole:`In[13]:`
@@ -415,7 +428,7 @@ as before except we use a compound model instead of the gaussian model.
 
 
 
-.. image:: nboutput/User-Defined-Model_32_0.png
+.. image:: nboutput/User-Defined-Model_35_0.png
 
 
 
@@ -504,8 +517,8 @@ the gaussian model allowed the base of the Gaussian fit to have a slope
 and a background level. Normal Gaussians go to zero at :math:`\pm \inf`;
 this one doesn’t.
 
-More tools to fit the data: fixed and bounded parameters of the model
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Fixed or bounded model parameters
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The mean value of the gaussian from our previous model indicates where
 the :math:`H\alpha` line is. In our fit result, we can tell that it is a
@@ -554,7 +567,7 @@ same way we did before.
 
 
 
-.. image:: nboutput/User-Defined-Model_44_0.png
+.. image:: nboutput/User-Defined-Model_47_0.png
 
 
 
@@ -628,7 +641,7 @@ for the mean.
 
 
 
-.. image:: nboutput/User-Defined-Model_48_0.png
+.. image:: nboutput/User-Defined-Model_51_0.png
 
 
 
@@ -680,7 +693,7 @@ provide? To solve that problem, Astropy has another tool called `custom
 model <http://docs.astropy.org/en/stable/modeling/new.html>`__. Using
 this tool, we can create any model we want.
 
-| We will describe two way to create a custom model: \*
+| We will describe two ways to create a custom model: \*
   `basic <http://docs.astropy.org/en/stable/modeling/new.html#basic-custom-models>`__
 | \*
   `full <http://docs.astropy.org/en/stable/modeling/new.html#a-step-by-step-definition-of-a-1-d-gaussian-model>`__
@@ -725,7 +738,7 @@ dataset that follows an exponential:
 
 
 
-.. image:: nboutput/User-Defined-Model_57_0.png
+.. image:: nboutput/User-Defined-Model_60_0.png
 
 
 
@@ -773,7 +786,7 @@ with ``astropy.modeling``.
 
 
 
-.. image:: nboutput/User-Defined-Model_62_0.png
+.. image:: nboutput/User-Defined-Model_65_0.png
 
 
 
@@ -796,9 +809,9 @@ with ``astropy.modeling``.
     Outputs: ('x',)
     Model set size: 1
     Parameters:
-                a                 b                   c         
-        ----------------- ------------------ -------------------
-        2.017141975725537 -2.077757598143473 0.43349051052044163
+                a                   b                   c         
+        ------------------ ------------------- -------------------
+        2.3855413997937474 -2.1246422198618586 0.26049209009458285
 
 
 The fit looks good in the plot. Let’s check the parameters and the
@@ -836,7 +849,7 @@ goodness of the fit.
 
 .. parsed-literal::
 
-    1.0633894640596793
+    0.8991169465184395
 
 
 
@@ -897,7 +910,7 @@ create a simulated dataset.
 
 
 
-.. image:: nboutput/User-Defined-Model_72_0.png
+.. image:: nboutput/User-Defined-Model_75_0.png
 
 
 
@@ -962,7 +975,7 @@ of the parameters.
 
 
 
-.. image:: nboutput/User-Defined-Model_77_0.png
+.. image:: nboutput/User-Defined-Model_80_0.png
 
 
 
@@ -987,7 +1000,7 @@ of the parameters.
     Parameters:
                 a                 b                 c                 d         
         ----------------- ----------------- ----------------- ------------------
-        3.367575484330802 2.011666522174178 3.755090588659896 0.9155314075065906
+        3.388691116668007 2.020743065306693 3.747977596349872 0.9942938435161137
 
 
 
@@ -1006,7 +1019,7 @@ of the parameters.
 
 .. parsed-literal::
 
-    5.506601097640629
+    5.472427908131628
 
 
 
@@ -1056,7 +1069,7 @@ the following data.
 
 
 
-.. image:: nboutput/User-Defined-Model_84_0.png
+.. image:: nboutput/User-Defined-Model_87_0.png
 
 
 
