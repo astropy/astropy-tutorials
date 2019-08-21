@@ -1,11 +1,6 @@
 .. meta::
     :keywords: filterTutorials, filterUnits, filterMatplotlib, filterRadioAstronomy, filterDataCubes
 
-
-
-
-
-
 .. raw:: html
 
     <a href="../_static/quantities/quantities.ipynb"><button id="download">Download tutorial notebook</button></a>
@@ -32,7 +27,7 @@ Ana Bonaca, Erik Tollerud, Jonathan Foster, Lia Corrales, Kris Stern
 Learning Goals
 --------------
 
--  Use ``Quantity`` objects to estimate a hypothetical galaxy's mass
+-  Use ``Quantity`` objects to estimate a hypothetical galaxy’s mass
 -  Take advantage of constants in the ``astropy.constants`` library
 -  Print formatted unit strings
 -  Plot ``Quantity`` objects with unit labels, using
@@ -57,7 +52,7 @@ units, matplotlib, radio astronomy, data cubes
 Summary
 -------
 
-In this tutorial we present some examples showing how Astropy's
+In this tutorial we present some examples showing how Astropy’s
 ``Quantity`` object can make astrophysics calculations easier. The
 examples include calculating the mass of a galaxy from its velocity
 dispersion and determining masses of molecular clouds from CO intensity
@@ -91,15 +86,15 @@ notebooks.
     import matplotlib.pyplot as plt
     %matplotlib inline
 
-It's conventional to load the Astropy ``units`` module as the variable
+It’s conventional to load the Astropy ``units`` module as the variable
 ``u``, demonstrated below. This will make working with ``Quantity``
 objects much easier.
 
 Astropy also has a ``constants`` module where typical physical constants
 are available. The constants are stored as objects of a subclass of
-``Quantity``, so they behave just like a ``Quantity``. Here, we'll only
-need the gravitational constant ``G``, Planck's constant ``h``, and
-Boltzmann's constant, ``k_B``.
+``Quantity``, so they behave just like a ``Quantity``. Here, we’ll only
+need the gravitational constant ``G``, Planck’s constant ``h``, and
+Boltzmann’s constant, ``k_B``.
 
 
 :inputnumrole:`In[2]:`
@@ -126,15 +121,15 @@ We will also show an example of plotting while taking advantage of the
 --------------
 
 In this first example, we will use ``Quantity`` objects to estimate a
-hypothetical galaxy's mass, given its half-light radius and radial
+hypothetical galaxy’s mass, given its half-light radius and radial
 velocities of stars in the galaxy.
 
-Let's assume that we measured the half-light radius of the galaxy to be
+Let’s assume that we measured the half-light radius of the galaxy to be
 29 pc projected on the sky at the distance of the galaxy. This radius is
-often called the "effective radius", so we'll store it as a ``Quantity``
+often called the “effective radius”, so we’ll store it as a ``Quantity``
 object with the name ``Reff``. The easiest way to create a ``Quantity``
 object is by multiplying the value with its unit. Units are accessed as
-u."unit", in this case u.pc.
+u.“unit”, in this case u.pc.
 
 
 :inputnumrole:`In[4]:`
@@ -145,7 +140,7 @@ u."unit", in this case u.pc.
     Reff = 29 * u.pc
 
 A completely equivalent (but more verbose) way of doing the same thing
-is to use the ``Quantity`` object's initializer, demonstrated below. In
+is to use the ``Quantity`` object’s initializer, demonstrated below. In
 general, the simpler form (above) is preferred, as it is closer to how
 such a quantity would actually be written in text. The initalizer form
 has more options, though, which you can learn about from the `astropy
@@ -228,7 +223,7 @@ length using the ``to()`` method. Here, we convert it to meters.
     8.95e+17 m
 
 
-Next, we'll first create a synthetic dataset of radial velocity
+Next, we’ll first create a synthetic dataset of radial velocity
 measurements, assuming a normal distribution with a mean velocity of 206
 km/s and a velocity dispersion of 4.3 km/s.
 
@@ -290,7 +285,7 @@ settings on your ``matplotlib`` session to better handle astropy
 
 .. parsed-literal::
 
-    <astropy.visualization.units.quantity_support.<locals>.MplQuantityConverter at 0x7ff55c6917f0>
+    <astropy.visualization.units.quantity_support.<locals>.MplQuantityConverter at 0x7f8adae1f210>
 
 
 
@@ -351,7 +346,7 @@ through these operations just as you would expect them to.
 
 Note how we needed to use ``numpy`` square root function, because the
 resulting velocity dispersion quantity is a ``numpy`` array. If we used
-the python standard ``math`` library's ``sqrt`` function instead, we get
+the python standard ``math`` library’s ``sqrt`` function instead, we get
 an error.
 
 
@@ -370,7 +365,7 @@ Now for the actual mass calculation. If a galaxy is pressure-supported
 (for example, an elliptical or dwarf spheroidal galaxy), its mass within
 the stellar extent can be estimated using a straightforward formula:
 :math:`M_{1/2}=4\sigma^2 R_{eff}/G`. There are caveats to the use of
-this formula for science -- see Wolf et al. 2010 for details. For
+this formula for science – see Wolf et al. 2010 for details. For
 demonstrating ``Quantity``, you can accept that this is often good
 enough. For the calculation, we can multiply the quantities together,
 and ``astropy`` will keep track of the units.
@@ -396,7 +391,7 @@ and ``astropy`` will keep track of the units.
 
 
 
-The result is in a composite unit, so it's not really obvious it's a
+The result is in a composite unit, so it’s not really obvious it’s a
 mass. However, it can be decomposed to cancel all of the length units
 (:math:`km^2 pc/m^3`) using the ``decompose()`` method.
 
@@ -420,7 +415,7 @@ mass. However, it can be decomposed to cancel all of the length units
 
 
 
-We can also easily express the mass in whatever form you like -- solar
+We can also easily express the mass in whatever form you like – solar
 masses are common in astronomy, or maybe you want the default SI and CGS
 units.
 
@@ -448,7 +443,7 @@ units.
 
 
 Or, if you want the log of the mass, you can just use ``np.log10`` as
-long as the logarithm's argument is dimensionless.
+long as the logarithm’s argument is dimensionless.
 
 
 :inputnumrole:`In[18]:`
@@ -470,7 +465,7 @@ long as the logarithm's argument is dimensionless.
 
 
 
-However, you can't take the log of something with units, as that is not
+However, you can’t take the log of something with units, as that is not
 mathematically sensible.
 
 
@@ -492,13 +487,13 @@ mathematically sensible.
 
     UnitConversionErrorTraceback (most recent call last)
 
-    ~/project/venv/lib/python3.6/site-packages/astropy/units/quantity_helper/helpers.py in get_converter(from_unit, to_unit)
+    ~/project/venv/lib/python3.7/site-packages/astropy/units/quantity_helper/helpers.py in get_converter(from_unit, to_unit)
          31     try:
     ---> 32         scale = from_unit._to(to_unit)
          33     except UnitsError:
 
 
-    ~/project/venv/lib/python3.6/site-packages/astropy/units/core.py in _to(self, other)
+    ~/project/venv/lib/python3.7/site-packages/astropy/units/core.py in _to(self, other)
         952         raise UnitConversionError(
     --> 953             "'{0!r}' is not a scaled version of '{1!r}'".format(self, other))
         954 
@@ -512,19 +507,19 @@ mathematically sensible.
 
     UnitConversionErrorTraceback (most recent call last)
 
-    ~/project/venv/lib/python3.6/site-packages/astropy/units/quantity_helper/helpers.py in helper_dimensionless_to_dimensionless(f, unit)
+    ~/project/venv/lib/python3.7/site-packages/astropy/units/quantity_helper/helpers.py in helper_dimensionless_to_dimensionless(f, unit)
         146     try:
     --> 147         return ([get_converter(unit, dimensionless_unscaled)],
         148                 dimensionless_unscaled)
 
 
-    ~/project/venv/lib/python3.6/site-packages/astropy/units/quantity_helper/helpers.py in get_converter(from_unit, to_unit)
+    ~/project/venv/lib/python3.7/site-packages/astropy/units/quantity_helper/helpers.py in get_converter(from_unit, to_unit)
          34         return from_unit._apply_equivalencies(
     ---> 35                 from_unit, to_unit, get_current_unit_registry().equivalencies)
          36     except AttributeError:
 
 
-    ~/project/venv/lib/python3.6/site-packages/astropy/units/core.py in _apply_equivalencies(self, unit, other, equivalencies)
+    ~/project/venv/lib/python3.7/site-packages/astropy/units/core.py in _apply_equivalencies(self, unit, other, equivalencies)
         889             "{0} and {1} are not convertible".format(
     --> 890                 unit_str, other_str))
         891 
@@ -542,7 +537,7 @@ mathematically sensible.
     ----> 1 np.log10(M)
     
 
-    ~/project/venv/lib/python3.6/site-packages/astropy/units/quantity.py in __array_ufunc__(self, function, method, *inputs, **kwargs)
+    ~/project/venv/lib/python3.7/site-packages/astropy/units/quantity.py in __array_ufunc__(self, function, method, *inputs, **kwargs)
         444         # consistent units between two inputs (e.g., in np.add) --
         445         # and the unit of the result (or tuple of units for nout > 1).
     --> 446         converters, unit = converters_and_unit(function, method, *inputs)
@@ -550,7 +545,7 @@ mathematically sensible.
         448         out = kwargs.get('out', None)
 
 
-    ~/project/venv/lib/python3.6/site-packages/astropy/units/quantity_helper/converters.py in converters_and_unit(function, method, *args)
+    ~/project/venv/lib/python3.7/site-packages/astropy/units/quantity_helper/converters.py in converters_and_unit(function, method, *args)
         164 
         165         # Determine possible conversion functions, and the result unit.
     --> 166         converters, result_unit = ufunc_helper(function, *units)
@@ -558,7 +553,7 @@ mathematically sensible.
         168         if any(converter is False for converter in converters):
 
 
-    ~/project/venv/lib/python3.6/site-packages/astropy/units/quantity_helper/helpers.py in helper_dimensionless_to_dimensionless(f, unit)
+    ~/project/venv/lib/python3.7/site-packages/astropy/units/quantity_helper/helpers.py in helper_dimensionless_to_dimensionless(f, unit)
         150         raise UnitTypeError("Can only apply '{0}' function to "
         151                             "dimensionless quantities"
     --> 152                             .format(f.__name__))
@@ -572,10 +567,10 @@ mathematically sensible.
 Exercises
 ---------
 
-Use ``Quantity`` and Kepler's law in the form given below to determine
+Use ``Quantity`` and Kepler’s law in the form given below to determine
 the (circular) orbital speed of the Earth around the sun in km/s. No
-need to look up constants or conversion factors to do this calculation
--- it's all in ``astropy.units`` and ``astropy.constants``.
+need to look up constants or conversion factors to do this calculation –
+it’s all in ``astropy.units`` and ``astropy.constants``.
 
 .. math:: v = \sqrt{\frac{G M_{\odot}}{r}}
 
@@ -584,8 +579,8 @@ need to look up constants or conversion factors to do this calculation
 
 
 
-There's a much easier way to figure out the velocity of the Earth using
-just two units or quantities. Do that and then compare to the Kepler's
+There’s a much easier way to figure out the velocity of the Earth using
+just two units or quantities. Do that and then compare to the Kepler’s
 law answer (the easiest way is probably to compute the percentage
 difference, if any).
 
@@ -595,7 +590,7 @@ difference, if any).
 
 
 (Completely optional, but a good way to convince yourself of the value
-of Quantity:) Do the above calculations by hand -- you can use a
+of Quantity:) Do the above calculations by hand – you can use a
 calculator (or python just for its arithmatic) but look up all the
 appropriate conversion factors and use paper-and-pencil approaches for
 keeping track of them all. Which one took longer?
@@ -616,12 +611,12 @@ molecular cloud using radio observations of isotopes of Carbon Monoxide
 Setting up the data cube
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-Let's assume that we've mapped the inner part of a molecular cloud in
+Let’s assume that we’ve mapped the inner part of a molecular cloud in
 the J=1-0 rotational transition of :math:`{\rm C}^{18}{\rm O}` and are
 interested in measuring its total mass. The measurement produced a data
 cube with RA and Dec as spatial coordiates and velocity as the third
 axis. Each voxel in this data cube represents the brightness temperature
-of the emission at that position and velocity. Furthermore, we'll assume
+of the emission at that position and velocity. Furthermore, we’ll assume
 that we have an independent measurement of distance to the cloud
 :math:`d=250` pc and that the excitation temperature is known and
 constant throughout the cloud: :math:`T_{ex}=25` K.
@@ -635,7 +630,7 @@ constant throughout the cloud: :math:`T_{ex}=25` K.
     d = 250 * u.pc
     Tex = 25 * u.K
 
-We'll generate a synthetic dataset, assuming the cloud follows a
+We’ll generate a synthetic dataset, assuming the cloud follows a
 Gaussian distribution in each of RA, Dec and velocity. We start by
 creating a 100x100x300 numpy array, such that the first coordinate is
 right ascension, the second is declination, and the third is velocity.
@@ -680,7 +675,7 @@ The units of the exponential are dimensionless, so we multiply the data
 cube by K to get brightness temperature units. Radio astronomers use a
 rather odd set of units [K km/s] as of integrated intensity (that is,
 summing all the emission from a line over velocity). As an aside for
-experts, we're setting up our artificial cube on the main-beam
+experts, we’re setting up our artificial cube on the main-beam
 temperature scale (T:math:`_{\rm MB}`) which is the closest we can
 normally get to the actual brightness temperature of our source.
 
@@ -693,7 +688,7 @@ normally get to the actual brightness temperature of our source.
     data = data_gauss * u.K
 
 We will also need to know the width of each velocity bin and the size of
-each pixel, so let's calculate that now.
+each pixel, so let’s calculate that now.
 
 
 :inputnumrole:`In[23]:`
@@ -723,8 +718,8 @@ each pixel, so let's calculate that now.
     dv = 0.1 km / s
 
 
-We're interested in the integrated intensity over all of the velocity
-channels, so let's create a 2D quantity array by summing our data cube
+We’re interested in the integrated intensity over all of the velocity
+channels, so let’s create a 2D quantity array by summing our data cube
 along the velocity axis (multiplying by the velocity width of a pixel).
 
 
@@ -748,8 +743,8 @@ along the velocity axis (multiplying by the velocity width of a pixel).
 
 
 
-We can plot the 2D quantity using matplotlib's imshow function, by
-passing the quantity's value. Similarly, we can set the correct extent
+We can plot the 2D quantity using matplotlib’s imshow function, by
+passing the quantity’s value. Similarly, we can set the correct extent
 using the values of :math:`x_i` and :math:`x_f`. Finally, we can set the
 colorbar label to have proper units.
 
@@ -800,13 +795,13 @@ where the constants :math:`C` and :math:`B` are given by:
 
 :math:`B=\frac{h\nu}{k_B T}`
 
-(Rohlfs & Wilson "Tools of Radio Astronomy").
+(Rohlfs & Wilson “Tools of Radio Astronomy”).
 
 Here we have given an expression for :math:`C` scaled to the values for
 :math:`{\rm C}^{13}{\rm O}` (:math:`\nu_{13}` and :math:`A_{13}`). In
 order to use this relation for :math:`{\rm C}^{18}{\rm O}`, we need to
 rescale the frequencies :math:`{\nu}` and Einstein coefficients
-:math:`A`. :math:`C` is in funny mixed units, but that's okay. We'll
+:math:`A`. :math:`C` is in funny mixed units, but that’s okay. We’ll
 define it as a ``Quantities`` object and not have to worry about it.
 
 First, we look up the wavelength for these emission lines and store them
@@ -851,7 +846,7 @@ convertible:
           2 nu18 = lambda18.to(u.Hz)
 
 
-    ~/project/venv/lib/python3.6/site-packages/astropy/units/quantity.py in to(self, unit, equivalencies)
+    ~/project/venv/lib/python3.7/site-packages/astropy/units/quantity.py in to(self, unit, equivalencies)
         675         # and don't want to slow down this method (esp. the scalar case).
         676         unit = Unit(unit)
     --> 677         return self._new_view(self._to_value(unit, equivalencies), unit)
@@ -859,7 +854,7 @@ convertible:
         679     def to_value(self, unit=None, equivalencies=[]):
 
 
-    ~/project/venv/lib/python3.6/site-packages/astropy/units/quantity.py in _to_value(self, unit, equivalencies)
+    ~/project/venv/lib/python3.7/site-packages/astropy/units/quantity.py in _to_value(self, unit, equivalencies)
         647             equivalencies = self._equivalencies
         648         return self.unit.to(unit, self.view(np.ndarray),
     --> 649                             equivalencies=equivalencies)
@@ -867,7 +862,7 @@ convertible:
         651     def to(self, unit, equivalencies=[]):
 
 
-    ~/project/venv/lib/python3.6/site-packages/astropy/units/core.py in to(self, other, value, equivalencies)
+    ~/project/venv/lib/python3.7/site-packages/astropy/units/core.py in to(self, other, value, equivalencies)
         987             return UNITY
         988         else:
     --> 989             return self._get_converter(other, equivalencies=equivalencies)(value)
@@ -875,7 +870,7 @@ convertible:
         991     def in_units(self, other, value=1.0, equivalencies=[]):
 
 
-    ~/project/venv/lib/python3.6/site-packages/astropy/units/core.py in _get_converter(self, other, equivalencies)
+    ~/project/venv/lib/python3.7/site-packages/astropy/units/core.py in _get_converter(self, other, equivalencies)
         918                             pass
         919 
     --> 920             raise exc
@@ -883,7 +878,7 @@ convertible:
         922     def _to(self, other):
 
 
-    ~/project/venv/lib/python3.6/site-packages/astropy/units/core.py in _get_converter(self, other, equivalencies)
+    ~/project/venv/lib/python3.7/site-packages/astropy/units/core.py in _get_converter(self, other, equivalencies)
         904         try:
         905             return self._apply_equivalencies(
     --> 906                 self, other, self._normalize_equivalencies(equivalencies))
@@ -891,7 +886,7 @@ convertible:
         908             # Last hope: maybe other knows how to do it?
 
 
-    ~/project/venv/lib/python3.6/site-packages/astropy/units/core.py in _apply_equivalencies(self, unit, other, equivalencies)
+    ~/project/venv/lib/python3.7/site-packages/astropy/units/core.py in _apply_equivalencies(self, unit, other, equivalencies)
         888         raise UnitConversionError(
         889             "{0} and {1} are not convertible".format(
     --> 890                 unit_str, other_str))
@@ -903,10 +898,10 @@ convertible:
 
 
 Fortunately, ``astropy`` comes to the rescue by providing a feature
-called "unit equivalencies." Equivalencies provide a way to convert
+called “unit equivalencies.” Equivalencies provide a way to convert
 between two physically different units that are not normally equivalent,
 but in a certain context have a one-to-one mapping. For more on
-equivalencies, see the `equivalencies section of astropy's
+equivalencies, see the `equivalencies section of astropy’s
 documentation <http://docs.astropy.org/en/stable/units/equivalencies.html>`__.
 
 In this case, calling the ``astropy.units.spectral()`` function provides
@@ -955,8 +950,8 @@ of :math:`C` is unchanged.
 
 
 Now we move on to calculate the constant :math:`B`. This is given by the
-ratio of :math:`\frac{h\nu}{k_B T}`, where :math:`h` is Planck's
-constant, :math:`k_B` is the Boltzmann's constant, :math:`\nu` is the
+ratio of :math:`\frac{h\nu}{k_B T}`, where :math:`h` is Planck’s
+constant, :math:`k_B` is the Boltzmann’s constant, :math:`\nu` is the
 emission frequency, and :math:`T` is the excitation temperature. The
 constants were imported from ``astropy.constants``, and the other two
 values are already calculated, so here we just take the ratio.
@@ -996,7 +991,7 @@ end when you want a final answer.
 At this point we have all the ingredients to calculate the number
 density of :math:`\rm CO` molecules in this cloud. We already integrated
 (summed) over the velocity channels above to show the integrated
-intensity map, but we'll do it again here for clarity. This gives us the
+intensity map, but we’ll do it again here for clarity. This gives us the
 column density of CO for each spatial pixel in our map. We can then
 print out the peak column column density.
 
@@ -1063,9 +1058,9 @@ column density with the (known/assumed) H\ :math:`_2`/CO ratio.
 
 
 
-That's a peak column density of roughly 50 magnitudes of visual
+That’s a peak column density of roughly 50 magnitudes of visual
 extinction (assuming the conversion between N\ :math:`_{\rm H_2}` and
-A\ :math:`_V` from Bohlin et al. 1978), which seems reasonable for a
+A\ :math:`_V` from Bohlin et al. 1978), which seems reasonable for a
 molecular cloud.
 
 We obtain the mass column density by multiplying the number column
@@ -1105,7 +1100,7 @@ width of a pixel, this area is then in units of :math:`{\rm deg}^2`.
 Now comes an important subtlety: in the small angle approximation,
 multiplying the pixel area with the square of distance yields the
 cross-sectional area of the cloud that the pixel covers, in *physical*
-units, rather than angular units. So it's tempting to just multiply the
+units, rather than angular units. So it’s tempting to just multiply the
 area and the square of the distance.
 
 
@@ -1174,7 +1169,7 @@ convert to a different area unit, it will fail:
     ----> 1 da.to(u.cm**2)
     
 
-    ~/project/venv/lib/python3.6/site-packages/astropy/units/quantity.py in to(self, unit, equivalencies)
+    ~/project/venv/lib/python3.7/site-packages/astropy/units/quantity.py in to(self, unit, equivalencies)
         675         # and don't want to slow down this method (esp. the scalar case).
         676         unit = Unit(unit)
     --> 677         return self._new_view(self._to_value(unit, equivalencies), unit)
@@ -1182,7 +1177,7 @@ convert to a different area unit, it will fail:
         679     def to_value(self, unit=None, equivalencies=[]):
 
 
-    ~/project/venv/lib/python3.6/site-packages/astropy/units/quantity.py in _to_value(self, unit, equivalencies)
+    ~/project/venv/lib/python3.7/site-packages/astropy/units/quantity.py in _to_value(self, unit, equivalencies)
         647             equivalencies = self._equivalencies
         648         return self.unit.to(unit, self.view(np.ndarray),
     --> 649                             equivalencies=equivalencies)
@@ -1190,7 +1185,7 @@ convert to a different area unit, it will fail:
         651     def to(self, unit, equivalencies=[]):
 
 
-    ~/project/venv/lib/python3.6/site-packages/astropy/units/core.py in to(self, other, value, equivalencies)
+    ~/project/venv/lib/python3.7/site-packages/astropy/units/core.py in to(self, other, value, equivalencies)
         987             return UNITY
         988         else:
     --> 989             return self._get_converter(other, equivalencies=equivalencies)(value)
@@ -1198,7 +1193,7 @@ convert to a different area unit, it will fail:
         991     def in_units(self, other, value=1.0, equivalencies=[]):
 
 
-    ~/project/venv/lib/python3.6/site-packages/astropy/units/core.py in _get_converter(self, other, equivalencies)
+    ~/project/venv/lib/python3.7/site-packages/astropy/units/core.py in _get_converter(self, other, equivalencies)
         918                             pass
         919 
     --> 920             raise exc
@@ -1206,7 +1201,7 @@ convert to a different area unit, it will fail:
         922     def _to(self, other):
 
 
-    ~/project/venv/lib/python3.6/site-packages/astropy/units/core.py in _get_converter(self, other, equivalencies)
+    ~/project/venv/lib/python3.7/site-packages/astropy/units/core.py in _get_converter(self, other, equivalencies)
         904         try:
         905             return self._apply_equivalencies(
     --> 906                 self, other, self._normalize_equivalencies(equivalencies))
@@ -1214,7 +1209,7 @@ convert to a different area unit, it will fail:
         908             # Last hope: maybe other knows how to do it?
 
 
-    ~/project/venv/lib/python3.6/site-packages/astropy/units/core.py in _apply_equivalencies(self, unit, other, equivalencies)
+    ~/project/venv/lib/python3.7/site-packages/astropy/units/core.py in _apply_equivalencies(self, unit, other, equivalencies)
         888         raise UnitConversionError(
         889             "{0} and {1} are not convertible".format(
     --> 890                 unit_str, other_str))
@@ -1298,9 +1293,9 @@ over all the pixels gives us the cloud mass.
 Exercises
 ---------
 
-The astro material was pretty heavy on that one, so let's focus on some
-associated statistics using ``Quantity``'s array capabililities. Compute
-the median and mean of the ``data`` with the ``np.mean`` and
+The astro material was pretty heavy on that one, so let’s focus on some
+associated statistics using ``Quantity``\ ’s array capabililities.
+Compute the median and mean of the ``data`` with the ``np.mean`` and
 ``np.median`` functions. Why are their values so different?
 
 
@@ -1308,7 +1303,7 @@ the median and mean of the ``data`` with the ``np.mean`` and
 
 
 
-Similarly, compute the standard deviation and variance (if you don't
+Similarly, compute the standard deviation and variance (if you don’t
 know the relevant functions, look it up in the numpy docs or just type
 np. and a code cell). Do they have the units you expect?
 
@@ -1330,7 +1325,7 @@ Below, we provide a simple example.
 
 Suppose you are working on an instrument, and the person funding it asks
 for a function to give an analytic estimate of the response function.
-You determine from some tests it's basically a Lorentzian, but with a
+You determine from some tests it’s basically a Lorentzian, but with a
 different scale along the two axes. Your first thought might be to do
 this:
 
@@ -1349,7 +1344,7 @@ this:
         return xfactor * yfactor
 
 You meant the inputs to be in arcsec, but alas, you send that to your
-collaborator and they don't look closely and think the inputs are
+collaborator and they don’t look closely and think the inputs are
 instead supposed to be in arcmin. So they do:
 
 
@@ -1373,7 +1368,7 @@ instead supposed to be in arcmin. So they do:
 
 
 And now they tell all their friends how terrible the instrument is,
-because it's supposed to have arcsecond resolution, but your function
+because it’s supposed to have arcsecond resolution, but your function
 clearly shows it can only resolve an arcmin at best. But you can solve
 this by requiring they pass in ``Quantity`` objects. The new function
 could simply be:
@@ -1426,7 +1421,7 @@ in a number they get an error:
           6 
 
 
-    ~/project/venv/lib/python3.6/site-packages/astropy/units/quantity.py in __array_ufunc__(self, function, method, *inputs, **kwargs)
+    ~/project/venv/lib/python3.7/site-packages/astropy/units/quantity.py in __array_ufunc__(self, function, method, *inputs, **kwargs)
         444         # consistent units between two inputs (e.g., in np.add) --
         445         # and the unit of the result (or tuple of units for nout > 1).
     --> 446         converters, unit = converters_and_unit(function, method, *inputs)
@@ -1434,7 +1429,7 @@ in a number they get an error:
         448         out = kwargs.get('out', None)
 
 
-    ~/project/venv/lib/python3.6/site-packages/astropy/units/quantity_helper/converters.py in converters_and_unit(function, method, *args)
+    ~/project/venv/lib/python3.7/site-packages/astropy/units/quantity_helper/converters.py in converters_and_unit(function, method, *args)
         187                             "argument is not a quantity (unless the "
         188                             "latter is all zero/infinity/nan)"
     --> 189                             .format(function.__name__))

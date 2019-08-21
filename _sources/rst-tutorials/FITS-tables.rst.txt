@@ -1,10 +1,5 @@
 .. meta::
-    :keywords: filterTutorials, filterTable, filterFileInputOutput, filterMatplotlib, filterFitsTable
-
-
-
-
-
+    :keywords: filterTutorials, filterTable, filterFileInputOutput(IO), filterMatplotlib, filterFitsTable
 
 .. raw:: html
 
@@ -27,24 +22,26 @@ Viewing and manipulating data from FITS tables
 Authors
 -------
 
-Lia Corrales
+Lia Corrales, Kris Stern
 
 Learning Goals
 --------------
 
--  TODO
+1. Learn how to open a FITS file and view table contents
+2. Learn how to make a 2-D histogram with some table data
+3. Learn how to close the FITS file after use
 
 Keywords
 --------
 
-table, file input/output, matplotlib, FITS table
+table, file input/output (i/o), matplotlib, FITS table
 
 Summary
 -------
 
 This tutorial demonstrates the use of ``astropy.utils.data`` to download
 a data file, then uses ``astropy.io.fits`` and ``astropy.table`` to open
-the file. Lastly, we'll use ``matplotlib`` to visualize the data.
+the file. Lastly, we’ll use ``matplotlib`` to visualize the data.
 
 
 :inputnumrole:`In[1]:`
@@ -75,7 +72,7 @@ this tutorial.
 FITS files often contain large amounts of multi-dimensional data and
 tables.
 
-In this particular example, we'll open a FITS file from a Chandra
+In this particular example, we’ll open a FITS file from a Chandra
 observation of the Galactic Center. The file contains a list of events
 with x and y coordinates, energy, and various other pieces of
 information.
@@ -92,7 +89,7 @@ information.
 Opening the FITS file and viewing table contents
 ------------------------------------------------
 
-Since the file is big, let's open it with ``memmap=True`` to prevent RAM
+Since the file is big, let’s open it with ``memmap=True`` to prevent RAM
 storage issues.
 
 
@@ -128,10 +125,10 @@ storage issues.
       6  GTI           6 BinTableHDU     28   1R x 2C   [1D, 1D]   
 
 
-In this case, we're interested in reading EVENTS, which contains
+In this case, we’re interested in reading EVENTS, which contains
 information about each X-ray photon that hit the detector.
 
-To find out what information the table contains, let's print the column
+To find out what information the table contains, let’s print the column
 names.
 
 
@@ -171,8 +168,8 @@ names.
     )
 
 
-Now we'll take this data and convert it into an `astropy
-table <http://docs.astropy.org/en/stable/table/>`__. While it's possible
+Now we’ll take this data and convert it into an `astropy
+table <http://docs.astropy.org/en/stable/table/>`__. While it’s possible
 to access FITS tables directly from the ``.data`` attribute, using
 `Table <http://docs.astropy.org/en/stable/api/astropy.table.Table.html#astropy.table.Table>`__
 tends to make a variety of common tasks more convenient.
@@ -205,7 +202,7 @@ cell with the table as the last line:
 .. raw:: html
 
     <i>Table length=483964</i>
-    <table id="table139709787957344" class="table-striped table-bordered table-condensed">
+    <table id="table140379072257744" class="table-striped table-bordered table-condensed">
     <thead><tr><th>time</th><th>ccd_id</th><th>node_id</th><th>expno</th><th>chipx</th><th>chipy</th><th>tdetx</th><th>tdety</th><th>detx</th><th>dety</th><th>x</th><th>y</th><th>pha</th><th>pha_ro</th><th>energy</th><th>pi</th><th>fltgrade</th><th>grade</th><th>status [32]</th></tr></thead>
     <thead><tr><th>float64</th><th>int16</th><th>int16</th><th>int32</th><th>int16</th><th>int16</th><th>int16</th><th>int16</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>int32</th><th>int32</th><th>float32</th><th>int32</th><th>int16</th><th>int16</th><th>bool</th></tr></thead>
     <tr><td>238623220.9093583</td><td>3</td><td>3</td><td>68</td><td>920</td><td>8</td><td>5124</td><td>3981</td><td>5095.641</td><td>4138.995</td><td>4168.0723</td><td>5087.772</td><td>3548</td><td>3534</td><td>13874.715</td><td>951</td><td>16</td><td>4</td><td>False .. False</td></tr>
@@ -233,9 +230,9 @@ cell with the table as the last line:
 
 
 
-We can extract data from the table by referencing the column name. Let's
+We can extract data from the table by referencing the column name. Let’s
 try making a histogram for the energy of each photon, which will give us
-a sense for the spectrum (folded with the detector's efficiency).
+a sense for the spectrum (folded with the detector’s efficiency).
 
 
 :inputnumrole:`In[9]:`
@@ -257,7 +254,7 @@ a sense for the spectrum (folded with the detector's efficiency).
 Making a 2-D histogram with some table data
 -------------------------------------------
 
-We'll make an image by binning the x and y coordinates of the events
+We’ll make an image by binning the x and y coordinates of the events
 into a 2-D histogram.
 
 This particular observation spans five CCD chips. First, we determine
@@ -366,10 +363,10 @@ Method 2: Use hist2d with a log-normal color scheme
 Close the FITS file
 -------------------
 
-When you're done using a FITS file, it's often a good idea to close it.
-That way you can be sure it won't continue using up excess memory or
+When you’re done using a FITS file, it’s often a good idea to close it.
+That way you can be sure it won’t continue using up excess memory or
 file handles on your computer. (This happens automatically when you
-close Python, but you never know how long that might be...)
+close Python, but you never know how long that might be…)
 
 
 :inputnumrole:`In[13]:`

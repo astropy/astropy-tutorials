@@ -1,11 +1,6 @@
 .. meta::
     :keywords: filterTutorials
 
-
-
-
-
-
 .. raw:: html
 
     <a href="../_static/gaia-galactic-orbits/gaia-galactic-orbits.ipynb"><button id="download">Download tutorial notebook</button></a>
@@ -46,13 +41,17 @@ Learning Goals
 Keywords
 ~~~~~~~~
 
-    **astropy packages:** coordinates, gala, astroquery
+   **astropy packages:** coordinates, gala, astroquery
 
-    **python packages:**
+..
 
-    **task:**
+   **python packages:**
 
-    **science:** galaxy dynamics
+   **task:**
+
+..
+
+   **science:** galaxy dynamics
 
 Companion Content
 ~~~~~~~~~~~~~~~~~
@@ -71,7 +70,7 @@ observed, heliocentric kinematic measurements to Galactocentric
 Cartesian coordinates and use the positions and velocities as initial
 conditions to compute the orbits of these stars in the galaxy using the
 `gala <http://gala.adrian.pw>`__ Python package. We will compare the
-orbits of high-mass main sequence (i.e. young) stars to the orbits of
+orbits of high-mass main sequence (i.e. young) stars to the orbits of
 lower-mass main sequence stars to show that young stars have smaller
 vertical amplitudes.
 
@@ -83,7 +82,7 @@ This tutorial depends on the Astropy affiliated packages ``gala`` and
 
 ::
 
-    pip install astro-gala astroquery
+   pip install astro-gala astroquery
 
 Imports
 -------
@@ -153,16 +152,16 @@ kinematics of different types of stars in the Milky Way.
 Using ``astroquery`` to retrieve Gaia data
 ------------------------------------------
 
-We'll start by querying the `Gaia science
+We’ll start by querying the `Gaia science
 archive <http://gea.esac.esa.int/archive/>`__ to download astrometric
 and kinematic data (parallax, proper motion, radial velocity) for a
-sample of stars near the Sun. We'll use data exclusively from `data
+sample of stars near the Sun. We’ll use data exclusively from `data
 release 2 (DR2) <https://www.cosmos.esa.int/web/gaia/data-release-2>`__
-from the *Gaia* mission. For the demonstration here, let's grab data for
+from the *Gaia* mission. For the demonstration here, let’s grab data for
 a random subset of 4096 stars within a distance of 100 pc from the Sun
 that have high signal-to-noise astrometric measurements.
 
-To perform the query and to retrieve the data, we'll use the *Gaia*
+To perform the query and to retrieve the data, we’ll use the *Gaia*
 module in the
 `astroquery <https://astroquery.readthedocs.io/en/latest/gaia/gaia.html>`__
 package, ``astroquery.gaia``. This module expects us to provide an SQL
@@ -171,16 +170,16 @@ query to select the data we want (technically it should be an
 which is similar to SQL but provides some additional functionality for
 astronomy; to learn more about ADQL syntax and options, `this
 guide <https://www.gaia.ac.uk/data/gaia-data-release-1/adql-cookbook>`__
-provides an introduction). We don't need all of the columns that are
-available in DR2, so we'll limit our query to request the sky position
+provides an introduction). We don’t need all of the columns that are
+available in DR2, so we’ll limit our query to request the sky position
 (``ra``, ``dec``), parallax, proper motion components (``pmra``,
 ``pmdec``), radial velocity, and magnitudes (``phot_*_mean_mag``). More
 information about the available columns is in the `Gaia DR2 data
 model <https://gea.esac.esa.int/archive/documentation/GDR2/Gaia_archive/chap_datamodel/sec_dm_main_tables/ssec_dm_gaia_source.html>`__.
 
-To select stars that have high signal-to-noise parallaxes, we'll use the
+To select stars that have high signal-to-noise parallaxes, we’ll use the
 filter ``parallax_over_error > 10`` to select stars that have small
-fractional uncertainties. We'll also use the filter
+fractional uncertainties. We’ll also use the filter
 ``radial_velocity IS NOT null`` to only select stars that have measured
 radial velocities.
 
@@ -204,7 +203,7 @@ create an anonymous job in the ``Gaia`` science archive to run our
 query. To retrieve the results of this query as an Astropy ``Table``
 object, we then use the ``job.get_results()`` method. Note that you may
 receive a number of warnings (output lines that begin with ``WARNING:``)
-from the ``astropy.io.votable`` package — these are expected, and it's
+from the ``astropy.io.votable`` package — these are expected, and it’s
 OK to ignore these warnings (the ``Gaia`` archive returns a slightly
 invalid VOTable).
 
@@ -232,7 +231,7 @@ invalid VOTable).
 
 The ``data`` object is now an Astropy ``Table`` called ``gaia_data``
 that contains ``Gaia`` data for 4096 random stars within 100 pc (or with
-a parallax > 10 mas) of the Sun, as we requested. Let's look at the
+a parallax > 10 mas) of the Sun, as we requested. Let’s look at the
 first four rows of the table:
 
 
@@ -252,7 +251,7 @@ first four rows of the table:
 .. raw:: html
 
     <i>QTable length=4</i>
-    <table id="table140715087529800" class="table-striped table-bordered table-condensed">
+    <table id="table140167204865616" class="table-striped table-bordered table-condensed">
     <thead><tr><th>ra</th><th>dec</th><th>parallax</th><th>pmra</th><th>pmdec</th><th>radial_velocity</th><th>phot_g_mean_mag</th><th>phot_bp_mean_mag</th><th>phot_rp_mean_mag</th></tr></thead>
     <thead><tr><th>deg</th><th>deg</th><th>mas</th><th>mas / yr</th><th>mas / yr</th><th>km / s</th><th>mag</th><th>mag</th><th>mag</th></tr></thead>
     <thead><tr><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float32</th><th>float32</th><th>float32</th></tr></thead>
@@ -270,9 +269,9 @@ the second row of the header.
 Using ``astropy.coordinates`` to represent and transform stellar positions and velocities
 -----------------------------------------------------------------------------------------
 
-Let's double check that the farthest star is still within 100 pc, as we
+Let’s double check that the farthest star is still within 100 pc, as we
 expect from the parallax selection we did in the query above. To do
-this, we'll create an Astropy ``Distance`` object using the parallax
+this, we’ll create an Astropy ``Distance`` object using the parallax
 (*Note: this inverts the parallax to compute the distance! This is only
 a good approximation when the parallax signal to noise is large, as we
 ensured in the query above with ``parallax_over_error > 10``*):
@@ -303,13 +302,13 @@ farthest is almost 100 pc, as we expected.
 
 We next want to convert the coordinate position and velocity data from
 heliocentric, spherical values to Galactocentric, Cartesian values.
-We'll do this using the `Astropy
+We’ll do this using the `Astropy
 coordinates <http://docs.astropy.org/en/latest/coordinates/index.html>`__
 transformation machinery. To make use of this functionality, we first
 have to create a ``SkyCoord`` object from the ``Gaia`` data we
 downloaded. The ``Gaia`` DR2 data are in the ICRS (equatorial) reference
 frame, which is also the default frame when creating new ``SkyCoord``
-objects, so we don't need to specify the frame below:
+objects, so we don’t need to specify the frame below:
 
 
 :inputnumrole:`In[7]:`
@@ -329,7 +328,7 @@ model <https://gea.esac.esa.int/archive/documentation/GDR2/Gaia_archive/chap_dat
 the Gaia column ``pmra`` contains the cos(dec) term. In Astropy
 coordinates, the name of this component is ``pm_ra_cosdec``.
 
-Let's again look at the first four coordinates in the ``SkyCoord``
+Let’s again look at the first four coordinates in the ``SkyCoord``
 object:
 
 
@@ -405,7 +404,7 @@ stars in a Galactocentric frame, centered on the center of the Milky
 Way. To do this transformation, Astropy provides the ``Galactocentric``
 frame class, which allows us to use our own conventions for, e.g., the
 distance from the sun to the Galactic center (``galcen_distance``) or
-the height of the Sun over the Galactic midplane (``z_sun``). Let's look
+the height of the Sun over the Galactic midplane (``z_sun``). Let’s look
 at the default values for the solar position and velocity:
 
 
@@ -429,10 +428,10 @@ at the default values for the solar position and velocity:
 
 
 
-We'll instead use a distance of 8.1 kpc — more consistent with the
+We’ll instead use a distance of 8.1 kpc — more consistent with the
 `recent results from the GRAVITY
 collaboration <https://arxiv.org/abs/1807.09409>`__ — and a solar height
-of 0 pc. We'll use the default solar velocity (see output above). We can
+of 0 pc. We’ll use the default solar velocity (see output above). We can
 transform our data to this frame using the ``transform_to()`` method by
 specifying the ``Galactocentric`` frame with our adopted values:
 
@@ -500,7 +499,7 @@ We can access the positions of the stars using the ``.x``, ``.y``, and
 
 
 Similarly, for the velocity components, we can use ``.v_x``, ``.v_y``,
-and ``.v_z``. For example, to create a classic "UV" plane velocity plot:
+and ``.v_z``. For example, to create a classic “UV” plane velocity plot:
 
 
 :inputnumrole:`In[14]:`
@@ -538,9 +537,9 @@ and ``.v_z``. For example, to create a classic "UV" plane velocity plot:
 
 Along with astrometric and radial velocity data, ``Gaia`` also provides
 photometric data for three photometric bandpasses: the broad-band ``G``,
-the blue ``BP``, and the red ``RP`` magnitudes. Let's make a Gaia
+the blue ``BP``, and the red ``RP`` magnitudes. Let’s make a Gaia
 color-magnitude diagram using the :math:`G_{\rm BP}-G_{\rm RP}` color
-and the absolute :math:`G`-band magnitude :math:`M_G`. We'll compute the
+and the absolute :math:`G`-band magnitude :math:`M_G`. We’ll compute the
 absolute magnitude using the distances we computed earlier — Astropy
 ``Distance`` objects have a convenient ``.distmod`` attribute that
 provides the distance modulus:
@@ -591,11 +590,11 @@ provides the distance modulus:
 In the above, there is a wide range of main sequence star masses which
 have a range of lifetimes. The most massive stars were likely born in
 the thin disk and their orbits therefore likely have smaller vertical
-amplitudes than the typical old main sequence star. To compare, we'll
+amplitudes than the typical old main sequence star. To compare, we’ll
 create two sub-selections of the Gaia CMD to select massive and low-mass
 main sequence stars from the CMD for comparison. You may see two
 ``RuntimeWarning``\ (s) from running the next cell — these are expected
-and it's safe to ignore them.
+and it’s safe to ignore them.
 
 
 :inputnumrole:`In[17]:`
@@ -617,13 +616,13 @@ and it's safe to ignore them.
 
 .. parsed-literal::
 
-    /home/circleci/project/venv/lib/python3.6/site-packages/astropy/units/quantity.py:466: RuntimeWarning: invalid value encountered in greater
+    /home/circleci/project/venv/lib/python3.7/site-packages/astropy/units/quantity.py:466: RuntimeWarning: invalid value encountered in greater
       result = super().__array_ufunc__(function, method, *arrays, **kwargs)
-    /home/circleci/project/venv/lib/python3.6/site-packages/astropy/units/quantity.py:466: RuntimeWarning: invalid value encountered in less
+    /home/circleci/project/venv/lib/python3.7/site-packages/astropy/units/quantity.py:466: RuntimeWarning: invalid value encountered in less
       result = super().__array_ufunc__(function, method, *arrays, **kwargs)
 
 
-Let's also define default colors to use when visualizing the high- and
+Let’s also define default colors to use when visualizing the high- and
 low-mass stars:
 
 
@@ -635,7 +634,7 @@ low-mass stars:
     hi_mass_color = 'tab:red'
     lo_mass_color = 'tab:purple'
 
-Let's now visualize these two CMD selections:
+Let’s now visualize these two CMD selections:
 
 
 :inputnumrole:`In[19]:`
@@ -677,11 +676,11 @@ Let's now visualize these two CMD selections:
 
 
 
-Thus far, we've used the color-magnitude diagram (using parallaxes and
+Thus far, we’ve used the color-magnitude diagram (using parallaxes and
 photometry from Gaia to compute absolute magnitudes) to select samples
 of high- and low-mass stars based on their colors.
 
-In what follows, we'll compute Galactic orbits for stars in the high-
+In what follows, we’ll compute Galactic orbits for stars in the high-
 and low-mass star selections above and compare.
 
 Using ``gala`` to numerically integrate Galactic stellar orbits
@@ -698,7 +697,7 @@ numerical integrators provided in ``gala`` to compute orbits. ``gala``
 comes with a pre-defined, multi-component, but `simple model for the
 Milky
 Way <http://gala.adrian.pw/en/latest/potential/define-milky-way-model.html>`__
-that can be used for orbit integrations. Let's create an instance of the
+that can be used for orbit integrations. Let’s create an instance of the
 ``MilkyWayPotential`` model and integrate orbits for the high- and
 low-mass main sequence stars selected above:
 
@@ -755,7 +754,7 @@ it slightly more massive (the choice ``8e10`` is arbitrary!):
 
 To integrate orbits, we have to combine the mass model with a reference
 frame into a ``Hamiltonian`` object. If no reference frame is passed in,
-it's assumed that we are in a static inertial frame moving with the
+it’s assumed that we are in a static inertial frame moving with the
 center of the mass model:
 
 
@@ -766,7 +765,7 @@ center of the mass model:
 
     H = gp.Hamiltonian(milky_way)
 
-Now that we have the mass model, we can integrate orbits. Let's now
+Now that we have the mass model, we can integrate orbits. Let’s now
 define initial conditions for subsets of the high- and low-mass star
 selections we did above. Initial conditions in ``gala`` are specified by
 creating ``PhaseSpacePosition`` objects. We can create these objects
@@ -803,7 +802,7 @@ low-mass stars in our selections. To integrate orbits, we call the
 above, and pass in initial conditions. We also have to specify the
 timestep for integration, and how long we want to integrate for. We can
 do this by either specifying the amount of time to integrate for, or by
-specifying the number of timesteps. Let's specify a timestep of 1 Myr
+specifying the number of timesteps. Let’s specify a timestep of 1 Myr
 and a time of 500 Myr (approximately two revolutions around the Galaxy
 for a Sun-like orbit):
 
@@ -828,9 +827,9 @@ for more details.
 
 With the orbit objects in hand, we can continue our comparison of the
 orbits of high-mass and low-mass main sequence stars in the solar
-neighborhood. Let's start by plotting a few orbits. The ``.plot()``
+neighborhood. Let’s start by plotting a few orbits. The ``.plot()``
 convenience function provides a quick way to visualize orbits in three
-Cartesian projections. For example, let's plot the first orbit in each
+Cartesian projections. For example, let’s plot the first orbit in each
 subsample on the same figure:
 
 
@@ -916,11 +915,11 @@ representation:
 
 Already in the above plot we can see that the high-mass star has an
 orbit with smaller eccentricity (smaller radial variations) and smaller
-vertical oscillations as compared to the low-mass star. Below, we'll
+vertical oscillations as compared to the low-mass star. Below, we’ll
 quantify this and look at the vertical excursions of all of the high-
 and low-mass stars, respectively.
 
-Let's now compare the vertical amplitudes of the orbits in each of our
+Let’s now compare the vertical amplitudes of the orbits in each of our
 sub-selections! We can compute the (approximate) maximum vertical height
 of each orbit using the convenience method ``.zmax()`` (you can see a
 list of all convenience methods on the ``Orbit`` object `in the Gala
@@ -936,7 +935,7 @@ here <http://gala.adrian.pw/en/latest/api/gala.dynamics.Orbit.html#gala.dynamics
     zmax_hi = orbits_hi.zmax(approximate=True)
     zmax_lo = orbits_lo.zmax(approximate=True)
 
-Let's make histograms of the maximum :math:`z` heights for these two
+Let’s make histograms of the maximum :math:`z` heights for these two
 samples:
 
 
@@ -976,10 +975,10 @@ samples:
 
 
 
-The distribution of :math:`z`-heights for the low-mass (i.e. typically
+The distribution of :math:`z`-heights for the low-mass (i.e. typically
 older) stars is more extended, as we predicted!
 
-In this tutorial, we've used ``astroquery`` to query the Gaia science
+In this tutorial, we’ve used ``astroquery`` to query the Gaia science
 archive to retrieve kinematic and photometric data for a small sample of
 stars with well-measured parallaxes from Gaia DR2. We used the colors
 and absolute magnitudes of these stars to select subsamples of high- and
@@ -991,7 +990,7 @@ Finally, we used the orbits to compute the maximum height that each star
 reaches above the Galactic midplane and showed that the younger
 (higher-mass) stars tend to have smaller excursions from the Galactic
 plane, consistent with the idea that stars are either born in a
-"thinner" disk and dynamically "heated," or that older stars formed with
+“thinner” disk and dynamically “heated,” or that older stars formed with
 a larger vertical scale-height.
 
 Exercises

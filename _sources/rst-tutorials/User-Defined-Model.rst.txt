@@ -1,11 +1,6 @@
 .. meta::
     :keywords: filterTutorials, filterModeling, filterUserDefinedModel, filterCustomModels, filterCompoundModels
 
-
-
-
-
-
 .. raw:: html
 
     <a href="../_static/User-Defined-Model/User-Defined-Model.ipynb"><button id="download">Download tutorial notebook</button></a>
@@ -78,7 +73,7 @@ Imports
 .. parsed-literal::
 
     WARNING: AstropyDeprecationWarning: astropy.extern.six will be removed in 4.0, use the six module directly if it is still needed [astropy.extern.six]
-    /home/circleci/project/venv/lib/python3.6/site-packages/astroquery/sdss/__init__.py:29: UserWarning: Experimental: SDSS has not yet been refactored to have its API match the rest of astroquery (but it's nearly there).
+    /home/circleci/project/venv/lib/python3.7/site-packages/astroquery/sdss/__init__.py:29: UserWarning: Experimental: SDSS has not yet been refactored to have its API match the rest of astroquery (but it's nearly there).
       warnings.warn("Experimental: SDSS has not yet been refactored to have its API "
 
 
@@ -93,7 +88,7 @@ One way to measure magnetic activity is the height of the
 `:math:`H\alpha` <https://en.wikipedia.org/wiki/H-alpha>`__ emission
 line. It is located at :math:`6563` Angstroms at the spectrum.
 
-Let's search for a spectrum of an M dwarf in the Sloan Digital Sky
+Let’s search for a spectrum of an M dwarf in the Sloan Digital Sky
 Survey (SDSS). First, we are going to look for the spectrum in the `SDSS
 database <https://dr12.sdss.org/basicSpectra>`__. SDSS has a particular
 way to identify the stars it observes: it uses three numbers: Plate,
@@ -125,12 +120,12 @@ way:
 
 .. parsed-literal::
 
-    /home/circleci/project/venv/lib/python3.6/site-packages/astroquery/sdss/core.py:856: VisibleDeprecationWarning: Reading unicode strings without specifying the encoding argument is deprecated. Set the encoding, use None for the system default.
+    /home/circleci/project/venv/lib/python3.7/site-packages/astroquery/sdss/core.py:856: VisibleDeprecationWarning: Reading unicode strings without specifying the encoding argument is deprecated. Set the encoding, use None for the system default.
       comments='#'))
 
 
-Now that we have the spectrum...
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Now that we have the spectrum…
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 One way to check what is inside the fits file ``spectrum`` is the
 following:
@@ -278,7 +273,7 @@ before.
 The blue dashed line marks the :math:`H\alpha` emission line. We can
 tell this is an active star because it has a strong emission line.
 
-Now, we would like to measure the height of this line. Let's use
+Now, we would like to measure the height of this line. Let’s use
 ``astropy.modeling`` to fit a gaussian to the :math:`H\alpha` line. We
 are going to initialize a gaussian model at the position of the
 :math:`H\alpha` line. The idea is that the gaussian amplitude will tell
@@ -299,7 +294,7 @@ tutorial <http://www.astropy.org/astropy-tutorials/rst-tutorials/Models-Quick-Fi
     fitter = fitting.LevMarLSQFitter()
     gaussian_fit = fitter(gausian_model, lam, flux)
 
-Let's plot the results.
+Let’s plot the results.
 
 
 :inputnumrole:`In[10]:`
@@ -324,7 +319,7 @@ Let's plot the results.
 
 
 
-We can see the fit is not doing a good job. Let's print the parameters
+We can see the fit is not doing a good job. Let’s print the parameters
 of this fit:
 
 
@@ -346,9 +341,9 @@ of this fit:
     Outputs: ('y',)
     Model set size: 1
     Parameters:
-            amplitude            mean             stddev      
-        ----------------- ----------------- ------------------
-        16.75070626907759 9456.749523005932 2368.3957026986304
+            amplitude             mean             stddev     
+        ------------------ ----------------- -----------------
+        16.750706286489784 9456.749529382625 2368.395705667002
 
 
 Exercise
@@ -379,7 +374,7 @@ of degree 1 to account for the background spectrum close to the
 :math:`H\alpha` line. Take a look at the plot we made before to convince
 yourself that this is the case.
 
-Now let's make our compound model!
+Now let’s make our compound model!
 
 
 :inputnumrole:`In[12]:`
@@ -424,7 +419,7 @@ as before except we use a compound model instead of the gaussian model.
 
 
 
-It works! Let's take a look to the fit we just made.
+It works! Let’s take a look to the fit we just made.
 
 
 :inputnumrole:`In[15]:`
@@ -450,12 +445,12 @@ It works! Let's take a look to the fit we just made.
     
         [1]: <Polynomial1D(1, c0=0., c1=0.)>
     Parameters:
-           amplitude_0          mean_0       ...         c1_1        
-        ----------------- ------------------ ... --------------------
-        7.020891699420025 6564.1363171649145 ... 0.003239952049620112
+           amplitude_0          mean_0      ...         c0_1                c1_1        
+        ----------------- ----------------- ... ------------------- --------------------
+        7.020891743992038 6564.136317149307 ... -12.793356186323782 0.003239952053201798
 
 
-Let's print all the parameters in a fancy way:
+Let’s print all the parameters in a fancy way:
 
 
 :inputnumrole:`In[16]:`
@@ -472,11 +467,11 @@ Let's print all the parameters in a fancy way:
 
 .. parsed-literal::
 
-    amplitude_0 7.020891699420025
-    mean_0 6564.1363171649145
-    stddev_0 1.9776147858047488
-    c0_1 -12.793356164944736
-    c1_1 0.003239952049620112
+    amplitude_0 7.020891743992038
+    mean_0 6564.136317149307
+    stddev_0 1.9776147549595713
+    c0_1 -12.793356186323782
+    c1_1 0.003239952053201798
 
 
 We can see that the result includes all the fit parameters from the
@@ -499,7 +494,7 @@ polynomial of degree 1. So now if we want to see just the amplitude:
 
 .. parsed-literal::
 
-    Parameter('amplitude_0', value=7.020891699420025)
+    Parameter('amplitude_0', value=7.020891743992038)
 
 
 
@@ -507,7 +502,7 @@ polynomial of degree 1. So now if we want to see just the amplitude:
 Gaussian and the compound model? The linear model that we added up to
 the gaussian model allowed the base of the Gaussian fit to have a slope
 and a background level. Normal Gaussians go to zero at :math:`\pm \inf`;
-this one doesn't.
+this one doesn’t.
 
 More tools to fit the data: fixed and bounded parameters of the model
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -516,8 +511,8 @@ The mean value of the gaussian from our previous model indicates where
 the :math:`H\alpha` line is. In our fit result, we can tell that it is a
 little off from :math:`6563` Angstroms. One way to fix this is to fix
 some of the parameters of the model. In ``astropy.modeling`` these are
-called **`fixed
-parameters <http://docs.astropy.org/en/stable/api/astropy.modeling.Parameter.html#astropy.modeling.Parameter.fixed>`__**.
+called `fixed
+parameters <http://docs.astropy.org/en/stable/api/astropy.modeling.Parameter.html#astropy.modeling.Parameter.fixed>`__.
 
 
 :inputnumrole:`In[18]:`
@@ -528,7 +523,7 @@ parameters <http://docs.astropy.org/en/stable/api/astropy.modeling.Parameter.htm
     compound_model_fixed = models.Gaussian1D(1, 6563, 10) + models.Polynomial1D(degree=1)
     compound_model_fixed.mean_0.fixed = True
 
-Now let's use this new model with a fixed parameter to fit the data the
+Now let’s use this new model with a fixed parameter to fit the data the
 same way we did before.
 
 
@@ -587,17 +582,17 @@ same way we did before.
     
         [1]: <Polynomial1D(1, c0=0., c1=0.)>
     Parameters:
-           amplitude_0     mean_0 ...         c0_1                c1_1        
-        ------------------ ------ ... ------------------- --------------------
-        1.5325722844012764 6563.0 ... -12.791029980456878 0.003237448622613733
+           amplitude_0     mean_0 ...        c0_1                c1_1        
+        ------------------ ------ ... ------------------ --------------------
+        1.5325747099672096 6563.0 ... -12.79103000338307 0.003237448628249798
 
 
 We can see in the plot that the height of the fit does not match the
 :math:`H\alpha` line height. What happend here is that we were too
 strict with the mean value, so we did not get a good fit. But the mean
-value is where we want it! Let's loosen this condition a little. Another
-thing we can do is to define a `**minimum and maximum
-value** <http://docs.astropy.org/en/stable/api/astropy.modeling.Parameter.html#astropy.modeling.Parameter.max>`__
+value is where we want it! Let’s loosen this condition a little. Another
+thing we can do is to define a `minimum and maximum
+value <http://docs.astropy.org/en/stable/api/astropy.modeling.Parameter.html#astropy.modeling.Parameter.max>`__
 for the mean.
 
 
@@ -661,9 +656,9 @@ for the mean.
     
         [1]: <Polynomial1D(1, c0=0., c1=0.)>
     Parameters:
-           amplitude_0    mean_0 ...         c0_1                c1_1       
-        ----------------- ------ ... ------------------- -------------------
-        6.657305353992826 6563.5 ... -12.793362521502136 0.00323995002187704
+           amplitude_0    mean_0 ...         c0_1                 c1_1        
+        ----------------- ------ ... ------------------- ---------------------
+        6.657305067136674 6563.5 ... -12.793362542827573 0.0032399500254038354
 
 
 Better! By loosening the condition we added to the mean value, we got a
@@ -680,7 +675,7 @@ minimum delta for which the fit is still good according to the plot?
 Custom model
 ============
 
-What should you do if you need a model that ``astropy.modeling`` doesn't
+What should you do if you need a model that ``astropy.modeling`` doesn’t
 provide? To solve that problem, Astropy has another tool called `custom
 model <http://docs.astropy.org/en/stable/modeling/new.html>`__. Using
 this tool, we can create any model we want.
@@ -691,14 +686,14 @@ this tool, we can create any model we want.
   `full <http://docs.astropy.org/en/stable/modeling/new.html#a-step-by-step-definition-of-a-1-d-gaussian-model>`__
 
 We use the basic custom model when we need a simple function to fit and
-the full custom model when we need a more complex function. Let's use an
+the full custom model when we need a more complex function. Let’s use an
 example to understand each one of the custom models.
 
 Basic custom model
 ------------------
 
-An **Exponential Model** is not provided by Astropy models. Let's see
-one example of basic custom model for this case. First, let's simulate a
+An **Exponential Model** is not provided by Astropy models. Let’s see
+one example of basic custom model for this case. First, let’s simulate a
 dataset that follows an exponential:
 
 
@@ -801,12 +796,12 @@ with ``astropy.modeling``.
     Outputs: ('x',)
     Model set size: 1
     Parameters:
-                a                   b                  c         
-        ------------------ ------------------- ------------------
-        1.1524772993020709 -1.9136002903996419 0.9462847262788687
+                a                 b                   c         
+        ----------------- ------------------ -------------------
+        2.017141975725537 -2.077757598143473 0.43349051052044163
 
 
-The fit looks good in the plot. Let's check the parameters and the
+The fit looks good in the plot. Let’s check the parameters and the
 Reduced Chi Square value, which will give us information about the
 goodness of the fit.
 
@@ -841,7 +836,7 @@ goodness of the fit.
 
 .. parsed-literal::
 
-    0.9164011699265907
+    1.0633894640596793
 
 
 
@@ -869,8 +864,8 @@ Full custom model
 What if we want to use a model from ``astropy.modeling``, but with a
 different set of parameters? One example is the `Sine
 Model <http://docs.astropy.org/en/stable/api/astropy.modeling.functional_models.Sine1D.html#astropy.modeling.functional_models.Sine1D>`__.
-It has a very particular definition of the frequency and phase. Let's
-define a new Sine function with a full custom model. Again, first let's
+It has a very particular definition of the frequency and phase. Let’s
+define a new Sine function with a full custom model. Again, first let’s
 create a simulated dataset.
 
 
@@ -990,9 +985,9 @@ of the parameters.
     Outputs: ('y',)
     Model set size: 1
     Parameters:
-                a                  b                  c                  d         
-        ------------------ ------------------ ------------------ ------------------
-        3.3647332644574615 2.0150702884820655 3.7479820961573678 1.0080016497376791
+                a                 b                 c                 d         
+        ----------------- ----------------- ----------------- ------------------
+        3.367575484330802 2.011666522174178 3.755090588659896 0.9155314075065906
 
 
 
@@ -1011,7 +1006,7 @@ of the parameters.
 
 .. parsed-literal::
 
-    6.014479076575094
+    5.506601097640629
 
 
 

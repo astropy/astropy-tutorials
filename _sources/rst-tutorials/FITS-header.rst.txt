@@ -1,11 +1,6 @@
 .. meta::
     :keywords: filterTutorials, filterFitsHeader, filterFileInputOutput
 
-
-
-
-
-
 .. raw:: html
 
     <a href="../_static/FITS-header/FITS-header.ipynb"><button id="download">Download tutorial notebook</button></a>
@@ -44,7 +39,7 @@ Summary
 -------
 
 This tutorial describes how to read in, edit a FITS header, and then
-write it back out to disk. For this example we're going to change the
+write it back out to disk. For this example we’re going to change the
 ``OBJECT`` keyword.
 
 This tutorial uses
@@ -54,7 +49,7 @@ which was formerly released separately as ``pyfits``. If you have used
 with the features and syntax of the package. We start by importing the
 subpackage into our local namespace, which allows us to access the
 functions and classes as ``fits.name_of_function()``. For example, to
-access the ``getdata()`` function, we *don't* have to do
+access the ``getdata()`` function, we *don’t* have to do
 ``astropy.io.fits.getdata()`` and can instead simply use
 ``fits.getdata()``. You may run across old documentation or tutorials
 that use the name ``pyfits``. Such examples will begin with
@@ -112,7 +107,7 @@ There is also a dedicated function for reading just the header:
 
 
 
-But ``getdata()`` can get both the data and the header, so it's a useful
+But ``getdata()`` can get both the data and the header, so it’s a useful
 command to remember. Since the primary HDU of a FITS file must contain
 image data, the data is now stored in a ``numpy`` array. The header is
 stored in an object that acts like a standard Python dictionary.
@@ -160,7 +155,7 @@ What will you learn if you type ``fits_inf[1].header``? Based on
 ``fits_inf.info()`` can you guess what will happen if you type
 ``fits_inf[2].header``?
 
-Now let's change the header to give it the correct object:
+Now let’s change the header to give it the correct object:
 
 
 :inputnumrole:`In[5]:`
@@ -181,14 +176,14 @@ function for this is the most useful command to remember:
 
     fits.writeto('output_file.fits', data, header, overwrite=True)
 
-That's it; you're done!
+That’s it; you’re done!
 
 Two common and more complicated cases are worth mentioning (but if your
 needs are much more complex, you should consult the full documentation
 http://docs.astropy.org/en/stable/io/fits/).
 
-The first complication is that the FITS file you're examining and
-editing might have multiple HDU's (extensions), in which case you can
+The first complication is that the FITS file you’re examining and
+editing might have multiple HDU’s (extensions), in which case you can
 specify the extension like this:
 
 
@@ -204,7 +199,7 @@ extension in the FITS file. Without specifying a number, ``getdata()``
 will get the 0th extension (equivalent to saying ``ext=0``).
 
 Another useful tip is if you want to overwrite an existing FITS file. By
-default, ``writeto()`` won't let you do this, so you need to explicitly
+default, ``writeto()`` won’t let you do this, so you need to explicitly
 give it permission using the ``clobber`` keyword argument:
 
 
@@ -216,7 +211,7 @@ give it permission using the ``clobber`` keyword argument:
     fits.writeto('output_file.fits', data, header, overwrite=True)
 
 A final example is if you want to make a small change to a FITS file,
-like updating a header keyword, but you don't want to read in and write
+like updating a header keyword, but you don’t want to read in and write
 out the whole file, which can take a while. Instead you can use the
 ``mode='update'`` read mode to do this:
 
@@ -234,9 +229,9 @@ Exercise
 
 Read in the file you just wrote and add three header keywords:
 
-1. 'RA' for the Right Ascension of M31
-2. 'DEC' for the Declination of M31
-3. 'RADECSRC' with text indicating where you found the RA/Dec (web URL,
+1. ‘RA’ for the Right Ascension of M31
+2. ‘DEC’ for the Declination of M31
+3. ‘RADECSRC’ with text indicating where you found the RA/Dec (web URL,
    textbook name, your photographic memory, etc.)
 
 Then write the updated header back out to a new file:

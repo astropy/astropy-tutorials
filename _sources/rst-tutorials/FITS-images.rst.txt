@@ -1,11 +1,6 @@
 .. meta::
     :keywords: filterTutorials, filterMatplotlib, filterFitsImage, filterTable
 
-
-
-
-
-
 .. raw:: html
 
     <a href="../_static/FITS-images/FITS-images.ipynb"><button id="download">Download tutorial notebook</button></a>
@@ -27,12 +22,15 @@ Viewing and manipulating FITS images
 Authors
 -------
 
-Lia Corrales
+Lia Corrales, Kris Stern
 
 Learning Goals
 --------------
 
--  TODO
+1. Learn how to open FITS files and load the image data
+2. Learn how to visualize the image data
+3. Learn about basic image math: image stacking
+4. Learn how to write image data to a FITS file
 
 Keywords
 --------
@@ -45,7 +43,7 @@ Summary
 This tutorial demonstrates the use of ``astropy.utils.data`` to download
 a data file, then uses ``astropy.io.fits`` to open the file, and lastly
 uses ``matplotlib`` to view the image with different color scales and
-stretches and to make histograms. In this tutorial we've also included a
+stretches and to make histograms. In this tutorial we’ve also included a
 demonstration of simple image stacking.
 
 
@@ -77,7 +75,7 @@ here.
 Opening FITS files and loading the image data
 ---------------------------------------------
 
-Let's open the FITS file to find out what it contains.
+Let’s open the FITS file to find out what it contains.
 
 
 :inputnumrole:`In[3]:`
@@ -101,7 +99,7 @@ Let's open the FITS file to find out what it contains.
 
 
 Generally, the image information is located in the PRIMARY block. The
-blocks are numbered and can be accessed by indexing hdu\_list.
+blocks are numbered and can be accessed by indexing hdu_list.
 
 
 :inputnumrole:`In[4]:`
@@ -134,7 +132,7 @@ array.
     (893, 891)
 
 
-Great! At this point, we can close the FITS file because we've stored
+Great! At this point, we can close the FITS file because we’ve stored
 everything we wanted to a variable.
 
 
@@ -148,7 +146,7 @@ everything we wanted to a variable.
 SHORTCUT
 ~~~~~~~~
 
-If you don't need to examine the FITS header, you can call
+If you don’t need to examine the FITS header, you can call
 ``fits.getdata`` to bypass the previous steps.
 
 
@@ -194,7 +192,7 @@ Viewing the image data and getting basic statistics
 
 .. parsed-literal::
 
-    <matplotlib.colorbar.Colorbar at 0x7fce964aa5f8>
+    <matplotlib.colorbar.Colorbar at 0x7f50b80de850>
 
 
 
@@ -203,7 +201,7 @@ Viewing the image data and getting basic statistics
 
 
 
-Let's get some basic statistics about our image:
+Let’s get some basic statistics about our image:
 
 
 :inputnumrole:`In[9]:`
@@ -231,10 +229,10 @@ Let's get some basic statistics about our image:
 Plotting a histogram
 ~~~~~~~~~~~~~~~~~~~~
 
-To make a histogram with ``matplotlib.pyplot.hist()``, we'll need to
+To make a histogram with ``matplotlib.pyplot.hist()``, we’ll need to
 cast the data from a 2-D array to something one dimensional.
 
-In this case, let's use the ``ndarray.flatten()`` to return a 1-D numpy
+In this case, let’s use the ``ndarray.flatten()`` to return a 1-D numpy
 array.
 
 
@@ -274,7 +272,7 @@ array.
 Displaying the image with a logarithmic scale
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-What if we want to use a logarithmic color scale? To do so, we'll need
+What if we want to use a logarithmic color scale? To do so, we’ll need
 to load the ``LogNorm`` object from ``matplotlib``.
 
 
@@ -318,11 +316,11 @@ Basic image math: image stacking
 --------------------------------
 
 You can also perform math with the image data like any other numpy
-array. In this particular example, we'll stack several images of M13
-taken with a ~10'' telescope.
+array. In this particular example, we’ll stack several images of M13
+taken with a ~10’’ telescope.
 
-Let's start by opening a series of FITS files and store the data in a
-list, which we've named ``image_concat``.
+Let’s start by opening a series of FITS files and store the data in a
+list, which we’ve named ``image_concat``.
 
 
 :inputnumrole:`In[14]:`
@@ -336,7 +334,7 @@ list, which we've named ``image_concat``.
                   for n in range(1, 5+1)]
     image_concat = [fits.getdata(image) for image in image_list]
 
-Now we'll stack the images by summing the concatenated list.
+Now we’ll stack the images by summing the concatenated list.
 
 
 :inputnumrole:`In[15]:`
@@ -353,8 +351,8 @@ Now we'll stack the images by summing the concatenated list.
     # The short way
     # final_image = np.sum(image_concat, axis=0)
 
-We're going to show the image, but need to decide on the best stretch.
-To do so let's plot a histogram of the data.
+We’re going to show the image, but need to decide on the best stretch.
+To do so let’s plot a histogram of the data.
 
 
 :inputnumrole:`In[16]:`
@@ -373,7 +371,7 @@ To do so let's plot a histogram of the data.
 
 
 
-We'll use the keywords ``vmin`` and ``vmax`` to set limits on the color
+We’ll use the keywords ``vmin`` and ``vmax`` to set limits on the color
 scaling for ``imshow``.
 
 
@@ -393,7 +391,7 @@ scaling for ``imshow``.
 
 .. parsed-literal::
 
-    <matplotlib.colorbar.Colorbar at 0x7fce8e4716a0>
+    <matplotlib.colorbar.Colorbar at 0x7f50b58b6090>
 
 
 
@@ -407,8 +405,8 @@ Writing image data to a FITS file
 
 We can easily do this with the ``writeto()`` method.
 
-Warning: you'll receive an error if the file you are trying to write
-already exists. That's why we've set ``overwrite=True``.
+Warning: you’ll receive an error if the file you are trying to write
+already exists. That’s why we’ve set ``overwrite=True``.
 
 
 :inputnumrole:`In[18]:`
@@ -444,10 +442,10 @@ size of the image is 15x15 arcminutes.)
 
 
 Now write out the image you just created, preserving the header the
-original image had, but add a keyword 'UNITS' with the value 'mag per sq
-arcsec'. (Hint: it may be helpful to read the
+original image had, but add a keyword ‘UNITS’ with the value ‘mag per sq
+arcsec’. (Hint: it may be helpful to read the
 `astropy.io.fits <http://docs.astropy.org/en/stable/io/fits/index.html>`__
-documentation if you're not sure how to include both the header and the
+documentation if you’re not sure how to include both the header and the
 data.)
 
 

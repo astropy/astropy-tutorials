@@ -1,11 +1,6 @@
 .. meta::
     :keywords: filterTutorials
 
-
-
-
-
-
 .. raw:: html
 
     <a href="../_static/color-excess/color-excess.ipynb"><button id="download">Download tutorial notebook</button></a>
@@ -61,8 +56,8 @@ literature, use one of those curves to deredden an observed spectrum,
 and practice invoking a background source flux in order to calculate
 magnitudes from an extinction model.
 
-The primary libraries we'll be using are
-`dust\_extinction <https://dust-extinction.readthedocs.io/en/latest/>`__
+The primary libraries we’ll be using are
+`dust_extinction <https://dust-extinction.readthedocs.io/en/latest/>`__
 and `synphot <https://synphot.readthedocs.io/en/latest/>`__, which are
 `Astropy affiliated packages <https://www.astropy.org/affiliated/>`__.
 
@@ -70,8 +65,8 @@ We recommend installing the two packages in this fashion:
 
 ::
 
-    conda install -c http://ssb.stsci.edu/astroconda synphot
-    pip install dust_extinction
+   conda install -c http://ssb.stsci.edu/astroconda synphot
+   pip install dust_extinction
 
 Notice that the structure of ``dust_extinction`` changed significantly
 from v0.6 to v0.7, so updating your installation may be required. If so,
@@ -79,7 +74,7 @@ you can upgrade the package with pip:
 
 ::
 
-    pip install --upgrade dust_extinction
+   pip install --upgrade dust_extinction
 
 
 :inputnumrole:`In[1]:`
@@ -120,7 +115,7 @@ The wavelength dependence of the extinction is such that
 short-wavelength light is extinguished more than long-wavelength light,
 and we call this effect *reddening*.
 
-If you're new to extinction, here is a brief introduction to the types
+If you’re new to extinction, here is a brief introduction to the types
 of quantities involved. The fractional change to the flux of starlight
 is
 
@@ -211,14 +206,8 @@ documentation. <https://dust-extinction.readthedocs.io/en/latest/dust_extinction
 :outputnumrole:`Out[2]:`
 
 
-.. parsed-literal::
 
-    /home/circleci/project/venv/lib/python3.6/site-packages/dust_extinction/helpers.py:28: UserWarning: x has no units, assuming x units are inverse microns
-      warnings.warn("x has no units, assuming x units are inverse microns")
-
-
-
-.. image:: nboutput/color-excess_9_1.png
+.. image:: nboutput/color-excess_9_0.png
 
 
 
@@ -381,7 +370,7 @@ magnitude:
     Bflux = zeroflux_B * 10.**(-0.4*Bmag)
     Vflux = zeroflux_V * 10.**(-0.4*Vmag)
 
-Using astropy quantities allow us to take advantage of astropy's unit
+Using astropy quantities allow us to take advantage of astropy’s unit
 support in plotting. `Calling ``astropy.visualization.quantity_support``
 explicitly turns the feature
 on. <http://docs.astropy.org/en/stable/units/quantity.html#plotting-quantities>`__
@@ -460,14 +449,8 @@ function. To unextinguish (deredden), divide by the same
 :outputnumrole:`Out[12]:`
 
 
-.. parsed-literal::
 
-    /home/circleci/project/venv/lib/python3.6/site-packages/dust_extinction/helpers.py:28: UserWarning: x has no units, assuming x units are inverse microns
-      warnings.warn("x has no units, assuming x units are inverse microns")
-
-
-
-.. image:: nboutput/color-excess_31_1.png
+.. image:: nboutput/color-excess_31_0.png
 
 
 
@@ -480,7 +463,7 @@ dust.
 
 Those experienced with dereddening should notice that that
 ``dust_extinction`` returns :math:`A_\lambda/A_V`, while other routines
-like the IDL fm\_unred procedure often return :math:`A_\lambda/E_{B-V}`
+like the IDL fm_unred procedure often return :math:`A_\lambda/E_{B-V}`
 by default and need to be divided by :math:`R_V` in order to compare
 directly with ``dust_extinction``.
 
@@ -509,7 +492,7 @@ synthetic photometry.
 There is an important point to be made here. The expression above does
 not simplify any further. Strictly speaking, it is impossible to convert
 spectral extinction :math:`A_\lambda` into a magnitude system without
-knowing the wavelength dependence of the source's original flux across
+knowing the wavelength dependence of the source’s original flux across
 the filter in question. As a special case, if we assume that the source
 flux is constant in the band (i.e. :math:`F_\lambda = F`), then we can
 cancel these factors out from the integrals, and extinction in
@@ -523,7 +506,7 @@ photometric extinction. We use a blackbody curve for the flux before the
 dust, apply an extinction curve, and perform synthetic photometry to
 calculate extinction and reddening in a magnitude system.
 
-First, let's get the filter transmission curves:
+First, let’s get the filter transmission curves:
 
 
 :inputnumrole:`In[13]:`
@@ -555,7 +538,7 @@ If you are running this with your own python, see the `synphot
 documentation <https://synphot.readthedocs.io/en/latest/#installation-and-setup>`__
 on how to install your own copy of the necessary files.
 
-Next, let's make a background flux to which we will apply extinction.
+Next, let’s make a background flux to which we will apply extinction.
 Here we make a 10,000 K blackbody using the model mechanism from within
 ``synphot`` and normalize it to :math:`V` = 10 in the Vega-based
 magnitude system.

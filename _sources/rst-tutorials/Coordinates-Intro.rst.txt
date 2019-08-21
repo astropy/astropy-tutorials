@@ -1,11 +1,6 @@
 .. meta::
     :keywords: filterTutorials, filterCoordinates, filterOop
 
-
-
-
-
-
 .. raw:: html
 
     <a href="../_static/Coordinates-Intro/Coordinates-Intro.ipynb"><button id="download">Download tutorial notebook</button></a>
@@ -45,8 +40,8 @@ coordinates, OOP
 Summary
 -------
 
-In this tutorial, we're going to investigate the area of the sky around
-the picturesque group of galaxies named "Hickson Compact Group 7,"
+In this tutorial, we’re going to investigate the area of the sky around
+the picturesque group of galaxies named “Hickson Compact Group 7,”
 download an image, and do something with its coordinates.
 
 Imports
@@ -79,11 +74,11 @@ Describing on-sky locations with ``coordinates``
 ------------------------------------------------
 
 The ``SkyCoord`` class in the ``astropy.coordinates`` package is used to
-represent celestial coordinates. First, we'll make a SkyCoord object
-based on our object's name, "Hickson Compact Group 7" or "HCG 7" for
+represent celestial coordinates. First, we’ll make a SkyCoord object
+based on our object’s name, “Hickson Compact Group 7” or “HCG 7” for
 short. Most astronomical object names can be found by
 `SESAME <http://cdsweb.u-strasbg.fr/cgi-bin/Sesame>`__, a service which
-queries Simbad, NED, and VizieR and returns the object's type and its
+queries Simbad, NED, and VizieR and returns the object’s type and its
 J2000 position. This service can be used via the
 ``SkyCoord.from_name()`` `class
 method <https://julien.danjou.info/blog/2013/guide-python-static-class-abstract-methods>`__:
@@ -101,7 +96,7 @@ method <https://julien.danjou.info/blog/2013/guide-python-static-class-abstract-
 
    <div class="alert alert-info">
 
-Note that this requires an internet connection. If you don't have one,
+Note that this requires an internet connection. If you don’t have one,
 execute this line instead:
 
 .. raw:: html
@@ -137,7 +132,7 @@ execute this line instead:
 
 
 
-Show the available methods and attributes of the SkyCoord object we've
+Show the available methods and attributes of the SkyCoord object we’ve
 created called ``hcg7_center``
 
 
@@ -189,10 +184,7 @@ created called ``hcg7_center``
      '__str__',
      '__subclasshook__',
      '__weakref__',
-     '_abc_cache',
-     '_abc_negative_cache',
-     '_abc_negative_cache_version',
-     '_abc_registry',
+     '_abc_impl',
      '_apply',
      '_extra_frameattr_names',
      '_sky_coord_frame',
@@ -334,7 +326,7 @@ Show the RA and Dec.
 We see that, according to SESAME, HCG 7 is located at ra = 9.849 deg and
 dec = 0.878 deg.
 
-This object we've just created has various useful ways of accessing the
+This object we’ve just created has various useful ways of accessing the
 information contained within it. In particular, the ``ra`` and ``dec``
 attributes are specialized
 ```Quantity`` <http://docs.astropy.org/en/stable/units/index.html>`__
@@ -430,8 +422,8 @@ angle units:
 
 
 SkyCoord will also accept string-formatted coordinates either as
-separate strings for RA/Dec or a single string. You'll need to give
-units, though, if they aren't part of the string itself.
+separate strings for RA/Dec or a single string. You’ll need to give
+units, though, if they aren’t part of the string itself.
 
 
 :inputnumrole:`In[11]:`
@@ -479,11 +471,11 @@ Download an image
 
 Now that we have a ``SkyCoord`` object, we can try to use it to access
 data from the `Sloan Digitial Sky Survey <http://www.sdss.org/>`__
-(SDSS). Let's start by trying to get a picture using the SDSS image
+(SDSS). Let’s start by trying to get a picture using the SDSS image
 cutout service to make sure HCG 7 is in the SDSS footprint and has good
 image quality.
 
-This requires an internet connection, but if it fails, don't worry: the
+This requires an internet connection, but if it fails, don’t worry: the
 file is included in the repository so you can just let it use the local
 file\ ``'HCG7_SDSS_cutout.jpg'``, defined at the top of the cell.
 
@@ -514,7 +506,7 @@ file\ ``'HCG7_SDSS_cutout.jpg'``, defined at the top of the cell.
 
 .. parsed-literal::
 
-    ('HCG7_SDSS_cutout.jpg', <http.client.HTTPMessage at 0x7fe9353a8dd8>)
+    ('HCG7_SDSS_cutout.jpg', <http.client.HTTPMessage at 0x7fb157090c90>)
 
 
 
@@ -546,7 +538,7 @@ Excercise 1
 
 Create a ``SkyCoord`` of some other astronomical object you find
 interesting. Using only a single method/function call, get a string with
-the RA/Dec in the form 'HH:MM:SS.S DD:MM:SS.S'. Check your answer
+the RA/Dec in the form ‘HH:MM:SS.S DD:MM:SS.S’. Check your answer
 against an academic paper or a website like
 `SIMBAD <http://simbad.u-strasbg.fr/simbad/>`__ that will show you
 sexigesimal coordinates for the object.

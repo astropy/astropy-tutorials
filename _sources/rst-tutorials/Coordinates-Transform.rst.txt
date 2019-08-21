@@ -1,11 +1,6 @@
 .. meta::
     :keywords: filterTutorials, filterCoordinates, filterUnits
 
-
-
-
-
-
 .. raw:: html
 
     <a href="../_static/Coordinates-Transform/Coordinates-Transform.ipynb"><button id="download">Download tutorial notebook</button></a>
@@ -34,7 +29,7 @@ Learning Goals
 
 -  Make coordinate objects
 -  Transform to different coordinate systems
--  See how to track an object's altitude from certain observing
+-  See how to track an object’s altitude from certain observing
    locations
 
 Keywords
@@ -46,7 +41,7 @@ Summary
 -------
 
 In this tutorial we demonstrate how to define astronomical coordinates
-using the ``astropy.coordinates`` "frame" classes. We then show how to
+using the ``astropy.coordinates`` “frame” classes. We then show how to
 transform between the different built-in coordinate frames, such as from
 ICRS (RA, Dec) to Galactic (l, b).
 
@@ -96,14 +91,14 @@ feel free to skip to `Section 1 <#Section-1:>`__.
 
    </div>
 
-In Astropy, the most common object you'll work with for coordinates is
+In Astropy, the most common object you’ll work with for coordinates is
 ``SkyCoord``. A ``SkyCoord`` can most easily be created directly from
 angles as shown below.
 
-In this tutorial we'll be converting between frames. Let's start in the
+In this tutorial we’ll be converting between frames. Let’s start in the
 ICRS frame (which happens to be the default.)
 
-For much of this tutorial we'll work with the Hickson Compact Group 7.
+For much of this tutorial we’ll work with the Hickson Compact Group 7.
 We can create an object either by passing the degrees explicitly (using
 the astropy
 `units <http://docs.astropy.org/en/stable/units/index.html>`__ library)
@@ -183,7 +178,7 @@ To understand the code in this section, it may help to read over the
 `overview of the astropy coordinates
 scheme <http://astropy.readthedocs.org/en/latest/coordinates/index.html#overview-of-astropy-coordinates-concepts>`__.
 The key piece to understand is that all coordinates in Astropy are in
-particular "frames" and we can transform between a specific ``SkyCoord``
+particular “frames” and we can transform between a specific ``SkyCoord``
 object in one frame to another. For example, we can transform our
 previously-defined center of HCG 7 from ICRS to Galactic coordinates:
 
@@ -198,7 +193,7 @@ previously-defined center of HCG 7 from ICRS to Galactic coordinates:
 There are three different ways of transforming coordinates. Each has its
 pros and cons, but all should give you the same result. The first way to
 transform to other built-in frames is by specifying those attributes.
-For instance, let's see the location of HCG 7 in Galactic coordinates.
+For instance, let’s see the location of HCG 7 in Galactic coordinates.
 
 Transforming coordinates using attributes:
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -224,11 +219,11 @@ Transforming coordinates using attributes:
 
 
 
-Transforming coordinates using the transform\_to() method and other coordinate object
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Transforming coordinates using the transform_to() method and other coordinate object
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The above is actually a special "quick-access" form that internally does
-the same as what's in the cell below: it uses the
+The above is actually a special “quick-access” form that internally does
+the same as what’s in the cell below: it uses the
 ```transform_to()`` <http://docs.astropy.org/en/stable/api/astropy.coordinates.SkyCoord.html#astropy.coordinates.SkyCoord.transform_to>`__
 method to convert from one frame to another. We can pass in an empty
 coordinate class to specify what coordinate system to transform into.
@@ -255,8 +250,8 @@ coordinate class to specify what coordinate system to transform into.
 
 
 
-Transforming coordinates using the transform\_to() method and a string
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Transforming coordinates using the transform_to() method and a string
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Finally, we can transform using the ``transform_to()`` method and a
 string with the name of a built-in coordinate system.
@@ -308,7 +303,7 @@ These coordinates are available by default:
 -  BaseEclipticFrame
 -  BaseRADecFrame
 
-Let's focus on just a few of these. We can try FK5 coordinates next:
+Let’s focus on just a few of these. We can try FK5 coordinates next:
 
 
 :inputnumrole:`In[10]:`
@@ -390,7 +385,7 @@ fail.
     ----> 1 hcg7_center.galactic.ra  # should fail because Galactic coordinates are l/b not RA/Dec
     
 
-    ~/project/venv/lib/python3.6/site-packages/astropy/coordinates/sky_coordinate.py in __getattr__(self, attr)
+    ~/project/venv/lib/python3.7/site-packages/astropy/coordinates/sky_coordinate.py in __getattr__(self, attr)
         598         # Fail
         599         raise AttributeError("'{0}' object has no attribute '{1}'"
     --> 600                              .format(self.__class__.__name__, attr))
@@ -423,15 +418,15 @@ Instead, we now have access to the l and b attributes:
 Section 2:
 ----------
 
-Transform frames to get to altitude-azimuth ("AltAz")
+Transform frames to get to altitude-azimuth (“AltAz”)
 -----------------------------------------------------
 
 To actually do anything with observability we need to convert to a frame
 local to an on-earth observer. By far the most common choice is
-horizontal altitude-azimuth coordinates, or "AltAz". We first need to
+horizontal altitude-azimuth coordinates, or “AltAz”. We first need to
 specify both where and when we want to try to observe.
 
-We'll need to import a few more specific modules:
+We’ll need to import a few more specific modules:
 
 
 :inputnumrole:`In[14]:`
@@ -442,7 +437,7 @@ We'll need to import a few more specific modules:
     from astropy.coordinates import EarthLocation
     from astropy.time import Time
 
-Let's first see the sky position at Kitt Peak National Observatory in
+Let’s first see the sky position at Kitt Peak National Observatory in
 Arizona.
 
 
@@ -622,7 +617,7 @@ We can see the list of observing sites:
 
 
 
-Let's check the altitude at 1 AM UTC, which is 6 PM AZ mountain time:
+Let’s check the altitude at 1 AM UTC, which is 6 PM AZ mountain time:
 
 
 :inputnumrole:`In[18]:`
@@ -703,9 +698,9 @@ To look at just the altitude we can ``alt`` attribute:
 
 
 
-Alright, it's at 55 degrees at 6 PM, but that's pretty early to be
+Alright, it’s at 55 degrees at 6 PM, but that’s pretty early to be
 observing. We could try various times one at a time to see if the
-airmass is at a darker time, but we can do better: let's try to create
+airmass is at a darker time, but we can do better: let’s try to create
 an airmass plot.
 
 
@@ -736,9 +731,9 @@ an airmass plot.
 
 
 Great! Looks like the lowest airmass is in another hour or so (7 PM).
-But that might still be twilight... When should we start observing for
+But that might still be twilight… When should we start observing for
 proper dark skies? Fortunately, Astropy provides a ``get_sun`` function
-that can be used to check this. Let's use it to check if we're in
+that can be used to check this. Let’s use it to check if we’re in
 18-degree twilight or not.
 
 
@@ -765,7 +760,7 @@ that can be used to check this. Let's use it to check if we're in
 
 
 
-Looks like it's just below 18 degrees at 7 PM, so you should be good to
+Looks like it’s just below 18 degrees at 7 PM, so you should be good to
 go!
 
 We can also look at the object altitude at the present time and date:
@@ -787,8 +782,8 @@ We can also look at the object altitude at the present time and date:
 
 .. parsed-literal::
 
-    <SkyCoord (AltAz: obstime=2019-07-09 18:01:24.456422, location=(-1994502.60430614, -5037538.54232911, 3358104.99690298) m, pressure=0.0 hPa, temperature=0.0 deg_C, relative_humidity=0.0, obswl=1.0 micron): (az, alt) in deg
-        (263.37655026, 12.31932573)>
+    <SkyCoord (AltAz: obstime=2019-08-21 20:28:20.775280, location=(-1994502.60430614, -5037538.54232911, 3358104.99690298) m, pressure=0.0 hPa, temperature=0.0 deg_C, relative_humidity=0.0, obswl=1.0 micron): (az, alt) in deg
+        (319.85030742, -49.58419071)>
 
 
 Exercises

@@ -2,7 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta charset="utf-8" /><meta content="filterTutorials, filterTable, filterFileInputOutput, filterMatplotlib, filterFitsTable" name="keywords" />
+    <meta charset="utf-8" /><meta content="filterTutorials, filterTable, filterFileInputOutput(IO), filterMatplotlib, filterFitsTable" name="keywords" />
 <meta content="filterTutorials," name="keywords" />
 
     <title>Viewing and manipulating data from FITS tables &#8212; astropy-tutorials v3.0.dev</title>
@@ -110,17 +110,19 @@
 <span id="fits-tables"></span><h1>Viewing and manipulating data from FITS tables<a class="headerlink" href="#viewing-and-manipulating-data-from-fits-tables" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="authors">
 <h2>Authors<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a></h2>
-<p>Lia Corrales</p>
+<p>Lia Corrales, Kris Stern</p>
 </div>
 <div class="section" id="learning-goals">
 <h2>Learning Goals<a class="headerlink" href="#learning-goals" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li><p>TODO</p></li>
-</ul>
+<ol class="arabic simple">
+<li><p>Learn how to open a FITS file and view table contents</p></li>
+<li><p>Learn how to make a 2-D histogram with some table data</p></li>
+<li><p>Learn how to close the FITS file after use</p></li>
+</ol>
 </div>
 <div class="section" id="keywords">
 <h2>Keywords<a class="headerlink" href="#keywords" title="Permalink to this headline">¶</a></h2>
-<p>table, file input/output, matplotlib, FITS table</p>
+<p>table, file input/output (i/o), matplotlib, FITS table</p>
 </div>
 <div class="section" id="summary">
 <h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
@@ -229,7 +231,7 @@ cell with the table as the last line:</p>
 </div>
 <p><span class="outputnumrole">Out[8]:</span></p>
 <i>Table length=483964</i>
-<table id="table139709787957344" class="table-striped table-bordered table-condensed">
+<table id="table140379072257744" class="table-striped table-bordered table-condensed">
 <thead><tr><th>time</th><th>ccd_id</th><th>node_id</th><th>expno</th><th>chipx</th><th>chipy</th><th>tdetx</th><th>tdety</th><th>detx</th><th>dety</th><th>x</th><th>y</th><th>pha</th><th>pha_ro</th><th>energy</th><th>pi</th><th>fltgrade</th><th>grade</th><th>status [32]</th></tr></thead>
 <thead><tr><th>float64</th><th>int16</th><th>int16</th><th>int32</th><th>int16</th><th>int16</th><th>int16</th><th>int16</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>int32</th><th>int32</th><th>float32</th><th>int32</th><th>int16</th><th>int16</th><th>bool</th></tr></thead>
 <tr><td>238623220.9093583</td><td>3</td><td>3</td><td>68</td><td>920</td><td>8</td><td>5124</td><td>3981</td><td>5095.641</td><td>4138.995</td><td>4168.0723</td><td>5087.772</td><td>3548</td><td>3534</td><td>13874.715</td><td>951</td><td>16</td><td>4</td><td>False .. False</td></tr>
@@ -370,7 +372,7 @@ How does the image change with different energy ranges?</p>
       
     </p>
     <p>
-    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.0.
     &copy; Copyright Astropy.
     </p>
   </div>

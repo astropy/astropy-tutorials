@@ -1,11 +1,6 @@
 .. meta::
     :keywords: filterTutorials, filterOop, filterLatex, filterAstrostatistics, filterMatplotlib, filterModeling, filterUnits
 
-
-
-
-
-
 .. raw:: html
 
     <a href="../_static/units-and-integration/units-and-integration.ipynb"><button id="download">Download tutorial notebook</button></a>
@@ -36,8 +31,8 @@ Learning Goals
    python context
 -  trapezoidal approximation
 -  gaussian quadrature
--  use ``astropy``'s built-in black-body curves
--  understand how ``astropy``'s units interact with one another
+-  use ``astropy``\ ’s built-in black-body curves
+-  understand how ``astropy``\ ’s units interact with one another
 -  write a mini Python class
 -  how the ``__call__`` method works
 -  add :math:`\LaTeX` labels to ``matplotlib`` figures using the
@@ -63,8 +58,8 @@ the stellar initial mass function (IMF) to illustrate how to integrate
 numerically, using the trapezoidal approximation and Gaussian
 quadrature. We will also explore making a custom class, an instance of
 which is callable in the same way as a function. In addition, we will
-encounter ``astropy``'s built-in units, and get a first taste of how to
-convert between them. Finally, we will use :math:`\LaTeX` to make our
+encounter ``astropy``\ ’s built-in units, and get a first taste of how
+to convert between them. Finally, we will use :math:`\LaTeX` to make our
 figure axis labels easy to read.
 
 
@@ -88,13 +83,13 @@ The Planck function describes how a black-body radiates energy. We will
 explore how to find bolometric luminosity using the Planck function in
 both frequency and wavelength space.
 
-Let's say we have a black-body at 5000 Kelvin. We can find out the total
+Let’s say we have a black-body at 5000 Kelvin. We can find out the total
 intensity (bolometric) from this object, by integrating the Planck
 function. The simplest way to do this is by approximating the integral
-using the trapezoid rule. Let's do this first using the frequency
+using the trapezoid rule. Let’s do this first using the frequency
 definition of the Planck function.
 
-We'll define a photon frequency grid, and evaluate the Planck function
+We’ll define a photon frequency grid, and evaluate the Planck function
 at those frequencies. Those will be used to numerically integrate using
 the trapezoidal rule. By multiplying a ``numpy`` array by an ``astropy``
 unit, we get a ``Quantity``, which is effectively a combination of one
@@ -144,10 +139,10 @@ section of the astropy.units documentation pages.
 Using :math:`LaTeX` for axis labels
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Here, we've used :math:`LaTeX` markup to add nice-looking axis labels.
+Here, we’ve used :math:`LaTeX` markup to add nice-looking axis labels.
 To do that, we enclose :math:`LaTeX` markup text in dollar signs, within
 a string ``r'\$ ... \$'``. The ``r`` before the open-quote denotes that
-the string is "raw," and backslashes are treated literally. This is the
+the string is “raw,” and backslashes are treated literally. This is the
 suggested format for axis label text that includes markup.
 
 
@@ -244,13 +239,13 @@ The stellar initial mass function (IMF)
 
 The stellar initial mass function tells us how many of each mass of
 stars are formed. In particular, low-mass stars are much more abundant
-than high-mass stars are. Let's explore more of the functionality of
+than high-mass stars are. Let’s explore more of the functionality of
 ``astropy`` using this concept.
 
 People generally think of the IMF as a power-law probability density
 function. In other words, if you count the stars that have been born
 recently from a cloud of gas, their distribution of masses will follow
-the IMF. Let's write a little class to help us keep track of that:
+the IMF. Let’s write a little class to help us keep track of that:
 
 
 :inputnumrole:`In[6]:`
@@ -284,7 +279,7 @@ tutorial <https://www.codecademy.com/ja/courses/learn-python/lessons/introductio
 Integrating using Gaussian quadrature
 -------------------------------------
 
-In this section, we'll explore a method of numerical integration that
+In this section, we’ll explore a method of numerical integration that
 does not require having your sampling grid set-up already.
 ``scipy.integrate.quad`` with reference
 `here <https://docs.scipy.org/doc/scipy-0.19.1/reference/generated/scipy.integrate.quad.html>`__
@@ -292,10 +287,10 @@ takes a function and both a lower and upper bound, and our
 ``PowerLawPDF`` class takes care of this just fine.
 
 Now we can use our new class to normalize our IMF given the mass bounds.
-This amounts to normalizing a probability density function. We'll use
+This amounts to normalizing a probability density function. We’ll use
 Gaussian quadrature (``quad``) to find the integral. ``quad`` returns
 the numerical value of the integral and its uncertainty. We only care
-about the numerical value, so we'll pack the uncertainty into ``_`` (a
+about the numerical value, so we’ll pack the uncertainty into ``_`` (a
 placeholder variable). We immediately throw the integral into our IMF
 object and use it for normalizing!
 
@@ -331,7 +326,7 @@ in 2015.
 How many more M stars are there than O stars?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Let's compare the number of M dwarf stars (mass less than 60% solar)
+Let’s compare the number of M dwarf stars (mass less than 60% solar)
 created by the IMF, to the number of O stars (mass more than 15 times
 solar).
 
@@ -360,12 +355,12 @@ high-mass stars!
 Where is all the mass?
 ~~~~~~~~~~~~~~~~~~~~~~
 
-Now let's compute the relative total masses for all O stars and all M
+Now let’s compute the relative total masses for all O stars and all M
 stars born. To do this, weight the Salpeter IMF by mass (i.e., add an
 extra factor of mass to the integral). To do this, we define a new
 function that takes the old power-law IMF as one of its arguments. Since
 this argument is unchanged throughout the integral, it is passed into
-the tuple ``args`` within ``quad``. It's important that there is only
+the tuple ``args`` within ``quad``. It’s important that there is only
 *one* argument that changes over the integral, and that it is the
 *first* argument that the function being integrated accepts.
 
@@ -427,18 +422,18 @@ Extras
 
 -  Think about which stars are producing most of the light, and which
    stars have most of the mass. How might this result in difficulty
-   inferring stellar masses from the light they produce? If you're
+   inferring stellar masses from the light they produce? If you’re
    interested in learning more, see `this review
    article <https://ned.ipac.caltech.edu/level5/Sept14/Courteau/Courteau_contents.html>`__.
 
 Challenge problems
 ------------------
 
--  Right now, we aren't worried about the bounds of the power law, but
+-  Right now, we aren’t worried about the bounds of the power law, but
    the IMF should drop off to zero probability at masses below .01 solar
    masses and above 100 solar masses. Modify ``PowerLawPDF`` in a way
    that allows both ``float`` and ``numpy.ndarray`` inputs.
--  Modify the ``PowerLawPDF`` class to explicitly use ``astropy``'s
+-  Modify the ``PowerLawPDF`` class to explicitly use ``astropy``\ ’s
    ``units`` constructs.
 -  Derive a relationship between recent star-formation rate and
    :math:`H\alpha` luminosity. In other words, find a value of :math:`C`
@@ -454,7 +449,7 @@ Challenge problems
 -  Predict the effect on the value of :math:`C` of using a different
    form of the IMF, like Kroupa or Chabrier (both are lighter on the
    low-mass end).
--  If you're not tired of IMFs yet, try defining a new class that
+-  If you’re not tired of IMFs yet, try defining a new class that
    implements a broken-power-law (Kroupa) or log-parabola (Chabrier)
    IMF. Perform the same calculations as above.
 

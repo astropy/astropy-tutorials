@@ -1,11 +1,6 @@
 .. meta::
     :keywords: filterTutorials, filterAstrometry, filterWcs, filterFitsImage, filterRadioAstronomy, filterVisualization, filterMatplotlib
 
-
-
-
-
-
 .. raw:: html
 
     <a href="../_static/synthetic-images/synthetic-images.ipynb"><button id="download">Download tutorial notebook</button></a>
@@ -56,8 +51,8 @@ file <#1.-Load-and-examine-the-FITS-file>`__
 `3. Prepare a Point Spread Function
 (PSF) <#3.-Prepare-a-Point-Spread-Function-(PSF)>`__
 
-    `3.a How to do this without astropy
-    kernels <#3.a-How-to-do-this-without-astropy-kernels>`__
+   `3.a How to do this without astropy
+   kernels <#3.a-How-to-do-this-without-astropy-kernels>`__
 
 `4. Convolve image with PSF <#4.-Convolve-image-with-PSF>`__
 
@@ -92,7 +87,7 @@ plot <#6.-Calculate-polarization-angle-and-fraction-for-quiver-plot>`__
 ---------------------------------
 
 Here we begin with a 2-dimensional data that were stored in FITS format
-from some simulations. We have Stokes I, Q, and U maps. We we'll first
+from some simulations. We have Stokes I, Q, and U maps. We we’ll first
 load a FITS file and examine the header.
 
 
@@ -154,7 +149,7 @@ load a FITS file and examine the header.
 
 We can see this FITS file, which was created in yt, has x and y
 coordinate in physical units (cm). We want to convert it into sky
-coordinates. Before we proceed, let's find out the range of the data and
+coordinates. Before we proceed, let’s find out the range of the data and
 plot a histogram.
 
 
@@ -179,7 +174,7 @@ plot a histogram.
 
 .. parsed-literal::
 
-    /home/circleci/project/venv/lib/python3.6/site-packages/ipykernel_launcher.py:3: RuntimeWarning: divide by zero encountered in log10
+    /home/circleci/project/venv/lib/python3.7/site-packages/ipykernel_launcher.py:3: RuntimeWarning: divide by zero encountered in log10
       This is separate from the ipykernel package so we can avoid doing imports until
 
 
@@ -211,7 +206,7 @@ proper range (``vmin`` and ``vmax``).
 
 .. parsed-literal::
 
-    <matplotlib.image.AxesImage at 0x7f13f29dddd8>
+    <matplotlib.image.AxesImage at 0x7fdd831ac210>
 
 
 
@@ -224,9 +219,9 @@ proper range (``vmin`` and ``vmax``).
 --------------------------------
 
 From the header, we know that the x and y axes are in centimeter.
-However, in an observation we usually have RA and Dec. To convert
+However, in an observation we usually have RA and Dec. To convert
 physical units to sky coordinates, we will need to make some assumptions
-about where the object is located, i.e. the distance to the object and
+about where the object is located, i.e. the distance to the object and
 the central RA and Dec.
 
 
@@ -299,7 +294,7 @@ Now we can convert the WCS coordinate into header and update the hdu.
     wcs_header = w.to_header()
     hdu.header.update(wcs_header)
 
-Let's take a look at the header. ``CDELT1``, ``CDELT2``, ``CUNIT1``,
+Let’s take a look at the header. ``CDELT1``, ``CDELT2``, ``CUNIT1``,
 ``CUNIT2``, ``CRVAL1``, and ``CRVAL2`` are in sky coordinates now.
 
 
@@ -372,7 +367,7 @@ Now we have the sky coordinate for the image!
 3. Prepare a Point Spread Function (PSF)
 ----------------------------------------
 
-Simple PSFs are included in ``astropy.convolution.kernel``. We'll use
+Simple PSFs are included in ``astropy.convolution.kernel``. We’ll use
 ``astropy.convolution.Gaussian2DKernel`` here. First we need to set the
 telescope resolution. For a 2D Gaussian, we can calculate sigma in
 pixels by using our pixel scale keyword ``cdelt2`` from above.
@@ -411,7 +406,7 @@ pixels by using our pixel scale keyword ``cdelt2`` from above.
 
 .. parsed-literal::
 
-    <matplotlib.image.AxesImage at 0x7f13f0751d68>
+    <matplotlib.image.AxesImage at 0x7fdd80e92610>
 
 
 
@@ -423,7 +418,7 @@ pixels by using our pixel scale keyword ``cdelt2`` from above.
 3.a How to do this without astropy kernels
 ------------------------------------------
 
-Maybe your PSF is more complicated. Here's an alternative way to do
+Maybe your PSF is more complicated. Here’s an alternative way to do
 this, using a 2D Lorentzian
 
 
@@ -456,7 +451,7 @@ this, using a 2D Lorentzian
 
 .. parsed-literal::
 
-    <matplotlib.image.AxesImage at 0x7f13f06b2b00>
+    <matplotlib.image.AxesImage at 0x7fdd80e7c550>
 
 
 
@@ -471,8 +466,8 @@ this, using a 2D Lorentzian
 Here we use ``astropy.convolution.convolve_fft`` to convolve image. This
 routine uses fourier transform for faster calculation. Especially since
 our data is :math:`2^n` sized, which makes it particually fast. Using a
-fft, however, causes boundary effects. We'll need to specify how we want
-to handle the boundary. Here we choose to "wrap" the data, which means
+fft, however, causes boundary effects. We’ll need to specify how we want
+to handle the boundary. Here we choose to “wrap” the data, which means
 making the data periodic.
 
 
@@ -495,7 +490,7 @@ making the data periodic.
     ymin, ymax = delta_x_psf, delta_x_psf+psf.shape[0]
     convolved_image[xmin:xmax, ymin:ymax] = psf.array/psf.array.max()*10
 
-Now let's take a look at the convolved image.
+Now let’s take a look at the convolved image.
 
 
 :inputnumrole:`In[16]:`
@@ -519,7 +514,7 @@ Now let's take a look at the convolved image.
 
 .. parsed-literal::
 
-    <matplotlib.colorbar.Colorbar at 0x7f13f0610470>
+    <matplotlib.colorbar.Colorbar at 0x7fdd80d9fb50>
 
 
 
@@ -577,7 +572,7 @@ Now let's take a look at the convolved image.
     convolved_image_q = convolve_fft(hdu_q.data, psf, boundary='wrap')
     convolved_image_u = convolve_fft(hdu_u.data, psf, boundary='wrap')
 
-Let's plot the Q and U images.
+Let’s plot the Q and U images.
 
 
 :inputnumrole:`In[19]:`
@@ -608,7 +603,7 @@ Let's plot the Q and U images.
 
 .. parsed-literal::
 
-    <matplotlib.colorbar.Colorbar at 0x7f13f2a63da0>
+    <matplotlib.colorbar.Colorbar at 0x7fdd80090f50>
 
 
 
@@ -683,7 +678,7 @@ vectors along the x/right-ascention axis.
 
 .. parsed-literal::
 
-    <matplotlib.quiver.Quiver at 0x7f13f2abfeb8>
+    <matplotlib.quiver.Quiver at 0x7fdd83e56850>
 
 
 

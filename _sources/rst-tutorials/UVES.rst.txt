@@ -1,11 +1,6 @@
 .. meta::
     :keywords: filterTutorials
 
-
-
-
-
-
 .. raw:: html
 
     <a href="../_static/UVES/UVES.ipynb"><button id="download">Download tutorial notebook</button></a>
@@ -81,7 +76,7 @@ Before you proceed
 Download the tar file and extract the files by executing the python code
 below. Executing this block will download and extract a tar file with
 data necessary for this tutorial. By default it will run in whatever
-directory you have placed this notebook. If that's some place you don't
+directory you have placed this notebook. If that’s some place you don’t
 want to fill with data files, change the ``working_dir_path`` variable.
 
 
@@ -105,8 +100,8 @@ Taurus-Auriga star forming region located at a distance of about 140 pc.
 MN Lup has been observed simultaneously with XMM-Newton and the UVES
 spectrograph on the VLT. MN Lup is suspected to be a classical T Tauri
 star, that is accreting mass from a circumstellar disk. MN Lup has been
-Doppler imaged by `Strassmeier et al.
-2005 <http://adsabs.harvard.edu/abs/2005A%26A...440.1105S>`__ with a
+Doppler imaged by `Strassmeier et
+al. 2005 <http://adsabs.harvard.edu/abs/2005A%26A...440.1105S>`__ with a
 very similar UVES setup and those authors claim an rotationally
 modulated accretion spot.
 
@@ -183,8 +178,8 @@ Read the first FITS file in the list and check what is in there:
 We see that the data is given as the primary image and all other info is
 part of the primary header. So, we can extract the WCS from that header
 to get the wavelength coordinate. If you see warnings about a
-non-standard RADECSYS, don't worry about this -- the WCS will still
-work, it just doesn't fully conform to the WCS standard.
+non-standard RADECSYS, don’t worry about this – the WCS will still work,
+it just doesn’t fully conform to the WCS standard.
 
 
 :inputnumrole:`In[5]:`
@@ -216,8 +211,8 @@ The flux is contained in the primary image.
 Making code reusable as a function
 ----------------------------------
 
-Now, we don't want to repeat this process for every single file by hand,
-so let's define a function that takes the filename as input and returns
+Now, we don’t want to repeat this process for every single file by hand,
+so let’s define a function that takes the filename as input and returns
 the wavelength and flux arrays and the time of the observation. In
 python, functions are created with the ``def`` statements. All lines
 that have an indentation level below the ``def`` statement are part of
@@ -236,7 +231,7 @@ functions that are defined in your file ``spectra_utils.py``:
 
 ``from spectra_utils import func a = func(param1, param2, ...)``
 
-You'll recognize that python does not make a difference between modules
+You’ll recognize that python does not make a difference between modules
 that come with python (e.g. ``glob``), external modules (e.g. ``numpy``
 or ``astropy``) and modules that you write yourself. The syntax to
 import those modules or functions is the same in all cases, provided
@@ -246,7 +241,7 @@ path <http://docs.python.org/2/tutorial/modules.html>`__.
 
 Once you used ``import spectra_utils`` python will not monitor the
 source file. If you change the source code of ``func`` in the file,
-you'll need to ``reload(spectra_utils)`` to load the new version of
+you’ll need to ``reload(spectra_utils)`` to load the new version of
 ``func``.
 
 So, after all this discussion, we can now define a function that
@@ -438,8 +433,8 @@ wavelength given in Angstrom or in nm? In X-ray observations, a common
 unit of wavelength is keV. How many nm is 0.65 keV?
 ```astropy.units`` <http://docs.astropy.org/en/stable/units/index.html>`__
 offers a framework that can take care of this book-keeping and propagate
-the units through many (but not all) mathematical operations (e.g.
-addition, division, multiplication). Furthermore,
+the units through many (but not all) mathematical operations
+(e.g. addition, division, multiplication). Furthermore,
 ```astropy.constants`` <http://docs.astropy.org/en/stable/constants/index.html>`__
 supplies the values of many physical and astronomical constants. The
 easiest way to attach a unit to a number is by multiplication.
@@ -472,7 +467,7 @@ easiest way to attach a unit to a number is by multiplication.
 
 Now we can use those variables in our calculations. MN Lup is a T Tauri
 star (TTS), which is possibly surrounded by an accretion disk. In the
-spectra we'll be looking for signatures of accretion. We expect those
+spectra we’ll be looking for signatures of accretion. We expect those
 accretion signatures to appear close to the free-fall velocity v that a
 mass m reaches, when it hits the stellar surface. We can calculate the
 infall speed using simple energy conservation.
@@ -481,7 +476,7 @@ infall speed using simple energy conservation.
 
 .. math:: \frac{1}{2} m v^2  =  G \frac{m M_*}{R_*}
 
-So, let's calculate the free-fall velocity for MN Lup.
+So, let’s calculate the free-fall velocity for MN Lup.
 
 
 :inputnumrole:`In[12]:`
@@ -554,10 +549,10 @@ keep their different length units unless told otherwise.
 
 
 
-The reason for this is that it's not uncommon to use different length
-units in a single constant, e.g. the Hubble constant is commonly given
-in "km/ (s Mpc)". "km" and "Mpc" are both units of length, but generally
-you do *not* want to shorten this to "1/s".
+The reason for this is that it’s not uncommon to use different length
+units in a single constant, e.g. the Hubble constant is commonly given
+in “km/ (s Mpc)”. “km” and “Mpc” are both units of length, but generally
+you do *not* want to shorten this to “1/s”.
 
 We can now use the ``astropy.units`` mechanism to correct the wavelength
 scale to the heliocentric velocity scale.
@@ -574,7 +569,7 @@ We could try:
 
     wavelength = wavelength * (1. + heliocentric/c)
 
-However, this fails, because ``heliocentric/c`` is in units of "km/m"
+However, this fails, because ``heliocentric/c`` is in units of “km/m”
 and ``1.`` is just a number. From the notation above, it is not clear
 what we actually want. Do we ask for the value of
 ``heliocentric/c + 1.`` or do we want to simplify the units of
@@ -739,8 +734,8 @@ observation in different systems, we could just read the keyword in the
 time system we like, but we will use ``astropy.time`` to make this
 conversion here. ``astropy.time.Time`` will parse many common input
 formats (strings, floats), but unless the format is unambiguous the
-format needs to be specified (e.g. a number could mean JD or MJD or
-year). Also, the time system needs to be given (e.g. UTC). Below are
+format needs to be specified (e.g. a number could mean JD or MJD or
+year). Also, the time system needs to be given (e.g. UTC). Below are
 several examples, initialized from different header keywords.
 
 
@@ -814,7 +809,7 @@ differences.
 Now we want to express the time difference between the individual
 spectra of MN Lup in rotational periods. While the unit of ``delta_t``
 is days, unfortunately ``astropy.time.Time`` and
-``astropy.units.Quantity`` objects don't work together yet, so we'll
+``astropy.units.Quantity`` objects don’t work together yet, so we’ll
 have to convert from one to the other explicitly.
 
 
@@ -870,10 +865,10 @@ The following function will do that:
         f = np.zeros((flux.shape[0], indrange.sum()))
         for i in range(flux.shape[0]):
             # fit polynomial of second order to the continuum region
-            linecoeff = np.polyfit(w[indcont], flux[i, indcont],2)
+            linecoeff = np.polyfit(w[indcont], flux[i, indcont], 2)
             # divide the flux by the polynomial and put the result in our
             # new flux array
-            f[i,:] = flux[i,indrange]/np.polyval(linecoeff, w[indrange])
+            f[i,:] = flux[i,indrange] / np.polyval(linecoeff, w[indrange].value)
         return w[indrange], f
     
     wcaII, fcaII = region_around_line(wavelength, flux,
@@ -885,7 +880,7 @@ Publication ready output
 Tables
 ~~~~~~
 
-We'll calculate the equivalent width in Angstroms of the emission line
+We’ll calculate the equivalent width in Angstroms of the emission line
 for the first spectrum.
 
 
@@ -946,14 +941,14 @@ code:
 Plots
 ~~~~~
 
-We'll make two plots. The plotting is done with
+We’ll make two plots. The plotting is done with
 ```matplotlib`` <http://matplotlib.org>`__, and does not involve Astropy
 itself. Plotting is introduced in ``plotting-and-images`` and more
 details on plotting can be found there. When in doubt, use the search
 engine of your choice and ask the internet. Here, we mainly want to
 illustrate that Astropy can be used in real-live data analysis. Thus we
-don't explain every step in the plotting in detail. The plots we produce
-below appear in very similar form in Guenther et al. 2013 (ApJ, 771,
+don’t explain every step in the plotting in detail. The plots we produce
+below appear in very similar form in Guenther et al. 2013 (ApJ, 771,
 70).
 
 In both cases we want the x-axis to show the Doppler shift expressed in
@@ -968,7 +963,7 @@ rotationally modulated will stick out between -1 and +1.
 
     x = w2vsini(wcaII, 393.366 * u.nm).decompose()
 
-First, we'll show the line profile.
+First, we’ll show the line profile.
 
 
 :inputnumrole:`In[33]:`
@@ -1041,7 +1036,7 @@ one way:
 
 
 
-Next, we'll make a more advanced plot. For each spectrum we calculate
+Next, we’ll make a more advanced plot. For each spectrum we calculate
 the difference to the mean flux.
 
 
@@ -1076,8 +1071,8 @@ nights is not visible and there is no proper labeling.
 
 
 
-In the following, we'll plot the spectra from both nights separately.
-Also, we'll pass the ``extent`` keyword to ``ax.imshow`` which takes
+In the following, we’ll plot the spectra from both nights separately.
+Also, we’ll pass the ``extent`` keyword to ``ax.imshow`` which takes
 care of the axis.
 
 
@@ -1182,7 +1177,7 @@ Understand the code for the last plot. Some of the commands used are
 already pretty advanced stuff. Remember, any internet search engine can
 be your friend.
 
-Clearly, we didn't develop this code for scratch. The `matplotlib
+Clearly, we didn’t develop this code for scratch. The `matplotlib
 gallery <http://matplotlib.org/gallery.html>`__ is our preferred place
 to look for plotting solutions.
 
@@ -1212,7 +1207,7 @@ into it promptly.
 Please try to include an example that demonstrates the issue and will
 allow the developers to reproduce and fix the problem. If you are seeing
 a crash then frequently it will help to include the full Python stack
-trace as well as information about your operating system (e.g. MacOSX
+trace as well as information about your operating system (e.g. MacOSX
 version or Linux version).
 
 

@@ -224,7 +224,7 @@ plot a histogram.</p>
 <span class="mf">0.0</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">circleci</span><span class="o">/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">6</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">ipykernel_launcher</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">3</span><span class="p">:</span> <span class="ne">RuntimeWarning</span><span class="p">:</span> <span class="n">divide</span> <span class="n">by</span> <span class="n">zero</span> <span class="n">encountered</span> <span class="ow">in</span> <span class="n">log10</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">circleci</span><span class="o">/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">ipykernel_launcher</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">3</span><span class="p">:</span> <span class="ne">RuntimeWarning</span><span class="p">:</span> <span class="n">divide</span> <span class="n">by</span> <span class="n">zero</span> <span class="n">encountered</span> <span class="ow">in</span> <span class="n">log10</span>
   <span class="n">This</span> <span class="ow">is</span> <span class="n">separate</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">ipykernel</span> <span class="n">package</span> <span class="n">so</span> <span class="n">we</span> <span class="n">can</span> <span class="n">avoid</span> <span class="n">doing</span> <span class="n">imports</span> <span class="n">until</span>
 </pre></div>
 </div>
@@ -240,7 +240,7 @@ proper range (<code class="docutils literal notranslate"><span class="pre">vmin<
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[4]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">AxesImage</span> <span class="n">at</span> <span class="mh">0x7f13f29dddd8</span><span class="o">&gt;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">AxesImage</span> <span class="n">at</span> <span class="mh">0x7fdd831ac210</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <img alt="../_images/synthetic-images_7_1.png" src="../_images/synthetic-images_7_1.png" />
@@ -248,9 +248,9 @@ proper range (<code class="docutils literal notranslate"><span class="pre">vmin<
 <div class="section" id="set-up-astrometry-coordinates">
 <h2>2. Set up astrometry coordinates<a class="headerlink" href="#set-up-astrometry-coordinates" title="Permalink to this headline">¶</a></h2>
 <p>From the header, we know that the x and y axes are in centimeter.
-However, in an observation we usually have RA and Dec. To convert
+However, in an observation we usually have RA and Dec. To convert
 physical units to sky coordinates, we will need to make some assumptions
-about where the object is located, i.e. the distance to the object and
+about where the object is located, i.e. the distance to the object and
 the central RA and Dec.</p>
 <p><span class="inputnumrole">In[5]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># distance to the object</span>
@@ -369,7 +369,7 @@ pixels by using our pixel scale keyword <code class="docutils literal notranslat
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[12]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">AxesImage</span> <span class="n">at</span> <span class="mh">0x7f13f0751d68</span><span class="o">&gt;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">AxesImage</span> <span class="n">at</span> <span class="mh">0x7fdd80e92610</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <img alt="../_images/synthetic-images_23_1.png" src="../_images/synthetic-images_23_1.png" />
@@ -397,7 +397,7 @@ this, using a 2D Lorentzian</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[13]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">AxesImage</span> <span class="n">at</span> <span class="mh">0x7f13f06b2b00</span><span class="o">&gt;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">AxesImage</span> <span class="n">at</span> <span class="mh">0x7fdd80e7c550</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <img alt="../_images/synthetic-images_26_1.png" src="../_images/synthetic-images_26_1.png" />
@@ -434,7 +434,7 @@ making the data periodic.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[16]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">colorbar</span><span class="o">.</span><span class="n">Colorbar</span> <span class="n">at</span> <span class="mh">0x7f13f0610470</span><span class="o">&gt;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">colorbar</span><span class="o">.</span><span class="n">Colorbar</span> <span class="n">at</span> <span class="mh">0x7fdd80d9fb50</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <img alt="../_images/synthetic-images_32_1.png" src="../_images/synthetic-images_32_1.png" />
@@ -493,7 +493,7 @@ making the data periodic.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[19]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">colorbar</span><span class="o">.</span><span class="n">Colorbar</span> <span class="n">at</span> <span class="mh">0x7f13f2a63da0</span><span class="o">&gt;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">colorbar</span><span class="o">.</span><span class="n">Colorbar</span> <span class="n">at</span> <span class="mh">0x7fdd80090f50</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <img alt="../_images/synthetic-images_37_1.png" src="../_images/synthetic-images_37_1.png" />
@@ -551,7 +551,7 @@ vectors along the x/right-ascention axis.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[20]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">quiver</span><span class="o">.</span><span class="n">Quiver</span> <span class="n">at</span> <span class="mh">0x7f13f2abfeb8</span><span class="o">&gt;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">quiver</span><span class="o">.</span><span class="n">Quiver</span> <span class="n">at</span> <span class="mh">0x7fdd83e56850</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <img alt="../_images/synthetic-images_40_1.png" src="../_images/synthetic-images_40_1.png" />
@@ -581,7 +581,7 @@ take the psf we created earlier, you can convert the data into Jy/beam.</p>
       
     </p>
     <p>
-    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.0.
     &copy; Copyright Astropy.
     </p>
   </div>

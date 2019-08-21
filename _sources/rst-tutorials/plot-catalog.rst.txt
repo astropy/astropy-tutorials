@@ -1,11 +1,6 @@
 .. meta::
     :keywords: filterTutorials, filterFileInputOutput, filterCoordinates, filterUnits, filterMatplotlib
 
-
-
-
-
-
 .. raw:: html
 
     <a href="../_static/plot-catalog/plot-catalog.ipynb"><button id="download">Download tutorial notebook</button></a>
@@ -69,7 +64,7 @@ tools for reading and writing ASCII data are provided with the
 ``astropy.io.ascii`` subpackage, but fundamentally use the classes and
 methods implemented in ``astropy.table``.
 
-We'll start by importing the ``ascii`` subpackage:
+We’ll start by importing the ``ascii`` subpackage:
 
 
 :inputnumrole:`In[2]:`
@@ -87,14 +82,14 @@ data are:
 
 ::
 
-    # name,ra,dec
-    BLG100,17:51:00.0,-29:59:48
-    BLG101,17:53:40.2,-29:49:52
-    BLG102,17:56:20.2,-29:30:51
-    BLG103,17:56:20.2,-30:06:22
-    ...
+   # name,ra,dec
+   BLG100,17:51:00.0,-29:59:48
+   BLG101,17:53:40.2,-29:49:52
+   BLG102,17:56:20.2,-29:30:51
+   BLG103,17:56:20.2,-30:06:22
+   ...
 
-(see *simple\_table.csv*)
+(see *simple_table.csv*)
 
 ``ascii.read()`` will return a ``Table`` object:
 
@@ -116,7 +111,7 @@ data are:
 .. raw:: html
 
     <i>Table length=4</i>
-    <table id="table140650821360552" class="table-striped table-bordered table-condensed">
+    <table id="table140235167608912" class="table-striped table-bordered table-condensed">
     <thead><tr><th>name</th><th>ra</th><th>dec</th></tr></thead>
     <thead><tr><th>str6</th><th>str10</th><th>str9</th></tr></thead>
     <tr><td>BLG100</td><td>17:51:00.0</td><td>-29:59:48</td></tr>
@@ -128,8 +123,8 @@ data are:
 
 
 The header names are automatically parsed from the top of the file, and
-the delimiter is inferred from the rest of the file -- awesome! We can
-access the columns directly from their names as 'keys' of the table
+the delimiter is inferred from the rest of the file – awesome! We can
+access the columns directly from their names as ‘keys’ of the table
 object:
 
 
@@ -187,17 +182,17 @@ the column and use the ``coordinates`` subpackage to parse the string:
 
 
 
-Now let's look at a case where this breaks, and we have to specify some
+Now let’s look at a case where this breaks, and we have to specify some
 more options to the ``read()`` function. Our data may look a bit
 messier::
 
 ::
 
-    ,,,,2MASS Photometry,,,,,,WISE Photometry,,,,,,,,Spectra,,,,Astrometry,,,,,,,,,,,
-    Name,Designation,RA,Dec,Jmag,J_unc,Hmag,H_unc,Kmag,K_unc,W1,W1_unc,W2,W2_unc,W3,W3_unc,W4,W4_unc,Spectral Type,Spectra (FITS),Opt Spec Refs,NIR Spec Refs,pm_ra (mas),pm_ra_unc,pm_dec (mas),pm_dec_unc,pi (mas),pi_unc,radial velocity (km/s),rv_unc,Astrometry Refs,Discovery Refs,Group/Age,Note
-    ,00 04 02.84 -64 10 35.6,1.01201,-64.18,15.79,0.07,14.83,0.07,14.01,0.05,13.37,0.03,12.94,0.03,12.18,0.24,9.16,null,L1γ,,Kirkpatrick et al. 2010,,,,,,,,,,,Kirkpatrick et al. 2010,,
-    PC 0025+04,00 27 41.97 +05 03 41.7,6.92489,5.06,16.19,0.09,15.29,0.10,14.96,0.12,14.62,0.04,14.14,0.05,12.24,null,8.89,null,M9.5β,,Mould et al. 1994,,0.0105,0.0004,-0.0008,0.0003,,,,,Faherty et al. 2009,Schneider et al. 1991,,,00 32 55.84 -44 05 05.8,8.23267,-44.08,14.78,0.04,13.86,0.03,13.27,0.04,12.82,0.03,12.49,0.03,11.73,0.19,9.29,null,L0γ,,Cruz et al. 2009,,0.1178,0.0043,-0.0916,0.0043,38.4,4.8,,,Faherty et al. 2012,Reid et al. 2008,,
-    ...
+   ,,,,2MASS Photometry,,,,,,WISE Photometry,,,,,,,,Spectra,,,,Astrometry,,,,,,,,,,,
+   Name,Designation,RA,Dec,Jmag,J_unc,Hmag,H_unc,Kmag,K_unc,W1,W1_unc,W2,W2_unc,W3,W3_unc,W4,W4_unc,Spectral Type,Spectra (FITS),Opt Spec Refs,NIR Spec Refs,pm_ra (mas),pm_ra_unc,pm_dec (mas),pm_dec_unc,pi (mas),pi_unc,radial velocity (km/s),rv_unc,Astrometry Refs,Discovery Refs,Group/Age,Note
+   ,00 04 02.84 -64 10 35.6,1.01201,-64.18,15.79,0.07,14.83,0.07,14.01,0.05,13.37,0.03,12.94,0.03,12.18,0.24,9.16,null,L1γ,,Kirkpatrick et al. 2010,,,,,,,,,,,Kirkpatrick et al. 2010,,
+   PC 0025+04,00 27 41.97 +05 03 41.7,6.92489,5.06,16.19,0.09,15.29,0.10,14.96,0.12,14.62,0.04,14.14,0.05,12.24,null,8.89,null,M9.5β,,Mould et al. 1994,,0.0105,0.0004,-0.0008,0.0003,,,,,Faherty et al. 2009,Schneider et al. 1991,,,00 32 55.84 -44 05 05.8,8.23267,-44.08,14.78,0.04,13.86,0.03,13.27,0.04,12.82,0.03,12.49,0.03,11.73,0.19,9.29,null,L0γ,,Cruz et al. 2009,,0.1178,0.0043,-0.0916,0.0043,38.4,4.8,,,Faherty et al. 2012,Reid et al. 2008,,
+   ...
 
 (see *Young-Objects-Compilation.csv*)
 
@@ -262,7 +257,7 @@ of the column:
 What happened? The column names are just ``col1``, ``col2``, etc., the
 default names if ``ascii.read()`` is unable to parse out column names.
 We know it failed to read the column names, but also notice that the
-first row of data are strings -- something else went wrong!
+first row of data are strings – something else went wrong!
 
 
 :inputnumrole:`In[7]:`
@@ -281,7 +276,7 @@ first row of data are strings -- something else went wrong!
 .. raw:: html
 
     <i>Row index=0 masked=True</i>
-    <table id="table140650777207360">
+    <table id="table140235125854864">
     <thead><tr><th>col1</th><th>col2</th><th>col3</th><th>col4</th><th>col5</th><th>col6</th><th>col7</th><th>col8</th><th>col9</th><th>col10</th><th>col11</th><th>col12</th><th>col13</th><th>col14</th><th>col15</th><th>col16</th><th>col17</th><th>col18</th><th>col19</th><th>col20</th><th>col21</th><th>col22</th><th>col23</th><th>col24</th><th>col25</th><th>col26</th><th>col27</th><th>col28</th><th>col29</th><th>col30</th><th>col31</th><th>col32</th><th>col33</th><th>col34</th></tr></thead>
     <thead><tr><th>str24</th><th>str25</th><th>str9</th><th>str6</th><th>str16</th><th>str5</th><th>str5</th><th>str5</th><th>str5</th><th>str5</th><th>str15</th><th>str6</th><th>str5</th><th>str6</th><th>str5</th><th>str6</th><th>str4</th><th>str6</th><th>str13</th><th>str14</th><th>str26</th><th>str23</th><th>str11</th><th>str9</th><th>str12</th><th>str10</th><th>str8</th><th>str6</th><th>str22</th><th>str6</th><th>str19</th><th>str23</th><th>str9</th><th>str38</th></tr></thead>
     <tr><td>--</td><td>--</td><td>--</td><td>--</td><td>2MASS Photometry</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td>WISE Photometry</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td>Spectra</td><td>--</td><td>--</td><td>--</td><td>Astrometry</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td></tr>
@@ -291,7 +286,7 @@ first row of data are strings -- something else went wrong!
 
 A few things are causing problems here. First, there are two header
 lines in the file and the header lines are not denoted by comment
-characters. The first line is actually some meta data that we don't care
+characters. The first line is actually some meta data that we don’t care
 about, so we want to skip it. We can get around this problem by
 specifying the ``header_start`` keyword to the ``ascii.read()``
 function. This keyword argument specifies the index of the row in the
@@ -367,7 +362,7 @@ start on the 3rd (index=2) row:
     tbl = ascii.read("Young-Objects-Compilation.csv", header_start=1, data_start=2)
 
 Some of the columns have missing data, for example, some of the ``RA``
-values are missing (denoted by -- when printed):
+values are missing (denoted by – when printed):
 
 
 :inputnumrole:`In[10]:`
@@ -414,7 +409,7 @@ This is called a **Masked column** because some missing values are
 masked out upon display. If we want to use this numeric data, we have to
 tell ``astropy`` what to fill the missing values with. We can do this
 with the ``.filled()`` method. For example, to fill all of the missing
-values with ``NaN``'s:
+values with ``NaN``\ ’s:
 
 
 :inputnumrole:`In[11]:`
@@ -463,7 +458,7 @@ values with ``NaN``'s:
 
 
 
-Let's recap what we've done so far, then make some plots with the data.
+Let’s recap what we’ve done so far, then make some plots with the data.
 Our data file has an extra line above the column names, so we use the
 ``header_start`` keyword to tell it to start from line 1 instead of line
 0 (remember Python is 0-indexed!). We then used had to specify that the
@@ -478,7 +473,7 @@ some columns have missing values.
 
     data = ascii.read("Young-Objects-Compilation.csv", header_start=1, data_start=2)
 
-Now that we have our data loaded, let's plot a color-magnitude diagram.
+Now that we have our data loaded, let’s plot a color-magnitude diagram.
 
 Here we simply make a scatter plot of the J-K color on the x-axis
 against the J magnitude on the y-axis. We use a trick to flip the y-axis
@@ -520,7 +515,7 @@ control over your figures.
 
 As a final example, we will plot the angular positions from the catalog
 on a 2D projection of the sky. Instead of using ``pylab``-style
-plotting, we'll take a more object-oriented approach. We'll start by
+plotting, we’ll take a more object-oriented approach. We’ll start by
 creating a ``Figure`` object and adding a single subplot to the figure.
 We can specify a projection with the ``projection`` keyword; in this
 example we will use a Mollweide projection. Unfortunately, it is highly
@@ -564,7 +559,7 @@ class.
 
 .. parsed-literal::
 
-    <matplotlib.collections.PathCollection at 0x7febcf82aa58>
+    <matplotlib.collections.PathCollection at 0x7f8b08d734d0>
 
 
 
@@ -573,7 +568,7 @@ class.
 
 
 
-By default, matplotlib will add degree tick labels, so let's change the
+By default, matplotlib will add degree tick labels, so let’s change the
 horizontal (x) tick labels to be in units of hours, and display a grid:
 
 

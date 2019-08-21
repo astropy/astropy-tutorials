@@ -191,8 +191,8 @@ Taurus-Auriga star forming region located at a distance of about 140 pc.
 MN Lup has been observed simultaneously with XMM-Newton and the UVES
 spectrograph on the VLT. MN Lup is suspected to be a classical T Tauri
 star, that is accreting mass from a circumstellar disk. MN Lup has been
-Doppler imaged by <a class="reference external" href="http://adsabs.harvard.edu/abs/2005A%26A...440.1105S">Strassmeier et al.
-2005</a> with a
+Doppler imaged by <a class="reference external" href="http://adsabs.harvard.edu/abs/2005A%26A...440.1105S">Strassmeier et
+al. 2005</a> with a
 very similar UVES setup and those authors claim an rotationally
 modulated accretion spot.</p>
 <p>In the X-ray data we find moderate indications for accretion. In this
@@ -247,8 +247,8 @@ for more details:</p>
 <p>We see that the data is given as the primary image and all other info is
 part of the primary header. So, we can extract the WCS from that header
 to get the wavelength coordinate. If you see warnings about a
-non-standard RADECSYS, don’t worry about this – the WCS will still
-work, it just doesn’t fully conform to the WCS standard.</p>
+non-standard RADECSYS, don’t worry about this – the WCS will still work,
+it just doesn’t fully conform to the WCS standard.</p>
 <p><span class="inputnumrole">In[5]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">header</span> <span class="o">=</span> <span class="n">sp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">header</span>
 
@@ -454,8 +454,8 @@ wavelength given in Angstrom or in nm? In X-ray observations, a common
 unit of wavelength is keV. How many nm is 0.65 keV?
 <code class="docutils literal notranslate"><span class="pre">`astropy.units</span></code> &lt;<a class="reference external" href="http://docs.astropy.org/en/stable/units/index.html">http://docs.astropy.org/en/stable/units/index.html</a>&gt;`__
 offers a framework that can take care of this book-keeping and propagate
-the units through many (but not all) mathematical operations (e.g.
-addition, division, multiplication). Furthermore,
+the units through many (but not all) mathematical operations
+(e.g. addition, division, multiplication). Furthermore,
 <code class="docutils literal notranslate"><span class="pre">`astropy.constants</span></code> &lt;<a class="reference external" href="http://docs.astropy.org/en/stable/constants/index.html">http://docs.astropy.org/en/stable/constants/index.html</a>&gt;`__
 supplies the values of many physical and astronomical constants. The
 easiest way to attach a unit to a number is by multiplication.</p>
@@ -527,7 +527,7 @@ keep their different length units unless told otherwise.</p>
 <div class="math notranslate nohighlight">
 \[4.7803573 \; \mathrm{}\]</div>
 <p>The reason for this is that it’s not uncommon to use different length
-units in a single constant, e.g. the Hubble constant is commonly given
+units in a single constant, e.g. the Hubble constant is commonly given
 in “km/ (s Mpc)”. “km” and “Mpc” are both units of length, but generally
 you do <em>not</em> want to shorten this to “1/s”.</p>
 <p>We can now use the <code class="docutils literal notranslate"><span class="pre">astropy.units</span></code> mechanism to correct the wavelength
@@ -648,8 +648,8 @@ observation in different systems, we could just read the keyword in the
 time system we like, but we will use <code class="docutils literal notranslate"><span class="pre">astropy.time</span></code> to make this
 conversion here. <code class="docutils literal notranslate"><span class="pre">astropy.time.Time</span></code> will parse many common input
 formats (strings, floats), but unless the format is unambiguous the
-format needs to be specified (e.g. a number could mean JD or MJD or
-year). Also, the time system needs to be given (e.g. UTC). Below are
+format needs to be specified (e.g. a number could mean JD or MJD or
+year). Also, the time system needs to be given (e.g. UTC). Below are
 several examples, initialized from different header keywords.</p>
 <p><span class="inputnumrole">In[23]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">astropy.time</span> <span class="kn">import</span> <span class="n">Time</span>
@@ -730,10 +730,10 @@ the flux by this polynomial.</p>
     <span class="n">f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">flux</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">indrange</span><span class="o">.</span><span class="n">sum</span><span class="p">()))</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">flux</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
         <span class="c1"># fit polynomial of second order to the continuum region</span>
-        <span class="n">linecoeff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">w</span><span class="p">[</span><span class="n">indcont</span><span class="p">],</span> <span class="n">flux</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">indcont</span><span class="p">],</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">linecoeff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">polyfit</span><span class="p">(</span><span class="n">w</span><span class="p">[</span><span class="n">indcont</span><span class="p">],</span> <span class="n">flux</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">indcont</span><span class="p">],</span> <span class="mi">2</span><span class="p">)</span>
         <span class="c1"># divide the flux by the polynomial and put the result in our</span>
         <span class="c1"># new flux array</span>
-        <span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">flux</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">indrange</span><span class="p">]</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">linecoeff</span><span class="p">,</span> <span class="n">w</span><span class="p">[</span><span class="n">indrange</span><span class="p">])</span>
+        <span class="n">f</span><span class="p">[</span><span class="n">i</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">flux</span><span class="p">[</span><span class="n">i</span><span class="p">,</span><span class="n">indrange</span><span class="p">]</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">polyval</span><span class="p">(</span><span class="n">linecoeff</span><span class="p">,</span> <span class="n">w</span><span class="p">[</span><span class="n">indrange</span><span class="p">]</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">w</span><span class="p">[</span><span class="n">indrange</span><span class="p">],</span> <span class="n">f</span>
 
 <span class="n">wcaII</span><span class="p">,</span> <span class="n">fcaII</span> <span class="o">=</span> <span class="n">region_around_line</span><span class="p">(</span><span class="n">wavelength</span><span class="p">,</span> <span class="n">flux</span><span class="p">,</span>
@@ -793,7 +793,7 @@ details on plotting can be found there. When in doubt, use the search
 engine of your choice and ask the internet. Here, we mainly want to
 illustrate that Astropy can be used in real-live data analysis. Thus we
 don’t explain every step in the plotting in detail. The plots we produce
-below appear in very similar form in Guenther et al. 2013 (ApJ, 771,
+below appear in very similar form in Guenther et al. 2013 (ApJ, 771,
 70).</p>
 <p>In both cases we want the x-axis to show the Doppler shift expressed in
 units of the rotational velocity. In this way, features that are
@@ -976,7 +976,7 @@ into it promptly.</p>
 <p>Please try to include an example that demonstrates the issue and will
 allow the developers to reproduce and fix the problem. If you are seeing
 a crash then frequently it will help to include the full Python stack
-trace as well as information about your operating system (e.g. MacOSX
+trace as well as information about your operating system (e.g. MacOSX
 version or Linux version).</p>
 <p><span class="inputnumrole">In[None]:</span></p>
 <div id="spacer"></div>
@@ -998,7 +998,7 @@ version or Linux version).</p>
       
     </p>
     <p>
-    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.1.2.
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.0.
     &copy; Copyright Astropy.
     </p>
   </div>

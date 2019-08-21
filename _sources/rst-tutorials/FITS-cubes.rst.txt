@@ -1,11 +1,6 @@
 .. meta::
     :keywords: filterTutorials, filterFits, filterRadioAstronomy, filterDataCubes, filterContourPlots
 
-
-
-
-
-
 .. raw:: html
 
     <a href="../_static/FITS-cubes/FITS-cubes.ipynb"><button id="download">Download tutorial notebook</button></a>
@@ -62,9 +57,9 @@ map. We will learn how to read in data from VizieR, query and download
 matching data from Herschel using astroquery, and plot the resulting
 images in a multitude of ways.
 
-The primary libraries we'll be using are:
+The primary libraries we’ll be using are:
 `astroquery <http://www.astropy.org/astroquery/>`__,
-`spectral\_cube <https://spectral-cube.readthedocs.io/en/latest/>`__,
+`spectral_cube <https://spectral-cube.readthedocs.io/en/latest/>`__,
 `reproject <https://reproject.readthedocs.io/en/stable/#>`__,
 `matplotlib <https://matplotlib.org/>`__)
 
@@ -72,11 +67,11 @@ They can be installed using conda:
 
 ::
 
-    conda install -c astropy astroquery
-    conda install -c astropy spectral-cube
-    conda install -c astropy reproject
+   conda install -c astropy astroquery
+   conda install -c astropy spectral-cube
+   conda install -c astropy reproject
 
-Alternatively, if you don't use conda, you can use pip.
+Alternatively, if you don’t use conda, you can use pip.
 
 
 :inputnumrole:`In[1]:`
@@ -116,11 +111,11 @@ Alternatively, if you don't use conda, you can use pip.
 Download the HI Data
 --------------------
 
-We'll be using HI 21 cm emission data from the `HI4Pi
+We’ll be using HI 21 cm emission data from the `HI4Pi
 survey <http://adsabs.harvard.edu/cgi-bin/bib_query?arXiv:1610.06175>`__.
 We want to look at neutral gas emission from the Magellanic Clouds and
 learn about the kinematics of the system and column densities. Using the
-VizieR catalog, we've found a relevant data cube to use that covers this
+VizieR catalog, we’ve found a relevant data cube to use that covers this
 region of the sky. You can also download an allsky data cube, but this
 is a very large file, so picking out sub-sections can be useful!
 
@@ -150,9 +145,9 @@ Awesome, so now we have a copy of the data file (a FITS file). So how do
 we do anything with it?
 
 Luckily for us, the
-`spectral\_cube <https://spectral-cube.readthedocs.io/en/latest/>`__
+`spectral_cube <https://spectral-cube.readthedocs.io/en/latest/>`__
 package does a lot of the nitty gritty work for us to manipulate this
-data and even quickly look through it. So let's open up our data file
+data and even quickly look through it. So let’s open up our data file
 and read in the data as a SpectralCube!
 
 The variable ``cube`` has the data using SpectralCube and ``hi_data`` is
@@ -183,7 +178,7 @@ SpectralCube like this:
 
    </div>
 
-So what does this SpectralCube object actually look like? Let's find
+So what does this SpectralCube object actually look like? Let’s find
 out! The first check is to print out the cube.
 
 
@@ -213,8 +208,8 @@ As we know, a data cube has three axes. In this case, there is Galactic
 Longitude (x), Galactic Latitude (y), and a spectral axis in terms of a
 LSR Velocity (z - listed as s with ``spectral_cube``).
 
-The data hidden in the cube lives as an ndarray with shape (n\_s, n\_y,
-n\_x) so that axis 0 corresponds with the Spectral Axis, axis 1
+The data hidden in the cube lives as an ndarray with shape (n_s, n_y,
+n_x) so that axis 0 corresponds with the Spectral Axis, axis 1
 corresponds with the Galactic Latitude Axis, and axis 2 corresponds with
 the Galactic Longitude Axis.
 
@@ -227,13 +222,13 @@ The cube also contains information about the coordinates corresponding
 to the data in the form of a WCS (World Coordinate System) object.
 
 SpectralCube is clever and keeps all the data masked until you really
-need it so that you can work with large sets of data. So let's see what
+need it so that you can work with large sets of data. So let’s see what
 our data actually looks like!
 
 SpectralCube has a ``quicklook()`` method which can give a handy
-sneak-peek preview of the data. It's useful when you just need to glance
+sneak-peek preview of the data. It’s useful when you just need to glance
 at a slice or spectrum without knowing any other information (say, to
-make sure the data isn't corrupted or is looking at the right region.)
+make sure the data isn’t corrupted or is looking at the right region.)
 
 To do this, we simply have to index our cube along one axis (for a
 slice) or two axes (for a spectrum):
@@ -252,8 +247,8 @@ slice) or two axes (for a spectrum):
 
 .. parsed-literal::
 
-    INFO: Auto-setting vmin to -1.660e+00 [aplpy.core]
-    INFO: Auto-setting vmax to  1.710e+01 [aplpy.core]
+    INFO: Auto-setting vmin to -1.615e+00 [aplpy.core]
+    INFO: Auto-setting vmax to  1.659e+01 [aplpy.core]
 
 
 
@@ -295,7 +290,7 @@ Make a smaller cube, focusing on the Magellanic Clouds
 ------------------------------------------------------
 
 The HI data cube we downloaded is bigger than we actually need it to be.
-Let's try zooming in on just the part we need and make a new
+Let’s try zooming in on just the part we need and make a new
 ``sub_cube``.
 
 The easiest way to do this is to cut out part of the cube with indices
@@ -309,7 +304,7 @@ We can extract the world coordinates from the cube using the
    <div class="alert alert-warning">
 
 Warning: using .world() will extract coordinates from every position you
-ask for. This can be a TON of data if you don't slice through the cube.
+ask for. This can be a TON of data if you don’t slice through the cube.
 One work around is to slice along two axes and extract coordinates just
 along a single dimension.
 
@@ -362,18 +357,18 @@ cube
 
 .. parsed-literal::
 
-    /home/circleci/project/venv/lib/python3.6/site-packages/spectral_cube/base_class.py:158: FutureWarning: Using a non-tuple sequence for multidimensional indexing is deprecated; use `arr[tuple(seq)]` instead of `arr[seq]`. In the future this will be interpreted as an array index, `arr[np.array(seq)]`, which will result either in an error or a different result.
+    /home/circleci/project/venv/lib/python3.7/site-packages/spectral_cube/base_class.py:158: FutureWarning: Using a non-tuple sequence for multidimensional indexing is deprecated; use `arr[tuple(seq)]` instead of `arr[seq]`. In the future this will be interpreted as an array index, `arr[np.array(seq)]`, which will result either in an error or a different result.
       inds = [i[view] for i in inds[::-1]]  # numpy -> wcs order
-    /home/circleci/project/venv/lib/python3.6/site-packages/spectral_cube/masks.py:632: FutureWarning: Using a non-tuple sequence for multidimensional indexing is deprecated; use `arr[tuple(seq)]` instead of `arr[seq]`. In the future this will be interpreted as an array index, `arr[np.array(seq)]`, which will result either in an error or a different result.
+    /home/circleci/project/venv/lib/python3.7/site-packages/spectral_cube/masks.py:632: FutureWarning: Using a non-tuple sequence for multidimensional indexing is deprecated; use `arr[tuple(seq)]` instead of `arr[seq]`. In the future this will be interpreted as an array index, `arr[np.array(seq)]`, which will result either in an error or a different result.
       return LazyMask(self._function, data=self._data[view],
-    /home/circleci/project/venv/lib/python3.6/site-packages/spectral_cube/spectral_cube.py:1222: FutureWarning: Using a non-tuple sequence for multidimensional indexing is deprecated; use `arr[tuple(seq)]` instead of `arr[seq]`. In the future this will be interpreted as an array index, `arr[np.array(seq)]`, which will result either in an error or a different result.
+    /home/circleci/project/venv/lib/python3.7/site-packages/spectral_cube/spectral_cube.py:1222: FutureWarning: Using a non-tuple sequence for multidimensional indexing is deprecated; use `arr[tuple(seq)]` instead of `arr[seq]`. In the future this will be interpreted as an array index, `arr[np.array(seq)]`, which will result either in an error or a different result.
       return self._new_cube_with(data=self._data[view],
 
 
 Cut along the Spectral Axis:
 ----------------------------
 
-We don't really need data from such a large velocity range so let's just
+We don’t really need data from such a large velocity range so let’s just
 extract a little slab. We can do this easily, in any units that we want
 using the ``.spectral_slab()`` method.
 
@@ -531,7 +526,7 @@ object directly into a matplotlib axis instance.
 
 .. parsed-literal::
 
-    /home/circleci/project/venv/lib/python3.6/site-packages/matplotlib/contour.py:1000: UserWarning: The following kwargs were not used by contour: 'lw'
+    /home/circleci/project/venv/lib/python3.7/site-packages/matplotlib/contour.py:1000: UserWarning: The following kwargs were not used by contour: 'lw'
       s)
 
 
@@ -539,7 +534,7 @@ object directly into a matplotlib axis instance.
 
 .. parsed-literal::
 
-    <matplotlib.contour.QuadContourSet at 0x7f5ac5d7b4a8>
+    <matplotlib.contour.QuadContourSet at 0x7f13adb43050>
 
 
 
@@ -814,7 +809,7 @@ TableList argument.
     INFO: [Done] [astroquery.esasky.core]
     INFO: Downloading of HERSCHEL data complete. [astroquery.esasky.core]
     INFO: Maps available at /home/circleci/project/tutorials/notebooks/FITS-cubes/Maps. [astroquery.esasky.core]
-    Filename: Maps/HERSCHEL/anonymous1562695302/hspirepmw401_25pxmp_0110_m7303_1342198565_1342198566_1462476888800.fits.gz
+    Filename: Maps/HERSCHEL/anonymous1566419157/hspirepmw401_25pxmp_0110_m7303_1342198565_1342198566_1462476888800.fits.gz
     No.    Name      Ver    Type      Cards   Dimensions   Format
       0  PRIMARY       1 PrimaryHDU     184   ()      
       1  image         1 ImageHDU        47   (2407, 2141)   float64   
@@ -830,7 +825,7 @@ Since we are just doing some qualitative analysis, we only need the
 image, but you can easily access lots of other information from our
 downloaded object, such as errors.
 
-Let's go ahead and extract just the WCS information and image data from
+Let’s go ahead and extract just the WCS information and image data from
 the 350 micron image.
 
 
@@ -872,7 +867,7 @@ the 350 micron image.
             1  yes  yes
 
 
-With this, it's just as easy as before to display this image using
+With this, it’s just as easy as before to display this image using
 matplotlib with
 `WCSAxes <http://docs.astropy.org/en/stable/visualization/wcsaxes/index.html>`__
 and the ``LogNorm()`` object so we can log scale our image.
@@ -913,11 +908,11 @@ and the ``LogNorm()`` object so we can log scale our image.
 
 .. parsed-literal::
 
-    /home/circleci/project/venv/lib/python3.6/site-packages/matplotlib/colors.py:1028: RuntimeWarning: invalid value encountered in less_equal
+    /home/circleci/project/venv/lib/python3.7/site-packages/matplotlib/colors.py:1028: RuntimeWarning: invalid value encountered in less_equal
       mask |= resdat <= 0
-    /home/circleci/project/venv/lib/python3.6/site-packages/matplotlib/colors.py:1028: RuntimeWarning: invalid value encountered in less_equal
+    /home/circleci/project/venv/lib/python3.7/site-packages/matplotlib/colors.py:1028: RuntimeWarning: invalid value encountered in less_equal
       mask |= resdat <= 0
-    /home/circleci/project/venv/lib/python3.6/site-packages/matplotlib/colors.py:1028: RuntimeWarning: invalid value encountered in less_equal
+    /home/circleci/project/venv/lib/python3.7/site-packages/matplotlib/colors.py:1028: RuntimeWarning: invalid value encountered in less_equal
       mask |= resdat <= 0
 
 
@@ -936,7 +931,7 @@ images produced using the
 framework and the ``.get_transform()`` method.
 
 The
-`WCSAxes.get\_transform() <http://docs.astropy.org/en/stable/api/astropy.visualization.wcsaxes.WCSAxes.html#astropy.visualization.wcsaxes.WCSAxes.get_transform>`__
+`WCSAxes.get_transform() <http://docs.astropy.org/en/stable/api/astropy.visualization.wcsaxes.WCSAxes.html#astropy.visualization.wcsaxes.WCSAxes.get_transform>`__
 method returns a transformation from a specified frame to the pixel/data
 coordinates. It accepts a string specifying the frame or a WCS object.
 
@@ -998,7 +993,7 @@ coordinates. It accepts a string specifying the frame or a WCS object.
 
 .. parsed-literal::
 
-    /home/circleci/project/venv/lib/python3.6/site-packages/matplotlib/contour.py:1000: UserWarning: The following kwargs were not used by contour: 'lw'
+    /home/circleci/project/venv/lib/python3.7/site-packages/matplotlib/contour.py:1000: UserWarning: The following kwargs were not used by contour: 'lw'
       s)
 
 
@@ -1012,11 +1007,11 @@ coordinates. It accepts a string specifying the frame or a WCS object.
 
 .. parsed-literal::
 
-    /home/circleci/project/venv/lib/python3.6/site-packages/matplotlib/colors.py:1028: RuntimeWarning: invalid value encountered in less_equal
+    /home/circleci/project/venv/lib/python3.7/site-packages/matplotlib/colors.py:1028: RuntimeWarning: invalid value encountered in less_equal
       mask |= resdat <= 0
-    /home/circleci/project/venv/lib/python3.6/site-packages/matplotlib/colors.py:1028: RuntimeWarning: invalid value encountered in less_equal
+    /home/circleci/project/venv/lib/python3.7/site-packages/matplotlib/colors.py:1028: RuntimeWarning: invalid value encountered in less_equal
       mask |= resdat <= 0
-    /home/circleci/project/venv/lib/python3.6/site-packages/matplotlib/colors.py:1028: RuntimeWarning: invalid value encountered in less_equal
+    /home/circleci/project/venv/lib/python3.7/site-packages/matplotlib/colors.py:1028: RuntimeWarning: invalid value encountered in less_equal
       mask |= resdat <= 0
 
 
@@ -1030,7 +1025,7 @@ Using reproject to match image resolutions
 
 The `reproject <https://reproject.readthedocs.io/en/stable/>`__ package
 is a powerful tool allowing for image data to be transformed into a
-variety of projections and resolutions. It's most powerful use is in
+variety of projections and resolutions. It’s most powerful use is in
 fact to transform data from one map projection to another without losing
 any information and still properly conserving flux values within the
 data. It even has a method to perform a fast reprojection if you are not
@@ -1083,11 +1078,11 @@ As we can see, the IR data has over 10 times higher spatial resolution.
 In order to create a new projection of an image, all we need to specifiy
 is a new header containing WCS information to transform into. These can
 be created manually if you wanted to completely change something about
-the projection type (i.e. going from a Mercator map projection to a
+the projection type (i.e. going from a Mercator map projection to a
 Tangential map projection). For us, since we want to match our
-resolutions, we can just "steal" the WCS object from the HI data.
+resolutions, we can just “steal” the WCS object from the HI data.
 Specifically, we will be using the
-`reproject\_interp() <https://reproject.readthedocs.io/en/stable/api/reproject.reproject_interp.html#reproject.reproject_interp>`__
+`reproject_interp() <https://reproject.readthedocs.io/en/stable/api/reproject.reproject_interp.html#reproject.reproject_interp>`__
 function. This takes two arguments: an HDU object that you want to
 reproject, and a header containing WCS information to reproject onto.
 
@@ -1111,7 +1106,7 @@ reproject, and a header containing WCS information to reproject onto.
 
 .. parsed-literal::
 
-    /home/circleci/project/venv/lib/python3.6/site-packages/reproject/interpolation/core_celestial.py:26: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+    /home/circleci/project/venv/lib/python3.7/site-packages/reproject/interpolation/core_celestial.py:26: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
       if not np.issubdtype(array.dtype, np.float):
 
 
@@ -1178,7 +1173,7 @@ Galactic rather than RA and Dec.
 
 .. parsed-literal::
 
-    /home/circleci/project/venv/lib/python3.6/site-packages/matplotlib/contour.py:1000: UserWarning: The following kwargs were not used by contour: 'lw'
+    /home/circleci/project/venv/lib/python3.7/site-packages/matplotlib/contour.py:1000: UserWarning: The following kwargs were not used by contour: 'lw'
       s)
 
 
@@ -1192,11 +1187,11 @@ Galactic rather than RA and Dec.
 
 .. parsed-literal::
 
-    /home/circleci/project/venv/lib/python3.6/site-packages/matplotlib/colors.py:1028: RuntimeWarning: invalid value encountered in less_equal
+    /home/circleci/project/venv/lib/python3.7/site-packages/matplotlib/colors.py:1028: RuntimeWarning: invalid value encountered in less_equal
       mask |= resdat <= 0
-    /home/circleci/project/venv/lib/python3.6/site-packages/matplotlib/colors.py:1028: RuntimeWarning: invalid value encountered in less_equal
+    /home/circleci/project/venv/lib/python3.7/site-packages/matplotlib/colors.py:1028: RuntimeWarning: invalid value encountered in less_equal
       mask |= resdat <= 0
-    /home/circleci/project/venv/lib/python3.6/site-packages/matplotlib/colors.py:1028: RuntimeWarning: invalid value encountered in less_equal
+    /home/circleci/project/venv/lib/python3.7/site-packages/matplotlib/colors.py:1028: RuntimeWarning: invalid value encountered in less_equal
       mask |= resdat <= 0
 
 

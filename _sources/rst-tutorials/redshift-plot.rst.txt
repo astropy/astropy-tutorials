@@ -1,11 +1,6 @@
 .. meta::
     :keywords: filterTutorials, filterUnits, filterCosmology, filterMatplotlib
 
-
-
-
-
-
 .. raw:: html
 
     <a href="../_static/redshift-plot/redshift-plot.ipynb"><button id="download">Download tutorial notebook</button></a>
@@ -42,11 +37,11 @@ units, cosmology, matplotlib
 Summary
 -------
 
-Each redshift corresponds to an age of the universe, so if you're
-plotting some quantity against redshift, it's often useful show the
+Each redshift corresponds to an age of the universe, so if you’re
+plotting some quantity against redshift, it’s often useful show the
 universe age too. The relationship between the two changes depending the
 type of cosmology you assume, which is where ``astropy.cosmology`` comes
-in. In this tutorial we'll show how to use the tools in
+in. In this tutorial we’ll show how to use the tools in
 ``astropy.cosmology`` to make a plot like this:
 
 
@@ -106,7 +101,7 @@ Note that we could instead use one of the built-in cosmologies, like
 ``WMAP9`` or ``Planck13``, in which case we would just redefine the
 ``cosmo`` variable.
 
-Now we need an example quantity to plot versus redshift. Let's use the
+Now we need an example quantity to plot versus redshift. Let’s use the
 angular diameter distance, which is the physical transverse distance
 (the size of a galaxy, say) corresponding to a fixed angular separation
 on the sky. To calculate the angular diameter distance for a range of
@@ -124,7 +119,7 @@ redshifts:
 
 Note that we passed an array of redshifts to
 ``cosmo.angular_diameter_distance`` and it produced a corresponding
-array of distance values, one for each redshift. Let's plot them:
+array of distance values, one for each redshift. Let’s plot them:
 
 
 :inputnumrole:`In[5]:`
@@ -179,7 +174,7 @@ unit attribute:
 
 
 
-Now let's put some age labels on the top axis. We're going to pick a
+Now let’s put some age labels on the top axis. We’re going to pick a
 series of round age values where we want to place axis ticks. You may
 need to tweak these depending on your redshift range to get nice, evenly
 spaced ticks.
@@ -229,7 +224,7 @@ values.
 
 
 
-We have ticks on the top axis at the correct ages, but they're labelled
+We have ticks on the top axis at the correct ages, but they’re labelled
 with the redshift, not the age. We can fix this by setting the tick
 labels by hand.
 
@@ -285,8 +280,8 @@ z=0).
 
 
 
-We're almost done. We just need to label all the axes, and add some
-minor ticks. Let's also tweak the y axis limits to avoid putting labels
+We’re almost done. We just need to label all the axes, and add some
+minor ticks. Let’s also tweak the y axis limits to avoid putting labels
 right near the top of the plot.
 
 
@@ -319,7 +314,7 @@ right near the top of the plot.
 
 
 
-Now for comparison, let's add the angular diameter distance for a
+Now for comparison, let’s add the angular diameter distance for a
 different cosmology, from the Planck 2013 results. And then finally, we
 save the figure to a png file.
 
@@ -363,7 +358,7 @@ save the figure to a png file.
 ``bbox_inches='tight'`` automatically trims any whitespace from around
 the plot edges.
 
-And we're done!
+And we’re done!
 
 Exercise
 --------
