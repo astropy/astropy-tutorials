@@ -11,6 +11,12 @@ from nbconvert.exporters import RSTExporter
 from nbconvert.writers import FilesWriter
 import nbformat
 
+import mocks  # just needs to be imported to run the code
+from mock_server import app, MOCK_SERVER_PORT
+
+# Start a Flask server to intercept and handle remote HTTP requests
+app.run(port=MOCK_SERVER_PORT)
+
 IPYTHON_VERSION = 4
 
 def clean_keyword(kw):
