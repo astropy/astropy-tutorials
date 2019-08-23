@@ -39,7 +39,7 @@ jobs:
 
       - restore_cache:
           keys:
-	    - astropy-cache
+            - astropy-cache
 
       - run:
           name: Build documentation
