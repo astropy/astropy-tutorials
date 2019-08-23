@@ -37,14 +37,20 @@ jobs:
       - run: *apt-install # run the apt install defined above
       - run: *pip-install # run the pip install defined above
 
-      # - restore_cache: # Need cache for all tutorial data!
-      #     keys: sample-data-v1
+      - restore_cache:
+          keys:
+	    - astropy-cache
 
       - run:
           name: Build documentation
           command: |
             . venv/bin/activate
             make html
+
+      - save_cache:
+          key: astropy-cache
+          paths:
+            - ~/.astropy/cache/
 
       - store_artifacts:
           path: build/html
@@ -59,10 +65,6 @@ jobs:
           command: |
             bash .circleci/gh-pages-push.sh
 
-      # - save_cache: # Specify what paths to cache
-      #     key: sample-data-v1
-      #     paths:
-      #       - ~/sunpy/data/sample_data
 
 notify:
   webhooks:
