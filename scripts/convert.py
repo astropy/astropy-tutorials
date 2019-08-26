@@ -1,6 +1,7 @@
 # Standard library
 from os import path, walk, remove, makedirs, sep
 import re
+import time
 
 # Third-party
 from astropy import log as logger
@@ -86,6 +87,7 @@ class NBTutorialsConverter(object):
         # Execute the notebook
         logger.debug('Executing notebook using kwargs '
                      '"{}"...'.format(self._execute_kwargs))
+        t0 = time.time()
         executor = ExecutePreprocessor(**self._execute_kwargs)
 
         with open(self.nb_path) as f:
@@ -96,6 +98,9 @@ class NBTutorialsConverter(object):
         except CellExecutionError:
             # TODO: should we fail fast and raise, or record all errors?
             raise
+
+        logger.info("Finished running notebook ({:.2f} seconds)"
+                    .format(time.time() - t0))
 
         if write:
             logger.debug('Writing executed notebook to file {0}...'
@@ -188,7 +193,8 @@ class NBTutorialsConverter(object):
 
         return output_file_path
 
-def process_notebooks(nbfile_or_path, exec_only=False, **kwargs):
+def process_notebooks(nbfile_or_path, exec_only=False, verbosity=None,
+                      **kwargs):
     """
     Execute and optionally convert the specified notebook file or directory of
     notebook files.
@@ -202,11 +208,17 @@ def process_notebooks(nbfile_or_path, exec_only=False, **kwargs):
         Either a single notebook filename or a path containing notebook files.
     exec_only : bool, optional
         Just execute the notebooks, don't run them.
+    verbosity : int, optional
+        A ``logging`` verbosity level, e.g., logging.DEBUG or etc. to specify
+        the log level.
     **kwargs
         Any other keyword arguments are passed to the ``NBTutorialsConverter``
         init.
 
     """
+    if verbosity is not None:
+        logger.setLevel(verbosity)
+
     if path.isdir(nbfile_or_path):
         # It's a path, so we need to walk through recursively and find any
         # notebook files
