@@ -777,7 +777,7 @@ This might take a while.
 
 .. parsed-literal::
 
-    Predicted run time is 0.8492508554236314 seconds
+    Predicted run time is 0.7289310058328469 seconds
     Predicted number of rows is 2617
 
 
@@ -806,7 +806,7 @@ the service provider.
 
 .. parsed-literal::
 
-    INFO: conesearch_timer took 0.6151206493377686 s on AVERAGE for 1 call(s). [astropy.utils.timer]
+    INFO: conesearch_timer took 0.6479523181915283 s on AVERAGE for 1 call(s). [astropy.utils.timer]
 
 
 
@@ -824,7 +824,7 @@ the service provider.
 
 .. parsed-literal::
 
-    Actual run time is 0.6151206493377686 seconds
+    Actual run time is 0.6479523181915283 seconds
     Actual number of rows is 4028
 
 
