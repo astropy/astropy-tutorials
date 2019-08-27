@@ -399,9 +399,9 @@ perform fit.
     Model set size: 1
     Degree: 3
     Parameters:
-                c0                c1                 c2                 c3        
-        ----------------- ------------------ ------------------ ------------------
-        -10.2128295417637 14.966250323191884 -7.947924856380077 1.3334214291124995
+                 c0                 c1                 c2                 c3        
+        ------------------- ------------------ ------------------ ------------------
+        -10.922718464238685 15.187298851314837 -7.317925107885652 1.1481079729449974
 
 
 What would happend if we use a different fitter (method)? Let’s use the
@@ -446,9 +446,9 @@ same model but with ``SimplexLSQFitter`` as fitter.
     Model set size: 1
     Degree: 3
     Parameters:
-                 c0                 c1                 c2                 c3        
-        ------------------- ------------------ ------------------ ------------------
-        0.04045399808332405 0.6129446026710037 -1.938603974449138 0.5573851441896243
+                 c0                 c1                 c2                  c3         
+        ------------------- ------------------ ------------------ --------------------
+        -5.4302744904737725 0.5661950220390213 2.0451631724074675 -0.45102604454259876
 
 
 Note that we got a warning after using ``SimplexLSQFitter`` to fit the
@@ -509,7 +509,7 @@ times.
 
 .. parsed-literal::
 
-    Reduced Chi Squared with LinearLSQFitter: 1.9362300554333656
+    Reduced Chi Squared with LinearLSQFitter: 1.5689119083885799
 
 
 
@@ -527,7 +527,7 @@ times.
 
 .. parsed-literal::
 
-    Reduced Chi Squared with SimplexLSQFitter: 5.778978712706977
+    Reduced Chi Squared with SimplexLSQFitter: 3.653213800377351
 
 
 As we can see, the *Reduced Chi Square* for the first fit is closer to
@@ -557,7 +557,7 @@ We can also compare the two fits visually:
 
 .. parsed-literal::
 
-    <matplotlib.legend.Legend at 0x7f1741ec2790>
+    <matplotlib.legend.Legend at 0x7faf4386e290>
 
 
 
@@ -653,9 +653,9 @@ we need (``Gaussian1D``) is non-linear in the parameters.
     Outputs: ('y',)
     Model set size: 1
     Parameters:
-            amplitude              mean              stddev     
-        ------------------ ------------------- -----------------
-        10.226562029061137 0.03236561069933169 9.785759198463072
+            amplitude            mean             stddev     
+        ----------------- ----------------- -----------------
+        10.03344352974433 0.166651504563275 9.936340880512947
 
 
 We can get the `covariance
@@ -700,7 +700,7 @@ parameters using:
 
 .. parsed-literal::
 
-    [0.06229085 0.07601483 0.07617985]
+    [0.05313933 0.06945293 0.06964563]
 
 
 Then:
@@ -721,9 +721,9 @@ Then:
 
 .. parsed-literal::
 
-    Amplitude: 10.226562029061137 +\- 0.24958135658653724
-    Mean: 0.03236561069933169 +\- 0.27570787327809554
-    Standard Deviation: 9.785759198463072 +\- 0.2760069782875809
+    Amplitude: 10.03344352974433 +\- 0.23051969327653596
+    Mean: 0.166651504563275 +\- 0.2635392450161062
+    Standard Deviation: 9.936340880512947 +\- 0.2639045824534499
 
 
 We can apply the same method with ``scipy.optimize.curve_fit``, and
@@ -762,7 +762,7 @@ compare the results using again the *Reduced Chi Square Value*.
 
 .. parsed-literal::
 
-    [10.22656345  0.03236077  9.78575648]
+    [10.0334422   0.16665209  9.93634351]
 
 
 
@@ -781,9 +781,9 @@ compare the results using again the *Reduced Chi Square Value*.
 
 .. parsed-literal::
 
-    Amplitude: 10.2265634540188 +\- 0.24957963571082156
-    Mean: 0.032360766025602644 +\- 0.2757114997744782
-    Standard Deviation: 9.785756475116214 +\- 0.27601087901240556
+    Amplitude: 10.033442201811951 +\- 0.2305190403993116
+    Mean: 0.16665209499523423 +\- 0.2635407074284335
+    Standard Deviation: 9.936343510355336 +\- 0.26390614135506163
 
 
 Compare results
@@ -804,7 +804,7 @@ Compare results
 
 .. parsed-literal::
 
-    Reduced Chi Squared using astropy.modeling: 1.1876694179285037
+    Reduced Chi Squared using astropy.modeling: 1.0286035966072218
 
 
 
@@ -822,7 +822,7 @@ Compare results
 
 .. parsed-literal::
 
-    Reduced Chi Squared using scipy: 1.1876694179256282
+    Reduced Chi Squared using scipy: 1.028603596608923
 
 
 As we can see there is a very small difference in the *Reduced Chi
@@ -853,7 +853,7 @@ us to remember the expression of the function we wanted to use.
 
 .. parsed-literal::
 
-    <matplotlib.legend.Legend at 0x7f1741dc6b50>
+    <matplotlib.legend.Legend at 0x7faee3a4b210>
 
 
 
