@@ -192,7 +192,7 @@ Viewing the image data and getting basic statistics
 
 .. parsed-literal::
 
-    <matplotlib.colorbar.Colorbar at 0x7f6587c4ced0>
+    <matplotlib.colorbar.Colorbar at 0x7f04d64f8850>
 
 
 
@@ -391,7 +391,7 @@ scaling for ``imshow``.
 
 .. parsed-literal::
 
-    <matplotlib.colorbar.Colorbar at 0x7f657f9f0d50>
+    <matplotlib.colorbar.Colorbar at 0x7f04cbf128d0>
 
 
 
