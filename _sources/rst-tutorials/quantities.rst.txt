@@ -293,7 +293,7 @@ settings on your ``matplotlib`` session to better handle astropy
 
 .. parsed-literal::
 
-    <astropy.visualization.units.quantity_support.<locals>.MplQuantityConverter at 0x7fd5b8144d90>
+    <astropy.visualization.units.quantity_support.<locals>.MplQuantityConverter at 0x7f983a334150>
 
 
 
