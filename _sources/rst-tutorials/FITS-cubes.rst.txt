@@ -246,8 +246,8 @@ To do this, we index our cube along one axis (for a slice) or two axes
 
 .. parsed-literal::
 
-    INFO: Auto-setting vmin to -1.460e+00 [aplpy.core]
-    INFO: Auto-setting vmax to  1.486e+01 [aplpy.core]
+    INFO: Auto-setting vmin to -1.768e+00 [aplpy.core]
+    INFO: Auto-setting vmax to  1.832e+01 [aplpy.core]
 
 
 
@@ -526,7 +526,7 @@ object directly into a matplotlib axis instance.
 
 .. parsed-literal::
 
-    <matplotlib.contour.QuadContourSet at 0x7f483089f450>
+    <matplotlib.contour.QuadContourSet at 0x7f64b87940d0>
 
 
 

@@ -102,7 +102,7 @@ set ``vos_baseurl`` yourself, as follows.
     from astropy.utils import minversion
     
     if not minversion(astroquery, '0.3.10'):
-        conf.vos_baseurl = 'http://astropy.stsci.edu/aux/vo_databases/'
+        conf.vos_baseurl = 'https://astroconda.org/aux/vo_databases/'
 
 To start, it might be useful to list the available Cone Search catalogs
 first. By default, catalogs that pass nightly validation are included.
@@ -129,6 +129,8 @@ Validation is hosted by Space Telescope Science Institute (STScI).
      'SDSS DR7 - Sloan Digital Sky Survey Data Release 7 2',
      'SDSS DR7 - Sloan Digital Sky Survey Data Release 7 3',
      'SDSS DR7 - Sloan Digital Sky Survey Data Release 7 4',
+     'SDSS DR8 - Sloan Digital Sky Survey Data Release 8 1',
+     'SDSS DR8 - Sloan Digital Sky Survey Data Release 8 2',
      'The HST Guide Star Catalog, Version 1.1 (Lasker+ 1992) 1',
      'The HST Guide Star Catalog, Version 1.2 (Lasker+ 1996) 1',
      'The HST Guide Star Catalog, Version GSC-ACT (Lasker+ 1996-99) 1',
@@ -156,7 +158,7 @@ Next, let’s pick an astronomical object of interest. For example, M31.
 .. parsed-literal::
 
     <SkyCoord (ICRS): (ra, dec) in deg
-        (10.68470833, 41.26875)>
+        (10.6847083, 41.26875)>
 
 
 By default, a basic Cone Search goes through the list of catalogs and
@@ -185,7 +187,7 @@ beyond the control of ``astroquery.vo_conesearch`` package.
 
 .. parsed-literal::
 
-    WARNING: W50: http://gsss.stsci.edu/webservices/vo/ConeSearch.aspx?CAT=GSC23&RA=10.68470833&DEC=41.26875&SR=0.1&VERB=1:154:0: W50: Invalid unit string 'pixel' [astropy.io.votable.tree]
+    WARNING: W50: http://gsss.stsci.edu/webservices/vo/ConeSearch.aspx?CAT=GSC23&RA=10.6847083&DEC=41.26875&SR=0.1&VERB=1:154:0: W50: Invalid unit string 'pixel' [astropy.io.votable.tree]
 
 
 
@@ -426,11 +428,11 @@ catalog.
             "W50"
         ],
         "validate_warnings": [
-            "/redkeep/ironthrone/vo_databases/daily_20190826/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:154:0: W50: Invalid unit string 'pixel'",
-            "/redkeep/ironthrone/vo_databases/daily_20190826/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:154:0: W50: Invalid unit string 'pixel'"
+            "/var/www/astroconda.org/html/aux/vo_databases/daily_20190901/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:154:0: W50: Invalid unit string 'pixel'",
+            "/var/www/astroconda.org/html/aux/vo_databases/daily_20190901/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:154:0: W50: Invalid unit string 'pixel'"
         ],
         "validate_xmllint": true,
-        "validate_xmllint_content": "/redkeep/ironthrone/vo_databases/daily_20190826/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml validates\n",
+        "validate_xmllint_content": "/var/www/astroconda.org/html/aux/vo_databases/daily_20190901/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml validates\n",
         "waveband": "optical",
         "wsdl_url": ""
     }
@@ -777,7 +779,7 @@ This might take a while.
 
 .. parsed-literal::
 
-    Predicted run time is 0.5082391841335637 seconds
+    Predicted run time is 0.6900910678165497 seconds
     Predicted number of rows is 2617
 
 
@@ -806,7 +808,7 @@ the service provider.
 
 .. parsed-literal::
 
-    INFO: conesearch_timer took 0.6538145542144775 s on AVERAGE for 1 call(s). [astropy.utils.timer]
+    INFO: conesearch_timer took 0.6699669361114502 s on AVERAGE for 1 call(s). [astropy.utils.timer]
 
 
 
@@ -824,7 +826,7 @@ the service provider.
 
 .. parsed-literal::
 
-    Actual run time is 0.6538145542144775 seconds
+    Actual run time is 0.6699669361114502 seconds
     Actual number of rows is 4028
 
 
