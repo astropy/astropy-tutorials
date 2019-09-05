@@ -85,6 +85,7 @@
 <li><a class="reference internal" href="#building-the-tutorials-page-locally">Building the tutorials page locally</a></li>
 <li><a class="reference internal" href="#releases">Releases</a></li>
 <li><a class="reference internal" href="#marking-a-cell-with-an-intentional-error">Marking a cell with an intentional error</a></li>
+<li><a class="reference internal" href="#automatically-strip-output-and-notebook-metadata">Automatically Strip Output and Notebook Metadata</a></li>
 </ul>
 </li>
 </ul>
@@ -216,6 +217,41 @@ followed by a revision number that is determined by the number of git commits.</
 <p>Edit the cell metadata of the cell in which you would like to raise an exception
 and add the following to the top-level JSON: <code class="docutils literal notranslate"><span class="pre">&quot;tags&quot;:</span> <span class="pre">[&quot;raises-exception&quot;]</span></code>
 This tag is recognized by the latest (master) version of nbconvert.</p>
+</div>
+<div class="section" id="automatically-strip-output-and-notebook-metadata">
+<h2>Automatically Strip Output and Notebook Metadata<a class="headerlink" href="#automatically-strip-output-and-notebook-metadata" title="Permalink to this headline">¶</a></h2>
+<p>Jupyter notebooks contain some metadata that is typically hidden from users,
+which contains, for example, information about the Python kernel used to run it, the
+version of IPython, etc. When tutorial authors or maintainers edit notebooks,
+this metadata is automatically modified by Jupyter, leading to superfluous and
+sometimes confusing changes to the notebooks when viewed in a “diff” locally or
+on GitHub.</p>
+<p>In order to prevent such metadata updates from appearing in pull requests, we
+therefore recommend that any contributor or maintainer install and use
+<a class="reference external" href="https://github.com/kynan/nbstripout">nbstripout</a> set up with an automatic Git
+hook to clean metadata changes whenever a notebook change is committed to your
+local repo. To install <code class="docutils literal notranslate"><span class="pre">nbstripout</span></code>, first pip install it with:</p>
+<blockquote>
+<div><p>pip install nbstripout</p>
+</div></blockquote>
+<p>This repo is already configured. Next, configure Git within your
+local clone of astropy-tutorials to tell <code class="docutils literal notranslate"><span class="pre">nbstripout</span></code> to intervene whenever
+you commit changes in the repo. To do this, you first have to “install” it with:</p>
+<blockquote>
+<div><p>nbstripout –install</p>
+</div></blockquote>
+<p>Then, to tell <code class="docutils literal notranslate"><span class="pre">nbstripout</span></code> to ignore metadata changes, you must also run:</p>
+<blockquote>
+<div><dl class="simple">
+<dt>git config filter.nbstripout.extrakeys ‘</dt><dd><p>metadata.celltoolbar metadata.kernel_spec.display_name
+metadata.kernel_spec.name metadata.language_info.codemirror_mode.version
+metadata.language_info.pygments_lexer metadata.language_info.version
+metadata.toc metadata.notify_time metadata.varInspector
+cell.metadata.heading_collapsed cell.metadata.hidden
+cell.metadata.code_folding cell.metadata.tags cell.metadata.init_cell’</p>
+</dd>
+</dl>
+</div></blockquote>
 </div>
 </div>
 
