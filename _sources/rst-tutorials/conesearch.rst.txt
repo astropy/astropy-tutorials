@@ -129,7 +129,6 @@ Validation is hosted by Space Telescope Science Institute (STScI).
      'SDSS DR7 - Sloan Digital Sky Survey Data Release 7 2',
      'SDSS DR7 - Sloan Digital Sky Survey Data Release 7 3',
      'SDSS DR7 - Sloan Digital Sky Survey Data Release 7 4',
-     'SDSS DR8 - Sloan Digital Sky Survey Data Release 8 1',
      'SDSS DR8 - Sloan Digital Sky Survey Data Release 8 2',
      'The HST Guide Star Catalog, Version 1.1 (Lasker+ 1992) 1',
      'The HST Guide Star Catalog, Version 1.2 (Lasker+ 1996) 1',
@@ -428,11 +427,11 @@ catalog.
             "W50"
         ],
         "validate_warnings": [
-            "/var/www/astroconda.org/html/aux/vo_databases/daily_20190905/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:154:0: W50: Invalid unit string 'pixel'",
-            "/var/www/astroconda.org/html/aux/vo_databases/daily_20190905/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:154:0: W50: Invalid unit string 'pixel'"
+            "/var/www/astroconda.org/html/aux/vo_databases/daily_20190915/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:154:0: W50: Invalid unit string 'pixel'",
+            "/var/www/astroconda.org/html/aux/vo_databases/daily_20190915/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:154:0: W50: Invalid unit string 'pixel'"
         ],
         "validate_xmllint": true,
-        "validate_xmllint_content": "/var/www/astroconda.org/html/aux/vo_databases/daily_20190905/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml validates\n",
+        "validate_xmllint_content": "/var/www/astroconda.org/html/aux/vo_databases/daily_20190915/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml validates\n",
         "waveband": "optical",
         "wsdl_url": ""
     }
@@ -779,7 +778,7 @@ This might take a while.
 
 .. parsed-literal::
 
-    Predicted run time is 0.4696482712664896 seconds
+    Predicted run time is 0.41963691561372124 seconds
     Predicted number of rows is 2617
 
 
@@ -808,7 +807,7 @@ the service provider.
 
 .. parsed-literal::
 
-    INFO: conesearch_timer took 0.7832655906677246 s on AVERAGE for 1 call(s). [astropy.utils.timer]
+    INFO: conesearch_timer took 0.7145993709564209 s on AVERAGE for 1 call(s). [astropy.utils.timer]
 
 
 
@@ -826,7 +825,7 @@ the service provider.
 
 .. parsed-literal::
 
-    Actual run time is 0.7832655906677246 seconds
+    Actual run time is 0.7145993709564209 seconds
     Actual number of rows is 4028
 
 

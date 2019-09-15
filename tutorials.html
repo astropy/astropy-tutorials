@@ -98,15 +98,15 @@
               filters[f].checked = true;
       }
       document.getElementById("search-bar-input").value = '';
-  });
-
-  //no results found
-  $(window).on('load', function() {
+  
+      //number of results found
+      setTimeout(function() {
           if (!document.getElementsByClassName('result-card').length)
               {document.getElementById('search-results').innerHTML += '<h3>No tutorials found!</h3>';}
           else{
             document.getElementById('search-results').innerHTML = ('<h4>'+document.getElementsByClassName('result-card').length +' tutorials found</h4>') + document.getElementById('search-results').innerHTML;
           }
+      },1000);
   });
 
   //update filters
