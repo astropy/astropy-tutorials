@@ -331,18 +331,22 @@ var Search = {
 
   _index : null,
   _queued_query : null,
+  _queued_target : null,
   _pulse_status : -1,
 
   init : function() {
       var params = $.getQueryParameters();
-      if (params.q) {
-          var query = params.q[0];
-      } else {
-          // If no query string is passed, assume we want to filterTutorials
-          var query = "filterTutorials";
-      }
-      $('input[name="q"]')[0].value = query;
-      this.performSearch(query);
+      var query = "";
+      // By default, search the tutorials. This might need to be changes when
+      // examples, guides, etc. also appear!
+      var target = "tutorials";
+      if (params.q)
+        query = params.q[0];
+
+      if (params.target)
+        target = params.target[0];
+
+      this.performSearch(query, target);
   },
 
   loadIndex : function(url) {
@@ -359,8 +363,10 @@ var Search = {
     var q;
     this._index = index;
     if ((q = this._queued_query) !== null) {
+      target = this._queued_target;
       this._queued_query = null;
-      Search.query(q);
+      this._queued_target = null;
+      Search.query(q, target);
     }
   },
 
@@ -368,8 +374,9 @@ var Search = {
       return this._index !== null;
   },
 
-  deferQuery : function(query) {
+  deferQuery : function(query, target) {
       this._queued_query = query;
+      this._queued_target = target;
   },
 
   stopPulse : function() {
@@ -395,7 +402,7 @@ var Search = {
   /**
    * perform a search for something (or wait until index is loaded)
    */
-  performSearch : function(query) {
+  performSearch : function(query, target) {
     // create the required interface elements
     this.out = $('#search-results');
     this.title = $('<h2>' + _('Searching') + '</h2>').appendTo(this.out);
@@ -408,12 +415,14 @@ var Search = {
 
     // index already loaded, the browser was quick!
     if (this.hasIndex())
-      this.query(query);
+      this.query(query, target);
     else
-      this.deferQuery(query);
+      this.deferQuery(query, target);
 
-    //Perform search in Astropy Documentation
-      if (query.includes("filterTutorials")) { // don't search docs if we are just looking for tutorials
+    // Perform search in Astropy Documentation
+    // TODO: this is broken right now - need to add support for target = 'all' and target = 'docs'
+    /*
+    if (target != 'tutorials') { // don't search docs if we just want tutorials
         var docResponse = null;
         var docResult = '';
         $.get('https://readthedocs.org/api/v2/docsearch/?q=' + window.location.search.split('=')[1] + '&project=astropy&version=stable&language=en', function(response){
@@ -437,13 +446,13 @@ var Search = {
              inject.innerHTML += docResult;
             }
         });
-      }
+      }*/
   },
 
   /**
    * execute search (requires search index to be loaded)
    */
-  query : function(query) {
+  query : function(query, target) {
     var i;
     var stopwords = ["a","and","are","as","at","be","but","by","for","if","in","into","is","it","near","no","not","of","on","or","such","that","the","their","then","there","these","they","this","to","was","will","with"];
 
@@ -459,7 +468,8 @@ var Search = {
           objectterms.push(tmp[i].toLowerCase());
       }
 
-      if ($u.indexOf(stopwords, tmp[i].toLowerCase()) != -1 || tmp[i].match(/^\d+$/) ||
+      if ($u.indexOf(stopwords, tmp[i].toLowerCase()) != -1 ||
+            tmp[i].match(/^\d+$/) ||
           tmp[i] === "") {
         // skip this "word"
         continue;
@@ -497,40 +507,60 @@ var Search = {
     // array of [filename, title, anchor, descr, score]
     var results = [];
     $('#search-progress').empty();
-
-    // lookup as object
-    for (i = 0; i < objectterms.length; i++) {
-      var others = [].concat(objectterms.slice(0, i),
-                             objectterms.slice(i+1, objectterms.length));
-      results = results.concat(this.performObjectSearch(objectterms[i], others));
-    }
-
-    // lookup as search terms in fulltext
-    results = results.concat(this.performTermsSearch(searchterms, excluded, terms, titleterms));
-
-    // let the scorer override scores with a custom scoring function
-    if (Scorer.score) {
-      for (i = 0; i < results.length; i++)
-        results[i][4] = Scorer.score(results[i]);
-    }
-
-    // now sort the results by score (in opposite order of appearance, since the
-    // display function below uses pop() to retrieve items) and then
-    // alphabetically
-    results.sort(function(a, b) {
-      var left = a[4];
-      var right = b[4];
-      if (left > right) {
-        return 1;
-      } else if (left < right) {
-        return -1;
-      } else {
-        // same score: sort alphabetically
-        left = a[1].toLowerCase();
-        right = b[1].toLowerCase();
-        return (left > right) ? -1 : ((left < right) ? 1 : 0);
+    if ((query != undefined) && (query != "")) {
+      // lookup as object
+      for (i = 0; i < objectterms.length; i++) {
+        var others = [].concat(objectterms.slice(0, i),
+                              objectterms.slice(i+1, objectterms.length));
+        results = results.concat(this.performObjectSearch(objectterms[i],
+                                                          others));
       }
-    });
+
+      // lookup as search terms in fulltext
+      results = results.concat(this.performTermsSearch(searchterms, excluded,
+                                                       terms, titleterms));
+
+      // let the scorer override scores with a custom scoring function
+      if (Scorer.score) {
+        for (i = 0; i < results.length; i++)
+          results[i][4] = Scorer.score(results[i]);
+      }
+
+      // now sort the results by score (in opposite order of appearance, since
+      // the display function below uses pop() to retrieve items) and then
+      // alphabetically
+      results.sort(function(a, b) {
+        var left = a[4];
+        var right = b[4];
+        if (left > right) {
+          return 1;
+        } else if (left < right) {
+          return -1;
+        } else {
+          // same score: sort alphabetically
+          left = a[1].toLowerCase();
+          right = b[1].toLowerCase();
+          return (left > right) ? -1 : ((left < right) ? 1 : 0);
+        }
+      });
+    } else { // No search query - get all items for the "target"
+      var filenames = this._index.filenames;
+      var docnames = this._index.docnames;
+      var titles = this._index.titles;
+
+      var tmp;
+      var result;
+      for (var i=0; i<filenames.length; i++) {
+        tmp = filenames[i].split('/');
+        result = [docnames[i], titles[i], '', null, 5, filenames[i]];
+        if (target == 'all') {
+          results.push(row);
+        } else if (target == 'tutorials') {
+          if (tmp[0] == 'rst-tutorials')
+            results.push(result);
+        } // TODO: add more else clauses for docs, examples, etc.
+      }
+    }
 
     // for debugging
     //Search.lastresults = results.slice();  // a copy
@@ -572,18 +602,35 @@ var Search = {
           if (suffix === undefined) {
             suffix = '.txt';
           }
-          $.ajax({url: DOCUMENTATION_OPTIONS.URL_ROOT + '_sources/' + item[5] + (item[5].slice(-suffix.length) === suffix ? '' : suffix),
-                  dataType: "text",
-                  complete: function(jqxhr, textstatus) {
-                    var data = jqxhr.responseText;
-                    if (data !== '' && data !== undefined) {
-                      listItem.append(Search.makeSearchSummary(data, searchterms, hlterms));
-                    }
-                    Search.output.append(listItem);
-                    listItem.slideDown(5, function() {
-                      displayNextItem();
-                    });
-                  }, async: false});
+          var full_url = DOCUMENTATION_OPTIONS.URL_ROOT + '_sources/' + item[5] + (item[5].slice(-suffix.length) === suffix ? '' : suffix);
+
+          if ((target == 'tutorials') || (target == 'all')) {
+            $.ajax({url: full_url,
+                    dataType: "text",
+                    complete: function(jqxhr, textstatus) {
+                      var data = jqxhr.responseText;
+                      if (data !== '' && data !== undefined) {
+                        var result = Search.makeSearchSummary(data,
+                                                              searchterms,
+                                                              hlterms,
+                                                              full_url);
+                        listItem.append(result);
+                      } else {
+                        var result = undefined;
+                      }
+                      if (result != undefined) {
+                        Search.output.append(listItem);
+                        listItem.slideDown(5, function() {
+                          displayNextItem();
+                        });
+                      }
+                    }, async: false});
+            } else {
+              console.log('Skipping ' + full_url + ' because target=' + target);
+              listItem.slideDown(5, function() {
+                displayNextItem();
+              });
+            }
         } else {
           // no source available, just display title
           Search.output.append(listItem);
@@ -773,7 +820,8 @@ var Search = {
    * words. the first one is used to find the occurrence, the
    * latter for highlighting it.
    */
-  makeSearchSummary : function(text, keywords, hlwords) {
+  makeSearchSummary : function(text, keywords, hlwords, url) {
+
     // The "text" passed in here is the restructured text from each tutorial
     // file generated by nbconvert
     var textLower = text.toLowerCase();
@@ -821,7 +869,10 @@ var Search = {
     var startIdx = textLower.indexOf('====\n', 0) + 5;
     var excerpt = "";
 
-    if (hlwords == "filtertutorials") {
+    // Content to display on each placard on the tutorials page when a search
+    // query is provided
+    var lines = new Array();
+    if ((keywords == undefined) || (keywords.length == 0)) {
       // Summary to display on the placards on the tutorials page with no search
       // query string
 
@@ -842,9 +893,6 @@ var Search = {
         excerpt = 'No tutorial summary found.';
       }
     } else {
-      // Content to display on each placard on the tutorials page when a search
-      // query is provided
-      var lines = new Array();
       $.each(keywords, function(i, x) {
         var keyIdx = textLower.indexOf(hlwords[i].toLowerCase(), startIdx);
         var textLen = textLower.length;

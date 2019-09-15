@@ -179,7 +179,7 @@ class NBTutorialsConverter(object):
         # Add metatags to top of RST files to get rendered into HTML, used for
         # the search and filter functionality in Learn Astropy
         meta_tutorials = '.. meta::\n    :keywords: {0}\n'
-        filters = ['filterTutorials'] + keyword_filters
+        filters = keyword_filters
         meta_tutorials = meta_tutorials.format(', '.join(filters))
         with open(output_file_path, 'r') as f:
             rst_text = f.read()

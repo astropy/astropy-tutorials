@@ -27,14 +27,15 @@
   //update filters
   function applyFilter(){
       sessionStorage.scrollTop = $(window).scrollTop(); //to store the current scroll position
-      var checkedValue = 'filterTutorials';    //because we only want to search the tutorials
+      var checkedValue = '';
       var inputElements = document.getElementsByClassName('custom-control-input');
       for(var i=0; inputElements[i]; ++i){
           if(inputElements[i].checked){
               checkedValue += '+' + inputElements[i].value ;   //new query
           }
       }
-      var url = window.location.href.split("tutorials.html")[0] + "tutorials.html?q=" + checkedValue;
+      // "target=tutorials" because we only want to search the tutorials
+      var url = window.location.href.split("tutorials.html")[0] + "tutorials.html?target=tutorials&q=" + checkedValue;
       window.location.href = url;
   }
 
