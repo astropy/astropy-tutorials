@@ -24,15 +24,6 @@ your web browser within a remote server:
 .. image:: http://mybinder.org/badge.svg
     :target: https://mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=tutorials/notebooks
 
-
-Contributing tutorial material
-------------------------------
-
-Please see the "`For contributors
-<http://www.astropy.org/astropy-tutorials/#for-contributors>`_" section
-of the tutorials documentation for information on how to get started.
-
-
 Tutorial infrastructure
 -----------------------
 
