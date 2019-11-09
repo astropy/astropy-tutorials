@@ -79,17 +79,6 @@ Imports
     from astropy.modeling import Fittable1DModel, Parameter
     from astroquery.sdss import SDSS
 
-
-:outputnumrole:`Out[1]:`
-
-
-.. parsed-literal::
-
-    WARNING: AstropyDeprecationWarning: astropy.extern.six will be removed in 4.0, use the six module directly if it is still needed [astropy.extern.six]
-    /home/circleci/project/venv/lib/python3.7/site-packages/astroquery/sdss/__init__.py:29: UserWarning: Experimental: SDSS has not yet been refactored to have its API match the rest of astroquery (but it's nearly there).
-      warnings.warn("Experimental: SDSS has not yet been refactored to have its API "
-
-
 Fit an emission line in a stellar spectrum
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -133,7 +122,7 @@ way:
 
 .. parsed-literal::
 
-    /home/circleci/project/venv/lib/python3.7/site-packages/astroquery/sdss/core.py:856: VisibleDeprecationWarning: Reading unicode strings without specifying the encoding argument is deprecated. Set the encoding, use None for the system default.
+    /home/circleci/project/venv/lib/python3.7/site-packages/astroquery/sdss/core.py:865: VisibleDeprecationWarning: Reading unicode strings without specifying the encoding argument is deprecated. Set the encoding, use None for the system default.
       comments='#'))
 
 
@@ -809,9 +798,9 @@ with ``astropy.modeling``.
     Outputs: ('x',)
     Model set size: 1
     Parameters:
-                a                   b                  c        
-        ------------------ ------------------- -----------------
-        1.2991138142627274 -1.8011437769577219 0.817605049976091
+                a                  b                  c         
+        ------------------ ------------------ ------------------
+        1.4061785671216398 -2.226494650282305 0.7931771115135371
 
 
 The fit looks good in the plot. Let’s check the parameters and the
@@ -849,7 +838,7 @@ goodness of the fit.
 
 .. parsed-literal::
 
-    1.1454280458480974
+    0.8811512501927788
 
 
 
@@ -998,9 +987,9 @@ of the parameters.
     Outputs: ('y',)
     Model set size: 1
     Parameters:
-                a                 b                  c                  d        
-        ----------------- ------------------ ------------------ -----------------
-        3.424824718929283 2.0044236648275833 3.8076229907310046 1.055802689008543
+                a                 b                  c                 d         
+        ----------------- ------------------ ----------------- ------------------
+        3.104101815305958 2.0332288045244207 3.788833823071875 1.0491952751192497
 
 
 
@@ -1019,7 +1008,7 @@ of the parameters.
 
 .. parsed-literal::
 
-    6.026062260939061
+    3.1873078935015084
 
 
 

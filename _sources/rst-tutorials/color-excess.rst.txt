@@ -98,15 +98,6 @@ command to upgrade
     from astroquery.mast import Observations
     import astropy.visualization
 
-
-:outputnumrole:`Out[1]:`
-
-
-.. parsed-literal::
-
-    WARNING: AstropyDeprecationWarning: astropy.extern.six will be removed in 4.0, use the six module directly if it is still needed [astropy.extern.six]
-
-
 Introduction
 ============
 
@@ -267,9 +258,9 @@ MAST <https://archive.stsci.edu/iue/>`__:
        science            IUE              -- ... 3500011968                0.0
        science            IUE              -- ... 3500011969                0.0
        science            IUE              -- ... 3500008878                0.0
-       science            HST         CALSTIS ... 2025086267 0.5751893673409462
-       science            HST         CALSTIS ... 2038207407 0.5751893673409462
-       science            HST         CALSTIS ... 2029206188 0.5751893673409462
+       science            HST         CALSTIS ... 2039211830 0.5751893673409462
+       science            HST         CALSTIS ... 2039212069 0.5751893673409462
+       science            HST         CALSTIS ... 2039209130 0.5751893673409462
     Length = 109 rows
     Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:IUE/url/pub/iue/data/lwr/05000/lwr05639.elbll.gz to ./mastDownload/IUE/lwr05639/lwr05639.elbll.gz ... [Done]
     Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:IUE/url/pub/iue/data/lwr/05000/lwr05639.lilo.gz to ./mastDownload/IUE/lwr05639/lwr05639.lilo.gz ... [Done]

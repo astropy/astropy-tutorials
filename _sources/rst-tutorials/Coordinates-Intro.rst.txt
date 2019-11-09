@@ -500,7 +500,7 @@ file\ ``'HCG7_SDSS_cutout.jpg'``, defined at the top of the cell.
 
 .. parsed-literal::
 
-    ('HCG7_SDSS_cutout.jpg', <http.client.HTTPMessage at 0x7fb6483d5f50>)
+    ('HCG7_SDSS_cutout.jpg', <http.client.HTTPMessage at 0x7f68a9bdc910>)
 
 
 
@@ -518,7 +518,7 @@ file\ ``'HCG7_SDSS_cutout.jpg'``, defined at the top of the cell.
 
 
 
-.. image:: nboutput/Coordinates-Intro_24_0.jpeg
+.. image:: nboutput/Coordinates-Intro_24_0.jpg
 
 
 

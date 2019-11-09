@@ -81,15 +81,6 @@ Imports
     import matplotlib.pyplot as plt
     %matplotlib inline
 
-
-:outputnumrole:`Out[1]:`
-
-
-.. parsed-literal::
-
-    WARNING: AstropyDeprecationWarning: astropy.extern.six will be removed in 4.0, use the six module directly if it is still needed [astropy.extern.six]
-
-
 If you are running an older version of ``astroquery``, you might need to
 set ``vos_baseurl`` yourself, as follows.
 
@@ -428,11 +419,11 @@ catalog.
             "W50"
         ],
         "validate_warnings": [
-            "/var/www/astroconda.org/html/aux/vo_databases/daily_20190919/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:154:0: W50: Invalid unit string 'pixel'",
-            "/var/www/astroconda.org/html/aux/vo_databases/daily_20190919/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:154:0: W50: Invalid unit string 'pixel'"
+            "/var/www/astroconda.org/html/aux/vo_databases/daily_20191109/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:154:0: W50: Invalid unit string 'pixel'",
+            "/var/www/astroconda.org/html/aux/vo_databases/daily_20191109/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:154:0: W50: Invalid unit string 'pixel'"
         ],
         "validate_xmllint": true,
-        "validate_xmllint_content": "/var/www/astroconda.org/html/aux/vo_databases/daily_20190919/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml validates\n",
+        "validate_xmllint_content": "/var/www/astroconda.org/html/aux/vo_databases/daily_20191109/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml validates\n",
         "waveband": "optical",
         "wsdl_url": ""
     }
@@ -779,7 +770,7 @@ This might take a while.
 
 .. parsed-literal::
 
-    Predicted run time is 0.4218068140462653 seconds
+    Predicted run time is 0.4503600351923458 seconds
     Predicted number of rows is 2617
 
 
@@ -808,7 +799,7 @@ the service provider.
 
 .. parsed-literal::
 
-    INFO: conesearch_timer took 0.6618714332580566 s on AVERAGE for 1 call(s). [astropy.utils.timer]
+    INFO: conesearch_timer took 0.6983885765075684 s on AVERAGE for 1 call(s). [astropy.utils.timer]
 
 
 
@@ -826,7 +817,7 @@ the service provider.
 
 .. parsed-literal::
 
-    Actual run time is 0.6618714332580566 seconds
+    Actual run time is 0.6983885765075684 seconds
     Actual number of rows is 4028
 
 
