@@ -64,7 +64,7 @@ We recommend installing the two packages in this fashion:
 
 ::
 
-   conda install -c http://ssb.stsci.edu/astroconda synphot
+   pip install synphot
    pip install dust_extinction
 
 This tutorial requires v0.7 or later of ``dust_extinction``. To ensure
