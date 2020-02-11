@@ -19,8 +19,8 @@
 Analyzing UVES Spectroscopy with Astropy
 ========================================
 
-Authors:
---------
+Authors
+-------
 
 Moritz Guenther, Miguel de Val-Borro, Emily Rice (Learning Goals &
 formatting)
@@ -43,11 +43,14 @@ Learning Goals
 -  *Visualization*: Plot spectral data using
    `matplotlib <https://matplotlib.org/>`__
 
-Keywords:
----------
+Keywords
+--------
 
 astropy.io, astropy.wcs, astropy.units, astropy.constants, astropy.time,
 astropy.table, matplotlib, spectra, UVES
+
+Summary
+-------
 
 This tutorial follows our real-life data analysis of MN Lup and the code
 developed below is taken (with only minor modifications) from the code

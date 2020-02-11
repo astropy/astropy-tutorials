@@ -19,16 +19,13 @@
 Computing Galactic Orbits of Stars with Gala
 ============================================
 
-Introduction
-------------
-
 Authors
-~~~~~~~
+-------
 
 Adrian Price-Whelan, Stephanie T. Douglas
 
 Learning Goals
-~~~~~~~~~~~~~~
+--------------
 
 -  Query the Gaia data release 2 catalog to retrieve data for a sample
    of well-measured, nearby stars
@@ -39,19 +36,19 @@ Learning Goals
    smaller vertical excursions
 
 Keywords
-~~~~~~~~
+--------
 
 coordinates, astroquery, gala, galactic dynamics, astrometry,
 matplotlib, scatter plot, histogram
 
 Companion Content
-~~~~~~~~~~~~~~~~~
+-----------------
 
 Astropy Docs: `Description of the Galactocentric frame in astropy
 coordinates <http://docs.astropy.org/en/latest/generated/examples/coordinates/plot_galactocentric-frame.html#sphx-glr-generated-examples-coordinates-plot-galactocentric-frame-py>`__
 
 Summary
-~~~~~~~
+-------
 
 We will use data from the `Gaia
 mission <https://www.cosmos.esa.int/web/gaia>`__ to get sky positions,
@@ -242,7 +239,7 @@ first four rows of the table:
 .. raw:: html
 
     <i>QTable length=4</i>
-    <table id="table139874284036304" class="table-striped table-bordered table-condensed">
+    <table id="table140682554773008" class="table-striped table-bordered table-condensed">
     <thead><tr><th>ra</th><th>dec</th><th>parallax</th><th>pmra</th><th>pmdec</th><th>radial_velocity</th><th>phot_g_mean_mag</th><th>phot_bp_mean_mag</th><th>phot_rp_mean_mag</th></tr></thead>
     <thead><tr><th>deg</th><th>deg</th><th>mas</th><th>mas / yr</th><th>mas / yr</th><th>km / s</th><th>mag</th><th>mag</th><th>mag</th></tr></thead>
     <thead><tr><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float32</th><th>float32</th><th>float32</th></tr></thead>

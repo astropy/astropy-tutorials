@@ -80,14 +80,11 @@
         <h3>Table of contents</h3>
         <ul>
 <li><a class="reference internal" href="#">Computing Galactic Orbits of Stars with Gala</a><ul>
-<li><a class="reference internal" href="#introduction">Introduction</a><ul>
 <li><a class="reference internal" href="#authors">Authors</a></li>
 <li><a class="reference internal" href="#learning-goals">Learning Goals</a></li>
 <li><a class="reference internal" href="#keywords">Keywords</a></li>
 <li><a class="reference internal" href="#companion-content">Companion Content</a></li>
 <li><a class="reference internal" href="#summary">Summary</a></li>
-</ul>
-</li>
 <li><a class="reference internal" href="#installing-dependencies">Installing Dependencies</a></li>
 <li><a class="reference internal" href="#imports">Imports</a></li>
 <li><a class="reference internal" href="#scientific-background">Scientific Background</a></li>
@@ -111,14 +108,12 @@
 
 <div id="spacer"></div><div class="section" id="computing-galactic-orbits-of-stars-with-gala">
 <span id="gaia-galactic-orbits"></span><h1>Computing Galactic Orbits of Stars with Gala<a class="headerlink" href="#computing-galactic-orbits-of-stars-with-gala" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="authors">
-<h3>Authors<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a></h3>
+<h2>Authors<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a></h2>
 <p>Adrian Price-Whelan, Stephanie T. Douglas</p>
 </div>
 <div class="section" id="learning-goals">
-<h3>Learning Goals<a class="headerlink" href="#learning-goals" title="Permalink to this headline">¶</a></h3>
+<h2>Learning Goals<a class="headerlink" href="#learning-goals" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>Query the Gaia data release 2 catalog to retrieve data for a sample
 of well-measured, nearby stars</p></li>
@@ -130,17 +125,17 @@ smaller vertical excursions</p></li>
 </ul>
 </div>
 <div class="section" id="keywords">
-<h3>Keywords<a class="headerlink" href="#keywords" title="Permalink to this headline">¶</a></h3>
+<h2>Keywords<a class="headerlink" href="#keywords" title="Permalink to this headline">¶</a></h2>
 <p>coordinates, astroquery, gala, galactic dynamics, astrometry,
 matplotlib, scatter plot, histogram</p>
 </div>
 <div class="section" id="companion-content">
-<h3>Companion Content<a class="headerlink" href="#companion-content" title="Permalink to this headline">¶</a></h3>
+<h2>Companion Content<a class="headerlink" href="#companion-content" title="Permalink to this headline">¶</a></h2>
 <p>Astropy Docs: <a class="reference external" href="http://docs.astropy.org/en/latest/generated/examples/coordinates/plot_galactocentric-frame.html#sphx-glr-generated-examples-coordinates-plot-galactocentric-frame-py">Description of the Galactocentric frame in astropy
 coordinates</a></p>
 </div>
 <div class="section" id="summary">
-<h3>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h3>
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
 <p>We will use data from the <a class="reference external" href="https://www.cosmos.esa.int/web/gaia">Gaia
 mission</a> to get sky positions,
 distances (parallaxes), proper motions, and radial velocities for a set
@@ -152,7 +147,6 @@ conditions to compute the orbits of these stars in the galaxy using the
 orbits of high-mass main sequence (i.e. young) stars to the orbits of
 lower-mass main sequence stars to show that young stars have smaller
 vertical amplitudes.</p>
-</div>
 </div>
 <div class="section" id="installing-dependencies">
 <h2>Installing Dependencies<a class="headerlink" href="#installing-dependencies" title="Permalink to this headline">¶</a></h2>
@@ -289,7 +283,7 @@ first four rows of the table:</p>
 </div>
 <p><span class="outputnumrole">Out[5]:</span></p>
 <i>QTable length=4</i>
-<table id="table139874284036304" class="table-striped table-bordered table-condensed">
+<table id="table140682554773008" class="table-striped table-bordered table-condensed">
 <thead><tr><th>ra</th><th>dec</th><th>parallax</th><th>pmra</th><th>pmdec</th><th>radial_velocity</th><th>phot_g_mean_mag</th><th>phot_bp_mean_mag</th><th>phot_rp_mean_mag</th></tr></thead>
 <thead><tr><th>deg</th><th>deg</th><th>mas</th><th>mas / yr</th><th>mas / yr</th><th>km / s</th><th>mag</th><th>mag</th><th>mag</th></tr></thead>
 <thead><tr><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float32</th><th>float32</th><th>float32</th></tr></thead>

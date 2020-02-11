@@ -19,6 +19,9 @@
 Analyzing interstellar reddening and calculating synthetic photometry
 =====================================================================
 
+Authors
+-------
+
 Kristen Larson, Lia Corrales, Stephanie T. Douglas, Kelle Cruz
 
 Input from Emir Karamehmetoglu, Pey Lian Lim, Karl Gordon, Kevin Covey
