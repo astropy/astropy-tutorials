@@ -11,19 +11,19 @@
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
     <link rel="stylesheet" type="text/css" href="../_static/bootstrap_sandstone.css" />
     <link rel="stylesheet" type="text/css" href="../_static/astropy.css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/language_data.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
-    <script type="text/javascript" src="../_static/searchtools.js"></script>
-    <script type="text/javascript" src="https://use.fontawesome.com/3168e95f94.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script src="../_static/js/jquery-fix.js"></script>
+    <script src="../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script src="../_static/bootstrap-sphinx.js"></script>
+    <script src="../_static/searchtools.js"></script>
+    <script src="https://use.fontawesome.com/3168e95f94.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <link rel="shortcut icon" href="../_static/astropy_favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -147,7 +147,7 @@ given position.</p>
 <span class="kn">import</span> <span class="nn">warnings</span>
 
 <span class="c1"># Third-party software</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <span class="c1"># Astropy</span>
 <span class="kn">from</span> <span class="nn">astropy</span> <span class="kn">import</span> <span class="n">coordinates</span> <span class="k">as</span> <span class="n">coord</span>
@@ -160,7 +160,7 @@ given position.</p>
 <span class="kn">from</span> <span class="nn">astroquery.vo_conesearch</span> <span class="kn">import</span> <span class="n">conf</span><span class="p">,</span> <span class="n">conesearch</span><span class="p">,</span> <span class="n">vos_catalog</span>
 
 <span class="c1"># Set up matplotlib</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
 </pre></div>
 </div>
@@ -193,13 +193,14 @@ Validation is hosted by Space Telescope Science Institute (STScI).</p>
  <span class="s1">&#39;The HST Guide Star Catalog, Version GSC-ACT (Lasker+ 1996-99) 1&#39;</span><span class="p">,</span>
  <span class="s1">&#39;The USNO-A2.0 Catalogue (Monet+ 1998) 1&#39;</span><span class="p">,</span>
  <span class="s1">&#39;Two Micron All Sky Survey (2MASS) 1&#39;</span><span class="p">,</span>
- <span class="s1">&#39;Two Micron All Sky Survey (2MASS) 2&#39;</span><span class="p">]</span>
+ <span class="s1">&#39;Two Micron All Sky Survey (2MASS) 2&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;USNO-A2 Catalogue 1&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 <p>Next, let’s pick an astronomical object of interest. For example, M31.</p>
 <p><span class="inputnumrole">In[4]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">coord</span><span class="o">.</span><span class="n">SkyCoord</span><span class="o">.</span><span class="n">from_name</span><span class="p">(</span><span class="s1">&#39;M31&#39;</span><span class="p">,</span> <span class="n">frame</span><span class="o">=</span><span class="s1">&#39;icrs&#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[4]:</span></p>
@@ -213,6 +214,8 @@ for objects within 0.1 degree around M31. You will see a lot of warnings
 that were generated by VO table parser but ignored by Cone Search
 service validator. VO compliance enforced by Cone Search providers is
 beyond the control of <code class="docutils literal notranslate"><span class="pre">astroquery.vo_conesearch</span></code> package.</p>
+<p>The result is an <a class="reference external" href="http://astropy.readthedocs.io/en/stable/table/index.html">Astropy
+table</a>.</p>
 <p><span class="inputnumrole">In[5]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">conesearch</span><span class="o">.</span><span class="n">conesearch</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">degree</span><span class="p">)</span>
 </pre></div>
@@ -221,25 +224,21 @@ beyond the control of <code class="docutils literal notranslate"><span class="pr
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Trying http://gsss.stsci.edu/webservices/vo/ConeSearch.aspx?CAT=GSC23&amp;
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>WARNING: W50: http://gsss.stsci.edu/webservices/vo/ConeSearch.aspx?CAT=GSC23&amp;RA=10.68470833&amp;DEC=41.26875&amp;SR=0.1&amp;VERB=1:154:0: W50: Invalid unit string &#39;pixel&#39; [astropy.io.votable.tree]
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>WARNING: W50: http://gsss.stsci.edu/webservices/vo/ConeSearch.aspx?CAT=GSC23RA=10.68470833&amp;DEC=41.26875&amp;SR=0.1&amp;VERB=1:154:0: W50: Invalid unit string &#39;pixel&#39; [astropy.io.votable.tree]
 </pre></div>
 </div>
 <p><span class="inputnumrole">In[6]:</span></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;First non-empty table returned by&#39;</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Number of rows is&#39;</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">nrows</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;First non-empty table returned by&#39;</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of rows is&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[6]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>First non-empty table returned by http://gsss.stsci.edu/webservices/vo/ConeSearch.aspx?CAT=GSC23&amp;
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>First non-empty table returned by http://gsss.stsci.edu/webservices/vo/ConeSearch.aspx?CAT=GSC23
 Number of rows is 4028
 </pre></div>
 </div>
-<p>This VO table can be converted into <a class="reference external" href="http://astropy.readthedocs.io/en/stable/table/index.html">Astropy
-table</a> and
-then manipulated as such; e.g., re-write the table into LaTeX format.</p>
 <p><span class="inputnumrole">In[7]:</span></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">result_tab</span> <span class="o">=</span> <span class="n">Table</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="s1">&#39;votable&#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">result_tab</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[7]:</span></p>
@@ -270,27 +269,50 @@ then manipulated as such; e.g., re-write the table into LaTeX format.</p>
 <span class="n">Length</span> <span class="o">=</span> <span class="mi">4028</span> <span class="n">rows</span>
 </pre></div>
 </div>
+<p>This table can be manipulated like any other Astropy table; e.g.,
+re-write the table into LaTeX format.</p>
 <p><span class="inputnumrole">In[8]:</span></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">result_tab</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;my_result.tex&#39;</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="s1">&#39;ascii.latex&#39;</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">result</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;my_result.tex&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;ascii.latex&#39;</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
+<p>You can now use your favorite text editor to open the <code class="docutils literal notranslate"><span class="pre">my_result.tex</span></code>
+file, but here, we are going to read it back into another Astropy table.</p>
+<p>Note that the extra <code class="docutils literal notranslate"><span class="pre">data_start=4</span></code> option is necessary due to the
+non-roundtripping nature of LaTeX reader/writer (see <a class="reference external" href="https://github.com/astropy/astropy/issues/5205">astropy issue
+5205</a>).</p>
 <p><span class="inputnumrole">In[9]:</span></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span># Now use your favorite text editor to open the my_result.tex file.
-# For example:
-!head my_result.tex
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">result_tex</span> <span class="o">=</span> <span class="n">Table</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;my_result.tex&#39;</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;ascii.latex&#39;</span><span class="p">,</span> <span class="n">data_start</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result_tex</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[9]:</span></p>
-<pre class="literal-block">begin{table}
-begin{tabular}{cccccccccccccccccccccccccccccccccccccccccccccccccccccccc}
-objID &amp; gsc2ID &amp; gsc1ID &amp; hstID &amp; ra &amp; dec &amp; epoch &amp; raEpsilon &amp; decEpsilon &amp; rapm &amp; decpm &amp; rapmErr &amp; decpmErr &amp; deltaEpoch &amp; FpgMag &amp; FpgMagErr &amp; FpgMagCode &amp; JpgMag &amp; JpgMagErr &amp; JpgMagCode &amp; NpgMag &amp; NpgMagErr &amp; NpgMagCode &amp; UMag &amp; UMagErr &amp; UMagCode &amp; BMag &amp; BMagErr &amp; BMagCode &amp; VMag &amp; VMagErr &amp; VMagCode &amp; RMag &amp; RMagErr &amp; RMagCode &amp; IMag &amp; IMagErr &amp; IMagCode &amp; JMag &amp; JMagErr &amp; JMagCode &amp; HMag &amp; HMagErr &amp; HMagCode &amp; KMag &amp; KMagErr &amp; KMagCode &amp; class &amp; semiMajorAxis &amp; eccentricity &amp; positionAngle &amp; sourceStatus &amp; variableFlag &amp; multipleFlag &amp; compassGSC2id &amp; Mag \
- &amp;  &amp;  &amp;  &amp; $mathrm{deg}$ &amp; $mathrm{deg}$ &amp; $mathrm{yr}$ &amp; $mathrm{arcsec}$ &amp; $mathrm{arcsec}$ &amp; $mathrm{mas,yr^{-1}}$ &amp; $mathrm{mas,yr^{-1}}$ &amp; $mathrm{mas,yr^{-1}}$ &amp; $mathrm{mas,yr^{-1}}$ &amp; $mathrm{yr}$ &amp; $mathrm{mag}$ &amp; $mathrm{mag}$ &amp;  &amp; $mathrm{mag}$ &amp; $mathrm{mag}$ &amp;  &amp; $mathrm{mag}$ &amp; $mathrm{mag}$ &amp;  &amp; $mathrm{mag}$ &amp; $mathrm{mag}$ &amp;  &amp; $mathrm{mag}$ &amp; $mathrm{mag}$ &amp;  &amp; $mathrm{mag}$ &amp; $mathrm{mag}$ &amp;  &amp; $mathrm{mag}$ &amp; $mathrm{mag}$ &amp;  &amp; $mathrm{mag}$ &amp; $mathrm{mag}$ &amp;  &amp; $mathrm{mag}$ &amp; $mathrm{mag}$ &amp;  &amp; $mathrm{mag}$ &amp; $mathrm{mag}$ &amp;  &amp; $mathrm{mag}$ &amp; $mathrm{mag}$ &amp;  &amp;  &amp; pixel &amp;  &amp; $mathrm{deg}$ &amp;  &amp;  &amp;  &amp;  &amp; $mathrm{mag}$ \
-23323175812944 &amp; 00424433+4116085 &amp;  &amp; 2MJG1R2O &amp; 10.684737 &amp; 41.269035 &amp; 1997.815 &amp; 0.08 &amp; 0.07 &amp; 0.0 &amp; 0.0 &amp; 0.0 &amp; 0.0 &amp; 0.0 &amp; 99.99 &amp; 99.99 &amp; 99 &amp; 99.99 &amp; 99.99 &amp; 99 &amp; 99.99 &amp; 99.99 &amp; 99 &amp; 99.99 &amp; 99.99 &amp; 99 &amp; 99.99 &amp; 99.99 &amp; 99 &amp; 99.99 &amp; 99.99 &amp; 99 &amp; 99.99 &amp; 99.99 &amp; 99 &amp; 99.99 &amp; 99.99 &amp; 99 &amp; 9.453 &amp; 0.052 &amp; 47 &amp; 8.668 &amp; 0.051 &amp; 48 &amp; 8.475 &amp; 0.051 &amp; 49 &amp; 4 &amp; 0.0 &amp; 0.0 &amp; 0.0 &amp; 77777700 &amp; 0 &amp; 0 &amp; 6453800072293 &amp; 9.453 \
-23323175812948 &amp; 00424403+4116069 &amp;  &amp; 2MJG1R2S &amp; 10.683469 &amp; 41.268585 &amp; 1997.815 &amp; 0.13 &amp; 0.12 &amp; 0.0 &amp; 0.0 &amp; 0.0 &amp; 0.0 &amp; 0.0 &amp; 99.99 &amp; 99.99 &amp; 99 &amp; 99.99 &amp; 99.99 &amp; 99 &amp; 99.99 &amp; 99.99 &amp; 99 &amp; 99.99 &amp; 99.99 &amp; 99 &amp; 99.99 &amp; 99.99 &amp; 99 &amp; 99.99 &amp; 99.99 &amp; 99 &amp; 99.99 &amp; 99.99 &amp; 99 &amp; 99.99 &amp; 99.99 &amp; 99 &amp; 9.321 &amp; -999.0 &amp; 47 &amp; 8.614 &amp; -999.0 &amp; 48 &amp; 10.601 &amp; 0.025 &amp; 49 &amp; 4 &amp; 0.0 &amp; 0.0 &amp; 0.0 &amp; 77777700 &amp; 0 &amp; 0 &amp; 6453800072297 &amp; 9.321 \
-23323175812933 &amp; 00424455+4116103 &amp;  &amp; 2MJG1R2D &amp; 10.685657 &amp; 41.26955 &amp; 1997.815 &amp; 0.13 &amp; 0.12 &amp; 0.0 &amp; 0.0 &amp; 0.0 &amp; 0.0 &amp; 0.0 &amp; 99.99 &amp; 99.99 &amp; 99 &amp; 99.99 &amp; 99.99 &amp; 99 &amp; 99.99 &amp; 99.99 &amp; 99 &amp; 99.99 &amp; 99.99 &amp; 99 &amp; 99.99 &amp; 99.99 &amp; 99 &amp; 99.99 &amp; 99.99 &amp; 99 &amp; 99.99 &amp; 99.99 &amp; 99 &amp; 99.99 &amp; 99.99 &amp; 99 &amp; 10.773 &amp; 0.069 &amp; 47 &amp; 8.532 &amp; -999.0 &amp; 48 &amp; 8.254 &amp; -999.0 &amp; 49 &amp; 4 &amp; 0.0 &amp; 0.0 &amp; 0.0 &amp; 77777700 &amp; 0 &amp; 0 &amp; 6453800072282 &amp; 10.773 \
-23323175812939 &amp; 00424464+4116092 &amp;  &amp; 2MJG1R2J &amp; 10.686026 &amp; 41.269226 &amp; 1997.815 &amp; 0.13 &amp; 0.12 &amp; 0.0 &amp; 0.0 &amp; 0.0 &amp; 0.0 &amp; 0.0 &amp; 99.99 &amp; 99.99 &amp; 99 &amp; 99.99 &amp; 99.99 &amp; 99 &amp; 99.99 &amp; 99.99 &amp; 99 &amp; 99.99 &amp; 99.99 &amp; 99 &amp; 99.99 &amp; 99.99 &amp; 99 &amp; 99.99 &amp; 99.99 &amp; 99 &amp; 99.99 &amp; 99.99 &amp; 99 &amp; 99.99 &amp; 99.99 &amp; 99 &amp; 9.299 &amp; -999.0 &amp; 47 &amp; 8.606 &amp; -999.0 &amp; 48 &amp; 10.119 &amp; 0.056 &amp; 49 &amp; 4 &amp; 0.0 &amp; 0.0 &amp; 0.0 &amp; 77777700 &amp; 0 &amp; 0 &amp; 6453800072288 &amp; 9.299 \
-23323175812930 &amp; 00424403+4116108 &amp;  &amp; 2MJG1R2A &amp; 10.683465 &amp; 41.269676 &amp; 1997.815 &amp; 0.13 &amp; 0.11 &amp; 0.0 &amp; 0.0 &amp; 0.0 &amp; 0.0 &amp; 0.0 &amp; 99.99 &amp; 99.99 &amp; 99 &amp; 99.99 &amp; 99.99 &amp; 99 &amp; 99.99 &amp; 99.99 &amp; 99 &amp; 99.99 &amp; 99.99 &amp; 99 &amp; 99.99 &amp; 99.99 &amp; 99 &amp; 99.99 &amp; 99.99 &amp; 99 &amp; 99.99 &amp; 99.99 &amp; 99 &amp; 99.99 &amp; 99.99 &amp; 99 &amp; 11.507 &amp; 0.056 &amp; 47 &amp; 8.744 &amp; -999.0 &amp; 48 &amp; 8.489 &amp; -999.0 &amp; 49 &amp; 4 &amp; 0.0 &amp; 0.0 &amp; 0.0 &amp; 77777700 &amp; 0 &amp; 0 &amp; 6453800072279 &amp; 11.507 \
-23323175812931 &amp; 00424464+4116106 &amp;  &amp; 2MJG1R2B &amp; 10.686015 &amp; 41.26963 &amp; 1997.815 &amp; 0.13 &amp; 0.12 &amp; 0.0 &amp; 0.0 &amp; 0.0 &amp; 0.0 &amp; 0.0 &amp; 99.99 &amp; 99.99 &amp; 99 &amp; 99.99 &amp; 99.99 &amp; 99 &amp; 99.99 &amp; 99.99 &amp; 99 &amp; 99.99 &amp; 99.99 &amp; 99 &amp; 99.99 &amp; 99.99 &amp; 99 &amp; 99.99 &amp; 99.99 &amp; 99 &amp; 99.99 &amp; 99.99 &amp; 99 &amp; 99.99 &amp; 99.99 &amp; 99 &amp; 9.399 &amp; -999.0 &amp; 47 &amp; 9.985 &amp; 0.07 &amp; 48 &amp; 8.429 &amp; -999.0 &amp; 49 &amp; 4 &amp; 0.0 &amp; 0.0 &amp; 0.0 &amp; 77777700 &amp; 0 &amp; 0 &amp; 6453800072280 &amp; 9.399 \</pre>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>    <span class="n">objID</span>           <span class="n">gsc2ID</span>      <span class="n">gsc1ID</span> <span class="o">...</span> <span class="n">multipleFlag</span> <span class="n">compassGSC2id</span>   <span class="n">Mag</span>
+<span class="o">--------------</span> <span class="o">----------------</span> <span class="o">------</span> <span class="o">...</span> <span class="o">------------</span> <span class="o">-------------</span> <span class="o">-------</span>
+<span class="mi">23323175812944</span> <span class="mi">00424433</span><span class="o">+</span><span class="mi">4116085</span>     <span class="o">--</span> <span class="o">...</span>            <span class="mi">0</span> <span class="mi">6453800072293</span>   <span class="mf">9.453</span>
+<span class="mi">23323175812948</span> <span class="mi">00424403</span><span class="o">+</span><span class="mi">4116069</span>     <span class="o">--</span> <span class="o">...</span>            <span class="mi">0</span> <span class="mi">6453800072297</span>   <span class="mf">9.321</span>
+<span class="mi">23323175812933</span> <span class="mi">00424455</span><span class="o">+</span><span class="mi">4116103</span>     <span class="o">--</span> <span class="o">...</span>            <span class="mi">0</span> <span class="mi">6453800072282</span>  <span class="mf">10.773</span>
+<span class="mi">23323175812939</span> <span class="mi">00424464</span><span class="o">+</span><span class="mi">4116092</span>     <span class="o">--</span> <span class="o">...</span>            <span class="mi">0</span> <span class="mi">6453800072288</span>   <span class="mf">9.299</span>
+<span class="mi">23323175812930</span> <span class="mi">00424403</span><span class="o">+</span><span class="mi">4116108</span>     <span class="o">--</span> <span class="o">...</span>            <span class="mi">0</span> <span class="mi">6453800072279</span>  <span class="mf">11.507</span>
+<span class="mi">23323175812931</span> <span class="mi">00424464</span><span class="o">+</span><span class="mi">4116106</span>     <span class="o">--</span> <span class="o">...</span>            <span class="mi">0</span> <span class="mi">6453800072280</span>   <span class="mf">9.399</span>
+<span class="mi">23323175812973</span> <span class="mi">00424446</span><span class="o">+</span><span class="mi">4116016</span>     <span class="o">--</span> <span class="o">...</span>            <span class="mi">0</span> <span class="mi">6453800072322</span>   <span class="mf">12.07</span>
+<span class="mi">23323175812966</span> <span class="mi">00424398</span><span class="o">+</span><span class="mi">4116028</span>     <span class="o">--</span> <span class="o">...</span>            <span class="mi">0</span> <span class="mi">6453800072315</span>  <span class="mf">12.136</span>
+<span class="mi">23323175812979</span> <span class="mi">00424420</span><span class="o">+</span><span class="mi">4116009</span>     <span class="o">--</span> <span class="o">...</span>            <span class="mi">0</span> <span class="mi">6453800072328</span>  <span class="mf">10.065</span>
+<span class="mi">23323175812958</span> <span class="mi">00424377</span><span class="o">+</span><span class="mi">4116045</span>     <span class="o">--</span> <span class="o">...</span>            <span class="mi">0</span> <span class="mi">6453800072307</span>  <span class="mf">12.446</span>
+           <span class="o">...</span>              <span class="o">...</span>    <span class="o">...</span> <span class="o">...</span>          <span class="o">...</span>           <span class="o">...</span>     <span class="o">...</span>
+  <span class="mi">133001226993</span>     <span class="n">N33001226993</span>     <span class="o">--</span> <span class="o">...</span>            <span class="mi">0</span> <span class="mi">6453800006993</span> <span class="mf">20.2829</span>
+ <span class="mi">1330012229027</span>    <span class="n">N330012229027</span>     <span class="o">--</span> <span class="o">...</span>            <span class="mi">0</span> <span class="mi">6453800029027</span> <span class="mf">20.3122</span>
+ <span class="mi">1330012247547</span>    <span class="n">N330012247547</span>     <span class="o">--</span> <span class="o">...</span>            <span class="mi">0</span> <span class="mi">6453800047547</span> <span class="mf">21.5449</span>
+ <span class="mi">1330012244072</span>    <span class="n">N330012244072</span>     <span class="o">--</span> <span class="o">...</span>            <span class="mi">0</span> <span class="mi">6453800044072</span> <span class="mf">20.9598</span>
+ <span class="mi">1330012248107</span>    <span class="n">N330012248107</span>     <span class="o">--</span> <span class="o">...</span>            <span class="mi">0</span> <span class="mi">6453800048107</span> <span class="mf">21.6947</span>
+  <span class="mi">133001227000</span>     <span class="n">N33001227000</span>     <span class="o">--</span> <span class="o">...</span>            <span class="mi">0</span> <span class="mi">6453800007000</span> <span class="mf">20.1382</span>
+ <span class="mi">1330012244001</span>    <span class="n">N330012244001</span>     <span class="o">--</span> <span class="o">...</span>            <span class="mi">0</span> <span class="mi">6453800044001</span> <span class="mf">21.8968</span>
+ <span class="mi">1330012228861</span>    <span class="n">N330012228861</span>     <span class="o">--</span> <span class="o">...</span>            <span class="mi">0</span> <span class="mi">6453800028861</span> <span class="mf">20.3572</span>
+ <span class="mi">1330012212014</span>    <span class="n">N330012212014</span>     <span class="o">--</span> <span class="o">...</span>            <span class="mi">0</span> <span class="mi">6453800012014</span> <span class="mf">16.5079</span>
+ <span class="mi">1330012231849</span>    <span class="n">N330012231849</span>     <span class="o">--</span> <span class="o">...</span>            <span class="mi">0</span> <span class="mi">6453800031849</span> <span class="mf">20.2869</span>
+ <span class="mi">1330012210212</span>    <span class="n">N330012210212</span>     <span class="o">--</span> <span class="o">...</span>            <span class="mi">0</span> <span class="mi">6453800010212</span> <span class="mf">20.2767</span>
+<span class="n">Length</span> <span class="o">=</span> <span class="mi">4028</span> <span class="n">rows</span>
+</pre></div>
+</div>
 <p>Cone Search results can also be used in conjuction with other types of
 queries. For example, you can query SIMBAD for the first entry in your
 result above.</p>
@@ -308,15 +330,15 @@ result above.</p>
 </div>
 <p><span class="inputnumrole">In[11]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Don&#39;t run this cell if column names above are invalid.</span>
-<span class="k">if</span> <span class="n">ra_colname</span> <span class="ow">in</span> <span class="n">result_tab</span><span class="o">.</span><span class="n">colnames</span> <span class="ow">and</span> <span class="n">dec_colname</span> <span class="ow">in</span> <span class="n">result_tab</span><span class="o">.</span><span class="n">colnames</span><span class="p">:</span>
-    <span class="n">row</span> <span class="o">=</span> <span class="n">result_tab</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="k">if</span> <span class="n">ra_colname</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">colnames</span> <span class="ow">and</span> <span class="n">dec_colname</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">colnames</span><span class="p">:</span>
+    <span class="n">row</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">simbad_obj</span> <span class="o">=</span> <span class="n">coord</span><span class="o">.</span><span class="n">SkyCoord</span><span class="p">(</span><span class="n">ra</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="n">ra_colname</span><span class="p">]</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">deg</span><span class="p">,</span> <span class="n">dec</span><span class="o">=</span><span class="n">row</span><span class="p">[</span><span class="n">dec_colname</span><span class="p">]</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">deg</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;Searching SIMBAD for</span><span class="se">\n</span><span class="s1">{}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">simbad_obj</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Searching SIMBAD for</span><span class="se">\n</span><span class="si">{}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">simbad_obj</span><span class="p">))</span>
     <span class="n">simbad_result</span> <span class="o">=</span> <span class="n">Simbad</span><span class="o">.</span><span class="n">query_region</span><span class="p">(</span><span class="n">simbad_obj</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mi">5</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">arcsec</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">simbad_result</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">simbad_result</span><span class="p">)</span>
 <span class="k">else</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;{} or {} not in search results. Choose from: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
-        <span class="n">ra_colname</span><span class="p">,</span> <span class="n">dec_colname</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">result_tab</span><span class="o">.</span><span class="n">colnames</span><span class="p">)))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">{}</span><span class="s1"> or </span><span class="si">{}</span><span class="s1"> not in search results. Choose from: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+        <span class="n">ra_colname</span><span class="p">,</span> <span class="n">dec_colname</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">colnames</span><span class="p">)))</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[11]:</span></p>
@@ -355,8 +377,8 @@ result above.</p>
 catalog.</p>
 <p><span class="inputnumrole">In[12]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">my_db</span> <span class="o">=</span> <span class="n">vos_catalog</span><span class="o">.</span><span class="n">get_remote_catalog_db</span><span class="p">(</span><span class="n">conf</span><span class="o">.</span><span class="n">conesearch_dbname</span><span class="p">)</span>
-<span class="n">my_cat</span> <span class="o">=</span> <span class="n">my_db</span><span class="o">.</span><span class="n">get_catalog_by_url</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">my_cat</span><span class="o">.</span><span class="n">dumps</span><span class="p">())</span>
+<span class="n">my_cat</span> <span class="o">=</span> <span class="n">my_db</span><span class="o">.</span><span class="n">get_catalog_by_url</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">url</span> <span class="o">+</span> <span class="s1">&#39;&amp;&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">my_cat</span><span class="o">.</span><span class="n">dumps</span><span class="p">())</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[12]:</span></p>
@@ -404,11 +426,11 @@ catalog.</p>
         &quot;W50&quot;
     ],
     &quot;validate_warnings&quot;: [
-        &quot;/var/www/astroconda.org/html/aux/vo_databases/daily_20191109/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:154:0: W50: Invalid unit string 'pixel'&quot;,
-        &quot;/var/www/astroconda.org/html/aux/vo_databases/daily_20191109/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:154:0: W50: Invalid unit string 'pixel'&quot;
+        &quot;/var/www/astroconda.org/html/aux/vo_databases/daily_20200210/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:154:0: W50: Invalid unit string 'pixel'&quot;,
+        &quot;/var/www/astroconda.org/html/aux/vo_databases/daily_20200210/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:154:0: W50: Invalid unit string 'pixel'&quot;
     ],
     &quot;validate_xmllint&quot;: true,
-    &quot;validate_xmllint_content&quot;: &quot;/var/www/astroconda.org/html/aux/vo_databases/daily_20191109/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml validatesn&quot;,
+    &quot;validate_xmllint_content&quot;: &quot;/var/www/astroconda.org/html/aux/vo_databases/daily_20200210/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml validatesn&quot;,
     &quot;waveband&quot;: &quot;optical&quot;,
     &quot;wsdl_url&quot;: &quot;&quot;
 }</pre>
@@ -425,7 +447,7 @@ calling <code class="docutils literal notranslate"><span class="pre">conesearch.
 </pre></div>
 </div>
 <p><span class="inputnumrole">In[14]:</span></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;Number of rows is&#39;</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">nrows</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of rows is&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[14]:</span></p>
@@ -444,101 +466,92 @@ this example, the VO table has several columns that might include:</p>
 <p>Note that column names, meanings, order, etc. might vary from catalog to
 catalog.</p>
 <p><span class="inputnumrole">In[15]:</span></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data_array</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">array</span><span class="o">.</span><span class="n">data</span>
-<span class="k">print</span><span class="p">(</span><span class="n">data_array</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">col_names</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">colnames</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">col_names</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[15]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[(</span><span class="mf">0.094265</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;1275-00425574&#39;</span><span class="p">,</span> <span class="mf">10.595878</span><span class="p">,</span> <span class="mf">41.335328</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="mf">19.8</span><span class="p">,</span> <span class="mf">17.4</span><span class="p">,</span> <span class="mf">1953.773</span><span class="p">)</span>
- <span class="p">(</span><span class="mf">0.09804</span> <span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;1275-00427192&#39;</span><span class="p">,</span> <span class="mf">10.639945</span><span class="p">,</span> <span class="mf">41.360845</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="mf">19.4</span><span class="p">,</span> <span class="mf">18.4</span><span class="p">,</span> <span class="mf">1953.773</span><span class="p">)</span>
- <span class="p">(</span><span class="mf">0.06328</span> <span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;1275-00429939&#39;</span><span class="p">,</span> <span class="mf">10.712834</span><span class="p">,</span> <span class="mf">41.209109</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="mf">99.9</span><span class="p">,</span> <span class="mf">11.2</span><span class="p">,</span>      <span class="n">nan</span><span class="p">)]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="s1">&#39;_r&#39;</span><span class="p">,</span> <span class="s1">&#39;USNO-A2.0&#39;</span><span class="p">,</span> <span class="s1">&#39;RAJ2000&#39;</span><span class="p">,</span> <span class="s1">&#39;DEJ2000&#39;</span><span class="p">,</span> <span class="s1">&#39;ACTflag&#39;</span><span class="p">,</span> <span class="s1">&#39;Mflag&#39;</span><span class="p">,</span> <span class="s1">&#39;Bmag&#39;</span><span class="p">,</span> <span class="s1">&#39;Rmag&#39;</span><span class="p">,</span> <span class="s1">&#39;Epoch&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 <p><span class="inputnumrole">In[16]:</span></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">col_names</span> <span class="o">=</span> <span class="n">data_array</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">names</span>
-<span class="k">print</span><span class="p">(</span><span class="n">col_names</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Before sort</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[16]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="s1">&#39;_r&#39;</span><span class="p">,</span> <span class="s1">&#39;USNO-A2.0&#39;</span><span class="p">,</span> <span class="s1">&#39;RAJ2000&#39;</span><span class="p">,</span> <span class="s1">&#39;DEJ2000&#39;</span><span class="p">,</span> <span class="s1">&#39;ACTflag&#39;</span><span class="p">,</span> <span class="s1">&#39;Mflag&#39;</span><span class="p">,</span> <span class="s1">&#39;Bmag&#39;</span><span class="p">,</span> <span class="s1">&#39;Rmag&#39;</span><span class="p">,</span> <span class="s1">&#39;Epoch&#39;</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>   <span class="n">_r</span>      <span class="n">USNO</span><span class="o">-</span><span class="n">A2</span><span class="o">.</span><span class="mi">0</span>    <span class="n">RAJ2000</span>    <span class="n">DEJ2000</span>   <span class="n">ACTflag</span> <span class="n">Mflag</span> <span class="n">Bmag</span> <span class="n">Rmag</span>  <span class="n">Epoch</span>
+  <span class="n">deg</span>                     <span class="n">deg</span>        <span class="n">deg</span>                   <span class="n">mag</span>  <span class="n">mag</span>     <span class="n">yr</span>
+<span class="o">--------</span> <span class="o">-------------</span> <span class="o">----------</span> <span class="o">----------</span> <span class="o">-------</span> <span class="o">-----</span> <span class="o">----</span> <span class="o">----</span> <span class="o">--------</span>
+<span class="mf">0.094265</span> <span class="mi">1275</span><span class="o">-</span><span class="mi">00425574</span>  <span class="mf">10.595878</span>  <span class="mf">41.335328</span>               <span class="mf">19.8</span> <span class="mf">17.4</span> <span class="mf">1953.773</span>
+<span class="mf">0.098040</span> <span class="mi">1275</span><span class="o">-</span><span class="mi">00427192</span>  <span class="mf">10.639945</span>  <span class="mf">41.360845</span>               <span class="mf">19.4</span> <span class="mf">18.4</span> <span class="mf">1953.773</span>
+<span class="mf">0.063280</span> <span class="mi">1275</span><span class="o">-</span><span class="mi">00429939</span>  <span class="mf">10.712834</span>  <span class="mf">41.209109</span>       <span class="n">A</span>       <span class="mf">99.9</span> <span class="mf">11.2</span>       <span class="o">--</span>
 </pre></div>
 </div>
 <p><span class="inputnumrole">In[17]:</span></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">distance</span> <span class="o">=</span> <span class="n">data_array</span><span class="p">[</span><span class="s1">&#39;_r&#39;</span><span class="p">]</span>
-<span class="n">sorted_indices</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">distance</span><span class="p">)</span>
-<span class="n">sorted_data_array</span> <span class="o">=</span> <span class="n">data_array</span><span class="p">[</span><span class="n">sorted_indices</span><span class="p">]</span>
-<span class="k">print</span><span class="p">(</span><span class="n">sorted_data_array</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># After sort</span>
+<span class="n">result</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="s1">&#39;_r&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[17]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[(</span><span class="mf">0.06328</span> <span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;1275-00429939&#39;</span><span class="p">,</span> <span class="mf">10.712834</span><span class="p">,</span> <span class="mf">41.209109</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="mf">99.9</span><span class="p">,</span> <span class="mf">11.2</span><span class="p">,</span>      <span class="n">nan</span><span class="p">)</span>
- <span class="p">(</span><span class="mf">0.094265</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;1275-00425574&#39;</span><span class="p">,</span> <span class="mf">10.595878</span><span class="p">,</span> <span class="mf">41.335328</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="mf">19.8</span><span class="p">,</span> <span class="mf">17.4</span><span class="p">,</span> <span class="mf">1953.773</span><span class="p">)</span>
- <span class="p">(</span><span class="mf">0.09804</span> <span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;1275-00427192&#39;</span><span class="p">,</span> <span class="mf">10.639945</span><span class="p">,</span> <span class="mf">41.360845</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="mf">19.4</span><span class="p">,</span> <span class="mf">18.4</span><span class="p">,</span> <span class="mf">1953.773</span><span class="p">)]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>   <span class="n">_r</span>      <span class="n">USNO</span><span class="o">-</span><span class="n">A2</span><span class="o">.</span><span class="mi">0</span>    <span class="n">RAJ2000</span>    <span class="n">DEJ2000</span>   <span class="n">ACTflag</span> <span class="n">Mflag</span> <span class="n">Bmag</span> <span class="n">Rmag</span>  <span class="n">Epoch</span>
+  <span class="n">deg</span>                     <span class="n">deg</span>        <span class="n">deg</span>                   <span class="n">mag</span>  <span class="n">mag</span>     <span class="n">yr</span>
+<span class="o">--------</span> <span class="o">-------------</span> <span class="o">----------</span> <span class="o">----------</span> <span class="o">-------</span> <span class="o">-----</span> <span class="o">----</span> <span class="o">----</span> <span class="o">--------</span>
+<span class="mf">0.063280</span> <span class="mi">1275</span><span class="o">-</span><span class="mi">00429939</span>  <span class="mf">10.712834</span>  <span class="mf">41.209109</span>       <span class="n">A</span>       <span class="mf">99.9</span> <span class="mf">11.2</span>       <span class="o">--</span>
+<span class="mf">0.094265</span> <span class="mi">1275</span><span class="o">-</span><span class="mi">00425574</span>  <span class="mf">10.595878</span>  <span class="mf">41.335328</span>               <span class="mf">19.8</span> <span class="mf">17.4</span> <span class="mf">1953.773</span>
+<span class="mf">0.098040</span> <span class="mi">1275</span><span class="o">-</span><span class="mi">00427192</span>  <span class="mf">10.639945</span>  <span class="mf">41.360845</span>               <span class="mf">19.4</span> <span class="mf">18.4</span> <span class="mf">1953.773</span>
 </pre></div>
 </div>
 <p>You can also convert the distance to arcseconds.</p>
 <p><span class="inputnumrole">In[18]:</span></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">distance_field</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get_field_by_id</span><span class="p">(</span><span class="s1">&#39;_r&#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Field title:&#39;</span><span class="p">,</span> <span class="n">distance_field</span><span class="o">.</span><span class="n">title</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Unit is&#39;</span><span class="p">,</span> <span class="n">distance_field</span><span class="o">.</span><span class="n">unit</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">result</span><span class="p">[</span><span class="s1">&#39;_r&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">arcsec</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[18]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Field</span> <span class="n">title</span><span class="p">:</span> <span class="n">Distance</span> <span class="kn">from</span> <span class="nn">center</span> <span class="p">(</span><span class="mf">010.684708</span><span class="o">+</span><span class="mf">41.268750</span><span class="p">)[</span><span class="n">FK5</span><span class="o">/</span><span class="n">J2000</span><span class="p">],</span> <span class="n">at</span> <span class="n">Epoch</span> <span class="n">of</span> <span class="n">catalog</span> <span class="p">(</span><span class="n">Epoch</span><span class="p">)</span>
-<span class="n">Unit</span> <span class="ow">is</span> <span class="n">deg</span>
-</pre></div>
-</div>
-<p><span class="inputnumrole">In[19]:</span></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sorted_distance</span> <span class="o">=</span> <span class="n">distance</span><span class="p">[</span><span class="n">sorted_indices</span><span class="p">]</span>
-<span class="n">distance_arcsec</span> <span class="o">=</span> <span class="p">(</span><span class="n">sorted_distance</span> <span class="o">*</span> <span class="n">distance_field</span><span class="o">.</span><span class="n">unit</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">arcsec</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">d_deg</span><span class="p">,</span> <span class="n">d_arcsec</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">sorted_distance</span><span class="p">,</span> <span class="n">distance_arcsec</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="s1">&#39;{:.6f} deg converted to {:.4f}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">d_deg</span><span class="p">,</span> <span class="n">d_arcsec</span><span class="p">))</span>
-</pre></div>
-</div>
-<p><span class="outputnumrole">Out[19]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">0.063280</span> <span class="n">deg</span> <span class="n">converted</span> <span class="n">to</span> <span class="mf">227.8080</span> <span class="n">arcsec</span>
-<span class="mf">0.094265</span> <span class="n">deg</span> <span class="n">converted</span> <span class="n">to</span> <span class="mf">339.3540</span> <span class="n">arcsec</span>
-<span class="mf">0.098040</span> <span class="n">deg</span> <span class="n">converted</span> <span class="n">to</span> <span class="mf">352.9440</span> <span class="n">arcsec</span>
-</pre></div>
-</div>
+<div class="math notranslate nohighlight">
+\[[227.808,~339.354,~352.944] \; \mathrm{{}^{\prime\prime}}\]</div>
 <p>What if you want <em>all</em> the results from <em>all</em> the catalogs? And you also
 want to suppress all the VO table warnings and informational messages?</p>
 <p><strong>Warning: This can be time and resource intensive.</strong></p>
-<p><span class="inputnumrole">In[20]:</span></p>
+<p><span class="inputnumrole">In[19]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">():</span>
     <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
-    <span class="n">all_results</span> <span class="o">=</span> <span class="n">conesearch</span><span class="o">.</span><span class="n">search_all</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">degree</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">all_results</span> <span class="o">=</span> <span class="n">conesearch</span><span class="o">.</span><span class="n">search_all</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">degree</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><span class="inputnumrole">In[21]:</span></p>
+<p><span class="inputnumrole">In[20]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">url</span><span class="p">,</span> <span class="n">tab</span> <span class="ow">in</span> <span class="n">all_results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="s1">&#39;returned&#39;</span><span class="p">,</span> <span class="n">tab</span><span class="o">.</span><span class="n">nrows</span><span class="p">,</span> <span class="s1">&#39;rows&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="s1">&#39;returned&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">tab</span><span class="p">),</span> <span class="s1">&#39;rows&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><span class="outputnumrole">Out[21]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>http://gsss.stsci.edu/webservices/vo/ConeSearch.aspx?CAT=GSC23&amp; returned 4028 rows
+<p><span class="outputnumrole">Out[20]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>http://gsss.stsci.edu/webservices/vo/ConeSearch.aspx?CAT=GSC23 returned 4028 rows
 http://vizier.u-strasbg.fr/viz-bin/conesearch/I/220/out? returned 5 rows
 http://vizier.u-strasbg.fr/viz-bin/conesearch/I/254/out? returned 5 rows
 http://vizier.u-strasbg.fr/viz-bin/conesearch/I/255/out? returned 5 rows
 http://vizier.u-strasbg.fr/viz-bin/conesearch/I/252/out? returned 3 rows
-http://wfaudata.roe.ac.uk/twomass-dsa/DirectCone?DSACAT=TWOMASS&amp;DSATAB=twomass_xsc&amp; returned 25 rows
-http://wfaudata.roe.ac.uk/twomass-dsa/DirectCone?DSACAT=TWOMASS&amp;DSATAB=twomass_psc&amp; returned 2008 rows
+http://wfaudata.roe.ac.uk/twomass-dsa/DirectCone?DSACAT=TWOMASS&amp;DSATAB=twomass_psc returned 2008 rows
+http://wfaudata.roe.ac.uk/twomass-dsa/DirectCone?DSACAT=TWOMASS&amp;DSATAB=twomass_xsc returned 25 rows
+http://astrometry.mit.edu/cgi-bin/vo_cone6.cgi?CAT=USNO-A2 returned 3 rows
 </pre></div>
 </div>
-<p><span class="inputnumrole">In[22]:</span></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">i220keys</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">all_results</span> <span class="k">if</span> <span class="s1">&#39;I/220&#39;</span> <span class="ow">in</span> <span class="n">k</span><span class="p">]</span>  <span class="c1"># pick out the first one with &quot;I/220&quot; in it</span>
+<p><span class="inputnumrole">In[21]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pick out the first one with &quot;I/220&quot; in it.</span>
+<span class="n">i220keys</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">all_results</span> <span class="k">if</span> <span class="s1">&#39;I/220&#39;</span> <span class="ow">in</span> <span class="n">k</span><span class="p">]</span>
 <span class="n">my_favorite_result</span> <span class="o">=</span> <span class="n">all_results</span><span class="p">[</span><span class="n">i220keys</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
-<span class="k">print</span><span class="p">(</span><span class="n">my_favorite_result</span><span class="o">.</span><span class="n">array</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">dtype</span><span class="o">.</span><span class="n">names</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">my_favorite_result</span><span class="o">.</span><span class="n">array</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">my_favorite_result</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><span class="outputnumrole">Out[22]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="s1">&#39;_r&#39;</span><span class="p">,</span> <span class="s1">&#39;GSC&#39;</span><span class="p">,</span> <span class="s1">&#39;RAJ2000&#39;</span><span class="p">,</span> <span class="s1">&#39;DEJ2000&#39;</span><span class="p">,</span> <span class="s1">&#39;PosErr&#39;</span><span class="p">,</span> <span class="s1">&#39;Pmag&#39;</span><span class="p">,</span> <span class="s1">&#39;e_Pmag&#39;</span><span class="p">,</span> <span class="s1">&#39;n_Pmag&#39;</span><span class="p">,</span> <span class="s1">&#39;Class&#39;</span><span class="p">,</span> <span class="s1">&#39;Plate&#39;</span><span class="p">,</span> <span class="s1">&#39;Epoch&#39;</span><span class="p">,</span> <span class="s1">&#39;Mult&#39;</span><span class="p">,</span> <span class="s1">&#39;Versions&#39;</span><span class="p">)</span>
-<span class="p">[(</span><span class="mf">0.063449</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;0280102008&#39;</span><span class="p">,</span> <span class="mf">10.71207</span><span class="p">,</span> <span class="mf">41.20873</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">11.82</span><span class="p">,</span> <span class="mf">0.43</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;0738&#39;</span><span class="p">,</span> <span class="mf">1985.877</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;GSC-all&#39;</span><span class="p">)</span>
- <span class="p">(</span><span class="mf">0.043453</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;0280102015&#39;</span><span class="p">,</span> <span class="mf">10.68782</span><span class="p">,</span> <span class="mf">41.22536</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">13.1</span> <span class="p">,</span> <span class="mf">0.44</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;0738&#39;</span><span class="p">,</span> <span class="mf">1985.877</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;GSC-all&#39;</span><span class="p">)</span>
- <span class="p">(</span><span class="mf">0.09617</span> <span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;0280102081&#39;</span><span class="p">,</span> <span class="mf">10.80558</span><span class="p">,</span> <span class="mf">41.23727</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">13.44</span><span class="p">,</span> <span class="mf">0.46</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;0738&#39;</span><span class="p">,</span> <span class="mf">1985.877</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;GSC-all&#39;</span><span class="p">)</span>
- <span class="p">(</span><span class="mf">0.066633</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;0280102017&#39;</span><span class="p">,</span> <span class="mf">10.60025</span><span class="p">,</span> <span class="mf">41.24853</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">13.47</span><span class="p">,</span> <span class="mf">0.46</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;0738&#39;</span><span class="p">,</span> <span class="mf">1985.877</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;GSC-all&#39;</span><span class="p">)</span>
- <span class="p">(</span><span class="mf">0.082097</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;0280502180&#39;</span><span class="p">,</span> <span class="mf">10.64539</span><span class="p">,</span> <span class="mf">41.34535</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mf">12.68</span><span class="p">,</span> <span class="mf">0.44</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;0738&#39;</span><span class="p">,</span> <span class="mf">1985.877</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="sa">b</span><span class="s1">&#39;GSC-all&#39;</span><span class="p">)]</span>
+<p><span class="outputnumrole">Out[21]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>   <span class="n">_r</span>       <span class="n">GSC</span>      <span class="n">RAJ2000</span>   <span class="n">DEJ2000</span>  <span class="n">PosErr</span> <span class="o">...</span> <span class="n">Plate</span>  <span class="n">Epoch</span>   <span class="n">Mult</span> <span class="n">Versions</span>
+  <span class="n">deg</span>                  <span class="n">deg</span>       <span class="n">deg</span>    <span class="n">arcsec</span> <span class="o">...</span>          <span class="n">yr</span>
+<span class="o">--------</span> <span class="o">----------</span> <span class="o">---------</span> <span class="o">---------</span> <span class="o">------</span> <span class="o">...</span> <span class="o">-----</span> <span class="o">--------</span> <span class="o">----</span> <span class="o">--------</span>
+<span class="mf">0.063449</span> <span class="mi">0280102008</span>  <span class="mf">10.71207</span>  <span class="mf">41.20873</span>    <span class="mf">0.2</span> <span class="o">...</span>  <span class="mi">0738</span> <span class="mf">1985.877</span>    <span class="n">F</span>  <span class="n">GSC</span><span class="o">-</span><span class="nb">all</span>
+<span class="mf">0.043453</span> <span class="mi">0280102015</span>  <span class="mf">10.68782</span>  <span class="mf">41.22536</span>    <span class="mf">0.2</span> <span class="o">...</span>  <span class="mi">0738</span> <span class="mf">1985.877</span>    <span class="n">F</span>  <span class="n">GSC</span><span class="o">-</span><span class="nb">all</span>
+<span class="mf">0.096170</span> <span class="mi">0280102081</span>  <span class="mf">10.80558</span>  <span class="mf">41.23727</span>    <span class="mf">0.2</span> <span class="o">...</span>  <span class="mi">0738</span> <span class="mf">1985.877</span>    <span class="n">F</span>  <span class="n">GSC</span><span class="o">-</span><span class="nb">all</span>
+<span class="mf">0.066633</span> <span class="mi">0280102017</span>  <span class="mf">10.60025</span>  <span class="mf">41.24853</span>    <span class="mf">0.2</span> <span class="o">...</span>  <span class="mi">0738</span> <span class="mf">1985.877</span>    <span class="n">F</span>  <span class="n">GSC</span><span class="o">-</span><span class="nb">all</span>
+<span class="mf">0.082097</span> <span class="mi">0280502180</span>  <span class="mf">10.64539</span>  <span class="mf">41.34535</span>    <span class="mf">0.2</span> <span class="o">...</span>  <span class="mi">0738</span> <span class="mf">1985.877</span>    <span class="n">F</span>  <span class="n">GSC</span><span class="o">-</span><span class="nb">all</span>
 </pre></div>
 </div>
 </div>
@@ -549,48 +562,58 @@ http://wfaudata.roe.ac.uk/twomass-dsa/DirectCone?DSACAT=TWOMASS&amp;DSATAB=twoma
 obtained using the asynchronous instance’s <code class="docutils literal notranslate"><span class="pre">get()</span></code> method that returns
 the result upon completion or after a given <code class="docutils literal notranslate"><span class="pre">timeout</span></code> value in
 seconds.</p>
-<p><span class="inputnumrole">In[23]:</span></p>
+<p><span class="inputnumrole">In[22]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">async_search</span> <span class="o">=</span> <span class="n">conesearch</span><span class="o">.</span><span class="n">AsyncConeSearch</span><span class="p">(</span>
     <span class="n">c</span><span class="p">,</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">degree</span><span class="p">,</span> <span class="n">catalog_db</span><span class="o">=</span><span class="s1">&#39;The USNO-A2.0 Catalogue (Monet+ 1998) 1&#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Am I running?&#39;</span><span class="p">,</span> <span class="n">async_search</span><span class="o">.</span><span class="n">running</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Am I running?&#39;</span><span class="p">,</span> <span class="n">async_search</span><span class="o">.</span><span class="n">running</span><span class="p">())</span>
 
 <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;After 3 seconds. Am I done?&#39;</span><span class="p">,</span> <span class="n">async_search</span><span class="o">.</span><span class="n">done</span><span class="p">())</span>
-<span class="k">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;After 3 seconds. Am I done?&#39;</span><span class="p">,</span> <span class="n">async_search</span><span class="o">.</span><span class="n">done</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">()</span>
 
 <span class="n">result</span> <span class="o">=</span> <span class="n">async_search</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Number of rows returned is&#39;</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">nrows</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of rows returned is&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
 </pre></div>
 </div>
-<p><span class="outputnumrole">Out[23]:</span></p>
+<p><span class="outputnumrole">Out[22]:</span></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Am I running? True
 After 3 seconds. Am I done? True
 
 Number of rows returned is 3
 </pre></div>
 </div>
-<p><span class="inputnumrole">In[24]:</span></p>
+<p><span class="inputnumrole">In[23]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">async_search_all</span> <span class="o">=</span> <span class="n">conesearch</span><span class="o">.</span><span class="n">AsyncSearchAll</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">degree</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Am I running?&#39;</span><span class="p">,</span> <span class="n">async_search_all</span><span class="o">.</span><span class="n">running</span><span class="p">())</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Am I done?&#39;</span><span class="p">,</span> <span class="n">async_search_all</span><span class="o">.</span><span class="n">done</span><span class="p">())</span>
-<span class="k">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Am I running?&#39;</span><span class="p">,</span> <span class="n">async_search_all</span><span class="o">.</span><span class="n">running</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Am I done?&#39;</span><span class="p">,</span> <span class="n">async_search_all</span><span class="o">.</span><span class="n">done</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">()</span>
 
 <span class="n">all_results</span> <span class="o">=</span> <span class="n">async_search_all</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">url</span><span class="p">,</span> <span class="n">tab</span> <span class="ow">in</span> <span class="n">all_results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="s1">&#39;returned&#39;</span><span class="p">,</span> <span class="n">tab</span><span class="o">.</span><span class="n">nrows</span><span class="p">,</span> <span class="s1">&#39;rows&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="s1">&#39;returned&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">tab</span><span class="p">),</span> <span class="s1">&#39;rows&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<p><span class="outputnumrole">Out[24]:</span></p>
+<p><span class="outputnumrole">Out[23]:</span></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Am I running? True
 Am I done? False
-
-http://gsss.stsci.edu/webservices/vo/ConeSearch.aspx?CAT=GSC23&amp; returned 4028 rows
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">WARNING</span><span class="p">:</span> <span class="n">NoResultsWarning</span><span class="p">:</span> <span class="n">Catalog</span> <span class="n">server</span> <span class="s1">&#39;http://wfaudata.roe.ac.uk/sdssdr7-dsa/DirectCone?DSACAT=SDSS_DR7&amp;DSATAB=PhotoObj&#39;</span> <span class="n">returned</span> <span class="mi">0</span> <span class="n">result</span> <span class="p">[</span><span class="n">astroquery</span><span class="o">.</span><span class="n">vo_conesearch</span><span class="o">.</span><span class="n">core</span><span class="p">]</span>
+<span class="n">WARNING</span><span class="p">:</span> <span class="n">NoResultsWarning</span><span class="p">:</span> <span class="n">Catalog</span> <span class="n">server</span> <span class="s1">&#39;http://wfaudata.roe.ac.uk/sdssdr7-dsa/DirectCone?DSACAT=SDSS_DR7&amp;DSATAB=PhotoObjAll&#39;</span> <span class="n">returned</span> <span class="mi">0</span> <span class="n">result</span> <span class="p">[</span><span class="n">astroquery</span><span class="o">.</span><span class="n">vo_conesearch</span><span class="o">.</span><span class="n">core</span><span class="p">]</span>
+<span class="n">WARNING</span><span class="p">:</span> <span class="n">NoResultsWarning</span><span class="p">:</span> <span class="n">Catalog</span> <span class="n">server</span> <span class="s1">&#39;http://wfaudata.roe.ac.uk/sdssdr7-dsa/DirectCone?DSACAT=SDSS_DR7&amp;DSATAB=Galaxy&#39;</span> <span class="n">returned</span> <span class="mi">0</span> <span class="n">result</span> <span class="p">[</span><span class="n">astroquery</span><span class="o">.</span><span class="n">vo_conesearch</span><span class="o">.</span><span class="n">core</span><span class="p">]</span>
+<span class="n">WARNING</span><span class="p">:</span> <span class="n">NoResultsWarning</span><span class="p">:</span> <span class="n">Catalog</span> <span class="n">server</span> <span class="s1">&#39;http://wfaudata.roe.ac.uk/sdssdr7-dsa/DirectCone?DSACAT=SDSS_DR7&amp;DSATAB=Star&#39;</span> <span class="n">returned</span> <span class="mi">0</span> <span class="n">result</span> <span class="p">[</span><span class="n">astroquery</span><span class="o">.</span><span class="n">vo_conesearch</span><span class="o">.</span><span class="n">core</span><span class="p">]</span>
+<span class="n">WARNING</span><span class="p">:</span> <span class="n">NoResultsWarning</span><span class="p">:</span> <span class="n">Catalog</span> <span class="n">server</span> <span class="s1">&#39;http://wfaudata.roe.ac.uk/sdssdr8-dsa/DirectCone?DSACAT=SDSS_DR8&amp;DSATAB=SpecObjAll&#39;</span> <span class="n">returned</span> <span class="mi">0</span> <span class="n">result</span> <span class="p">[</span><span class="n">astroquery</span><span class="o">.</span><span class="n">vo_conesearch</span><span class="o">.</span><span class="n">core</span><span class="p">]</span>
+<span class="n">WARNING</span><span class="p">:</span> <span class="n">NoResultsWarning</span><span class="p">:</span> <span class="n">Catalog</span> <span class="n">server</span> <span class="s1">&#39;http://wfaudata.roe.ac.uk/sdssdr8-dsa/DirectCone?DSACAT=SDSS_DR8&amp;DSATAB=PhotoObjAll&#39;</span> <span class="n">returned</span> <span class="mi">0</span> <span class="n">result</span> <span class="p">[</span><span class="n">astroquery</span><span class="o">.</span><span class="n">vo_conesearch</span><span class="o">.</span><span class="n">core</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>http://gsss.stsci.edu/webservices/vo/ConeSearch.aspx?CAT=GSC23 returned 4028 rows
 http://vizier.u-strasbg.fr/viz-bin/conesearch/I/220/out? returned 5 rows
 http://vizier.u-strasbg.fr/viz-bin/conesearch/I/254/out? returned 5 rows
 http://vizier.u-strasbg.fr/viz-bin/conesearch/I/255/out? returned 5 rows
 http://vizier.u-strasbg.fr/viz-bin/conesearch/I/252/out? returned 3 rows
-http://wfaudata.roe.ac.uk/twomass-dsa/DirectCone?DSACAT=TWOMASS&amp;DSATAB=twomass_xsc&amp; returned 25 rows
-http://wfaudata.roe.ac.uk/twomass-dsa/DirectCone?DSACAT=TWOMASS&amp;DSATAB=twomass_psc&amp; returned 2008 rows
+http://wfaudata.roe.ac.uk/twomass-dsa/DirectCone?DSACAT=TWOMASS&amp;DSATAB=twomass_psc returned 2008 rows
+http://wfaudata.roe.ac.uk/twomass-dsa/DirectCone?DSACAT=TWOMASS&amp;DSATAB=twomass_xsc returned 25 rows
+http://astrometry.mit.edu/cgi-bin/vo_cone6.cgi?CAT=USNO-A2 returned 3 rows
 </pre></div>
 </div>
 </div>
@@ -601,51 +624,51 @@ http://wfaudata.roe.ac.uk/twomass-dsa/DirectCone?DSACAT=TWOMASS&amp;DSATAB=twoma
 a radius of 0.1 degrees. For now, the prediction assumes a very simple
 linear model, which might or might not reflect the actual trend.</p>
 <p>This might take a while.</p>
-<p><span class="inputnumrole">In[25]:</span></p>
+<p><span class="inputnumrole">In[24]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">():</span>
     <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
     <span class="n">t_est</span><span class="p">,</span> <span class="n">n_est</span> <span class="o">=</span> <span class="n">conesearch</span><span class="o">.</span><span class="n">predict_search</span><span class="p">(</span>
         <span class="s1">&#39;http://gsss.stsci.edu/webservices/vo/ConeSearch.aspx?CAT=GSC23&amp;&#39;</span><span class="p">,</span>
-        <span class="n">c</span><span class="p">,</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">degree</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="n">c</span><span class="p">,</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">degree</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[24]:</span></p>
+<img alt="../_images/conesearch_41_0.png" src="../_images/conesearch_41_0.png" />
+<img alt="../_images/conesearch_41_1.png" src="../_images/conesearch_41_1.png" />
+<p><span class="inputnumrole">In[25]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Predicted run time is&#39;</span><span class="p">,</span> <span class="n">t_est</span><span class="p">,</span> <span class="s1">&#39;seconds&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Predicted number of rows is&#39;</span><span class="p">,</span> <span class="n">n_est</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[25]:</span></p>
-<img alt="../_images/conesearch_41_0.png" src="../_images/conesearch_41_0.png" />
-<img alt="../_images/conesearch_41_1.png" src="../_images/conesearch_41_1.png" />
-<p><span class="inputnumrole">In[26]:</span></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;Predicted run time is&#39;</span><span class="p">,</span> <span class="n">t_est</span><span class="p">,</span> <span class="s1">&#39;seconds&#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Predicted number of rows is&#39;</span><span class="p">,</span> <span class="n">n_est</span><span class="p">)</span>
-</pre></div>
-</div>
-<p><span class="outputnumrole">Out[26]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Predicted</span> <span class="n">run</span> <span class="n">time</span> <span class="ow">is</span> <span class="mf">0.5671657183046198</span> <span class="n">seconds</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Predicted</span> <span class="n">run</span> <span class="n">time</span> <span class="ow">is</span> <span class="mf">0.4077133703528213</span> <span class="n">seconds</span>
 <span class="n">Predicted</span> <span class="n">number</span> <span class="n">of</span> <span class="n">rows</span> <span class="ow">is</span> <span class="mi">2617</span>
 </pre></div>
 </div>
 <p>Let’s get the actual run time and number of rows to compare with the
 prediction above. This might take a while.</p>
 <p>As you will see, the prediction is not spot on, but it’s not too shabby
-(at least, not when we tried it!) Note that both predicted and actual
+(at least, not when we tried it!). Note that both predicted and actual
 run time results also depend on network latency and responsiveness of
 the service provider.</p>
-<p><span class="inputnumrole">In[27]:</span></p>
+<p><span class="inputnumrole">In[26]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">t_real</span><span class="p">,</span> <span class="n">tab</span> <span class="o">=</span> <span class="n">conesearch</span><span class="o">.</span><span class="n">conesearch_timer</span><span class="p">(</span>
     <span class="n">c</span><span class="p">,</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">degree</span><span class="p">,</span>
     <span class="n">catalog_db</span><span class="o">=</span><span class="s1">&#39;http://gsss.stsci.edu/webservices/vo/ConeSearch.aspx?CAT=GSC23&amp;&#39;</span><span class="p">,</span>
-    <span class="n">verbose</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[26]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">INFO</span><span class="p">:</span> <span class="n">conesearch_timer</span> <span class="n">took</span> <span class="mf">0.6867201328277588</span> <span class="n">s</span> <span class="n">on</span> <span class="n">AVERAGE</span> <span class="k">for</span> <span class="mi">1</span> <span class="n">call</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">.</span> <span class="p">[</span><span class="n">astroquery</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">timer</span><span class="p">]</span>
+</pre></div>
+</div>
+<p><span class="inputnumrole">In[27]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Actual run time is&#39;</span><span class="p">,</span> <span class="n">t_real</span><span class="p">,</span> <span class="s1">&#39;seconds&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Actual number of rows is&#39;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">tab</span><span class="p">))</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[27]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">INFO</span><span class="p">:</span> <span class="n">conesearch_timer</span> <span class="n">took</span> <span class="mf">0.7684788703918457</span> <span class="n">s</span> <span class="n">on</span> <span class="n">AVERAGE</span> <span class="k">for</span> <span class="mi">1</span> <span class="n">call</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">.</span> <span class="p">[</span><span class="n">astropy</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">timer</span><span class="p">]</span>
-</pre></div>
-</div>
-<p><span class="inputnumrole">In[28]:</span></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;Actual run time is&#39;</span><span class="p">,</span> <span class="n">t_real</span><span class="p">,</span> <span class="s1">&#39;seconds&#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Actual number of rows is&#39;</span><span class="p">,</span> <span class="n">tab</span><span class="o">.</span><span class="n">nrows</span><span class="p">)</span>
-</pre></div>
-</div>
-<p><span class="outputnumrole">Out[28]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Actual</span> <span class="n">run</span> <span class="n">time</span> <span class="ow">is</span> <span class="mf">0.7684788703918457</span> <span class="n">seconds</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Actual</span> <span class="n">run</span> <span class="n">time</span> <span class="ow">is</span> <span class="mf">0.6867201328277588</span> <span class="n">seconds</span>
 <span class="n">Actual</span> <span class="n">number</span> <span class="n">of</span> <span class="n">rows</span> <span class="ow">is</span> <span class="mi">4028</span>
 </pre></div>
 </div>
@@ -669,7 +692,7 @@ the service provider.</p>
       
     </p>
     <p>
-    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.1.
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.1.
     &copy; Copyright Astropy.
     </p>
   </div>

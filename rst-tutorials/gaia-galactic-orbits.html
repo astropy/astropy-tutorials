@@ -11,19 +11,19 @@
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
     <link rel="stylesheet" type="text/css" href="../_static/bootstrap_sandstone.css" />
     <link rel="stylesheet" type="text/css" href="../_static/astropy.css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/language_data.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
-    <script type="text/javascript" src="../_static/searchtools.js"></script>
-    <script type="text/javascript" src="https://use.fontawesome.com/3168e95f94.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script src="../_static/js/jquery-fix.js"></script>
+    <script src="../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script src="../_static/bootstrap-sphinx.js"></script>
+    <script src="../_static/searchtools.js"></script>
+    <script src="https://use.fontawesome.com/3168e95f94.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <link rel="shortcut icon" href="../_static/astropy_favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -166,21 +166,21 @@ vertical amplitudes.</p>
 <h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h2>
 <p><span class="inputnumrole">In[1]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># astropy imports</span>
-<span class="kn">import</span> <span class="nn">astropy.coordinates</span> <span class="kn">as</span> <span class="nn">coord</span>
+<span class="kn">import</span> <span class="nn">astropy.coordinates</span> <span class="k">as</span> <span class="nn">coord</span>
 <span class="kn">from</span> <span class="nn">astropy.table</span> <span class="kn">import</span> <span class="n">QTable</span>
-<span class="kn">import</span> <span class="nn">astropy.units</span> <span class="kn">as</span> <span class="nn">u</span>
+<span class="kn">import</span> <span class="nn">astropy.units</span> <span class="k">as</span> <span class="nn">u</span>
 <span class="kn">from</span> <span class="nn">astroquery.gaia</span> <span class="kn">import</span> <span class="n">Gaia</span>
 
 <span class="c1"># Third-party imports</span>
-<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="kn">as</span> <span class="nn">mpl</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
 
 <span class="c1"># gala imports</span>
-<span class="kn">import</span> <span class="nn">gala.coordinates</span> <span class="kn">as</span> <span class="nn">gc</span>
-<span class="kn">import</span> <span class="nn">gala.dynamics</span> <span class="kn">as</span> <span class="nn">gd</span>
-<span class="kn">import</span> <span class="nn">gala.potential</span> <span class="kn">as</span> <span class="nn">gp</span>
+<span class="kn">import</span> <span class="nn">gala.coordinates</span> <span class="k">as</span> <span class="nn">gc</span>
+<span class="kn">import</span> <span class="nn">gala.dynamics</span> <span class="k">as</span> <span class="nn">gd</span>
+<span class="kn">import</span> <span class="nn">gala.potential</span> <span class="k">as</span> <span class="nn">gp</span>
 <span class="kn">from</span> <span class="nn">gala.units</span> <span class="kn">import</span> <span class="n">galactic</span>
 </pre></div>
 </div>
@@ -195,9 +195,6 @@ vertical amplitudes.</p>
     <span class="n">Use</span> <span class="n">HTTPS</span><span class="p">:</span> <span class="kc">True</span>
     <span class="n">Port</span><span class="p">:</span> <span class="mi">443</span>
     <span class="n">SSL</span> <span class="n">Port</span><span class="p">:</span> <span class="mi">443</span>
-</pre></div>
-</div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">WARNING</span><span class="p">:</span> <span class="n">AstropyDeprecationWarning</span><span class="p">:</span> <span class="n">astropy</span><span class="o">.</span><span class="n">extern</span><span class="o">.</span><span class="n">six</span> <span class="n">will</span> <span class="n">be</span> <span class="n">removed</span> <span class="ow">in</span> <span class="mf">4.0</span><span class="p">,</span> <span class="n">use</span> <span class="n">the</span> <span class="n">six</span> <span class="n">module</span> <span class="n">directly</span> <span class="k">if</span> <span class="n">it</span> <span class="ow">is</span> <span class="n">still</span> <span class="n">needed</span> <span class="p">[</span><span class="n">astropy</span><span class="o">.</span><span class="n">extern</span><span class="o">.</span><span class="n">six</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -292,7 +289,7 @@ first four rows of the table:</p>
 </div>
 <p><span class="outputnumrole">Out[5]:</span></p>
 <i>QTable length=4</i>
-<table id="table140651502680336" class="table-striped table-bordered table-condensed">
+<table id="table139874284036304" class="table-striped table-bordered table-condensed">
 <thead><tr><th>ra</th><th>dec</th><th>parallax</th><th>pmra</th><th>pmdec</th><th>radial_velocity</th><th>phot_g_mean_mag</th><th>phot_bp_mean_mag</th><th>phot_rp_mean_mag</th></tr></thead>
 <thead><tr><th>deg</th><th>deg</th><th>mas</th><th>mas / yr</th><th>mas / yr</th><th>km / s</th><th>mag</th><th>mag</th><th>mag</th></tr></thead>
 <thead><tr><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float32</th><th>float32</th><th>float32</th></tr></thead>
@@ -401,6 +398,9 @@ at the default values for the solar position and velocity:</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[10]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">WARNING</span><span class="p">:</span> <span class="n">AstropyDeprecationWarning</span><span class="p">:</span> <span class="n">In</span> <span class="n">v4</span><span class="o">.</span><span class="mi">1</span> <span class="ow">and</span> <span class="n">later</span> <span class="n">versions</span><span class="p">,</span> <span class="n">the</span> <span class="n">Galactocentric</span> <span class="n">frame</span> <span class="n">will</span> <span class="n">adopt</span> <span class="n">default</span> <span class="n">parameters</span> <span class="n">that</span> <span class="n">may</span> <span class="n">update</span> <span class="k">with</span> <span class="n">time</span><span class="o">.</span> <span class="n">An</span> <span class="n">updated</span> <span class="n">default</span> <span class="n">parameter</span> <span class="nb">set</span> <span class="ow">is</span> <span class="n">already</span> <span class="n">available</span> <span class="n">through</span> <span class="n">the</span> <span class="n">astropy</span><span class="o">.</span><span class="n">coordinates</span><span class="o">.</span><span class="n">galactocentric_frame_defaults</span> <span class="n">ScienceState</span> <span class="nb">object</span><span class="p">,</span> <span class="k">as</span> <span class="n">described</span> <span class="ow">in</span> <span class="n">but</span> <span class="n">the</span> <span class="n">default</span> <span class="ow">is</span> <span class="n">currently</span> <span class="n">still</span> <span class="nb">set</span> <span class="n">to</span> <span class="n">the</span> <span class="n">pre</span><span class="o">-</span><span class="n">v4</span><span class="o">.</span><span class="mi">0</span> <span class="n">parameter</span> <span class="n">defaults</span><span class="o">.</span> <span class="n">The</span> <span class="n">safest</span> <span class="n">way</span> <span class="n">to</span> <span class="n">guard</span> <span class="n">against</span> <span class="n">changing</span> <span class="n">default</span> <span class="n">parameters</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">future</span> <span class="ow">is</span> <span class="n">to</span> <span class="n">either</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="n">specify</span> <span class="nb">all</span> <span class="n">Galactocentric</span> <span class="n">frame</span> <span class="n">attributes</span> <span class="n">explicitly</span> <span class="n">when</span> <span class="n">using</span> <span class="n">the</span> <span class="n">frame</span><span class="p">,</span> <span class="ow">or</span> <span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="nb">set</span> <span class="n">the</span> <span class="n">galactocentric_frame_defaults</span> <span class="n">parameter</span> <span class="nb">set</span> <span class="n">name</span> <span class="n">explicitly</span><span class="o">.</span> <span class="n">See</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">docs</span><span class="o">.</span><span class="n">astropy</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">en</span><span class="o">/</span><span class="n">latest</span><span class="o">/</span><span class="n">coordinates</span><span class="o">/</span><span class="n">galactocentric</span><span class="o">.</span><span class="n">html</span> <span class="k">for</span> <span class="n">more</span> <span class="n">information</span><span class="o">.</span> <span class="p">[</span><span class="n">astropy</span><span class="o">.</span><span class="n">coordinates</span><span class="o">.</span><span class="n">builtin_frames</span><span class="o">.</span><span class="n">galactocentric</span><span class="p">]</span>
+</pre></div>
+</div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">Galactocentric</span> <span class="n">Frame</span> <span class="p">(</span><span class="n">galcen_coord</span><span class="o">=&lt;</span><span class="n">ICRS</span> <span class="n">Coordinate</span><span class="p">:</span> <span class="p">(</span><span class="n">ra</span><span class="p">,</span> <span class="n">dec</span><span class="p">)</span> <span class="ow">in</span> <span class="n">deg</span>
     <span class="p">(</span><span class="mf">266.4051</span><span class="p">,</span> <span class="o">-</span><span class="mf">28.936175</span><span class="p">)</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">galcen_distance</span><span class="o">=</span><span class="mf">8.3</span> <span class="n">kpc</span><span class="p">,</span> <span class="n">galcen_v_sun</span><span class="o">=</span><span class="p">(</span><span class="mf">11.1</span><span class="p">,</span> <span class="mf">232.24</span><span class="p">,</span> <span class="mf">7.25</span><span class="p">)</span> <span class="n">km</span> <span class="o">/</span> <span class="n">s</span><span class="p">,</span> <span class="n">z_sun</span><span class="o">=</span><span class="mf">27.0</span> <span class="n">pc</span><span class="p">,</span> <span class="n">roll</span><span class="o">=</span><span class="mf">0.0</span> <span class="n">deg</span><span class="p">)</span><span class="o">&gt;</span>
 </pre></div>
@@ -485,7 +485,7 @@ provides the distance modulus:</p>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;$G_{BP}-G_{RP}$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;$G_</span><span class="si">{BP}</span><span class="s1">-G_</span><span class="si">{RP}</span><span class="s1">$&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$M_G$&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -536,7 +536,7 @@ low-mass stars:</p>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;$G_{BP}-G_{RP}$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;$G_</span><span class="si">{BP}</span><span class="s1">-G_</span><span class="si">{RP}</span><span class="s1">$&#39;</span><span class="p">)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$M_G$&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -663,7 +663,7 @@ to, for example, only show specified components (including velocity
 components):</p>
 <p><span class="inputnumrole">In[26]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">orbits_hi</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;v_x&#39;</span><span class="p">],</span>
-                           <span class="n">auto_aspect</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span>
+                           <span class="n">auto_aspect</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                            <span class="n">color</span><span class="o">=</span><span class="n">hi_mass_color</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -700,8 +700,8 @@ list of all convenience methods on the <code class="docutils literal notranslate
 documentation
 here</a>):</p>
 <p><span class="inputnumrole">In[28]:</span></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">zmax_hi</span> <span class="o">=</span> <span class="n">orbits_hi</span><span class="o">.</span><span class="n">zmax</span><span class="p">(</span><span class="n">approximate</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
-<span class="n">zmax_lo</span> <span class="o">=</span> <span class="n">orbits_lo</span><span class="o">.</span><span class="n">zmax</span><span class="p">(</span><span class="n">approximate</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">zmax_hi</span> <span class="o">=</span> <span class="n">orbits_hi</span><span class="o">.</span><span class="n">zmax</span><span class="p">(</span><span class="n">approximate</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">zmax_lo</span> <span class="o">=</span> <span class="n">orbits_lo</span><span class="o">.</span><span class="n">zmax</span><span class="p">(</span><span class="n">approximate</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Let’s make histograms of the maximum <span class="math notranslate nohighlight">\(z\)</span> heights for these two
@@ -710,10 +710,10 @@ samples:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bins</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">zmax_hi</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">,</span>
-         <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;high-mass&#39;</span><span class="p">,</span>
+         <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;high-mass&#39;</span><span class="p">,</span>
          <span class="n">color</span><span class="o">=</span><span class="n">hi_mass_color</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">zmax_lo</span><span class="o">.</span><span class="n">value</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="n">bins</span><span class="p">,</span>
-         <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;low-mass&#39;</span><span class="p">,</span>
+         <span class="n">alpha</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">density</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;low-mass&#39;</span><span class="p">,</span>
          <span class="n">color</span><span class="o">=</span><span class="n">lo_mass_color</span><span class="p">);</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
@@ -778,7 +778,7 @@ of eccentricity values.</p></li>
       
     </p>
     <p>
-    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.1.
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.1.
     &copy; Copyright Astropy.
     </p>
   </div>

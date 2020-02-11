@@ -11,19 +11,19 @@
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
     <link rel="stylesheet" type="text/css" href="../_static/bootstrap_sandstone.css" />
     <link rel="stylesheet" type="text/css" href="../_static/astropy.css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/language_data.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
-    <script type="text/javascript" src="../_static/searchtools.js"></script>
-    <script type="text/javascript" src="https://use.fontawesome.com/3168e95f94.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script src="../_static/js/jquery-fix.js"></script>
+    <script src="../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script src="../_static/bootstrap-sphinx.js"></script>
+    <script src="../_static/searchtools.js"></script>
+    <script src="https://use.fontawesome.com/3168e95f94.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <link rel="shortcut icon" href="../_static/astropy_favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -156,8 +156,8 @@ which provides an introduction to <code class="docutils literal notranslate"><sp
 </div><div class="section" id="imports">
 <h3>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h3>
 <p><span class="inputnumrole">In[1]:</span></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">astropy.io</span> <span class="kn">import</span> <span class="n">fits</span>
 <span class="kn">from</span> <span class="nn">astropy.modeling</span> <span class="kn">import</span> <span class="n">models</span><span class="p">,</span> <span class="n">fitting</span>
 <span class="kn">from</span> <span class="nn">astropy.modeling.models</span> <span class="kn">import</span> <span class="n">custom_model</span>
@@ -237,7 +237,7 @@ the flux units.</p>
 <p><span class="inputnumrole">In[5]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#Units of the flux</span>
 <span class="n">units_flux</span> <span class="o">=</span> <span class="n">spectrum</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="s1">&#39;bunit&#39;</span><span class="p">]</span>
-<span class="k">print</span><span class="p">(</span><span class="n">units_flux</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">units_flux</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[5]:</span></p>
@@ -251,7 +251,7 @@ tells us what header keyword to look at.</p>
 <p><span class="inputnumrole">In[6]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#Units of the wavelegth</span>
 <span class="n">units_wavelength_full</span> <span class="o">=</span> <span class="n">spectrum</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">header</span><span class="p">[</span><span class="s1">&#39;WAT1_001&#39;</span><span class="p">]</span>
-<span class="k">print</span><span class="p">(</span><span class="n">units_wavelength_full</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">units_wavelength_full</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[6]:</span></p>
@@ -262,7 +262,7 @@ tells us what header keyword to look at.</p>
 Angstroms</p>
 <p><span class="inputnumrole">In[7]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">units_wavelength</span> <span class="o">=</span> <span class="n">units_wavelength_full</span><span class="p">[</span><span class="mi">36</span><span class="p">:]</span>
-<span class="k">print</span><span class="p">(</span><span class="n">units_wavelength</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">units_wavelength</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[7]:</span></p>
@@ -274,8 +274,8 @@ Angstroms</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lam</span><span class="p">,</span> <span class="n">flux</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">6300</span><span class="p">,</span><span class="mi">6700</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">6563</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Wavelength ({})&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">units_wavelength</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Flux ({})&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">units_flux</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Wavelength (</span><span class="si">{}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">units_wavelength</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Flux (</span><span class="si">{}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">units_flux</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -309,7 +309,7 @@ us the height of the line.</p>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lam</span><span class="p">,</span> <span class="n">gaussian_fit</span><span class="p">(</span><span class="n">lam</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;darkorange&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">6300</span><span class="p">,</span><span class="mi">6700</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Wavelength (Angstroms)&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Flux ({})&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">units_flux</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Flux (</span><span class="si">{}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">units_flux</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -318,7 +318,7 @@ us the height of the line.</p>
 <p>We can see the fit is not doing a good job. Let’s print the parameters
 of this fit:</p>
 <p><span class="inputnumrole">In[11]:</span></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">gaussian_fit</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">gaussian_fit</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[11]:</span></p>
@@ -376,7 +376,7 @@ except we use a compound model instead of the gaussian model.</p>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lam</span><span class="p">,</span> <span class="n">compound_fit</span><span class="p">(</span><span class="n">lam</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;darkorange&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">6300</span><span class="p">,</span><span class="mi">6700</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Wavelength (Angstroms)&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Flux ({})&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">units_flux</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Flux (</span><span class="si">{}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">units_flux</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -384,19 +384,19 @@ except we use a compound model instead of the gaussian model.</p>
 <img alt="../_images/User-Defined-Model_35_0.png" src="../_images/User-Defined-Model_35_0.png" />
 <p>It works! Let’s take a look to the fit we just made.</p>
 <p><span class="inputnumrole">In[15]:</span></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">compound_fit</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">compound_fit</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[15]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Model</span><span class="p">:</span> <span class="n">CompoundModel0</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Model</span><span class="p">:</span> <span class="n">CompoundModel</span>
 <span class="n">Inputs</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,)</span>
 <span class="n">Outputs</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">,)</span>
 <span class="n">Model</span> <span class="nb">set</span> <span class="n">size</span><span class="p">:</span> <span class="mi">1</span>
 <span class="n">Expression</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 <span class="n">Components</span><span class="p">:</span>
-    <span class="p">[</span><span class="mi">0</span><span class="p">]:</span> <span class="o">&lt;</span><span class="n">Gaussian1D</span><span class="p">(</span><span class="n">amplitude</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> <span class="n">mean</span><span class="o">=</span><span class="mf">6563.</span><span class="p">,</span> <span class="n">stddev</span><span class="o">=</span><span class="mf">10.</span><span class="p">)</span><span class="o">&gt;</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">]:</span> <span class="o">&lt;</span><span class="n">Gaussian1D</span><span class="p">(</span><span class="n">amplitude</span><span class="o">=</span><span class="mf">7.02089174</span><span class="p">,</span> <span class="n">mean</span><span class="o">=</span><span class="mf">6564.13631715</span><span class="p">,</span> <span class="n">stddev</span><span class="o">=</span><span class="mf">1.97761475</span><span class="p">)</span><span class="o">&gt;</span>
 
-    <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="o">&lt;</span><span class="n">Polynomial1D</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">c0</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">c1</span><span class="o">=</span><span class="mf">0.</span><span class="p">)</span><span class="o">&gt;</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="o">&lt;</span><span class="n">Polynomial1D</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">c0</span><span class="o">=-</span><span class="mf">12.79335619</span><span class="p">,</span> <span class="n">c1</span><span class="o">=</span><span class="mf">0.00323995</span><span class="p">)</span><span class="o">&gt;</span>
 <span class="n">Parameters</span><span class="p">:</span>
        <span class="n">amplitude_0</span>          <span class="n">mean_0</span>      <span class="o">...</span>         <span class="n">c0_1</span>                <span class="n">c1_1</span>
     <span class="o">-----------------</span> <span class="o">-----------------</span> <span class="o">...</span> <span class="o">-------------------</span> <span class="o">--------------------</span>
@@ -406,7 +406,7 @@ except we use a compound model instead of the gaussian model.</p>
 <p>Let’s print all the parameters in a fancy way:</p>
 <p><span class="inputnumrole">In[16]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">compound_fit</span><span class="o">.</span><span class="n">param_names</span><span class="p">,</span> <span class="n">compound_fit</span><span class="o">.</span><span class="n">parameters</span><span class="p">):</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[16]:</span></p>
@@ -425,7 +425,7 @@ polynomial of degree 1. So now if we want to see just the amplitude:</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[17]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Parameter</span><span class="p">(</span><span class="s1">&#39;amplitude_0&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">7.020891743992038</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Parameter</span><span class="p">(</span><span class="s1">&#39;amplitude&#39;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">7.020891743992038</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><strong>Conclusions:</strong> What was the difference between the first simple
@@ -441,7 +441,7 @@ called <a class="reference external" href="http://docs.astropy.org/en/stable/api
 parameters</a>.</p>
 <p><span class="inputnumrole">In[18]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">compound_model_fixed</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">Gaussian1D</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6563</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="o">+</span> <span class="n">models</span><span class="o">.</span><span class="n">Polynomial1D</span><span class="p">(</span><span class="n">degree</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">compound_model_fixed</span><span class="o">.</span><span class="n">mean_0</span><span class="o">.</span><span class="n">fixed</span> <span class="o">=</span> <span class="bp">True</span>
+<span class="n">compound_model_fixed</span><span class="o">.</span><span class="n">mean_0</span><span class="o">.</span><span class="n">fixed</span> <span class="o">=</span> <span class="kc">True</span>
 </pre></div>
 </div>
 <p>Now let’s use this new model with a fixed parameter to fit the data the
@@ -457,26 +457,26 @@ same way we did before.</p>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lam</span><span class="p">,</span> <span class="n">compound_fit_fixed</span><span class="p">(</span><span class="n">lam</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;darkorange&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">6300</span><span class="p">,</span><span class="mi">6700</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Wavelength (Angstroms)&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Flux ({})&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">units_flux</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Flux (</span><span class="si">{}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">units_flux</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[20]:</span></p>
 <img alt="../_images/User-Defined-Model_47_0.png" src="../_images/User-Defined-Model_47_0.png" />
 <p><span class="inputnumrole">In[21]:</span></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">compound_fit_fixed</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">compound_fit_fixed</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[21]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Model</span><span class="p">:</span> <span class="n">CompoundModel1</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Model</span><span class="p">:</span> <span class="n">CompoundModel</span>
 <span class="n">Inputs</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,)</span>
 <span class="n">Outputs</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">,)</span>
 <span class="n">Model</span> <span class="nb">set</span> <span class="n">size</span><span class="p">:</span> <span class="mi">1</span>
 <span class="n">Expression</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 <span class="n">Components</span><span class="p">:</span>
-    <span class="p">[</span><span class="mi">0</span><span class="p">]:</span> <span class="o">&lt;</span><span class="n">Gaussian1D</span><span class="p">(</span><span class="n">amplitude</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> <span class="n">mean</span><span class="o">=</span><span class="mf">6563.</span><span class="p">,</span> <span class="n">stddev</span><span class="o">=</span><span class="mf">10.</span><span class="p">)</span><span class="o">&gt;</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">]:</span> <span class="o">&lt;</span><span class="n">Gaussian1D</span><span class="p">(</span><span class="n">amplitude</span><span class="o">=</span><span class="mf">1.53257471</span><span class="p">,</span> <span class="n">mean</span><span class="o">=</span><span class="mf">6563.</span><span class="p">,</span> <span class="n">stddev</span><span class="o">=</span><span class="mf">28.57847527</span><span class="p">)</span><span class="o">&gt;</span>
 
-    <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="o">&lt;</span><span class="n">Polynomial1D</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">c0</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">c1</span><span class="o">=</span><span class="mf">0.</span><span class="p">)</span><span class="o">&gt;</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="o">&lt;</span><span class="n">Polynomial1D</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">c0</span><span class="o">=-</span><span class="mf">12.79103</span><span class="p">,</span> <span class="n">c1</span><span class="o">=</span><span class="mf">0.00323745</span><span class="p">)</span><span class="o">&gt;</span>
 <span class="n">Parameters</span><span class="p">:</span>
        <span class="n">amplitude_0</span>     <span class="n">mean_0</span> <span class="o">...</span>        <span class="n">c0_1</span>                <span class="n">c1_1</span>
     <span class="o">------------------</span> <span class="o">------</span> <span class="o">...</span> <span class="o">------------------</span> <span class="o">--------------------</span>
@@ -506,26 +506,26 @@ for the mean.</p>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">lam</span><span class="p">,</span> <span class="n">compound_fit_bounded</span><span class="p">(</span><span class="n">lam</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;darkorange&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">6300</span><span class="p">,</span><span class="mi">6700</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Wavelength (Angstroms)&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Flux ({})&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">units_flux</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Flux (</span><span class="si">{}</span><span class="s1">)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">units_flux</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[23]:</span></p>
 <img alt="../_images/User-Defined-Model_51_0.png" src="../_images/User-Defined-Model_51_0.png" />
 <p><span class="inputnumrole">In[24]:</span></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">compound_fit_bounded</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">compound_fit_bounded</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[24]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Model</span><span class="p">:</span> <span class="n">CompoundModel2</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Model</span><span class="p">:</span> <span class="n">CompoundModel</span>
 <span class="n">Inputs</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,)</span>
 <span class="n">Outputs</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">,)</span>
 <span class="n">Model</span> <span class="nb">set</span> <span class="n">size</span><span class="p">:</span> <span class="mi">1</span>
 <span class="n">Expression</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 <span class="n">Components</span><span class="p">:</span>
-    <span class="p">[</span><span class="mi">0</span><span class="p">]:</span> <span class="o">&lt;</span><span class="n">Gaussian1D</span><span class="p">(</span><span class="n">amplitude</span><span class="o">=</span><span class="mf">1.</span><span class="p">,</span> <span class="n">mean</span><span class="o">=</span><span class="mf">6563.</span><span class="p">,</span> <span class="n">stddev</span><span class="o">=</span><span class="mf">10.</span><span class="p">)</span><span class="o">&gt;</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">]:</span> <span class="o">&lt;</span><span class="n">Gaussian1D</span><span class="p">(</span><span class="n">amplitude</span><span class="o">=</span><span class="mf">6.65730507</span><span class="p">,</span> <span class="n">mean</span><span class="o">=</span><span class="mf">6563.5</span><span class="p">,</span> <span class="n">stddev</span><span class="o">=</span><span class="mf">2.09182676</span><span class="p">)</span><span class="o">&gt;</span>
 
-    <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="o">&lt;</span><span class="n">Polynomial1D</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">c0</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">c1</span><span class="o">=</span><span class="mf">0.</span><span class="p">)</span><span class="o">&gt;</span>
+    <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="o">&lt;</span><span class="n">Polynomial1D</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">c0</span><span class="o">=-</span><span class="mf">12.79336254</span><span class="p">,</span> <span class="n">c1</span><span class="o">=</span><span class="mf">0.00323995</span><span class="p">)</span><span class="o">&gt;</span>
 <span class="n">Parameters</span><span class="p">:</span>
        <span class="n">amplitude_0</span>    <span class="n">mean_0</span> <span class="o">...</span>         <span class="n">c0_1</span>                 <span class="n">c1_1</span>
     <span class="o">-----------------</span> <span class="o">------</span> <span class="o">...</span> <span class="o">-------------------</span> <span class="o">---------------------</span>
@@ -608,18 +608,18 @@ with <code class="docutils literal notranslate"><span class="pre">astropy.modeli
 <p><span class="outputnumrole">Out[29]:</span></p>
 <img alt="../_images/User-Defined-Model_65_0.png" src="../_images/User-Defined-Model_65_0.png" />
 <p><span class="inputnumrole">In[30]:</span></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">exp_fit</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">exp_fit</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[30]:</span></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Model</span><span class="p">:</span> <span class="n">exponential</span>
 <span class="n">Inputs</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,)</span>
-<span class="n">Outputs</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">,)</span>
+<span class="n">Outputs</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">,)</span>
 <span class="n">Model</span> <span class="nb">set</span> <span class="n">size</span><span class="p">:</span> <span class="mi">1</span>
 <span class="n">Parameters</span><span class="p">:</span>
             <span class="n">a</span>                   <span class="n">b</span>                  <span class="n">c</span>
-    <span class="o">------------------</span> <span class="o">-------------------</span> <span class="o">-----------------</span>
-    <span class="mf">0.9261347868421593</span> <span class="o">-</span><span class="mf">1.8932207075783711</span> <span class="mf">1.135720857580515</span>
+    <span class="o">------------------</span> <span class="o">-------------------</span> <span class="o">------------------</span>
+    <span class="mf">2.0424017112445787</span> <span class="o">-</span><span class="mf">1.9707656563084213</span> <span class="mf">0.3492154563411067</span>
 </pre></div>
 </div>
 <p>The fit looks good in the plot. Let’s check the parameters and the
@@ -641,7 +641,7 @@ goodness of the fit.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[32]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">1.013934362144876</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">0.8319950467679277</span>
 </pre></div>
 </div>
 <p>The Reduced Chi Square value is close to 1. Great! This means our fit is
@@ -730,7 +730,7 @@ of the parameters.</p>
 <p><span class="outputnumrole">Out[37]:</span></p>
 <img alt="../_images/User-Defined-Model_80_0.png" src="../_images/User-Defined-Model_80_0.png" />
 <p><span class="inputnumrole">In[38]:</span></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">sine_fit</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">sine_fit</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[38]:</span></p>
@@ -739,9 +739,9 @@ of the parameters.</p>
 <span class="n">Outputs</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">,)</span>
 <span class="n">Model</span> <span class="nb">set</span> <span class="n">size</span><span class="p">:</span> <span class="mi">1</span>
 <span class="n">Parameters</span><span class="p">:</span>
-            <span class="n">a</span>                  <span class="n">b</span>                 <span class="n">c</span>                 <span class="n">d</span>
-    <span class="o">------------------</span> <span class="o">-----------------</span> <span class="o">-----------------</span> <span class="o">------------------</span>
-    <span class="mf">3.3489381772195923</span> <span class="mf">2.014879433181183</span> <span class="mf">3.745210625454761</span> <span class="mf">1.0466277001413815</span>
+            <span class="n">a</span>                 <span class="n">b</span>                 <span class="n">c</span>                  <span class="n">d</span>
+    <span class="o">-----------------</span> <span class="o">-----------------</span> <span class="o">------------------</span> <span class="o">------------------</span>
+    <span class="mf">3.436275027635132</span> <span class="mf">2.015261440352939</span> <span class="mf">3.7579874374765723</span> <span class="mf">0.9640138899925932</span>
 </pre></div>
 </div>
 <p><span class="inputnumrole">In[39]:</span></p>
@@ -749,7 +749,7 @@ of the parameters.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[39]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">5.449084792562024</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">4.985433822929824</span>
 </pre></div>
 </div>
 <p>The Reduced Chi Squared value is showing the same as the plot: this fit
@@ -803,7 +803,7 @@ the following data.</p>
       
     </p>
     <p>
-    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.1.
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.1.
     &copy; Copyright Astropy.
     </p>
   </div>

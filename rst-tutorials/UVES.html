@@ -11,19 +11,19 @@
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
     <link rel="stylesheet" type="text/css" href="../_static/bootstrap_sandstone.css" />
     <link rel="stylesheet" type="text/css" href="../_static/astropy.css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/language_data.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
-    <script type="text/javascript" src="../_static/searchtools.js"></script>
-    <script type="text/javascript" src="https://use.fontawesome.com/3168e95f94.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script src="../_static/js/jquery-fix.js"></script>
+    <script src="../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script src="../_static/bootstrap-sphinx.js"></script>
+    <script src="../_static/searchtools.js"></script>
+    <script src="https://use.fontawesome.com/3168e95f94.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <link rel="shortcut icon" href="../_static/astropy_favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -165,7 +165,7 @@ please execute all the code again.</p>
 <h2>Before you proceed<a class="headerlink" href="#before-you-proceed" title="Permalink to this headline">¶</a></h2>
 <p><span class="inputnumrole">In[1]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set up matplotlib</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
 </pre></div>
 </div>
@@ -178,7 +178,7 @@ want to fill with data files, change the <code class="docutils literal notransla
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">tarfile</span>
 <span class="kn">from</span> <span class="nn">astropy.utils.data</span> <span class="kn">import</span> <span class="n">download_file</span>
 <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;http://data.astropy.org/tutorials/UVES/data_UVES.tar.gz&#39;</span>
-<span class="n">f</span> <span class="o">=</span> <span class="n">tarfile</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">download_file</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">cache</span><span class="o">=</span><span class="bp">True</span><span class="p">),</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;r|*&#39;</span><span class="p">)</span>
+<span class="n">f</span> <span class="o">=</span> <span class="n">tarfile</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">download_file</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">cache</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;r|*&#39;</span><span class="p">)</span>
 <span class="n">working_dir_path</span> <span class="o">=</span> <span class="s1">&#39;.&#39;</span>  <span class="c1"># CHANGE TO WHEREVER YOU WANT THE DATA TO BE EXTRACTED</span>
 <span class="n">f</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">working_dir_path</span><span class="p">)</span>
 </pre></div>
@@ -211,7 +211,7 @@ for more details:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">glob</span> <span class="kn">import</span> <span class="n">glob</span>
 <span class="kn">import</span> <span class="nn">os</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
 <span class="kn">from</span> <span class="nn">astropy.wcs</span> <span class="kn">import</span> <span class="n">WCS</span>
 <span class="kn">from</span> <span class="nn">astropy.io</span> <span class="kn">import</span> <span class="n">fits</span>
@@ -219,7 +219,7 @@ for more details:</p>
 <span class="c1"># os.path.join is a platform-independent way to join two directories</span>
 <span class="n">globpath</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">working_dir_path</span><span class="p">,</span> <span class="s1">&#39;UVES/*.fits&#39;</span><span class="p">)</span>
 
-<span class="k">print</span><span class="p">(</span><span class="n">globpath</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">globpath</span><span class="p">)</span>
 <span class="c1"># glob searches through directories similar to the Unix shell</span>
 <span class="n">filelist</span> <span class="o">=</span> <span class="n">glob</span><span class="p">(</span><span class="n">globpath</span><span class="p">)</span>
 
@@ -398,7 +398,7 @@ all exposures have the same setup.</p>
 <span class="c1"># Let&#39;s just print the setup on the screen</span>
 <span class="c1"># We&#39;ll see if it&#39;s all the same.</span>
 <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">filelist</span><span class="p">:</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">read_setup</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">read_setup</span><span class="p">(</span><span class="n">f</span><span class="p">))</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[9]:</span></p>
@@ -460,7 +460,7 @@ the units through many (but not all) mathematical operations
 supplies the values of many physical and astronomical constants. The
 easiest way to attach a unit to a number is by multiplication.</p>
 <p><span class="inputnumrole">In[11]:</span></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">astropy.units</span> <span class="kn">as</span> <span class="nn">u</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">astropy.units</span> <span class="k">as</span> <span class="nn">u</span>
 <span class="kn">from</span> <span class="nn">astropy.constants.si</span> <span class="kn">import</span> <span class="n">c</span><span class="p">,</span> <span class="n">G</span><span class="p">,</span> <span class="n">M_sun</span><span class="p">,</span> <span class="n">R_sun</span>
 
 <span class="n">wavelength</span> <span class="o">=</span> <span class="n">wavelength</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">AA</span>
@@ -494,12 +494,12 @@ infall speed using simple energy conservation.</p>
 <p>So, let’s calculate the free-fall velocity for MN Lup.</p>
 <p><span class="inputnumrole">In[12]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">v_accr</span> <span class="o">=</span> <span class="p">(</span><span class="mf">2.</span><span class="o">*</span> <span class="n">G</span> <span class="o">*</span> <span class="n">M_MN_Lup</span><span class="o">/</span><span class="n">R_MN_Lup</span><span class="p">)</span><span class="o">**</span><span class="mf">0.5</span>
-<span class="k">print</span><span class="p">(</span><span class="n">v_accr</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">v_accr</span><span class="p">)</span>
 <span class="c1"># Maybe astronomers prefer it in the traditional cgs system?</span>
-<span class="k">print</span><span class="p">(</span><span class="n">v_accr</span><span class="o">.</span><span class="n">cgs</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">v_accr</span><span class="o">.</span><span class="n">cgs</span><span class="p">)</span>
 <span class="c1"># Or in some really obscure unit?</span>
 <span class="kn">from</span> <span class="nn">astropy.units</span> <span class="kn">import</span> <span class="n">imperial</span>
-<span class="k">print</span><span class="p">(</span><span class="n">v_accr</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">imperial</span><span class="o">.</span><span class="n">yd</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">hour</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">v_accr</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">imperial</span><span class="o">.</span><span class="n">yd</span> <span class="o">/</span> <span class="n">u</span><span class="o">.</span><span class="n">hour</span><span class="p">))</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[12]:</span></p>
@@ -578,7 +578,7 @@ expected from spectroscopy.</p>
 <p>The values from evolutionary tracks are indeed consistent with the
 spectroscopically estimated surface gravity.</p>
 <p><span class="inputnumrole">In[18]:</span></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">((</span><span class="n">G</span><span class="o">*</span><span class="n">M_MN_Lup</span><span class="o">/</span><span class="n">R_MN_Lup</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">second</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">((</span><span class="n">G</span><span class="o">*</span><span class="n">M_MN_Lup</span><span class="o">/</span><span class="n">R_MN_Lup</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">second</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[18]:</span></p>
@@ -602,13 +602,13 @@ wavelengths relative to <span class="math notranslate nohighlight">\(H_\alpha\)<
 <p>We get -132, -86 and +5 km/s.</p>
 <p><span class="inputnumrole">In[20]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># This function uses the Doppler equivalency between wavelength and velocity</span>
-<span class="kn">import</span> <span class="nn">astropy.units</span> <span class="kn">as</span> <span class="nn">u</span>
+<span class="kn">import</span> <span class="nn">astropy.units</span> <span class="k">as</span> <span class="nn">u</span>
 <span class="k">def</span> <span class="nf">wave2doppler</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">w0</span><span class="p">):</span>
     <span class="n">w0_equiv</span> <span class="o">=</span> <span class="n">u</span><span class="o">.</span><span class="n">doppler_optical</span><span class="p">(</span><span class="n">w0</span><span class="p">)</span>
     <span class="n">w_equiv</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">km</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">,</span> <span class="n">equivalencies</span><span class="o">=</span><span class="n">w0_equiv</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">w_equiv</span>
 
-<span class="k">print</span><span class="p">(</span><span class="n">wave2doppler</span><span class="p">(</span><span class="n">waveclosetoHa</span><span class="p">,</span> <span class="mf">656.489</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">nm</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">km</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">wave2doppler</span><span class="p">(</span><span class="n">waveclosetoHa</span><span class="p">,</span> <span class="mf">656.489</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">nm</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">km</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">))</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[20]:</span></p>
@@ -653,7 +653,7 @@ year). Also, the time system needs to be given (e.g. UTC). Below are
 several examples, initialized from different header keywords.</p>
 <p><span class="inputnumrole">In[23]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">astropy.time</span> <span class="kn">import</span> <span class="n">Time</span>
-<span class="n">t1</span> <span class="o">=</span> <span class="n">Time</span><span class="p">(</span><span class="n">header</span><span class="p">[</span><span class="s1">&#39;MJD-Obs&#39;</span><span class="p">],</span> <span class="n">format</span> <span class="o">=</span> <span class="s1">&#39;mjd&#39;</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="s1">&#39;utc&#39;</span><span class="p">)</span>
+<span class="n">t1</span> <span class="o">=</span> <span class="n">Time</span><span class="p">(</span><span class="n">header</span><span class="p">[</span><span class="s1">&#39;MJD-Obs&#39;</span><span class="p">],</span> <span class="nb">format</span> <span class="o">=</span> <span class="s1">&#39;mjd&#39;</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="s1">&#39;utc&#39;</span><span class="p">)</span>
 <span class="n">t2</span> <span class="o">=</span> <span class="n">Time</span><span class="p">(</span><span class="n">header</span><span class="p">[</span><span class="s1">&#39;Date-Obs&#39;</span><span class="p">],</span> <span class="n">scale</span> <span class="o">=</span> <span class="s1">&#39;utc&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -750,7 +750,7 @@ for the first spectrum.</p>
 <p><span class="inputnumrole">In[29]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ew</span> <span class="o">=</span> <span class="n">fcaII</span><span class="p">[</span><span class="mi">0</span><span class="p">,:]</span> <span class="o">-</span> <span class="mf">1.</span>
 <span class="n">ew</span> <span class="o">=</span> <span class="n">ew</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">wcaII</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">AA</span><span class="p">)</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">ew</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ew</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[29]:</span></p>
@@ -776,8 +776,8 @@ code:</p>
 <span class="kn">from</span> <span class="nn">astropy.io</span> <span class="kn">import</span> <span class="n">ascii</span>
 
 <span class="n">datecol</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Obs Date&#39;</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">date</span><span class="p">)</span>
-<span class="n">pcol</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;phase&#39;</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">delta_p</span><span class="p">,</span> <span class="n">format</span> <span class="o">=</span> <span class="s1">&#39;{:.1f}&#39;</span><span class="p">)</span>
-<span class="n">ewcol</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;EW&#39;</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">ew</span><span class="p">,</span> <span class="n">format</span> <span class="o">=</span> <span class="s1">&#39;{:.1f}&#39;</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">AA&#39;</span><span class="p">)</span>
+<span class="n">pcol</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;phase&#39;</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">delta_p</span><span class="p">,</span> <span class="nb">format</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:.1f}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">ewcol</span> <span class="o">=</span> <span class="n">Column</span><span class="p">(</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;EW&#39;</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">ew</span><span class="p">,</span> <span class="nb">format</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:.1f}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\\</span><span class="s1">AA&#39;</span><span class="p">)</span>
 <span class="n">tab</span> <span class="o">=</span> <span class="n">Table</span><span class="p">((</span><span class="n">datecol</span><span class="p">,</span> <span class="n">pcol</span><span class="p">,</span> <span class="n">ewcol</span><span class="p">))</span>
 <span class="c1"># latexdicts[&#39;AA&#39;] contains the style specifics for A&amp;A (\hline etc.)</span>
 <span class="n">tab</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">working_dir_path</span><span class="p">,</span> <span class="s1">&#39;EWtab.tex&#39;</span><span class="p">),</span> <span class="n">latexdict</span> <span class="o">=</span> <span class="n">ascii</span><span class="o">.</span><span class="n">latexdicts</span><span class="p">[</span><span class="s1">&#39;AA&#39;</span><span class="p">])</span>
@@ -998,7 +998,7 @@ version or Linux version).</p>
       
     </p>
     <p>
-    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.1.
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.1.
     &copy; Copyright Astropy.
     </p>
   </div>

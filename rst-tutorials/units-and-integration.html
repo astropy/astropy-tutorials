@@ -11,19 +11,19 @@
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
     <link rel="stylesheet" type="text/css" href="../_static/bootstrap_sandstone.css" />
     <link rel="stylesheet" type="text/css" href="../_static/astropy.css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/language_data.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
-    <script type="text/javascript" src="../_static/searchtools.js"></script>
-    <script type="text/javascript" src="https://use.fontawesome.com/3168e95f94.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script src="../_static/js/jquery-fix.js"></script>
+    <script src="../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script src="../_static/bootstrap-sphinx.js"></script>
+    <script src="../_static/searchtools.js"></script>
+    <script src="https://use.fontawesome.com/3168e95f94.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <link rel="shortcut icon" href="../_static/astropy_favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -161,11 +161,11 @@ encounter <code class="docutils literal notranslate"><span class="pre">astropy</
 to convert between them. Finally, we will use <span class="math notranslate nohighlight">\(\LaTeX\)</span> to make our
 figure axis labels easy to read.</p>
 <p><span class="inputnumrole">In[1]:</span></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">integrate</span>
 <span class="kn">from</span> <span class="nn">astropy.modeling.blackbody</span> <span class="kn">import</span> <span class="n">blackbody_lambda</span><span class="p">,</span> <span class="n">blackbody_nu</span><span class="p">,</span> <span class="n">BlackBody1D</span>
 <span class="kn">from</span> <span class="nn">astropy</span> <span class="kn">import</span> <span class="n">units</span> <span class="k">as</span> <span class="n">u</span><span class="p">,</span> <span class="n">constants</span> <span class="k">as</span> <span class="n">c</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 <span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
 </pre></div>
@@ -205,7 +205,10 @@ section of the astropy.units documentation pages.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[2]:</span></p>
-<img alt="../_images/units-and-integration_5_0.png" src="../_images/units-and-integration_5_0.png" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">WARNING</span><span class="p">:</span> <span class="n">AstropyDeprecationWarning</span><span class="p">:</span> <span class="n">BlackBody</span> <span class="n">provides</span> <span class="n">the</span> <span class="n">same</span> <span class="n">capabilities</span> <span class="p">[</span><span class="n">warnings</span><span class="p">]</span>
+</pre></div>
+</div>
+<img alt="../_images/units-and-integration_5_1.png" src="../_images/units-and-integration_5_1.png" />
 <div class="section" id="using-latex-for-axis-labels">
 <h3>Using <span class="math notranslate nohighlight">\(LaTeX\)</span> for axis labels<a class="headerlink" href="#using-latex-for-axis-labels" title="Permalink to this headline">¶</a></h3>
 <p>Here, we’ve used <span class="math notranslate nohighlight">\(LaTeX\)</span> markup to add nice-looking axis labels.
@@ -220,7 +223,7 @@ suggested format for axis label text that includes markup.</p>
 </div>
 <p><span class="outputnumrole">Out[3]:</span></p>
 <div class="math notranslate nohighlight">
-\[1.1280834 \times 10^{10} \; \mathrm{\frac{erg}{s\,sr\,cm^{2}}}\]</div>
+\[1.1280849 \times 10^{10} \; \mathrm{\frac{erg}{s\,sr\,cm^{2}}}\]</div>
 <p>Now we can do something similar, but for a wavelength grid. We want to
 integrate over an equivalent wavelength range to the frequency range we
 did earlier. We can transform the maximum frequency into the
@@ -239,14 +242,18 @@ the addition of an <em>equivalency</em>.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[4]:</span></p>
-<img alt="../_images/units-and-integration_9_0.png" src="../_images/units-and-integration_9_0.png" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">WARNING</span><span class="p">:</span> <span class="n">AstropyDeprecationWarning</span><span class="p">:</span> <span class="n">BlackBody</span> <span class="n">provides</span> <span class="n">the</span> <span class="n">same</span> <span class="n">capabilities</span> <span class="p">[</span><span class="n">warnings</span><span class="p">]</span>
+<span class="n">WARNING</span><span class="p">:</span> <span class="n">AstropyDeprecationWarning</span><span class="p">:</span> <span class="n">BlackBody</span> <span class="n">provides</span> <span class="n">the</span> <span class="n">same</span> <span class="n">capabilities</span> <span class="p">[</span><span class="n">astropy</span><span class="o">.</span><span class="n">modeling</span><span class="o">.</span><span class="n">blackbody</span><span class="p">]</span>
+</pre></div>
+</div>
+<img alt="../_images/units-and-integration_9_1.png" src="../_images/units-and-integration_9_1.png" />
 <p><span class="inputnumrole">In[5]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">trapz</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">lam</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">bb5000K_lam</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s1">&#39;erg s-1 cm-2 sr-1&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[5]:</span></p>
 <div class="math notranslate nohighlight">
-\[1.1467744 \times 10^{10} \; \mathrm{\frac{erg}{s\,sr\,cm^{2}}}\]</div>
+\[1.146776 \times 10^{10} \; \mathrm{\frac{erg}{s\,sr\,cm^{2}}}\]</div>
 <p>Notice this is within a couple percent of the answer we got in frequency
 space, despite our bad sampling at small wavelengths!</p>
 <p>Many <code class="docutils literal notranslate"><span class="pre">astropy</span></code> functions use units and quantities directly. As you
@@ -336,9 +343,9 @@ in 2015.</p>
 created by the IMF, to the number of O stars (mass more than 15 times
 solar).</p>
 <p><span class="inputnumrole">In[8]:</span></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n_m</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">integrate</span><span class="o">.</span><span class="n">quad</span><span class="p">(</span><span class="n">salpeter</span><span class="p">,</span> <span class="n">a</span><span class="o">=.</span><span class="mo">01</span><span class="p">,</span> <span class="n">b</span><span class="o">=.</span><span class="mi">6</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n_m</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">integrate</span><span class="o">.</span><span class="n">quad</span><span class="p">(</span><span class="n">salpeter</span><span class="p">,</span> <span class="n">a</span><span class="o">=.</span><span class="mi">01</span><span class="p">,</span> <span class="n">b</span><span class="o">=.</span><span class="mi">6</span><span class="p">)</span>
 <span class="n">n_o</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">integrate</span><span class="o">.</span><span class="n">quad</span><span class="p">(</span><span class="n">salpeter</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mf">15.</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mf">100.</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">n_m</span> <span class="o">/</span> <span class="n">n_o</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">n_m</span> <span class="o">/</span> <span class="n">n_o</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[8]:</span></p>
@@ -370,7 +377,7 @@ by mass. More generally, you find the value of some property
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">IMF_m</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">imf</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">imf</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="o">*</span> <span class="n">m</span>
 
-<span class="n">m_m</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">integrate</span><span class="o">.</span><span class="n">quad</span><span class="p">(</span><span class="n">IMF_m</span><span class="p">,</span> <span class="n">a</span><span class="o">=.</span><span class="mo">01</span><span class="p">,</span> <span class="n">b</span><span class="o">=.</span><span class="mi">6</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">salpeter</span><span class="p">,</span> <span class="p">))</span>
+<span class="n">m_m</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">integrate</span><span class="o">.</span><span class="n">quad</span><span class="p">(</span><span class="n">IMF_m</span><span class="p">,</span> <span class="n">a</span><span class="o">=.</span><span class="mi">01</span><span class="p">,</span> <span class="n">b</span><span class="o">=.</span><span class="mi">6</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">salpeter</span><span class="p">,</span> <span class="p">))</span>
 <span class="n">m_o</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">integrate</span><span class="o">.</span><span class="n">quad</span><span class="p">(</span><span class="n">IMF_m</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mf">15.</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mf">100.</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">salpeter</span><span class="p">,</span> <span class="p">))</span>
 
 <span class="n">m_m</span> <span class="o">/</span> <span class="n">m_o</span>
@@ -454,7 +461,7 @@ IMF. Perform the same calculations as above.</p></li>
       
     </p>
     <p>
-    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.1.
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.1.
     &copy; Copyright Astropy.
     </p>
   </div>

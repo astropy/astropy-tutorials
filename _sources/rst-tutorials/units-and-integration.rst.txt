@@ -132,8 +132,13 @@ section of the astropy.units documentation pages.
 :outputnumrole:`Out[2]:`
 
 
+.. parsed-literal::
 
-.. image:: nboutput/units-and-integration_5_0.png
+    WARNING: AstropyDeprecationWarning: BlackBody provides the same capabilities [warnings]
+
+
+
+.. image:: nboutput/units-and-integration_5_1.png
 
 
 
@@ -164,7 +169,7 @@ Now we numerically integrate using the trapezoid rule.
 
 .. math::
 
-    1.1280834 \times 10^{10} \; \mathrm{\frac{erg}{s\,sr\,cm^{2}}}
+    1.1280849 \times 10^{10} \; \mathrm{\frac{erg}{s\,sr\,cm^{2}}}
 
 
 
@@ -194,8 +199,14 @@ the addition of an *equivalency*.
 :outputnumrole:`Out[4]:`
 
 
+.. parsed-literal::
 
-.. image:: nboutput/units-and-integration_9_0.png
+    WARNING: AstropyDeprecationWarning: BlackBody provides the same capabilities [warnings]
+    WARNING: AstropyDeprecationWarning: BlackBody provides the same capabilities [astropy.modeling.blackbody]
+
+
+
+.. image:: nboutput/units-and-integration_9_1.png
 
 
 
@@ -215,7 +226,7 @@ the addition of an *equivalency*.
 
 .. math::
 
-    1.1467744 \times 10^{10} \; \mathrm{\frac{erg}{s\,sr\,cm^{2}}}
+    1.146776 \times 10^{10} \; \mathrm{\frac{erg}{s\,sr\,cm^{2}}}
 
 
 

@@ -197,8 +197,27 @@ documentation. <https://dust-extinction.readthedocs.io/en/latest/dust_extinction
 :outputnumrole:`Out[2]:`
 
 
+.. parsed-literal::
 
-.. image:: nboutput/color-excess_9_0.png
+    WARNING: AstropyDeprecationWarning: Class CCM89 defines class attributes ``inputs``.
+                This has been deprecated in v4.0 and support will be removed in v4.1.
+                Starting with v4.0 classes must define a class attribute ``n_inputs``.
+                Please consult the documentation for details.
+                 [astropy.modeling.core]
+    WARNING: AstropyDeprecationWarning: Class F99 defines class attributes ``inputs``.
+                This has been deprecated in v4.0 and support will be removed in v4.1.
+                Starting with v4.0 classes must define a class attribute ``n_inputs``.
+                Please consult the documentation for details.
+                 [astropy.modeling.core]
+    WARNING: AstropyDeprecationWarning: Class FM90 defines class attributes ``inputs``.
+                This has been deprecated in v4.0 and support will be removed in v4.1.
+                Starting with v4.0 classes must define a class attribute ``n_inputs``.
+                Please consult the documentation for details.
+                 [astropy.modeling.core]
+
+
+
+.. image:: nboutput/color-excess_9_1.png
 
 
 
@@ -237,31 +256,31 @@ MAST <https://archive.stsci.edu/iue/>`__:
 
 .. parsed-literal::
 
-    intentType obs_collection provenance_name ...   objID         distance     
-    ---------- -------------- --------------- ... ---------- ------------------
-       science            IUE              -- ... 3500014392                0.0
-       science            IUE              -- ... 3500014393                0.0
-       science            IUE              -- ... 3500014394                0.0
-       science            IUE              -- ... 3500014395                0.0
-       science            IUE              -- ... 3500014396                0.0
-       science            IUE              -- ... 3500014397                0.0
-       science            IUE              -- ... 3500014398                0.0
-       science            IUE              -- ... 3500014399                0.0
-       science            IUE              -- ... 3500014400                0.0
-       science            IUE              -- ... 3500014401                0.0
-           ...            ...             ... ...        ...                ...
-       science            IUE              -- ... 3500011964                0.0
-       science            IUE              -- ... 3500011965                0.0
-       science            IUE              -- ... 3500011966                0.0
-       science            IUE              -- ... 3500011967                0.0
-       science            IUE              -- ... 3500009330                0.0
-       science            IUE              -- ... 3500011968                0.0
-       science            IUE              -- ... 3500011969                0.0
-       science            IUE              -- ... 3500008878                0.0
-       science            HST         CALSTIS ... 2039211830 0.5751893673409462
-       science            HST         CALSTIS ... 2039212069 0.5751893673409462
-       science            HST         CALSTIS ... 2039209130 0.5751893673409462
-    Length = 109 rows
+    intentType obs_collection provenance_name ...   objID          distance     
+    ---------- -------------- --------------- ... ---------- -------------------
+       science            IUE              -- ... 3500014392                 0.0
+       science            IUE              -- ... 3500014393                 0.0
+       science            IUE              -- ... 3500014394                 0.0
+       science            IUE              -- ... 3500014395                 0.0
+       science            IUE              -- ... 3500014396                 0.0
+       science            IUE              -- ... 3500014397                 0.0
+       science            IUE              -- ... 3500014398                 0.0
+       science            IUE              -- ... 3500014399                 0.0
+       science            IUE              -- ... 3500014400                 0.0
+       science            IUE              -- ... 3500014401                 0.0
+           ...            ...             ... ...        ...                 ...
+       science            IUE              -- ... 3500011969                 0.0
+       science            IUE              -- ... 3500008878                 0.0
+       science            HST         CALSTIS ... 2039211830                 0.0
+       science            HST         CALSTIS ... 2039212069                 0.0
+       science            HST         CALSTIS ... 2039209130                 0.0
+       science            HST          CALHRS ... 2034384292 0.33893346431996607
+       science            HST          CALHRS ... 2019078073 0.33893346431996607
+       science            HST          CALHRS ... 2034382288 0.40340282324719634
+       science            HST          CALHRS ... 2034383974 0.46671585424445183
+       science            HST          CALHRS ... 2019067415 0.46671585424445183
+       science            HST         CALSTIS ... 2039288697  0.8422128285820137
+    Length = 115 rows
     Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:IUE/url/pub/iue/data/lwr/05000/lwr05639.elbll.gz to ./mastDownload/IUE/lwr05639/lwr05639.elbll.gz ... [Done]
     Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:IUE/url/pub/iue/data/lwr/05000/lwr05639.lilo.gz to ./mastDownload/IUE/lwr05639/lwr05639.lilo.gz ... [Done]
     Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:IUE/url/pub/iue/data/lwr/05000/lwr05639.melol.gz to ./mastDownload/IUE/lwr05639/lwr05639.melol.gz ... [Done]
@@ -435,6 +454,19 @@ ISM community for having large-\ :math:`R_V` dust in the line of sight.
     Ebv = 0.5
     ext = F99(Rv=Rv)
 
+
+:outputnumrole:`Out[11]:`
+
+
+.. parsed-literal::
+
+    WARNING: AstropyDeprecationWarning: Class F99 defines class attributes ``inputs``.
+                This has been deprecated in v4.0 and support will be removed in v4.1.
+                Starting with v4.0 classes must define a class attribute ``n_inputs``.
+                Please consult the documentation for details.
+                 [astropy.modeling.core]
+
+
 To extinguish (redden) a spectrum, multiply by the ``ext.extinguish``
 function. To unextinguish (deredden), divide by the same
 ``ext.extinguish``, as we do here:
@@ -465,8 +497,17 @@ function. To unextinguish (deredden), divide by the same
 :outputnumrole:`Out[12]:`
 
 
+.. parsed-literal::
 
-.. image:: nboutput/color-excess_31_0.png
+    WARNING: AstropyDeprecationWarning: Class FM90 defines class attributes ``inputs``.
+                This has been deprecated in v4.0 and support will be removed in v4.1.
+                Starting with v4.0 classes must define a class attribute ``n_inputs``.
+                Please consult the documentation for details.
+                 [astropy.modeling.core]
+
+
+
+.. image:: nboutput/color-excess_31_1.png
 
 
 
@@ -583,8 +624,13 @@ magnitude system.
 :outputnumrole:`Out[14]:`
 
 
+.. parsed-literal::
 
-.. image:: nboutput/color-excess_39_0.png
+    WARNING: AstropyDeprecationWarning: BlackBody provides the same capabilities [synphot.models]
+
+
+
+.. image:: nboutput/color-excess_39_1.png
 
 
 
@@ -617,8 +663,17 @@ with the extinction model as a lookup table.
 :outputnumrole:`Out[15]:`
 
 
+.. parsed-literal::
 
-.. image:: nboutput/color-excess_41_0.png
+    WARNING: AstropyDeprecationWarning: Class CCM89 defines class attributes ``inputs``.
+                This has been deprecated in v4.0 and support will be removed in v4.1.
+                Starting with v4.0 classes must define a class attribute ``n_inputs``.
+                Please consult the documentation for details.
+                 [astropy.modeling.core]
+
+
+
+.. image:: nboutput/color-excess_41_1.png
 
 
 

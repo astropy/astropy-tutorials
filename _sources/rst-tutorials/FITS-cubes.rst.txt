@@ -98,15 +98,6 @@ Alternatively, if you don’t use conda, you can use pip.
     from astropy.wcs import WCS
     from reproject import reproject_interp
 
-
-:outputnumrole:`Out[1]:`
-
-
-.. parsed-literal::
-
-    WARNING: AstropyDeprecationWarning: astropy.extern.six will be removed in 4.0, use the six module directly if it is still needed [astropy.extern.six]
-
-
 Download the HI Data
 --------------------
 
@@ -246,8 +237,8 @@ To do this, we index our cube along one axis (for a slice) or two axes
 
 .. parsed-literal::
 
-    INFO: Auto-setting vmin to -1.510e+00 [aplpy.core]
-    INFO: Auto-setting vmax to  1.542e+01 [aplpy.core]
+    INFO: Auto-setting vmin to -1.531e+00 [aplpy.core]
+    INFO: Auto-setting vmax to  1.567e+01 [aplpy.core]
 
 
 
@@ -354,16 +345,6 @@ cube
      n_s:    450  type_s: VRAD      unit_s: m / s  range:  -598824.534 m / s:  600409.133 m / s
 
 
-.. parsed-literal::
-
-    /home/circleci/project/venv/lib/python3.7/site-packages/spectral_cube/base_class.py:158: FutureWarning: Using a non-tuple sequence for multidimensional indexing is deprecated; use `arr[tuple(seq)]` instead of `arr[seq]`. In the future this will be interpreted as an array index, `arr[np.array(seq)]`, which will result either in an error or a different result.
-      inds = [i[view] for i in inds[::-1]]  # numpy -> wcs order
-    /home/circleci/project/venv/lib/python3.7/site-packages/spectral_cube/masks.py:632: FutureWarning: Using a non-tuple sequence for multidimensional indexing is deprecated; use `arr[tuple(seq)]` instead of `arr[seq]`. In the future this will be interpreted as an array index, `arr[np.array(seq)]`, which will result either in an error or a different result.
-      return LazyMask(self._function, data=self._data[view],
-    /home/circleci/project/venv/lib/python3.7/site-packages/spectral_cube/spectral_cube.py:1222: FutureWarning: Using a non-tuple sequence for multidimensional indexing is deprecated; use `arr[tuple(seq)]` instead of `arr[seq]`. In the future this will be interpreted as an array index, `arr[np.array(seq)]`, which will result either in an error or a different result.
-      return self._new_cube_with(data=self._data[view],
-
-
 Cut along the Spectral Axis:
 ----------------------------
 
@@ -460,26 +441,16 @@ possible to access just the WCS object associated with a cube object.
 
 .. parsed-literal::
 
-    WCS Transformation
+    WCS Keywords
     
-    This transformation has 2 pixel and 2 world dimensions
-    
-    Array shape (Numpy order): None
-    
-    Pixel Dim  Data size  Bounds
-            0       None  None
-            1       None  None
-    
-    World Dim  Physical Type     Units
-            0  pos.galactic.lon  deg
-            1  pos.galactic.lat  deg
-    
-    Correlation between pixel and world axes:
-    
-               Pixel Dim
-    World Dim    0    1
-            0  yes  yes
-            1  yes  yes
+    Number of WCS axes: 2
+    CTYPE : 'GLON-TAN'  'GLAT-TAN'  
+    CRVAL : 303.75  -40.0  
+    CRPIX : 10.557620817843869  47.3723930634757  
+    PC1_1 PC1_2  : 1.0  0.0  
+    PC2_1 PC2_2  : 0.0  1.0  
+    CDELT : -0.1494444443846667  0.1538888888273333  
+    NAXIS : 0  0
 
 
 As expected, the first moment image we created only has two axes
@@ -526,7 +497,7 @@ object directly into a matplotlib axis instance.
 
 .. parsed-literal::
 
-    <matplotlib.contour.QuadContourSet at 0x7fbd6d106050>
+    <matplotlib.contour.QuadContourSet at 0x7f18d8f2aa90>
 
 
 
@@ -666,11 +637,11 @@ specified.
 
 .. parsed-literal::
 
-    WARNING: W35: None:4:0: W35: 'value' attribute required for INFO elements [astropy.io.votable.tree]
     WARNING: W35: None:5:0: W35: 'value' attribute required for INFO elements [astropy.io.votable.tree]
     WARNING: W35: None:6:0: W35: 'value' attribute required for INFO elements [astropy.io.votable.tree]
     WARNING: W35: None:7:0: W35: 'value' attribute required for INFO elements [astropy.io.votable.tree]
-    WARNING: W35: None:9:0: W35: 'value' attribute required for INFO elements [astropy.io.votable.tree]
+    WARNING: W35: None:8:0: W35: 'value' attribute required for INFO elements [astropy.io.votable.tree]
+    WARNING: W35: None:10:0: W35: 'value' attribute required for INFO elements [astropy.io.votable.tree]
 
 
 Here, the result is a TableList which contains 24 Herschel data products
@@ -811,7 +782,7 @@ five quite large files. It could take several minutes to complete.
     INFO: [Done] [astroquery.esasky.core]
     INFO: Downloading of HERSCHEL data complete. [astroquery.esasky.core]
     INFO: Maps available at /home/circleci/project/tutorials/notebooks/FITS-cubes/Maps. [astroquery.esasky.core]
-    Filename: Maps/HERSCHEL/anonymous1573321302/hspirepmw401_25pxmp_0110_m7303_1342198565_1342198566_1462476888800.fits.gz
+    Filename: Maps/HERSCHEL/anonymous1581356723/hspirepmw401_25pxmp_0110_m7303_1342198565_1342198566_1462476888800.fits.gz
     No.    Name      Ver    Type      Cards   Dimensions   Format
       0  PRIMARY       1 PrimaryHDU     184   ()      
       1  image         1 ImageHDU        47   (2407, 2141)   float64   
@@ -847,26 +818,13 @@ the 350 micron image.
 
 .. parsed-literal::
 
-    WCS Transformation
+    WCS Keywords
     
-    This transformation has 2 pixel and 2 world dimensions
-    
-    Array shape (Numpy order): (2141, 2407)
-    
-    Pixel Dim  Data size  Bounds
-            0       2407  None
-            1       2141  None
-    
-    World Dim  Physical Type  Units
-            0  pos.eq.ra      deg
-            1  pos.eq.dec     deg
-    
-    Correlation between pixel and world axes:
-    
-               Pixel Dim
-    World Dim    0    1
-            0  yes  yes
-            1  yes  yes
+    Number of WCS axes: 2
+    CTYPE : 'RA---TAN'  'DEC--TAN'  
+    CRVAL : 18.99666058287459  -71.82876374906319  
+    CRPIX : 1063.0  1517.0  
+    NAXIS : 2407  2141
 
 
 With this, we can display this image using matplotlib with

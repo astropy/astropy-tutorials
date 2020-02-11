@@ -11,19 +11,19 @@
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
     <link rel="stylesheet" type="text/css" href="../_static/bootstrap_sandstone.css" />
     <link rel="stylesheet" type="text/css" href="../_static/astropy.css" />
-    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
-    <script type="text/javascript" src="../_static/jquery.js"></script>
-    <script type="text/javascript" src="../_static/underscore.js"></script>
-    <script type="text/javascript" src="../_static/doctools.js"></script>
-    <script type="text/javascript" src="../_static/language_data.js"></script>
-    <script async="async" type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <script type="text/javascript" src="../_static/js/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="../_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../_static/bootstrap-sphinx.js"></script>
-    <script type="text/javascript" src="../_static/searchtools.js"></script>
-    <script type="text/javascript" src="https://use.fontawesome.com/3168e95f94.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script src="../_static/js/jquery-fix.js"></script>
+    <script src="../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script src="../_static/bootstrap-sphinx.js"></script>
+    <script src="../_static/searchtools.js"></script>
+    <script src="https://use.fontawesome.com/3168e95f94.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
     <link rel="shortcut icon" href="../_static/astropy_favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -157,11 +157,11 @@ command to upgrade</p>
 </pre></div>
 </div>
 <p><span class="inputnumrole">In[1]:</span></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="kn">import</span> <span class="nn">astropy.units</span> <span class="kn">as</span> <span class="nn">u</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">astropy.units</span> <span class="k">as</span> <span class="nn">u</span>
 <span class="kn">from</span> <span class="nn">astropy.table</span> <span class="kn">import</span> <span class="n">Table</span>
 <span class="kn">from</span> <span class="nn">dust_extinction.parameter_averages</span> <span class="kn">import</span> <span class="n">CCM89</span><span class="p">,</span> <span class="n">F99</span>
 <span class="kn">from</span> <span class="nn">synphot</span> <span class="kn">import</span> <span class="n">units</span><span class="p">,</span> <span class="n">config</span>
@@ -248,7 +248,22 @@ documentation. &lt;<a class="reference external" href="https://dust-extinction.r
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[2]:</span></p>
-<img alt="../_images/color-excess_9_0.png" src="../_images/color-excess_9_0.png" />
+<pre class="literal-block">WARNING: AstropyDeprecationWarning: Class CCM89 defines class attributes <code class="docutils literal notranslate"><span class="pre">inputs</span></code>.
+            This has been deprecated in v4.0 and support will be removed in v4.1.
+            Starting with v4.0 classes must define a class attribute <code class="docutils literal notranslate"><span class="pre">n_inputs</span></code>.
+            Please consult the documentation for details.
+             [astropy.modeling.core]
+WARNING: AstropyDeprecationWarning: Class F99 defines class attributes <code class="docutils literal notranslate"><span class="pre">inputs</span></code>.
+            This has been deprecated in v4.0 and support will be removed in v4.1.
+            Starting with v4.0 classes must define a class attribute <code class="docutils literal notranslate"><span class="pre">n_inputs</span></code>.
+            Please consult the documentation for details.
+             [astropy.modeling.core]
+WARNING: AstropyDeprecationWarning: Class FM90 defines class attributes <code class="docutils literal notranslate"><span class="pre">inputs</span></code>.
+            This has been deprecated in v4.0 and support will be removed in v4.1.
+            Starting with v4.0 classes must define a class attribute <code class="docutils literal notranslate"><span class="pre">n_inputs</span></code>.
+            Please consult the documentation for details.
+             [astropy.modeling.core]</pre>
+<img alt="../_images/color-excess_9_1.png" src="../_images/color-excess_9_1.png" />
 <p>Astronomers studying the ISM often display extinction curves against
 inverse wavelength (wavenumber) to show the ultraviolet variation, as we
 do here. Infrared extinction varies much less and approaches zero at
@@ -272,31 +287,31 @@ MAST</a>:</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[3]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>intentType obs_collection provenance_name ...   objID         distance
----------- -------------- --------------- ... ---------- ------------------
-   science            IUE              -- ... 3500014392                0.0
-   science            IUE              -- ... 3500014393                0.0
-   science            IUE              -- ... 3500014394                0.0
-   science            IUE              -- ... 3500014395                0.0
-   science            IUE              -- ... 3500014396                0.0
-   science            IUE              -- ... 3500014397                0.0
-   science            IUE              -- ... 3500014398                0.0
-   science            IUE              -- ... 3500014399                0.0
-   science            IUE              -- ... 3500014400                0.0
-   science            IUE              -- ... 3500014401                0.0
-       ...            ...             ... ...        ...                ...
-   science            IUE              -- ... 3500011964                0.0
-   science            IUE              -- ... 3500011965                0.0
-   science            IUE              -- ... 3500011966                0.0
-   science            IUE              -- ... 3500011967                0.0
-   science            IUE              -- ... 3500009330                0.0
-   science            IUE              -- ... 3500011968                0.0
-   science            IUE              -- ... 3500011969                0.0
-   science            IUE              -- ... 3500008878                0.0
-   science            HST         CALSTIS ... 2039211830 0.5751893673409462
-   science            HST         CALSTIS ... 2039212069 0.5751893673409462
-   science            HST         CALSTIS ... 2039209130 0.5751893673409462
-Length = 109 rows
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>intentType obs_collection provenance_name ...   objID          distance
+---------- -------------- --------------- ... ---------- -------------------
+   science            IUE              -- ... 3500014392                 0.0
+   science            IUE              -- ... 3500014393                 0.0
+   science            IUE              -- ... 3500014394                 0.0
+   science            IUE              -- ... 3500014395                 0.0
+   science            IUE              -- ... 3500014396                 0.0
+   science            IUE              -- ... 3500014397                 0.0
+   science            IUE              -- ... 3500014398                 0.0
+   science            IUE              -- ... 3500014399                 0.0
+   science            IUE              -- ... 3500014400                 0.0
+   science            IUE              -- ... 3500014401                 0.0
+       ...            ...             ... ...        ...                 ...
+   science            IUE              -- ... 3500011969                 0.0
+   science            IUE              -- ... 3500008878                 0.0
+   science            HST         CALSTIS ... 2039211830                 0.0
+   science            HST         CALSTIS ... 2039212069                 0.0
+   science            HST         CALSTIS ... 2039209130                 0.0
+   science            HST          CALHRS ... 2034384292 0.33893346431996607
+   science            HST          CALHRS ... 2019078073 0.33893346431996607
+   science            HST          CALHRS ... 2034382288 0.40340282324719634
+   science            HST          CALHRS ... 2034383974 0.46671585424445183
+   science            HST          CALHRS ... 2019067415 0.46671585424445183
+   science            HST         CALSTIS ... 2039288697  0.8422128285820137
+Length = 115 rows
 Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:IUE/url/pub/iue/data/lwr/05000/lwr05639.elbll.gz to ./mastDownload/IUE/lwr05639/lwr05639.elbll.gz ... [Done]
 Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:IUE/url/pub/iue/data/lwr/05000/lwr05639.lilo.gz to ./mastDownload/IUE/lwr05639/lwr05639.lilo.gz ... [Done]
 Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:IUE/url/pub/iue/data/lwr/05000/lwr05639.melol.gz to ./mastDownload/IUE/lwr05639/lwr05639.melol.gz ... [Done]
@@ -311,7 +326,7 @@ Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:IUE/url/p
 <p>We read the downloaded files into an astropy table:</p>
 <p><span class="inputnumrole">In[4]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">t_lwr</span> <span class="o">=</span> <span class="n">Table</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;./mastDownload/IUE/lwr05639/lwr05639mxlo_vo.fits&#39;</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="n">t_lwr</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">t_lwr</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[4]:</span></p>
@@ -413,6 +428,12 @@ ISM community for having large-<span class="math notranslate nohighlight">\(R_V\
 <span class="n">ext</span> <span class="o">=</span> <span class="n">F99</span><span class="p">(</span><span class="n">Rv</span><span class="o">=</span><span class="n">Rv</span><span class="p">)</span>
 </pre></div>
 </div>
+<p><span class="outputnumrole">Out[11]:</span></p>
+<pre class="literal-block">WARNING: AstropyDeprecationWarning: Class F99 defines class attributes <code class="docutils literal notranslate"><span class="pre">inputs</span></code>.
+            This has been deprecated in v4.0 and support will be removed in v4.1.
+            Starting with v4.0 classes must define a class attribute <code class="docutils literal notranslate"><span class="pre">n_inputs</span></code>.
+            Please consult the documentation for details.
+             [astropy.modeling.core]</pre>
 <p>To extinguish (redden) a spectrum, multiply by the <code class="docutils literal notranslate"><span class="pre">ext.extinguish</span></code>
 function. To unextinguish (deredden), divide by the same
 <code class="docutils literal notranslate"><span class="pre">ext.extinguish</span></code>, as we do here:</p>
@@ -435,7 +456,12 @@ function. To unextinguish (deredden), divide by the same
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[12]:</span></p>
-<img alt="../_images/color-excess_31_0.png" src="../_images/color-excess_31_0.png" />
+<pre class="literal-block">WARNING: AstropyDeprecationWarning: Class FM90 defines class attributes <code class="docutils literal notranslate"><span class="pre">inputs</span></code>.
+            This has been deprecated in v4.0 and support will be removed in v4.1.
+            Starting with v4.0 classes must define a class attribute <code class="docutils literal notranslate"><span class="pre">n_inputs</span></code>.
+            Please consult the documentation for details.
+             [astropy.modeling.core]</pre>
+<img alt="../_images/color-excess_31_1.png" src="../_images/color-excess_31_1.png" />
 <p>Notice that, by dereddening the spectrum, the absorption feature at 2175
 Angstrom is removed. This feature can also be seen as the prominent bump
 in the extinction curves in Example 1. That we have smoothly removed the
@@ -525,7 +551,10 @@ magnitude system.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[14]:</span></p>
-<img alt="../_images/color-excess_39_0.png" src="../_images/color-excess_39_0.png" />
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">WARNING</span><span class="p">:</span> <span class="n">AstropyDeprecationWarning</span><span class="p">:</span> <span class="n">BlackBody</span> <span class="n">provides</span> <span class="n">the</span> <span class="n">same</span> <span class="n">capabilities</span> <span class="p">[</span><span class="n">synphot</span><span class="o">.</span><span class="n">models</span><span class="p">]</span>
+</pre></div>
+</div>
+<img alt="../_images/color-excess_39_1.png" src="../_images/color-excess_39_1.png" />
 <p>Now we initialize the extinction model and choose an extinction of
 <span class="math notranslate nohighlight">\(A_V\)</span> = 2. To get the <code class="docutils literal notranslate"><span class="pre">dust_extinction</span></code> model working with
 <code class="docutils literal notranslate"><span class="pre">synphot</span></code>, we create a wavelength array and make a spectral element
@@ -547,7 +576,12 @@ with the extinction model as a lookup table.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[15]:</span></p>
-<img alt="../_images/color-excess_41_0.png" src="../_images/color-excess_41_0.png" />
+<pre class="literal-block">WARNING: AstropyDeprecationWarning: Class CCM89 defines class attributes <code class="docutils literal notranslate"><span class="pre">inputs</span></code>.
+            This has been deprecated in v4.0 and support will be removed in v4.1.
+            Starting with v4.0 classes must define a class attribute <code class="docutils literal notranslate"><span class="pre">n_inputs</span></code>.
+            Please consult the documentation for details.
+             [astropy.modeling.core]</pre>
+<img alt="../_images/color-excess_41_1.png" src="../_images/color-excess_41_1.png" />
 <p>Synthetic photometry refers to modeling an observation of a star by
 multiplying the theoretical model for the astronomical flux through a
 certain filter response function, then integrating.</p>
@@ -564,12 +598,12 @@ the Vega system.</p>
 <p><span class="inputnumrole">In[17]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sp_stim_before</span> <span class="o">=</span> <span class="n">sp_obs_before</span><span class="o">.</span><span class="n">effstim</span><span class="p">(</span><span class="n">flux_unit</span><span class="o">=</span><span class="s1">&#39;vegamag&#39;</span><span class="p">,</span> <span class="n">vegaspec</span><span class="o">=</span><span class="n">vega</span><span class="p">)</span>
 <span class="n">sp_stim</span> <span class="o">=</span> <span class="n">sp_obs</span><span class="o">.</span><span class="n">effstim</span><span class="p">(</span><span class="n">flux_unit</span><span class="o">=</span><span class="s1">&#39;vegamag&#39;</span><span class="p">,</span> <span class="n">vegaspec</span><span class="o">=</span><span class="n">vega</span><span class="p">)</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;before dust, V =&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">sp_stim_before</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;after dust, V =&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">sp_stim</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;before dust, V =&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">sp_stim_before</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;after dust, V =&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">sp_stim</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
 
 <span class="c1"># Calculate extinction and compare to our chosen value.</span>
 <span class="n">Av_calc</span> <span class="o">=</span> <span class="n">sp_stim</span> <span class="o">-</span> <span class="n">sp_stim_before</span>
-<span class="k">print</span><span class="p">(</span><span class="s1">&#39;$A_V$ = &#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">Av_calc</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;$A_V$ = &#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">Av_calc</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[17]:</span></p>
@@ -605,7 +639,7 @@ plot.</p>
     <span class="c1"># Color excess = extinction at lambda - extinction at V</span>
     <span class="n">color_excess</span> <span class="o">=</span> <span class="n">obs_effstim</span> <span class="o">-</span> <span class="n">obs_i_effstim</span> <span class="o">-</span> <span class="n">Av_calc</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">sp_obs_i</span><span class="o">.</span><span class="n">effective_wavelength</span><span class="p">(),</span> <span class="n">color_excess</span><span class="p">,</span><span class="s1">&#39;or&#39;</span><span class="p">)</span>
-    <span class="k">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">sp_obs_i</span><span class="o">.</span><span class="n">effective_wavelength</span><span class="p">(),</span><span class="mi">1</span><span class="p">),</span> <span class="s1">&#39;,&#39;</span><span class="p">,</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">sp_obs_i</span><span class="o">.</span><span class="n">effective_wavelength</span><span class="p">(),</span><span class="mi">1</span><span class="p">),</span> <span class="s1">&#39;,&#39;</span><span class="p">,</span>
           <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">color_excess</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
 
 <span class="c1"># Plot the model extinction curve for comparison</span>
@@ -657,7 +691,7 @@ depends on the shape of the background source flux.</p>
       
     </p>
     <p>
-    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.2.1.
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.1.
     &copy; Copyright Astropy.
     </p>
   </div>

@@ -437,15 +437,15 @@ It works! Let’s take a look to the fit we just made.
 
 .. parsed-literal::
 
-    Model: CompoundModel0
+    Model: CompoundModel
     Inputs: ('x',)
     Outputs: ('y',)
     Model set size: 1
     Expression: [0] + [1]
     Components: 
-        [0]: <Gaussian1D(amplitude=1., mean=6563., stddev=10.)>
+        [0]: <Gaussian1D(amplitude=7.02089174, mean=6564.13631715, stddev=1.97761475)>
     
-        [1]: <Polynomial1D(1, c0=0., c1=0.)>
+        [1]: <Polynomial1D(1, c0=-12.79335619, c1=0.00323995)>
     Parameters:
            amplitude_0          mean_0      ...         c0_1                c1_1        
         ----------------- ----------------- ... ------------------- --------------------
@@ -496,7 +496,7 @@ polynomial of degree 1. So now if we want to see just the amplitude:
 
 .. parsed-literal::
 
-    Parameter('amplitude_0', value=7.020891743992038)
+    Parameter('amplitude', value=7.020891743992038)
 
 
 
@@ -574,15 +574,15 @@ same way we did before.
 
 .. parsed-literal::
 
-    Model: CompoundModel1
+    Model: CompoundModel
     Inputs: ('x',)
     Outputs: ('y',)
     Model set size: 1
     Expression: [0] + [1]
     Components: 
-        [0]: <Gaussian1D(amplitude=1., mean=6563., stddev=10.)>
+        [0]: <Gaussian1D(amplitude=1.53257471, mean=6563., stddev=28.57847527)>
     
-        [1]: <Polynomial1D(1, c0=0., c1=0.)>
+        [1]: <Polynomial1D(1, c0=-12.79103, c1=0.00323745)>
     Parameters:
            amplitude_0     mean_0 ...        c0_1                c1_1        
         ------------------ ------ ... ------------------ --------------------
@@ -648,15 +648,15 @@ for the mean.
 
 .. parsed-literal::
 
-    Model: CompoundModel2
+    Model: CompoundModel
     Inputs: ('x',)
     Outputs: ('y',)
     Model set size: 1
     Expression: [0] + [1]
     Components: 
-        [0]: <Gaussian1D(amplitude=1., mean=6563., stddev=10.)>
+        [0]: <Gaussian1D(amplitude=6.65730507, mean=6563.5, stddev=2.09182676)>
     
-        [1]: <Polynomial1D(1, c0=0., c1=0.)>
+        [1]: <Polynomial1D(1, c0=-12.79336254, c1=0.00323995)>
     Parameters:
            amplitude_0    mean_0 ...         c0_1                 c1_1        
         ----------------- ------ ... ------------------- ---------------------
@@ -795,12 +795,12 @@ with ``astropy.modeling``.
 
     Model: exponential
     Inputs: ('x',)
-    Outputs: ('x',)
+    Outputs: ('y',)
     Model set size: 1
     Parameters:
-                a                   b                  c        
-        ------------------ ------------------- -----------------
-        0.9261347868421593 -1.8932207075783711 1.135720857580515
+                a                   b                  c         
+        ------------------ ------------------- ------------------
+        2.0424017112445787 -1.9707656563084213 0.3492154563411067
 
 
 The fit looks good in the plot. Let’s check the parameters and the
@@ -838,7 +838,7 @@ goodness of the fit.
 
 .. parsed-literal::
 
-    1.013934362144876
+    0.8319950467679277
 
 
 
@@ -987,9 +987,9 @@ of the parameters.
     Outputs: ('y',)
     Model set size: 1
     Parameters:
-                a                  b                 c                 d         
-        ------------------ ----------------- ----------------- ------------------
-        3.3489381772195923 2.014879433181183 3.745210625454761 1.0466277001413815
+                a                 b                 c                  d         
+        ----------------- ----------------- ------------------ ------------------
+        3.436275027635132 2.015261440352939 3.7579874374765723 0.9640138899925932
 
 
 
@@ -1008,7 +1008,7 @@ of the parameters.
 
 .. parsed-literal::
 
-    5.449084792562024
+    4.985433822929824
 
 
 

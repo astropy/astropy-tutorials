@@ -181,6 +181,7 @@ created called ``hcg7_center``
      '_abc_impl',
      '_apply',
      '_extra_frameattr_names',
+     '_is_name',
      '_sky_coord_frame',
      'altaz',
      'apply_space_motion',
@@ -192,6 +193,7 @@ created called ``hcg7_center``
      'contained_by',
      'copy',
      'custombarycentricecliptic',
+     'cylindrical',
      'data',
      'dec',
      'default_differential',
@@ -500,7 +502,7 @@ file\ ``'HCG7_SDSS_cutout.jpg'``, defined at the top of the cell.
 
 .. parsed-literal::
 
-    ('HCG7_SDSS_cutout.jpg', <http.client.HTTPMessage at 0x7fd1831f5b10>)
+    ('HCG7_SDSS_cutout.jpg', <http.client.HTTPMessage at 0x7f2780ed96d0>)
 
 
 
