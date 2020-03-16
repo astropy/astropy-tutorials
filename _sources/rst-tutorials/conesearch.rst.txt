@@ -407,7 +407,7 @@ catalog.
         "content_type": "catalog",
         "created": "12/4/2008 3:29:11 PM",
         "creator_seq": "",
-        "duplicatesIgnored": 0,
+        "duplicatesIgnored": 1,
         "intf_index": 1,
         "intf_role": "std",
         "intf_type": "vs:paramhttp",
@@ -417,7 +417,7 @@ catalog.
         "reference_url": "http://gsss.stsci.edu/Catalogs/GSC/GSC2/GSC2.htm",
         "region_of_regard": NaN,
         "res_description": "The Guide Star Catalog II (GSC-II) is an all-sky optical catalog based on 1\" resolution scans of the photographic Sky Survey plates, at two epochs and three bandpasses, from the Palomar and UK Schmidt telescopes. This all-sky catalog will ultimately contains positions, proper motions, classifications, and magnitudes in multiple bandpasses for almost a billion objects down to approximately Jpg=21, Fpg=20. The GSC-II is currently used for HST Bright Object Protection and HST pointing. Looking ahead, the GSC-II will form the basis of the Guide Star Catalog for JWST. This was constructed in collaboration with ground-based observatories for use with the GEMINI, VLT and GALILEO telescopes",
-        "res_subject": "Surveys",
+        "res_subject": "Observational astronomy",
         "res_type": "vs:catalogservice",
         "res_version": "2.3.2",
         "result_type": "",
@@ -429,7 +429,7 @@ catalog.
         "standard_id": "ivo://ivoa.net/std/conesearch",
         "std_version": "",
         "title": "Guide Star Catalog 2.3 Cone Search",
-        "updated": "7/25/2018 4:14:19 PM",
+        "updated": "2/13/2020 5:10:38 PM",
         "url": "http://gsss.stsci.edu/webservices/vo/ConeSearch.aspx?CAT=GSC23&",
         "url_use": "base",
         "validate_expected": "good",
@@ -442,11 +442,11 @@ catalog.
             "W50"
         ],
         "validate_warnings": [
-            "/var/www/astroconda.org/html/aux/vo_databases/daily_20200210/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:154:0: W50: Invalid unit string 'pixel'",
-            "/var/www/astroconda.org/html/aux/vo_databases/daily_20200210/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:154:0: W50: Invalid unit string 'pixel'"
+            "/var/www/astroconda.org/html/aux/vo_databases/daily_20200313/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:154:0: W50: Invalid unit string 'pixel'",
+            "/var/www/astroconda.org/html/aux/vo_databases/daily_20200313/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:154:0: W50: Invalid unit string 'pixel'"
         ],
         "validate_xmllint": true,
-        "validate_xmllint_content": "/var/www/astroconda.org/html/aux/vo_databases/daily_20200210/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml validates\n",
+        "validate_xmllint_content": "/var/www/astroconda.org/html/aux/vo_databases/daily_20200313/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml validates\n",
         "waveband": "optical",
         "wsdl_url": ""
     }
@@ -794,7 +794,7 @@ This might take a while.
 
 .. parsed-literal::
 
-    Predicted run time is 0.43164173743478423 seconds
+    Predicted run time is 0.4353619479540252 seconds
     Predicted number of rows is 2617
 
 
@@ -823,7 +823,7 @@ the service provider.
 
 .. parsed-literal::
 
-    INFO: conesearch_timer took 0.7515678405761719 s on AVERAGE for 1 call(s). [astroquery.utils.timer]
+    INFO: conesearch_timer took 0.7184271812438965 s on AVERAGE for 1 call(s). [astroquery.utils.timer]
 
 
 
@@ -841,7 +841,7 @@ the service provider.
 
 .. parsed-literal::
 
-    Actual run time is 0.7515678405761719 seconds
+    Actual run time is 0.7184271812438965 seconds
     Actual number of rows is 4028
 
 
