@@ -237,12 +237,17 @@ To do this, we index our cube along one axis (for a slice) or two axes
 
 .. parsed-literal::
 
-    INFO: Auto-setting vmin to -1.550e+00 [aplpy.core]
-    INFO: Auto-setting vmax to  1.587e+01 [aplpy.core]
+    WARNING: WCSWarning: WCS2 is missing card DATEREF [spectral_cube.wcs_utils]
+
+
+.. parsed-literal::
+
+    INFO: Auto-setting vmin to -1.717e+00 [aplpy.core]
+    INFO: Auto-setting vmax to  1.765e+01 [aplpy.core]
 
 
 
-.. image:: nboutput/FITS-cubes_11_1.png
+.. image:: nboutput/FITS-cubes_11_2.png
 
 
 
@@ -497,7 +502,7 @@ object directly into a matplotlib axis instance.
 
 .. parsed-literal::
 
-    <matplotlib.contour.QuadContourSet at 0x7f4aa3585250>
+    <matplotlib.contour.QuadContourSet at 0x7f674ddbb090>
 
 
 
@@ -564,6 +569,7 @@ We then select the appropriate data by indexing along the numpy array.
 
     WARNING: WCSWarning: Slicing across a celestial axis results in an invalid WCS, so the celestial projection (TAN) is being removed.  The WCS indices being kept were [0 2]. [spectral_cube.wcs_utils]
     WARNING: WCSWarning: Slicing across a celestial axis results in an invalid WCS, so the celestial projection (TAN) is being removed.  The view used was (slice(None, None, None), 18, slice(None, None, None)). [spectral_cube.wcs_utils]
+    WARNING: WCSWarning: WCS2 is missing card DATEREF [spectral_cube.wcs_utils]
 
 
 
@@ -782,7 +788,7 @@ five quite large files. It could take several minutes to complete.
     INFO: [Done] [astroquery.esasky.core]
     INFO: Downloading of HERSCHEL data complete. [astroquery.esasky.core]
     INFO: Maps available at /home/circleci/project/tutorials/notebooks/FITS-cubes/Maps. [astroquery.esasky.core]
-    Filename: Maps/HERSCHEL/anonymous1584169150/hspirepmw401_25pxmp_0110_m7303_1342198565_1342198566_1462476888800.fits.gz
+    Filename: Maps/HERSCHEL/anonymous1585584155/hspirepmw401_25pxmp_0110_m7303_1342198565_1342198566_1462476888800.fits.gz
     No.    Name      Ver    Type      Cards   Dimensions   Format
       0  PRIMARY       1 PrimaryHDU     184   ()      
       1  image         1 ImageHDU        47   (2407, 2141)   float64   
@@ -1037,6 +1043,16 @@ reproject, and a header containing WCS information to reproject onto.
     rescaled_herschel_imagehdu = fits.PrimaryHDU(data = rescaled_herschel_data, 
                                                  # wrap up our reprojection as a new fits HDU object
                                                  header = hi_column_density.hdu.header)
+
+
+:outputnumrole:`Out[22]:`
+
+
+.. parsed-literal::
+
+    /home/circleci/project/venv/lib/python3.7/site-packages/reproject/interpolation/core_celestial.py:26: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+      if not np.issubdtype(array.dtype, np.float):
+
 
 ``rescaled_herschel_imagehdu`` will now behave just like the other FITS
 images we have been working with, but now with a degraded resolution

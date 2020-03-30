@@ -202,7 +202,7 @@ proper range (``vmin`` and ``vmax``).
 
 .. parsed-literal::
 
-    <matplotlib.image.AxesImage at 0x7fb6f7194b90>
+    <matplotlib.image.AxesImage at 0x7fa817382a10>
 
 
 
@@ -332,6 +332,9 @@ Let’s take a look at the header. ``CDELT1``, ``CDELT2``, ``CUNIT1``,
     CRVAL2  =      40.733915555556 / [deg] Coordinate value at reference point      
     LATPOLE =                 90.0 / [deg] Native latitude of celestial pole        
     WCSNAME = 'yt      '                                                            
+    DATEREF = '1858-11-17'         / ISO-8601 fiducial time                         
+    MJDREFI =                  0.0 / [d] MJD of fiducial time, integer part         
+    MJDREFF =                  0.0 / [d] MJD of fiducial time, fractional part      
 
 
 
@@ -402,7 +405,7 @@ pixels by using our pixel scale keyword ``cdelt2`` from above.
 
 .. parsed-literal::
 
-    <matplotlib.image.AxesImage at 0x7fb6f4e255d0>
+    <matplotlib.image.AxesImage at 0x7fa81500c650>
 
 
 
@@ -447,7 +450,7 @@ this, using a 2D Lorentzian
 
 .. parsed-literal::
 
-    <matplotlib.image.AxesImage at 0x7fb6f7263e50>
+    <matplotlib.image.AxesImage at 0x7fa8174b5950>
 
 
 
@@ -510,7 +513,7 @@ Now let’s take a look at the convolved image.
 
 .. parsed-literal::
 
-    <matplotlib.colorbar.Colorbar at 0x7fb6f71f1d50>
+    <matplotlib.colorbar.Colorbar at 0x7fa817475c50>
 
 
 
@@ -539,7 +542,7 @@ Now let’s take a look at the convolved image.
     Filename: /home/circleci/.astropy/cache/download/py3/c0ef4c0e064fc23aef784f93082d8b9a
     No.    Name      Ver    Type      Cards   Dimensions   Format
       0  PRIMARY       1 PrimaryHDU       4   ()      
-      1  NN_EMISSIVITY_I_LOBE_150.0MHZ    1 ImageHDU        23   (1024, 1452)   float64   
+      1  NN_EMISSIVITY_I_LOBE_150.0MHZ    1 ImageHDU        26   (1024, 1452)   float64   
 
 
 
@@ -599,7 +602,7 @@ Let’s plot the Q and U images.
 
 .. parsed-literal::
 
-    <matplotlib.colorbar.Colorbar at 0x7fb6f41c5710>
+    <matplotlib.colorbar.Colorbar at 0x7fa8143b2650>
 
 
 
@@ -674,7 +677,7 @@ vectors along the x/right-ascention axis.
 
 .. parsed-literal::
 
-    <matplotlib.quiver.Quiver at 0x7fb6f4124a90>
+    <matplotlib.quiver.Quiver at 0x7fa81430a990>
 
 
 
