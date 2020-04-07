@@ -13,10 +13,9 @@ pip-run: &pip-install
   command: |
     python3 -m venv venv
     . venv/bin/activate
-    pip install -r pip-requirements.txt
-    pip install sphinx pytest
-    pip install sphinx-astropy sphinx-bootstrap-theme
-    pip install git+https://github.com/jupyter/nbconvert
+    pip install -r pip-requirements.txt  --progress-bar off
+    pip install --progress-bar off sphinx pytest
+    pip install --progress-bar off sphinx-astropy sphinx-bootstrap-theme nbconvert==5.6.1
 
 jobs:
 
@@ -68,4 +67,4 @@ jobs:
 
 notify:
   webhooks:
-    - url: https://giles.cadair.com/circleci
+    - url: https://giles.cadair.dev/circleci

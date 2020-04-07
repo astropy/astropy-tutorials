@@ -136,3 +136,37 @@ Marking a cell with an intentional error
 Edit the cell metadata of the cell in which you would like to raise an exception
 and add the following to the top-level JSON: ``"tags": ["raises-exception"]``
 This tag is recognized by the latest (master) version of nbconvert.
+
+Automatically Strip Output and Notebook Metadata
+------------------------------------------------
+
+Jupyter notebooks contain some metadata that is typically hidden from users,
+which contains, for example, information about the Python kernel used to run it, the
+version of IPython, etc. When tutorial authors or maintainers edit notebooks,
+this metadata is automatically modified by Jupyter, leading to superfluous and
+sometimes confusing changes to the notebooks when viewed in a "diff" locally or
+on GitHub.
+
+In order to prevent such metadata updates from appearing in pull requests, we
+therefore recommend that any contributor or maintainer install and use
+`nbstripout <https://github.com/kynan/nbstripout>`_ set up with an automatic Git
+hook to clean metadata changes whenever a notebook change is committed to your
+local repo. To install ``nbstripout``, first pip install it with:
+
+    pip install nbstripout
+
+This repo is already configured. Next, configure Git within your
+local clone of astropy-tutorials to tell ``nbstripout`` to intervene whenever
+you commit changes in the repo. To do this, you first have to "install" it with:
+
+    nbstripout --install
+
+Then, to tell ``nbstripout`` to ignore metadata changes, you must also run:
+
+    git config filter.nbstripout.extrakeys '
+        metadata.celltoolbar metadata.kernel_spec.display_name
+        metadata.kernel_spec.name metadata.language_info.codemirror_mode.version
+        metadata.language_info.pygments_lexer metadata.language_info.version
+        metadata.toc metadata.notify_time metadata.varInspector
+        cell.metadata.heading_collapsed cell.metadata.hidden
+        cell.metadata.code_folding cell.metadata.tags cell.metadata.init_cell'
