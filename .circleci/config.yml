@@ -14,7 +14,7 @@ pip-run: &pip-install
     python3 -m venv venv
     . venv/bin/activate
     pip install -r pip-requirements.txt  --progress-bar off
-    pip install --progress-bar off sphinx pytest
+    pip install --progress-bar off "sphinx>=2.0,<3.0" pytest
     pip install --progress-bar off sphinx-astropy sphinx-bootstrap-theme nbconvert==5.6.1
 
 jobs:

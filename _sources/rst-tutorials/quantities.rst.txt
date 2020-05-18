@@ -293,7 +293,7 @@ settings on your ``matplotlib`` session to better handle astropy
 
 .. parsed-literal::
 
-    <astropy.visualization.units.quantity_support.<locals>.MplQuantityConverter at 0x7fd1847a48d0>
+    <astropy.visualization.units.quantity_support.<locals>.MplQuantityConverter at 0x7fe3ee4540d0>
 
 
 
@@ -459,7 +459,7 @@ long as the logarithm’s argument is dimensionless.
 
 .. code:: python
 
-    np.log10(M / u.Msun)
+    np.log10(M.to_value(u.Msun))
 
 
 :outputnumrole:`Out[18]:`
@@ -467,9 +467,9 @@ long as the logarithm’s argument is dimensionless.
 
 
 
-.. math::
+.. parsed-literal::
 
-    5.7104737 \; \mathrm{}
+    5.710473687565016
 
 
 
