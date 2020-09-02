@@ -902,7 +902,7 @@ for the first spectrum.
 
 .. parsed-literal::
 
-    20.2123821447853
+    20.21238214515653
 
 
 Using ``numpy`` array notation we can actually process all spectra at

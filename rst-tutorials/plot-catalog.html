@@ -165,7 +165,7 @@ data are:</p>
 </div>
 <p><span class="outputnumrole">Out[3]:</span></p>
 <i>Table length=4</i>
-<table id="table140561115647312" class="table-striped table-bordered table-condensed">
+<table id="table140128222674704" class="table-striped table-bordered table-condensed">
 <thead><tr><th>name</th><th>ra</th><th>dec</th></tr></thead>
 <thead><tr><th>str6</th><th>str10</th><th>str9</th></tr></thead>
 <tr><td>BLG100</td><td>17:51:00.0</td><td>-29:59:48</td></tr>
@@ -272,7 +272,7 @@ first row of data are strings – something else went wrong!</p>
 </div>
 <p><span class="outputnumrole">Out[7]:</span></p>
 <i>Row index=0</i>
-<table id="table140561073702672">
+<table id="table140128180962576">
 <thead><tr><th>col1</th><th>col2</th><th>col3</th><th>col4</th><th>col5</th><th>col6</th><th>col7</th><th>col8</th><th>col9</th><th>col10</th><th>col11</th><th>col12</th><th>col13</th><th>col14</th><th>col15</th><th>col16</th><th>col17</th><th>col18</th><th>col19</th><th>col20</th><th>col21</th><th>col22</th><th>col23</th><th>col24</th><th>col25</th><th>col26</th><th>col27</th><th>col28</th><th>col29</th><th>col30</th><th>col31</th><th>col32</th><th>col33</th><th>col34</th></tr></thead>
 <thead><tr><th>str24</th><th>str25</th><th>str9</th><th>str6</th><th>str16</th><th>str5</th><th>str5</th><th>str5</th><th>str5</th><th>str5</th><th>str15</th><th>str6</th><th>str5</th><th>str6</th><th>str5</th><th>str6</th><th>str4</th><th>str6</th><th>str13</th><th>str14</th><th>str26</th><th>str23</th><th>str11</th><th>str9</th><th>str12</th><th>str10</th><th>str8</th><th>str6</th><th>str22</th><th>str6</th><th>str19</th><th>str23</th><th>str9</th><th>str38</th></tr></thead>
 <tr><td>--</td><td>--</td><td>--</td><td>--</td><td>2MASS Photometry</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td>WISE Photometry</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td>Spectra</td><td>--</td><td>--</td><td>--</td><td>Astrometry</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td><td>--</td></tr>
@@ -460,6 +460,11 @@ class.</p>
 <span class="n">dec</span> <span class="o">=</span> <span class="n">coord</span><span class="o">.</span><span class="n">Angle</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;Dec&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">filled</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">degree</span><span class="p">)</span>
 </pre></div>
 </div>
+<p><span class="outputnumrole">Out[14]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">circleci</span><span class="o">/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astropy</span><span class="o">/</span><span class="n">units</span><span class="o">/</span><span class="n">quantity</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">477</span><span class="p">:</span> <span class="ne">RuntimeWarning</span><span class="p">:</span> <span class="n">invalid</span> <span class="n">value</span> <span class="n">encountered</span> <span class="ow">in</span> <span class="n">remainder</span>
+  <span class="n">result</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__array_ufunc__</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="o">*</span><span class="n">arrays</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</pre></div>
+</div>
 <p><span class="inputnumrole">In[15]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
 <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="s2">&quot;mollweide&quot;</span><span class="p">)</span>
@@ -467,7 +472,7 @@ class.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[15]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">collections</span><span class="o">.</span><span class="n">PathCollection</span> <span class="n">at</span> <span class="mh">0x7fd6ecd1c5d0</span><span class="o">&gt;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">collections</span><span class="o">.</span><span class="n">PathCollection</span> <span class="n">at</span> <span class="mh">0x7f7227434f50</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <img alt="../_images/plot-catalog_30_1.png" src="../_images/plot-catalog_30_1.png" />

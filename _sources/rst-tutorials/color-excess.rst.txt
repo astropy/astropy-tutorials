@@ -200,27 +200,8 @@ documentation. <https://dust-extinction.readthedocs.io/en/latest/dust_extinction
 :outputnumrole:`Out[2]:`
 
 
-.. parsed-literal::
 
-    WARNING: AstropyDeprecationWarning: Class CCM89 defines class attributes ``inputs``.
-                    This has been deprecated in v4.0 and support will be removed in v4.1.
-                    Starting with v4.0 classes must define a class attribute ``n_inputs``.
-                    Please consult the documentation for details.
-                     [astropy.modeling.core]
-    WARNING: AstropyDeprecationWarning: Class F99 defines class attributes ``inputs``.
-                    This has been deprecated in v4.0 and support will be removed in v4.1.
-                    Starting with v4.0 classes must define a class attribute ``n_inputs``.
-                    Please consult the documentation for details.
-                     [astropy.modeling.core]
-    WARNING: AstropyDeprecationWarning: Class FM90 defines class attributes ``inputs``.
-                    This has been deprecated in v4.0 and support will be removed in v4.1.
-                    Starting with v4.0 classes must define a class attribute ``n_inputs``.
-                    Please consult the documentation for details.
-                     [astropy.modeling.core]
-
-
-
-.. image:: nboutput/color-excess_9_1.png
+.. image:: nboutput/color-excess_9_0.png
 
 
 
@@ -272,18 +253,18 @@ MAST <https://archive.stsci.edu/iue/>`__:
        science            IUE              -- ... 3500001194                 0.0
        science            IUE              -- ... 3500001195                 0.0
            ...            ...             ... ...        ...                 ...
+       science            IUE              -- ... 3500034898                 0.0
+       science            IUE              -- ... 3500034899                 0.0
        science            IUE              -- ... 3500034900                 0.0
-       science            HST         CALSTIS ... 2004013275                 0.0
-       science            HST         CALSTIS ... 2004013276                 0.0
-       science            HST         CALSTIS ... 2003575848                 0.0
-       science            HST          CALHRS ... 2003834338 0.33893346431996607
-       science            HST          CALHRS ... 2003834339 0.33893346431996607
-       science            HST          CALHRS ... 2003827557 0.40340282324719634
-       science            HST          CALHRS ... 2003827579 0.46671585424445183
-       science            HST          CALHRS ... 2003827580 0.46671585424445183
-       science            HST         CALSTIS ... 2007928446  0.8421985492399936
-       science            HST         CALSTIS ... 2007928510  0.8422128285820137
-    Length = 116 rows
+       science            HST          CALHRS ... 2003827557  0.1203890194025941
+       science            HST          CALHRS ... 2003834338 0.21145342332150374
+       science            HST          CALHRS ... 2003834339 0.21145342332150374
+       science            HST         CALSTIS ... 2004013275 0.23003273443801767
+       science            HST         CALSTIS ... 2004013276 0.23003273443801767
+       science            HST         CALSTIS ... 2003575848 0.23003273443801767
+       science            HST          CALHRS ... 2003827579  0.7903105443193604
+       science            HST          CALHRS ... 2003827580  0.7903105443193604
+    Length = 114 rows
     Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:IUE/url/pub/iue/data/lwr/05000/lwr05639.elbll.gz to ./mastDownload/IUE/lwr05639/lwr05639.elbll.gz ... [Done]
     Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:IUE/url/pub/iue/data/lwr/05000/lwr05639.lilo.gz to ./mastDownload/IUE/lwr05639/lwr05639.lilo.gz ... [Done]
     Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:IUE/url/pub/iue/data/lwr/05000/lwr05639.melol.gz to ./mastDownload/IUE/lwr05639/lwr05639.melol.gz ... [Done]
@@ -457,19 +438,6 @@ ISM community for having large-\ :math:`R_V` dust in the line of sight.
     Ebv = 0.5
     ext = F99(Rv=Rv)
 
-
-:outputnumrole:`Out[11]:`
-
-
-.. parsed-literal::
-
-    WARNING: AstropyDeprecationWarning: Class F99 defines class attributes ``inputs``.
-                    This has been deprecated in v4.0 and support will be removed in v4.1.
-                    Starting with v4.0 classes must define a class attribute ``n_inputs``.
-                    Please consult the documentation for details.
-                     [astropy.modeling.core]
-
-
 To extinguish (redden) a spectrum, multiply by the ``ext.extinguish``
 function. To unextinguish (deredden), divide by the same
 ``ext.extinguish``, as we do here:
@@ -500,17 +468,8 @@ function. To unextinguish (deredden), divide by the same
 :outputnumrole:`Out[12]:`
 
 
-.. parsed-literal::
 
-    WARNING: AstropyDeprecationWarning: Class FM90 defines class attributes ``inputs``.
-                    This has been deprecated in v4.0 and support will be removed in v4.1.
-                    Starting with v4.0 classes must define a class attribute ``n_inputs``.
-                    Please consult the documentation for details.
-                     [astropy.modeling.core]
-
-
-
-.. image:: nboutput/color-excess_31_1.png
+.. image:: nboutput/color-excess_31_0.png
 
 
 
@@ -661,17 +620,8 @@ with the extinction model as a lookup table.
 :outputnumrole:`Out[15]:`
 
 
-.. parsed-literal::
 
-    WARNING: AstropyDeprecationWarning: Class CCM89 defines class attributes ``inputs``.
-                    This has been deprecated in v4.0 and support will be removed in v4.1.
-                    Starting with v4.0 classes must define a class attribute ``n_inputs``.
-                    Please consult the documentation for details.
-                     [astropy.modeling.core]
-
-
-
-.. image:: nboutput/color-excess_41_1.png
+.. image:: nboutput/color-excess_41_0.png
 
 
 

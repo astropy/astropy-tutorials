@@ -325,7 +325,10 @@ tutorial.</p>
 want to include them in the <code class="docutils literal notranslate"><span class="pre">astropy/astropy-tutorials</span></code> git repository, as
 that will drastically slow down cloning the repository. Instead, we encourage
 use of the <code class="xref py py-obj docutils literal notranslate"><span class="pre">astropy.utils.download_files</span></code> function, and will host data files on
-the <a class="reference external" href="http://data.astropy.org">http://data.astropy.org</a> server. To do this, use the following
+the <a class="reference external" href="http://data.astropy.org">http://data.astropy.org</a> server by opening a PR at the
+<a class="reference external" href="https://github.com/astropy/astropy-data">https://github.com/astropy/astropy-data</a> repository, or to use Zenodo to host the data files
+if the file concerned is larger than 10 MB.
+To do the former, use the following
 procedure:</p>
 <ul>
 <li><p>When writing your tutorial, include the files in your tutorial’s directory
@@ -355,10 +358,30 @@ the top of the notebook:</p>
 <p>If you do this, the only change necessary when merging your notebook will be to set <code class="docutils literal notranslate"><span class="pre">tutorialpath</span></code> to  <code class="docutils literal notranslate"><span class="pre">'http://data.astropy.org/tutorials/My-tutorial-name/'</span></code>.</p>
 </li>
 </ul>
+<p>For larger data files that are bigger than 10 MB in size, we recommend hosting with Zenodo.
+To use this approach, follow these steps:</p>
+<ul class="simple">
+<li><p>You will need to sign up for an account with Zenodo before you can upload a file there.</p></li>
+<li><p>After a Zenodo account has been properly set up, be sure to log in and do a new upload. Follow</p></li>
+</ul>
+<p>the Zenodo instructions and complete all the required fields as the bare minimum in order to have
+the data file(s) uploaded to their records. Once this is done you will have a link to share the data.</p>
+<ul>
+<li><p>With the link to the data file record, which has the format <code class="docutils literal notranslate"><span class="pre">https://zenodo.org/api/records/:id</span></code>, an example HTTP GET request needed to retrieve the data using the Python package <code class="docutils literal notranslate"><span class="pre">requests</span></code> is shown below:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">requests</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://zenodo.org/api/records/1234)</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>To use the output as a locally stored file, you would first need to write the file contents to a file, for example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;./some-data-file.fits&#39;</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
+</pre></div>
+</div>
 <p>If you need information or help with:</p>
 <ul class="simple">
-<li><p>previewing how the rendered Jupyter notebooks will look on the tutorial
-webpage</p></li>
+<li><p>previewing how the rendered Jupyter notebooks will look on the tutorial webpage</p></li>
 <li><p>marking a cell with an intentional / expected error</p></li>
 </ul>
 <p>please see the <a class="reference internal" href="dev.html#dev-page"><span class="std std-ref">Documentation on tutorials infrastructure</span></a>.</p>

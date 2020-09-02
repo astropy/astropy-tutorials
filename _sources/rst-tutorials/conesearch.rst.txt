@@ -442,11 +442,11 @@ catalog.
             "W50"
         ],
         "validate_warnings": [
-            "/var/www/astroconda.org/html/aux/vo_databases/daily_20200518/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:154:0: W50: Invalid unit string 'pixel'",
-            "/var/www/astroconda.org/html/aux/vo_databases/daily_20200518/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:154:0: W50: Invalid unit string 'pixel'"
+            "/var/www/astroconda.org/html/aux/vo_databases/daily_20200902/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:154:0: W50: Invalid unit string 'pixel'",
+            "/var/www/astroconda.org/html/aux/vo_databases/daily_20200902/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:154:0: W50: Invalid unit string 'pixel'"
         ],
         "validate_xmllint": true,
-        "validate_xmllint_content": "/var/www/astroconda.org/html/aux/vo_databases/daily_20200518/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml validates\n",
+        "validate_xmllint_content": "/var/www/astroconda.org/html/aux/vo_databases/daily_20200902/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml validates\n",
         "waveband": "optical",
         "wsdl_url": ""
     }
@@ -625,8 +625,8 @@ want to suppress all the VO table warnings and informational messages?
     http://vizier.u-strasbg.fr/viz-bin/conesearch/I/254/out? returned 5 rows
     http://vizier.u-strasbg.fr/viz-bin/conesearch/I/255/out? returned 5 rows
     http://vizier.u-strasbg.fr/viz-bin/conesearch/I/252/out? returned 3 rows
-    http://wfaudata.roe.ac.uk/twomass-dsa/DirectCone?DSACAT=TWOMASS&DSATAB=twomass_xsc returned 25 rows
     http://wfaudata.roe.ac.uk/twomass-dsa/DirectCone?DSACAT=TWOMASS&DSATAB=twomass_psc returned 2008 rows
+    http://wfaudata.roe.ac.uk/twomass-dsa/DirectCone?DSACAT=TWOMASS&DSATAB=twomass_xsc returned 25 rows
     http://astrometry.mit.edu/cgi-bin/vo_cone6.cgi?CAT=USNO-A2 returned 3 rows
 
 
@@ -738,8 +738,8 @@ seconds.
     http://vizier.u-strasbg.fr/viz-bin/conesearch/I/254/out? returned 5 rows
     http://vizier.u-strasbg.fr/viz-bin/conesearch/I/255/out? returned 5 rows
     http://vizier.u-strasbg.fr/viz-bin/conesearch/I/252/out? returned 3 rows
-    http://wfaudata.roe.ac.uk/twomass-dsa/DirectCone?DSACAT=TWOMASS&DSATAB=twomass_xsc returned 25 rows
     http://wfaudata.roe.ac.uk/twomass-dsa/DirectCone?DSACAT=TWOMASS&DSATAB=twomass_psc returned 2008 rows
+    http://wfaudata.roe.ac.uk/twomass-dsa/DirectCone?DSACAT=TWOMASS&DSATAB=twomass_xsc returned 25 rows
     http://astrometry.mit.edu/cgi-bin/vo_cone6.cgi?CAT=USNO-A2 returned 3 rows
 
 
@@ -794,7 +794,7 @@ This might take a while.
 
 .. parsed-literal::
 
-    Predicted run time is 0.44115052690039136 seconds
+    Predicted run time is 1.0913937195568186 seconds
     Predicted number of rows is 2617
 
 
@@ -823,7 +823,7 @@ the service provider.
 
 .. parsed-literal::
 
-    INFO: conesearch_timer took 0.7701425552368164 s on AVERAGE for 1 call(s). [astroquery.utils.timer]
+    INFO: conesearch_timer took 0.7571063041687012 s on AVERAGE for 1 call(s). [astroquery.utils.timer]
 
 
 
@@ -841,7 +841,7 @@ the service provider.
 
 .. parsed-literal::
 
-    Actual run time is 0.7701425552368164 seconds
+    Actual run time is 0.7571063041687012 seconds
     Actual number of rows is 4028
 
 
