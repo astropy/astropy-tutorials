@@ -244,9 +244,8 @@ procedure:
 
   If you do this, the only change necessary when merging your notebook will be to set ``tutorialpath`` to  ``'http://data.astropy.org/tutorials/My-tutorial-name/'``.
 
-For larger data files that are bigger than 10 MB in size, we recommend hosting with Zenodo. Using Zenodo
-to host large data files is very straightforward and involves potentially far less steps. To use
-this approach do the following:
+For larger data files that are bigger than 10 MB in size, we recommend hosting with Zenodo. 
+To use this approach, follow these steps:
 
 * You will need to sign up for an account with Zenodo before you can upload a file there.
 
@@ -254,13 +253,12 @@ this approach do the following:
 the Zenodo instructions and complete all the required fields as the bare minimum in order to have
 the data file(s) uploaded to their records. Once this is done you will have a link to share the data.
 
-* With the link which has the format ``https://zenodo.org/api/records/:id``, and the HTTP GET request
-needed to retrieve the record using the Python package ``requests`` is as below::
+* With the link to the data file record, which has the format ``https://zenodo.org/api/records/:id``, an example HTTP GET request needed to retrieve the data using the Python package ``requests`` is shown below::
 
     import requests
     r = requests.get("https://zenodo.org/api/records/1234)
 
-Basically to use the output you simply need to add the following lines to your Jupyter notebook::
+To use the output as a locally stored file, you would first need to write the file contents to a file, for example::
 
     with open('./some-data-file.fits', 'wb') as f:
         f.write(r.content)
