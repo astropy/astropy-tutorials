@@ -143,7 +143,7 @@ array of distance values, one for each redshift. Let’s plot them:
 
 .. parsed-literal::
 
-    [<matplotlib.lines.Line2D at 0x7fba553dcf10>]
+    [<matplotlib.lines.Line2D at 0x7f00155557d0>]
 
 
 
@@ -223,17 +223,17 @@ values.
 
 .. parsed-literal::
 
-    [<matplotlib.axis.XTick at 0x7fba540aeb50>,
-     <matplotlib.axis.XTick at 0x7fba540ae1d0>,
-     <matplotlib.axis.XTick at 0x7fba540ae2d0>,
-     <matplotlib.axis.XTick at 0x7fba51ef5890>,
-     <matplotlib.axis.XTick at 0x7fba51ef5dd0>,
-     <matplotlib.axis.XTick at 0x7fba51efd390>,
-     <matplotlib.axis.XTick at 0x7fba51efd950>,
-     <matplotlib.axis.XTick at 0x7fba51efdf10>,
-     <matplotlib.axis.XTick at 0x7fba51efd510>,
-     <matplotlib.axis.XTick at 0x7fba51f04390>,
-     <matplotlib.axis.XTick at 0x7fba51f048d0>]
+    [<matplotlib.axis.XTick at 0x7f00120cd4d0>,
+     <matplotlib.axis.XTick at 0x7f00120c7310>,
+     <matplotlib.axis.XTick at 0x7f00120c7a50>,
+     <matplotlib.axis.XTick at 0x7f00120f1310>,
+     <matplotlib.axis.XTick at 0x7f00120f1810>,
+     <matplotlib.axis.XTick at 0x7f00120f1d90>,
+     <matplotlib.axis.XTick at 0x7f00120f7390>,
+     <matplotlib.axis.XTick at 0x7f00120f7950>,
+     <matplotlib.axis.XTick at 0x7f00120f1f10>,
+     <matplotlib.axis.XTick at 0x7f00120f7a10>,
+     <matplotlib.axis.XTick at 0x7f0012081310>]
 
 
 

@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" /><meta content="filterTutorials, filterWcs, filterCoordinates, filterMatplotlib" name="keywords" />
+<meta content="filterTutorials," name="keywords" />
+
+    <title>Working with Celestial Coordinates in WCS 1: Specifying, reading, and plotting &#8212; astropy-tutorials v3.0.dev</title>
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bootstrap_sandstone.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/astropy.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script src="../_static/js/jquery-fix.js"></script>
+    <script src="../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script src="../_static/bootstrap-sphinx.js"></script>
+    <script src="../_static/searchtools.js"></script>
+    <script src="https://use.fontawesome.com/3168e95f94.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <link rel="shortcut icon" href="../_static/astropy_favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <script type="text/javascript">
+    jQuery(function() { Search.loadIndex("../searchindex.js"); });
+  </script>
+  
+  <script type="text/javascript" id="searchindexloader"></script>
+   
+
+  </head><body>
+
+
+<nav class="navbar navbar-expand-lg bg-navbar">
+  <a class="navbar-brand" href="/" style="padding: 0px 5px;">
+    <img src="../../_static/astropy_logo.png" onerror="this.onerror=null;this.src='../_static/astropy_logo.png';" style="height: 38px;">
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarColor01">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="http://www.astropy.org"/>Astropy<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Modules</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0" action="../search.html" method="get">
+      <div class="input-group-prepend">
+          <button class="input-group-text" style="padding: 0.7rem"><i class="fa fa-search fa-fw"></i></button>
+      </div>
+      <input class="form-control mr-sm-3" name="q" type="text" placeholder="Search the universe" />
+    </form>
+  </div>
+</nav>
+
+
+<div class="container">
+  <div class="row">
+
+    
+    
+    
+
+    
+    <div class="col-md-3">
+      <div id="sidebar" class="bs-sidenav card" role="complementary">
+        <h3>Table of contents</h3>
+        <ul>
+<li><a class="reference internal" href="#">Working with Celestial Coordinates in WCS 1: Specifying, reading, and plotting</a><ul>
+<li><a class="reference internal" href="#authors">Authors</a></li>
+<li><a class="reference internal" href="#learning-goals">Learning Goals</a></li>
+<li><a class="reference internal" href="#keywords">Keywords</a></li>
+<li><a class="reference internal" href="#companion-contents">Companion Contents</a></li>
+<li><a class="reference internal" href="#summary">Summary</a></li>
+<li><a class="reference internal" href="#section-1-two-ways-to-create-an-astropy-wcs-wcs-object">Section 1: Two ways to create an <code class="docutils literal notranslate"><span class="pre">astropy.wcs.WCS</span></code> object</a><ul>
+<li><a class="reference internal" href="#method-1-building-a-wcs-object-with-a-dictionary">Method 1: Building a WCS object with a dictionary</a></li>
+<li><a class="reference internal" href="#method-2-create-an-empty-wcs-object-before-assigning-values">Method 2: Create an empty WCS object before assigning values</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#section-2-show-an-image-of-the-helix-nebula-with-ra-and-dec-labeled">Section 2: Show an image of the Helix nebula with RA and Dec labeled</a><ul>
+<li><a class="reference internal" href="#step-1-read-in-the-fits-file">Step 1: Read in the FITS file</a></li>
+<li><a class="reference internal" href="#step-2-read-in-the-fits-image-coordinate-system-with-astropy-wcs-wcs">Step 2: Read in the FITS image coordinate system with astropy.wcs.WCS</a></li>
+<li><a class="reference internal" href="#step-3-plot-the-helix-nebula-with-sky-coordinate-axes-ra-and-dec">Step 3: Plot the Helix nebula with sky coordinate axes (RA and Dec)</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#exercise">Exercise</a></li>
+<li><a class="reference internal" href="#section-3-plot-a-scale-marker-on-an-image-with-wcs">Section 3: Plot a scale marker on an image with WCS</a></li>
+<li><a class="reference internal" href="#id1">Exercise</a></li>
+</ul>
+</li>
+</ul>
+
+      </div>
+    </div>
+    
+
+    <div class="col-md-9">
+      <div class="content-padding card">
+        <div>
+  <a href="../_static/celestial_coords1/celestial_coords1.ipynb"><button id="download">Download tutorial notebook</button></a>
+<a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/celestial_coords1/celestial_coords1.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
+
+<div id="spacer"></div><div class="section" id="working-with-celestial-coordinates-in-wcs-1-specifying-reading-and-plotting">
+<span id="celestial-coords1"></span><h1>Working with Celestial Coordinates in WCS 1: Specifying, reading, and plotting<a class="headerlink" href="#working-with-celestial-coordinates-in-wcs-1-specifying-reading-and-plotting" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="authors">
+<h2>Authors<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a></h2>
+<p>Kris Stern, Kelle Cruz, Lia Corrales, David Shupe, Adrian Price-Whelan</p>
+</div>
+<div class="section" id="learning-goals">
+<h2>Learning Goals<a class="headerlink" href="#learning-goals" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><p>Demonstrate two ways to build a <code class="docutils literal notranslate"><span class="pre">astropy.wcs.WCS</span></code> object</p></li>
+<li><p>Show an image of the Helix nebula with RA and Dec labeled</p></li>
+<li><p>Plot a scale bar on an image with WCS information</p></li>
+</ol>
+</div>
+<div class="section" id="keywords">
+<h2>Keywords<a class="headerlink" href="#keywords" title="Permalink to this headline">¶</a></h2>
+<p>WCS, coordinates, matplotlib</p>
+</div>
+<div class="section" id="companion-contents">
+<h2>Companion Contents<a class="headerlink" href="#companion-contents" title="Permalink to this headline">¶</a></h2>
+<ol class="arabic simple">
+<li><p>“An Introduction to Modern Astrophysics” (<a class="reference external" href="https://ui.adsabs.harvard.edu/abs/2006ima..book.....C/abstract">Carroll &amp;
+Ostlie</a>)</p></li>
+<li><p><a class="reference external" href="https://fits.gsfc.nasa.gov/fits_wcs.html">FITS WCS page at GSFC</a></p></li>
+</ol>
+</div>
+<div class="section" id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p>This tutorial series aims to show how the content of Chapter 1 of “An
+Introduction to Modern Astrophysics” by Carroll and Ostlie can be
+applied to real life astrophysics research situations, using tools in
+the Astropy ecosystem. We will introduce two different approaches to
+building a <code class="docutils literal notranslate"><span class="pre">astropy.wcs.WCS</span></code> object, which contains meta-data that (in
+this case) defines a mapping between image coordinates and sky
+coordinates. The <code class="docutils literal notranslate"><span class="pre">astropy.wcs</span></code> subpackage conforms to the standards of
+the FITS World Coordinate System (WCS) used extensively by the astronomy
+research community. We will created a 2D WCS for an image of the iconic
+the Helix nebula (a planetary nebula) and display an image of the nebula
+with sky coordinates (here, equatorial, ICRS RA and Dec.) labeled.
+Finally, we will over-plot a scale bar on the Helix nebula image using
+WCS to give the reader a sense of the angular size of the image.</p>
+<p><span class="inputnumrole">In[1]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">astropy.wcs</span> <span class="kn">import</span> <span class="n">WCS</span>
+<span class="kn">from</span> <span class="nn">astropy.io</span> <span class="kn">import</span> <span class="n">fits</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="section-1-two-ways-to-create-an-astropy-wcs-wcs-object">
+<h2>Section 1: Two ways to create an <code class="docutils literal notranslate"><span class="pre">astropy.wcs.WCS</span></code> object<a class="headerlink" href="#section-1-two-ways-to-create-an-astropy-wcs-wcs-object" title="Permalink to this headline">¶</a></h2>
+<p><em>World coordinates</em> serve to locate a measurement in some
+multi-dimensional parameter space. A World Coordinate System (WCS)
+specifies the physical, or world, coordinates to be attached to each
+pixel or voxel of an N-dimensional image or array. An <a class="reference external" href="https://fits.gsfc.nasa.gov/fits_wcs.html">elaborate set of
+standards and conventions</a>
+have been developed for the Flexible Image Transport System (FITS)
+format (<a class="reference external" href="https://ui.adsabs.harvard.edu/abs/1981A&amp;AS...44..363W/abstract">Wells et
+al. 1981</a>).
+A typical WCS example is to specify the Right Ascension (RA) and
+Declination (Dec) on the sky associated with a given the pixel or spaxel
+location in a 2-dimensional celestial image (<a class="reference external" href="https://ui.adsabs.harvard.edu/abs/2002A&amp;A...395.1061G/abstract">Greisen &amp; Calabretta
+2002</a>;
+<a class="reference external" href="https://ui.adsabs.harvard.edu/abs/2002A&amp;A...395.1077C/abstract">Calabretta and Greisen
+2002</a>).</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">`astropy.wcs</span></code>
+subpackage &lt;<a class="reference external" href="https://docs.astropy.org/en/stable/wcs/">https://docs.astropy.org/en/stable/wcs/</a>&gt;`__ implements FITS
+standards and conventions for World Coordinate Systems. Using the
+<code class="docutils literal notranslate"><span class="pre">astropy.wcs.WCS</span></code> object and <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>, we can generate images of
+the sky that have axes labeled with coordinates such as right ascension
+(RA) and declination (Dec). This requires selecting the proper
+projections for <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> and providing an
+<code class="docutils literal notranslate"><span class="pre">astropy.visualization.WCSAxes</span></code> object.</p>
+<p>There are two main ways to initialize a <code class="docutils literal notranslate"><span class="pre">WCS</span></code> object: with a Python
+dictionary (or dictionary-like object, like a FITS file header) or with
+Python lists. In this set of examples, we will initialize an
+<code class="docutils literal notranslate"><span class="pre">astropy.wcs.WCS</span></code> object with two dimensions, as would be needed to
+represent an image.</p>
+<p>The WCS standard defines a set of keywords that are used to represent
+the world coordinate system for a given set of data (e.g., image). Here
+is a list of the essential WCS keywords and their uses; In each case,
+the integer <span class="math notranslate nohighlight">\(n\)</span> denotes the dimensional axis (starting with 1) to
+which the keyword is being applied. In our examples below, we will have
+two image dimensions (axes), so <span class="math notranslate nohighlight">\(n\)</span> will either be 1 or 2.</p>
+<ul class="simple">
+<li><p><strong>CRVALn</strong>: the coordinate value at a reference point (e.g., RA and
+DEC value in degrees)</p></li>
+<li><p><strong>CRPIXn</strong>: the pixel location of the reference point (e.g.,
+CRPIX1=1, CRPIX2=1 describes the center of a corner pixel)</p></li>
+<li><p><strong>CDELTn</strong>: the coordinate increment at the reference point (e.g.,
+the difference in ‘RA’ value from the reference pixel to its neighbor
+along the RA axis)</p></li>
+<li><p><strong>CTYPEn</strong>: an 8-character string describing the axis type (e.g.,
+‘RA—TAN’ and ‘DEC—TAN’ describe the typical tangent-plane sky
+projection that astronomers use)</p></li>
+<li><p><strong>CUNITn</strong>: a string describing the unit for each axis (if not
+specified, the default unit is degrees.)</p></li>
+<li><p><strong>NAXISn</strong>: an integer defining the number of pixels in each axis</p></li>
+</ul>
+<p>Some good references of the WCS standard can be found
+<a class="reference external" href="https://fits.gsfc.nasa.gov/fits_wcs.html">here</a>.</p>
+<div class="section" id="method-1-building-a-wcs-object-with-a-dictionary">
+<h3>Method 1: Building a WCS object with a dictionary<a class="headerlink" href="#method-1-building-a-wcs-object-with-a-dictionary" title="Permalink to this headline">¶</a></h3>
+<p>One way to define an Astropy <code class="docutils literal notranslate"><span class="pre">WCS</span></code> object is to construct a dictionary
+containing all of the essential information (i.e., specifying values for
+the WCS keywords listed above) that map the pixel coordinate space to
+the world coordinate space.</p>
+<p>In this example, we define two coordinate axes with: * A Gnomonic
+(tangent-plane) projection, which corresponds to the RA/Dec coordinate
+system * A reference location of (RA,DEC) = (337.52, -20.83), as
+defined by the <strong>CRVALn</strong> keys * The pixel at coordinate value (1,1) as
+the reference location (<strong>CRPIXn</strong> keys) * Units of degrees (<strong>CUNITn =
+‘deg’</strong>) * Pixel sizes of 1 x 1 arcsec (<strong>CDELTn = 0.002778</strong> in
+degrees) * An image size of 1024 x 1024 pixels (<strong>NAXISn</strong> key)</p>
+<p><span class="inputnumrole">In[2]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">wcs_input_dict</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;CTYPE1&#39;</span><span class="p">:</span> <span class="s1">&#39;RA---TAN&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CUNIT1&#39;</span><span class="p">:</span> <span class="s1">&#39;deg&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CDELT1&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">0.0002777777778</span><span class="p">,</span>
+    <span class="s1">&#39;CRPIX1&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s1">&#39;CRVAL1&#39;</span><span class="p">:</span> <span class="mf">337.5202808</span><span class="p">,</span>
+    <span class="s1">&#39;NAXIS1&#39;</span><span class="p">:</span> <span class="mi">1024</span><span class="p">,</span>
+    <span class="s1">&#39;CTYPE2&#39;</span><span class="p">:</span> <span class="s1">&#39;DEC--TAN&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CUNIT2&#39;</span><span class="p">:</span> <span class="s1">&#39;deg&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;CDELT2&#39;</span><span class="p">:</span> <span class="mf">0.0002777777778</span><span class="p">,</span>
+    <span class="s1">&#39;CRPIX2&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s1">&#39;CRVAL2&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mf">20.833333059999998</span><span class="p">,</span>
+    <span class="s1">&#39;NAXIS2&#39;</span><span class="p">:</span> <span class="mi">1024</span>
+<span class="p">}</span>
+<span class="n">wcs_helix_dict</span> <span class="o">=</span> <span class="n">WCS</span><span class="p">(</span><span class="n">wcs_input_dict</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now let’s print the <code class="docutils literal notranslate"><span class="pre">WCS</span></code> object defined with a Python dictionary to
+check its content:</p>
+<p><span class="inputnumrole">In[3]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">wcs_helix_dict</span> <span class="c1"># To check output</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[3]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">WCS</span> <span class="n">Keywords</span>
+
+<span class="n">Number</span> <span class="n">of</span> <span class="n">WCS</span> <span class="n">axes</span><span class="p">:</span> <span class="mi">2</span>
+<span class="n">CTYPE</span> <span class="p">:</span> <span class="s1">&#39;RA---TAN&#39;</span>  <span class="s1">&#39;DEC--TAN&#39;</span>
+<span class="n">CRVAL</span> <span class="p">:</span> <span class="mf">337.5202808</span>  <span class="o">-</span><span class="mf">20.83333306</span>
+<span class="n">CRPIX</span> <span class="p">:</span> <span class="mf">1.0</span>  <span class="mf">1.0</span>
+<span class="n">PC1_1</span> <span class="n">PC1_2</span>  <span class="p">:</span> <span class="mf">1.0</span>  <span class="mf">0.0</span>
+<span class="n">PC2_1</span> <span class="n">PC2_2</span>  <span class="p">:</span> <span class="mf">0.0</span>  <span class="mf">1.0</span>
+<span class="n">CDELT</span> <span class="p">:</span> <span class="o">-</span><span class="mf">0.0002777777778</span>  <span class="mf">0.0002777777778</span>
+<span class="n">NAXIS</span> <span class="p">:</span> <span class="mi">1024</span>  <span class="mi">1024</span>
+</pre></div>
+</div>
+<p>In this demonstration (and below), we assume that we know all of the
+relevant WCS keyword values to specify. Typically, however, we will rely
+on software to produce these values for us. For example, WCS information
+is most often included automatically in FITS files produced by software
+used to take images with most instruments at astronomical observatories.
+In cases when the WCS information is provided for us in a FITS file, it
+is typically included in a FITS header, which, when read into Python,
+acts like a dictionary object. We demonstrate this later on in this
+tutorial.</p>
+</div>
+<div class="section" id="method-2-create-an-empty-wcs-object-before-assigning-values">
+<h3>Method 2: Create an empty WCS object before assigning values<a class="headerlink" href="#method-2-create-an-empty-wcs-object-before-assigning-values" title="Permalink to this headline">¶</a></h3>
+<p>Alternatively, we could initialize the <code class="docutils literal notranslate"><span class="pre">astropy.wcs.WCS</span></code> object, and
+assign the keyword values with lists corresponding to each respective
+axis.</p>
+<p><span class="inputnumrole">In[4]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">wcs_helix_list</span> <span class="o">=</span> <span class="n">WCS</span><span class="p">(</span><span class="n">naxis</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">wcs_helix_list</span><span class="o">.</span><span class="n">wcs</span><span class="o">.</span><span class="n">crpix</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">wcs_helix_list</span><span class="o">.</span><span class="n">wcs</span><span class="o">.</span><span class="n">crval</span> <span class="o">=</span> <span class="p">[</span><span class="mf">337.5202808</span><span class="p">,</span> <span class="o">-</span><span class="mf">20.833333059999998</span><span class="p">]</span>
+<span class="n">wcs_helix_list</span><span class="o">.</span><span class="n">wcs</span><span class="o">.</span><span class="n">cunit</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;deg&quot;</span><span class="p">,</span> <span class="s2">&quot;deg&quot;</span><span class="p">]</span>
+<span class="n">wcs_helix_list</span><span class="o">.</span><span class="n">wcs</span><span class="o">.</span><span class="n">ctype</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;RA---TAN&quot;</span><span class="p">,</span> <span class="s2">&quot;DEC--TAN&quot;</span><span class="p">]</span>
+<span class="n">wcs_helix_list</span><span class="o">.</span><span class="n">wcs</span><span class="o">.</span><span class="n">cdelt</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mf">0.0002777777778</span><span class="p">,</span> <span class="mf">0.0002777777778</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Let’s print the <code class="docutils literal notranslate"><span class="pre">WCS</span></code> object one more time to check how our values
+were assigned.</p>
+<p><span class="inputnumrole">In[5]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">wcs_helix_list</span> <span class="c1"># To check output</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[5]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">WCS</span> <span class="n">Keywords</span>
+
+<span class="n">Number</span> <span class="n">of</span> <span class="n">WCS</span> <span class="n">axes</span><span class="p">:</span> <span class="mi">2</span>
+<span class="n">CTYPE</span> <span class="p">:</span> <span class="s1">&#39;RA---TAN&#39;</span>  <span class="s1">&#39;DEC--TAN&#39;</span>
+<span class="n">CRVAL</span> <span class="p">:</span> <span class="mf">337.5202808</span>  <span class="o">-</span><span class="mf">20.833333059999998</span>
+<span class="n">CRPIX</span> <span class="p">:</span> <span class="mf">1.0</span>  <span class="mf">1.0</span>
+<span class="n">PC1_1</span> <span class="n">PC1_2</span>  <span class="p">:</span> <span class="mf">1.0</span>  <span class="mf">0.0</span>
+<span class="n">PC2_1</span> <span class="n">PC2_2</span>  <span class="p">:</span> <span class="mf">0.0</span>  <span class="mf">1.0</span>
+<span class="n">CDELT</span> <span class="p">:</span> <span class="o">-</span><span class="mf">0.0002777777778</span>  <span class="mf">0.0002777777778</span>
+<span class="n">NAXIS</span> <span class="p">:</span> <span class="mi">0</span>  <span class="mi">0</span>
+</pre></div>
+</div>
+<p>Note that when we initialize the WCS object this way, the <code class="docutils literal notranslate"><span class="pre">NAXIS</span></code>
+values are set to 0. To assign coordinates to our image, we will need to
+fix the shape of the <code class="docutils literal notranslate"><span class="pre">WCS</span></code> object array so that it matches our image.
+We can do this by assigning a value to the <code class="docutils literal notranslate"><span class="pre">array_shape</span></code> attribute of
+the <code class="docutils literal notranslate"><span class="pre">WCS</span></code> object:</p>
+<p><span class="inputnumrole">In[6]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">wcs_helix_list</span><span class="o">.</span><span class="n">array_shape</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1024</span><span class="p">,</span> <span class="mi">1024</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Now when we print the <code class="docutils literal notranslate"><span class="pre">WCS</span></code> object, we can see that the <code class="docutils literal notranslate"><span class="pre">NAXIS</span></code>
+values have been updated from the default size of 0 to 1024.</p>
+<p><span class="inputnumrole">In[7]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">wcs_helix_list</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[7]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">WCS</span> <span class="n">Keywords</span>
+
+<span class="n">Number</span> <span class="n">of</span> <span class="n">WCS</span> <span class="n">axes</span><span class="p">:</span> <span class="mi">2</span>
+<span class="n">CTYPE</span> <span class="p">:</span> <span class="s1">&#39;RA---TAN&#39;</span>  <span class="s1">&#39;DEC--TAN&#39;</span>
+<span class="n">CRVAL</span> <span class="p">:</span> <span class="mf">337.5202808</span>  <span class="o">-</span><span class="mf">20.833333059999998</span>
+<span class="n">CRPIX</span> <span class="p">:</span> <span class="mf">1.0</span>  <span class="mf">1.0</span>
+<span class="n">PC1_1</span> <span class="n">PC1_2</span>  <span class="p">:</span> <span class="mf">1.0</span>  <span class="mf">0.0</span>
+<span class="n">PC2_1</span> <span class="n">PC2_2</span>  <span class="p">:</span> <span class="mf">0.0</span>  <span class="mf">1.0</span>
+<span class="n">CDELT</span> <span class="p">:</span> <span class="o">-</span><span class="mf">0.0002777777778</span>  <span class="mf">0.0002777777778</span>
+<span class="n">NAXIS</span> <span class="p">:</span> <span class="mi">1024</span>  <span class="mi">1024</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="section-2-show-an-image-of-the-helix-nebula-with-ra-and-dec-labeled">
+<h2>Section 2: Show an image of the Helix nebula with RA and Dec labeled<a class="headerlink" href="#section-2-show-an-image-of-the-helix-nebula-with-ra-and-dec-labeled" title="Permalink to this headline">¶</a></h2>
+<p>Most of the time we can obtain the required <code class="docutils literal notranslate"><span class="pre">astropy.wcs.WCS</span></code> object
+from the header of the FITS file from a telescope or astronomical
+database. This process is described below.</p>
+<div class="section" id="step-1-read-in-the-fits-file">
+<h3>Step 1: Read in the FITS file<a class="headerlink" href="#step-1-read-in-the-fits-file" title="Permalink to this headline">¶</a></h3>
+<p>We will read the FITS file containing an image of the Helix nebula from
+the <code class="docutils literal notranslate"><span class="pre">astropy-data</span></code> GitHub repository using the <code class="docutils literal notranslate"><span class="pre">astropy.io.fits</span></code>
+subpackage. The <code class="docutils literal notranslate"><span class="pre">astropy.io.fits.open()</span></code> function will load the
+contents of a FITS file into Python, and it accepts either a local file
+path or a URL (as is demonstrated here). This image (FITS file) was
+originally accessed from the <a class="reference external" href="https://archive.eso.org/dss/dss">Digitized Sky
+Survey</a> but is provided in the
+<code class="docutils literal notranslate"><span class="pre">astropy-data</span></code> repository for convenience:</p>
+<p><span class="inputnumrole">In[8]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">header_data_unit_list</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="s1">&#39;https://github.com/astropy/astropy-data/raw/6d92878d18e970ce6497b70a9253f65c925978bf/tutorials/celestial-coords1/tailored_dss.22.29.38.50-20.50.13_60arcmin.fits&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>FITS files are a binary file format that is mainly used by astronomers
+and can contain information arranged in many “extensions,” which contain
+both header information (e.g., metadata) and data (e.g., image data). We
+can check how many extensions there are in a FITS file, as well as view
+a summary of the contents in each extension, by printing the FITS object
+information.</p>
+<p><span class="inputnumrole">In[9]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">header_data_unit_list</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[9]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Filename</span><span class="p">:</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">circleci</span><span class="o">/.</span><span class="n">astropy</span><span class="o">/</span><span class="n">cache</span><span class="o">/</span><span class="n">download</span><span class="o">/</span><span class="n">py3</span><span class="o">/</span><span class="mi">65</span><span class="n">dd87703534c8da774ac848727941fb</span>
+<span class="n">No</span><span class="o">.</span>    <span class="n">Name</span>      <span class="n">Ver</span>    <span class="n">Type</span>      <span class="n">Cards</span>   <span class="n">Dimensions</span>   <span class="n">Format</span>
+  <span class="mi">0</span>  <span class="n">PRIMARY</span>       <span class="mi">1</span> <span class="n">PrimaryHDU</span>     <span class="mi">121</span>   <span class="p">(</span><span class="mi">2119</span><span class="p">,</span> <span class="mi">2119</span><span class="p">)</span>   <span class="n">int16</span>
+</pre></div>
+</div>
+<p>This shows us that our FITS file contains only one extension, labeled
+‘PRIMARY’ (or extension number 0). We will copy the image data from this
+extension to the variable <code class="docutils literal notranslate"><span class="pre">image</span></code>, and the header data to the variable
+<code class="docutils literal notranslate"><span class="pre">header</span></code>:</p>
+<p><span class="inputnumrole">In[10]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">image</span> <span class="o">=</span> <span class="n">header_data_unit_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
+<span class="n">header</span> <span class="o">=</span> <span class="n">header_data_unit_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">header</span>
+</pre></div>
+</div>
+<p>We can print the FITS image header to screen so that all of its contents
+can be checked or utilized. Note that the WCS information for this
+information can be found near the bottom of the printed header, below.</p>
+<p><span class="inputnumrole">In[11]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">header</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[11]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SIMPLE</span>  <span class="o">=</span>                    <span class="n">T</span> <span class="o">/</span> <span class="n">conforms</span> <span class="n">to</span> <span class="n">FITS</span> <span class="n">standard</span>
+<span class="n">BITPIX</span>  <span class="o">=</span>                   <span class="mi">16</span> <span class="o">/</span> <span class="n">array</span> <span class="n">data</span> <span class="nb">type</span>
+<span class="n">NAXIS</span>   <span class="o">=</span>                    <span class="mi">2</span> <span class="o">/</span> <span class="n">number</span> <span class="n">of</span> <span class="n">array</span> <span class="n">dimensions</span>
+<span class="n">NAXIS1</span>  <span class="o">=</span>                 <span class="mi">2119</span>
+<span class="n">NAXIS2</span>  <span class="o">=</span>                 <span class="mi">2119</span>
+<span class="n">DATE</span>    <span class="o">=</span> <span class="s1">&#39;03/09/19          &#39;</span> <span class="o">/</span><span class="n">Date</span> <span class="n">of</span> <span class="n">FITS</span> <span class="n">file</span> <span class="n">creation</span>
+<span class="n">ORIGIN</span>  <span class="o">=</span> <span class="s1">&#39;CASB -- STScI     &#39;</span> <span class="o">/</span><span class="n">Origin</span> <span class="n">of</span> <span class="n">FITS</span> <span class="n">image</span>
+<span class="n">PLTLABEL</span><span class="o">=</span> <span class="s1">&#39;J 10265           &#39;</span> <span class="o">/</span><span class="n">Observatory</span> <span class="n">plate</span> <span class="n">label</span>
+<span class="n">PLATEID</span> <span class="o">=</span> <span class="s1">&#39;04I5              &#39;</span> <span class="o">/</span><span class="n">GSSS</span> <span class="n">Plate</span> <span class="n">ID</span>
+<span class="n">REGION</span>  <span class="o">=</span> <span class="s1">&#39;S602              &#39;</span> <span class="o">/</span><span class="n">GSSS</span> <span class="n">Region</span> <span class="n">Name</span>
+<span class="n">DATE</span><span class="o">-</span><span class="n">OBS</span><span class="o">=</span> <span class="s1">&#39;1985-06-15&#39;</span>         <span class="o">/</span> <span class="n">UT</span> <span class="n">date</span> <span class="n">of</span> <span class="n">Observation</span>
+<span class="n">UT</span>      <span class="o">=</span> <span class="s1">&#39;18:30:00.00       &#39;</span> <span class="o">/</span><span class="n">UT</span> <span class="n">time</span> <span class="n">of</span> <span class="n">observation</span>
+<span class="n">EPOCH</span>   <span class="o">=</span>  <span class="mf">1.9854542236328E+03</span> <span class="o">/</span><span class="n">Epoch</span> <span class="n">of</span> <span class="n">plate</span>
+<span class="n">PLTRAH</span>  <span class="o">=</span>                   <span class="mi">22</span> <span class="o">/</span><span class="n">Plate</span> <span class="n">center</span> <span class="n">RA</span>
+<span class="n">PLTRAM</span>  <span class="o">=</span>                   <span class="mi">26</span> <span class="o">/</span>
+<span class="n">PLTRAS</span>  <span class="o">=</span>  <span class="mf">4.3474570000000E+01</span> <span class="o">/</span>
+<span class="n">PLTDECSN</span><span class="o">=</span> <span class="s1">&#39;-                 &#39;</span> <span class="o">/</span><span class="n">Plate</span> <span class="n">center</span> <span class="n">Dec</span>
+<span class="n">PLTDECD</span> <span class="o">=</span>                   <span class="mi">19</span> <span class="o">/</span>
+<span class="n">PLTDECM</span> <span class="o">=</span>                   <span class="mi">44</span> <span class="o">/</span>
+<span class="n">PLTDECS</span> <span class="o">=</span>  <span class="mf">4.2059660000000E+01</span> <span class="o">/</span>
+<span class="n">EQUINOX</span> <span class="o">=</span>  <span class="mf">2.0000000000000E+03</span> <span class="o">/</span><span class="n">Julian</span> <span class="n">Reference</span> <span class="n">frame</span> <span class="n">equinox</span>
+<span class="n">EXPOSURE</span><span class="o">=</span>  <span class="mf">7.0000000000000E+01</span> <span class="o">/</span><span class="n">Exposure</span> <span class="n">time</span> <span class="n">minutes</span>
+<span class="n">BANDPASS</span><span class="o">=</span>                    <span class="mi">0</span> <span class="o">/</span><span class="n">GSSS</span> <span class="n">Bandpass</span> <span class="n">code</span>
+<span class="n">PLTGRADE</span><span class="o">=</span>                    <span class="mi">1</span> <span class="o">/</span><span class="n">Plate</span> <span class="n">grade</span>
+<span class="n">PLTSCALE</span><span class="o">=</span>  <span class="mf">6.7200000000000E+01</span> <span class="o">/</span><span class="n">Plate</span> <span class="n">Scale</span> <span class="n">arcsec</span> <span class="n">per</span> <span class="n">mm</span>
+<span class="n">SITELAT</span> <span class="o">=</span> <span class="s1">&#39;-31:16:24.00      &#39;</span> <span class="o">/</span><span class="n">Latitude</span> <span class="n">of</span> <span class="n">Observatory</span>
+<span class="n">SITELONG</span><span class="o">=</span> <span class="s1">&#39;+149:03:42.00     &#39;</span> <span class="o">/</span><span class="n">Longitude</span> <span class="n">of</span> <span class="n">Observatory</span>
+<span class="n">TELESCOP</span><span class="o">=</span> <span class="s1">&#39;UK Schmidt (new optics)&#39;</span> <span class="o">/</span><span class="n">Telescope</span> <span class="n">where</span> <span class="n">plate</span> <span class="n">taken</span>
+<span class="n">CNPIX1</span>  <span class="o">=</span>                 <span class="mi">4541</span> <span class="o">/</span><span class="n">X</span> <span class="n">corner</span>  <span class="p">(</span><span class="n">pixels</span><span class="p">)</span>
+<span class="n">CNPIX2</span>  <span class="o">=</span>                 <span class="mi">3647</span> <span class="o">/</span><span class="n">Y</span> <span class="n">corner</span>
+<span class="n">DATATYPE</span><span class="o">=</span> <span class="s1">&#39;INTEGER*2         &#39;</span> <span class="o">/</span><span class="n">Type</span> <span class="n">of</span> <span class="n">Data</span>
+<span class="n">SCANIMG</span> <span class="o">=</span> <span class="s1">&#39;S602_04I5_00_00.PIM&#39;</span> <span class="o">/</span><span class="n">Name</span> <span class="n">of</span> <span class="n">original</span> <span class="n">scan</span>
+<span class="n">SCANNUM</span> <span class="o">=</span>                    <span class="mi">0</span> <span class="o">/</span><span class="n">Identifies</span> <span class="n">scan</span> <span class="n">of</span> <span class="n">the</span> <span class="n">plate</span>
+<span class="n">DCHOPPED</span><span class="o">=</span>                    <span class="n">F</span> <span class="o">/</span><span class="n">Image</span> <span class="n">repaired</span> <span class="k">for</span> <span class="n">chopping</span> <span class="n">effects</span>
+<span class="n">DSHEARED</span><span class="o">=</span>                    <span class="n">F</span> <span class="o">/</span><span class="n">Image</span> <span class="n">repaired</span> <span class="k">for</span> <span class="n">shearing</span> <span class="n">effects</span>
+<span class="n">DSCNDNUM</span><span class="o">=</span>                    <span class="mi">0</span> <span class="o">/</span><span class="n">Identifies</span> <span class="n">descendant</span> <span class="n">of</span> <span class="n">plate</span> <span class="n">scan</span> <span class="n">image</span>
+<span class="n">XPIXELSZ</span><span class="o">=</span>  <span class="mf">2.5284450000000E+01</span> <span class="o">/</span><span class="n">X</span> <span class="n">pixel</span> <span class="n">size</span> <span class="n">microns</span>
+<span class="n">YPIXELSZ</span><span class="o">=</span>  <span class="mf">2.5284450000000E+01</span> <span class="o">/</span><span class="n">Y</span> <span class="n">pixel</span> <span class="n">size</span> <span class="n">microns</span>
+<span class="n">PPO1</span>    <span class="o">=</span>  <span class="mf">0.0000000000000E+00</span> <span class="o">/</span><span class="n">Orientation</span> <span class="n">Coefficients</span>
+<span class="n">PPO2</span>    <span class="o">=</span>  <span class="mf">0.0000000000000E+00</span> <span class="o">/</span>
+<span class="n">PPO3</span>    <span class="o">=</span>  <span class="mf">1.7800815369865E+05</span> <span class="o">/</span>
+<span class="n">PPO4</span>    <span class="o">=</span>  <span class="mf">0.0000000000000E+00</span> <span class="o">/</span>
+<span class="n">PPO5</span>    <span class="o">=</span>  <span class="mf">0.0000000000000E+00</span> <span class="o">/</span>
+<span class="n">PPO6</span>    <span class="o">=</span>  <span class="mf">1.7762863283887E+05</span> <span class="o">/</span>
+<span class="n">AMDX1</span>   <span class="o">=</span>  <span class="mf">6.7219770175765E+01</span> <span class="o">/</span><span class="n">Plate</span> <span class="n">solution</span> <span class="n">x</span> <span class="n">coefficients</span>
+<span class="n">AMDX2</span>   <span class="o">=</span> <span class="o">-</span><span class="mf">1.1880355995672E-01</span> <span class="o">/</span>
+<span class="n">AMDX3</span>   <span class="o">=</span> <span class="o">-</span><span class="mf">1.3157645513770E-01</span> <span class="o">/</span>
+<span class="n">AMDX4</span>   <span class="o">=</span> <span class="o">-</span><span class="mf">5.6708509711628E-06</span> <span class="o">/</span>
+<span class="n">AMDX5</span>   <span class="o">=</span>  <span class="mf">6.2679885786864E-06</span> <span class="o">/</span>
+<span class="n">AMDX6</span>   <span class="o">=</span> <span class="o">-</span><span class="mf">1.1142206237378E-07</span> <span class="o">/</span>
+<span class="n">AMDX7</span>   <span class="o">=</span>  <span class="mf">0.0000000000000E+00</span> <span class="o">/</span>
+<span class="n">AMDX8</span>   <span class="o">=</span>  <span class="mf">2.2200418019794E-06</span> <span class="o">/</span>
+<span class="n">AMDX9</span>   <span class="o">=</span>  <span class="mf">7.4390602168984E-10</span> <span class="o">/</span>
+<span class="n">AMDX10</span>  <span class="o">=</span>  <span class="mf">2.5668005274713E-06</span> <span class="o">/</span>
+<span class="n">AMDX11</span>  <span class="o">=</span> <span class="o">-</span><span class="mf">2.6549905009760E-07</span> <span class="o">/</span>
+<span class="n">AMDX12</span>  <span class="o">=</span>  <span class="mf">0.0000000000000E+00</span> <span class="o">/</span>
+<span class="n">AMDX13</span>  <span class="o">=</span>  <span class="mf">0.0000000000000E+00</span> <span class="o">/</span>
+<span class="n">AMDX14</span>  <span class="o">=</span>  <span class="mf">0.0000000000000E+00</span> <span class="o">/</span>
+<span class="n">AMDX15</span>  <span class="o">=</span>  <span class="mf">0.0000000000000E+00</span> <span class="o">/</span>
+<span class="n">AMDX16</span>  <span class="o">=</span>  <span class="mf">0.0000000000000E+00</span> <span class="o">/</span>
+<span class="n">AMDX17</span>  <span class="o">=</span>  <span class="mf">0.0000000000000E+00</span> <span class="o">/</span>
+<span class="n">AMDX18</span>  <span class="o">=</span>  <span class="mf">0.0000000000000E+00</span> <span class="o">/</span>
+<span class="n">AMDX19</span>  <span class="o">=</span>  <span class="mf">0.0000000000000E+00</span> <span class="o">/</span>
+<span class="n">AMDX20</span>  <span class="o">=</span>  <span class="mf">0.0000000000000E+00</span> <span class="o">/</span>
+<span class="n">AMDY1</span>   <span class="o">=</span>  <span class="mf">6.7228009015427E+01</span> <span class="o">/</span><span class="n">Plate</span> <span class="n">solution</span> <span class="n">y</span> <span class="n">coefficients</span>
+<span class="n">AMDY2</span>   <span class="o">=</span>  <span class="mf">1.2873652788750E-01</span> <span class="o">/</span>
+<span class="n">AMDY3</span>   <span class="o">=</span> <span class="o">-</span><span class="mf">3.1950040128023E-01</span> <span class="o">/</span>
+<span class="n">AMDY4</span>   <span class="o">=</span> <span class="o">-</span><span class="mf">3.2645385511415E-05</span> <span class="o">/</span>
+<span class="n">AMDY5</span>   <span class="o">=</span>  <span class="mf">8.7305582924401E-06</span> <span class="o">/</span>
+<span class="n">AMDY6</span>   <span class="o">=</span>  <span class="mf">1.8171663502226E-05</span> <span class="o">/</span>
+<span class="n">AMDY7</span>   <span class="o">=</span>  <span class="mf">0.0000000000000E+00</span> <span class="o">/</span>
+<span class="n">AMDY8</span>   <span class="o">=</span>  <span class="mf">2.1698493473859E-06</span> <span class="o">/</span>
+<span class="n">AMDY9</span>   <span class="o">=</span> <span class="o">-</span><span class="mf">3.6671971341692E-08</span> <span class="o">/</span>
+<span class="n">AMDY10</span>  <span class="o">=</span>  <span class="mf">2.4125963913336E-06</span> <span class="o">/</span>
+<span class="n">AMDY11</span>  <span class="o">=</span> <span class="o">-</span><span class="mf">1.9511911767187E-08</span> <span class="o">/</span>
+<span class="n">AMDY12</span>  <span class="o">=</span>  <span class="mf">0.0000000000000E+00</span> <span class="o">/</span>
+<span class="n">AMDY13</span>  <span class="o">=</span>  <span class="mf">0.0000000000000E+00</span> <span class="o">/</span>
+<span class="n">AMDY14</span>  <span class="o">=</span>  <span class="mf">0.0000000000000E+00</span> <span class="o">/</span>
+<span class="n">AMDY15</span>  <span class="o">=</span>  <span class="mf">0.0000000000000E+00</span> <span class="o">/</span>
+<span class="n">AMDY16</span>  <span class="o">=</span>  <span class="mf">0.0000000000000E+00</span> <span class="o">/</span>
+<span class="n">AMDY17</span>  <span class="o">=</span>  <span class="mf">0.0000000000000E+00</span> <span class="o">/</span>
+<span class="n">AMDY18</span>  <span class="o">=</span>  <span class="mf">0.0000000000000E+00</span> <span class="o">/</span>
+<span class="n">AMDY19</span>  <span class="o">=</span>  <span class="mf">0.0000000000000E+00</span> <span class="o">/</span>
+<span class="n">AMDY20</span>  <span class="o">=</span>  <span class="mf">0.0000000000000E+00</span> <span class="o">/</span>
+        <span class="n">Based</span> <span class="n">on</span> <span class="n">photographic</span> <span class="n">data</span> <span class="n">obtained</span> <span class="n">using</span> <span class="n">The</span> <span class="n">UK</span> <span class="n">Schmidt</span> <span class="n">Telescope</span><span class="o">.</span>
+        <span class="n">The</span> <span class="n">UK</span> <span class="n">Schmidt</span> <span class="n">Telescope</span> <span class="n">was</span> <span class="n">operated</span> <span class="n">by</span> <span class="n">the</span> <span class="n">Royal</span> <span class="n">Observatory</span>
+        <span class="n">Edinburgh</span><span class="p">,</span> <span class="k">with</span> <span class="n">funding</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">UK</span> <span class="n">Science</span> <span class="ow">and</span> <span class="n">Engineering</span> <span class="n">Research</span>
+        <span class="n">Council</span><span class="p">,</span> <span class="n">until</span> <span class="mi">1988</span> <span class="n">June</span><span class="p">,</span> <span class="ow">and</span> <span class="n">thereafter</span> <span class="n">by</span> <span class="n">the</span> <span class="n">Anglo</span><span class="o">-</span><span class="n">Australian</span>
+        <span class="n">Observatory</span><span class="o">.</span>  <span class="n">Original</span> <span class="n">plate</span> <span class="n">material</span> <span class="ow">is</span> <span class="n">copyright</span> <span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="n">the</span> <span class="n">Royal</span>
+        <span class="n">Observatory</span> <span class="n">Edinburgh</span> <span class="ow">and</span> <span class="n">the</span> <span class="n">Anglo</span><span class="o">-</span><span class="n">Australian</span> <span class="n">Observatory</span><span class="o">.</span>  <span class="n">The</span>
+        <span class="n">plates</span> <span class="n">were</span> <span class="n">processed</span> <span class="n">into</span> <span class="n">the</span> <span class="n">present</span> <span class="n">compressed</span> <span class="n">digital</span> <span class="n">form</span> <span class="k">with</span>
+        <span class="n">their</span> <span class="n">permission</span><span class="o">.</span>  <span class="n">The</span> <span class="n">Digitized</span> <span class="n">Sky</span> <span class="n">Survey</span> <span class="n">was</span> <span class="n">produced</span> <span class="n">at</span> <span class="n">the</span> <span class="n">Space</span>
+        <span class="n">Telescope</span> <span class="n">Science</span> <span class="n">Institute</span> <span class="n">under</span> <span class="n">US</span> <span class="n">Government</span> <span class="n">grant</span> <span class="n">NAG</span> <span class="n">W</span><span class="o">-</span><span class="mf">2166.</span>
+
+        <span class="n">Investigators</span> <span class="n">using</span> <span class="n">these</span> <span class="n">scans</span> <span class="n">are</span> <span class="n">requested</span> <span class="n">to</span> <span class="n">include</span> <span class="n">the</span> <span class="n">above</span>
+        <span class="n">acknowledgements</span> <span class="ow">in</span> <span class="nb">any</span> <span class="n">publications</span><span class="o">.</span>
+
+        <span class="n">Copyright</span> <span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="mi">1993</span><span class="p">,</span> <span class="mi">1994</span><span class="p">,</span> <span class="n">Association</span> <span class="n">of</span> <span class="n">Universities</span> <span class="k">for</span> <span class="n">Research</span> <span class="ow">in</span>
+        <span class="n">Astronomy</span><span class="p">,</span> <span class="n">Inc</span><span class="o">.</span>  <span class="n">All</span> <span class="n">rights</span> <span class="n">reserved</span><span class="o">.</span>
+<span class="n">DATAMAX</span> <span class="o">=</span>                <span class="mi">21635</span> <span class="o">/</span><span class="n">Maximum</span> <span class="n">data</span> <span class="n">value</span>
+<span class="n">DATAMIN</span> <span class="o">=</span>                  <span class="mi">607</span> <span class="o">/</span><span class="n">Minimum</span> <span class="n">data</span> <span class="n">value</span>
+<span class="n">OBJECT</span>  <span class="o">=</span> <span class="s1">&#39;dss67608          &#39;</span> <span class="o">/</span><span class="n">Object</span> <span class="n">ID</span>
+<span class="n">OBJCTRA</span> <span class="o">=</span> <span class="s1">&#39;22 29 38.500      &#39;</span> <span class="o">/</span><span class="n">Object</span> <span class="n">Right</span> <span class="n">Ascension</span> <span class="p">(</span><span class="n">J2000</span><span class="p">)</span>
+<span class="n">OBJCTDEC</span><span class="o">=</span> <span class="s1">&#39;-20 50 13.00      &#39;</span> <span class="o">/</span><span class="n">Object</span> <span class="n">Declination</span> <span class="p">(</span><span class="n">J2000</span><span class="p">)</span>
+<span class="n">OBJCTX</span>  <span class="o">=</span>              <span class="mf">5600.52</span> <span class="o">/</span><span class="n">Object</span> <span class="n">X</span> <span class="n">on</span> <span class="n">plate</span> <span class="p">(</span><span class="n">pixels</span><span class="p">)</span>
+<span class="n">OBJCTY</span>  <span class="o">=</span>              <span class="mf">4706.97</span> <span class="o">/</span><span class="n">Object</span> <span class="n">Y</span> <span class="n">on</span> <span class="n">plate</span> <span class="p">(</span><span class="n">pixels</span><span class="p">)</span>
+<span class="n">CTYPE1</span>  <span class="o">=</span> <span class="s1">&#39;RA---TAN&#39;</span>           <span class="o">/</span><span class="n">R</span><span class="o">.</span><span class="n">A</span><span class="o">.</span> <span class="ow">in</span> <span class="n">tangent</span> <span class="n">plane</span> <span class="n">projection</span>
+<span class="n">CTYPE2</span>  <span class="o">=</span> <span class="s1">&#39;DEC--TAN&#39;</span>           <span class="o">/</span><span class="n">DEC</span><span class="o">.</span> <span class="ow">in</span> <span class="n">tangent</span> <span class="n">plane</span> <span class="n">projection</span>
+<span class="n">CRPIX1</span>  <span class="o">=</span>               <span class="mf">1059.5</span> <span class="o">/</span><span class="n">Refpix</span> <span class="n">of</span> <span class="n">first</span> <span class="n">axis</span>
+<span class="n">CRPIX2</span>  <span class="o">=</span>               <span class="mf">1059.5</span> <span class="o">/</span><span class="n">Refpix</span> <span class="n">of</span> <span class="n">second</span> <span class="n">axis</span>
+<span class="n">CRVAL1</span>  <span class="o">=</span>  <span class="mf">3.3741068406866E+02</span> <span class="o">/</span><span class="n">RA</span> <span class="n">at</span> <span class="n">Ref</span> <span class="n">pix</span> <span class="ow">in</span> <span class="n">decimal</span> <span class="n">degrees</span>
+<span class="n">CRVAL2</span>  <span class="o">=</span> <span class="o">-</span><span class="mf">2.0837400617286E+01</span> <span class="o">/</span><span class="n">DEC</span> <span class="n">at</span> <span class="n">Ref</span> <span class="n">pix</span> <span class="ow">in</span> <span class="n">decimal</span> <span class="n">degrees</span>
+<span class="n">CROTA1</span>  <span class="o">=</span>  <span class="mf">3.6014388955457E-01</span> <span class="o">/</span><span class="n">Rotation</span> <span class="n">angle</span> <span class="n">of</span> <span class="n">first</span> <span class="n">axis</span> <span class="p">(</span><span class="n">deg</span><span class="p">)</span>
+<span class="n">CROTA2</span>  <span class="o">=</span>  <span class="mf">3.6014388955457E-01</span> <span class="o">/</span><span class="n">Rotation</span> <span class="n">angle</span> <span class="n">of</span> <span class="n">second</span> <span class="n">axis</span> <span class="p">(</span><span class="n">deg</span><span class="p">)</span>
+        <span class="ne">Warning</span><span class="p">:</span> <span class="n">CROTA2</span> <span class="ow">is</span> <span class="n">inaccurate</span> <span class="n">due</span> <span class="n">to</span> <span class="n">considerable</span> <span class="n">skew</span>
+<span class="n">CDELT1</span>  <span class="o">=</span> <span class="o">-</span><span class="mf">4.7215565578926E-04</span> <span class="o">/</span><span class="n">RA</span> <span class="n">pixel</span> <span class="n">step</span> <span class="p">(</span><span class="n">deg</span><span class="p">)</span>
+<span class="n">CDELT2</span>  <span class="o">=</span>  <span class="mf">4.7224980649186E-04</span> <span class="o">/</span><span class="n">DEC</span> <span class="n">pixel</span> <span class="n">step</span> <span class="p">(</span><span class="n">deg</span><span class="p">)</span>
+<span class="n">CD1_1</span>   <span class="o">=</span> <span class="o">-</span><span class="mf">4.7214664002041E-04</span> <span class="o">/</span><span class="n">CD</span> <span class="n">matrix</span>
+<span class="n">CD1_2</span>   <span class="o">=</span> <span class="o">-</span><span class="mf">3.0184077818787E-06</span> <span class="o">/</span><span class="n">CD</span> <span class="n">matrix</span>
+<span class="n">CD2_1</span>   <span class="o">=</span> <span class="o">-</span><span class="mf">2.9178093186884E-06</span> <span class="o">/</span><span class="n">CD</span> <span class="n">matrix</span>
+<span class="n">CD2_2</span>   <span class="o">=</span>  <span class="mf">4.7224016024271E-04</span> <span class="o">/</span><span class="n">CD</span> <span class="n">matrix</span>
+</pre></div>
+</div>
+<p>Please note that the <em>original</em> header (as downloaded from the DSS)
+violates the FITS WCS standards (because it includes both CDELTn
+keywords and a matrix of CD values; including deprecated PC-matrix
+keywords). The header has been cleaned up to conform to the existing
+standards.</p>
+</div>
+<div class="section" id="step-2-read-in-the-fits-image-coordinate-system-with-astropy-wcs-wcs">
+<h3>Step 2: Read in the FITS image coordinate system with astropy.wcs.WCS<a class="headerlink" href="#step-2-read-in-the-fits-image-coordinate-system-with-astropy-wcs-wcs" title="Permalink to this headline">¶</a></h3>
+<p>Because the header contains WCS information and acts like a Python
+dictionary, an Astropy <code class="docutils literal notranslate"><span class="pre">WCS</span></code> object can be created directly from the
+FITS header.</p>
+<p><span class="inputnumrole">In[12]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">wcs_helix</span> <span class="o">=</span> <span class="n">WCS</span><span class="p">(</span><span class="n">header</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Let’s print the <code class="docutils literal notranslate"><span class="pre">WCS</span></code> object to see what values were drawn from the
+header.</p>
+<p><span class="inputnumrole">In[13]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">wcs_helix</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[13]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">WCS</span> <span class="n">Keywords</span>
+
+<span class="n">Number</span> <span class="n">of</span> <span class="n">WCS</span> <span class="n">axes</span><span class="p">:</span> <span class="mi">2</span>
+<span class="n">CTYPE</span> <span class="p">:</span> <span class="s1">&#39;RA---TAN&#39;</span>  <span class="s1">&#39;DEC--TAN&#39;</span>
+<span class="n">CRVAL</span> <span class="p">:</span> <span class="mf">336.6811440416667</span>  <span class="o">-</span><span class="mf">19.745016572222223</span>
+<span class="n">CRPIX</span> <span class="p">:</span> <span class="mf">2499.6447489941065</span>  <span class="mf">3378.9002584168584</span>
+<span class="n">PC1_1</span> <span class="n">PC1_2</span>  <span class="p">:</span> <span class="mf">0.025282857855146917</span>  <span class="mf">4.4684674035885186e-05</span>
+<span class="n">PC2_1</span> <span class="n">PC2_2</span>  <span class="p">:</span> <span class="o">-</span><span class="mf">4.8420685266167345e-05</span>  <span class="mf">0.0252859566668733</span>
+<span class="n">CDELT</span> <span class="p">:</span> <span class="o">-</span><span class="mf">0.01867333422948538</span>  <span class="mf">0.01867333422948538</span>
+<span class="n">NAXIS</span> <span class="p">:</span> <span class="mi">2119</span>  <span class="mi">2119</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="step-3-plot-the-helix-nebula-with-sky-coordinate-axes-ra-and-dec">
+<h3>Step 3: Plot the Helix nebula with sky coordinate axes (RA and Dec)<a class="headerlink" href="#step-3-plot-the-helix-nebula-with-sky-coordinate-axes-ra-and-dec" title="Permalink to this headline">¶</a></h3>
+<p>The image data, <code class="docutils literal notranslate"><span class="pre">image</span></code>, is a 2D array of values, and by itself
+contains no information about the sky coordinates of the pixels. So, if
+we plotted the image by itself, the plot axes would show pixel values.
+(We will be using the <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> library for the plotting.)</p>
+<p><span class="inputnumrole">In[14]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;cividis&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[14]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">AxesImage</span> <span class="n">at</span> <span class="mh">0x7f97a1cf6290</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<img alt="../_images/celestial_coords1_30_1.png" src="../_images/celestial_coords1_30_1.png" />
+<p>All of the information that maps from these pixel values to sky
+coordinates comes from the WCS metadata, which we loaded into the
+<code class="docutils literal notranslate"><span class="pre">wcs_helix</span></code> object (from the FITS file header). This <code class="docutils literal notranslate"><span class="pre">WCS</span></code> object is
+built so that it can be provided to <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> with the
+<code class="docutils literal notranslate"><span class="pre">projection</span></code> keyword, as shown in the call to
+<code class="docutils literal notranslate"><span class="pre">matplotlib.pyplot.subplot</span></code> below, in order to produce axes that show
+sky coordinate information instead of pixel values. We will also overlay
+a coordinate grid in ICRS equatorial coordinates by passing the sky
+coordinate frame name (here, “icrs”) to the <code class="docutils literal notranslate"><span class="pre">ax.get_coords_overlay()</span></code>
+method.</p>
+<p><span class="inputnumrole">In[15]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="n">wcs_helix</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;cividis&#39;</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;RA&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Dec&#39;</span><span class="p">)</span>
+
+<span class="n">overlay</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_coords_overlay</span><span class="p">(</span><span class="s1">&#39;icrs&#39;</span><span class="p">)</span>
+<span class="n">overlay</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;dotted&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[15]:</span></p>
+<img alt="../_images/celestial_coords1_32_0.png" src="../_images/celestial_coords1_32_0.png" />
+</div>
+</div>
+<div class="section" id="exercise">
+<h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">¶</a></h2>
+<p>Copy the code block above and instead overlay a coordinate grid in
+Galactic coordinates.</p>
+<p><span class="inputnumrole">In[16]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="n">wcs_helix</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;cividis&#39;</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;RA&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Dec&#39;</span><span class="p">)</span>
+
+<span class="n">overlay</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_coords_overlay</span><span class="p">(</span><span class="s1">&#39;galactic&#39;</span><span class="p">)</span>
+<span class="n">overlay</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">ls</span><span class="o">=</span><span class="s1">&#39;dotted&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[16]:</span></p>
+<img alt="../_images/celestial_coords1_34_0.png" src="../_images/celestial_coords1_34_0.png" />
+</div>
+<div class="section" id="section-3-plot-a-scale-marker-on-an-image-with-wcs">
+<h2>Section 3: Plot a scale marker on an image with WCS<a class="headerlink" href="#section-3-plot-a-scale-marker-on-an-image-with-wcs" title="Permalink to this headline">¶</a></h2>
+<p>To add a scale marker (i.e., a line of a particular <em>angular</em> size) to
+the image of the Helix nebula, we will use the matplotlib <code class="docutils literal notranslate"><span class="pre">Axes.arrow</span></code>
+method to draw a line.</p>
+<p>First, we need to decide where to place the scale bar. In the example
+below, we define the center of the scale marker to be at
+<code class="docutils literal notranslate"><span class="pre">(RA,</span> <span class="pre">Dec)</span> <span class="pre">=</span> <span class="pre">(337</span> <span class="pre">deg,</span> <span class="pre">-21.2</span> <span class="pre">deg)</span></code>.</p>
+<p>We then use the <code class="docutils literal notranslate"><span class="pre">transform</span></code> attribute of <code class="docutils literal notranslate"><span class="pre">Axes.arrow</span></code> to draw our
+scale bars in degrees (instead of pixel coordinates). In this case, we
+draw a scale marker with a length of 0.1 degrees. The arrow method
+inputs are <code class="docutils literal notranslate"><span class="pre">ax.arrow(x,</span> <span class="pre">y,</span> <span class="pre">dx,</span> <span class="pre">dy,</span> <span class="pre">**kwargs)</span></code>, with <code class="docutils literal notranslate"><span class="pre">x</span></code> and <code class="docutils literal notranslate"><span class="pre">y</span></code>
+being the <code class="docutils literal notranslate"><span class="pre">RA</span></code> and <code class="docutils literal notranslate"><span class="pre">Dec</span></code> of the beginning of the line. We use
+<code class="docutils literal notranslate"><span class="pre">dx=0</span></code> so that there is no horizontal component in the bar, and
+<code class="docutils literal notranslate"><span class="pre">dy=0.1</span></code>, which gives the length of the arrow in the vertical
+direction. To ensure that the arrow is drawn in the J2000 ICRS
+coordinate frame, we pass <code class="docutils literal notranslate"><span class="pre">ax.get_transform('icrs')</span></code> to the
+<code class="docutils literal notranslate"><span class="pre">transform</span></code> keyword.</p>
+<p>Finally, we use <code class="docutils literal notranslate"><span class="pre">matplotlib.pyplot.text</span></code> to mark the length of the
+scale marker.</p>
+<p><span class="inputnumrole">In[17]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="n">frameon</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="n">wcs_helix</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">arrow</span><span class="p">(</span><span class="mi">337</span><span class="p">,</span> <span class="o">-</span><span class="mf">21.2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span>
+         <span class="n">head_width</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">head_length</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+         <span class="n">fc</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">ec</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.003</span><span class="p">,</span>
+         <span class="n">transform</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">get_transform</span><span class="p">(</span><span class="s1">&#39;icrs&#39;</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">337.05</span><span class="p">,</span> <span class="o">-</span><span class="mf">21.18</span><span class="p">,</span> <span class="s1">&#39;0.1 deg&#39;</span><span class="p">,</span>
+         <span class="n">color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span>
+         <span class="n">transform</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">get_transform</span><span class="p">(</span><span class="s1">&#39;icrs&#39;</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;cividis&#39;</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;RA&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Dec&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[17]:</span></p>
+<img alt="../_images/celestial_coords1_36_0.png" src="../_images/celestial_coords1_36_0.png" />
+</div>
+<div class="section" id="id1">
+<h2>Exercise<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>Make a horizontal bar with the same length. Keep in mind that 1 hour
+angle = 15 degrees.</p>
+<p><span class="inputnumrole">In[None]:</span></p>
+<div id="spacer"></div>
+
+<a href="../_static/celestial_coords1/celestial_coords1.ipynb"><button id="download">Download tutorial notebook</button></a>
+<a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/celestial_coords1/celestial_coords1.ipynb"><button id="binder">Interactive tutorial notebook</button></a></div>
+</div>
+
+</div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+    &copy; Copyright Astropy.
+    </p>
+  </div>
+</footer>
+  </body>
+</html>
