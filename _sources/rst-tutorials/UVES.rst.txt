@@ -227,12 +227,18 @@ If a function ``func`` is contained in a file called
 imported into a python session in order to use the function ``func``
 with the following command:
 
-``import spectra_utils a = spectra_utils.func(param1, param2, ...)``
+::
+
+   import spectra_utils
+   a = spectra_utils.func(param1, param2, ...)
 
 Alternatively, you can import just one (or a few) of many different
 functions that are defined in your file ``spectra_utils.py``:
 
-``from spectra_utils import func a = func(param1, param2, ...)``
+::
+
+   from spectra_utils import func
+   a = func(param1, param2, ...)
 
 You’ll recognize that python does not make a difference between modules
 that come with python (e.g. ``glob``), external modules (e.g. ``numpy``

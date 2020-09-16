@@ -285,10 +285,16 @@ the function. Functions can (but do not have to) return values using the
 <code class="docutils literal notranslate"><span class="pre">spectra_utils.py</span></code> in the current directory, then this file can be
 imported into a python session in order to use the function <code class="docutils literal notranslate"><span class="pre">func</span></code>
 with the following command:</p>
-<p><code class="docutils literal notranslate"><span class="pre">import</span> <span class="pre">spectra_utils</span> <span class="pre">a</span> <span class="pre">=</span> <span class="pre">spectra_utils.func(param1,</span> <span class="pre">param2,</span> <span class="pre">...)</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">spectra_utils</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">spectra_utils</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="n">param1</span><span class="p">,</span> <span class="n">param2</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
 <p>Alternatively, you can import just one (or a few) of many different
 functions that are defined in your file <code class="docutils literal notranslate"><span class="pre">spectra_utils.py</span></code>:</p>
-<p><code class="docutils literal notranslate"><span class="pre">from</span> <span class="pre">spectra_utils</span> <span class="pre">import</span> <span class="pre">func</span> <span class="pre">a</span> <span class="pre">=</span> <span class="pre">func(param1,</span> <span class="pre">param2,</span> <span class="pre">...)</span></code></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">spectra_utils</span> <span class="kn">import</span> <span class="n">func</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="n">param1</span><span class="p">,</span> <span class="n">param2</span><span class="p">,</span> <span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
 <p>You’ll recognize that python does not make a difference between modules
 that come with python (e.g. <code class="docutils literal notranslate"><span class="pre">glob</span></code>), external modules (e.g. <code class="docutils literal notranslate"><span class="pre">numpy</span></code>
 or <code class="docutils literal notranslate"><span class="pre">astropy</span></code>) and modules that you write yourself. The syntax to
