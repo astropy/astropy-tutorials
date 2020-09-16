@@ -14,4 +14,3 @@ dust_extinction>=0.7
 astro-gala
 dust_extinction>=0.7
 synphot
-requests
