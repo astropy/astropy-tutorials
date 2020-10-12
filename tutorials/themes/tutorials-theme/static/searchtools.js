@@ -13,7 +13,7 @@
 // See https://stackoverflow.com/a/25489055/9959073 for details.
 jQuery.ajaxSetup({async:false});
 
-/* Non-minified version JS is _stemmer.js if file is provided */ 
+/* Non-minified version JS is _stemmer.js if file is provided */
 /**
  * Porter Stemmer
  */
@@ -416,17 +416,17 @@ var Search = {
       if (query.includes("filterTutorials")) { // don't search docs if we are just looking for tutorials
         var docResponse = null;
         var docResult = '';
-        $.get('https://readthedocs.org/api/v2/docsearch/?q=' + window.location.search.split('=')[1] + '&project=astropy&version=stable&language=en', function(response){
+        $.get('https://docs.readthedocs.io/_/api/v2/search/?q=' + window.location.search.split('=')[1] + '&project=astropy&version=stable', function(response){
           docResponse = response;
           //limits the maximum results from the documentation to 15
           docResultsCount = (docResponse.results.hits.total>15)? 15 : docResponse.results.hits.total ;
 
           for(var i = 0; i < docResultsCount; i++ ) {
-            docResult += '<li style="" class="result-card doc"> <a href="' + 
-                              docResponse.results.hits.hits[i].fields.link + '.html' +  
+            docResult += '<li style="" class="result-card doc"> <a href="' +
+                              docResponse.results.hits.hits[i].fields.link + '.html' +
                               '?highlight=' + window.location.search.split('=')[1] + '">' +
                               docResponse.results.hits.hits[i].fields.title[0] + '</a>' +
-                              '<div class="context">' + 
+                              '<div class="context">' +
                               docResponse.results.hits.hits[i].highlight.content[0] +
                               docResponse.results.hits.hits[i].highlight.content[1] +
                               '</div> </li>';
@@ -563,7 +563,7 @@ var Search = {
         if (item[3]) {
           listItem.append($('<span> (' + item[3] + ')</span>'));
           Search.output.append(listItem);
-          
+
           listItem.slideDown(5, function() {
             displayNextItem();
           });
@@ -590,7 +590,7 @@ var Search = {
           listItem.slideDown(5, function() {
             displayNextItem();
           });
-        }   
+        }
       }
       // search finished, update title and status message
       else {
@@ -775,19 +775,19 @@ var Search = {
    */
   makeSearchSummary : function(text, keywords, hlwords) {
     var textLower = text.toLowerCase();
-    
+
     //extracting an image for the thumbnail
     var imageSearch = textLower.indexOf('nboutput',0);
     var imageTypeJPEG = textLower.indexOf('.jpeg', imageSearch);
     var imageTypePNG = textLower.indexOf('.png', imageSearch);
     var imageTypeJPG = textLower.indexOf('.jpg', imageSearch);
-    imageType = ( (imageTypeJPEG == -1) || ((imageTypeJPG != -1) && (imageTypeJPG < imageTypeJPEG)) )? imageTypeJPG : imageTypeJPEG ; 
+    imageType = ( (imageTypeJPEG == -1) || ((imageTypeJPG != -1) && (imageTypeJPG < imageTypeJPEG)) )? imageTypeJPG : imageTypeJPEG ;
     imageURLEnd = ( (imageType == -1) || ((imageTypePNG != -1) && (imageTypePNG < imageType)) )? imageTypePNG : imageType ; //to end the URL with appropriate extention
     var imageURL = $.trim(text.substr((imageSearch+8),(imageURLEnd-imageSearch)))
     if(imageURL == "" || imageURL.length > 80) //to add default image
       {imageURL = "_static/default_thumbnail.png";}
     else
-      {imageURL = '_images' + imageURL;}  
+      {imageURL = '_images' + imageURL;}
 
     //extracting context
     textLower = textLower.replace(/<[^<>]*>/gi, ''); //removing the html tags
@@ -810,12 +810,12 @@ var Search = {
     else{
       var startPoint = textLower.indexOf('====',0);
       var start = startPoint;
-      var sentenceStart = 0;  
+      var sentenceStart = 0;
       $.each(keywords, function() {
         var finderStart = startPoint;
         var flag = 0;
         var firstFound =-1;
-      
+
         while(flag==0 && sentenceStart!=80){
           var i = textLower.indexOf(this.toLowerCase(),finderStart);
           if (i > -1)
@@ -825,8 +825,8 @@ var Search = {
              sentenceStart=0;
              flag =1;
              break;}
-            
-          for( sentenceStart = 0; sentenceStart<80; sentenceStart++){ 
+
+          for( sentenceStart = 0; sentenceStart<80; sentenceStart++){
             if((textLower.charAt(start - sentenceStart) == '>') || (textLower.charAt(start - sentenceStart) == '<')) {
               finderStart = start+1;
               if(finderStart == startPoint)
@@ -845,14 +845,14 @@ var Search = {
 
     var excerpt = trimmedText.replace(/[`~!@#$%^&*()_|+\-=?:'"<>\{\}\[\]\\\/]/gi, '');
     excerpt = '<div class="row"><div class="col-md-3"><img src="' + imageURL + '" style="width: 150px; padding-top: 5px;"></div> <div class="col-md-9" style="padding-top: 20px; padding-left: 0px;">' + excerpt + '</div></div></div>'
-    
+
     var rv = $('<div class="context"></div>').html(excerpt);
     $.each(hlwords, function() {
       if(this.search('filter')==-1){   //if "filter" is not there in the search query then directly use the query to highlight text
         rv = rv.highlightText(this, 'highlighted');
       } else {    //if "filter" is there in the search query then first strip "filter" from the query and then use it to highlight text
         rv = rv.highlightText(this.split('filter')[1], 'highlighted');
-      }  
+      }
     });
     return rv;
   }
