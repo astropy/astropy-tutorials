@@ -1,6 +1,5 @@
 IPython>=6.1
 astropy>=4
-astroquery>=0.3.7
 git+https://github.com/astropy/astroquery.git
 matplotlib==3.0.2
 numpy>=1.17
