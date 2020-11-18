@@ -382,11 +382,11 @@ fail.
     
 
     ~/project/venv/lib/python3.7/site-packages/astropy/coordinates/sky_coordinate.py in __getattr__(self, attr)
-        605         # Fail
-        606         raise AttributeError("'{}' object has no attribute '{}'"
-    --> 607                              .format(self.__class__.__name__, attr))
-        608 
-        609     def __setattr__(self, attr, val):
+        789         # Fail
+        790         raise AttributeError("'{}' object has no attribute '{}'"
+    --> 791                              .format(self.__class__.__name__, attr))
+        792 
+        793     def __setattr__(self, attr, val):
 
 
     AttributeError: 'SkyCoord' object has no attribute 'ra'
@@ -668,7 +668,7 @@ location in the sky over Kitt Peak at the requested time.
 .. parsed-literal::
 
     <SkyCoord (AltAz: obstime=2010-12-21 01:00:00.000, location=(-1994502.60430614, -5037538.54232911, 3358104.99690298) m, pressure=0.0 hPa, temperature=0.0 deg_C, relative_humidity=0.0, obswl=1.0 micron): (az, alt) in deg
-        (149.19234446, 55.05673074)>
+        (149.19234442, 55.05673073)>
 
 
 
@@ -690,7 +690,7 @@ To look at just the altitude we can ``alt`` attribute:
 
 .. math::
 
-    55^\circ03{}^\prime24.2307{}^{\prime\prime}
+    55^\circ03{}^\prime24.2306{}^{\prime\prime}
 
 
 
@@ -778,8 +778,8 @@ We can also look at the object altitude at the present time and date:
 
 .. parsed-literal::
 
-    <SkyCoord (AltAz: obstime=2020-09-16 15:09:42.047968, location=(-1994502.60430614, -5037538.54232911, 3358104.99690298) m, pressure=0.0 hPa, temperature=0.0 deg_C, relative_humidity=0.0, obswl=1.0 micron): (az, alt) in deg
-        (277.14823403, -9.42142303)>
+    <SkyCoord (AltAz: obstime=2020-11-18 16:48:00.522983, location=(-1994502.60430614, -5037538.54232911, 3358104.99690298) m, pressure=0.0 hPa, temperature=0.0 deg_C, relative_humidity=0.0, obswl=1.0 micron): (az, alt) in deg
+        (15.35836599, -56.06525593)>
 
 
 Exercises

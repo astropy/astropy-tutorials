@@ -353,7 +353,7 @@ information.
 
 .. parsed-literal::
 
-    Filename: /home/circleci/.astropy/cache/download/py3/65dd87703534c8da774ac848727941fb
+    Filename: /home/circleci/.astropy/cache/download/url/21d072715b8ee90ab2fe1405b0e5fb1a/contents
     No.    Name      Ver    Type      Cards   Dimensions   Format
       0  PRIMARY       1 PrimaryHDU     121   (2119, 2119)   int16   
 
@@ -594,7 +594,7 @@ we plotted the image by itself, the plot axes would show pixel values.
 
 .. parsed-literal::
 
-    <matplotlib.image.AxesImage at 0x7f7b81496150>
+    <matplotlib.image.AxesImage at 0x7fb3a95d3410>
 
 
 

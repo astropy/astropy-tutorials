@@ -274,11 +274,11 @@ make sure the data isn’t corrupted or is looking at the right region.)</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[5]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">WARNING</span><span class="p">:</span> <span class="n">WCSWarning</span><span class="p">:</span> <span class="n">WCS2</span> <span class="ow">is</span> <span class="n">missing</span> <span class="n">card</span> <span class="n">DATEREF</span> <span class="p">[</span><span class="n">spectral_cube</span><span class="o">.</span><span class="n">wcs_utils</span><span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">WARNING</span><span class="p">:</span> <span class="n">AstropyDeprecationWarning</span><span class="p">:</span> <span class="n">block_reduce</span> <span class="n">was</span> <span class="n">moved</span> <span class="n">to</span> <span class="n">the</span> <span class="n">astropy</span><span class="o">.</span><span class="n">nddata</span><span class="o">.</span><span class="n">blocks</span> <span class="n">module</span><span class="o">.</span>  <span class="n">Please</span> <span class="n">update</span> <span class="n">your</span> <span class="kn">import</span> <span class="nn">statement.</span> <span class="p">[</span><span class="n">astropy</span><span class="o">.</span><span class="n">nddata</span><span class="o">.</span><span class="n">utils</span><span class="p">]</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">INFO</span><span class="p">:</span> <span class="n">Auto</span><span class="o">-</span><span class="n">setting</span> <span class="n">vmin</span> <span class="n">to</span> <span class="o">-</span><span class="mf">1.507e+00</span> <span class="p">[</span><span class="n">aplpy</span><span class="o">.</span><span class="n">core</span><span class="p">]</span>
-<span class="n">INFO</span><span class="p">:</span> <span class="n">Auto</span><span class="o">-</span><span class="n">setting</span> <span class="n">vmax</span> <span class="n">to</span>  <span class="mf">1.542e+01</span> <span class="p">[</span><span class="n">aplpy</span><span class="o">.</span><span class="n">core</span><span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">INFO</span><span class="p">:</span> <span class="n">Auto</span><span class="o">-</span><span class="n">setting</span> <span class="n">vmin</span> <span class="n">to</span> <span class="o">-</span><span class="mf">1.710e+00</span> <span class="p">[</span><span class="n">aplpy</span><span class="o">.</span><span class="n">core</span><span class="p">]</span>
+<span class="n">INFO</span><span class="p">:</span> <span class="n">Auto</span><span class="o">-</span><span class="n">setting</span> <span class="n">vmax</span> <span class="n">to</span>  <span class="mf">1.764e+01</span> <span class="p">[</span><span class="n">aplpy</span><span class="o">.</span><span class="n">core</span><span class="p">]</span>
 </pre></div>
 </div>
 <img alt="../_images/FITS-cubes_11_2.png" src="../_images/FITS-cubes_11_2.png" />
@@ -330,9 +330,9 @@ cube</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[8]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SpectralCube</span> <span class="k">with</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">450</span><span class="p">,</span> <span class="mi">41</span><span class="p">,</span> <span class="mi">48</span><span class="p">)</span> <span class="ow">and</span> <span class="n">unit</span><span class="o">=</span><span class="n">K</span><span class="p">:</span>
- <span class="n">n_x</span><span class="p">:</span>     <span class="mi">48</span>  <span class="n">type_x</span><span class="p">:</span> <span class="n">GLON</span><span class="o">-</span><span class="n">TAN</span>  <span class="n">unit_x</span><span class="p">:</span> <span class="n">deg</span>    <span class="nb">range</span><span class="p">:</span>   <span class="mf">295.647485</span> <span class="n">deg</span><span class="p">:</span>  <span class="mf">305.831248</span> <span class="n">deg</span>
- <span class="n">n_y</span><span class="p">:</span>     <span class="mi">41</span>  <span class="n">type_y</span><span class="p">:</span> <span class="n">GLAT</span><span class="o">-</span><span class="n">TAN</span>  <span class="n">unit_y</span><span class="p">:</span> <span class="n">deg</span>    <span class="nb">range</span><span class="p">:</span>   <span class="o">-</span><span class="mf">47.080781</span> <span class="n">deg</span><span class="p">:</span>  <span class="o">-</span><span class="mf">40.745361</span> <span class="n">deg</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SpectralCube</span> <span class="k">with</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">450</span><span class="p">,</span> <span class="mi">38</span><span class="p">,</span> <span class="mi">57</span><span class="p">)</span> <span class="ow">and</span> <span class="n">unit</span><span class="o">=</span><span class="n">K</span><span class="p">:</span>
+ <span class="n">n_x</span><span class="p">:</span>     <span class="mi">57</span>  <span class="n">type_x</span><span class="p">:</span> <span class="n">GLON</span><span class="o">-</span><span class="n">TAN</span>  <span class="n">unit_x</span><span class="p">:</span> <span class="n">deg</span>    <span class="nb">range</span><span class="p">:</span>   <span class="mf">294.113498</span> <span class="n">deg</span><span class="p">:</span>  <span class="mf">306.009028</span> <span class="n">deg</span>
+ <span class="n">n_y</span><span class="p">:</span>     <span class="mi">38</span>  <span class="n">type_y</span><span class="p">:</span> <span class="n">GLAT</span><span class="o">-</span><span class="n">TAN</span>  <span class="n">unit_y</span><span class="p">:</span> <span class="n">deg</span>    <span class="nb">range</span><span class="p">:</span>   <span class="o">-</span><span class="mf">46.014280</span> <span class="n">deg</span><span class="p">:</span>  <span class="o">-</span><span class="mf">40.027398</span> <span class="n">deg</span>
  <span class="n">n_s</span><span class="p">:</span>    <span class="mi">450</span>  <span class="n">type_s</span><span class="p">:</span> <span class="n">VRAD</span>      <span class="n">unit_s</span><span class="p">:</span> <span class="n">m</span> <span class="o">/</span> <span class="n">s</span>  <span class="nb">range</span><span class="p">:</span>  <span class="o">-</span><span class="mf">598824.534</span> <span class="n">m</span> <span class="o">/</span> <span class="n">s</span><span class="p">:</span>  <span class="mf">600409.133</span> <span class="n">m</span> <span class="o">/</span> <span class="n">s</span>
 </pre></div>
 </div>
@@ -349,9 +349,9 @@ the <code class="docutils literal notranslate"><span class="pre">.spectral_slab(
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[9]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SpectralCube</span> <span class="k">with</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">226</span><span class="p">,</span> <span class="mi">41</span><span class="p">,</span> <span class="mi">48</span><span class="p">)</span> <span class="ow">and</span> <span class="n">unit</span><span class="o">=</span><span class="n">K</span><span class="p">:</span>
- <span class="n">n_x</span><span class="p">:</span>     <span class="mi">48</span>  <span class="n">type_x</span><span class="p">:</span> <span class="n">GLON</span><span class="o">-</span><span class="n">TAN</span>  <span class="n">unit_x</span><span class="p">:</span> <span class="n">deg</span>    <span class="nb">range</span><span class="p">:</span>   <span class="mf">295.647485</span> <span class="n">deg</span><span class="p">:</span>  <span class="mf">305.831248</span> <span class="n">deg</span>
- <span class="n">n_y</span><span class="p">:</span>     <span class="mi">41</span>  <span class="n">type_y</span><span class="p">:</span> <span class="n">GLAT</span><span class="o">-</span><span class="n">TAN</span>  <span class="n">unit_y</span><span class="p">:</span> <span class="n">deg</span>    <span class="nb">range</span><span class="p">:</span>   <span class="o">-</span><span class="mf">47.080781</span> <span class="n">deg</span><span class="p">:</span>  <span class="o">-</span><span class="mf">40.745361</span> <span class="n">deg</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SpectralCube</span> <span class="k">with</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">226</span><span class="p">,</span> <span class="mi">38</span><span class="p">,</span> <span class="mi">57</span><span class="p">)</span> <span class="ow">and</span> <span class="n">unit</span><span class="o">=</span><span class="n">K</span><span class="p">:</span>
+ <span class="n">n_x</span><span class="p">:</span>     <span class="mi">57</span>  <span class="n">type_x</span><span class="p">:</span> <span class="n">GLON</span><span class="o">-</span><span class="n">TAN</span>  <span class="n">unit_x</span><span class="p">:</span> <span class="n">deg</span>    <span class="nb">range</span><span class="p">:</span>   <span class="mf">294.113498</span> <span class="n">deg</span><span class="p">:</span>  <span class="mf">306.009028</span> <span class="n">deg</span>
+ <span class="n">n_y</span><span class="p">:</span>     <span class="mi">38</span>  <span class="n">type_y</span><span class="p">:</span> <span class="n">GLAT</span><span class="o">-</span><span class="n">TAN</span>  <span class="n">unit_y</span><span class="p">:</span> <span class="n">deg</span>    <span class="nb">range</span><span class="p">:</span>   <span class="o">-</span><span class="mf">46.014280</span> <span class="n">deg</span><span class="p">:</span>  <span class="o">-</span><span class="mf">40.027398</span> <span class="n">deg</span>
  <span class="n">n_s</span><span class="p">:</span>    <span class="mi">226</span>  <span class="n">type_s</span><span class="p">:</span> <span class="n">VRAD</span>      <span class="n">unit_s</span><span class="p">:</span> <span class="n">m</span> <span class="o">/</span> <span class="n">s</span>  <span class="nb">range</span><span class="p">:</span>  <span class="o">-</span><span class="mf">299683.842</span> <span class="n">m</span> <span class="o">/</span> <span class="n">s</span><span class="p">:</span>  <span class="mf">301268.441</span> <span class="n">m</span> <span class="o">/</span> <span class="n">s</span>
 </pre></div>
 </div>
@@ -406,7 +406,7 @@ possible to access just the WCS object associated with a cube object.</p>
 <span class="n">Number</span> <span class="n">of</span> <span class="n">WCS</span> <span class="n">axes</span><span class="p">:</span> <span class="mi">2</span>
 <span class="n">CTYPE</span> <span class="p">:</span> <span class="s1">&#39;GLON-TAN&#39;</span>  <span class="s1">&#39;GLAT-TAN&#39;</span>
 <span class="n">CRVAL</span> <span class="p">:</span> <span class="mf">303.75</span>  <span class="o">-</span><span class="mf">40.0</span>
-<span class="n">CRPIX</span> <span class="p">:</span> <span class="mf">10.557620817843869</span>  <span class="mf">47.3723930634757</span>
+<span class="n">CRPIX</span> <span class="p">:</span> <span class="mf">11.557620817843869</span>  <span class="mf">40.3723930634757</span>
 <span class="n">PC1_1</span> <span class="n">PC1_2</span>  <span class="p">:</span> <span class="mf">1.0</span>  <span class="mf">0.0</span>
 <span class="n">PC2_1</span> <span class="n">PC2_2</span>  <span class="p">:</span> <span class="mf">0.0</span>  <span class="mf">1.0</span>
 <span class="n">CDELT</span> <span class="p">:</span> <span class="o">-</span><span class="mf">0.1494444443846667</span>  <span class="mf">0.1538888888273333</span>
@@ -445,7 +445,7 @@ object directly into a matplotlib axis instance.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[12]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">contour</span><span class="o">.</span><span class="n">QuadContourSet</span> <span class="n">at</span> <span class="mh">0x7f9b7c1aadd0</span><span class="o">&gt;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">contour</span><span class="o">.</span><span class="n">QuadContourSet</span> <span class="n">at</span> <span class="mh">0x7f8c2aba6810</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <img alt="../_images/FITS-cubes_27_1.png" src="../_images/FITS-cubes_27_1.png" />
@@ -493,7 +493,6 @@ latitude, longitude).</p>
 <p><span class="outputnumrole">Out[13]:</span></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">WARNING</span><span class="p">:</span> <span class="n">WCSWarning</span><span class="p">:</span> <span class="n">Slicing</span> <span class="n">across</span> <span class="n">a</span> <span class="n">celestial</span> <span class="n">axis</span> <span class="n">results</span> <span class="ow">in</span> <span class="n">an</span> <span class="n">invalid</span> <span class="n">WCS</span><span class="p">,</span> <span class="n">so</span> <span class="n">the</span> <span class="n">celestial</span> <span class="n">projection</span> <span class="p">(</span><span class="n">TAN</span><span class="p">)</span> <span class="ow">is</span> <span class="n">being</span> <span class="n">removed</span><span class="o">.</span>  <span class="n">The</span> <span class="n">WCS</span> <span class="n">indices</span> <span class="n">being</span> <span class="n">kept</span> <span class="n">were</span> <span class="p">[</span><span class="mi">0</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span> <span class="p">[</span><span class="n">spectral_cube</span><span class="o">.</span><span class="n">wcs_utils</span><span class="p">]</span>
 <span class="n">WARNING</span><span class="p">:</span> <span class="n">WCSWarning</span><span class="p">:</span> <span class="n">Slicing</span> <span class="n">across</span> <span class="n">a</span> <span class="n">celestial</span> <span class="n">axis</span> <span class="n">results</span> <span class="ow">in</span> <span class="n">an</span> <span class="n">invalid</span> <span class="n">WCS</span><span class="p">,</span> <span class="n">so</span> <span class="n">the</span> <span class="n">celestial</span> <span class="n">projection</span> <span class="p">(</span><span class="n">TAN</span><span class="p">)</span> <span class="ow">is</span> <span class="n">being</span> <span class="n">removed</span><span class="o">.</span>  <span class="n">The</span> <span class="n">view</span> <span class="n">used</span> <span class="n">was</span> <span class="p">(</span><span class="nb">slice</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">),</span> <span class="mi">18</span><span class="p">,</span> <span class="nb">slice</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span><span class="o">.</span> <span class="p">[</span><span class="n">spectral_cube</span><span class="o">.</span><span class="n">wcs_utils</span><span class="p">]</span>
-<span class="n">WARNING</span><span class="p">:</span> <span class="n">WCSWarning</span><span class="p">:</span> <span class="n">WCS2</span> <span class="ow">is</span> <span class="n">missing</span> <span class="n">card</span> <span class="n">DATEREF</span> <span class="p">[</span><span class="n">spectral_cube</span><span class="o">.</span><span class="n">wcs_utils</span><span class="p">]</span>
 </pre></div>
 </div>
 <img alt="../_images/FITS-cubes_30_1.png" src="../_images/FITS-cubes_30_1.png" />
@@ -536,11 +535,8 @@ specified.</p>
     <span class="s1">&#39;0:HERSCHEL&#39;</span> <span class="k">with</span> <span class="mi">12</span> <span class="n">column</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="ow">and</span> <span class="mi">28</span> <span class="n">row</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">WARNING</span><span class="p">:</span> <span class="n">W35</span><span class="p">:</span> <span class="kc">None</span><span class="p">:</span><span class="mi">5</span><span class="p">:</span><span class="mi">0</span><span class="p">:</span> <span class="n">W35</span><span class="p">:</span> <span class="s1">&#39;value&#39;</span> <span class="n">attribute</span> <span class="n">required</span> <span class="k">for</span> <span class="n">INFO</span> <span class="n">elements</span> <span class="p">[</span><span class="n">astropy</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">votable</span><span class="o">.</span><span class="n">tree</span><span class="p">]</span>
-<span class="n">WARNING</span><span class="p">:</span> <span class="n">W35</span><span class="p">:</span> <span class="kc">None</span><span class="p">:</span><span class="mi">6</span><span class="p">:</span><span class="mi">0</span><span class="p">:</span> <span class="n">W35</span><span class="p">:</span> <span class="s1">&#39;value&#39;</span> <span class="n">attribute</span> <span class="n">required</span> <span class="k">for</span> <span class="n">INFO</span> <span class="n">elements</span> <span class="p">[</span><span class="n">astropy</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">votable</span><span class="o">.</span><span class="n">tree</span><span class="p">]</span>
-<span class="n">WARNING</span><span class="p">:</span> <span class="n">W35</span><span class="p">:</span> <span class="kc">None</span><span class="p">:</span><span class="mi">7</span><span class="p">:</span><span class="mi">0</span><span class="p">:</span> <span class="n">W35</span><span class="p">:</span> <span class="s1">&#39;value&#39;</span> <span class="n">attribute</span> <span class="n">required</span> <span class="k">for</span> <span class="n">INFO</span> <span class="n">elements</span> <span class="p">[</span><span class="n">astropy</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">votable</span><span class="o">.</span><span class="n">tree</span><span class="p">]</span>
-<span class="n">WARNING</span><span class="p">:</span> <span class="n">W35</span><span class="p">:</span> <span class="kc">None</span><span class="p">:</span><span class="mi">8</span><span class="p">:</span><span class="mi">0</span><span class="p">:</span> <span class="n">W35</span><span class="p">:</span> <span class="s1">&#39;value&#39;</span> <span class="n">attribute</span> <span class="n">required</span> <span class="k">for</span> <span class="n">INFO</span> <span class="n">elements</span> <span class="p">[</span><span class="n">astropy</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">votable</span><span class="o">.</span><span class="n">tree</span><span class="p">]</span>
-<span class="n">WARNING</span><span class="p">:</span> <span class="n">W35</span><span class="p">:</span> <span class="kc">None</span><span class="p">:</span><span class="mi">10</span><span class="p">:</span><span class="mi">0</span><span class="p">:</span> <span class="n">W35</span><span class="p">:</span> <span class="s1">&#39;value&#39;</span> <span class="n">attribute</span> <span class="n">required</span> <span class="k">for</span> <span class="n">INFO</span> <span class="n">elements</span> <span class="p">[</span><span class="n">astropy</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">votable</span><span class="o">.</span><span class="n">tree</span><span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">WARNING</span><span class="p">:</span> <span class="n">W50</span><span class="p">:</span> <span class="kc">None</span><span class="p">:</span><span class="mi">37</span><span class="p">:</span><span class="mi">0</span><span class="p">:</span> <span class="n">W50</span><span class="p">:</span> <span class="n">Invalid</span> <span class="n">unit</span> <span class="n">string</span> <span class="s1">&#39;microns&#39;</span> <span class="p">[</span><span class="n">astropy</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">votable</span><span class="o">.</span><span class="n">tree</span><span class="p">]</span>
+<span class="n">WARNING</span><span class="p">:</span> <span class="n">W50</span><span class="p">:</span> <span class="kc">None</span><span class="p">:</span><span class="mi">43</span><span class="p">:</span><span class="mi">0</span><span class="p">:</span> <span class="n">W50</span><span class="p">:</span> <span class="n">Invalid</span> <span class="n">unit</span> <span class="n">string</span> <span class="s1">&#39;seconds&#39;</span> <span class="p">[</span><span class="n">astropy</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">votable</span><span class="o">.</span><span class="n">tree</span><span class="p">]</span>
 </pre></div>
 </div>
 <p>Here, the result is a TableList which contains 24 Herschel data products
@@ -572,32 +568,32 @@ filters used for these observations.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[16]:</span></p>
-&lt;MaskedColumn name=&apos;filter&apos; dtype=&apos;object&apos; length=28&gt;
+&lt;MaskedColumn name=&apos;filter&apos; dtype=&apos;object&apos; unit=&apos;microns&apos; description=&apos;Filter or filters used&apos; length=28&gt;
 <table>
 <tr><td>70, 160</td></tr>
-<tr><td>100, 160</td></tr>
-<tr><td>70, 160</td></tr>
-<tr><td>100, 160</td></tr>
-<tr><td>70, 160</td></tr>
 <tr><td>70, 160</td></tr>
 <tr><td>250, 350, 500</td></tr>
 <tr><td>100, 160</td></tr>
+<tr><td>250, 350, 500</td></tr>
 <tr><td>70, 160</td></tr>
 <tr><td>70, 160</td></tr>
 <tr><td>70, 160</td></tr>
 <tr><td>70, 160</td></tr>
+<tr><td>70, 160</td></tr>
+<tr><td>70, 160</td></tr>
+<tr><td>250, 350, 500</td></tr>
 <tr><td>...</td></tr>
-<tr><td>250, 350, 500</td></tr>
 <tr><td>100, 160</td></tr>
 <tr><td>250, 350, 500</td></tr>
 <tr><td>70, 160</td></tr>
-<tr><td>250, 350, 500</td></tr>
+<tr><td>100, 160</td></tr>
 <tr><td>100, 160</td></tr>
 <tr><td>70, 160</td></tr>
+<tr><td>70, 160</td></tr>
 <tr><td>250, 350, 500</td></tr>
 <tr><td>70, 160</td></tr>
-<tr><td>70, 160</td></tr>
 <tr><td>100, 160</td></tr>
+<tr><td>70, 160</td></tr>
 <tr><td>70, 160</td></tr>
 </table><p>Luckily for us, there is an observation made with three filters: 250,
 350, and 500 microns. This is the object we will want to download. One
@@ -621,19 +617,19 @@ five quite large files. It could take several minutes to complete.</p>
 </div>
 <p><span class="outputnumrole">Out[17]:</span></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>INFO: Starting download of HERSCHEL data. (5 files) [astroquery.esasky.core]
+INFO: Downloading Observation ID: 1342205092 from http://archives.esac.esa.int/hsa/whsa-tap-server/data?RETRIEVAL_TYPE=STANDALONE&amp;observation_oid=8614195&amp;DATA_RETRIEVAL_ORIGIN=UI [astroquery.esasky.core]
+INFO: [Done] [astroquery.esasky.core]
+INFO: Downloading Observation ID: 1342205055 from http://archives.esac.esa.int/hsa/whsa-tap-server/data?RETRIEVAL_TYPE=STANDALONE&amp;observation_oid=8614152&amp;DATA_RETRIEVAL_ORIGIN=UI [astroquery.esasky.core]
+INFO: [Done] [astroquery.esasky.core]
 INFO: Downloading Observation ID: 1342198566 from http://archives.esac.esa.int/hsa/whsa-tap-server/data?RETRIEVAL_TYPE=STANDALONE&amp;observation_oid=8634358&amp;DATA_RETRIEVAL_ORIGIN=UI [astroquery.esasky.core]
 INFO: [Done] [astroquery.esasky.core]
 INFO: Downloading Observation ID: 1342198565 from http://archives.esac.esa.int/hsa/whsa-tap-server/data?RETRIEVAL_TYPE=STANDALONE&amp;observation_oid=8613787&amp;DATA_RETRIEVAL_ORIGIN=UI [astroquery.esasky.core]
 INFO: [Done] [astroquery.esasky.core]
-INFO: Downloading Observation ID: 1342205055 from http://archives.esac.esa.int/hsa/whsa-tap-server/data?RETRIEVAL_TYPE=STANDALONE&amp;observation_oid=8614152&amp;DATA_RETRIEVAL_ORIGIN=UI [astroquery.esasky.core]
-INFO: [Done] [astroquery.esasky.core]
 INFO: Downloading Observation ID: 1342198590 from http://archives.esac.esa.int/hsa/whsa-tap-server/data?RETRIEVAL_TYPE=STANDALONE&amp;observation_oid=8634359&amp;DATA_RETRIEVAL_ORIGIN=UI [astroquery.esasky.core]
-INFO: [Done] [astroquery.esasky.core]
-INFO: Downloading Observation ID: 1342205092 from http://archives.esac.esa.int/hsa/whsa-tap-server/data?RETRIEVAL_TYPE=STANDALONE&amp;observation_oid=8614195&amp;DATA_RETRIEVAL_ORIGIN=UI [astroquery.esasky.core]
 INFO: [Done] [astroquery.esasky.core]
 INFO: Downloading of HERSCHEL data complete. [astroquery.esasky.core]
 INFO: Maps available at /home/circleci/project/tutorials/notebooks/FITS-cubes/Maps. [astroquery.esasky.core]
-Filename: Maps/HERSCHEL/anonymous1599060839/hspirepmw401_25pxmp_0110_m7303_1342198565_1342198566_1462476888800.fits.gz
+Filename: Maps/HERSCHEL/anonymous1605718158/hspirepmw401_25pxmp_0110_m7303_1342198565_1342198566_1462476888800.fits.gz
 No.    Name      Ver    Type      Cards   Dimensions   Format
   0  PRIMARY       1 PrimaryHDU     184   ()
   1  image         1 ImageHDU        47   (2407, 2141)   float64
@@ -882,7 +878,7 @@ Galactic rather than RA and Dec.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[23]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mf">40.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">)</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mf">37.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.5</span><span class="p">)</span>
 </pre></div>
 </div>
 <img alt="../_images/FITS-cubes_55_1.png" src="../_images/FITS-cubes_55_1.png" />

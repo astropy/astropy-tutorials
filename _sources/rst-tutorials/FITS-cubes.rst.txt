@@ -237,13 +237,13 @@ To do this, we index our cube along one axis (for a slice) or two axes
 
 .. parsed-literal::
 
-    WARNING: WCSWarning: WCS2 is missing card DATEREF [spectral_cube.wcs_utils]
+    WARNING: AstropyDeprecationWarning: block_reduce was moved to the astropy.nddata.blocks module.  Please update your import statement. [astropy.nddata.utils]
 
 
 .. parsed-literal::
 
-    INFO: Auto-setting vmin to -1.507e+00 [aplpy.core]
-    INFO: Auto-setting vmax to  1.542e+01 [aplpy.core]
+    INFO: Auto-setting vmin to -1.710e+00 [aplpy.core]
+    INFO: Auto-setting vmax to  1.764e+01 [aplpy.core]
 
 
 
@@ -344,9 +344,9 @@ cube
 
 .. parsed-literal::
 
-    SpectralCube with shape=(450, 41, 48) and unit=K:
-     n_x:     48  type_x: GLON-TAN  unit_x: deg    range:   295.647485 deg:  305.831248 deg
-     n_y:     41  type_y: GLAT-TAN  unit_y: deg    range:   -47.080781 deg:  -40.745361 deg
+    SpectralCube with shape=(450, 38, 57) and unit=K:
+     n_x:     57  type_x: GLON-TAN  unit_x: deg    range:   294.113498 deg:  306.009028 deg
+     n_y:     38  type_y: GLAT-TAN  unit_y: deg    range:   -46.014280 deg:  -40.027398 deg
      n_s:    450  type_s: VRAD      unit_s: m / s  range:  -598824.534 m / s:  600409.133 m / s
 
 
@@ -373,9 +373,9 @@ the ``.spectral_slab()`` method.
 
 .. parsed-literal::
 
-    SpectralCube with shape=(226, 41, 48) and unit=K:
-     n_x:     48  type_x: GLON-TAN  unit_x: deg    range:   295.647485 deg:  305.831248 deg
-     n_y:     41  type_y: GLAT-TAN  unit_y: deg    range:   -47.080781 deg:  -40.745361 deg
+    SpectralCube with shape=(226, 38, 57) and unit=K:
+     n_x:     57  type_x: GLON-TAN  unit_x: deg    range:   294.113498 deg:  306.009028 deg
+     n_y:     38  type_y: GLAT-TAN  unit_y: deg    range:   -46.014280 deg:  -40.027398 deg
      n_s:    226  type_s: VRAD      unit_s: m / s  range:  -299683.842 m / s:  301268.441 m / s
 
 
@@ -451,7 +451,7 @@ possible to access just the WCS object associated with a cube object.
     Number of WCS axes: 2
     CTYPE : 'GLON-TAN'  'GLAT-TAN'  
     CRVAL : 303.75  -40.0  
-    CRPIX : 10.557620817843869  47.3723930634757  
+    CRPIX : 11.557620817843869  40.3723930634757  
     PC1_1 PC1_2  : 1.0  0.0  
     PC2_1 PC2_2  : 0.0  1.0  
     CDELT : -0.1494444443846667  0.1538888888273333  
@@ -502,7 +502,7 @@ object directly into a matplotlib axis instance.
 
 .. parsed-literal::
 
-    <matplotlib.contour.QuadContourSet at 0x7f9b7c1aadd0>
+    <matplotlib.contour.QuadContourSet at 0x7f8c2aba6810>
 
 
 
@@ -569,7 +569,6 @@ We then select the appropriate data by indexing along the numpy array.
 
     WARNING: WCSWarning: Slicing across a celestial axis results in an invalid WCS, so the celestial projection (TAN) is being removed.  The WCS indices being kept were [0 2]. [spectral_cube.wcs_utils]
     WARNING: WCSWarning: Slicing across a celestial axis results in an invalid WCS, so the celestial projection (TAN) is being removed.  The view used was (slice(None, None, None), 18, slice(None, None, None)). [spectral_cube.wcs_utils]
-    WARNING: WCSWarning: WCS2 is missing card DATEREF [spectral_cube.wcs_utils]
 
 
 
@@ -643,11 +642,8 @@ specified.
 
 .. parsed-literal::
 
-    WARNING: W35: None:5:0: W35: 'value' attribute required for INFO elements [astropy.io.votable.tree]
-    WARNING: W35: None:6:0: W35: 'value' attribute required for INFO elements [astropy.io.votable.tree]
-    WARNING: W35: None:7:0: W35: 'value' attribute required for INFO elements [astropy.io.votable.tree]
-    WARNING: W35: None:8:0: W35: 'value' attribute required for INFO elements [astropy.io.votable.tree]
-    WARNING: W35: None:10:0: W35: 'value' attribute required for INFO elements [astropy.io.votable.tree]
+    WARNING: W50: None:37:0: W50: Invalid unit string 'microns' [astropy.io.votable.tree]
+    WARNING: W50: None:43:0: W50: Invalid unit string 'seconds' [astropy.io.votable.tree]
 
 
 Here, the result is a TableList which contains 24 Herschel data products
@@ -704,32 +700,32 @@ filters used for these observations.
 
 .. raw:: html
 
-    &lt;MaskedColumn name=&apos;filter&apos; dtype=&apos;object&apos; length=28&gt;
+    &lt;MaskedColumn name=&apos;filter&apos; dtype=&apos;object&apos; unit=&apos;microns&apos; description=&apos;Filter or filters used&apos; length=28&gt;
     <table>
     <tr><td>70, 160</td></tr>
-    <tr><td>100, 160</td></tr>
-    <tr><td>70, 160</td></tr>
-    <tr><td>100, 160</td></tr>
-    <tr><td>70, 160</td></tr>
     <tr><td>70, 160</td></tr>
     <tr><td>250, 350, 500</td></tr>
     <tr><td>100, 160</td></tr>
+    <tr><td>250, 350, 500</td></tr>
     <tr><td>70, 160</td></tr>
     <tr><td>70, 160</td></tr>
     <tr><td>70, 160</td></tr>
     <tr><td>70, 160</td></tr>
+    <tr><td>70, 160</td></tr>
+    <tr><td>70, 160</td></tr>
+    <tr><td>250, 350, 500</td></tr>
     <tr><td>...</td></tr>
-    <tr><td>250, 350, 500</td></tr>
     <tr><td>100, 160</td></tr>
     <tr><td>250, 350, 500</td></tr>
     <tr><td>70, 160</td></tr>
-    <tr><td>250, 350, 500</td></tr>
+    <tr><td>100, 160</td></tr>
     <tr><td>100, 160</td></tr>
     <tr><td>70, 160</td></tr>
+    <tr><td>70, 160</td></tr>
     <tr><td>250, 350, 500</td></tr>
     <tr><td>70, 160</td></tr>
-    <tr><td>70, 160</td></tr>
     <tr><td>100, 160</td></tr>
+    <tr><td>70, 160</td></tr>
     <tr><td>70, 160</td></tr>
     </table>
 
@@ -776,19 +772,19 @@ five quite large files. It could take several minutes to complete.
 .. parsed-literal::
 
     INFO: Starting download of HERSCHEL data. (5 files) [astroquery.esasky.core]
+    INFO: Downloading Observation ID: 1342205092 from http://archives.esac.esa.int/hsa/whsa-tap-server/data?RETRIEVAL_TYPE=STANDALONE&observation_oid=8614195&DATA_RETRIEVAL_ORIGIN=UI [astroquery.esasky.core]
+    INFO: [Done] [astroquery.esasky.core]
+    INFO: Downloading Observation ID: 1342205055 from http://archives.esac.esa.int/hsa/whsa-tap-server/data?RETRIEVAL_TYPE=STANDALONE&observation_oid=8614152&DATA_RETRIEVAL_ORIGIN=UI [astroquery.esasky.core]
+    INFO: [Done] [astroquery.esasky.core]
     INFO: Downloading Observation ID: 1342198566 from http://archives.esac.esa.int/hsa/whsa-tap-server/data?RETRIEVAL_TYPE=STANDALONE&observation_oid=8634358&DATA_RETRIEVAL_ORIGIN=UI [astroquery.esasky.core]
     INFO: [Done] [astroquery.esasky.core]
     INFO: Downloading Observation ID: 1342198565 from http://archives.esac.esa.int/hsa/whsa-tap-server/data?RETRIEVAL_TYPE=STANDALONE&observation_oid=8613787&DATA_RETRIEVAL_ORIGIN=UI [astroquery.esasky.core]
     INFO: [Done] [astroquery.esasky.core]
-    INFO: Downloading Observation ID: 1342205055 from http://archives.esac.esa.int/hsa/whsa-tap-server/data?RETRIEVAL_TYPE=STANDALONE&observation_oid=8614152&DATA_RETRIEVAL_ORIGIN=UI [astroquery.esasky.core]
-    INFO: [Done] [astroquery.esasky.core]
     INFO: Downloading Observation ID: 1342198590 from http://archives.esac.esa.int/hsa/whsa-tap-server/data?RETRIEVAL_TYPE=STANDALONE&observation_oid=8634359&DATA_RETRIEVAL_ORIGIN=UI [astroquery.esasky.core]
-    INFO: [Done] [astroquery.esasky.core]
-    INFO: Downloading Observation ID: 1342205092 from http://archives.esac.esa.int/hsa/whsa-tap-server/data?RETRIEVAL_TYPE=STANDALONE&observation_oid=8614195&DATA_RETRIEVAL_ORIGIN=UI [astroquery.esasky.core]
     INFO: [Done] [astroquery.esasky.core]
     INFO: Downloading of HERSCHEL data complete. [astroquery.esasky.core]
     INFO: Maps available at /home/circleci/project/tutorials/notebooks/FITS-cubes/Maps. [astroquery.esasky.core]
-    Filename: Maps/HERSCHEL/anonymous1599060839/hspirepmw401_25pxmp_0110_m7303_1342198565_1342198566_1462476888800.fits.gz
+    Filename: Maps/HERSCHEL/anonymous1605718158/hspirepmw401_25pxmp_0110_m7303_1342198565_1342198566_1462476888800.fits.gz
     No.    Name      Ver    Type      Cards   Dimensions   Format
       0  PRIMARY       1 PrimaryHDU     184   ()      
       1  image         1 ImageHDU        47   (2407, 2141)   float64   
@@ -1116,7 +1112,7 @@ Galactic rather than RA and Dec.
 
 .. parsed-literal::
 
-    (40.5, -0.5)
+    (37.5, -0.5)
 
 
 

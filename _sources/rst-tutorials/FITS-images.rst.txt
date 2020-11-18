@@ -93,7 +93,7 @@ Let’s open the FITS file to find out what it contains.
 
 .. parsed-literal::
 
-    Filename: /home/circleci/.astropy/cache/download/py3/2c9202ae878ecfcb60878ceb63837f5f
+    Filename: /home/circleci/.astropy/cache/download/url/ff6e0b93871033c68022ca026a956d87/contents
     No.    Name      Ver    Type      Cards   Dimensions   Format
       0  PRIMARY       1 PrimaryHDU     161   (891, 893)   int16   
       1  er.mask       1 TableHDU        25   1600R x 4C   [F6.2, F6.2, F6.2, F6.2]   
@@ -192,7 +192,7 @@ Viewing the image data and getting basic statistics
 
 .. parsed-literal::
 
-    <matplotlib.colorbar.Colorbar at 0x7f3fa9a0ab90>
+    <matplotlib.colorbar.Colorbar at 0x7f4e8cb4b190>
 
 
 
@@ -391,7 +391,7 @@ scaling for ``imshow``.
 
 .. parsed-literal::
 
-    <matplotlib.colorbar.Colorbar at 0x7f3fa31a0890>
+    <matplotlib.colorbar.Colorbar at 0x7f4e82665bd0>
 
 
 

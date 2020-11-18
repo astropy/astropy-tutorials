@@ -274,6 +274,12 @@ MAST <https://archive.stsci.edu/iue/>`__:
     Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:IUE/url/browse/previews/iue/mx/lwr/05000/gif/lwr05639.gif to ./mastDownload/IUE/lwr05639/lwr05639.gif ... [Done]
     Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:IUE/url/pub/iue/data/lwr/05000/lwr05639.mxlo.gz to ./mastDownload/IUE/lwr05639/lwr05639.mxlo.gz ... [Done]
     Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:IUE/url/pub/vospectra/iue2/lwr05639mxlo_vo.fits to ./mastDownload/IUE/lwr05639/lwr05639mxlo_vo.fits ... [Done]
+     [Done]
+
+
+.. parsed-literal::
+
+    WARNING: Found cached file ./mastDownload/IUE/lwr05639/lwr05639.gif with size 7406 that is different from expected size 3459 [astroquery.query]
 
 
 We read the downloaded files into an astropy table:

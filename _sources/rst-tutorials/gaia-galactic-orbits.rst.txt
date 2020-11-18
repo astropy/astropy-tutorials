@@ -105,13 +105,13 @@ Imports
 
 .. parsed-literal::
 
-    Created TAP+ (v1.2.1) - Connection:
+    Created TAP+ (v20200428.1) - Connection:
     	Host: gea.esac.esa.int
     	Use HTTPS: True
     	Port: 443
     	SSL Port: 443
-    Created TAP+ (v1.2.1) - Connection:
-    	Host: geadata.esac.esa.int
+    Created TAP+ (v20200428.1) - Connection:
+    	Host: gea.esac.esa.int
     	Use HTTPS: True
     	Port: 443
     	SSL Port: 443
@@ -239,7 +239,7 @@ first four rows of the table:
 .. raw:: html
 
     <i>QTable length=4</i>
-    <table id="table140494095499472" class="table-striped table-bordered table-condensed">
+    <table id="table140106491073040" class="table-striped table-bordered table-condensed">
     <thead><tr><th>ra</th><th>dec</th><th>parallax</th><th>pmra</th><th>pmdec</th><th>radial_velocity</th><th>phot_g_mean_mag</th><th>phot_bp_mean_mag</th><th>phot_rp_mean_mag</th></tr></thead>
     <thead><tr><th>deg</th><th>deg</th><th>mas</th><th>mas / yr</th><th>mas / yr</th><th>km / s</th><th>mag</th><th>mag</th><th>mag</th></tr></thead>
     <thead><tr><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float32</th><th>float32</th><th>float32</th></tr></thead>
@@ -407,17 +407,12 @@ at the default values for the solar position and velocity:
 :outputnumrole:`Out[10]:`
 
 
-.. parsed-literal::
-
-    WARNING: AstropyDeprecationWarning: In v4.1 and later versions, the Galactocentric frame will adopt default parameters that may update with time. An updated default parameter set is already available through the astropy.coordinates.galactocentric_frame_defaults ScienceState object, as described in but the default is currently still set to the pre-v4.0 parameter defaults. The safest way to guard against changing default parameters in the future is to either (1) specify all Galactocentric frame attributes explicitly when using the frame, or (2) set the galactocentric_frame_defaults parameter set name explicitly. See http://docs.astropy.org/en/latest/coordinates/galactocentric.html for more information. [astropy.coordinates.builtin_frames.galactocentric]
-
-
 
 
 .. parsed-literal::
 
     <Galactocentric Frame (galcen_coord=<ICRS Coordinate: (ra, dec) in deg
-        (266.4051, -28.936175)>, galcen_distance=8.3 kpc, galcen_v_sun=(11.1, 232.24, 7.25) km / s, z_sun=27.0 pc, roll=0.0 deg)>
+        (266.4051, -28.936175)>, galcen_distance=8.122 kpc, galcen_v_sun=(12.9, 245.6, 7.78) km / s, z_sun=20.8 pc, roll=0.0 deg)>
 
 
 
@@ -457,16 +452,16 @@ Galactocentric frame:
 .. parsed-literal::
 
     <SkyCoord (Galactocentric: galcen_coord=<ICRS Coordinate: (ra, dec) in deg
-        (266.4051, -28.936175)>, galcen_distance=8.1 kpc, galcen_v_sun=(11.1, 232.24, 7.25) km / s, z_sun=0.0 pc, roll=0.0 deg): (x, y, z) in pc
+        (266.4051, -28.936175)>, galcen_distance=8.1 kpc, galcen_v_sun=(12.9, 245.6, 7.78) km / s, z_sun=0.0 pc, roll=0.0 deg): (x, y, z) in pc
         [(-8077.44468803,  70.79989896,  55.66242071),
          (-8114.06090109, -18.04601124,   8.31586669),
          (-8109.24493623,  32.92015736, -44.47693151),
          (-8111.0109288 ,  75.59768012,  -3.55986822)]
      (v_x, v_y, v_z) in km / s
-        [(-18.06556759, 220.62501167,   4.36424163),
-         (-32.74107553, 212.64094753,  -5.38474972),
-         (209.09926667, -25.11804786, -36.55277769),
-         ( 47.01632893, 208.88147077,  17.25803683)]>
+        [(-16.26556759, 233.98501167,   4.89424163),
+         (-30.94107553, 226.00094753,  -4.85474972),
+         (210.89926667, -11.75804787, -36.02277769),
+         ( 48.81632893, 222.24147077,  17.78803683)]>
 
 
 
@@ -774,7 +769,7 @@ a Cartesian representation. We can do this by calling
 
 .. parsed-literal::
 
-    ((185,), (577,))
+    ((185,), (593,))
 
 
 

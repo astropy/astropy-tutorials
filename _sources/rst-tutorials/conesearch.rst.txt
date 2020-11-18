@@ -150,7 +150,7 @@ Next, let’s pick an astronomical object of interest. For example, M31.
 .. parsed-literal::
 
     <SkyCoord (ICRS): (ra, dec) in deg
-        (10.68470833, 41.26875)>
+        (10.6847083, 41.26875)>
 
 
 By default, a basic Cone Search goes through the list of catalogs and
@@ -182,7 +182,7 @@ table <http://astropy.readthedocs.io/en/stable/table/index.html>`__.
 
 .. parsed-literal::
 
-    WARNING: W50: http://gsss.stsci.edu/webservices/vo/ConeSearch.aspx?CAT=GSC23RA=10.68470833&DEC=41.26875&SR=0.1&VERB=1:154:0: W50: Invalid unit string 'pixel' [astropy.io.votable.tree]
+    WARNING: W50: http://gsss.stsci.edu/webservices/vo/ConeSearch.aspx?CAT=GSC23RA=10.6847083&DEC=41.26875&SR=0.1&VERB=1:154:0: W50: Invalid unit string 'pixel' [astropy.io.votable.tree]
 
 
 
@@ -442,11 +442,11 @@ catalog.
             "W50"
         ],
         "validate_warnings": [
-            "/var/www/astroconda.org/html/aux/vo_databases/daily_20200902/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:154:0: W50: Invalid unit string 'pixel'",
-            "/var/www/astroconda.org/html/aux/vo_databases/daily_20200902/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:154:0: W50: Invalid unit string 'pixel'"
+            "/var/www/astroconda.org/html/aux/vo_databases/daily_20201118/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:154:0: W50: Invalid unit string 'pixel'",
+            "/var/www/astroconda.org/html/aux/vo_databases/daily_20201118/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:154:0: W50: Invalid unit string 'pixel'"
         ],
         "validate_xmllint": true,
-        "validate_xmllint_content": "/var/www/astroconda.org/html/aux/vo_databases/daily_20200902/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml validates\n",
+        "validate_xmllint_content": "/var/www/astroconda.org/html/aux/vo_databases/daily_20201118/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml validates\n",
         "waveband": "optical",
         "wsdl_url": ""
     }
@@ -794,7 +794,7 @@ This might take a while.
 
 .. parsed-literal::
 
-    Predicted run time is 1.0259410383725407 seconds
+    Predicted run time is 1.3217878337043518 seconds
     Predicted number of rows is 2617
 
 
@@ -823,7 +823,7 @@ the service provider.
 
 .. parsed-literal::
 
-    INFO: conesearch_timer took 1.674558162689209 s on AVERAGE for 1 call(s). [astroquery.utils.timer]
+    INFO: conesearch_timer took 1.263808250427246 s on AVERAGE for 1 call(s). [astroquery.utils.timer]
 
 
 
@@ -841,7 +841,7 @@ the service provider.
 
 .. parsed-literal::
 
-    Actual run time is 1.674558162689209 seconds
+    Actual run time is 1.263808250427246 seconds
     Actual number of rows is 4028
 
 

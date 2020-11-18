@@ -18,10 +18,6 @@ to look like the main documentation. Sphinx requires restructured text (RST)
 files for its build process, so use an intermediate step to run the notebooks to
 produce output, and then convert the notebook files into RST files.
 
-We use our own run-and-convert machinery using ``nbconvert``. We use the same
-script that converts the notebooks to RST to test the notebooks on travis by
-simply executing the notebooks and ignoring the output.
-
 We use `CircleCI <https://circleci.com>`_ to do the Sphinx build, which is then
 pushed to the ``gh-pages`` branch of the repository and served by GitHub. The
 notebooks are first converted to RST files during the Sphinx build by doing the

@@ -112,7 +112,7 @@ load a FITS file and examine the header.
 
 .. parsed-literal::
 
-    Filename: /home/circleci/.astropy/cache/download/py3/c0ef4c0e064fc23aef784f93082d8b9a
+    Filename: /home/circleci/.astropy/cache/download/url/8da27de5aa6b0db633441e82715bedf3/contents
     No.    Name      Ver    Type      Cards   Dimensions   Format
       0  PRIMARY       1 PrimaryHDU       4   ()      
       1  NN_EMISSIVITY_I_LOBE_150.0MHZ    1 ImageHDU        23   (1024, 1452)   float64   
@@ -202,7 +202,7 @@ proper range (``vmin`` and ``vmax``).
 
 .. parsed-literal::
 
-    <matplotlib.image.AxesImage at 0x7f4f2a1d7310>
+    <matplotlib.image.AxesImage at 0x7f0675084ad0>
 
 
 
@@ -253,7 +253,7 @@ distance to the object.
 
 .. parsed-literal::
 
-    8.749222239908287e-06 deg 8.749222239908287e-06 deg
+    8.74922223983974e-06 deg 8.74922223983974e-06 deg
 
 
 Use ``astropy.wcs.WCS`` to prepare a FITS header.
@@ -322,8 +322,8 @@ Let’s take a look at the header. ``CDELT1``, ``CDELT2``, ``CUNIT1``,
     WCSAXES =                    2 / Number of coordinate axes                      
     CRPIX1  =                726.0 / Pixel coordinate of reference point            
     CRPIX2  =                512.0 / Pixel coordinate of reference point            
-    CDELT1  = -8.7492222399083E-06 / [deg] Coordinate increment at reference point  
-    CDELT2  =  8.7492222399083E-06 / [deg] Coordinate increment at reference point  
+    CDELT1  = -8.7492222398396E-06 / [deg] Coordinate increment at reference point  
+    CDELT2  = 8.74922223983969E-06 / [deg] Coordinate increment at reference point  
     CUNIT1  = 'deg     '           / Units of coordinate increment and value        
     CUNIT2  = 'deg     '           / Units of coordinate increment and value        
     CTYPE1  = 'LINEAR  '                                                            
@@ -332,9 +332,7 @@ Let’s take a look at the header. ``CDELT1``, ``CDELT2``, ``CUNIT1``,
     CRVAL2  =      40.733915555556 / [deg] Coordinate value at reference point      
     LATPOLE =                 90.0 / [deg] Native latitude of celestial pole        
     WCSNAME = 'yt      '                                                            
-    DATEREF = '1858-11-17'         / ISO-8601 fiducial time                         
-    MJDREFI =                  0.0 / [d] MJD of fiducial time, integer part         
-    MJDREFF =                  0.0 / [d] MJD of fiducial time, fractional part      
+    MJDREF  =                  0.0 / [d] MJD of fiducial time                       
 
 
 
@@ -405,7 +403,7 @@ pixels by using our pixel scale keyword ``cdelt2`` from above.
 
 .. parsed-literal::
 
-    <matplotlib.image.AxesImage at 0x7f4f2a2a31d0>
+    <matplotlib.image.AxesImage at 0x7f066ee68450>
 
 
 
@@ -450,7 +448,7 @@ this, using a 2D Lorentzian
 
 .. parsed-literal::
 
-    <matplotlib.image.AxesImage at 0x7f4f2a25c450>
+    <matplotlib.image.AxesImage at 0x7f066edd0210>
 
 
 
@@ -513,7 +511,7 @@ Now let’s take a look at the convolved image.
 
 .. parsed-literal::
 
-    <matplotlib.colorbar.Colorbar at 0x7f4f2a349a90>
+    <matplotlib.colorbar.Colorbar at 0x7f066ed65990>
 
 
 
@@ -539,10 +537,10 @@ Now let’s take a look at the convolved image.
 
 .. parsed-literal::
 
-    Filename: /home/circleci/.astropy/cache/download/py3/c0ef4c0e064fc23aef784f93082d8b9a
+    Filename: /home/circleci/.astropy/cache/download/url/8da27de5aa6b0db633441e82715bedf3/contents
     No.    Name      Ver    Type      Cards   Dimensions   Format
       0  PRIMARY       1 PrimaryHDU       4   ()      
-      1  NN_EMISSIVITY_I_LOBE_150.0MHZ    1 ImageHDU        26   (1024, 1452)   float64   
+      1  NN_EMISSIVITY_I_LOBE_150.0MHZ    1 ImageHDU        24   (1024, 1452)   float64   
 
 
 
@@ -602,7 +600,7 @@ Let’s plot the Q and U images.
 
 .. parsed-literal::
 
-    <matplotlib.colorbar.Colorbar at 0x7f4f2265fdd0>
+    <matplotlib.colorbar.Colorbar at 0x7f066d584bd0>
 
 
 
@@ -677,7 +675,7 @@ vectors along the x/right-ascention axis.
 
 .. parsed-literal::
 
-    <matplotlib.quiver.Quiver at 0x7f4f225c4250>
+    <matplotlib.quiver.Quiver at 0x7f066d4b7890>
 
 
 
