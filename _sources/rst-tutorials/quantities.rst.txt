@@ -293,7 +293,7 @@ settings on your ``matplotlib`` session to better handle astropy
 
 .. parsed-literal::
 
-    <astropy.visualization.units.quantity_support.<locals>.MplQuantityConverter at 0x7fb370de8f50>
+    <astropy.visualization.units.quantity_support.<locals>.MplQuantityConverter at 0x7fad87331850>
 
 
 
@@ -855,12 +855,12 @@ convertible:
           2 nu18 = lambda18.to(u.Hz)
 
 
-    ~/project/venv/lib/python3.7/site-packages/astropy/units/quantity.py in to(self, unit, equivalencies)
-        687         # and don't want to slow down this method (esp. the scalar case).
-        688         unit = Unit(unit)
-    --> 689         return self._new_view(self._to_value(unit, equivalencies), unit)
-        690 
-        691     def to_value(self, unit=None, equivalencies=[]):
+    ~/project/venv/lib/python3.7/site-packages/astropy/units/quantity.py in to(self, unit, equivalencies, copy)
+        694             # Avoid using to_value to ensure that we make a copy. We also
+        695             # don't want to slow down this method (esp. the scalar case).
+    --> 696             value = self._to_value(unit, equivalencies)
+        697         else:
+        698             # to_value only copies if necessary
 
 
     ~/project/venv/lib/python3.7/site-packages/astropy/units/quantity.py in _to_value(self, unit, equivalencies)
@@ -868,7 +868,7 @@ convertible:
         660         return self.unit.to(unit, self.view(np.ndarray),
     --> 661                             equivalencies=equivalencies)
         662 
-        663     def to(self, unit, equivalencies=[]):
+        663     def to(self, unit, equivalencies=[], copy=True):
 
 
     ~/project/venv/lib/python3.7/site-packages/astropy/units/core.py in to(self, other, value, equivalencies)
@@ -1178,12 +1178,12 @@ convert to a different area unit, it will fail:
     ----> 1 da.to(u.cm**2)
     
 
-    ~/project/venv/lib/python3.7/site-packages/astropy/units/quantity.py in to(self, unit, equivalencies)
-        687         # and don't want to slow down this method (esp. the scalar case).
-        688         unit = Unit(unit)
-    --> 689         return self._new_view(self._to_value(unit, equivalencies), unit)
-        690 
-        691     def to_value(self, unit=None, equivalencies=[]):
+    ~/project/venv/lib/python3.7/site-packages/astropy/units/quantity.py in to(self, unit, equivalencies, copy)
+        694             # Avoid using to_value to ensure that we make a copy. We also
+        695             # don't want to slow down this method (esp. the scalar case).
+    --> 696             value = self._to_value(unit, equivalencies)
+        697         else:
+        698             # to_value only copies if necessary
 
 
     ~/project/venv/lib/python3.7/site-packages/astropy/units/quantity.py in _to_value(self, unit, equivalencies)
@@ -1191,7 +1191,7 @@ convert to a different area unit, it will fail:
         660         return self.unit.to(unit, self.view(np.ndarray),
     --> 661                             equivalencies=equivalencies)
         662 
-        663     def to(self, unit, equivalencies=[]):
+        663     def to(self, unit, equivalencies=[], copy=True):
 
 
     ~/project/venv/lib/python3.7/site-packages/astropy/units/core.py in to(self, other, value, equivalencies)

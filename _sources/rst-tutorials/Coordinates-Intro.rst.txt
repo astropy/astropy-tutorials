@@ -146,7 +146,9 @@ created called ``hcg7_center``
 .. parsed-literal::
 
     ['T',
+     '_APPLICABLE_FUNCTIONS',
      '__abstractmethods__',
+     '__array_function__',
      '__bool__',
      '__class__',
      '__delattr__',
@@ -293,6 +295,7 @@ created called ``hcg7_center``
      'take',
      'teme',
      'temperature',
+     'tete',
      'to_pixel',
      'to_string',
      'transform_to',
@@ -507,7 +510,7 @@ file\ ``'HCG7_SDSS_cutout.jpg'``, defined at the top of the cell.
 
 .. parsed-literal::
 
-    ('HCG7_SDSS_cutout.jpg', <http.client.HTTPMessage at 0x7f5225dbdd10>)
+    ('HCG7_SDSS_cutout.jpg', <http.client.HTTPMessage at 0x7fa4b9e67910>)
 
 
 

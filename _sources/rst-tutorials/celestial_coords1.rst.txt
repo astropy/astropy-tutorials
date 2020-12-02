@@ -594,7 +594,7 @@ we plotted the image by itself, the plot axes would show pixel values.
 
 .. parsed-literal::
 
-    <matplotlib.image.AxesImage at 0x7fb3a95d3410>
+    <matplotlib.image.AxesImage at 0x7fe7ec6a64d0>
 
 
 
