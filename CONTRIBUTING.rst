@@ -6,7 +6,7 @@ Overview
 
 Each tutorial is a `Jupyter notebook <http://jupyter.org/>`_ file. Each notebook is saved in a separate directory within the ``tutorials/notebooks``
 subdirectory in this project. For an example, let's look at the source notebook
-of the `FITS-header <https://github.com/astropy/astropy-tutorials/tree/master/tu
+of the `FITS-header <https://github.com/astropy/astropy-tutorials/tree/main/tu
 torials/notebooks/FITS-header/>`_ tutorial. Within
 ``tutorials/notebooks/FITS-header``, there is a single Jupyter notebook file
 that contains the text and code for the tutorial, and any small data files used
@@ -76,7 +76,7 @@ Code
     * Variable names should be descriptive, e.g., ``galaxy_mass``, ``u_mag``
 * Use the print function explicitly to display information about variables
 * As much as possible, comply with `PEP8 <https://www.python.org/dev/peps/pep-0008/>`_.
-* As much as possible, comply with Jupyter notebook style guides - `STScI style guide <https://github.com/spacetelescope/style-guides/blob/master/guides/jupyter-notebooks.md>`_ and `Official Coding Style <https://jupyter.readthedocs.io/en/latest/development_guide/coding_style.html>`_.
+* As much as possible, comply with Jupyter notebook style guides - `STScI style guide <https://github.com/spacetelescope/style-guides/blob/main/guides/jupyter-notebooks.md>`_ and `Official Coding Style <https://jupyter.readthedocs.io/en/latest/development_guide/coding_style.html>`_.
 * Imports
     * Do not use ``from package import *``; import packages, classes, and
       functions explicitly
@@ -188,7 +188,7 @@ your ``requirements.txt`` file would look like:
     numpy>=1.13
 
 To see an example, have a look at the FITS-header `requirements.txt file <https:
-//github.com/astropy/astropy-tutorials/blob/master/tutorials/notebooks/FITS-head
+//github.com/astropy/astropy-tutorials/blob/main/tutorials/notebooks/FITS-head
 er/requirements.txt>`_.
 
 Push the notebook and other files from your local branch up to your fork of the

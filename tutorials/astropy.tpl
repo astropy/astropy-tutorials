@@ -8,7 +8,7 @@
 .. raw:: html
 
     <a href="../_static/{{ nb_name }}/{{ nb_name }}.ipynb"><button id="download">Download tutorial notebook</button></a>
-    <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/{{ nb_name }}/{{ nb_name }}.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
+    <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/main?filepath=/tutorials/notebooks/{{ nb_name }}/{{ nb_name }}.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
 
     <div id="spacer"></div>
 
@@ -31,7 +31,7 @@
     <div id="spacer"></div>
 
     <a href="../_static/{{ nb_name }}/{{ nb_name }}.ipynb"><button id="download">Download tutorial notebook</button></a>
-    <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/{{ nb_name }}/{{ nb_name }}.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
+    <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/main?filepath=/tutorials/notebooks/{{ nb_name }}/{{ nb_name }}.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
 
 {% endblock %}
 
