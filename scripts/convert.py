@@ -131,7 +131,7 @@ class NBTutorialsConverter(object):
             return self._rst_path
 
         # Initialize the resources dict - see:
-        # https://github.com/jupyter/nbconvert/blob/main/nbconvert/nbconvertapp.py#L327
+        # https://github.com/jupyter/nbconvert/blob/master/nbconvert/nbconvertapp.py#L327
         resources = {}
         resources['config_dir'] = '' # we don't need to specify config
         resources['unique_key'] = self.nb_name
