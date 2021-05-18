@@ -2,7 +2,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta charset="utf-8" /><meta content="filterTutorials, filterModeling, filterModelFitting, filterAstrostatistics, filterAstroquery, filterVizier, filterScipy, filterMatplotlib, filterErrorBars, filterScatterPlots" name="keywords" />
+    <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta content="filterTutorials, filterModeling, filterModelFitting, filterAstrostatistics, filterAstroquery, filterVizier, filterScipy, filterMatplotlib, filterErrorBars, filterScatterPlots" name="keywords" />
 <meta content="filterTutorials," name="keywords" />
 
     <title>Modeling 1: Make a quick fit using astropy.modeling &#8212; astropy-tutorials v3.0.dev</title>
@@ -116,13 +117,13 @@
   <a href="../_static/Models-Quick-Fit/Models-Quick-Fit.ipynb"><button id="download">Download tutorial notebook</button></a>
 <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/Models-Quick-Fit/Models-Quick-Fit.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
 
-<div id="spacer"></div><div class="section" id="modeling-1-make-a-quick-fit-using-astropy-modeling">
+<div id="spacer"></div><section id="modeling-1-make-a-quick-fit-using-astropy-modeling">
 <span id="models-quick-fit"></span><h1>Modeling 1: Make a quick fit using astropy.modeling<a class="headerlink" href="#modeling-1-make-a-quick-fit-using-astropy-modeling" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="authors">
+<section id="authors">
 <h2>Authors<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a></h2>
 <p>Rocio Kiman, Lia Corrales, Zé Vinícius, Kelle Cruz, Stephanie T. Douglas</p>
-</div>
-<div class="section" id="learning-goals">
+</section>
+<section id="learning-goals">
 <h2>Learning Goals<a class="headerlink" href="#learning-goals" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>Use <code class="docutils literal notranslate"><span class="pre">astroquery</span></code> to download data from Vizier</p></li>
@@ -132,18 +133,18 @@
 <li><p>Plot the model with the data</p></li>
 <li><p>Compare different models and fitters</p></li>
 </ul>
-</div>
-<div class="section" id="keywords">
+</section>
+<section id="keywords">
 <h2>Keywords<a class="headerlink" href="#keywords" title="Permalink to this headline">¶</a></h2>
 <p>modeling, model fitting, astrostatistics, astroquery, Vizier, scipy,
 matplotlib, error bars, scatter plots</p>
-</div>
-<div class="section" id="summary">
+</section>
+<section id="summary">
 <h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
 <p>In this tutorial, we will become familiar with the models available in
 <a class="reference external" href="http://docs.astropy.org/en/stable/modeling/">astropy.modeling</a> and
 learn how to make a quick fit to our data.</p>
-<div class="section" id="imports">
+<section id="imports">
 <h3>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h3>
 <p><span class="inputnumrole">In[1]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -155,9 +156,9 @@ learn how to make a quick fit to our data.</p>
 <span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="fit-a-linear-model-three-steps-to-fit-data-using-astropy-modeling">
+</section>
+</section>
+<section id="fit-a-linear-model-three-steps-to-fit-data-using-astropy-modeling">
 <h2>1) Fit a Linear model: Three steps to fit data using astropy.modeling<a class="headerlink" href="#fit-a-linear-model-three-steps-to-fit-data-using-astropy-modeling" title="Permalink to this headline">¶</a></h2>
 <p>We are going to start with a <strong>linear fit to real data</strong>. The data comes
 from the paper <a class="reference external" href="https://ui.adsabs.harvard.edu/?#abs/2017A%26A...605A.100B">Bhardwaj et
@@ -204,7 +205,7 @@ where <code class="docutils literal notranslate"><span class="pre">astropy.model
 three simple lines we can make any fit we want. We are going to start
 with the linear fit, but first, let’s understand what a model and a
 fitter are.</p>
-<div class="section" id="models-in-astropy">
+<section id="models-in-astropy">
 <h3>Models in Astropy<a class="headerlink" href="#models-in-astropy" title="Permalink to this headline">¶</a></h3>
 <p><a class="reference external" href="http://docs.astropy.org/en/stable/modeling/#using-models">Models</a> in
 Astropy are known parametrized functions. With this format they are easy
@@ -221,8 +222,8 @@ linear or non-linear in the variables. Some examples of models are:</p>
 <a class="reference external" href="http://docs.astropy.org/en/stable/modeling/#module-astropy.modeling.functional_models">list</a>
 continues.</p></li>
 </ul>
-</div>
-<div class="section" id="fitters-in-astropy">
+</section>
+<section id="fitters-in-astropy">
 <h3>Fitters in Astropy<a class="headerlink" href="#fitters-in-astropy" title="Permalink to this headline">¶</a></h3>
 <p>Fitters in Astropy are the classes resposable for making the fit. They
 can be linear or non-linear in the parameters (no the variable, like
@@ -240,7 +241,7 @@ Simplex algorithm and least squares statistic.</p></li>
 <a class="reference external" href="http://docs.astropy.org/en/stable/modeling/#id21">here</a></p></li>
 </ul>
 <p>Now we continue with our fitting.</p>
-<div class="section" id="step-1-model">
+<section id="step-1-model">
 <h4>Step 1: Model<a class="headerlink" href="#step-1-model" title="Permalink to this headline">¶</a></h4>
 <p>First we need to choose which model we are going to use to fit to our
 data. As we said before, our data looks like a linear relation, so we
@@ -249,8 +250,8 @@ are going to use a linear model.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">Linear1D</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="step-2-fitter">
+</section>
+<section id="step-2-fitter">
 <h4>Step 2: Fitter<a class="headerlink" href="#step-2-fitter" title="Permalink to this headline">¶</a></h4>
 <p>Second we are going to choose the fitter we want to use. This choice is
 basically which method we want to use to fit the model to the data. In
@@ -263,8 +264,8 @@ we are going to analyze how to choose the fitter.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fitter</span> <span class="o">=</span> <span class="n">fitting</span><span class="o">.</span><span class="n">LinearLSQFitter</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="step-3-fit-data">
+</section>
+<section id="step-3-fit-data">
 <h4>Step 3: Fit Data<a class="headerlink" href="#step-3-fit-data" title="Permalink to this headline">¶</a></h4>
 <p>Finally, we give to our <strong>fitter</strong> (method to fit the data) the
 <strong>model</strong> and the <strong>data</strong> to perform the fit. Note that we are
@@ -314,16 +315,16 @@ or
 <a class="reference external" href="http://docs.astropy.org/en/stable/modeling/#id21">fitter</a>.</p></li>
 <li><p>Pass to the fitter the model and the data to perform fit.</p></li>
 </ol>
-</div>
-</div>
-</div>
-<div class="section" id="exercise">
+</section>
+</section>
+</section>
+<section id="exercise">
 <h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">¶</a></h2>
 <p>Use the model <code class="docutils literal notranslate"><span class="pre">Polynomial1D(degree=1)</span></code> to fit the same data and
 compare the results.</p>
 <p><span class="inputnumrole">In[None]:</span></p>
-</div>
-<div class="section" id="fit-a-polynomial-model-choose-fitter-wisely">
+</section>
+<section id="fit-a-polynomial-model-choose-fitter-wisely">
 <h2>2) Fit a Polynomial model: Choose fitter wisely<a class="headerlink" href="#fit-a-polynomial-model-choose-fitter-wisely" title="Permalink to this headline">¶</a></h2>
 <p>For our second example, let’s fit a polynomial of degree more than 1. In
 this case, we are going to create fake data to make the fit. Note that
@@ -371,9 +372,9 @@ perform fit.</p>
 <span class="n">Model</span> <span class="nb">set</span> <span class="n">size</span><span class="p">:</span> <span class="mi">1</span>
 <span class="n">Degree</span><span class="p">:</span> <span class="mi">3</span>
 <span class="n">Parameters</span><span class="p">:</span>
-            <span class="n">c0</span>                <span class="n">c1</span>                <span class="n">c2</span>                 <span class="n">c3</span>
-    <span class="o">-----------------</span> <span class="o">-----------------</span> <span class="o">------------------</span> <span class="o">------------------</span>
-    <span class="o">-</span><span class="mf">8.29139331583838</span> <span class="mf">10.06574517083344</span> <span class="o">-</span><span class="mf">5.039978285168041</span> <span class="mf">0.8704946455233574</span>
+            <span class="n">c0</span>                <span class="n">c1</span>                 <span class="n">c2</span>                <span class="n">c3</span>
+    <span class="o">-----------------</span> <span class="o">------------------</span> <span class="o">-----------------</span> <span class="o">------------------</span>
+    <span class="o">-</span><span class="mf">8.28818353910413</span> <span class="mf">11.176652344807867</span> <span class="o">-</span><span class="mf">5.58118844376736</span> <span class="mf">0.9367533682035392</span>
 </pre></div>
 </div>
 <p>What would happend if we use a different fitter (method)? Let’s use the
@@ -399,9 +400,9 @@ same model but with <code class="docutils literal notranslate"><span class="pre"
 <span class="n">Model</span> <span class="nb">set</span> <span class="n">size</span><span class="p">:</span> <span class="mi">1</span>
 <span class="n">Degree</span><span class="p">:</span> <span class="mi">3</span>
 <span class="n">Parameters</span><span class="p">:</span>
-            <span class="n">c0</span>                  <span class="n">c1</span>                   <span class="n">c2</span>                  <span class="n">c3</span>
-    <span class="o">------------------</span> <span class="o">--------------------</span> <span class="o">-------------------</span> <span class="o">-------------------</span>
-    <span class="mf">0.4896726237345464</span> <span class="o">-</span><span class="mf">0.23195700106267442</span> <span class="o">-</span><span class="mf">1.0013992875870001</span> <span class="mf">0.35616382839185234</span>
+            <span class="n">c0</span>                   <span class="n">c1</span>                   <span class="n">c2</span>                 <span class="n">c3</span>
+    <span class="o">------------------</span> <span class="o">---------------------</span> <span class="o">-------------------</span> <span class="o">------------------</span>
+    <span class="mf">0.2693653995687064</span> <span class="o">-</span><span class="mf">0.017972694897460874</span> <span class="o">-</span><span class="mf">0.8783197265562936</span> <span class="mf">0.3133795920301905</span>
 </pre></div>
 </div>
 <p>Note that we got a warning after using <code class="docutils literal notranslate"><span class="pre">SimplexLSQFitter</span></code> to fit the
@@ -440,7 +441,7 @@ times.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[16]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Reduced</span> <span class="n">Chi</span> <span class="n">Squared</span> <span class="k">with</span> <span class="n">LinearLSQFitter</span><span class="p">:</span> <span class="mf">1.8301972352787612</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Reduced</span> <span class="n">Chi</span> <span class="n">Squared</span> <span class="k">with</span> <span class="n">LinearLSQFitter</span><span class="p">:</span> <span class="mf">1.3481834837831483</span>
 </pre></div>
 </div>
 <p><span class="inputnumrole">In[17]:</span></p>
@@ -449,7 +450,7 @@ times.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[17]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Reduced</span> <span class="n">Chi</span> <span class="n">Squared</span> <span class="k">with</span> <span class="n">SimplexLSQFitter</span><span class="p">:</span> <span class="mf">5.27434139585548</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Reduced</span> <span class="n">Chi</span> <span class="n">Squared</span> <span class="k">with</span> <span class="n">SimplexLSQFitter</span><span class="p">:</span> <span class="mf">4.263566974941678</span>
 </pre></div>
 </div>
 <p>As we can see, the <em>Reduced Chi Square</em> for the first fit is closer to
@@ -466,15 +467,15 @@ after the discussion of the warnings.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[18]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">legend</span><span class="o">.</span><span class="n">Legend</span> <span class="n">at</span> <span class="mh">0x7fa337457d10</span><span class="o">&gt;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">legend</span><span class="o">.</span><span class="n">Legend</span> <span class="n">at</span> <span class="mh">0x7f191998bad0</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <img alt="../_images/Models-Quick-Fit_49_1.png" src="../_images/Models-Quick-Fit_49_1.png" />
 <p>Results are as espected, the fit performed with the linear fitter is
 better than the second, non linear one.</p>
 <p><strong>Conclusion:</strong> Pay attention when you choose the fitter.</p>
-</div>
-<div class="section" id="fit-a-gaussian-lets-compare-to-scipy">
+</section>
+<section id="fit-a-gaussian-lets-compare-to-scipy">
 <h2>3) Fit a Gaussian: Let’s compare to scipy<a class="headerlink" href="#fit-a-gaussian-lets-compare-to-scipy" title="Permalink to this headline">¶</a></h2>
 <p>Scipy has the function
 <a class="reference external" href="https://docs.scipy.org/doc/scipy-1.0.0/reference/generated/scipy.optimize.curve_fit.html">scipy.optimize.curve_fit</a>
@@ -520,9 +521,9 @@ we need (<code class="docutils literal notranslate"><span class="pre">Gaussian1D
 <span class="n">Outputs</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">,)</span>
 <span class="n">Model</span> <span class="nb">set</span> <span class="n">size</span><span class="p">:</span> <span class="mi">1</span>
 <span class="n">Parameters</span><span class="p">:</span>
-        <span class="n">amplitude</span>              <span class="n">mean</span>              <span class="n">stddev</span>
-    <span class="o">------------------</span> <span class="o">-------------------</span> <span class="o">------------------</span>
-    <span class="mf">10.202001855920384</span> <span class="o">-</span><span class="mf">0.5715606038483805</span> <span class="mf">10.300270729247837</span>
+        <span class="n">amplitude</span>             <span class="n">mean</span>              <span class="n">stddev</span>
+    <span class="o">-----------------</span> <span class="o">--------------------</span> <span class="o">----------------</span>
+    <span class="mf">9.943640817097908</span> <span class="o">-</span><span class="mf">0.13482303492063488</span> <span class="mf">9.86993555708896</span>
 </pre></div>
 </div>
 <p>We can get the <a class="reference external" href="http://mathworld.wolfram.com/CovarianceMatrix.html">covariance
@@ -545,7 +546,7 @@ parameters using:</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[24]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mf">0.05775007</span> <span class="mf">0.07842396</span> <span class="mf">0.07880671</span><span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mf">0.04942309</span> <span class="mf">0.06489479</span> <span class="mf">0.0650567</span> <span class="p">]</span>
 </pre></div>
 </div>
 <p>Then:</p>
@@ -556,9 +557,9 @@ parameters using:</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[25]:</span></p>
-<pre class="literal-block">Amplitude: 10.202001855920384 +- 0.24031244607895316
-Mean: -0.5715606038483805 +- 0.2800427758433761
-Standard Deviation: 10.300270729247837 +- 0.28072532673917167</pre>
+<pre class="literal-block">Amplitude: 9.943640817097908 +- 0.2223130504439547
+Mean: -0.13482303492063488 +- 0.2547445601473009
+Standard Deviation: 9.86993555708896 +- 0.25506214712293995</pre>
 <p>We can apply the same method with <code class="docutils literal notranslate"><span class="pre">scipy.optimize.curve_fit</span></code>, and
 compare the results using again the <em>Reduced Chi Square Value</em>.</p>
 <p><span class="inputnumrole">In[26]:</span></p>
@@ -577,7 +578,7 @@ compare the results using again the <em>Reduced Chi Square Value</em>.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[28]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mf">10.20199855</span> <span class="o">-</span><span class="mf">0.57156257</span> <span class="mf">10.30027741</span><span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span> <span class="mf">9.94364074</span> <span class="o">-</span><span class="mf">0.13482417</span>  <span class="mf">9.86993571</span><span class="p">]</span>
 </pre></div>
 </div>
 <p><span class="inputnumrole">In[29]:</span></p>
@@ -587,16 +588,16 @@ compare the results using again the <em>Reduced Chi Square Value</em>.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[29]:</span></p>
-<pre class="literal-block">Amplitude: 10.201998549088126 +- 0.24031135683967564
-Mean: -0.5715625717749605 +- 0.2800455090984387
-Standard Deviation: 10.30027741281916 +- 0.2807281959433531</pre>
+<pre class="literal-block">Amplitude: 9.943640739900381 +- 0.22231239633096783
+Mean: -0.13482417473716335 +- 0.25474607975531816
+Standard Deviation: 9.869935710192996 +- 0.25506370661474215</pre>
 <p><span class="inputnumrole">In[30]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">reduced_chi_squared</span> <span class="o">=</span> <span class="n">calc_reduced_chi_square</span><span class="p">(</span><span class="n">best_fit_gauss</span><span class="p">(</span><span class="n">x2</span><span class="p">),</span> <span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="n">y2_err</span><span class="p">,</span> <span class="n">N2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Reduced Chi Squared using astropy.modeling: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">reduced_chi_squared</span><span class="p">))</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[30]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Reduced</span> <span class="n">Chi</span> <span class="n">Squared</span> <span class="n">using</span> <span class="n">astropy</span><span class="o">.</span><span class="n">modeling</span><span class="p">:</span> <span class="mf">1.1580617955091492</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Reduced</span> <span class="n">Chi</span> <span class="n">Squared</span> <span class="n">using</span> <span class="n">astropy</span><span class="o">.</span><span class="n">modeling</span><span class="p">:</span> <span class="mf">0.9503555506803775</span>
 </pre></div>
 </div>
 <p><span class="inputnumrole">In[31]:</span></p>
@@ -605,7 +606,7 @@ Standard Deviation: 10.30027741281916 +- 0.2807281959433531</pre>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[31]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Reduced</span> <span class="n">Chi</span> <span class="n">Squared</span> <span class="n">using</span> <span class="n">scipy</span><span class="p">:</span> <span class="mf">1.1580617955070858</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Reduced</span> <span class="n">Chi</span> <span class="n">Squared</span> <span class="n">using</span> <span class="n">scipy</span><span class="p">:</span> <span class="mf">0.9503555506807343</span>
 </pre></div>
 </div>
 <p>As we can see there is a very small difference in the <em>Reduced Chi
@@ -624,7 +625,7 @@ us to remember the expression of the function we wanted to use.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[32]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">legend</span><span class="o">.</span><span class="n">Legend</span> <span class="n">at</span> <span class="mh">0x7fa3373998d0</span><span class="o">&gt;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">legend</span><span class="o">.</span><span class="n">Legend</span> <span class="n">at</span> <span class="mh">0x7f19177eb1d0</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <img alt="../_images/Models-Quick-Fit_72_1.png" src="../_images/Models-Quick-Fit_72_1.png" />
@@ -637,8 +638,8 @@ gaussians</a>
 plus a <a class="reference external" href="http://docs.astropy.org/en/stable/modeling/#blackbody-radiation">black
 body</a>,
 but that is another tutorial.</p>
-</div>
-<div class="section" id="id1">
+</section>
+<section id="id1">
 <h2>Summary:<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>Let’s review the conclusion we got in this tutorial:</p>
 <ol class="arabic simple">
@@ -654,8 +655,8 @@ but that is another tutorial.</p>
 recomend <code class="docutils literal notranslate"><span class="pre">astropy.modeling</span></code> to make <strong>quick fits of known
 functions</strong>.</p></li>
 </ol>
-</div>
-<div class="section" id="exercise-your-turn-to-choose">
+</section>
+<section id="exercise-your-turn-to-choose">
 <h2>4) Exercise: Your turn to choose<a class="headerlink" href="#exercise-your-turn-to-choose" title="Permalink to this headline">¶</a></h2>
 <p>For the next data: * Choose model and fitter to fit this data *
 Compare different options</p>
@@ -683,8 +684,8 @@ Compare different options</p>
 <div id="spacer"></div>
 
 <a href="../_static/Models-Quick-Fit/Models-Quick-Fit.ipynb"><button id="download">Download tutorial notebook</button></a>
-<a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/Models-Quick-Fit/Models-Quick-Fit.ipynb"><button id="binder">Interactive tutorial notebook</button></a></div>
-</div>
+<a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/Models-Quick-Fit/Models-Quick-Fit.ipynb"><button id="binder">Interactive tutorial notebook</button></a></section>
+</section>
 
 </div>
       </div>

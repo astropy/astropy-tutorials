@@ -2,7 +2,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta charset="utf-8" /><meta content="filterTutorials, filterModeling, filterConvolution, filterCoordinates, filterWcs, filterFits, filterRadioAstronomy, filterMatplotlib, filterColorbar" name="keywords" />
+    <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta content="filterTutorials, filterModeling, filterConvolution, filterCoordinates, filterWcs, filterFits, filterRadioAstronomy, filterMatplotlib, filterColorbar" name="keywords" />
 <meta content="filterTutorials," name="keywords" />
 
     <title>Synthetic Images from simulated data &#8212; astropy-tutorials v3.0.dev</title>
@@ -109,13 +110,13 @@
   <a href="../_static/synthetic-images/synthetic-images.ipynb"><button id="download">Download tutorial notebook</button></a>
 <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/synthetic-images/synthetic-images.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
 
-<div id="spacer"></div><div class="section" id="synthetic-images-from-simulated-data">
+<div id="spacer"></div><section id="synthetic-images-from-simulated-data">
 <span id="synthetic-images"></span><h1>Synthetic Images from simulated data<a class="headerlink" href="#synthetic-images-from-simulated-data" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="authors">
+<section id="authors">
 <h2>Authors<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a></h2>
 <p>Yi-Hao Chen, Sebastian Heinz, Kelle Cruz, Stephanie T. Douglas</p>
-</div>
-<div class="section" id="learning-goals">
+</section>
+<section id="learning-goals">
 <h2>Learning Goals<a class="headerlink" href="#learning-goals" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>Assign WCS astrometry to an image using <code class="docutils literal notranslate"><span class="pre">astropy.wcs</span></code></p></li>
@@ -124,13 +125,13 @@
 <li><p>Calculate polarization fraction and angle from Stokes I, Q, U data</p></li>
 <li><p>Overplot quivers on the image</p></li>
 </ul>
-</div>
-<div class="section" id="keywords">
+</section>
+<section id="keywords">
 <h2>Keywords<a class="headerlink" href="#keywords" title="Permalink to this headline">¶</a></h2>
 <p>modeling, convolution, coordinates, WCS, FITS, radio astronomy,
 matplotlib, colorbar</p>
-</div>
-<div class="section" id="summary">
+</section>
+<section id="summary">
 <h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
 <p>In this tutorial, we will:</p>
 <p><a class="reference external" href="#1.-Load-and-examine-the-FITS-file">1. Load and examine the FITS
@@ -164,8 +165,8 @@ plot</a></p>
 <span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="load-and-examine-the-fits-file">
+</section>
+<section id="load-and-examine-the-fits-file">
 <h2>1. Load and examine the FITS file<a class="headerlink" href="#load-and-examine-the-fits-file" title="Permalink to this headline">¶</a></h2>
 <p>Here we begin with a 2-dimensional data that were stored in FITS format
 from some simulations. We have Stokes I, Q, and U maps. We we’ll first
@@ -185,7 +186,7 @@ load a FITS file and examine the header.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Filename</span><span class="p">:</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">circleci</span><span class="o">/.</span><span class="n">astropy</span><span class="o">/</span><span class="n">cache</span><span class="o">/</span><span class="n">download</span><span class="o">/</span><span class="n">url</span><span class="o">/</span><span class="mi">8</span><span class="n">da27de5aa6b0db633441e82715bedf3</span><span class="o">/</span><span class="n">contents</span>
 <span class="n">No</span><span class="o">.</span>    <span class="n">Name</span>      <span class="n">Ver</span>    <span class="n">Type</span>      <span class="n">Cards</span>   <span class="n">Dimensions</span>   <span class="n">Format</span>
   <span class="mi">0</span>  <span class="n">PRIMARY</span>       <span class="mi">1</span> <span class="n">PrimaryHDU</span>       <span class="mi">4</span>   <span class="p">()</span>
-  <span class="mi">1</span>  <span class="n">NN_EMISSIVITY_I_LOBE_150</span><span class="o">.</span><span class="mi">0</span><span class="n">MHZ</span>    <span class="mi">1</span> <span class="n">ImageHDU</span>        <span class="mi">23</span>   <span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="mi">1452</span><span class="p">)</span>   <span class="n">float64</span>
+  <span class="mi">1</span>  <span class="n">NN_EMISSIVITY_I_LOBE_150</span><span class="mf">.0</span><span class="n">MHZ</span>    <span class="mi">1</span> <span class="n">ImageHDU</span>        <span class="mi">23</span>   <span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="mi">1452</span><span class="p">)</span>   <span class="n">float64</span>
 </pre></div>
 </div>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">XTENSION</span><span class="o">=</span> <span class="s1">&#39;IMAGE   &#39;</span>           <span class="o">/</span> <span class="n">Image</span> <span class="n">extension</span>
@@ -241,12 +242,12 @@ proper range (<code class="docutils literal notranslate"><span class="pre">vmin<
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[4]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">AxesImage</span> <span class="n">at</span> <span class="mh">0x7f890fe80b50</span><span class="o">&gt;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">AxesImage</span> <span class="n">at</span> <span class="mh">0x7f351ac38610</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <img alt="../_images/synthetic-images_7_1.png" src="../_images/synthetic-images_7_1.png" />
-</div>
-<div class="section" id="set-up-astrometry-coordinates">
+</section>
+<section id="set-up-astrometry-coordinates">
 <h2>2. Set up astrometry coordinates<a class="headerlink" href="#set-up-astrometry-coordinates" title="Permalink to this headline">¶</a></h2>
 <p>From the header, we know that the x and y axes are in centimeter.
 However, in an observation we usually have RA and Dec. To convert
@@ -345,8 +346,8 @@ distance to the object.</p>
 <p><span class="outputnumrole">Out[10]:</span></p>
 <img alt="../_images/synthetic-images_18_0.png" src="../_images/synthetic-images_18_0.png" />
 <p>Now we have the sky coordinate for the image!</p>
-</div>
-<div class="section" id="prepare-a-point-spread-function-psf">
+</section>
+<section id="prepare-a-point-spread-function-psf">
 <h2>3. Prepare a Point Spread Function (PSF)<a class="headerlink" href="#prepare-a-point-spread-function-psf" title="Permalink to this headline">¶</a></h2>
 <p>Simple PSFs are included in <code class="docutils literal notranslate"><span class="pre">astropy.convolution.kernel</span></code>. We’ll use
 <code class="docutils literal notranslate"><span class="pre">astropy.convolution.Gaussian2DKernel</span></code> here. First we need to set the
@@ -371,12 +372,12 @@ pixels by using our pixel scale keyword <code class="docutils literal notranslat
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[12]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">AxesImage</span> <span class="n">at</span> <span class="mh">0x7f890dc5a790</span><span class="o">&gt;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">AxesImage</span> <span class="n">at</span> <span class="mh">0x7f35189451d0</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <img alt="../_images/synthetic-images_23_1.png" src="../_images/synthetic-images_23_1.png" />
-</div>
-<div class="section" id="a-how-to-do-this-without-astropy-kernels">
+</section>
+<section id="a-how-to-do-this-without-astropy-kernels">
 <h2>3.a How to do this without astropy kernels<a class="headerlink" href="#a-how-to-do-this-without-astropy-kernels" title="Permalink to this headline">¶</a></h2>
 <p>Maybe your PSF is more complicated. Here’s an alternative way to do
 this, using a 2D Lorentzian</p>
@@ -399,12 +400,12 @@ this, using a 2D Lorentzian</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[13]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">AxesImage</span> <span class="n">at</span> <span class="mh">0x7f890dbc35d0</span><span class="o">&gt;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">AxesImage</span> <span class="n">at</span> <span class="mh">0x7f351892ffd0</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <img alt="../_images/synthetic-images_26_1.png" src="../_images/synthetic-images_26_1.png" />
-</div>
-<div class="section" id="convolve-image-with-psf">
+</section>
+<section id="convolve-image-with-psf">
 <h2>4. Convolve image with PSF<a class="headerlink" href="#convolve-image-with-psf" title="Permalink to this headline">¶</a></h2>
 <p>Here we use <code class="docutils literal notranslate"><span class="pre">astropy.convolution.convolve_fft</span></code> to convolve image. This
 routine uses fourier transform for faster calculation. Especially since
@@ -436,12 +437,12 @@ making the data periodic.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[16]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">colorbar</span><span class="o">.</span><span class="n">Colorbar</span> <span class="n">at</span> <span class="mh">0x7f890db5bcd0</span><span class="o">&gt;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">colorbar</span><span class="o">.</span><span class="n">Colorbar</span> <span class="n">at</span> <span class="mh">0x7f3581c3c790</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <img alt="../_images/synthetic-images_32_1.png" src="../_images/synthetic-images_32_1.png" />
-</div>
-<div class="section" id="convolve-stokes-q-and-u-images">
+</section>
+<section id="convolve-stokes-q-and-u-images">
 <h2>5. Convolve Stokes Q and U images<a class="headerlink" href="#convolve-stokes-q-and-u-images" title="Permalink to this headline">¶</a></h2>
 <p><span class="inputnumrole">In[17]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">hdulist</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
@@ -451,7 +452,7 @@ making the data periodic.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Filename</span><span class="p">:</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">circleci</span><span class="o">/.</span><span class="n">astropy</span><span class="o">/</span><span class="n">cache</span><span class="o">/</span><span class="n">download</span><span class="o">/</span><span class="n">url</span><span class="o">/</span><span class="mi">8</span><span class="n">da27de5aa6b0db633441e82715bedf3</span><span class="o">/</span><span class="n">contents</span>
 <span class="n">No</span><span class="o">.</span>    <span class="n">Name</span>      <span class="n">Ver</span>    <span class="n">Type</span>      <span class="n">Cards</span>   <span class="n">Dimensions</span>   <span class="n">Format</span>
   <span class="mi">0</span>  <span class="n">PRIMARY</span>       <span class="mi">1</span> <span class="n">PrimaryHDU</span>       <span class="mi">4</span>   <span class="p">()</span>
-  <span class="mi">1</span>  <span class="n">NN_EMISSIVITY_I_LOBE_150</span><span class="o">.</span><span class="mi">0</span><span class="n">MHZ</span>    <span class="mi">1</span> <span class="n">ImageHDU</span>        <span class="mi">24</span>   <span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="mi">1452</span><span class="p">)</span>   <span class="n">float64</span>
+  <span class="mi">1</span>  <span class="n">NN_EMISSIVITY_I_LOBE_150</span><span class="mf">.0</span><span class="n">MHZ</span>    <span class="mi">1</span> <span class="n">ImageHDU</span>        <span class="mi">24</span>   <span class="p">(</span><span class="mi">1024</span><span class="p">,</span> <span class="mi">1452</span><span class="p">)</span>   <span class="n">float64</span>
 </pre></div>
 </div>
 <p><span class="inputnumrole">In[18]:</span></p>
@@ -495,12 +496,12 @@ making the data periodic.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[19]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">colorbar</span><span class="o">.</span><span class="n">Colorbar</span> <span class="n">at</span> <span class="mh">0x7f890c37edd0</span><span class="o">&gt;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">colorbar</span><span class="o">.</span><span class="n">Colorbar</span> <span class="n">at</span> <span class="mh">0x7f3518730c10</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <img alt="../_images/synthetic-images_37_1.png" src="../_images/synthetic-images_37_1.png" />
-</div>
-<div class="section" id="calculate-polarization-angle-and-fraction-for-quiver-plot">
+</section>
+<section id="calculate-polarization-angle-and-fraction-for-quiver-plot">
 <h2>6. Calculate polarization angle and fraction for quiver plot<a class="headerlink" href="#calculate-polarization-angle-and-fraction-for-quiver-plot" title="Permalink to this headline">¶</a></h2>
 <p>Note that rotating Stokes Q and I maps requires changing signs of both.
 Here we assume that the Stokes q and u maps were calculated defining the
@@ -553,14 +554,14 @@ vectors along the x/right-ascention axis.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[20]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">quiver</span><span class="o">.</span><span class="n">Quiver</span> <span class="n">at</span> <span class="mh">0x7f890c25a710</span><span class="o">&gt;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">quiver</span><span class="o">.</span><span class="n">Quiver</span> <span class="n">at</span> <span class="mh">0x7f3518619450</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <img alt="../_images/synthetic-images_40_1.png" src="../_images/synthetic-images_40_1.png" />
-</div>
-<div class="section" id="exercise">
+</section>
+<section id="exercise">
 <h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="convert-the-units-of-the-data-from-jy-arcsec-2-to-jy-beam">
+<section id="convert-the-units-of-the-data-from-jy-arcsec-2-to-jy-beam">
 <h3>Convert the units of the data from Jy/arcsec^2 to Jy/beam<a class="headerlink" href="#convert-the-units-of-the-data-from-jy-arcsec-2-to-jy-beam" title="Permalink to this headline">¶</a></h3>
 <p>The intensity of the data is given in unit of Jy/arcsec^2. Observational
 data usually have the intensity unit in Jy/beam. Assuming a beam size or
@@ -569,9 +570,9 @@ take the psf we created earlier, you can convert the data into Jy/beam.</p>
 <div id="spacer"></div>
 
 <a href="../_static/synthetic-images/synthetic-images.ipynb"><button id="download">Download tutorial notebook</button></a>
-<a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/synthetic-images/synthetic-images.ipynb"><button id="binder">Interactive tutorial notebook</button></a></div>
-</div>
-</div>
+<a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/synthetic-images/synthetic-images.ipynb"><button id="binder">Interactive tutorial notebook</button></a></section>
+</section>
+</section>
 
 </div>
       </div>

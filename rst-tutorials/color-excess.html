@@ -2,7 +2,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta charset="utf-8" /><meta content="filterTutorials" name="keywords" />
+    <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta content="filterTutorials" name="keywords" />
 <meta content="filterTutorials," name="keywords" />
 
     <title>Analyzing interstellar reddening and calculating synthetic photometry &#8212; astropy-tutorials v3.0.dev</title>
@@ -106,14 +107,14 @@
   <a href="../_static/color-excess/color-excess.ipynb"><button id="download">Download tutorial notebook</button></a>
 <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/color-excess/color-excess.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
 
-<div id="spacer"></div><div class="section" id="analyzing-interstellar-reddening-and-calculating-synthetic-photometry">
+<div id="spacer"></div><section id="analyzing-interstellar-reddening-and-calculating-synthetic-photometry">
 <span id="color-excess"></span><h1>Analyzing interstellar reddening and calculating synthetic photometry<a class="headerlink" href="#analyzing-interstellar-reddening-and-calculating-synthetic-photometry" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="authors">
+<section id="authors">
 <h2>Authors<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a></h2>
 <p>Kristen Larson, Lia Corrales, Stephanie T. Douglas, Kelle Cruz</p>
 <p>Input from Emir Karamehmetoglu, Pey Lian Lim, Karl Gordon, Kevin Covey</p>
-</div>
-<div class="section" id="learning-goals">
+</section>
+<section id="learning-goals">
 <h2>Learning Goals<a class="headerlink" href="#learning-goals" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>Investigate extinction curve shapes</p></li>
@@ -125,20 +126,20 @@
 equivalencies</p></li>
 <li><p>Unit support for plotting with <code class="docutils literal notranslate"><span class="pre">astropy.visualization</span></code></p></li>
 </ul>
-</div>
-<div class="section" id="keywords">
+</section>
+<section id="keywords">
 <h2>Keywords<a class="headerlink" href="#keywords" title="Permalink to this headline">¶</a></h2>
 <p>dust extinction, synphot, astroquery, units, photometry, extinction,
 physics, observational astronomy</p>
-</div>
-<div class="section" id="companion-content">
+</section>
+<section id="companion-content">
 <h2>Companion Content<a class="headerlink" href="#companion-content" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://ui.adsabs.harvard.edu/#abs/2012PASP..124..140B/abstract">Bessell &amp; Murphy
 (2012)</a></p></li>
 </ul>
-</div>
-<div class="section" id="summary">
+</section>
+<section id="summary">
 <h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
 <p>In this tutorial, we will look at some extinction curves from the
 literature, use one of those curves to deredden an observed spectrum,
@@ -178,9 +179,9 @@ command to upgrade</p>
 <span class="kn">import</span> <span class="nn">astropy.visualization</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="introduction">
+</section>
+</section>
+<section id="introduction">
 <h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
 <p>Dust in the interstellar medium (ISM) extinguishes background starlight.
 The wavelength dependence of the extinction is such that
@@ -218,8 +219,8 @@ that</p>
 </ul>
 <p>Once astropy and the affiliated packages are installed, we can import
 from them as needed:</p>
-</div>
-<div class="section" id="example-1-investigate-extinction-models">
+</section>
+<section id="example-1-investigate-extinction-models">
 <h1>Example 1: Investigate Extinction Models<a class="headerlink" href="#example-1-investigate-extinction-models" title="Permalink to this headline">¶</a></h1>
 <p>The <code class="docutils literal notranslate"><span class="pre">dust_extinction</span></code> package provides various models for extinction
 <span class="math notranslate nohighlight">\(A_\lambda\)</span> normalized to <span class="math notranslate nohighlight">\(A_V\)</span>. The shapes of normalized
@@ -258,8 +259,8 @@ inverse wavelength (wavenumber) to show the ultraviolet variation, as we
 do here. Infrared extinction varies much less and approaches zero at
 long wavelength in the absence of wavelength-independent, or grey,
 extinction.</p>
-</div>
-<div class="section" id="example-2-deredden-a-spectrum">
+</section>
+<section id="example-2-deredden-a-spectrum">
 <h1>Example 2: Deredden a Spectrum<a class="headerlink" href="#example-2-deredden-a-spectrum" title="Permalink to this headline">¶</a></h1>
 <p>Here we deredden (unextinguish) the IUE ultraviolet spectrum and optical
 photometry of the star <span class="math notranslate nohighlight">\(\rho\)</span> Oph (HD 147933).</p>
@@ -270,50 +271,46 @@ MAST</a>:</p>
 <span class="n">obsTable_spec</span><span class="o">=</span><span class="n">obsTable</span><span class="p">[</span><span class="n">obsTable</span><span class="p">[</span><span class="s1">&#39;dataproduct_type&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;spectrum&#39;</span><span class="p">]</span>
 <span class="n">obsTable_spec</span><span class="o">.</span><span class="n">pprint</span><span class="p">()</span>
 
-<span class="n">obsids</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;3000022829&#39;</span><span class="p">]</span>
+<span class="n">obsids</span> <span class="o">=</span> <span class="n">obsTable_spec</span><span class="p">[</span><span class="mi">39</span><span class="p">][</span><span class="s1">&#39;obsid&#39;</span><span class="p">]</span>
 <span class="n">dataProductsByID</span> <span class="o">=</span> <span class="n">Observations</span><span class="o">.</span><span class="n">get_product_list</span><span class="p">(</span><span class="n">obsids</span><span class="p">)</span>
 <span class="n">manifest</span> <span class="o">=</span> <span class="n">Observations</span><span class="o">.</span><span class="n">download_products</span><span class="p">(</span><span class="n">dataProductsByID</span><span class="p">)</span>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[3]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>intentType obs_collection provenance_name ...   obsid          distance
----------- -------------- --------------- ... ---------- -------------------
-   science            IUE              -- ... 3500001186                 0.0
-   science            IUE              -- ... 3500001187                 0.0
-   science            IUE              -- ... 3500001188                 0.0
-   science            IUE              -- ... 3500001189                 0.0
-   science            IUE              -- ... 3500001190                 0.0
-   science            IUE              -- ... 3500001191                 0.0
-   science            IUE              -- ... 3500001192                 0.0
-   science            IUE              -- ... 3500001193                 0.0
-   science            IUE              -- ... 3500001194                 0.0
-   science            IUE              -- ... 3500001195                 0.0
-       ...            ...             ... ...        ...                 ...
-   science            IUE              -- ... 3500034898                 0.0
-   science            IUE              -- ... 3500034899                 0.0
-   science            IUE              -- ... 3500034900                 0.0
-   science            HST          CALHRS ... 2003827557  0.1203890194025941
-   science            HST          CALHRS ... 2003834338 0.21145342332150374
-   science            HST          CALHRS ... 2003834339 0.21145342332150374
-   science            HST         CALSTIS ... 2004013275 0.23003273443801767
-   science            HST         CALSTIS ... 2004013276 0.23003273443801767
-   science            HST         CALSTIS ... 2003575848 0.23003273443801767
-   science            HST          CALHRS ... 2003827579  0.7903105443193604
-   science            HST          CALHRS ... 2003827580  0.7903105443193604
-Length = 114 rows
-Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:IUE/url/pub/iue/data/lwr/05000/lwr05639.elbll.gz to ./mastDownload/IUE/lwr05639/lwr05639.elbll.gz ... [Done]
-Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:IUE/url/pub/iue/data/lwr/05000/lwr05639.lilo.gz to ./mastDownload/IUE/lwr05639/lwr05639.lilo.gz ... [Done]
-Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:IUE/url/pub/iue/data/lwr/05000/lwr05639.melol.gz to ./mastDownload/IUE/lwr05639/lwr05639.melol.gz ... [Done]
-Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:IUE/url/pub/iue/data/lwr/05000/lwr05639.raw.gz to ./mastDownload/IUE/lwr05639/lwr05639.raw.gz ... [Done]
-Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:IUE/url/pub/iue/data/lwr/05000/lwr05639.rilo.gz to ./mastDownload/IUE/lwr05639/lwr05639.rilo.gz ... [Done]
-Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:IUE/url/pub/iue/data/lwr/05000/lwr05639.silo.gz to ./mastDownload/IUE/lwr05639/lwr05639.silo.gz ... [Done]
-Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:IUE/url/browse/previews/iue/mx/lwr/05000/gif/lwr05639.gif to ./mastDownload/IUE/lwr05639/lwr05639.gif ... [Done]
-Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:IUE/url/pub/iue/data/lwr/05000/lwr05639.mxlo.gz to ./mastDownload/IUE/lwr05639/lwr05639.mxlo.gz ... [Done]
-Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:IUE/url/pub/vospectra/iue2/lwr05639mxlo_vo.fits to ./mastDownload/IUE/lwr05639/lwr05639mxlo_vo.fits ... [Done]
- [Done]
-</pre></div>
-</div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">WARNING</span><span class="p">:</span> <span class="n">Found</span> <span class="n">cached</span> <span class="n">file</span> <span class="o">./</span><span class="n">mastDownload</span><span class="o">/</span><span class="n">IUE</span><span class="o">/</span><span class="n">lwr05639</span><span class="o">/</span><span class="n">lwr05639</span><span class="o">.</span><span class="n">gif</span> <span class="k">with</span> <span class="n">size</span> <span class="mi">7406</span> <span class="n">that</span> <span class="ow">is</span> <span class="n">different</span> <span class="kn">from</span> <span class="nn">expected</span> <span class="n">size</span> <span class="mi">3459</span> <span class="p">[</span><span class="n">astroquery</span><span class="o">.</span><span class="n">query</span><span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>intentType obs_collection provenance_name ... srcDen  obsid        distance
+---------- -------------- --------------- ... ------ -------- ------------------
+   science            IUE              -- ... 5885.0   349209                0.0
+   science            IUE              -- ... 5885.0   349210                0.0
+   science            IUE              -- ... 5885.0   349211                0.0
+   science            IUE              -- ... 5885.0   349212                0.0
+   science            IUE              -- ... 5885.0   349213                0.0
+   science            IUE              -- ... 5885.0   349214                0.0
+   science            IUE              -- ... 5885.0   349215                0.0
+   science            IUE              -- ... 5885.0   349216                0.0
+   science            IUE              -- ... 5885.0   349217                0.0
+   science            IUE              -- ... 5885.0   349218                0.0
+       ...            ...             ... ...    ...      ...                ...
+   science            IUE              -- ... 5885.0   382916                0.0
+   science            IUE              -- ... 5885.0   382917                0.0
+   science            IUE              -- ... 5885.0   382918                0.0
+   science            IUE              -- ... 5885.0   382919                0.0
+   science            IUE              -- ... 5885.0   382920                0.0
+   science            IUE              -- ... 5885.0   382921                0.0
+   science            IUE              -- ... 5885.0   382922                0.0
+   science            IUE              -- ... 5885.0   382923                0.0
+   science            HST         CALSTIS ...    nan 24969540 0.5751893673409462
+   science            HST         CALSTIS ...    nan 24969541 0.5751893673409462
+   science            HST         CALSTIS ...    nan 24532244 0.5751893673409462
+Length = 109 rows
+Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=http://archive.stsci.edu/pub/iue/data/lwr/05000/lwr05639.elbll.gz to ./mastDownload/IUE/lwr05639/lwr05639.elbll.gz ... [Done]
+Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=http://archive.stsci.edu/pub/iue/data/lwr/05000/lwr05639.lilo.gz to ./mastDownload/IUE/lwr05639/lwr05639.lilo.gz ... [Done]
+Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=http://archive.stsci.edu/pub/iue/data/lwr/05000/lwr05639.melol.gz to ./mastDownload/IUE/lwr05639/lwr05639.melol.gz ... [Done]
+Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=http://archive.stsci.edu/pub/iue/data/lwr/05000/lwr05639.raw.gz to ./mastDownload/IUE/lwr05639/lwr05639.raw.gz ... [Done]
+Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=http://archive.stsci.edu/pub/iue/data/lwr/05000/lwr05639.rilo.gz to ./mastDownload/IUE/lwr05639/lwr05639.rilo.gz ... [Done]
+Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=http://archive.stsci.edu/pub/iue/data/lwr/05000/lwr05639.silo.gz to ./mastDownload/IUE/lwr05639/lwr05639.silo.gz ... [Done]
+Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=http://archive.stsci.edu/browse/previews/iue/mx/lwr/05000/gif/lwr05639.gif to ./mastDownload/IUE/lwr05639/lwr05639.gif ... [Done]
+Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=http://archive.stsci.edu/pub/iue/data/lwr/05000/lwr05639.mxlo.gz to ./mastDownload/IUE/lwr05639/lwr05639.mxlo.gz ... [Done]
+Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=http://archive.stsci.edu/pub/vospectra/iue2/lwr05639mxlo_vo.fits to ./mastDownload/IUE/lwr05639/lwr05639mxlo_vo.fits ... [Done]
 </pre></div>
 </div>
 <p>We read the downloaded files into an astropy table:</p>
@@ -455,8 +452,8 @@ dust.</p>
 like the IDL fm_unred procedure often return <span class="math notranslate nohighlight">\(A_\lambda/E_{B-V}\)</span>
 by default and need to be divided by <span class="math notranslate nohighlight">\(R_V\)</span> in order to compare
 directly with <code class="docutils literal notranslate"><span class="pre">dust_extinction</span></code>.</p>
-</div>
-<div class="section" id="example-3-calculate-color-excess-with-synphot">
+</section>
+<section id="example-3-calculate-color-excess-with-synphot">
 <h1>Example 3: Calculate Color Excess with <code class="docutils literal notranslate"><span class="pre">synphot</span></code><a class="headerlink" href="#example-3-calculate-color-excess-with-synphot" title="Permalink to this headline">¶</a></h1>
 <p>Calculating broadband <em>photometric</em> extinction is harder than it might
 look at first. All we have to do is look up <span class="math notranslate nohighlight">\(A_\lambda\)</span> for a
@@ -637,7 +634,7 @@ plot.</p>
 </pre></div>
 </div>
 <img alt="../_images/color-excess_48_1.png" src="../_images/color-excess_48_1.png" />
-<div class="section" id="exercise">
+<section id="exercise">
 <h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">¶</a></h2>
 <p>Try changing the blackbody temperature to something very hot or very
 cool. Are the color excess values the same? Have the effective
@@ -649,8 +646,8 @@ depends on the shape of the background source flux.</p>
 <div id="spacer"></div>
 
 <a href="../_static/color-excess/color-excess.ipynb"><button id="download">Download tutorial notebook</button></a>
-<a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/color-excess/color-excess.ipynb"><button id="binder">Interactive tutorial notebook</button></a></div>
-</div>
+<a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/color-excess/color-excess.ipynb"><button id="binder">Interactive tutorial notebook</button></a></section>
+</section>
 
 </div>
       </div>

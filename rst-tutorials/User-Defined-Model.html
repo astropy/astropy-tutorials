@@ -2,7 +2,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta charset="utf-8" /><meta content="filterTutorials, filterModeling, filterFits, filterAstrostatistics, filterMatplotlib, filterModelFitting, filterErrorBars, filterScatterPlots" name="keywords" />
+    <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta content="filterTutorials, filterModeling, filterFits, filterAstrostatistics, filterMatplotlib, filterModelFitting, filterErrorBars, filterScatterPlots" name="keywords" />
 <meta content="filterTutorials," name="keywords" />
 
     <title>Modeling 2: Create a User Defined Model using astropy.modeling &#8212; astropy-tutorials v3.0.dev</title>
@@ -119,13 +120,13 @@
   <a href="../_static/User-Defined-Model/User-Defined-Model.ipynb"><button id="download">Download tutorial notebook</button></a>
 <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/User-Defined-Model/User-Defined-Model.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
 
-<div id="spacer"></div><div class="section" id="modeling-2-create-a-user-defined-model-using-astropy-modeling">
+<div id="spacer"></div><section id="modeling-2-create-a-user-defined-model-using-astropy-modeling">
 <span id="user-defined-model"></span><h1>Modeling 2: Create a User Defined Model using astropy.modeling<a class="headerlink" href="#modeling-2-create-a-user-defined-model-using-astropy-modeling" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="authors">
+<section id="authors">
 <h2>Authors<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a></h2>
 <p>Rocio Kiman, Lia Corrales, Zé Vinícius, Stephanie T. Douglas</p>
-</div>
-<div class="section" id="learning-goals">
+</section>
+<section id="learning-goals">
 <h2>Learning Goals<a class="headerlink" href="#learning-goals" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>Define a new model with <code class="docutils literal notranslate"><span class="pre">astropy</span></code></p></li>
@@ -140,20 +141,20 @@
 <p>This tutorial assumes the student knows how to fit data using
 <code class="docutils literal notranslate"><span class="pre">astropy.modeling</span></code>. This topic is covered in the <a class="reference external" href="http://www.astropy.org/astropy-tutorials/rst-tutorials/Models-Quick-Fit.html">Models-Quick-Fit
 tutorial</a>.</p>
-</div>
-<div class="section" id="keywords">
+</section>
+<section id="keywords">
 <h2>Keywords<a class="headerlink" href="#keywords" title="Permalink to this headline">¶</a></h2>
 <p>modeling, FITS, astrostatistics, matplotlib, model fitting, error bars,
 scatter plots</p>
-</div>
-<div class="section" id="summary">
+</section>
+<section id="summary">
 <h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
 <p>In this tutorial, we will learn how to define a new model in two ways:
 with a compound model and with a custom model.</p>
 <div class="alert alert-info"><p><strong>Note:</strong> This tutorial assumes you have already gone through <a class="reference external" href="http://www.astropy.org/astropy-tutorials/rst-tutorials/Models-Quick-Fit.html">Modeling
 1</a>,
 which provides an introduction to <code class="docutils literal notranslate"><span class="pre">astropy.modeling</span></code></p>
-</div><div class="section" id="imports">
+</div><section id="imports">
 <h3>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h3>
 <p><span class="inputnumrole">In[1]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -165,8 +166,8 @@ which provides an introduction to <code class="docutils literal notranslate"><sp
 <span class="kn">from</span> <span class="nn">astroquery.sdss</span> <span class="kn">import</span> <span class="n">SDSS</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="fit-an-emission-line-in-a-stellar-spectrum">
+</section>
+<section id="fit-an-emission-line-in-a-stellar-spectrum">
 <h3>Fit an emission line in a stellar spectrum<a class="headerlink" href="#fit-an-emission-line-in-a-stellar-spectrum" title="Permalink to this headline">¶</a></h3>
 <p>M dwarfs are low mass stars (less than half of the mass of the sun).
 Currently we do not understand completely the physics inside low mass
@@ -195,11 +196,11 @@ way:</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[2]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">circleci</span><span class="o">/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astroquery</span><span class="o">/</span><span class="n">sdss</span><span class="o">/</span><span class="n">core</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">865</span><span class="p">:</span> <span class="n">VisibleDeprecationWarning</span><span class="p">:</span> <span class="n">Reading</span> <span class="n">unicode</span> <span class="n">strings</span> <span class="n">without</span> <span class="n">specifying</span> <span class="n">the</span> <span class="n">encoding</span> <span class="n">argument</span> <span class="ow">is</span> <span class="n">deprecated</span><span class="o">.</span> <span class="n">Set</span> <span class="n">the</span> <span class="n">encoding</span><span class="p">,</span> <span class="n">use</span> <span class="kc">None</span> <span class="k">for</span> <span class="n">the</span> <span class="n">system</span> <span class="n">default</span><span class="o">.</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">circleci</span><span class="o">/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astroquery</span><span class="o">/</span><span class="n">sdss</span><span class="o">/</span><span class="n">core</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">865</span><span class="p">:</span> <span class="n">VisibleDeprecationWarning</span><span class="p">:</span> <span class="n">Reading</span> <span class="n">unicode</span> <span class="n">strings</span> <span class="n">without</span> <span class="n">specifying</span> <span class="n">the</span> <span class="n">encoding</span> <span class="n">argument</span> <span class="ow">is</span> <span class="n">deprecated</span><span class="o">.</span> <span class="n">Set</span> <span class="n">the</span> <span class="n">encoding</span><span class="p">,</span> <span class="n">use</span> <span class="kc">None</span> <span class="k">for</span> <span class="n">the</span> <span class="n">system</span> <span class="n">default</span><span class="o">.</span>
   <span class="n">comments</span><span class="o">=</span><span class="s1">&#39;#&#39;</span><span class="p">))</span>
 </pre></div>
 </div>
-<div class="section" id="now-that-we-have-the-spectrum">
+<section id="now-that-we-have-the-spectrum">
 <h4>Now that we have the spectrum…<a class="headerlink" href="#now-that-we-have-the-spectrum" title="Permalink to this headline">¶</a></h4>
 <p>One way to check what is inside the fits file <code class="docutils literal notranslate"><span class="pre">spectrum</span></code> is the
 following:</p>
@@ -284,10 +285,10 @@ Angstroms</p>
 <p>We just plotted our spectrum! Check different ranges of wavelength to
 see how the full spectrum looks like in comparison to the one we saw
 before.</p>
-</div>
-</div>
-</div>
-<div class="section" id="fit-an-emission-line-with-a-gaussian-model">
+</section>
+</section>
+</section>
+<section id="fit-an-emission-line-with-a-gaussian-model">
 <h2>Fit an Emission Line with a Gaussian Model<a class="headerlink" href="#fit-an-emission-line-with-a-gaussian-model" title="Permalink to this headline">¶</a></h2>
 <p>The blue dashed line marks the <span class="math notranslate nohighlight">\(H\alpha\)</span> emission line. We can
 tell this is an active star because it has a strong emission line.</p>
@@ -332,8 +333,8 @@ of this fit:</p>
     <span class="mf">16.750706286489784</span> <span class="mf">9456.749529382625</span> <span class="mf">2368.395705667002</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="exercise">
+</section>
+<section id="exercise">
 <h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">¶</a></h2>
 <p>Go back to the previous plot and try to make the fit work. Note: <strong>Do
 not spend more than 10 minutes</strong> in this exercise. A couple of ideas to
@@ -343,9 +344,9 @@ find more models to use
 * Is it not working because of the fitter we chose? * Is it not
 working because of the range of data we are fitting? * Is it not
 working because how we are plotting the data?</p>
-</div>
-</div>
-<div class="section" id="compound-models">
+</section>
+</section>
+<section id="compound-models">
 <h1>Compound models<a class="headerlink" href="#compound-models" title="Permalink to this headline">¶</a></h1>
 <p>One model is not enough to make this fit work. We need to combine a
 couple of models to make a <a class="reference external" href="http://docs.astropy.org/en/stable/modeling/#compound-models">compound
@@ -534,15 +535,15 @@ for the mean.</p>
 </div>
 <p>Better! By loosening the condition we added to the mean value, we got a
 better fit and the mean of the gaussian is closer to where we want it.</p>
-<div class="section" id="id1">
+<section id="id1">
 <h2>Exercise<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>Modify the value of delta to change the minimum and maximum values for
 the mean of the gaussian. Look for: * The better delta so the mean is
 closer to the real value of the <span class="math notranslate nohighlight">\(H\alpha\)</span> line. * What is the
 minimum delta for which the fit is still good according to the plot?</p>
-</div>
-</div>
-<div class="section" id="custom-model">
+</section>
+</section>
+<section id="custom-model">
 <h1>Custom model<a class="headerlink" href="#custom-model" title="Permalink to this headline">¶</a></h1>
 <p>What should you do if you need a model that <code class="docutils literal notranslate"><span class="pre">astropy.modeling</span></code> doesn’t
 provide? To solve that problem, Astropy has another tool called <a class="reference external" href="http://docs.astropy.org/en/stable/modeling/new.html">custom
@@ -557,7 +558,7 @@ this tool, we can create any model we want.</p>
 <p>We use the basic custom model when we need a simple function to fit and
 the full custom model when we need a more complex function. Let’s use an
 example to understand each one of the custom models.</p>
-<div class="section" id="basic-custom-model">
+<section id="basic-custom-model">
 <h2>Basic custom model<a class="headerlink" href="#basic-custom-model" title="Permalink to this headline">¶</a></h2>
 <p>An <strong>Exponential Model</strong> is not provided by Astropy models. Let’s see
 one example of basic custom model for this case. First, let’s simulate a
@@ -617,9 +618,9 @@ with <code class="docutils literal notranslate"><span class="pre">astropy.modeli
 <span class="n">Outputs</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">,)</span>
 <span class="n">Model</span> <span class="nb">set</span> <span class="n">size</span><span class="p">:</span> <span class="mi">1</span>
 <span class="n">Parameters</span><span class="p">:</span>
-            <span class="n">a</span>                  <span class="n">b</span>                 <span class="n">c</span>
-    <span class="o">------------------</span> <span class="o">-----------------</span> <span class="o">------------------</span>
-    <span class="mf">1.1570444021893245</span> <span class="o">-</span><span class="mf">2.04893114734932</span> <span class="mf">0.9469932445759114</span>
+            <span class="n">a</span>                   <span class="n">b</span>                  <span class="n">c</span>
+    <span class="o">------------------</span> <span class="o">-------------------</span> <span class="o">------------------</span>
+    <span class="mf">1.2315998457078985</span> <span class="o">-</span><span class="mf">1.9930860660045056</span> <span class="mf">0.9056575545638473</span>
 </pre></div>
 </div>
 <p>The fit looks good in the plot. Let’s check the parameters and the
@@ -641,7 +642,7 @@ goodness of the fit.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[32]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">1.0210433225215296</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">1.1349362737825424</span>
 </pre></div>
 </div>
 <p>The Reduced Chi Square value is close to 1. Great! This means our fit is
@@ -650,8 +651,8 @@ parameters and the ones we used to simulate the data.</p>
 <p><strong>Note:</strong> Fits of non-linear parameters (like in our example) are
 extremely dependent on initial conditions. Pay attention to the initial
 conditions you select.</p>
-</div>
-<div class="section" id="id2">
+</section>
+<section id="id2">
 <h2>Exercise<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <p>Modify the initial conditions of the fit and check yourself the relation
 between the best fit parameters and the initial conditions for the
@@ -659,8 +660,8 @@ previous example. You can check it by looking at the Reduced Chi Square
 value: if it gets closer to 1 the fit is better and vice versa. To
 compare the quality of the fits you can take note of the Reduced Chi
 Square value you get for each initial condition.</p>
-</div>
-<div class="section" id="full-custom-model">
+</section>
+<section id="full-custom-model">
 <h2>Full custom model<a class="headerlink" href="#full-custom-model" title="Permalink to this headline">¶</a></h2>
 <p>What if we want to use a model from <code class="docutils literal notranslate"><span class="pre">astropy.modeling</span></code>, but with a
 different set of parameters? One example is the <a class="reference external" href="http://docs.astropy.org/en/stable/api/astropy.modeling.functional_models.Sine1D.html#astropy.modeling.functional_models.Sine1D">Sine
@@ -739,9 +740,9 @@ of the parameters.</p>
 <span class="n">Outputs</span><span class="p">:</span> <span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">,)</span>
 <span class="n">Model</span> <span class="nb">set</span> <span class="n">size</span><span class="p">:</span> <span class="mi">1</span>
 <span class="n">Parameters</span><span class="p">:</span>
-            <span class="n">a</span>                 <span class="n">b</span>                 <span class="n">c</span>                  <span class="n">d</span>
-    <span class="o">-----------------</span> <span class="o">-----------------</span> <span class="o">------------------</span> <span class="o">------------------</span>
-    <span class="mf">3.102324010581833</span> <span class="mf">2.038671968797272</span> <span class="mf">3.7051286938411705</span> <span class="mf">0.9321771661312259</span>
+            <span class="n">a</span>                 <span class="n">b</span>                  <span class="n">c</span>                  <span class="n">d</span>
+    <span class="o">-----------------</span> <span class="o">------------------</span> <span class="o">------------------</span> <span class="o">------------------</span>
+    <span class="mf">3.478007391987046</span> <span class="mf">2.0176299474391226</span> <span class="mf">3.7232623317362314</span> <span class="mf">0.9850809535851546</span>
 </pre></div>
 </div>
 <p><span class="inputnumrole">In[39]:</span></p>
@@ -749,22 +750,22 @@ of the parameters.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[39]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">3.013512162717793</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">5.960824965406881</span>
 </pre></div>
 </div>
 <p>The Reduced Chi Squared value is showing the same as the plot: this fit
 could be improved. The Reduced Chi Squared is not close to 1 and the fit
 is off by small phase.</p>
-</div>
-<div class="section" id="id3">
+</section>
+<section id="id3">
 <h2>Exercise<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <p>Play with the initial values for the last fit and improve the Reduced
 Chi Squared value.</p>
 <p><strong>Note:</strong> A fancy way of doing this would be to code a function which
 iterates over different initial conditions, optimizing the Reduced Chi
 Squared value. No need to do it here, but feel free to try.</p>
-</div>
-<div class="section" id="id4">
+</section>
+<section id="id4">
 <h2>Exercise<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
 <p>Custom models are also useful when we want to fit an <strong>unusual
 function</strong> to our data. As an example, create a full custom model to fit
@@ -787,8 +788,8 @@ the following data.</p>
 <div id="spacer"></div>
 
 <a href="../_static/User-Defined-Model/User-Defined-Model.ipynb"><button id="download">Download tutorial notebook</button></a>
-<a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/User-Defined-Model/User-Defined-Model.ipynb"><button id="binder">Interactive tutorial notebook</button></a></div>
-</div>
+<a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/User-Defined-Model/User-Defined-Model.ipynb"><button id="binder">Interactive tutorial notebook</button></a></section>
+</section>
 
 </div>
       </div>

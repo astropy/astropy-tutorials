@@ -2,7 +2,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta charset="utf-8" /><meta content="filterTutorials, filterWcs, filterCoordinates, filterMatplotlib" name="keywords" />
+    <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta content="filterTutorials, filterWcs, filterCoordinates, filterMatplotlib" name="keywords" />
 <meta content="filterTutorials," name="keywords" />
 
     <title>Working with Celestial Coordinates in WCS 1: Specifying, reading, and plotting &#8212; astropy-tutorials v3.0.dev</title>
@@ -113,33 +114,33 @@
   <a href="../_static/celestial_coords1/celestial_coords1.ipynb"><button id="download">Download tutorial notebook</button></a>
 <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/celestial_coords1/celestial_coords1.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
 
-<div id="spacer"></div><div class="section" id="working-with-celestial-coordinates-in-wcs-1-specifying-reading-and-plotting">
+<div id="spacer"></div><section id="working-with-celestial-coordinates-in-wcs-1-specifying-reading-and-plotting">
 <span id="celestial-coords1"></span><h1>Working with Celestial Coordinates in WCS 1: Specifying, reading, and plotting<a class="headerlink" href="#working-with-celestial-coordinates-in-wcs-1-specifying-reading-and-plotting" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="authors">
+<section id="authors">
 <h2>Authors<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a></h2>
 <p>Kris Stern, Kelle Cruz, Lia Corrales, David Shupe, Adrian Price-Whelan</p>
-</div>
-<div class="section" id="learning-goals">
+</section>
+<section id="learning-goals">
 <h2>Learning Goals<a class="headerlink" href="#learning-goals" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
 <li><p>Demonstrate two ways to build a <code class="docutils literal notranslate"><span class="pre">astropy.wcs.WCS</span></code> object</p></li>
 <li><p>Show an image of the Helix nebula with RA and Dec labeled</p></li>
 <li><p>Plot a scale bar on an image with WCS information</p></li>
 </ol>
-</div>
-<div class="section" id="keywords">
+</section>
+<section id="keywords">
 <h2>Keywords<a class="headerlink" href="#keywords" title="Permalink to this headline">¶</a></h2>
 <p>WCS, coordinates, matplotlib</p>
-</div>
-<div class="section" id="companion-contents">
+</section>
+<section id="companion-contents">
 <h2>Companion Contents<a class="headerlink" href="#companion-contents" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
 <li><p>“An Introduction to Modern Astrophysics” (<a class="reference external" href="https://ui.adsabs.harvard.edu/abs/2006ima..book.....C/abstract">Carroll &amp;
 Ostlie</a>)</p></li>
 <li><p><a class="reference external" href="https://fits.gsfc.nasa.gov/fits_wcs.html">FITS WCS page at GSFC</a></p></li>
 </ol>
-</div>
-<div class="section" id="summary">
+</section>
+<section id="summary">
 <h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
 <p>This tutorial series aims to show how the content of Chapter 1 of “An
 Introduction to Modern Astrophysics” by Carroll and Ostlie can be
@@ -160,8 +161,8 @@ WCS to give the reader a sense of the angular size of the image.</p>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="section-1-two-ways-to-create-an-astropy-wcs-wcs-object">
+</section>
+<section id="section-1-two-ways-to-create-an-astropy-wcs-wcs-object">
 <h2>Section 1: Two ways to create an <code class="docutils literal notranslate"><span class="pre">astropy.wcs.WCS</span></code> object<a class="headerlink" href="#section-1-two-ways-to-create-an-astropy-wcs-wcs-object" title="Permalink to this headline">¶</a></h2>
 <p><em>World coordinates</em> serve to locate a measurement in some
 multi-dimensional parameter space. A World Coordinate System (WCS)
@@ -213,7 +214,7 @@ specified, the default unit is degrees.)</p></li>
 </ul>
 <p>Some good references of the WCS standard can be found
 <a class="reference external" href="https://fits.gsfc.nasa.gov/fits_wcs.html">here</a>.</p>
-<div class="section" id="method-1-building-a-wcs-object-with-a-dictionary">
+<section id="method-1-building-a-wcs-object-with-a-dictionary">
 <h3>Method 1: Building a WCS object with a dictionary<a class="headerlink" href="#method-1-building-a-wcs-object-with-a-dictionary" title="Permalink to this headline">¶</a></h3>
 <p>One way to define an Astropy <code class="docutils literal notranslate"><span class="pre">WCS</span></code> object is to construct a dictionary
 containing all of the essential information (i.e., specifying values for
@@ -272,8 +273,8 @@ In cases when the WCS information is provided for us in a FITS file, it
 is typically included in a FITS header, which, when read into Python,
 acts like a dictionary object. We demonstrate this later on in this
 tutorial.</p>
-</div>
-<div class="section" id="method-2-create-an-empty-wcs-object-before-assigning-values">
+</section>
+<section id="method-2-create-an-empty-wcs-object-before-assigning-values">
 <h3>Method 2: Create an empty WCS object before assigning values<a class="headerlink" href="#method-2-create-an-empty-wcs-object-before-assigning-values" title="Permalink to this headline">¶</a></h3>
 <p>Alternatively, we could initialize the <code class="docutils literal notranslate"><span class="pre">astropy.wcs.WCS</span></code> object, and
 assign the keyword values with lists corresponding to each respective
@@ -334,14 +335,14 @@ values have been updated from the default size of 0 to 1024.</p>
 <span class="n">NAXIS</span> <span class="p">:</span> <span class="mi">1024</span>  <span class="mi">1024</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="section-2-show-an-image-of-the-helix-nebula-with-ra-and-dec-labeled">
+</section>
+</section>
+<section id="section-2-show-an-image-of-the-helix-nebula-with-ra-and-dec-labeled">
 <h2>Section 2: Show an image of the Helix nebula with RA and Dec labeled<a class="headerlink" href="#section-2-show-an-image-of-the-helix-nebula-with-ra-and-dec-labeled" title="Permalink to this headline">¶</a></h2>
 <p>Most of the time we can obtain the required <code class="docutils literal notranslate"><span class="pre">astropy.wcs.WCS</span></code> object
 from the header of the FITS file from a telescope or astronomical
 database. This process is described below.</p>
-<div class="section" id="step-1-read-in-the-fits-file">
+<section id="step-1-read-in-the-fits-file">
 <h3>Step 1: Read in the FITS file<a class="headerlink" href="#step-1-read-in-the-fits-file" title="Permalink to this headline">¶</a></h3>
 <p>We will read the FITS file containing an image of the Helix nebula from
 the <code class="docutils literal notranslate"><span class="pre">astropy-data</span></code> GitHub repository using the <code class="docutils literal notranslate"><span class="pre">astropy.io.fits</span></code>
@@ -516,8 +517,8 @@ violates the FITS WCS standards (because it includes both CDELTn
 keywords and a matrix of CD values; including deprecated PC-matrix
 keywords). The header has been cleaned up to conform to the existing
 standards.</p>
-</div>
-<div class="section" id="step-2-read-in-the-fits-image-coordinate-system-with-astropy-wcs-wcs">
+</section>
+<section id="step-2-read-in-the-fits-image-coordinate-system-with-astropy-wcs-wcs">
 <h3>Step 2: Read in the FITS image coordinate system with astropy.wcs.WCS<a class="headerlink" href="#step-2-read-in-the-fits-image-coordinate-system-with-astropy-wcs-wcs" title="Permalink to this headline">¶</a></h3>
 <p>Because the header contains WCS information and acts like a Python
 dictionary, an Astropy <code class="docutils literal notranslate"><span class="pre">WCS</span></code> object can be created directly from the
@@ -545,8 +546,8 @@ header.</p>
 <span class="n">NAXIS</span> <span class="p">:</span> <span class="mi">2119</span>  <span class="mi">2119</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="step-3-plot-the-helix-nebula-with-sky-coordinate-axes-ra-and-dec">
+</section>
+<section id="step-3-plot-the-helix-nebula-with-sky-coordinate-axes-ra-and-dec">
 <h3>Step 3: Plot the Helix nebula with sky coordinate axes (RA and Dec)<a class="headerlink" href="#step-3-plot-the-helix-nebula-with-sky-coordinate-axes-ra-and-dec" title="Permalink to this headline">¶</a></h3>
 <p>The image data, <code class="docutils literal notranslate"><span class="pre">image</span></code>, is a 2D array of values, and by itself
 contains no information about the sky coordinates of the pixels. So, if
@@ -558,7 +559,7 @@ we plotted the image by itself, the plot axes would show pixel values.
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[14]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">AxesImage</span> <span class="n">at</span> <span class="mh">0x7fe7ec6a64d0</span><span class="o">&gt;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">AxesImage</span> <span class="n">at</span> <span class="mh">0x7f8c92657290</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <img alt="../_images/celestial_coords1_30_1.png" src="../_images/celestial_coords1_30_1.png" />
@@ -585,9 +586,9 @@ method.</p>
 </div>
 <p><span class="outputnumrole">Out[15]:</span></p>
 <img alt="../_images/celestial_coords1_32_0.png" src="../_images/celestial_coords1_32_0.png" />
-</div>
-</div>
-<div class="section" id="exercise">
+</section>
+</section>
+<section id="exercise">
 <h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">¶</a></h2>
 <p>Copy the code block above and instead overlay a coordinate grid in
 Galactic coordinates.</p>
@@ -604,8 +605,8 @@ Galactic coordinates.</p>
 </div>
 <p><span class="outputnumrole">Out[16]:</span></p>
 <img alt="../_images/celestial_coords1_34_0.png" src="../_images/celestial_coords1_34_0.png" />
-</div>
-<div class="section" id="section-3-plot-a-scale-marker-on-an-image-with-wcs">
+</section>
+<section id="section-3-plot-a-scale-marker-on-an-image-with-wcs">
 <h2>Section 3: Plot a scale marker on an image with WCS<a class="headerlink" href="#section-3-plot-a-scale-marker-on-an-image-with-wcs" title="Permalink to this headline">¶</a></h2>
 <p>To add a scale marker (i.e., a line of a particular <em>angular</em> size) to
 the image of the Helix nebula, we will use the matplotlib <code class="docutils literal notranslate"><span class="pre">Axes.arrow</span></code>
@@ -642,8 +643,8 @@ scale marker.</p>
 </div>
 <p><span class="outputnumrole">Out[17]:</span></p>
 <img alt="../_images/celestial_coords1_36_0.png" src="../_images/celestial_coords1_36_0.png" />
-</div>
-<div class="section" id="id1">
+</section>
+<section id="id1">
 <h2>Exercise<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>Make a horizontal bar with the same length. Keep in mind that 1 hour
 angle = 15 degrees.</p>
@@ -651,8 +652,8 @@ angle = 15 degrees.</p>
 <div id="spacer"></div>
 
 <a href="../_static/celestial_coords1/celestial_coords1.ipynb"><button id="download">Download tutorial notebook</button></a>
-<a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/celestial_coords1/celestial_coords1.ipynb"><button id="binder">Interactive tutorial notebook</button></a></div>
-</div>
+<a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/celestial_coords1/celestial_coords1.ipynb"><button id="binder">Interactive tutorial notebook</button></a></section>
+</section>
 
 </div>
       </div>

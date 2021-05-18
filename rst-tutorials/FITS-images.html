@@ -2,7 +2,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta charset="utf-8" /><meta content="filterTutorials, filterFits, filterFileInputOutput, filterImageManipulation, filterNumpy, filterMatplotlib, filterHistogram, filterColorbar" name="keywords" />
+    <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta content="filterTutorials, filterFits, filterFileInputOutput, filterImageManipulation, filterNumpy, filterMatplotlib, filterHistogram, filterColorbar" name="keywords" />
 <meta content="filterTutorials," name="keywords" />
 
     <title>Viewing and manipulating FITS images &#8212; astropy-tutorials v3.0.dev</title>
@@ -110,13 +111,13 @@
   <a href="../_static/FITS-images/FITS-images.ipynb"><button id="download">Download tutorial notebook</button></a>
 <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/FITS-images/FITS-images.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
 
-<div id="spacer"></div><div class="section" id="viewing-and-manipulating-fits-images">
+<div id="spacer"></div><section id="viewing-and-manipulating-fits-images">
 <span id="fits-images"></span><h1>Viewing and manipulating FITS images<a class="headerlink" href="#viewing-and-manipulating-fits-images" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="authors">
+<section id="authors">
 <h2>Authors<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a></h2>
 <p>Lia Corrales, Kris Stern, Stephanie T. Douglas, Kelle Cruz</p>
-</div>
-<div class="section" id="learning-goals">
+</section>
+<section id="learning-goals">
 <h2>Learning Goals<a class="headerlink" href="#learning-goals" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>Open FITS files and load image data</p></li>
@@ -126,13 +127,13 @@
 <li><p>Stack several images into a single image</p></li>
 <li><p>Write image data to a FITS file</p></li>
 </ol>
-</div>
-<div class="section" id="keywords">
+</section>
+<section id="keywords">
 <h2>Keywords<a class="headerlink" href="#keywords" title="Permalink to this headline">¶</a></h2>
 <p>FITS, file input/output, image manipulation, numpy, matplotlib,
 histogram, colorbar</p>
-</div>
-<div class="section" id="summary">
+</section>
+<section id="summary">
 <h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
 <p>This tutorial demonstrates the use of <code class="docutils literal notranslate"><span class="pre">astropy.utils.data</span></code> to download
 a data file, then uses <code class="docutils literal notranslate"><span class="pre">astropy.io.fits</span></code> to open the file, and lastly
@@ -155,8 +156,8 @@ demonstration of simple image stacking.</p>
 <span class="n">image_file</span> <span class="o">=</span> <span class="n">download_file</span><span class="p">(</span><span class="s1">&#39;http://data.astropy.org/tutorials/FITS-images/HorseHead.fits&#39;</span><span class="p">,</span> <span class="n">cache</span><span class="o">=</span><span class="kc">True</span> <span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="opening-fits-files-and-loading-the-image-data">
+</section>
+<section id="opening-fits-files-and-loading-the-image-data">
 <h2>Opening FITS files and loading the image data<a class="headerlink" href="#opening-fits-files-and-loading-the-image-data" title="Permalink to this headline">¶</a></h2>
 <p>Let’s open the FITS file to find out what it contains.</p>
 <p><span class="inputnumrole">In[3]:</span></p>
@@ -168,7 +169,7 @@ demonstration of simple image stacking.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Filename</span><span class="p">:</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">circleci</span><span class="o">/.</span><span class="n">astropy</span><span class="o">/</span><span class="n">cache</span><span class="o">/</span><span class="n">download</span><span class="o">/</span><span class="n">url</span><span class="o">/</span><span class="n">ff6e0b93871033c68022ca026a956d87</span><span class="o">/</span><span class="n">contents</span>
 <span class="n">No</span><span class="o">.</span>    <span class="n">Name</span>      <span class="n">Ver</span>    <span class="n">Type</span>      <span class="n">Cards</span>   <span class="n">Dimensions</span>   <span class="n">Format</span>
   <span class="mi">0</span>  <span class="n">PRIMARY</span>       <span class="mi">1</span> <span class="n">PrimaryHDU</span>     <span class="mi">161</span>   <span class="p">(</span><span class="mi">891</span><span class="p">,</span> <span class="mi">893</span><span class="p">)</span>   <span class="n">int16</span>
-  <span class="mi">1</span>  <span class="n">er</span><span class="o">.</span><span class="n">mask</span>       <span class="mi">1</span> <span class="n">TableHDU</span>        <span class="mi">25</span>   <span class="mi">1600</span><span class="n">R</span> <span class="n">x</span> <span class="mi">4</span><span class="n">C</span>   <span class="p">[</span><span class="n">F6</span><span class="o">.</span><span class="mi">2</span><span class="p">,</span> <span class="n">F6</span><span class="o">.</span><span class="mi">2</span><span class="p">,</span> <span class="n">F6</span><span class="o">.</span><span class="mi">2</span><span class="p">,</span> <span class="n">F6</span><span class="o">.</span><span class="mi">2</span><span class="p">]</span>
+  <span class="mi">1</span>  <span class="n">er</span><span class="o">.</span><span class="n">mask</span>       <span class="mi">1</span> <span class="n">TableHDU</span>        <span class="mi">25</span>   <span class="mi">1600</span><span class="n">R</span> <span class="n">x</span> <span class="mi">4</span><span class="n">C</span>   <span class="p">[</span><span class="n">F6</span><span class="mf">.2</span><span class="p">,</span> <span class="n">F6</span><span class="mf">.2</span><span class="p">,</span> <span class="n">F6</span><span class="mf">.2</span><span class="p">,</span> <span class="n">F6</span><span class="mf">.2</span><span class="p">]</span>
 </pre></div>
 </div>
 <p>Generally, the image information is located in the PRIMARY block. The
@@ -195,7 +196,7 @@ everything we wanted to a variable.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">hdu_list</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 </div>
-<div class="section" id="shortcut">
+<section id="shortcut">
 <h3>SHORTCUT<a class="headerlink" href="#shortcut" title="Permalink to this headline">¶</a></h3>
 <p>If you don’t need to examine the FITS header, you can call
 <code class="docutils literal notranslate"><span class="pre">fits.getdata</span></code> to bypass the previous steps.</p>
@@ -210,9 +211,9 @@ everything we wanted to a variable.</p>
 (893, 891)
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="viewing-the-image-data-and-getting-basic-statistics">
+</section>
+</section>
+<section id="viewing-the-image-data-and-getting-basic-statistics">
 <h2>Viewing the image data and getting basic statistics<a class="headerlink" href="#viewing-the-image-data-and-getting-basic-statistics" title="Permalink to this headline">¶</a></h2>
 <p><span class="inputnumrole">In[8]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image_data</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
@@ -223,7 +224,7 @@ everything we wanted to a variable.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[8]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">colorbar</span><span class="o">.</span><span class="n">Colorbar</span> <span class="n">at</span> <span class="mh">0x7f7bcc0bde10</span><span class="o">&gt;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">colorbar</span><span class="o">.</span><span class="n">Colorbar</span> <span class="n">at</span> <span class="mh">0x7f783f781990</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <img alt="../_images/FITS-images_17_1.png" src="../_images/FITS-images_17_1.png" />
@@ -242,7 +243,7 @@ everything we wanted to a variable.</p>
 <span class="n">Stdev</span><span class="p">:</span> <span class="mf">3032.3927542049046</span>
 </pre></div>
 </div>
-<div class="section" id="plotting-a-histogram">
+<section id="plotting-a-histogram">
 <h3>Plotting a histogram<a class="headerlink" href="#plotting-a-histogram" title="Permalink to this headline">¶</a></h3>
 <p>To make a histogram with <code class="docutils literal notranslate"><span class="pre">matplotlib.pyplot.hist()</span></code>, we’ll need to
 cast the data from a 2D array to something one dimensional.</p>
@@ -262,8 +263,8 @@ array.</p>
 </div>
 <p><span class="outputnumrole">Out[11]:</span></p>
 <img alt="../_images/FITS-images_24_0.png" src="../_images/FITS-images_24_0.png" />
-</div>
-<div class="section" id="displaying-the-image-with-a-logarithmic-scale">
+</section>
+<section id="displaying-the-image-with-a-logarithmic-scale">
 <h3>Displaying the image with a logarithmic scale<a class="headerlink" href="#displaying-the-image-with-a-logarithmic-scale" title="Permalink to this headline">¶</a></h3>
 <p>What if we want to use a logarithmic color scale? To do so, we’ll need
 to load the <code class="docutils literal notranslate"><span class="pre">LogNorm</span></code> object from <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>.</p>
@@ -284,9 +285,9 @@ to load the <code class="docutils literal notranslate"><span class="pre">LogNorm
 </pre></div>
 </div>
 <img alt="../_images/FITS-images_28_1.png" src="../_images/FITS-images_28_1.png" />
-</div>
-</div>
-<div class="section" id="basic-image-math-image-stacking">
+</section>
+</section>
+<section id="basic-image-math-image-stacking">
 <h2>Basic image math: image stacking<a class="headerlink" href="#basic-image-math-image-stacking" title="Permalink to this headline">¶</a></h2>
 <p>You can also perform math with the image data like any other numpy
 array. In this particular example, we’ll stack several images of M13
@@ -329,12 +330,12 @@ scaling for <code class="docutils literal notranslate"><span class="pre">imshow<
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[17]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">colorbar</span><span class="o">.</span><span class="n">Colorbar</span> <span class="n">at</span> <span class="mh">0x7f7bc3201b90</span><span class="o">&gt;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">colorbar</span><span class="o">.</span><span class="n">Colorbar</span> <span class="n">at</span> <span class="mh">0x7f7836aada50</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <img alt="../_images/FITS-images_38_1.png" src="../_images/FITS-images_38_1.png" />
-</div>
-<div class="section" id="writing-image-data-to-a-fits-file">
+</section>
+<section id="writing-image-data-to-a-fits-file">
 <h2>Writing image data to a FITS file<a class="headerlink" href="#writing-image-data-to-a-fits-file" title="Permalink to this headline">¶</a></h2>
 <p>We can do this with the <code class="docutils literal notranslate"><span class="pre">writeto()</span></code> method.</p>
 <p>Warning: you’ll receive an error if the file you are trying to write
@@ -346,8 +347,8 @@ already exists. That’s why we’ve set <code class="docutils literal notransla
 <span class="n">hdu</span><span class="o">.</span><span class="n">writeto</span><span class="p">(</span><span class="n">outfile</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="exercises">
+</section>
+<section id="exercises">
 <h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
 <p>Determine the mean, median, and standard deviation of a part of the
 stacked M13 image where there is <em>not</em> light from M13. Use those
@@ -368,8 +369,8 @@ data.)</p>
 <div id="spacer"></div>
 
 <a href="../_static/FITS-images/FITS-images.ipynb"><button id="download">Download tutorial notebook</button></a>
-<a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/FITS-images/FITS-images.ipynb"><button id="binder">Interactive tutorial notebook</button></a></div>
-</div>
+<a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/FITS-images/FITS-images.ipynb"><button id="binder">Interactive tutorial notebook</button></a></section>
+</section>
 
 </div>
       </div>

@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta content="filterTutorials, filterCoordinates, filterOop" name="keywords" />
+<meta content="filterTutorials," name="keywords" />
+
+    <title>Astronomical Coordinates 2: Transforming Coordinate Systems and Representations &#8212; astropy-tutorials v3.0.dev</title>
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bootstrap_sandstone.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/astropy.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script src="../_static/js/jquery-fix.js"></script>
+    <script src="../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script src="../_static/bootstrap-sphinx.js"></script>
+    <script src="../_static/searchtools.js"></script>
+    <script src="https://use.fontawesome.com/3168e95f94.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <link rel="shortcut icon" href="../_static/astropy_favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <script type="text/javascript">
+    jQuery(function() { Search.loadIndex("../searchindex.js"); });
+  </script>
+  
+  <script type="text/javascript" id="searchindexloader"></script>
+   
+
+  </head><body>
+
+
+<nav class="navbar navbar-expand-lg bg-navbar">
+  <a class="navbar-brand" href="/" style="padding: 0px 5px;">
+    <img src="../../_static/astropy_logo.png" onerror="this.onerror=null;this.src='../_static/astropy_logo.png';" style="height: 38px;">
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarColor01">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="http://www.astropy.org"/>Astropy<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Modules</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0" action="../search.html" method="get">
+      <div class="input-group-prepend">
+          <button class="input-group-text" style="padding: 0.7rem"><i class="fa fa-search fa-fw"></i></button>
+      </div>
+      <input class="form-control mr-sm-3" name="q" type="text" placeholder="Search the universe" />
+    </form>
+  </div>
+</nav>
+
+
+<div class="container">
+  <div class="row">
+
+    
+    
+    
+
+    
+    <div class="col-md-3">
+      <div id="sidebar" class="bs-sidenav card" role="complementary">
+        <h3>Table of contents</h3>
+        <ul>
+<li><a class="reference internal" href="#">Astronomical Coordinates 2: Transforming Coordinate Systems and Representations</a><ul>
+<li><a class="reference internal" href="#authors">Authors</a></li>
+<li><a class="reference internal" href="#learning-goals">Learning Goals</a></li>
+<li><a class="reference internal" href="#keywords">Keywords</a></li>
+<li><a class="reference internal" href="#summary">Summary</a></li>
+<li><a class="reference internal" href="#imports">Imports</a></li>
+<li><a class="reference internal" href="#key-astropy-coordinates-concepts-component-formats-representations-and-frames">Key <code class="docutils literal notranslate"><span class="pre">astropy.coordinates</span></code> Concepts: Component Formats, Representations, and Frames</a></li>
+<li><a class="reference internal" href="#coordinate-component-formats">Coordinate Component Formats</a></li>
+<li><a class="reference internal" href="#coordinate-representations">Coordinate Representations</a></li>
+<li><a class="reference internal" href="#transforming-between-coordinate-frames">Transforming Between Coordinate Frames</a></li>
+<li><a class="reference internal" href="#transforming-to-more-complex-coordinate-frames-computing-the-altitude-of-a-target-at-an-observatory">Transforming to More Complex Coordinate Frames: Computing the Altitude of a Target at an Observatory</a></li>
+<li><a class="reference internal" href="#potential-caveats">Potential Caveats</a></li>
+</ul>
+</li>
+</ul>
+
+      </div>
+    </div>
+    
+
+    <div class="col-md-9">
+      <div class="content-padding card">
+        <div>
+  <a href="../_static/2-Coordinates-Transforms/2-Coordinates-Transforms.ipynb"><button id="download">Download tutorial notebook</button></a>
+<a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/2-Coordinates-Transforms/2-Coordinates-Transforms.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
+
+<div id="spacer"></div><section id="astronomical-coordinates-2-transforming-coordinate-systems-and-representations">
+<span id="coordinates-transforms"></span><h1>Astronomical Coordinates 2: Transforming Coordinate Systems and Representations<a class="headerlink" href="#astronomical-coordinates-2-transforming-coordinate-systems-and-representations" title="Permalink to this headline">¶</a></h1>
+<section id="authors">
+<h2>Authors<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a></h2>
+<p>Adrian Price-Whelan</p>
+</section>
+<section id="learning-goals">
+<h2>Learning Goals<a class="headerlink" href="#learning-goals" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Introduce key concepts in <code class="docutils literal notranslate"><span class="pre">astropy.coordinates</span></code>: coordinate
+component formats, representations, and frames</p></li>
+<li><p>Demonstrate how to work with coordinate representations, for example,
+to change from Cartesian to Cylindrical coordinates</p></li>
+<li><p>Introduce coordinate frame transformations and demonstrate
+transforming from ICRS coordinates to Galactic and Altitude-Azimuth
+coordinates</p></li>
+</ul>
+</section>
+<section id="keywords">
+<h2>Keywords<a class="headerlink" href="#keywords" title="Permalink to this headline">¶</a></h2>
+<p>coordinates, OOP</p>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p>In the previous tutorial in this series, we showed how astronomical
+coordinates in the ICRS or equatorial coordinate system can be
+represented in Python using the <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> object
+(<a class="reference external" href="https://docs.astropy.org/en/stable/coordinates/skycoord.html">docs</a>).
+There are many other coordinate systems that are commonly used in
+astronomical research. For example, the Galactic coordinate system is
+often used in radio astronomy and Galactic science, the “horizontal” or
+altitude-azimuth frame is often used for observatory-specific
+observation planning, and Ecliptic coordinates are often used for solar
+system science or space mission footprints. All of these coordinate
+frames (and others!) are supported by <code class="docutils literal notranslate"><span class="pre">astropy.coordinates</span></code>. As we
+will see below, the <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> object is designed to make transforming
+between these systems a straightforward task.</p>
+<p>In this tutorial, we will explore how the <code class="docutils literal notranslate"><span class="pre">astropy.coordinates</span></code>
+package can be used to transform astronomical coordinates between
+different coordinate systems or frames. You may find it helpful to keep
+<a class="reference external" href="http://docs.astropy.org/en/stable/coordinates/index.html">the Astropy documentation for the coordinates
+package</a>
+open alongside this tutorial for reference or additional reading. In the
+text below, you may also see some links that look like
+(<a class="reference external" href="http://docs.astropy.org/en/stable/coordinates/index.html">docs</a>).
+These links will take you to parts of the documentation that are
+directly relevant to the cells from which they link.</p>
+<p><em>Note: This is the 2nd tutorial in a series of tutorials about
+astropy.coordinates. If you are new to astropy.coordinates, you may want
+to start from the beginning or an earlier tutorial.</em> - <a class="reference external" href="1-Coordinates-Intro">Previous
+tutorial: Astronomical Coordinates 1 - Getting
+Started</a> - <a class="reference external" href="3-Coordinates-Velocities">Next tutorial: Astronomical
+Coordinates 3 - Working with Velocity Data</a></p>
+</section>
+<section id="imports">
+<h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h2>
+<p>We start by importing some general packages that we will need below:</p>
+<p><span class="inputnumrole">In[1]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">astropy</span> <span class="kn">import</span> <span class="n">units</span> <span class="k">as</span> <span class="n">u</span>
+<span class="kn">from</span> <span class="nn">astropy.coordinates</span> <span class="kn">import</span> <span class="p">(</span><span class="n">SkyCoord</span><span class="p">,</span> <span class="n">Distance</span><span class="p">,</span> <span class="n">Galactic</span><span class="p">,</span>
+                                 <span class="n">EarthLocation</span><span class="p">,</span> <span class="n">AltAz</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">astropy.coordinates</span> <span class="k">as</span> <span class="nn">coord</span>
+<span class="kn">from</span> <span class="nn">astropy.io</span> <span class="kn">import</span> <span class="n">fits</span>
+<span class="kn">from</span> <span class="nn">astropy.table</span> <span class="kn">import</span> <span class="n">QTable</span>
+<span class="kn">from</span> <span class="nn">astropy.time</span> <span class="kn">import</span> <span class="n">Time</span>
+<span class="kn">from</span> <span class="nn">astropy.utils.data</span> <span class="kn">import</span> <span class="n">download_file</span>
+</pre></div>
+</div>
+</section>
+<section id="key-astropy-coordinates-concepts-component-formats-representations-and-frames">
+<h2>Key <code class="docutils literal notranslate"><span class="pre">astropy.coordinates</span></code> Concepts: Component Formats, Representations, and Frames<a class="headerlink" href="#key-astropy-coordinates-concepts-component-formats-representations-and-frames" title="Permalink to this headline">¶</a></h2>
+<p>Usage of the term “coordinates” is overloaded in astronomy and is often
+used interchangeably when referring to data formats (e.g., sexagesimal
+vs. decimal), representations (e.g., Cartesian vs. spherical), and
+frames (e.g., equatorial vs. galactic). In <code class="docutils literal notranslate"><span class="pre">astropy.coordinates</span></code>, we
+have tried to formalize these three concepts and have made them a core
+part of the way we interact with objects in this subpackage
+(<a class="reference external" href="https://docs.astropy.org/en/stable/coordinates/index.html#overview-of-astropy-coordinates-concepts">docs</a>).
+Here we will give an overview of these different concepts as we build up
+to demonstrating how to transform between different astronomical
+reference frames or systems.</p>
+</section>
+<section id="coordinate-component-formats">
+<h2>Coordinate Component Formats<a class="headerlink" href="#coordinate-component-formats" title="Permalink to this headline">¶</a></h2>
+<p>In our previous tutorial, we showed that it is possible to pass in
+coordinate component data to the <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> initializer as strings or
+as <code class="docutils literal notranslate"><span class="pre">Quantity</span></code> objects in a variety of formats and units. We also saw
+that the coordinate components of <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> objects can be
+re-formatted. For example, we can change the coordinate <em>format</em> by
+changing the component units, or converting the data to a string:</p>
+<p><span class="inputnumrole">In[2]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">SkyCoord</span><span class="p">(</span><span class="n">ra</span><span class="o">=</span><span class="mf">15.9932</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">deg</span><span class="p">,</span> <span class="n">dec</span><span class="o">=-</span><span class="mf">10.52351344</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">deg</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">ra</span><span class="o">.</span><span class="n">hourangle</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="s1">&#39;hmsdms&#39;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">dec</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">sep</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mi">5</span><span class="p">))</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[2]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">1.0662133333333335</span>
+<span class="mi">01</span><span class="n">h03m58</span><span class="mf">.368</span><span class="n">s</span> <span class="o">-</span><span class="mi">10</span><span class="n">d31m24</span><span class="mf">.6484</span><span class="n">s</span>
+<span class="o">-</span><span class="mi">10</span><span class="p">:</span><span class="mi">31</span><span class="p">:</span><span class="mf">24.64838</span>
+</pre></div>
+</div>
+<p>See the previous tutorial <a class="reference external" href="1-Coordinates-Intro">Astronomical Coordinates 1 - Getting
+Started</a> for more examples of this.</p>
+</section>
+<section id="coordinate-representations">
+<h2>Coordinate Representations<a class="headerlink" href="#coordinate-representations" title="Permalink to this headline">¶</a></h2>
+<p>In the previous tutorial, we only worked with coordinate data in
+spherical representations (longitude/latitude), but
+<code class="docutils literal notranslate"><span class="pre">astropy.coordinates</span></code> also supports other coordinate representations
+like Cartesian, cylindrical, etc.
+(<a class="reference external" href="https://docs.astropy.org/en/stable/coordinates/skycoord.html#astropy-skycoord-representations">docs</a>).
+To retrieve the coordinate data in a different representation, we can
+use the <code class="docutils literal notranslate"><span class="pre">SkyCoord.represent_as()</span></code> method. This method either takes a
+string name of the desired representation, for example:</p>
+<p><span class="inputnumrole">In[3]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">c</span><span class="o">.</span><span class="n">represent_as</span><span class="p">(</span><span class="s1">&#39;cartesian&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[3]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">CartesianRepresentation</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span> <span class="p">[</span><span class="n">dimensionless</span><span class="p">]</span>
+    <span class="p">(</span><span class="mf">0.94512547</span><span class="p">,</span> <span class="mf">0.27088898</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.18263903</span><span class="p">)</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>or it accepts an <code class="docutils literal notranslate"><span class="pre">astropy.coordinates</span></code> <code class="docutils literal notranslate"><span class="pre">Representation</span></code> class, such
+as:</p>
+<p><span class="inputnumrole">In[4]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">c</span><span class="o">.</span><span class="n">represent_as</span><span class="p">(</span><span class="n">coord</span><span class="o">.</span><span class="n">CartesianRepresentation</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[4]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">CartesianRepresentation</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span> <span class="p">[</span><span class="n">dimensionless</span><span class="p">]</span>
+    <span class="p">(</span><span class="mf">0.94512547</span><span class="p">,</span> <span class="mf">0.27088898</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.18263903</span><span class="p">)</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>A list of all supported representations is given in the documentation
+(<a class="reference external" href="https://docs.astropy.org/en/stable/coordinates/representations.html#astropy-coordinates-representations">docs</a>),
+or can be identified as class names that end in <code class="docutils literal notranslate"><span class="pre">Representaton</span></code>:</p>
+<p><span class="inputnumrole">In[5]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="n">coord</span><span class="p">)</span>
+       <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;Representation&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">x</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;Base&#39;</span><span class="p">)])</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[5]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="s1">&#39;CartesianRepresentation&#39;</span><span class="p">,</span> <span class="s1">&#39;CylindricalRepresentation&#39;</span><span class="p">,</span> <span class="s1">&#39;PhysicsSphericalRepresentation&#39;</span><span class="p">,</span> <span class="s1">&#39;RadialRepresentation&#39;</span><span class="p">,</span> <span class="s1">&#39;SphericalRepresentation&#39;</span><span class="p">,</span> <span class="s1">&#39;UnitSphericalRepresentation&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>In the <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> object that we defined above, we only specified sky
+positions (i.e., no distance data), so the units of the Cartesian
+components that are returned above are dimensionless and are interpreted
+as being on the surface of the (dimensionless) unit sphere. If we
+instead pass in a distance to <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> using the <code class="docutils literal notranslate"><span class="pre">distance</span></code>
+keyword argument, we instead get a <code class="docutils literal notranslate"><span class="pre">CartesianRepresentation</span></code> object
+for the 3D position with positional units. For example:</p>
+<p><span class="inputnumrole">In[6]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">c2</span> <span class="o">=</span> <span class="n">SkyCoord</span><span class="p">(</span><span class="n">ra</span><span class="o">=</span><span class="mf">15.9932</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">deg</span><span class="p">,</span>
+              <span class="n">dec</span><span class="o">=-</span><span class="mf">10.52351344</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">deg</span><span class="p">,</span>
+              <span class="n">distance</span><span class="o">=</span><span class="mf">127.4</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">pc</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="inputnumrole">In[7]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">c2</span><span class="o">.</span><span class="n">represent_as</span><span class="p">(</span><span class="s1">&#39;cartesian&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[7]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">CartesianRepresentation</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span> <span class="ow">in</span> <span class="n">pc</span>
+    <span class="p">(</span><span class="mf">120.40898448</span><span class="p">,</span> <span class="mf">34.5112558</span><span class="p">,</span> <span class="o">-</span><span class="mf">23.2682118</span><span class="p">)</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Or, we could represent this data with cylindrical components:</p>
+<p><span class="inputnumrole">In[8]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">c2</span><span class="o">.</span><span class="n">represent_as</span><span class="p">(</span><span class="s1">&#39;cylindrical&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[8]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">CylindricalRepresentation</span> <span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span> <span class="ow">in</span> <span class="p">(</span><span class="n">pc</span><span class="p">,</span> <span class="n">rad</span><span class="p">,</span> <span class="n">pc</span><span class="p">)</span>
+    <span class="p">(</span><span class="mf">125.2571368</span><span class="p">,</span> <span class="mf">0.279134</span><span class="p">,</span> <span class="o">-</span><span class="mf">23.2682118</span><span class="p">)</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>To summarize, using <code class="docutils literal notranslate"><span class="pre">SkyCoord.represent_as()</span></code> is a convenient way to
+retrieve your coordinate data in a different representation, like
+Cartesian or Cylindrical. You can also change (in place) the
+representation of a <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> object by setting the
+<code class="docutils literal notranslate"><span class="pre">SkyCoord.representation_type</span></code> attribute. For example, if we create a
+<code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> again with a distance, the default representation type is
+spherical:</p>
+<p><span class="inputnumrole">In[9]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">c3</span> <span class="o">=</span> <span class="n">SkyCoord</span><span class="p">(</span><span class="n">ra</span><span class="o">=</span><span class="mf">15.9932</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">deg</span><span class="p">,</span>
+              <span class="n">dec</span><span class="o">=-</span><span class="mf">10.52351344</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">deg</span><span class="p">,</span>
+              <span class="n">distance</span><span class="o">=</span><span class="mf">127.4</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">pc</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">c3</span><span class="o">.</span><span class="n">representation_type</span><span class="p">)</span>
+<span class="n">c3</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[9]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;astropy.coordinates.representation.SphericalRepresentation&#39;&gt;
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">SkyCoord</span> <span class="p">(</span><span class="n">ICRS</span><span class="p">):</span> <span class="p">(</span><span class="n">ra</span><span class="p">,</span> <span class="n">dec</span><span class="p">,</span> <span class="n">distance</span><span class="p">)</span> <span class="ow">in</span> <span class="p">(</span><span class="n">deg</span><span class="p">,</span> <span class="n">deg</span><span class="p">,</span> <span class="n">pc</span><span class="p">)</span>
+    <span class="p">(</span><span class="mf">15.9932</span><span class="p">,</span> <span class="o">-</span><span class="mf">10.52351344</span><span class="p">,</span> <span class="mf">127.4</span><span class="p">)</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>We can, however, change the internal representation of the data by
+setting the <code class="docutils literal notranslate"><span class="pre">representation_type</span></code> attribute to a new
+<code class="docutils literal notranslate"><span class="pre">Representation</span></code> class:</p>
+<p><span class="inputnumrole">In[10]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">c3</span><span class="o">.</span><span class="n">representation_type</span> <span class="o">=</span> <span class="n">coord</span><span class="o">.</span><span class="n">CylindricalRepresentation</span>
+</pre></div>
+</div>
+<p>This then changes the way <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> will display the components:</p>
+<p><span class="inputnumrole">In[11]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">c3</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[11]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">SkyCoord</span> <span class="p">(</span><span class="n">ICRS</span><span class="p">):</span> <span class="p">(</span><span class="n">rho</span><span class="p">,</span> <span class="n">phi</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span> <span class="ow">in</span> <span class="p">(</span><span class="n">pc</span><span class="p">,</span> <span class="n">deg</span><span class="p">,</span> <span class="n">pc</span><span class="p">)</span>
+    <span class="p">(</span><span class="mf">125.2571368</span><span class="p">,</span> <span class="mf">15.9932</span><span class="p">,</span> <span class="o">-</span><span class="mf">23.2682118</span><span class="p">)</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Note, however, that changing the representation will also change the
+components that are available on a given <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> object: Once we
+set the <code class="docutils literal notranslate"><span class="pre">representation_type</span></code> to cylindrical, the attributes <code class="docutils literal notranslate"><span class="pre">.ra</span></code>
+and <code class="docutils literal notranslate"><span class="pre">.dec</span></code> will no longer work, and we instead have to use the
+cylindrical component names to access the data. In this case, these are
+<code class="docutils literal notranslate"><span class="pre">.rho</span></code> for radius, <code class="docutils literal notranslate"><span class="pre">.phi</span></code> for azimuth, <code class="docutils literal notranslate"><span class="pre">.z</span></code> for <span class="math notranslate nohighlight">\(z\)</span>
+position:</p>
+<p><span class="inputnumrole">In[12]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">c3</span><span class="o">.</span><span class="n">rho</span><span class="p">,</span> <span class="n">c3</span><span class="o">.</span><span class="n">phi</span><span class="p">,</span> <span class="n">c3</span><span class="o">.</span><span class="n">z</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[12]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="o">&lt;</span><span class="n">Quantity</span> <span class="mf">125.2571368</span> <span class="n">pc</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">Angle</span> <span class="mf">15.9932</span> <span class="n">deg</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">Quantity</span> <span class="o">-</span><span class="mf">23.2682118</span> <span class="n">pc</span><span class="o">&gt;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="transforming-between-coordinate-frames">
+<h2>Transforming Between Coordinate Frames<a class="headerlink" href="#transforming-between-coordinate-frames" title="Permalink to this headline">¶</a></h2>
+<p>The third key concept to keep in mind when thinking about astronomical
+coordinate data is the reference frame or coordinate system that the
+data are in. In the previous tutorial, and so far here, we have worked
+with the default frame assumed by <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code>: the International
+Celestial Reference System (ICRS; <a class="reference external" href="https://arxiv.org/abs/astro-ph/0602086">some important definitions and
+context about the ICRS is given
+here</a>). The ICRS is the
+fundamental coordinate system used in most modern astronomical contexts
+and is generally what people mean when they refer to “equatorial” or
+“J2000” or “RA/Dec” coordinates (but there are some important caveats if
+you are working with older data). As noted above, however, there are
+many other coordinate systems used in different astronomical, solar, or
+solar system contexts.</p>
+<p>Some other common coordinate systems are defined as a rotation away from
+the ICRS that is defined to make science applications easier to
+interpret. One example here is the Galactic coordinate system, which is
+rotated with respect to the ICRS to approximately align the Galactic
+plane with latitude=0. As an example of the <code class="docutils literal notranslate"><span class="pre">astropy.coordinates</span></code>
+frame transformation machinery, we will load in a subset of a catalog of
+positions and distances to a set of open clusters in the Milky Way from
+Cantat-Gaudin et al. 2018 (<a class="reference external" href="http://vizier.u-strasbg.fr/viz-bin/VizieR-3?-source=J/A%2bA/618/A93/table1">Table 1 in this
+catalog</a>).
+We have pre-selected the 474 clusters within 2 kpc of the sun and
+provide the catalog as a data file next to this notebook. This catalog
+provides sky position (columns <code class="docutils literal notranslate"><span class="pre">RAJ2000</span></code> and <code class="docutils literal notranslate"><span class="pre">DEJ2000</span></code> in the
+original catalog) and distance estimates (column <code class="docutils literal notranslate"><span class="pre">dmode</span></code> in the
+original catalog), which we have renamed in the table we provide to
+column names <code class="docutils literal notranslate"><span class="pre">'ra'</span></code>, <code class="docutils literal notranslate"><span class="pre">'dec'</span></code>, and <code class="docutils literal notranslate"><span class="pre">'distance'</span></code>. We will start by
+loading the catalog as a <code class="docutils literal notranslate"><span class="pre">QTable</span></code> using <code class="docutils literal notranslate"><span class="pre">astropy.table</span></code>
+(<a class="reference external" href="https://docs.astropy.org/en/stable/table/">docs</a>):</p>
+<p><span class="inputnumrole">In[13]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tbl</span> <span class="o">=</span> <span class="n">QTable</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;Cantat-Gaudin-open-clusters.ecsv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We can now pass the coordinate components to <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> to create a
+single array-valued <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> object to represent the positions of
+all of the open clusters in this catalog. Note that below we will
+explicitly specify the coordinate frame using <code class="docutils literal notranslate"><span class="pre">frame='icrs'</span></code>: Even
+though this is the default frame, it is often better to be explicit so
+that it is clearer to someone reading the code what the coordinate
+system is:</p>
+<p><span class="inputnumrole">In[14]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">open_cluster_c</span> <span class="o">=</span> <span class="n">SkyCoord</span><span class="p">(</span>
+    <span class="n">ra</span><span class="o">=</span><span class="n">tbl</span><span class="p">[</span><span class="s1">&#39;ra&#39;</span><span class="p">],</span>
+    <span class="n">dec</span><span class="o">=</span><span class="n">tbl</span><span class="p">[</span><span class="s1">&#39;dec&#39;</span><span class="p">],</span>
+    <span class="n">distance</span><span class="o">=</span><span class="n">tbl</span><span class="p">[</span><span class="s1">&#39;distance&#39;</span><span class="p">],</span>
+    <span class="n">frame</span><span class="o">=</span><span class="s1">&#39;icrs&#39;</span><span class="p">)</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">open_cluster_c</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[14]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">474</span>
+</pre></div>
+</div>
+<p>To see the first few coordinate entries, we can “slice” the array-valued
+coordinate object like we would a Python list or numpy array:</p>
+<p><span class="inputnumrole">In[15]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">open_cluster_c</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[15]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">SkyCoord</span> <span class="p">(</span><span class="n">ICRS</span><span class="p">):</span> <span class="p">(</span><span class="n">ra</span><span class="p">,</span> <span class="n">dec</span><span class="p">,</span> <span class="n">distance</span><span class="p">)</span> <span class="ow">in</span> <span class="p">(</span><span class="n">deg</span><span class="p">,</span> <span class="n">deg</span><span class="p">,</span> <span class="n">pc</span><span class="p">)</span>
+    <span class="p">[(</span> <span class="mf">51.87</span> <span class="p">,</span> <span class="mf">34.981</span><span class="p">,</span>  <span class="mf">629.6</span><span class="p">),</span> <span class="p">(</span><span class="mf">288.399</span><span class="p">,</span> <span class="mf">36.369</span><span class="p">,</span>  <span class="mf">382.2</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">295.548</span><span class="p">,</span> <span class="mf">27.366</span><span class="p">,</span>  <span class="mf">522.9</span><span class="p">),</span> <span class="p">(</span><span class="mf">298.306</span><span class="p">,</span> <span class="mf">39.349</span><span class="p">,</span> <span class="mf">1034.6</span><span class="p">)]</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Let’s now visualize the sky positions of all of these clusters, colored
+by their distances. To plot these in an all-sky spherical projection
+(e.g., aitoff) using <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code>, with longitude increasing to the
+left as is typically done for plotting astronomical objects on the sky,
+we have to trick <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> a little bit: We have to pass in the
+<em>negative</em> angle values when plotting, then reformat the tick labels to
+make them positive values again. We have written a short function below
+to handle this trick:</p>
+<p><span class="inputnumrole">In[16]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">coordinates_aitoff_plot</span><span class="p">(</span><span class="n">coords</span><span class="p">):</span>
+    <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span>
+                           <span class="n">subplot_kw</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="s2">&quot;aitoff&quot;</span><span class="p">))</span>
+
+    <span class="n">sph</span> <span class="o">=</span> <span class="n">coords</span><span class="o">.</span><span class="n">spherical</span>
+    <span class="n">cs</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="o">-</span><span class="n">sph</span><span class="o">.</span><span class="n">lon</span><span class="o">.</span><span class="n">wrap_at</span><span class="p">(</span><span class="mi">180</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">deg</span><span class="p">)</span><span class="o">.</span><span class="n">radian</span><span class="p">,</span>
+                    <span class="n">sph</span><span class="o">.</span><span class="n">lat</span><span class="o">.</span><span class="n">radian</span><span class="p">,</span>
+                    <span class="n">c</span><span class="o">=</span><span class="n">sph</span><span class="o">.</span><span class="n">distance</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">fmt_func</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pos</span><span class="p">):</span>
+        <span class="n">val</span> <span class="o">=</span> <span class="n">coord</span><span class="o">.</span><span class="n">Angle</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">radian</span><span class="p">)</span><span class="o">.</span><span class="n">wrap_at</span><span class="p">(</span><span class="mi">360</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">deg</span><span class="p">)</span><span class="o">.</span><span class="n">degree</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;$</span><span class="si">{</span><span class="n">val</span><span class="si">:</span><span class="s1">.0f</span><span class="si">}</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="sa">r</span><span class="s1">&#39;^{\circ}$&#39;</span>
+
+    <span class="n">ticker</span> <span class="o">=</span> <span class="n">mpl</span><span class="o">.</span><span class="n">ticker</span><span class="o">.</span><span class="n">FuncFormatter</span><span class="p">(</span><span class="n">fmt_func</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">ticker</span><span class="p">)</span>
+
+    <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+    <span class="n">cb</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">cs</span><span class="p">)</span>
+    <span class="n">cb</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s1">&#39;distance [pc]&#39;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span>
+</pre></div>
+</div>
+<p>Now we can plot the sky positions by passing our <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> object in
+to this <code class="docutils literal notranslate"><span class="pre">coordinates_aitoff_plot()</span></code> plot helper function:</p>
+<p><span class="inputnumrole">In[17]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">coordinates_aitoff_plot</span><span class="p">(</span><span class="n">open_cluster_c</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;RA [deg]&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Dec [deg]&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[17]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Text</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="s1">&#39;Dec [deg]&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../_images/2-Coordinates-Transforms_33_1.png" src="../_images/2-Coordinates-Transforms_33_1.png" />
+<p>The majority of these open clusters are relatively close to the Galactic
+midplane, which is why they form a fairly narrow “band” on the sky in
+ICRS coordinates. If we transform these positions to Galactic
+coordinates, we would therefore expect the points to appear around the
+latitude <span class="math notranslate nohighlight">\(b=0\)</span> line.</p>
+<p>To transform our coordinates from ICRS to Galactic (or any other
+coordinate system), we can use the <code class="docutils literal notranslate"><span class="pre">SkyCoord.transform_to()</span></code> method
+and pass in the new coordinate frame instance (in this case,
+<code class="docutils literal notranslate"><span class="pre">Galactic()</span></code>):</p>
+<p><span class="inputnumrole">In[18]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">open_cluster_gal</span> <span class="o">=</span> <span class="n">open_cluster_c</span><span class="o">.</span><span class="n">transform_to</span><span class="p">(</span><span class="n">Galactic</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>While the recommended way of transforming <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> objects to new
+frames is by passing in a frame class <em>instance</em> as we demonstrated in
+the cell above, <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> also supports a shorthand for transforming
+some frames by accessing attributes (named as the lower-case version of
+the new frame name):</p>
+<p><span class="inputnumrole">In[19]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">open_cluster_gal</span> <span class="o">=</span> <span class="n">open_cluster_c</span><span class="o">.</span><span class="n">galactic</span>
+</pre></div>
+</div>
+<p>The transformed <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> object now contains coordinate data in the
+<code class="docutils literal notranslate"><span class="pre">Galactic</span></code> coordinate frame:</p>
+<p><span class="inputnumrole">In[20]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">open_cluster_gal</span><span class="p">[:</span><span class="mi">4</span><span class="p">]</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[20]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">SkyCoord</span> <span class="p">(</span><span class="n">Galactic</span><span class="p">):</span> <span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">distance</span><span class="p">)</span> <span class="ow">in</span> <span class="p">(</span><span class="n">deg</span><span class="p">,</span> <span class="n">deg</span><span class="p">,</span> <span class="n">pc</span><span class="p">)</span>
+    <span class="p">[(</span><span class="mf">155.72353157</span><span class="p">,</span> <span class="o">-</span><span class="mf">17.76999215</span><span class="p">,</span>  <span class="mf">629.59997559</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">68.02807936</span><span class="p">,</span>  <span class="mf">11.60790067</span><span class="p">,</span>  <span class="mf">382.20001221</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">62.82445527</span><span class="p">,</span>   <span class="mf">2.06275608</span><span class="p">,</span>  <span class="mf">522.90002441</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">74.37841053</span><span class="p">,</span>   <span class="mf">6.07393592</span><span class="p">,</span> <span class="mf">1034.59997559</span><span class="p">)]</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Comparing this to the original <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code>, note that the names of the
+longitude and latitude components have changed from <code class="docutils literal notranslate"><span class="pre">ra</span></code> to <code class="docutils literal notranslate"><span class="pre">l</span></code> and
+from <code class="docutils literal notranslate"><span class="pre">dec</span></code> to <code class="docutils literal notranslate"><span class="pre">b</span></code>, per convention. We can therefore access the new
+Galactic longitude/latitude data using these new attribute names:</p>
+<p><span class="inputnumrole">In[21]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">open_cluster_gal</span><span class="o">.</span><span class="n">l</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[21]:</span></p>
+<div class="math notranslate nohighlight">
+\[[$155^\circ43{}^\prime24.7137{}^{\prime\prime}$
+ $68^\circ01{}^\prime41.0857{}^{\prime\prime}$
+ $62^\circ49{}^\prime28.039{}^{\prime\prime}$]\]</div>
+<p><span class="inputnumrole">In[22]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">open_cluster_gal</span><span class="o">.</span><span class="n">b</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[22]:</span></p>
+<div class="math notranslate nohighlight">
+\[[$-17^\circ46{}^\prime11.9717{}^{\prime\prime}$
+ $11^\circ36{}^\prime28.4424{}^{\prime\prime}$
+ $2^\circ03{}^\prime45.9219{}^{\prime\prime}$]\]</div>
+<p><em>Note: the ICRS coordinate component names (``.ra``, ``.dec``) will
+therefore</em><strong>not</strong><em>work on this new, transformed ``SkyCoord``
+instance, ``open_cluster_gal``</em></p>
+<p>With this new <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> object (in the Galactic frame), let’s re-make
+a sky plot to visualize the sky positions of the open clusters in
+Galactic coordinates:</p>
+<p><span class="inputnumrole">In[23]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">coordinates_aitoff_plot</span><span class="p">(</span><span class="n">open_cluster_gal</span><span class="p">);</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Galactic longitude, $l$ [deg]&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Galactic latitude, $b$ [deg]&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[23]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Text</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="s1">&#39;Galactic latitude, $b$ [deg]&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../_images/2-Coordinates-Transforms_45_1.png" src="../_images/2-Coordinates-Transforms_45_1.png" />
+<p>As we hoped and expected, in the Galactic coordinate frame, the open
+clusters predominantly appear at low galactic latitudes!</p>
+</section>
+<section id="transforming-to-more-complex-coordinate-frames-computing-the-altitude-of-a-target-at-an-observatory">
+<h2>Transforming to More Complex Coordinate Frames: Computing the Altitude of a Target at an Observatory<a class="headerlink" href="#transforming-to-more-complex-coordinate-frames-computing-the-altitude-of-a-target-at-an-observatory" title="Permalink to this headline">¶</a></h2>
+<p>To determine whether a target is observable from a given observatory on
+Earth or to find out what targets are observable from a city or place on
+Earth at some time, we sometimes need to convert a coordinate or set of
+coordinates to a frame that is local to an on-earth observer. The most
+common choice for such a frame is “horizontal” or “Altitude-Azimuth”
+coordinates. In this frame, the sky coordinates of a source can be
+specified as an altitude from the horizon and an azimuth angle at a
+specified time. This coordinate frame is supported in
+<code class="docutils literal notranslate"><span class="pre">astropy.coordinates</span></code> through the <code class="docutils literal notranslate"><span class="pre">AltAz</span></code> coordinate frame.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">AltAz</span></code> frame is different from the previously-demonstrated
+<code class="docutils literal notranslate"><span class="pre">Galactic</span></code> frame in that it requires additional metadata to define the
+frame instance. Since the <code class="docutils literal notranslate"><span class="pre">Galactic</span></code> frame is close to being a 3D
+rotation away from the ICRS frame, and that rotation matrix is fixed, we
+could transform to <code class="docutils literal notranslate"><span class="pre">Galactic</span></code> by instantiating the class with no
+arguments (see the example above where we used
+<code class="docutils literal notranslate"><span class="pre">.transform_to(Galactic())</span></code>). In order to specify an instance of the
+<code class="docutils literal notranslate"><span class="pre">AltAz</span></code> frame, we have to (at minimum) pass in (1) a location on
+Earth, and (2) the time (or times) we are requesting the frame at.</p>
+<p>In <code class="docutils literal notranslate"><span class="pre">astropy.coordinates</span></code>, we specify locations on Earth with the
+<code class="docutils literal notranslate"><span class="pre">EarthLocation</span></code> class
+(<a class="reference external" href="https://docs.astropy.org/en/stable/api/astropy.coordinates.EarthLocation.html">docs</a>).
+If we know the Earth longitude and latitude of our site, we can use
+these to create an instance of <code class="docutils literal notranslate"><span class="pre">EarthLocation</span></code> directly:</p>
+<p><span class="inputnumrole">In[24]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">demo_loc</span> <span class="o">=</span> <span class="n">EarthLocation</span><span class="o">.</span><span class="n">from_geodetic</span><span class="p">(</span>
+    <span class="n">lon</span><span class="o">=-</span><span class="mf">74.32834</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">deg</span><span class="p">,</span> <span class="n">lat</span><span class="o">=</span><span class="mf">43.05885</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">deg</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">EarthLocation</span></code> class also provides handy short-hands for
+retrieving an instance for a given street address (by querying the
+<a class="reference external" href="https://www.openstreetmap.org/">OpenStreetMap</a> web API):</p>
+<p><span class="inputnumrole">In[25]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">demo_loc</span> <span class="o">=</span> <span class="n">EarthLocation</span><span class="o">.</span><span class="n">of_address</span><span class="p">(</span><span class="s1">&#39;162 Fifth Ave, New York, NY 10010&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Or for an astronomical observatory (use
+<code class="docutils literal notranslate"><span class="pre">EarthLocation.get_site_names()</span></code> to see a list of all available
+sites). For example, to retrieve an <code class="docutils literal notranslate"><span class="pre">EarthLocation</span></code> instance for the
+position of Kitt Peak National Observatory (in AZ, USA):</p>
+<p><span class="inputnumrole">In[26]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">observing_location</span> <span class="o">=</span> <span class="n">EarthLocation</span><span class="o">.</span><span class="n">of_site</span><span class="p">(</span><span class="s1">&#39;Kitt Peak&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We will use Kitt Peak as our site.</p>
+<p>As an example, we will now compute the altitude of a few of the open
+clusters from our catalog above over the course of a night. We have an
+object to represent our location on Earth, so now we need to create a
+set of times to compute the <code class="docutils literal notranslate"><span class="pre">AltAz</span></code> frame for. <code class="docutils literal notranslate"><span class="pre">AltAz</span></code> expects time
+information to be passed in as an <code class="docutils literal notranslate"><span class="pre">astropy.time.Time</span></code> object
+(<a class="reference external" href="https://docs.astropy.org/en/stable/api/astropy.time.Time.html">docs</a>;
+which can contain an array of times). Let’s pretend we have an observing
+run coming up on Dec 18, 2020, and we would like to compute the
+altitude/azimuth coordinates for our open clusters over that whole
+night.</p>
+<p><span class="inputnumrole">In[27]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1AM UTC = 6PM local time (AZ mountain time), roughly the start of a night</span>
+<span class="n">observing_date</span> <span class="o">=</span> <span class="n">Time</span><span class="p">(</span><span class="s1">&#39;2020-12-18 1:00&#39;</span><span class="p">)</span>
+
+<span class="c1"># Compute the alt/az over a 14 hour period, starting at 6PM local time,</span>
+<span class="c1"># with 256 equally spaced time points:</span>
+<span class="n">time_grid</span> <span class="o">=</span> <span class="n">observing_date</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">14</span><span class="p">,</span> <span class="mi">256</span><span class="p">)</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">hour</span>
+</pre></div>
+</div>
+<p>Now we use our location, <code class="docutils literal notranslate"><span class="pre">observing_location</span></code>, and this grid of times,
+<code class="docutils literal notranslate"><span class="pre">time_grid</span></code>, to create an <code class="docutils literal notranslate"><span class="pre">AltAz</span></code> frame object.</p>
+<p><em>Note: This frame accepts even more parameters about the atmosphere,
+which can be used to correct for atmospheric refraction. But here we
+leave those additional parameters set to their defaults, which ignores
+refraction.</em></p>
+<p><span class="inputnumrole">In[28]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">altaz</span> <span class="o">=</span> <span class="n">AltAz</span><span class="p">(</span><span class="n">location</span><span class="o">=</span><span class="n">observing_location</span><span class="p">,</span> <span class="n">obstime</span><span class="o">=</span><span class="n">time_grid</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now we can transform the ICRS <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> positions of the open
+clusters to <code class="docutils literal notranslate"><span class="pre">AltAz</span></code> to get the location of each of the clusters in the
+sky over Kitt Peak over a night. Let’s first do this only for the first
+open cluster in the catalog we loaded:</p>
+<p><span class="inputnumrole">In[29]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">oc_altaz</span> <span class="o">=</span> <span class="n">open_cluster_c</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">transform_to</span><span class="p">(</span><span class="n">altaz</span><span class="p">)</span>
+<span class="n">oc_altaz</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[29]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">SkyCoord</span> <span class="p">(</span><span class="n">AltAz</span><span class="p">:</span> <span class="n">obstime</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;2020-12-18 01:00:00.000&#39;</span> <span class="s1">&#39;2020-12-18 01:03:17.647&#39;</span>
+ <span class="s1">&#39;2020-12-18 01:06:35.294&#39;</span> <span class="s1">&#39;2020-12-18 01:09:52.941&#39;</span>
+ <span class="s1">&#39;2020-12-18 01:13:10.588&#39;</span> <span class="s1">&#39;2020-12-18 01:16:28.235&#39;</span>
+ <span class="s1">&#39;2020-12-18 01:19:45.882&#39;</span> <span class="s1">&#39;2020-12-18 01:23:03.529&#39;</span>
+ <span class="s1">&#39;2020-12-18 01:26:21.176&#39;</span> <span class="s1">&#39;2020-12-18 01:29:38.824&#39;</span>
+ <span class="s1">&#39;2020-12-18 01:32:56.471&#39;</span> <span class="s1">&#39;2020-12-18 01:36:14.118&#39;</span>
+ <span class="s1">&#39;2020-12-18 01:39:31.765&#39;</span> <span class="s1">&#39;2020-12-18 01:42:49.412&#39;</span>
+ <span class="s1">&#39;2020-12-18 01:46:07.059&#39;</span> <span class="s1">&#39;2020-12-18 01:49:24.706&#39;</span>
+ <span class="s1">&#39;2020-12-18 01:52:42.353&#39;</span> <span class="s1">&#39;2020-12-18 01:56:00.000&#39;</span>
+ <span class="s1">&#39;2020-12-18 01:59:17.647&#39;</span> <span class="s1">&#39;2020-12-18 02:02:35.294&#39;</span>
+ <span class="s1">&#39;2020-12-18 02:05:52.941&#39;</span> <span class="s1">&#39;2020-12-18 02:09:10.588&#39;</span>
+ <span class="s1">&#39;2020-12-18 02:12:28.235&#39;</span> <span class="s1">&#39;2020-12-18 02:15:45.882&#39;</span>
+ <span class="s1">&#39;2020-12-18 02:19:03.529&#39;</span> <span class="s1">&#39;2020-12-18 02:22:21.176&#39;</span>
+ <span class="s1">&#39;2020-12-18 02:25:38.824&#39;</span> <span class="s1">&#39;2020-12-18 02:28:56.471&#39;</span>
+ <span class="s1">&#39;2020-12-18 02:32:14.118&#39;</span> <span class="s1">&#39;2020-12-18 02:35:31.765&#39;</span>
+ <span class="s1">&#39;2020-12-18 02:38:49.412&#39;</span> <span class="s1">&#39;2020-12-18 02:42:07.059&#39;</span>
+ <span class="s1">&#39;2020-12-18 02:45:24.706&#39;</span> <span class="s1">&#39;2020-12-18 02:48:42.353&#39;</span>
+ <span class="s1">&#39;2020-12-18 02:52:00.000&#39;</span> <span class="s1">&#39;2020-12-18 02:55:17.647&#39;</span>
+ <span class="s1">&#39;2020-12-18 02:58:35.294&#39;</span> <span class="s1">&#39;2020-12-18 03:01:52.941&#39;</span>
+ <span class="s1">&#39;2020-12-18 03:05:10.588&#39;</span> <span class="s1">&#39;2020-12-18 03:08:28.235&#39;</span>
+ <span class="s1">&#39;2020-12-18 03:11:45.882&#39;</span> <span class="s1">&#39;2020-12-18 03:15:03.529&#39;</span>
+ <span class="s1">&#39;2020-12-18 03:18:21.176&#39;</span> <span class="s1">&#39;2020-12-18 03:21:38.824&#39;</span>
+ <span class="s1">&#39;2020-12-18 03:24:56.471&#39;</span> <span class="s1">&#39;2020-12-18 03:28:14.118&#39;</span>
+ <span class="s1">&#39;2020-12-18 03:31:31.765&#39;</span> <span class="s1">&#39;2020-12-18 03:34:49.412&#39;</span>
+ <span class="s1">&#39;2020-12-18 03:38:07.059&#39;</span> <span class="s1">&#39;2020-12-18 03:41:24.706&#39;</span>
+ <span class="s1">&#39;2020-12-18 03:44:42.353&#39;</span> <span class="s1">&#39;2020-12-18 03:48:00.000&#39;</span>
+ <span class="s1">&#39;2020-12-18 03:51:17.647&#39;</span> <span class="s1">&#39;2020-12-18 03:54:35.294&#39;</span>
+ <span class="s1">&#39;2020-12-18 03:57:52.941&#39;</span> <span class="s1">&#39;2020-12-18 04:01:10.588&#39;</span>
+ <span class="s1">&#39;2020-12-18 04:04:28.235&#39;</span> <span class="s1">&#39;2020-12-18 04:07:45.882&#39;</span>
+ <span class="s1">&#39;2020-12-18 04:11:03.529&#39;</span> <span class="s1">&#39;2020-12-18 04:14:21.176&#39;</span>
+ <span class="s1">&#39;2020-12-18 04:17:38.824&#39;</span> <span class="s1">&#39;2020-12-18 04:20:56.471&#39;</span>
+ <span class="s1">&#39;2020-12-18 04:24:14.118&#39;</span> <span class="s1">&#39;2020-12-18 04:27:31.765&#39;</span>
+ <span class="s1">&#39;2020-12-18 04:30:49.412&#39;</span> <span class="s1">&#39;2020-12-18 04:34:07.059&#39;</span>
+ <span class="s1">&#39;2020-12-18 04:37:24.706&#39;</span> <span class="s1">&#39;2020-12-18 04:40:42.353&#39;</span>
+ <span class="s1">&#39;2020-12-18 04:44:00.000&#39;</span> <span class="s1">&#39;2020-12-18 04:47:17.647&#39;</span>
+ <span class="s1">&#39;2020-12-18 04:50:35.294&#39;</span> <span class="s1">&#39;2020-12-18 04:53:52.941&#39;</span>
+ <span class="s1">&#39;2020-12-18 04:57:10.588&#39;</span> <span class="s1">&#39;2020-12-18 05:00:28.235&#39;</span>
+ <span class="s1">&#39;2020-12-18 05:03:45.882&#39;</span> <span class="s1">&#39;2020-12-18 05:07:03.529&#39;</span>
+ <span class="s1">&#39;2020-12-18 05:10:21.176&#39;</span> <span class="s1">&#39;2020-12-18 05:13:38.824&#39;</span>
+ <span class="s1">&#39;2020-12-18 05:16:56.471&#39;</span> <span class="s1">&#39;2020-12-18 05:20:14.118&#39;</span>
+ <span class="s1">&#39;2020-12-18 05:23:31.765&#39;</span> <span class="s1">&#39;2020-12-18 05:26:49.412&#39;</span>
+ <span class="s1">&#39;2020-12-18 05:30:07.059&#39;</span> <span class="s1">&#39;2020-12-18 05:33:24.706&#39;</span>
+ <span class="s1">&#39;2020-12-18 05:36:42.353&#39;</span> <span class="s1">&#39;2020-12-18 05:40:00.000&#39;</span>
+ <span class="s1">&#39;2020-12-18 05:43:17.647&#39;</span> <span class="s1">&#39;2020-12-18 05:46:35.294&#39;</span>
+ <span class="s1">&#39;2020-12-18 05:49:52.941&#39;</span> <span class="s1">&#39;2020-12-18 05:53:10.588&#39;</span>
+ <span class="s1">&#39;2020-12-18 05:56:28.235&#39;</span> <span class="s1">&#39;2020-12-18 05:59:45.882&#39;</span>
+ <span class="s1">&#39;2020-12-18 06:03:03.529&#39;</span> <span class="s1">&#39;2020-12-18 06:06:21.176&#39;</span>
+ <span class="s1">&#39;2020-12-18 06:09:38.824&#39;</span> <span class="s1">&#39;2020-12-18 06:12:56.471&#39;</span>
+ <span class="s1">&#39;2020-12-18 06:16:14.118&#39;</span> <span class="s1">&#39;2020-12-18 06:19:31.765&#39;</span>
+ <span class="s1">&#39;2020-12-18 06:22:49.412&#39;</span> <span class="s1">&#39;2020-12-18 06:26:07.059&#39;</span>
+ <span class="s1">&#39;2020-12-18 06:29:24.706&#39;</span> <span class="s1">&#39;2020-12-18 06:32:42.353&#39;</span>
+ <span class="s1">&#39;2020-12-18 06:36:00.000&#39;</span> <span class="s1">&#39;2020-12-18 06:39:17.647&#39;</span>
+ <span class="s1">&#39;2020-12-18 06:42:35.294&#39;</span> <span class="s1">&#39;2020-12-18 06:45:52.941&#39;</span>
+ <span class="s1">&#39;2020-12-18 06:49:10.588&#39;</span> <span class="s1">&#39;2020-12-18 06:52:28.235&#39;</span>
+ <span class="s1">&#39;2020-12-18 06:55:45.882&#39;</span> <span class="s1">&#39;2020-12-18 06:59:03.529&#39;</span>
+ <span class="s1">&#39;2020-12-18 07:02:21.176&#39;</span> <span class="s1">&#39;2020-12-18 07:05:38.824&#39;</span>
+ <span class="s1">&#39;2020-12-18 07:08:56.471&#39;</span> <span class="s1">&#39;2020-12-18 07:12:14.118&#39;</span>
+ <span class="s1">&#39;2020-12-18 07:15:31.765&#39;</span> <span class="s1">&#39;2020-12-18 07:18:49.412&#39;</span>
+ <span class="s1">&#39;2020-12-18 07:22:07.059&#39;</span> <span class="s1">&#39;2020-12-18 07:25:24.706&#39;</span>
+ <span class="s1">&#39;2020-12-18 07:28:42.353&#39;</span> <span class="s1">&#39;2020-12-18 07:32:00.000&#39;</span>
+ <span class="s1">&#39;2020-12-18 07:35:17.647&#39;</span> <span class="s1">&#39;2020-12-18 07:38:35.294&#39;</span>
+ <span class="s1">&#39;2020-12-18 07:41:52.941&#39;</span> <span class="s1">&#39;2020-12-18 07:45:10.588&#39;</span>
+ <span class="s1">&#39;2020-12-18 07:48:28.235&#39;</span> <span class="s1">&#39;2020-12-18 07:51:45.882&#39;</span>
+ <span class="s1">&#39;2020-12-18 07:55:03.529&#39;</span> <span class="s1">&#39;2020-12-18 07:58:21.176&#39;</span>
+ <span class="s1">&#39;2020-12-18 08:01:38.824&#39;</span> <span class="s1">&#39;2020-12-18 08:04:56.471&#39;</span>
+ <span class="s1">&#39;2020-12-18 08:08:14.118&#39;</span> <span class="s1">&#39;2020-12-18 08:11:31.765&#39;</span>
+ <span class="s1">&#39;2020-12-18 08:14:49.412&#39;</span> <span class="s1">&#39;2020-12-18 08:18:07.059&#39;</span>
+ <span class="s1">&#39;2020-12-18 08:21:24.706&#39;</span> <span class="s1">&#39;2020-12-18 08:24:42.353&#39;</span>
+ <span class="s1">&#39;2020-12-18 08:28:00.000&#39;</span> <span class="s1">&#39;2020-12-18 08:31:17.647&#39;</span>
+ <span class="s1">&#39;2020-12-18 08:34:35.294&#39;</span> <span class="s1">&#39;2020-12-18 08:37:52.941&#39;</span>
+ <span class="s1">&#39;2020-12-18 08:41:10.588&#39;</span> <span class="s1">&#39;2020-12-18 08:44:28.235&#39;</span>
+ <span class="s1">&#39;2020-12-18 08:47:45.882&#39;</span> <span class="s1">&#39;2020-12-18 08:51:03.529&#39;</span>
+ <span class="s1">&#39;2020-12-18 08:54:21.176&#39;</span> <span class="s1">&#39;2020-12-18 08:57:38.824&#39;</span>
+ <span class="s1">&#39;2020-12-18 09:00:56.471&#39;</span> <span class="s1">&#39;2020-12-18 09:04:14.118&#39;</span>
+ <span class="s1">&#39;2020-12-18 09:07:31.765&#39;</span> <span class="s1">&#39;2020-12-18 09:10:49.412&#39;</span>
+ <span class="s1">&#39;2020-12-18 09:14:07.059&#39;</span> <span class="s1">&#39;2020-12-18 09:17:24.706&#39;</span>
+ <span class="s1">&#39;2020-12-18 09:20:42.353&#39;</span> <span class="s1">&#39;2020-12-18 09:24:00.000&#39;</span>
+ <span class="s1">&#39;2020-12-18 09:27:17.647&#39;</span> <span class="s1">&#39;2020-12-18 09:30:35.294&#39;</span>
+ <span class="s1">&#39;2020-12-18 09:33:52.941&#39;</span> <span class="s1">&#39;2020-12-18 09:37:10.588&#39;</span>
+ <span class="s1">&#39;2020-12-18 09:40:28.235&#39;</span> <span class="s1">&#39;2020-12-18 09:43:45.882&#39;</span>
+ <span class="s1">&#39;2020-12-18 09:47:03.529&#39;</span> <span class="s1">&#39;2020-12-18 09:50:21.176&#39;</span>
+ <span class="s1">&#39;2020-12-18 09:53:38.824&#39;</span> <span class="s1">&#39;2020-12-18 09:56:56.471&#39;</span>
+ <span class="s1">&#39;2020-12-18 10:00:14.118&#39;</span> <span class="s1">&#39;2020-12-18 10:03:31.765&#39;</span>
+ <span class="s1">&#39;2020-12-18 10:06:49.412&#39;</span> <span class="s1">&#39;2020-12-18 10:10:07.059&#39;</span>
+ <span class="s1">&#39;2020-12-18 10:13:24.706&#39;</span> <span class="s1">&#39;2020-12-18 10:16:42.353&#39;</span>
+ <span class="s1">&#39;2020-12-18 10:20:00.000&#39;</span> <span class="s1">&#39;2020-12-18 10:23:17.647&#39;</span>
+ <span class="s1">&#39;2020-12-18 10:26:35.294&#39;</span> <span class="s1">&#39;2020-12-18 10:29:52.941&#39;</span>
+ <span class="s1">&#39;2020-12-18 10:33:10.588&#39;</span> <span class="s1">&#39;2020-12-18 10:36:28.235&#39;</span>
+ <span class="s1">&#39;2020-12-18 10:39:45.882&#39;</span> <span class="s1">&#39;2020-12-18 10:43:03.529&#39;</span>
+ <span class="s1">&#39;2020-12-18 10:46:21.176&#39;</span> <span class="s1">&#39;2020-12-18 10:49:38.824&#39;</span>
+ <span class="s1">&#39;2020-12-18 10:52:56.471&#39;</span> <span class="s1">&#39;2020-12-18 10:56:14.118&#39;</span>
+ <span class="s1">&#39;2020-12-18 10:59:31.765&#39;</span> <span class="s1">&#39;2020-12-18 11:02:49.412&#39;</span>
+ <span class="s1">&#39;2020-12-18 11:06:07.059&#39;</span> <span class="s1">&#39;2020-12-18 11:09:24.706&#39;</span>
+ <span class="s1">&#39;2020-12-18 11:12:42.353&#39;</span> <span class="s1">&#39;2020-12-18 11:16:00.000&#39;</span>
+ <span class="s1">&#39;2020-12-18 11:19:17.647&#39;</span> <span class="s1">&#39;2020-12-18 11:22:35.294&#39;</span>
+ <span class="s1">&#39;2020-12-18 11:25:52.941&#39;</span> <span class="s1">&#39;2020-12-18 11:29:10.588&#39;</span>
+ <span class="s1">&#39;2020-12-18 11:32:28.235&#39;</span> <span class="s1">&#39;2020-12-18 11:35:45.882&#39;</span>
+ <span class="s1">&#39;2020-12-18 11:39:03.529&#39;</span> <span class="s1">&#39;2020-12-18 11:42:21.176&#39;</span>
+ <span class="s1">&#39;2020-12-18 11:45:38.824&#39;</span> <span class="s1">&#39;2020-12-18 11:48:56.471&#39;</span>
+ <span class="s1">&#39;2020-12-18 11:52:14.118&#39;</span> <span class="s1">&#39;2020-12-18 11:55:31.765&#39;</span>
+ <span class="s1">&#39;2020-12-18 11:58:49.412&#39;</span> <span class="s1">&#39;2020-12-18 12:02:07.059&#39;</span>
+ <span class="s1">&#39;2020-12-18 12:05:24.706&#39;</span> <span class="s1">&#39;2020-12-18 12:08:42.353&#39;</span>
+ <span class="s1">&#39;2020-12-18 12:12:00.000&#39;</span> <span class="s1">&#39;2020-12-18 12:15:17.647&#39;</span>
+ <span class="s1">&#39;2020-12-18 12:18:35.294&#39;</span> <span class="s1">&#39;2020-12-18 12:21:52.941&#39;</span>
+ <span class="s1">&#39;2020-12-18 12:25:10.588&#39;</span> <span class="s1">&#39;2020-12-18 12:28:28.235&#39;</span>
+ <span class="s1">&#39;2020-12-18 12:31:45.882&#39;</span> <span class="s1">&#39;2020-12-18 12:35:03.529&#39;</span>
+ <span class="s1">&#39;2020-12-18 12:38:21.176&#39;</span> <span class="s1">&#39;2020-12-18 12:41:38.824&#39;</span>
+ <span class="s1">&#39;2020-12-18 12:44:56.471&#39;</span> <span class="s1">&#39;2020-12-18 12:48:14.118&#39;</span>
+ <span class="s1">&#39;2020-12-18 12:51:31.765&#39;</span> <span class="s1">&#39;2020-12-18 12:54:49.412&#39;</span>
+ <span class="s1">&#39;2020-12-18 12:58:07.059&#39;</span> <span class="s1">&#39;2020-12-18 13:01:24.706&#39;</span>
+ <span class="s1">&#39;2020-12-18 13:04:42.353&#39;</span> <span class="s1">&#39;2020-12-18 13:08:00.000&#39;</span>
+ <span class="s1">&#39;2020-12-18 13:11:17.647&#39;</span> <span class="s1">&#39;2020-12-18 13:14:35.294&#39;</span>
+ <span class="s1">&#39;2020-12-18 13:17:52.941&#39;</span> <span class="s1">&#39;2020-12-18 13:21:10.588&#39;</span>
+ <span class="s1">&#39;2020-12-18 13:24:28.235&#39;</span> <span class="s1">&#39;2020-12-18 13:27:45.882&#39;</span>
+ <span class="s1">&#39;2020-12-18 13:31:03.529&#39;</span> <span class="s1">&#39;2020-12-18 13:34:21.176&#39;</span>
+ <span class="s1">&#39;2020-12-18 13:37:38.824&#39;</span> <span class="s1">&#39;2020-12-18 13:40:56.471&#39;</span>
+ <span class="s1">&#39;2020-12-18 13:44:14.118&#39;</span> <span class="s1">&#39;2020-12-18 13:47:31.765&#39;</span>
+ <span class="s1">&#39;2020-12-18 13:50:49.412&#39;</span> <span class="s1">&#39;2020-12-18 13:54:07.059&#39;</span>
+ <span class="s1">&#39;2020-12-18 13:57:24.706&#39;</span> <span class="s1">&#39;2020-12-18 14:00:42.353&#39;</span>
+ <span class="s1">&#39;2020-12-18 14:04:00.000&#39;</span> <span class="s1">&#39;2020-12-18 14:07:17.647&#39;</span>
+ <span class="s1">&#39;2020-12-18 14:10:35.294&#39;</span> <span class="s1">&#39;2020-12-18 14:13:52.941&#39;</span>
+ <span class="s1">&#39;2020-12-18 14:17:10.588&#39;</span> <span class="s1">&#39;2020-12-18 14:20:28.235&#39;</span>
+ <span class="s1">&#39;2020-12-18 14:23:45.882&#39;</span> <span class="s1">&#39;2020-12-18 14:27:03.529&#39;</span>
+ <span class="s1">&#39;2020-12-18 14:30:21.176&#39;</span> <span class="s1">&#39;2020-12-18 14:33:38.824&#39;</span>
+ <span class="s1">&#39;2020-12-18 14:36:56.471&#39;</span> <span class="s1">&#39;2020-12-18 14:40:14.118&#39;</span>
+ <span class="s1">&#39;2020-12-18 14:43:31.765&#39;</span> <span class="s1">&#39;2020-12-18 14:46:49.412&#39;</span>
+ <span class="s1">&#39;2020-12-18 14:50:07.059&#39;</span> <span class="s1">&#39;2020-12-18 14:53:24.706&#39;</span>
+ <span class="s1">&#39;2020-12-18 14:56:42.353&#39;</span> <span class="s1">&#39;2020-12-18 15:00:00.000&#39;</span><span class="p">],</span> <span class="n">location</span><span class="o">=</span><span class="p">(</span><span class="o">-</span><span class="mf">1994502.60430614</span><span class="p">,</span> <span class="o">-</span><span class="mf">5037538.54232911</span><span class="p">,</span> <span class="mf">3358104.99690298</span><span class="p">)</span> <span class="n">m</span><span class="p">,</span> <span class="n">pressure</span><span class="o">=</span><span class="mf">0.0</span> <span class="n">hPa</span><span class="p">,</span> <span class="n">temperature</span><span class="o">=</span><span class="mf">0.0</span> <span class="n">deg_C</span><span class="p">,</span> <span class="n">relative_humidity</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">obswl</span><span class="o">=</span><span class="mf">1.0</span> <span class="n">micron</span><span class="p">):</span> <span class="p">(</span><span class="n">az</span><span class="p">,</span> <span class="n">alt</span><span class="p">,</span> <span class="n">distance</span><span class="p">)</span> <span class="ow">in</span> <span class="p">(</span><span class="n">deg</span><span class="p">,</span> <span class="n">deg</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
+    <span class="p">[(</span> <span class="mf">68.64531195</span><span class="p">,</span>  <span class="mf">3.92957976e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">68.87232256</span><span class="p">,</span>  <span class="mf">3.99487861e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">69.09658773</span><span class="p">,</span>  <span class="mf">4.06027691e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">69.31808174</span><span class="p">,</span>  <span class="mf">4.12577245e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">69.53677552</span><span class="p">,</span>  <span class="mf">4.19136304e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">69.75263652</span><span class="p">,</span>  <span class="mf">4.25704651e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">69.96562846</span><span class="p">,</span>  <span class="mf">4.32282074e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">70.17571107</span><span class="p">,</span>  <span class="mf">4.38868357e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">70.38283984</span><span class="p">,</span>  <span class="mf">4.45463292e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">70.58696572</span><span class="p">,</span>  <span class="mf">4.52066669e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">70.78803479</span><span class="p">,</span>  <span class="mf">4.58678280e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">70.98598794</span><span class="p">,</span>  <span class="mf">4.65297919e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">71.18076044</span><span class="p">,</span>  <span class="mf">4.71925382e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">71.37228158</span><span class="p">,</span>  <span class="mf">4.78560463e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">71.56047414</span><span class="p">,</span>  <span class="mf">4.85202961e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">71.74525393</span><span class="p">,</span>  <span class="mf">4.91852671e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">71.92652921</span><span class="p">,</span>  <span class="mf">4.98509393e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">72.10420006</span><span class="p">,</span>  <span class="mf">5.05172924e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">72.27815772</span><span class="p">,</span>  <span class="mf">5.11843061e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">72.44828383</span><span class="p">,</span>  <span class="mf">5.18519603e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">72.61444956</span><span class="p">,</span>  <span class="mf">5.25202345e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">72.77651469</span><span class="p">,</span>  <span class="mf">5.31891085e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">72.93432662</span><span class="p">,</span>  <span class="mf">5.38585616e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">73.08771912</span><span class="p">,</span>  <span class="mf">5.45285732e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">73.23651113</span><span class="p">,</span>  <span class="mf">5.51991223e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">73.38050525</span><span class="p">,</span>  <span class="mf">5.58701878e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">73.51948615</span><span class="p">,</span>  <span class="mf">5.65417482e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">73.65321874</span><span class="p">,</span>  <span class="mf">5.72137818e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">73.78144611</span><span class="p">,</span>  <span class="mf">5.78862662e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">73.90388723</span><span class="p">,</span>  <span class="mf">5.85591788e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">74.02023431</span><span class="p">,</span>  <span class="mf">5.92324963e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">74.13014985</span><span class="p">,</span>  <span class="mf">5.99061948e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">74.23326323</span><span class="p">,</span>  <span class="mf">6.05802495e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">74.32916689</span><span class="p">,</span>  <span class="mf">6.12546351e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">74.41741188</span><span class="p">,</span>  <span class="mf">6.19293249e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">74.49750284</span><span class="p">,</span>  <span class="mf">6.26042914e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">74.56889213</span><span class="p">,</span>  <span class="mf">6.32795056e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">74.63097317</span><span class="p">,</span>  <span class="mf">6.39549371e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">74.68307262</span><span class="p">,</span>  <span class="mf">6.46305539e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">74.72444134</span><span class="p">,</span>  <span class="mf">6.53063219e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">74.75424384</span><span class="p">,</span>  <span class="mf">6.59822048e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">74.77154591</span><span class="p">,</span>  <span class="mf">6.66581637e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">74.7753001</span> <span class="p">,</span>  <span class="mf">6.73341567e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">74.76432852</span><span class="p">,</span>  <span class="mf">6.80101385e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">74.73730248</span><span class="p">,</span>  <span class="mf">6.86860596e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">74.69271818</span><span class="p">,</span>  <span class="mf">6.93618659e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">74.62886761</span><span class="p">,</span>  <span class="mf">7.00374976e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">74.54380349</span><span class="p">,</span>  <span class="mf">7.07128884e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">74.43529677</span><span class="p">,</span>  <span class="mf">7.13879644e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">74.30078485</span><span class="p">,</span>  <span class="mf">7.20626423e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">74.13730816</span><span class="p">,</span>  <span class="mf">7.27368280e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">73.94143174</span><span class="p">,</span>  <span class="mf">7.34104138e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">73.70914787</span><span class="p">,</span>  <span class="mf">7.40832764e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">73.43575409</span><span class="p">,</span>  <span class="mf">7.47552727e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">73.11569924</span><span class="p">,</span>  <span class="mf">7.54262356e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">72.74238752</span><span class="p">,</span>  <span class="mf">7.60959686e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">72.30792686</span><span class="p">,</span>  <span class="mf">7.67642378e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">71.80280292</span><span class="p">,</span>  <span class="mf">7.74307629e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">71.2154524</span> <span class="p">,</span>  <span class="mf">7.80952039e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">70.53169906</span><span class="p">,</span>  <span class="mf">7.87571446e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">69.73400027</span><span class="p">,</span>  <span class="mf">7.94160691e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">68.80042988</span><span class="p">,</span>  <span class="mf">8.00713302e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">67.70329059</span><span class="p">,</span>  <span class="mf">8.07221051e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">66.40720237</span><span class="p">,</span>  <span class="mf">8.13673326e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">64.86644797</span><span class="p">,</span>  <span class="mf">8.20056232e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">63.02126974</span><span class="p">,</span>  <span class="mf">8.26351269e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">60.79271465</span><span class="p">,</span>  <span class="mf">8.32533379e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">58.07556828</span><span class="p">,</span>  <span class="mf">8.38568008e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">54.72908241</span><span class="p">,</span>  <span class="mf">8.44406661e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">50.56610671</span><span class="p">,</span>  <span class="mf">8.49980229e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">45.34423733</span><span class="p">,</span>  <span class="mf">8.55189271e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">38.77061796</span><span class="p">,</span>  <span class="mf">8.59891117e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">30.5487625</span> <span class="p">,</span>  <span class="mf">8.63886759e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">20.51469271</span><span class="p">,</span>  <span class="mf">8.66919014e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span>  <span class="mf">8.87921676</span><span class="p">,</span>  <span class="mf">8.68706354e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">356.42130394</span><span class="p">,</span>  <span class="mf">8.69032349e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">344.30564506</span><span class="p">,</span>  <span class="mf">8.67852493e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">333.52846484</span><span class="p">,</span>  <span class="mf">8.65320207e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">324.53491308</span><span class="p">,</span>  <span class="mf">8.61702974e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">317.28825209</span><span class="p">,</span>  <span class="mf">8.57275676e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">311.52521777</span><span class="p">,</span>  <span class="mf">8.52263406e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">306.94165668</span><span class="p">,</span>  <span class="mf">8.46831617e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">303.27141327</span><span class="p">,</span>  <span class="mf">8.41096547e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">300.30436084</span><span class="p">,</span>  <span class="mf">8.35138910e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">297.88122585</span><span class="p">,</span>  <span class="mf">8.29015054e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">295.88283322</span><span class="p">,</span>  <span class="mf">8.22764848e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">294.21997197</span><span class="p">,</span>  <span class="mf">8.16416987e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">292.82539391</span><span class="p">,</span>  <span class="mf">8.09992491e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">291.6478951</span> <span class="p">,</span>  <span class="mf">8.03507037e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">290.64804543</span><span class="p">,</span>  <span class="mf">7.96972512e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">289.79512802</span><span class="p">,</span>  <span class="mf">7.90398074e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">289.06494086</span><span class="p">,</span>  <span class="mf">7.83790884e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">288.4382068</span> <span class="p">,</span>  <span class="mf">7.77156619e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">287.89941318</span><span class="p">,</span>  <span class="mf">7.70499836e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">287.43595607</span><span class="p">,</span>  <span class="mf">7.63824237e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">287.03750269</span><span class="p">,</span>  <span class="mf">7.57132863e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">286.69551114</span><span class="p">,</span>  <span class="mf">7.50428237e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">286.40286499</span><span class="p">,</span>  <span class="mf">7.43712476e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">286.15359244</span><span class="p">,</span>  <span class="mf">7.36987369e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">285.94264852</span><span class="p">,</span>  <span class="mf">7.30254443e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">285.76574452</span><span class="p">,</span>  <span class="mf">7.23515011e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">285.61921334</span><span class="p">,</span>  <span class="mf">7.16770213e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">285.49990234</span><span class="p">,</span>  <span class="mf">7.10021045e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">285.40508746</span><span class="p">,</span>  <span class="mf">7.03268384e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">285.3324037</span> <span class="p">,</span>  <span class="mf">6.96513008e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">285.27978879</span><span class="p">,</span>  <span class="mf">6.89755611e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">285.24543691</span><span class="p">,</span>  <span class="mf">6.82996817e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">285.22776065</span><span class="p">,</span>  <span class="mf">6.76237189e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">285.22535957</span><span class="p">,</span>  <span class="mf">6.69477243e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">285.23699386</span><span class="p">,</span>  <span class="mf">6.62717449e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">285.26156249</span><span class="p">,</span>  <span class="mf">6.55958238e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">285.29808465</span><span class="p">,</span>  <span class="mf">6.49200014e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">285.3456842</span> <span class="p">,</span>  <span class="mf">6.42443149e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">285.40357639</span><span class="p">,</span>  <span class="mf">6.35687992e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">285.47105662</span><span class="p">,</span>  <span class="mf">6.28934874e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">285.54749071</span><span class="p">,</span>  <span class="mf">6.22184105e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">285.63230666</span><span class="p">,</span>  <span class="mf">6.15435979e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">285.72498749</span><span class="p">,</span>  <span class="mf">6.08690780e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">285.82506502</span><span class="p">,</span>  <span class="mf">6.01948776e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">285.93211453</span><span class="p">,</span>  <span class="mf">5.95210226e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">286.04575009</span><span class="p">,</span>  <span class="mf">5.88475382e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">286.16562044</span><span class="p">,</span>  <span class="mf">5.81744484e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">286.29140546</span><span class="p">,</span>  <span class="mf">5.75017769e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">286.42281299</span><span class="p">,</span>  <span class="mf">5.68295467e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">286.5595761</span> <span class="p">,</span>  <span class="mf">5.61577800e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">286.70145061</span><span class="p">,</span>  <span class="mf">5.54864990e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">286.84821296</span><span class="p">,</span>  <span class="mf">5.48157252e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">286.99965828</span><span class="p">,</span>  <span class="mf">5.41454799e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">287.1555987</span> <span class="p">,</span>  <span class="mf">5.34757841e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">287.31586181</span><span class="p">,</span>  <span class="mf">5.28066586e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">287.48028931</span><span class="p">,</span>  <span class="mf">5.21381240e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">287.6487358</span> <span class="p">,</span>  <span class="mf">5.14702008e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">287.82106772</span><span class="p">,</span>  <span class="mf">5.08029093e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">287.99716232</span><span class="p">,</span>  <span class="mf">5.01362698e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">288.17690682</span><span class="p">,</span>  <span class="mf">4.94703026e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">288.3601976</span> <span class="p">,</span>  <span class="mf">4.88050277e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">288.5469395</span> <span class="p">,</span>  <span class="mf">4.81404655e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">288.73704517</span><span class="p">,</span>  <span class="mf">4.74766362e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">288.93043448</span><span class="p">,</span>  <span class="mf">4.68135601e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">289.12703396</span><span class="p">,</span>  <span class="mf">4.61512576e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">289.3267764</span> <span class="p">,</span>  <span class="mf">4.54897490e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">289.52960032</span><span class="p">,</span>  <span class="mf">4.48290551e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">289.73544963</span><span class="p">,</span>  <span class="mf">4.41691964e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">289.94427322</span><span class="p">,</span>  <span class="mf">4.35101939e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">290.15602469</span><span class="p">,</span>  <span class="mf">4.28520685e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">290.37066198</span><span class="p">,</span>  <span class="mf">4.21948413e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">290.58814713</span><span class="p">,</span>  <span class="mf">4.15385338e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">290.80844602</span><span class="p">,</span>  <span class="mf">4.08831676e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">291.03152812</span><span class="p">,</span>  <span class="mf">4.02287643e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">291.2573663</span> <span class="p">,</span>  <span class="mf">3.95753460e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">291.48593661</span><span class="p">,</span>  <span class="mf">3.89229351e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">291.71721812</span><span class="p">,</span>  <span class="mf">3.82715539e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">291.95119273</span><span class="p">,</span>  <span class="mf">3.76212252e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">292.18784501</span><span class="p">,</span>  <span class="mf">3.69719721e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">292.42716211</span><span class="p">,</span>  <span class="mf">3.63238180e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">292.66913357</span><span class="p">,</span>  <span class="mf">3.56767865e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">292.91375122</span><span class="p">,</span>  <span class="mf">3.50309016e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">293.16100907</span><span class="p">,</span>  <span class="mf">3.43861876e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">293.4109032</span> <span class="p">,</span>  <span class="mf">3.37426690e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">293.66343167</span><span class="p">,</span>  <span class="mf">3.31003709e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">293.91859444</span><span class="p">,</span>  <span class="mf">3.24593187e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">294.17639325</span><span class="p">,</span>  <span class="mf">3.18195379e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">294.43683159</span><span class="p">,</span>  <span class="mf">3.11810548e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">294.69991457</span><span class="p">,</span>  <span class="mf">3.05438958e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">294.96564892</span><span class="p">,</span>  <span class="mf">2.99080877e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">295.23404288</span><span class="p">,</span>  <span class="mf">2.92736580e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">295.50510615</span><span class="p">,</span>  <span class="mf">2.86406344e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">295.77884986</span><span class="p">,</span>  <span class="mf">2.80090450e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">296.05528647</span><span class="p">,</span>  <span class="mf">2.73789185e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">296.33442978</span><span class="p">,</span>  <span class="mf">2.67502839e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">296.61629484</span><span class="p">,</span>  <span class="mf">2.61231709e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">296.90089792</span><span class="p">,</span>  <span class="mf">2.54976095e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">297.18825649</span><span class="p">,</span>  <span class="mf">2.48736303e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">297.47838915</span><span class="p">,</span>  <span class="mf">2.42512642e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">297.77131563</span><span class="p">,</span>  <span class="mf">2.36305430e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">298.0670567</span> <span class="p">,</span>  <span class="mf">2.30114988e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">298.36563421</span><span class="p">,</span>  <span class="mf">2.23941641e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">298.667071</span>  <span class="p">,</span>  <span class="mf">2.17785722e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">298.97139092</span><span class="p">,</span>  <span class="mf">2.11647570e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">299.27861874</span><span class="p">,</span>  <span class="mf">2.05527528e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">299.58878019</span><span class="p">,</span>  <span class="mf">1.99425947e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">299.90190188</span><span class="p">,</span>  <span class="mf">1.93343180e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">300.21801131</span><span class="p">,</span>  <span class="mf">1.87279592e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">300.53713683</span><span class="p">,</span>  <span class="mf">1.81235551e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">300.85930762</span><span class="p">,</span>  <span class="mf">1.75211430e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">301.18455364</span><span class="p">,</span>  <span class="mf">1.69207612e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">301.51290567</span><span class="p">,</span>  <span class="mf">1.63224486e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">301.84439522</span><span class="p">,</span>  <span class="mf">1.57262445e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">302.17905454</span><span class="p">,</span>  <span class="mf">1.51321893e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">302.51691661</span><span class="p">,</span>  <span class="mf">1.45403238e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">302.85801506</span><span class="p">,</span>  <span class="mf">1.39506896e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">303.20238422</span><span class="p">,</span>  <span class="mf">1.33633293e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">303.55005904</span><span class="p">,</span>  <span class="mf">1.27782858e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">303.9010751</span> <span class="p">,</span>  <span class="mf">1.21956032e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">304.25546858</span><span class="p">,</span>  <span class="mf">1.16153260e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">304.61327621</span><span class="p">,</span>  <span class="mf">1.10374997e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">304.97453527</span><span class="p">,</span>  <span class="mf">1.04621707e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">305.33928355</span><span class="p">,</span>  <span class="mf">9.88938599e+00</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">305.70755936</span><span class="p">,</span>  <span class="mf">9.31919347e+00</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">306.07940143</span><span class="p">,</span>  <span class="mf">8.75164192e+00</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">306.45484895</span><span class="p">,</span>  <span class="mf">8.18678096e+00</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">306.83394151</span><span class="p">,</span>  <span class="mf">7.62466105e+00</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">307.21671906</span><span class="p">,</span>  <span class="mf">7.06533356e+00</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">307.60322191</span><span class="p">,</span>  <span class="mf">6.50885073e+00</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">307.99349064</span><span class="p">,</span>  <span class="mf">5.95526570e+00</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">308.38756614</span><span class="p">,</span>  <span class="mf">5.40463254e+00</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">308.78548952</span><span class="p">,</span>  <span class="mf">4.85700624e+00</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">309.18730207</span><span class="p">,</span>  <span class="mf">4.31244269e+00</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">309.59304525</span><span class="p">,</span>  <span class="mf">3.77099878e+00</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">310.00276064</span><span class="p">,</span>  <span class="mf">3.23273231e+00</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">310.41648987</span><span class="p">,</span>  <span class="mf">2.69770206e+00</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">310.83427462</span><span class="p">,</span>  <span class="mf">2.16596777e+00</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">311.25615652</span><span class="p">,</span>  <span class="mf">1.63759018e+00</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">311.68217714</span><span class="p">,</span>  <span class="mf">1.11263099e+00</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">312.11237793</span><span class="p">,</span>  <span class="mf">5.91152909e-01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">312.54680016</span><span class="p">,</span>  <span class="mf">7.32196366e-02</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">312.98548484</span><span class="p">,</span> <span class="o">-</span><span class="mf">4.41104123e-01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">313.42847273</span><span class="p">,</span> <span class="o">-</span><span class="mf">9.51752661e-01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">313.87580418</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.45865926e+00</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">314.32751916</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.96175619e+00</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">314.78365713</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.46097470e+00</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">315.24425701</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.95624506e+00</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">315.70935708</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.44749649e+00</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">316.17899491</span><span class="p">,</span> <span class="o">-</span><span class="mf">3.93465723e+00</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">316.6532073</span> <span class="p">,</span> <span class="o">-</span><span class="mf">4.41765452e+00</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">317.13203018</span><span class="p">,</span> <span class="o">-</span><span class="mf">4.89641459e+00</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">317.61549854</span><span class="p">,</span> <span class="o">-</span><span class="mf">5.37086268e+00</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">318.10364632</span><span class="p">,</span> <span class="o">-</span><span class="mf">5.84092308e+00</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">318.59650637</span><span class="p">,</span> <span class="o">-</span><span class="mf">6.30651908e+00</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">319.0941103</span> <span class="p">,</span> <span class="o">-</span><span class="mf">6.76757303e+00</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">319.59648841</span><span class="p">,</span> <span class="o">-</span><span class="mf">7.22400634e+00</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">320.10366962</span><span class="p">,</span> <span class="o">-</span><span class="mf">7.67573951e+00</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">320.6156813</span> <span class="p">,</span> <span class="o">-</span><span class="mf">8.12269211e+00</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">321.13254926</span><span class="p">,</span> <span class="o">-</span><span class="mf">8.56478285e+00</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">321.65429755</span><span class="p">,</span> <span class="o">-</span><span class="mf">9.00192957e+00</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">322.18094842</span><span class="p">,</span> <span class="o">-</span><span class="mf">9.43404929e+00</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">322.71252218</span><span class="p">,</span> <span class="o">-</span><span class="mf">9.86105821e+00</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">323.24903709</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.02828718e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">323.79050926</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.06994047e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">324.33695251</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.11105709e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">324.88837826</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.15162837e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">325.44479542</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.19164560e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">326.00621026</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.23109997e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">326.57262629</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.26998265e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">327.14404415</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.30828476e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">327.72046146</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.34599736e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">328.30187271</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.38311149e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">328.88826915</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.41961815e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">329.47963868</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.45550832e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">330.07596566</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.49077296e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">330.67723089</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.52540303e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">331.28341142</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.55938948e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">331.89448047</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.59272326e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">332.51040731</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.62539533e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">333.13115716</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.65739669e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">333.75669108</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.68871836e+01</span><span class="p">,</span> <span class="mf">1.94274252e+19</span><span class="p">)]</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>There is a lot of information in the representation of our transformed
+<code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code>, but note that the frame of the new object is now correctly
+noted as <code class="docutils literal notranslate"><span class="pre">AltAz</span></code>, as in<code class="docutils literal notranslate"><span class="pre">&lt;SkyCoord</span> <span class="pre">(AltAz:</span> <span class="pre">...</span></code>. Like transforming
+to <code class="docutils literal notranslate"><span class="pre">Galactic</span></code> coordinates above, the new <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> object now
+contains the data in a new representation, so the ICRS component names
+<code class="docutils literal notranslate"><span class="pre">.ra</span></code> and <code class="docutils literal notranslate"><span class="pre">.dec</span></code> will not work on this new object. Instead, the data
+(the altitude and azimuth as a function of time) can be accessed with
+the <code class="docutils literal notranslate"><span class="pre">.alt</span></code> and <code class="docutils literal notranslate"><span class="pre">.az</span></code> component names. For example, let’s plot the
+altitude of this open cluster over the course of the night:</p>
+<p><span class="inputnumrole">In[30]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time_grid</span><span class="o">.</span><span class="n">datetime</span><span class="p">,</span> <span class="n">oc_altaz</span><span class="o">.</span><span class="n">alt</span><span class="o">.</span><span class="n">degree</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=-</span><span class="mi">10</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:red&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Date/Time [UTC]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Altitude [deg]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">get_majorticklabels</span><span class="p">(),</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[30]:</span></p>
+<img alt="../_images/2-Coordinates-Transforms_60_0.png" src="../_images/2-Coordinates-Transforms_60_0.png" />
+<p>Here we can see that this open cluster reaches a high altitude above the
+horizon from Kitt Peak, and so it looks like it would be observable from
+this site. The above curve only shows the altitude trajectory for the
+first open cluster in our catalog, but we would like to compute the
+equivalent for <em>all</em> of the open clusters in the catalog. To do this, we
+have to make use of a concept that is used heavily in Numpy: <a class="reference external" href="https://numpy.org/doc/stable/user/basics.broadcasting.html">array
+broadcasting</a>.
+We have 474 open clusters and we want to evaluate the <code class="docutils literal notranslate"><span class="pre">AltAz</span></code>
+coordinates of these clusters at 256 different times.</p>
+<p><span class="inputnumrole">In[31]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">open_cluster_c</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">altaz</span><span class="o">.</span><span class="n">obstime</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[31]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">474</span><span class="p">,</span> <span class="mi">256</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We therefore want to produce a two-dimensional coordinate object that is
+indexed along one axis by the open cluster index, and along other axis
+by the time index. The <code class="docutils literal notranslate"><span class="pre">astropy.coordinates</span></code> transformation machinery
+supports array-like broadcasting, so we can do this by creating new,
+unmatched, length-1 axes on both the open clusters <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> object
+and the <code class="docutils literal notranslate"><span class="pre">AltAz</span></code> frame using <code class="docutils literal notranslate"><span class="pre">numpy.newaxis</span></code>:</p>
+<p><span class="inputnumrole">In[32]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">open_cluster_altaz</span> <span class="o">=</span> <span class="n">open_cluster_c</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span><span class="o">.</span><span class="n">transform_to</span><span class="p">(</span><span class="n">altaz</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>Let’s now over-plot the trajectories for the first 10 open clusters in
+the catalog:</p>
+<p><span class="inputnumrole">In[33]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time_grid</span><span class="o">.</span><span class="n">datetime</span><span class="p">,</span>
+         <span class="n">open_cluster_altaz</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span><span class="o">.</span><span class="n">alt</span><span class="o">.</span><span class="n">degree</span><span class="o">.</span><span class="n">T</span><span class="p">,</span>
+         <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=-</span><span class="mi">10</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:red&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Date/Time [UTC]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Altitude [deg]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">setp</span><span class="p">(</span><span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">get_majorticklabels</span><span class="p">(),</span> <span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[33]:</span></p>
+<img alt="../_images/2-Coordinates-Transforms_66_0.png" src="../_images/2-Coordinates-Transforms_66_0.png" />
+<p>From this, we can see that only two of the clusters in this batch seem
+to be easily observable.</p>
+</section>
+<section id="potential-caveats">
+<h2>Potential Caveats<a class="headerlink" href="#potential-caveats" title="Permalink to this headline">¶</a></h2>
+<p>Transformations between some reference frames require knowing more
+information about a source. For example, the transformation from ICRS to
+Galactic coordinates (as demonstrated above) amounts to a 3D rotation,
+but no change of origin. This transformation is therefore supported for
+any spherical position (with or without distance information). However,
+some transformations include a change of origin, and therefore require
+that the source data (i.e., the <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> object) has defined
+distance information. For example, for a <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> with only sky
+position, we can transform from the ICRS to the FK5 coordinate system:</p>
+<p><span class="inputnumrole">In[34]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">icrs_c</span> <span class="o">=</span> <span class="n">coord</span><span class="o">.</span><span class="n">SkyCoord</span><span class="p">(</span><span class="mf">150.4</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">deg</span><span class="p">,</span> <span class="o">-</span><span class="mi">11</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">deg</span><span class="p">)</span>
+<span class="n">icrs_c</span><span class="o">.</span><span class="n">transform_to</span><span class="p">(</span><span class="n">coord</span><span class="o">.</span><span class="n">FK5</span><span class="p">())</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[34]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">SkyCoord</span> <span class="p">(</span><span class="n">FK5</span><span class="p">:</span> <span class="n">equinox</span><span class="o">=</span><span class="n">J2000</span><span class="mf">.000</span><span class="p">):</span> <span class="p">(</span><span class="n">ra</span><span class="p">,</span> <span class="n">dec</span><span class="p">)</span> <span class="ow">in</span> <span class="n">deg</span>
+    <span class="p">(</span><span class="mf">150.40000705</span><span class="p">,</span> <span class="o">-</span><span class="mf">11.00000493</span><span class="p">)</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>However, we would <em>not</em> be able to transform this position to the
+<code class="docutils literal notranslate"><span class="pre">Galactocentric</span></code> frame
+(<a class="reference external" href="https://docs.astropy.org/en/stable/coordinates/galactocentric.html">docs</a>),
+because this transformation involves a shift of origin from the solar
+system barycenter to the Galactic center:</p>
+<p><span class="inputnumrole">In[35]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># This cell will raise an exception - this is expected!</span>
+<span class="n">icrs_c</span><span class="o">.</span><span class="n">transform_to</span><span class="p">(</span><span class="n">coord</span><span class="o">.</span><span class="n">Galactocentric</span><span class="p">())</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[35]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ConvertErrorTraceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span>
+
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">35</span><span class="o">-</span><span class="n">ca57f3abdc33</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+      <span class="mi">1</span> <span class="c1"># This cell will raise an exception - this is expected!</span>
+<span class="o">----&gt;</span> <span class="mi">2</span> <span class="n">icrs_c</span><span class="o">.</span><span class="n">transform_to</span><span class="p">(</span><span class="n">coord</span><span class="o">.</span><span class="n">Galactocentric</span><span class="p">())</span>
+
+
+<span class="o">~/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astropy</span><span class="o">/</span><span class="n">coordinates</span><span class="o">/</span><span class="n">sky_coordinate</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">transform_to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">frame</span><span class="p">,</span> <span class="n">merge_attributes</span><span class="p">)</span>
+    <span class="mi">617</span>         <span class="c1"># Do the transformation, returning a coordinate frame of the desired</span>
+    <span class="mi">618</span>         <span class="c1"># final type (not generic).</span>
+<span class="o">--&gt;</span> <span class="mi">619</span>         <span class="n">new_coord</span> <span class="o">=</span> <span class="n">trans</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">frame</span><span class="p">,</span> <span class="n">generic_frame</span><span class="p">)</span>
+    <span class="mi">620</span>
+    <span class="mi">621</span>         <span class="c1"># Finally make the new SkyCoord object from the `new_coord` and</span>
+
+
+<span class="o">~/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astropy</span><span class="o">/</span><span class="n">coordinates</span><span class="o">/</span><span class="n">transformations</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fromcoord</span><span class="p">,</span> <span class="n">toframe</span><span class="p">)</span>
+   <span class="mi">1421</span>
+   <span class="mi">1422</span>             <span class="n">curr_toframe</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">tosys</span><span class="p">(</span><span class="o">**</span><span class="n">frattrs</span><span class="p">)</span>
+<span class="o">-&gt;</span> <span class="mi">1423</span>             <span class="n">curr_coord</span> <span class="o">=</span> <span class="n">t</span><span class="p">(</span><span class="n">curr_coord</span><span class="p">,</span> <span class="n">curr_toframe</span><span class="p">)</span>
+   <span class="mi">1424</span>
+   <span class="mi">1425</span>         <span class="c1"># this is safe even in the case where self.transforms is empty, because</span>
+
+
+<span class="o">~/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astropy</span><span class="o">/</span><span class="n">coordinates</span><span class="o">/</span><span class="n">transformations</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fromcoord</span><span class="p">,</span> <span class="n">toframe</span><span class="p">)</span>
+   <span class="mi">1239</span>     <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fromcoord</span><span class="p">,</span> <span class="n">toframe</span><span class="p">):</span>
+   <span class="mi">1240</span>
+<span class="o">-&gt;</span> <span class="mi">1241</span>         <span class="n">M</span><span class="p">,</span> <span class="n">vec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">transform_func</span><span class="p">(</span><span class="n">fromcoord</span><span class="p">,</span> <span class="n">toframe</span><span class="p">)</span>
+   <span class="mi">1242</span>         <span class="n">newrep</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apply_transform</span><span class="p">(</span><span class="n">fromcoord</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">vec</span><span class="p">)</span>
+   <span class="mi">1243</span>
+
+
+<span class="o">~/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astropy</span><span class="o">/</span><span class="n">coordinates</span><span class="o">/</span><span class="n">builtin_frames</span><span class="o">/</span><span class="n">galactocentric</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">icrs_to_galactocentric</span><span class="p">(</span><span class="n">icrs_coord</span><span class="p">,</span> <span class="n">galactocentric_frame</span><span class="p">)</span>
+    <span class="mi">577</span> <span class="nd">@frame_transform_graph</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">AffineTransform</span><span class="p">,</span> <span class="n">ICRS</span><span class="p">,</span> <span class="n">Galactocentric</span><span class="p">)</span>
+    <span class="mi">578</span> <span class="k">def</span> <span class="nf">icrs_to_galactocentric</span><span class="p">(</span><span class="n">icrs_coord</span><span class="p">,</span> <span class="n">galactocentric_frame</span><span class="p">):</span>
+<span class="o">--&gt;</span> <span class="mi">579</span>     <span class="n">_check_coord_repr_diff_types</span><span class="p">(</span><span class="n">icrs_coord</span><span class="p">)</span>
+    <span class="mi">580</span>     <span class="k">return</span> <span class="n">get_matrix_vectors</span><span class="p">(</span><span class="n">galactocentric_frame</span><span class="p">)</span>
+    <span class="mi">581</span>
+
+
+<span class="o">~/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astropy</span><span class="o">/</span><span class="n">coordinates</span><span class="o">/</span><span class="n">builtin_frames</span><span class="o">/</span><span class="n">galactocentric</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">_check_coord_repr_diff_types</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+    <span class="mi">561</span> <span class="k">def</span> <span class="nf">_check_coord_repr_diff_types</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>
+    <span class="mi">562</span>     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">UnitSphericalRepresentation</span><span class="p">):</span>
+<span class="o">--&gt;</span> <span class="mi">563</span>         <span class="k">raise</span> <span class="n">ConvertError</span><span class="p">(</span><span class="s2">&quot;Transforming to/from a Galactocentric frame &quot;</span>
+    <span class="mi">564</span>                            <span class="s2">&quot;requires a 3D coordinate, e.g. (angle, angle, &quot;</span>
+    <span class="mi">565</span>                            <span class="s2">&quot;distance) or (x, y, z).&quot;</span><span class="p">)</span>
+
+
+<span class="n">ConvertError</span><span class="p">:</span> <span class="n">Transforming</span> <span class="n">to</span><span class="o">/</span><span class="kn">from</span> <span class="nn">a</span> <span class="n">Galactocentric</span> <span class="n">frame</span> <span class="n">requires</span> <span class="n">a</span> <span class="mi">3</span><span class="n">D</span> <span class="n">coordinate</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span> <span class="p">(</span><span class="n">angle</span><span class="p">,</span> <span class="n">angle</span><span class="p">,</span> <span class="n">distance</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>In this tutorial, we have introduced the key concepts that underly the
+<code class="docutils literal notranslate"><span class="pre">astropy.coordinates</span></code> framework: coordinate component formats,
+representations, and frames. We demonstrated how to change the
+representation of a <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> object (e.g., Cartesian to
+Cylindrical). We then introduce the concept of coordinate frames and
+frame transformations.</p>
+<div id="spacer"></div>
+
+<a href="../_static/2-Coordinates-Transforms/2-Coordinates-Transforms.ipynb"><button id="download">Download tutorial notebook</button></a>
+<a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/2-Coordinates-Transforms/2-Coordinates-Transforms.ipynb"><button id="binder">Interactive tutorial notebook</button></a></section>
+</section>
+
+</div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+    &copy; Copyright Astropy.
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

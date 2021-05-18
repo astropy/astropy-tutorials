@@ -2,7 +2,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta charset="utf-8" /><meta content="filterTutorials, filterUnits, filterRadioAstronomy, filterDataCubes, filterMatplotlib" name="keywords" />
+    <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta content="filterTutorials, filterUnits, filterRadioAstronomy, filterDataCubes, filterMatplotlib" name="keywords" />
 <meta content="filterTutorials," name="keywords" />
 
     <title>Using Astropy Quantities and Units for astrophysical calculations &#8212; astropy-tutorials v3.0.dev</title>
@@ -111,14 +112,14 @@
   <a href="../_static/quantities/quantities.ipynb"><button id="download">Download tutorial notebook</button></a>
 <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/quantities/quantities.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
 
-<div id="spacer"></div><div class="section" id="using-astropy-quantities-and-units-for-astrophysical-calculations">
+<div id="spacer"></div><section id="using-astropy-quantities-and-units-for-astrophysical-calculations">
 <span id="quantities"></span><h1>Using Astropy Quantities and Units for astrophysical calculations<a class="headerlink" href="#using-astropy-quantities-and-units-for-astrophysical-calculations" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="authors">
+<section id="authors">
 <h2>Authors<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a></h2>
 <p>Ana Bonaca, Erik Tollerud, Jonathan Foster, Lia Corrales, Kris Stern,
 Stephanie T. Douglas</p>
-</div>
-<div class="section" id="learning-goals">
+</section>
+<section id="learning-goals">
 <h2>Learning Goals<a class="headerlink" href="#learning-goals" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>Use <code class="docutils literal notranslate"><span class="pre">Quantity</span></code> objects to estimate a hypothetical galaxy’s mass</p></li>
@@ -138,18 +139,18 @@ arrays</p></li>
 <li><p>Use <code class="docutils literal notranslate"><span class="pre">Quantity</span></code> objects such as data cubes to facilitate a full
 derivation of the total mass of a molecular cloud</p></li>
 </ul>
-</div>
-<div class="section" id="keywords">
+</section>
+<section id="keywords">
 <h2>Keywords<a class="headerlink" href="#keywords" title="Permalink to this headline">¶</a></h2>
 <p>units, radio astronomy, data cubes, matplotlib</p>
-</div>
-<div class="section" id="companion-content">
+</section>
+<section id="companion-content">
 <h2>Companion Content<a class="headerlink" href="#companion-content" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="https://www.springer.com/gp/book/9783662053942">Tools for Radio
 Astronomy</a> by Rohlfs
 &amp; Wilson</p>
-</div>
-<div class="section" id="summary">
+</section>
+<section id="summary">
 <h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
 <p>In this tutorial we present some examples showing how Astropy’s
 <code class="docutils literal notranslate"><span class="pre">Quantity</span></code> object can make astrophysics calculations easier. The
@@ -160,8 +161,8 @@ functions you might distribute to other people.</p>
 <p>For an in-depth discussion of <code class="docutils literal notranslate"><span class="pre">Quantity</span></code> objects, see the <a class="reference external" href="http://docs.astropy.org/en/stable/units/quantity.html">astropy
 documentation
 section</a>.</p>
-</div>
-<div class="section" id="preliminaries">
+</section>
+<section id="preliminaries">
 <h2>Preliminaries<a class="headerlink" href="#preliminaries" title="Permalink to this headline">¶</a></h2>
 <p>We start by loading standard libraries and set up plotting for ipython
 notebooks.</p>
@@ -198,8 +199,8 @@ Boltzmann’s constant, <code class="docutils literal notranslate"><span class="
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">astropy.visualization</span> <span class="kn">import</span> <span class="n">quantity_support</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="galaxy-mass">
+</section>
+<section id="galaxy-mass">
 <h2>1. Galaxy mass<a class="headerlink" href="#galaxy-mass" title="Permalink to this headline">¶</a></h2>
 <p>In this first example, we will use <code class="docutils literal notranslate"><span class="pre">Quantity</span></code> objects to estimate a
 hypothetical galaxy’s mass, given its half-light radius and radial
@@ -299,7 +300,7 @@ settings on your <code class="docutils literal notranslate"><span class="pre">ma
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[11]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">astropy</span><span class="o">.</span><span class="n">visualization</span><span class="o">.</span><span class="n">units</span><span class="o">.</span><span class="n">quantity_support</span><span class="o">.&lt;</span><span class="nb">locals</span><span class="o">&gt;.</span><span class="n">MplQuantityConverter</span> <span class="n">at</span> <span class="mh">0x7fad87331850</span><span class="o">&gt;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">astropy</span><span class="o">.</span><span class="n">visualization</span><span class="o">.</span><span class="n">units</span><span class="o">.</span><span class="n">quantity_support</span><span class="o">.&lt;</span><span class="nb">locals</span><span class="o">&gt;.</span><span class="n">MplQuantityConverter</span> <span class="n">at</span> <span class="mh">0x7f8aab1c3c10</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <p>Now we can plot a histogram of the velocity dataset. Note that, due to
@@ -403,13 +404,13 @@ mathematically sensible.</p>
 <p><span class="outputnumrole">Out[19]:</span></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">UnitConversionErrorTraceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span>
 
-<span class="o">~/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astropy</span><span class="o">/</span><span class="n">units</span><span class="o">/</span><span class="n">quantity_helper</span><span class="o">/</span><span class="n">helpers</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">get_converter</span><span class="p">(</span><span class="n">from_unit</span><span class="p">,</span> <span class="n">to_unit</span><span class="p">)</span>
+<span class="o">~/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astropy</span><span class="o">/</span><span class="n">units</span><span class="o">/</span><span class="n">quantity_helper</span><span class="o">/</span><span class="n">helpers</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">get_converter</span><span class="p">(</span><span class="n">from_unit</span><span class="p">,</span> <span class="n">to_unit</span><span class="p">)</span>
      <span class="mi">31</span>     <span class="k">try</span><span class="p">:</span>
 <span class="o">---&gt;</span> <span class="mi">32</span>         <span class="n">scale</span> <span class="o">=</span> <span class="n">from_unit</span><span class="o">.</span><span class="n">_to</span><span class="p">(</span><span class="n">to_unit</span><span class="p">)</span>
      <span class="mi">33</span>     <span class="k">except</span> <span class="n">UnitsError</span><span class="p">:</span>
 
 
-<span class="o">~/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astropy</span><span class="o">/</span><span class="n">units</span><span class="o">/</span><span class="n">core</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">_to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span>
+<span class="o">~/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astropy</span><span class="o">/</span><span class="n">units</span><span class="o">/</span><span class="n">core</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">_to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">)</span>
     <span class="mi">950</span>         <span class="k">raise</span> <span class="n">UnitConversionError</span><span class="p">(</span>
 <span class="o">--&gt;</span> <span class="mi">951</span>             <span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="bp">self</span><span class="si">!r}</span><span class="s2">&#39; is not a scaled version of &#39;</span><span class="si">{</span><span class="n">other</span><span class="si">!r}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
     <span class="mi">952</span>
@@ -423,19 +424,19 @@ mathematically sensible.</p>
 
 <span class="n">UnitConversionErrorTraceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span>
 
-<span class="o">~/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astropy</span><span class="o">/</span><span class="n">units</span><span class="o">/</span><span class="n">quantity_helper</span><span class="o">/</span><span class="n">helpers</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">helper_dimensionless_to_dimensionless</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">unit</span><span class="p">)</span>
+<span class="o">~/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astropy</span><span class="o">/</span><span class="n">units</span><span class="o">/</span><span class="n">quantity_helper</span><span class="o">/</span><span class="n">helpers</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">helper_dimensionless_to_dimensionless</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">unit</span><span class="p">)</span>
     <span class="mi">146</span>     <span class="k">try</span><span class="p">:</span>
 <span class="o">--&gt;</span> <span class="mi">147</span>         <span class="k">return</span> <span class="p">([</span><span class="n">get_converter</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span> <span class="n">dimensionless_unscaled</span><span class="p">)],</span>
     <span class="mi">148</span>                 <span class="n">dimensionless_unscaled</span><span class="p">)</span>
 
 
-<span class="o">~/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astropy</span><span class="o">/</span><span class="n">units</span><span class="o">/</span><span class="n">quantity_helper</span><span class="o">/</span><span class="n">helpers</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">get_converter</span><span class="p">(</span><span class="n">from_unit</span><span class="p">,</span> <span class="n">to_unit</span><span class="p">)</span>
+<span class="o">~/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astropy</span><span class="o">/</span><span class="n">units</span><span class="o">/</span><span class="n">quantity_helper</span><span class="o">/</span><span class="n">helpers</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">get_converter</span><span class="p">(</span><span class="n">from_unit</span><span class="p">,</span> <span class="n">to_unit</span><span class="p">)</span>
      <span class="mi">34</span>         <span class="k">return</span> <span class="n">from_unit</span><span class="o">.</span><span class="n">_apply_equivalencies</span><span class="p">(</span>
 <span class="o">---&gt;</span> <span class="mi">35</span>                 <span class="n">from_unit</span><span class="p">,</span> <span class="n">to_unit</span><span class="p">,</span> <span class="n">get_current_unit_registry</span><span class="p">()</span><span class="o">.</span><span class="n">equivalencies</span><span class="p">)</span>
      <span class="mi">36</span>     <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
 
 
-<span class="o">~/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astropy</span><span class="o">/</span><span class="n">units</span><span class="o">/</span><span class="n">core</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">_apply_equivalencies</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unit</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">equivalencies</span><span class="p">)</span>
+<span class="o">~/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astropy</span><span class="o">/</span><span class="n">units</span><span class="o">/</span><span class="n">core</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">_apply_equivalencies</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unit</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">equivalencies</span><span class="p">)</span>
     <span class="mi">887</span>             <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> and </span><span class="si">{}</span><span class="s2"> are not convertible&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
 <span class="o">--&gt;</span> <span class="mi">888</span>                 <span class="n">unit_str</span><span class="p">,</span> <span class="n">other_str</span><span class="p">))</span>
     <span class="mi">889</span>
@@ -453,15 +454,15 @@ mathematically sensible.</p>
 <span class="o">----&gt;</span> <span class="mi">1</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">M</span><span class="p">)</span>
 
 
-<span class="o">~/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astropy</span><span class="o">/</span><span class="n">units</span><span class="o">/</span><span class="n">quantity</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">__array_ufunc__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="o">*</span><span class="n">inputs</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-    <span class="mi">455</span>         <span class="c1"># consistent units between two inputs (e.g., in np.add) --</span>
-    <span class="mi">456</span>         <span class="c1"># and the unit of the result (or tuple of units for nout &gt; 1).</span>
-<span class="o">--&gt;</span> <span class="mi">457</span>         <span class="n">converters</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="n">converters_and_unit</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="o">*</span><span class="n">inputs</span><span class="p">)</span>
-    <span class="mi">458</span>
-    <span class="mi">459</span>         <span class="n">out</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;out&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="o">~/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astropy</span><span class="o">/</span><span class="n">units</span><span class="o">/</span><span class="n">quantity</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">__array_ufunc__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="o">*</span><span class="n">inputs</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="mi">457</span>         <span class="c1"># consistent units between two inputs (e.g., in np.add) --</span>
+    <span class="mi">458</span>         <span class="c1"># and the unit of the result (or tuple of units for nout &gt; 1).</span>
+<span class="o">--&gt;</span> <span class="mi">459</span>         <span class="n">converters</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="n">converters_and_unit</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="o">*</span><span class="n">inputs</span><span class="p">)</span>
+    <span class="mi">460</span>
+    <span class="mi">461</span>         <span class="n">out</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;out&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 
 
-<span class="o">~/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astropy</span><span class="o">/</span><span class="n">units</span><span class="o">/</span><span class="n">quantity_helper</span><span class="o">/</span><span class="n">converters</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">converters_and_unit</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+<span class="o">~/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astropy</span><span class="o">/</span><span class="n">units</span><span class="o">/</span><span class="n">quantity_helper</span><span class="o">/</span><span class="n">converters</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">converters_and_unit</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
     <span class="mi">164</span>
     <span class="mi">165</span>         <span class="c1"># Determine possible conversion functions, and the result unit.</span>
 <span class="o">--&gt;</span> <span class="mi">166</span>         <span class="n">converters</span><span class="p">,</span> <span class="n">result_unit</span> <span class="o">=</span> <span class="n">ufunc_helper</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="o">*</span><span class="n">units</span><span class="p">)</span>
@@ -469,7 +470,7 @@ mathematically sensible.</p>
     <span class="mi">168</span>         <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">converter</span> <span class="ow">is</span> <span class="kc">False</span> <span class="k">for</span> <span class="n">converter</span> <span class="ow">in</span> <span class="n">converters</span><span class="p">):</span>
 
 
-<span class="o">~/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astropy</span><span class="o">/</span><span class="n">units</span><span class="o">/</span><span class="n">quantity_helper</span><span class="o">/</span><span class="n">helpers</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">helper_dimensionless_to_dimensionless</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">unit</span><span class="p">)</span>
+<span class="o">~/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astropy</span><span class="o">/</span><span class="n">units</span><span class="o">/</span><span class="n">quantity_helper</span><span class="o">/</span><span class="n">helpers</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">helper_dimensionless_to_dimensionless</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">unit</span><span class="p">)</span>
     <span class="mi">150</span>         <span class="k">raise</span> <span class="n">UnitTypeError</span><span class="p">(</span><span class="s2">&quot;Can only apply &#39;</span><span class="si">{}</span><span class="s2">&#39; function to &quot;</span>
     <span class="mi">151</span>                             <span class="s2">&quot;dimensionless quantities&quot;</span>
 <span class="o">--&gt;</span> <span class="mi">152</span>                             <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="vm">__name__</span><span class="p">))</span>
@@ -480,8 +481,8 @@ mathematically sensible.</p>
 <span class="n">UnitTypeError</span><span class="p">:</span> <span class="n">Can</span> <span class="n">only</span> <span class="n">apply</span> <span class="s1">&#39;log10&#39;</span> <span class="n">function</span> <span class="n">to</span> <span class="n">dimensionless</span> <span class="n">quantities</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="exercises">
+</section>
+<section id="exercises">
 <h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
 <p>Use <code class="docutils literal notranslate"><span class="pre">Quantity</span></code> and Kepler’s law in the form given below to determine
 the (circular) orbital speed of the Earth around the sun in km/s. No
@@ -501,14 +502,14 @@ calculator (or python just for its arithmatic) but look up all the
 appropriate conversion factors and use paper-and-pencil approaches for
 keeping track of them all. Which one took longer?</p>
 <p><span class="inputnumrole">In[None]:</span></p>
-</div>
-<div class="section" id="molecular-cloud-mass">
+</section>
+<section id="molecular-cloud-mass">
 <h2>2. Molecular cloud mass<a class="headerlink" href="#molecular-cloud-mass" title="Permalink to this headline">¶</a></h2>
 <p>In this second example, we will demonstrate how using <code class="docutils literal notranslate"><span class="pre">Quantity</span></code>
 objects can facilitate a full derivation of the total mass of a
 molecular cloud using radio observations of isotopes of Carbon Monoxide
 (CO).</p>
-<div class="section" id="setting-up-the-data-cube">
+<section id="setting-up-the-data-cube">
 <h3>Setting up the data cube<a class="headerlink" href="#setting-up-the-data-cube" title="Permalink to this headline">¶</a></h3>
 <p>Let’s assume that we’ve mapped the inner part of a molecular cloud in
 the J=1-0 rotational transition of <span class="math notranslate nohighlight">\({\rm C}^{18}{\rm O}\)</span> and are
@@ -622,8 +623,8 @@ colorbar label to have proper units.</p>
 </div>
 <p><span class="outputnumrole">Out[25]:</span></p>
 <img alt="../_images/quantities_63_0.png" src="../_images/quantities_63_0.png" />
-</div>
-<div class="section" id="measuring-the-column-density-of-co">
+</section>
+<section id="measuring-the-column-density-of-co">
 <h3>Measuring The Column Density of CO<a class="headerlink" href="#measuring-the-column-density-of-co" title="Permalink to this headline">¶</a></h3>
 <p>In order to calculate the mass of the molecular cloud, we need to
 measure its column density. A number of assumptions are required for the
@@ -670,23 +671,23 @@ convertible:</p>
       <span class="mi">2</span> <span class="n">nu18</span> <span class="o">=</span> <span class="n">lambda18</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">Hz</span><span class="p">)</span>
 
 
-<span class="o">~/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astropy</span><span class="o">/</span><span class="n">units</span><span class="o">/</span><span class="n">quantity</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unit</span><span class="p">,</span> <span class="n">equivalencies</span><span class="p">,</span> <span class="n">copy</span><span class="p">)</span>
-    <span class="mi">694</span>             <span class="c1"># Avoid using to_value to ensure that we make a copy. We also</span>
-    <span class="mi">695</span>             <span class="c1"># don&#39;t want to slow down this method (esp. the scalar case).</span>
-<span class="o">--&gt;</span> <span class="mi">696</span>             <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_to_value</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span> <span class="n">equivalencies</span><span class="p">)</span>
-    <span class="mi">697</span>         <span class="k">else</span><span class="p">:</span>
-    <span class="mi">698</span>             <span class="c1"># to_value only copies if necessary</span>
+<span class="o">~/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astropy</span><span class="o">/</span><span class="n">units</span><span class="o">/</span><span class="n">quantity</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unit</span><span class="p">,</span> <span class="n">equivalencies</span><span class="p">,</span> <span class="n">copy</span><span class="p">)</span>
+    <span class="mi">696</span>             <span class="c1"># Avoid using to_value to ensure that we make a copy. We also</span>
+    <span class="mi">697</span>             <span class="c1"># don&#39;t want to slow down this method (esp. the scalar case).</span>
+<span class="o">--&gt;</span> <span class="mi">698</span>             <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_to_value</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span> <span class="n">equivalencies</span><span class="p">)</span>
+    <span class="mi">699</span>         <span class="k">else</span><span class="p">:</span>
+    <span class="mi">700</span>             <span class="c1"># to_value only copies if necessary</span>
 
 
-<span class="o">~/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astropy</span><span class="o">/</span><span class="n">units</span><span class="o">/</span><span class="n">quantity</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">_to_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unit</span><span class="p">,</span> <span class="n">equivalencies</span><span class="p">)</span>
-    <span class="mi">659</span>             <span class="n">equivalencies</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_equivalencies</span>
-    <span class="mi">660</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">unit</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">),</span>
-<span class="o">--&gt;</span> <span class="mi">661</span>                             <span class="n">equivalencies</span><span class="o">=</span><span class="n">equivalencies</span><span class="p">)</span>
-    <span class="mi">662</span>
-    <span class="mi">663</span>     <span class="k">def</span> <span class="nf">to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unit</span><span class="p">,</span> <span class="n">equivalencies</span><span class="o">=</span><span class="p">[],</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="o">~/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astropy</span><span class="o">/</span><span class="n">units</span><span class="o">/</span><span class="n">quantity</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">_to_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unit</span><span class="p">,</span> <span class="n">equivalencies</span><span class="p">)</span>
+    <span class="mi">661</span>             <span class="n">equivalencies</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_equivalencies</span>
+    <span class="mi">662</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">unit</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">),</span>
+<span class="o">--&gt;</span> <span class="mi">663</span>                             <span class="n">equivalencies</span><span class="o">=</span><span class="n">equivalencies</span><span class="p">)</span>
+    <span class="mi">664</span>
+    <span class="mi">665</span>     <span class="k">def</span> <span class="nf">to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unit</span><span class="p">,</span> <span class="n">equivalencies</span><span class="o">=</span><span class="p">[],</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 
 
-<span class="o">~/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astropy</span><span class="o">/</span><span class="n">units</span><span class="o">/</span><span class="n">core</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">equivalencies</span><span class="p">)</span>
+<span class="o">~/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astropy</span><span class="o">/</span><span class="n">units</span><span class="o">/</span><span class="n">core</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">equivalencies</span><span class="p">)</span>
     <span class="mi">985</span>             <span class="k">return</span> <span class="n">UNITY</span>
     <span class="mi">986</span>         <span class="k">else</span><span class="p">:</span>
 <span class="o">--&gt;</span> <span class="mi">987</span>             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_converter</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">equivalencies</span><span class="o">=</span><span class="n">equivalencies</span><span class="p">)(</span><span class="n">value</span><span class="p">)</span>
@@ -694,7 +695,7 @@ convertible:</p>
     <span class="mi">989</span>     <span class="k">def</span> <span class="nf">in_units</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">equivalencies</span><span class="o">=</span><span class="p">[]):</span>
 
 
-<span class="o">~/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astropy</span><span class="o">/</span><span class="n">units</span><span class="o">/</span><span class="n">core</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">_get_converter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">equivalencies</span><span class="p">)</span>
+<span class="o">~/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astropy</span><span class="o">/</span><span class="n">units</span><span class="o">/</span><span class="n">core</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">_get_converter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">equivalencies</span><span class="p">)</span>
     <span class="mi">916</span>                             <span class="k">pass</span>
     <span class="mi">917</span>
 <span class="o">--&gt;</span> <span class="mi">918</span>             <span class="k">raise</span> <span class="n">exc</span>
@@ -702,7 +703,7 @@ convertible:</p>
     <span class="mi">920</span>     <span class="k">def</span> <span class="nf">_to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
 
 
-<span class="o">~/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astropy</span><span class="o">/</span><span class="n">units</span><span class="o">/</span><span class="n">core</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">_get_converter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">equivalencies</span><span class="p">)</span>
+<span class="o">~/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astropy</span><span class="o">/</span><span class="n">units</span><span class="o">/</span><span class="n">core</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">_get_converter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">equivalencies</span><span class="p">)</span>
     <span class="mi">902</span>         <span class="k">try</span><span class="p">:</span>
     <span class="mi">903</span>             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apply_equivalencies</span><span class="p">(</span>
 <span class="o">--&gt;</span> <span class="mi">904</span>                 <span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_normalize_equivalencies</span><span class="p">(</span><span class="n">equivalencies</span><span class="p">))</span>
@@ -710,7 +711,7 @@ convertible:</p>
     <span class="mi">906</span>             <span class="c1"># Last hope: maybe other knows how to do it?</span>
 
 
-<span class="o">~/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astropy</span><span class="o">/</span><span class="n">units</span><span class="o">/</span><span class="n">core</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">_apply_equivalencies</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unit</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">equivalencies</span><span class="p">)</span>
+<span class="o">~/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astropy</span><span class="o">/</span><span class="n">units</span><span class="o">/</span><span class="n">core</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">_apply_equivalencies</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unit</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">equivalencies</span><span class="p">)</span>
     <span class="mi">886</span>         <span class="k">raise</span> <span class="n">UnitConversionError</span><span class="p">(</span>
     <span class="mi">887</span>             <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> and </span><span class="si">{}</span><span class="s2"> are not convertible&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
 <span class="o">--&gt;</span> <span class="mi">888</span>                 <span class="n">unit_str</span><span class="p">,</span> <span class="n">other_str</span><span class="p">))</span>
@@ -795,8 +796,8 @@ print out the peak column column density.</p>
 </div>
 <div class="math notranslate nohighlight">
 \[8.5782091 \times 10^{15} \; \mathrm{\frac{1}{cm^{2}}}\]</div>
-</div>
-<div class="section" id="co-to-total-mass">
+</section>
+<section id="co-to-total-mass">
 <h3>CO to Total Mass<a class="headerlink" href="#co-to-total-mass" title="Permalink to this headline">¶</a></h3>
 <p>We are using CO as a tracer for the much more numerous H<span class="math notranslate nohighlight">\(_2\)</span>,
 the quantity we are actually trying to infer. Since most of the mass is
@@ -874,23 +875,23 @@ convert to a different area unit, it will fail:</p>
 <span class="o">----&gt;</span> <span class="mi">1</span> <span class="n">da</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">cm</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 
 
-<span class="o">~/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astropy</span><span class="o">/</span><span class="n">units</span><span class="o">/</span><span class="n">quantity</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unit</span><span class="p">,</span> <span class="n">equivalencies</span><span class="p">,</span> <span class="n">copy</span><span class="p">)</span>
-    <span class="mi">694</span>             <span class="c1"># Avoid using to_value to ensure that we make a copy. We also</span>
-    <span class="mi">695</span>             <span class="c1"># don&#39;t want to slow down this method (esp. the scalar case).</span>
-<span class="o">--&gt;</span> <span class="mi">696</span>             <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_to_value</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span> <span class="n">equivalencies</span><span class="p">)</span>
-    <span class="mi">697</span>         <span class="k">else</span><span class="p">:</span>
-    <span class="mi">698</span>             <span class="c1"># to_value only copies if necessary</span>
+<span class="o">~/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astropy</span><span class="o">/</span><span class="n">units</span><span class="o">/</span><span class="n">quantity</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unit</span><span class="p">,</span> <span class="n">equivalencies</span><span class="p">,</span> <span class="n">copy</span><span class="p">)</span>
+    <span class="mi">696</span>             <span class="c1"># Avoid using to_value to ensure that we make a copy. We also</span>
+    <span class="mi">697</span>             <span class="c1"># don&#39;t want to slow down this method (esp. the scalar case).</span>
+<span class="o">--&gt;</span> <span class="mi">698</span>             <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_to_value</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span> <span class="n">equivalencies</span><span class="p">)</span>
+    <span class="mi">699</span>         <span class="k">else</span><span class="p">:</span>
+    <span class="mi">700</span>             <span class="c1"># to_value only copies if necessary</span>
 
 
-<span class="o">~/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astropy</span><span class="o">/</span><span class="n">units</span><span class="o">/</span><span class="n">quantity</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">_to_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unit</span><span class="p">,</span> <span class="n">equivalencies</span><span class="p">)</span>
-    <span class="mi">659</span>             <span class="n">equivalencies</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_equivalencies</span>
-    <span class="mi">660</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">unit</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">),</span>
-<span class="o">--&gt;</span> <span class="mi">661</span>                             <span class="n">equivalencies</span><span class="o">=</span><span class="n">equivalencies</span><span class="p">)</span>
-    <span class="mi">662</span>
-    <span class="mi">663</span>     <span class="k">def</span> <span class="nf">to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unit</span><span class="p">,</span> <span class="n">equivalencies</span><span class="o">=</span><span class="p">[],</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="o">~/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astropy</span><span class="o">/</span><span class="n">units</span><span class="o">/</span><span class="n">quantity</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">_to_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unit</span><span class="p">,</span> <span class="n">equivalencies</span><span class="p">)</span>
+    <span class="mi">661</span>             <span class="n">equivalencies</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_equivalencies</span>
+    <span class="mi">662</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">unit</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">unit</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">),</span>
+<span class="o">--&gt;</span> <span class="mi">663</span>                             <span class="n">equivalencies</span><span class="o">=</span><span class="n">equivalencies</span><span class="p">)</span>
+    <span class="mi">664</span>
+    <span class="mi">665</span>     <span class="k">def</span> <span class="nf">to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unit</span><span class="p">,</span> <span class="n">equivalencies</span><span class="o">=</span><span class="p">[],</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 
 
-<span class="o">~/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astropy</span><span class="o">/</span><span class="n">units</span><span class="o">/</span><span class="n">core</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">equivalencies</span><span class="p">)</span>
+<span class="o">~/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astropy</span><span class="o">/</span><span class="n">units</span><span class="o">/</span><span class="n">core</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">equivalencies</span><span class="p">)</span>
     <span class="mi">985</span>             <span class="k">return</span> <span class="n">UNITY</span>
     <span class="mi">986</span>         <span class="k">else</span><span class="p">:</span>
 <span class="o">--&gt;</span> <span class="mi">987</span>             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_converter</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">equivalencies</span><span class="o">=</span><span class="n">equivalencies</span><span class="p">)(</span><span class="n">value</span><span class="p">)</span>
@@ -898,7 +899,7 @@ convert to a different area unit, it will fail:</p>
     <span class="mi">989</span>     <span class="k">def</span> <span class="nf">in_units</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">equivalencies</span><span class="o">=</span><span class="p">[]):</span>
 
 
-<span class="o">~/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astropy</span><span class="o">/</span><span class="n">units</span><span class="o">/</span><span class="n">core</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">_get_converter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">equivalencies</span><span class="p">)</span>
+<span class="o">~/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astropy</span><span class="o">/</span><span class="n">units</span><span class="o">/</span><span class="n">core</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">_get_converter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">equivalencies</span><span class="p">)</span>
     <span class="mi">916</span>                             <span class="k">pass</span>
     <span class="mi">917</span>
 <span class="o">--&gt;</span> <span class="mi">918</span>             <span class="k">raise</span> <span class="n">exc</span>
@@ -906,7 +907,7 @@ convert to a different area unit, it will fail:</p>
     <span class="mi">920</span>     <span class="k">def</span> <span class="nf">_to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
 
 
-<span class="o">~/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astropy</span><span class="o">/</span><span class="n">units</span><span class="o">/</span><span class="n">core</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">_get_converter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">equivalencies</span><span class="p">)</span>
+<span class="o">~/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astropy</span><span class="o">/</span><span class="n">units</span><span class="o">/</span><span class="n">core</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">_get_converter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">equivalencies</span><span class="p">)</span>
     <span class="mi">902</span>         <span class="k">try</span><span class="p">:</span>
     <span class="mi">903</span>             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apply_equivalencies</span><span class="p">(</span>
 <span class="o">--&gt;</span> <span class="mi">904</span>                 <span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_normalize_equivalencies</span><span class="p">(</span><span class="n">equivalencies</span><span class="p">))</span>
@@ -914,7 +915,7 @@ convert to a different area unit, it will fail:</p>
     <span class="mi">906</span>             <span class="c1"># Last hope: maybe other knows how to do it?</span>
 
 
-<span class="o">~/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astropy</span><span class="o">/</span><span class="n">units</span><span class="o">/</span><span class="n">core</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">_apply_equivalencies</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unit</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">equivalencies</span><span class="p">)</span>
+<span class="o">~/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astropy</span><span class="o">/</span><span class="n">units</span><span class="o">/</span><span class="n">core</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">_apply_equivalencies</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">unit</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">equivalencies</span><span class="p">)</span>
     <span class="mi">886</span>         <span class="k">raise</span> <span class="n">UnitConversionError</span><span class="p">(</span>
     <span class="mi">887</span>             <span class="s2">&quot;</span><span class="si">{}</span><span class="s2"> and </span><span class="si">{}</span><span class="s2"> are not convertible&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
 <span class="o">--&gt;</span> <span class="mi">888</span>                 <span class="n">unit_str</span><span class="p">,</span> <span class="n">other_str</span><span class="p">))</span>
@@ -954,9 +955,9 @@ over all the pixels gives us the cloud mass.</p>
 <p><span class="outputnumrole">Out[41]:</span></p>
 <div class="math notranslate nohighlight">
 \[317.64843 \; \mathrm{M_{\odot}}\]</div>
-</div>
-</div>
-<div class="section" id="id1">
+</section>
+</section>
+<section id="id1">
 <h2>Exercises<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>The astro material was pretty heavy on that one, so let’s focus on some
 associated statistics using <code class="docutils literal notranslate"><span class="pre">Quantity</span></code>’s array capabililities.
@@ -967,8 +968,8 @@ Compute the median and mean of the <code class="docutils literal notranslate"><s
 know the relevant functions, look it up in the numpy docs or just type
 np. and a code cell). Do they have the units you expect?</p>
 <p><span class="inputnumrole">In[None]:</span></p>
-</div>
-<div class="section" id="using-quantities-with-functions">
+</section>
+<section id="using-quantities-with-functions">
 <h2>3. Using Quantities with Functions<a class="headerlink" href="#using-quantities-with-functions" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">Quantity</span></code> is also a useful tool if you plan to share some of your
 code, either with collaborators or the wider community. By writing
@@ -1039,15 +1040,15 @@ in a number they get an error:</p>
       <span class="mi">6</span>
 
 
-<span class="o">~/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astropy</span><span class="o">/</span><span class="n">units</span><span class="o">/</span><span class="n">quantity</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">__array_ufunc__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="o">*</span><span class="n">inputs</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-    <span class="mi">455</span>         <span class="c1"># consistent units between two inputs (e.g., in np.add) --</span>
-    <span class="mi">456</span>         <span class="c1"># and the unit of the result (or tuple of units for nout &gt; 1).</span>
-<span class="o">--&gt;</span> <span class="mi">457</span>         <span class="n">converters</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="n">converters_and_unit</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="o">*</span><span class="n">inputs</span><span class="p">)</span>
-    <span class="mi">458</span>
-    <span class="mi">459</span>         <span class="n">out</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;out&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="o">~/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astropy</span><span class="o">/</span><span class="n">units</span><span class="o">/</span><span class="n">quantity</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">__array_ufunc__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">function</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="o">*</span><span class="n">inputs</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="mi">457</span>         <span class="c1"># consistent units between two inputs (e.g., in np.add) --</span>
+    <span class="mi">458</span>         <span class="c1"># and the unit of the result (or tuple of units for nout &gt; 1).</span>
+<span class="o">--&gt;</span> <span class="mi">459</span>         <span class="n">converters</span><span class="p">,</span> <span class="n">unit</span> <span class="o">=</span> <span class="n">converters_and_unit</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="o">*</span><span class="n">inputs</span><span class="p">)</span>
+    <span class="mi">460</span>
+    <span class="mi">461</span>         <span class="n">out</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;out&#39;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 
 
-<span class="o">~/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="o">.</span><span class="mi">7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astropy</span><span class="o">/</span><span class="n">units</span><span class="o">/</span><span class="n">quantity_helper</span><span class="o">/</span><span class="n">converters</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">converters_and_unit</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
+<span class="o">~/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astropy</span><span class="o">/</span><span class="n">units</span><span class="o">/</span><span class="n">quantity_helper</span><span class="o">/</span><span class="n">converters</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">converters_and_unit</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span>
     <span class="mi">187</span>                             <span class="s2">&quot;argument is not a quantity (unless the &quot;</span>
     <span class="mi">188</span>                             <span class="s2">&quot;latter is all zero/infinity/nan)&quot;</span>
 <span class="o">--&gt;</span> <span class="mi">189</span>                             <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">function</span><span class="o">.</span><span class="vm">__name__</span><span class="p">))</span>
@@ -1070,8 +1071,8 @@ in a number they get an error:</p>
 instrument is saved! You now go on to win the Nobel Prize due to
 discoveries the instrument makes. And it was all because you used
 <code class="docutils literal notranslate"><span class="pre">Quantity</span></code> as the input of code you shared.</p>
-</div>
-<div class="section" id="exercise">
+</section>
+<section id="exercise">
 <h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">¶</a></h2>
 <p>Write a function that computes the Keplerian velocity you worked out in
 section 1 (using <code class="docutils literal notranslate"><span class="pre">Quantity</span></code> input and outputs, of course), but
@@ -1083,8 +1084,8 @@ masses and distances.</p>
 <div id="spacer"></div>
 
 <a href="../_static/quantities/quantities.ipynb"><button id="download">Download tutorial notebook</button></a>
-<a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/quantities/quantities.ipynb"><button id="binder">Interactive tutorial notebook</button></a></div>
-</div>
+<a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/quantities/quantities.ipynb"><button id="binder">Interactive tutorial notebook</button></a></section>
+</section>
 
 </div>
       </div>

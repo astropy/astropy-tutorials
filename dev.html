@@ -2,7 +2,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>Documentation on tutorials infrastructure &#8212; astropy-tutorials v3.0.dev</title>
     <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -97,9 +98,9 @@
     <div class="col-md-9">
       <div class="content-padding card">
         <div>
-  <div class="section" id="documentation-on-tutorials-infrastructure">
+  <section id="documentation-on-tutorials-infrastructure">
 <span id="dev-page"></span><h1>Documentation on tutorials infrastructure<a class="headerlink" href="#documentation-on-tutorials-infrastructure" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="overview">
+<section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
 <p>Tutorials are written as Jupyter notebooks on the <code class="docutils literal notranslate"><span class="pre">master</span></code> branch of the
 <code class="docutils literal notranslate"><span class="pre">astropy/astropy-tutorials</span></code> repository in <code class="docutils literal notranslate"><span class="pre">tutorials/notebooks/</span></code>. These
@@ -113,23 +114,23 @@ produce output, and then convert the notebook files into RST files.</p>
 pushed to the <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> branch of the repository and served by GitHub. The
 notebooks are first converted to RST files during the Sphinx build by doing the
 conversion at the end of the <a class="reference external" href="https://github.com/astropy/astropy-tutorials/blob/master/tutorials/conf.py">Sphinx configuration file</a>.</p>
-</div>
-<div class="section" id="why-not-use-nbsphinx">
+</section>
+<section id="why-not-use-nbsphinx">
 <h2>Why not use nbsphinx?<a class="headerlink" href="#why-not-use-nbsphinx" title="Permalink to this headline">¶</a></h2>
 <p>Both running and converting the notebooks is handled automatically by the Sphinx
 plugin <code class="docutils literal notranslate"><span class="pre">nbsphinx</span></code>, but it doesn’t support all of the features we want. In
 particular, there is no supported way to modify the template file that controls
 the output RST file that gets generated from each notebook; we want to be able
 to modify the template so we can add the links mentioned above.</p>
-</div>
-<div class="section" id="tutorials-directory-structure">
+</section>
+<section id="tutorials-directory-structure">
 <h2>Tutorials directory structure<a class="headerlink" href="#tutorials-directory-structure" title="Permalink to this headline">¶</a></h2>
 <p>The notebook files must be written as a single Jupyter notebook in a directory
 within the <code class="docutils literal notranslate"><span class="pre">tutorials/notebooks</span></code> directory. The name of the notebook must
 be the same as the subdirectory name. This is just needed for auto-generating
 links to the source notebooks from the generated RST pages.</p>
-</div>
-<div class="section" id="testing-notebook-execution">
+</section>
+<section id="testing-notebook-execution">
 <h2>Testing notebook execution<a class="headerlink" href="#testing-notebook-execution" title="Permalink to this headline">¶</a></h2>
 <p>You can use the custom nbconvert script in the astropy-tutorials repository to
 test that the tutorials all execute correctly. From the top-level repository
@@ -155,8 +156,8 @@ this, just remove the <code class="docutils literal notranslate"><span class="pr
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">scripts</span><span class="o">/</span><span class="n">convert</span><span class="o">.</span><span class="n">py</span> <span class="n">tutorials</span><span class="o">/</span><span class="n">notebooks</span><span class="o">/</span><span class="n">coordinates</span><span class="o">/</span><span class="n">coordinates</span><span class="o">.</span><span class="n">ipynb</span> <span class="o">-</span><span class="n">v</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="building-the-tutorials-page-locally">
+</section>
+<section id="building-the-tutorials-page-locally">
 <h2>Building the tutorials page locally<a class="headerlink" href="#building-the-tutorials-page-locally" title="Permalink to this headline">¶</a></h2>
 <p>For this, you can use the <a class="reference external" href="https://github.com/astropy/astropy-tutorials/blob/master/Makefile">Makefile</a> at the
 top-level of the tutorials repository. From the root level of the cloned or
@@ -196,8 +197,8 @@ environment variable.  Something like:</p>
 $ NBCONVERT_KERNEL=astropy-tutorials make html
 </pre></div>
 </div>
-</div>
-<div class="section" id="releases">
+</section>
+<section id="releases">
 <h2>Releases<a class="headerlink" href="#releases" title="Permalink to this headline">¶</a></h2>
 <p>We will release a new version of the tutorials with each major release of the
 Astropy core package; i.e. we will release for 3.0, 3.1, etc., but not for
@@ -208,14 +209,14 @@ and <code class="docutils literal notranslate"><span class="pre">pip-requirement
 repository with the new version.  This is the version number that will be
 shown in the sphinx builds. Note that if it ends in <code class="docutils literal notranslate"><span class="pre">.dev</span></code>, this will be
 followed by a revision number that is determined by the number of git commits.</p>
-</div>
-<div class="section" id="marking-a-cell-with-an-intentional-error">
+</section>
+<section id="marking-a-cell-with-an-intentional-error">
 <h2>Marking a cell with an intentional error<a class="headerlink" href="#marking-a-cell-with-an-intentional-error" title="Permalink to this headline">¶</a></h2>
 <p>Edit the cell metadata of the cell in which you would like to raise an exception
 and add the following to the top-level JSON: <code class="docutils literal notranslate"><span class="pre">&quot;tags&quot;:</span> <span class="pre">[&quot;raises-exception&quot;]</span></code>
 This tag is recognized by the latest (master) version of nbconvert.</p>
-</div>
-<div class="section" id="automatically-strip-output-and-notebook-metadata">
+</section>
+<section id="automatically-strip-output-and-notebook-metadata">
 <h2>Automatically Strip Output and Notebook Metadata<a class="headerlink" href="#automatically-strip-output-and-notebook-metadata" title="Permalink to this headline">¶</a></h2>
 <p>Jupyter notebooks contain some metadata that is typically hidden from users,
 which contains, for example, information about the Python kernel used to run it, the
@@ -249,8 +250,8 @@ cell.metadata.code_folding cell.metadata.tags cell.metadata.init_cell’</p>
 </dd>
 </dl>
 </div></blockquote>
-</div>
-</div>
+</section>
+</section>
 
 </div>
       </div>

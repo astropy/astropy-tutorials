@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta content="filterTutorials, filterCoordinates, filterOop, filterAstroquery, filterGaia" name="keywords" />
+<meta content="filterTutorials," name="keywords" />
+
+    <title>Astronomical Coordinates 3: Working with Velocity Data in astropy.coordinates &#8212; astropy-tutorials v3.0.dev</title>
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bootstrap_sandstone.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/astropy.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script src="../_static/js/jquery-fix.js"></script>
+    <script src="../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script src="../_static/bootstrap-sphinx.js"></script>
+    <script src="../_static/searchtools.js"></script>
+    <script src="https://use.fontawesome.com/3168e95f94.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <link rel="shortcut icon" href="../_static/astropy_favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <script type="text/javascript">
+    jQuery(function() { Search.loadIndex("../searchindex.js"); });
+  </script>
+  
+  <script type="text/javascript" id="searchindexloader"></script>
+   
+
+  </head><body>
+
+
+<nav class="navbar navbar-expand-lg bg-navbar">
+  <a class="navbar-brand" href="/" style="padding: 0px 5px;">
+    <img src="../../_static/astropy_logo.png" onerror="this.onerror=null;this.src='../_static/astropy_logo.png';" style="height: 38px;">
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarColor01">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="http://www.astropy.org"/>Astropy<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Modules</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0" action="../search.html" method="get">
+      <div class="input-group-prepend">
+          <button class="input-group-text" style="padding: 0.7rem"><i class="fa fa-search fa-fw"></i></button>
+      </div>
+      <input class="form-control mr-sm-3" name="q" type="text" placeholder="Search the universe" />
+    </form>
+  </div>
+</nav>
+
+
+<div class="container">
+  <div class="row">
+
+    
+    
+    
+
+    
+    <div class="col-md-3">
+      <div id="sidebar" class="bs-sidenav card" role="complementary">
+        <h3>Table of contents</h3>
+        <ul>
+<li><a class="reference internal" href="#">Astronomical Coordinates 3: Working with Velocity Data in astropy.coordinates</a><ul>
+<li><a class="reference internal" href="#authors">Authors</a></li>
+<li><a class="reference internal" href="#learning-goals">Learning Goals</a></li>
+<li><a class="reference internal" href="#keywords">Keywords</a></li>
+<li><a class="reference internal" href="#summary">Summary</a></li>
+<li><a class="reference internal" href="#imports">Imports</a></li>
+<li><a class="reference internal" href="#more-than-sky-positions-including-velocity-data-in-skycoord">More Than Sky Positions: Including Velocity Data in <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code></a></li>
+<li><a class="reference internal" href="#passing-velocity-data-into-skycoord">Passing Velocity Data into <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code></a></li>
+<li><a class="reference internal" href="#evolving-coordinate-positions-between-epochs">Evolving Coordinate Positions Between Epochs</a></li>
+</ul>
+</li>
+</ul>
+
+      </div>
+    </div>
+    
+
+    <div class="col-md-9">
+      <div class="content-padding card">
+        <div>
+  <a href="../_static/3-Coordinates-Velocities/3-Coordinates-Velocities.ipynb"><button id="download">Download tutorial notebook</button></a>
+<a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/3-Coordinates-Velocities/3-Coordinates-Velocities.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
+
+<div id="spacer"></div><section id="astronomical-coordinates-3-working-with-velocity-data-in-astropy-coordinates">
+<span id="coordinates-velocities"></span><h1>Astronomical Coordinates 3: Working with Velocity Data in astropy.coordinates<a class="headerlink" href="#astronomical-coordinates-3-working-with-velocity-data-in-astropy-coordinates" title="Permalink to this headline">¶</a></h1>
+<section id="authors">
+<h2>Authors<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a></h2>
+<p>Adrian Price-Whelan</p>
+</section>
+<section id="learning-goals">
+<h2>Learning Goals<a class="headerlink" href="#learning-goals" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Introduce how to represent and transform velocity data in
+<code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> objects</p></li>
+<li><p>Demonstrate how to predict the position of a star at a time using its
+proper motion</p></li>
+</ul>
+</section>
+<section id="keywords">
+<h2>Keywords<a class="headerlink" href="#keywords" title="Permalink to this headline">¶</a></h2>
+<p>coordinates, OOP, astroquery, gaia</p>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p>In the previous tutorial in this series, we showed how astronomical
+<em>positional</em> coordinates can be represented and transformed in Python
+using the <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> object
+(<a class="reference external" href="https://docs.astropy.org/en/stable/coordinates/skycoord.html">docs</a>).
+Many sources, especially stars (thanks to the Gaia mission), have
+measured velocities or measured components of their velocity (e.g., just
+proper motion, or just radial velocity).</p>
+<p>In this tutorial, we will explore how the <code class="docutils literal notranslate"><span class="pre">astropy.coordinates</span></code>
+package can be used to represent and transform astronomical coordinates
+that have associated velocity data. You may find it helpful to keep <a class="reference external" href="http://docs.astropy.org/en/stable/coordinates/index.html">the
+Astropy documentation for the coordinates
+package</a>
+open alongside this tutorial for reference or additional reading. In the
+text below, you may also see some links that look like
+(<a class="reference external" href="http://docs.astropy.org/en/stable/coordinates/index.html">docs</a>).
+These links will take you to parts of the documentation that are
+directly relevant to the cells from which they link.</p>
+<p><em>Note: This is the 3rd tutorial in a series of tutorials about
+astropy.coordinates. If you are new to astropy.coordinates, you may want
+to start from the beginning or an earlier tutorial.</em> - <a class="reference external" href="2-Coordinates-Transforms">Previous
+tutorial: Astronomical Coordinates 2 - Transforming Coordinate Systems
+and Representations¶</a> - <a class="reference external" href="4-Coordinates-Crossmatch">Next tutorial:
+Astronomical Coordinates 4 - Cross-matching
+Catalogs</a></p>
+</section>
+<section id="imports">
+<h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h2>
+<p>We start by importing some general packages we will need below:</p>
+<p><span class="inputnumrole">In[1]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">astropy</span> <span class="kn">import</span> <span class="n">units</span> <span class="k">as</span> <span class="n">u</span>
+<span class="kn">from</span> <span class="nn">astropy.coordinates</span> <span class="kn">import</span> <span class="n">SkyCoord</span><span class="p">,</span> <span class="n">Distance</span><span class="p">,</span> <span class="n">Galactic</span>
+<span class="kn">import</span> <span class="nn">astropy.coordinates</span> <span class="k">as</span> <span class="nn">coord</span>
+<span class="kn">from</span> <span class="nn">astropy.io</span> <span class="kn">import</span> <span class="n">fits</span>
+<span class="kn">from</span> <span class="nn">astropy.table</span> <span class="kn">import</span> <span class="n">QTable</span>
+<span class="kn">from</span> <span class="nn">astropy.time</span> <span class="kn">import</span> <span class="n">Time</span>
+<span class="kn">from</span> <span class="nn">astropy.utils.data</span> <span class="kn">import</span> <span class="n">download_file</span>
+<span class="kn">from</span> <span class="nn">astropy.wcs</span> <span class="kn">import</span> <span class="n">WCS</span>
+
+<span class="kn">from</span> <span class="nn">astroquery.gaia</span> <span class="kn">import</span> <span class="n">Gaia</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[1]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Created</span> <span class="n">TAP</span><span class="o">+</span> <span class="p">(</span><span class="n">v20200428</span><span class="mf">.1</span><span class="p">)</span> <span class="o">-</span> <span class="n">Connection</span><span class="p">:</span>
+    <span class="n">Host</span><span class="p">:</span> <span class="n">gea</span><span class="o">.</span><span class="n">esac</span><span class="o">.</span><span class="n">esa</span><span class="o">.</span><span class="n">int</span>
+    <span class="n">Use</span> <span class="n">HTTPS</span><span class="p">:</span> <span class="kc">True</span>
+    <span class="n">Port</span><span class="p">:</span> <span class="mi">443</span>
+    <span class="n">SSL</span> <span class="n">Port</span><span class="p">:</span> <span class="mi">443</span>
+<span class="n">Created</span> <span class="n">TAP</span><span class="o">+</span> <span class="p">(</span><span class="n">v20200428</span><span class="mf">.1</span><span class="p">)</span> <span class="o">-</span> <span class="n">Connection</span><span class="p">:</span>
+    <span class="n">Host</span><span class="p">:</span> <span class="n">gea</span><span class="o">.</span><span class="n">esac</span><span class="o">.</span><span class="n">esa</span><span class="o">.</span><span class="n">int</span>
+    <span class="n">Use</span> <span class="n">HTTPS</span><span class="p">:</span> <span class="kc">True</span>
+    <span class="n">Port</span><span class="p">:</span> <span class="mi">443</span>
+    <span class="n">SSL</span> <span class="n">Port</span><span class="p">:</span> <span class="mi">443</span>
+</pre></div>
+</div>
+</section>
+<section id="more-than-sky-positions-including-velocity-data-in-skycoord">
+<h2>More Than Sky Positions: Including Velocity Data in <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code><a class="headerlink" href="#more-than-sky-positions-including-velocity-data-in-skycoord" title="Permalink to this headline">¶</a></h2>
+<p>As we have seen in the previous tutorials, the <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> object can
+be used to store scalars or arrays of positional coordinate information
+and supports transforming between different coordinate frames and
+representations. But <code class="docutils literal notranslate"><span class="pre">astropy.coordinates</span></code> also supports representing
+and transforming <em>velocity</em> information along with positions
+(<a class="reference external" href="http://docs.astropy.org/en/latest/coordinates/velocities.html">docs</a>).</p>
+</section>
+<section id="passing-velocity-data-into-skycoord">
+<h2>Passing Velocity Data into <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code><a class="headerlink" href="#passing-velocity-data-into-skycoord" title="Permalink to this headline">¶</a></h2>
+<p>Velocity components are passed in to <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> in the same way that
+positional components are specified: As arguments to the <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code>
+class. For example, to create a <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> to represent a sky position
+and a proper motion in the (default) ICRS coordinate frame, in addition
+to the position components <code class="docutils literal notranslate"><span class="pre">ra</span></code>, <code class="docutils literal notranslate"><span class="pre">dec</span></code>, we can pass in values for
+the proper motion components <code class="docutils literal notranslate"><span class="pre">pm_ra_cosdec</span></code>, <code class="docutils literal notranslate"><span class="pre">pm_dec</span></code> (“pm” for
+“proper motion”):</p>
+<p><span class="inputnumrole">In[2]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">SkyCoord</span><span class="p">(</span>
+    <span class="n">ra</span><span class="o">=</span><span class="mi">10</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">deg</span><span class="p">,</span>
+    <span class="n">dec</span><span class="o">=</span><span class="mi">20</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">deg</span><span class="p">,</span>
+    <span class="n">pm_ra_cosdec</span><span class="o">=</span><span class="mi">1</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">mas</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">yr</span><span class="p">,</span>
+    <span class="n">pm_dec</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">mas</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">yr</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[2]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">SkyCoord</span> <span class="p">(</span><span class="n">ICRS</span><span class="p">):</span> <span class="p">(</span><span class="n">ra</span><span class="p">,</span> <span class="n">dec</span><span class="p">)</span> <span class="ow">in</span> <span class="n">deg</span>
+    <span class="p">(</span><span class="mf">10.</span><span class="p">,</span> <span class="mf">20.</span><span class="p">)</span>
+ <span class="p">(</span><span class="n">pm_ra_cosdec</span><span class="p">,</span> <span class="n">pm_dec</span><span class="p">)</span> <span class="ow">in</span> <span class="n">mas</span> <span class="o">/</span> <span class="n">yr</span>
+    <span class="p">(</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">)</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Here, you may notice that the proper motion in right ascension has
+“cosdec” in the name: This is to explicitly note that the input here is
+expected to be the proper motion scaled by the cosine of the
+declination, which accounts for the fact that a change in longitude
+(right ascension) has different physical length at different latitudes
+(declinations).</p>
+<p>Like the examples in previous tutorials demonstrated for positional
+coordinates, we can also create an array-valued <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> object by
+passing in arrays of data for all of the components:</p>
+<p><span class="inputnumrole">In[3]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">SkyCoord</span><span class="p">(</span>
+    <span class="n">ra</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">deg</span><span class="p">,</span>
+    <span class="n">dec</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">deg</span><span class="p">,</span>
+    <span class="n">pm_ra_cosdec</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">mas</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">yr</span><span class="p">,</span>
+    <span class="n">pm_dec</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">mas</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">yr</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[3]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">SkyCoord</span> <span class="p">(</span><span class="n">ICRS</span><span class="p">):</span> <span class="p">(</span><span class="n">ra</span><span class="p">,</span> <span class="n">dec</span><span class="p">)</span> <span class="ow">in</span> <span class="n">deg</span>
+    <span class="p">[(</span> <span class="mf">0.</span> <span class="p">,</span>  <span class="mf">5.</span>  <span class="p">),</span> <span class="p">(</span> <span class="mf">2.5</span><span class="p">,</span>  <span class="mf">8.75</span><span class="p">),</span> <span class="p">(</span> <span class="mf">5.</span> <span class="p">,</span> <span class="mf">12.5</span> <span class="p">),</span> <span class="p">(</span> <span class="mf">7.5</span><span class="p">,</span> <span class="mf">16.25</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">10.</span> <span class="p">,</span> <span class="mf">20.</span>  <span class="p">)]</span>
+ <span class="p">(</span><span class="n">pm_ra_cosdec</span><span class="p">,</span> <span class="n">pm_dec</span><span class="p">)</span> <span class="ow">in</span> <span class="n">mas</span> <span class="o">/</span> <span class="n">yr</span>
+    <span class="p">[(</span><span class="o">-</span><span class="mf">5.</span> <span class="p">,</span> <span class="o">-</span><span class="mf">5.</span> <span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mf">2.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.5</span><span class="p">),</span> <span class="p">(</span> <span class="mf">0.</span> <span class="p">,</span>  <span class="mf">0.</span> <span class="p">),</span> <span class="p">(</span> <span class="mf">2.5</span><span class="p">,</span>  <span class="mf">2.5</span><span class="p">),</span> <span class="p">(</span> <span class="mf">5.</span> <span class="p">,</span>  <span class="mf">5.</span> <span class="p">)]</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>However, for some of the examples below we will continue to use scalar
+values for brevity.</p>
+<p>You can also specify radial velocity data with the <code class="docutils literal notranslate"><span class="pre">radial_velocity</span></code>
+argument:</p>
+<p><span class="inputnumrole">In[4]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">velocity_coord</span> <span class="o">=</span> <span class="n">SkyCoord</span><span class="p">(</span>
+    <span class="n">ra</span><span class="o">=</span><span class="mi">10</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">deg</span><span class="p">,</span>
+    <span class="n">dec</span><span class="o">=</span><span class="mi">20</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">deg</span><span class="p">,</span>
+    <span class="n">pm_ra_cosdec</span><span class="o">=</span><span class="mi">1</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">mas</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">yr</span><span class="p">,</span>
+    <span class="n">pm_dec</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">mas</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">yr</span><span class="p">,</span>
+    <span class="n">radial_velocity</span><span class="o">=</span><span class="mi">100</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">km</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">s</span><span class="p">)</span>
+<span class="n">velocity_coord</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[4]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">SkyCoord</span> <span class="p">(</span><span class="n">ICRS</span><span class="p">):</span> <span class="p">(</span><span class="n">ra</span><span class="p">,</span> <span class="n">dec</span><span class="p">)</span> <span class="ow">in</span> <span class="n">deg</span>
+    <span class="p">(</span><span class="mf">10.</span><span class="p">,</span> <span class="mf">20.</span><span class="p">)</span>
+ <span class="p">(</span><span class="n">pm_ra_cosdec</span><span class="p">,</span> <span class="n">pm_dec</span><span class="p">,</span> <span class="n">radial_velocity</span><span class="p">)</span> <span class="ow">in</span> <span class="p">(</span><span class="n">mas</span> <span class="o">/</span> <span class="n">yr</span><span class="p">,</span> <span class="n">mas</span> <span class="o">/</span> <span class="n">yr</span><span class="p">,</span> <span class="n">km</span> <span class="o">/</span> <span class="n">s</span><span class="p">)</span>
+    <span class="p">(</span><span class="mf">1.</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="mf">100.</span><span class="p">)</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>The component data can then be accessed using the same names used to
+pass in the velocity components:</p>
+<p><span class="inputnumrole">In[5]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">velocity_coord</span><span class="o">.</span><span class="n">pm_ra_cosdec</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[5]:</span></p>
+<div class="math notranslate nohighlight">
+\[1 \; \mathrm{\frac{mas}{yr}}\]</div>
+<p><span class="inputnumrole">In[6]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">velocity_coord</span><span class="o">.</span><span class="n">radial_velocity</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[6]:</span></p>
+<div class="math notranslate nohighlight">
+\[100 \; \mathrm{\frac{km}{s}}\]</div>
+<p>A <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> object with velocity data can be transformed to other
+frames just like the position-only coordinate objects we used in the
+previous tutorials:</p>
+<p><span class="inputnumrole">In[7]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">velocity_coord_gal</span> <span class="o">=</span> <span class="n">velocity_coord</span><span class="o">.</span><span class="n">transform_to</span><span class="p">(</span><span class="n">Galactic</span><span class="p">())</span>
+<span class="n">velocity_coord_gal</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[7]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">SkyCoord</span> <span class="p">(</span><span class="n">Galactic</span><span class="p">):</span> <span class="p">(</span><span class="n">l</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="ow">in</span> <span class="n">deg</span>
+    <span class="p">(</span><span class="mf">119.26936774</span><span class="p">,</span> <span class="o">-</span><span class="mf">42.79039286</span><span class="p">)</span>
+ <span class="p">(</span><span class="n">pm_l_cosb</span><span class="p">,</span> <span class="n">pm_b</span><span class="p">,</span> <span class="n">radial_velocity</span><span class="p">)</span> <span class="ow">in</span> <span class="p">(</span><span class="n">mas</span> <span class="o">/</span> <span class="n">yr</span><span class="p">,</span> <span class="n">mas</span> <span class="o">/</span> <span class="n">yr</span><span class="p">,</span> <span class="n">km</span> <span class="o">/</span> <span class="n">s</span><span class="p">)</span>
+    <span class="p">(</span><span class="mf">1.11917063</span><span class="p">,</span> <span class="mf">1.93583499</span><span class="p">,</span> <span class="mf">100.</span><span class="p">)</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Note that, like the position components, which change from
+<code class="docutils literal notranslate"><span class="pre">ra</span></code>,<code class="docutils literal notranslate"><span class="pre">dec</span></code> to <code class="docutils literal notranslate"><span class="pre">l</span></code>,<code class="docutils literal notranslate"><span class="pre">b</span></code>, the proper motion component names
+have changed to reflect naming conventions for the component names in a
+given frame: <code class="docutils literal notranslate"><span class="pre">pm_ra_cosdec</span></code> and <code class="docutils literal notranslate"><span class="pre">pm_dec</span></code> have become <code class="docutils literal notranslate"><span class="pre">pm_l_cosb</span></code>
+and <code class="docutils literal notranslate"><span class="pre">pm_b</span></code>:</p>
+<p><span class="inputnumrole">In[8]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">velocity_coord_gal</span><span class="o">.</span><span class="n">pm_l_cosb</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[8]:</span></p>
+<div class="math notranslate nohighlight">
+\[1.1191706 \; \mathrm{\frac{mas}{yr}}\]</div>
+<p><span class="inputnumrole">In[9]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">velocity_coord_gal</span><span class="o">.</span><span class="n">pm_b</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[9]:</span></p>
+<div class="math notranslate nohighlight">
+\[1.935835 \; \mathrm{\frac{mas}{yr}}\]</div>
+<p>An important caveat to note when transforming a <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> object with
+velocity data is that some reference frames require knowing the
+distances, or the full velocity vectors (i.e. proper motion components
+and radial velocity) in order to transform the velocities correctly. For
+example, a <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> with only sky position and proper motion data
+cannot be transformed to a frame with a positional or velocity offset,
+such as the <code class="docutils literal notranslate"><span class="pre">Galactocentric</span></code> frame
+(<a class="reference external" href="https://docs.astropy.org/en/stable/coordinates/galactocentric.html">docs</a>)</p>
+<p><span class="inputnumrole">In[10]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">test_coord</span> <span class="o">=</span> <span class="n">SkyCoord</span><span class="p">(</span>
+    <span class="n">ra</span><span class="o">=</span><span class="mi">10</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">deg</span><span class="p">,</span>
+    <span class="n">dec</span><span class="o">=</span><span class="mi">20</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">deg</span><span class="p">,</span>
+    <span class="n">pm_ra_cosdec</span><span class="o">=</span><span class="mi">1</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">mas</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">yr</span><span class="p">,</span>
+    <span class="n">pm_dec</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">mas</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">yr</span><span class="p">)</span>
+
+<span class="c1"># This cell will raise an exception - this is expected!</span>
+<span class="n">test_coord</span><span class="o">.</span><span class="n">transform_to</span><span class="p">(</span><span class="n">coord</span><span class="o">.</span><span class="n">Galactocentric</span><span class="p">())</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[10]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">ConvertErrorTraceback</span> <span class="p">(</span><span class="n">most</span> <span class="n">recent</span> <span class="n">call</span> <span class="n">last</span><span class="p">)</span>
+
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="n">b9856df12370</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+      <span class="mi">6</span>
+      <span class="mi">7</span> <span class="c1"># This cell will raise an exception - this is expected!</span>
+<span class="o">----&gt;</span> <span class="mi">8</span> <span class="n">test_coord</span><span class="o">.</span><span class="n">transform_to</span><span class="p">(</span><span class="n">coord</span><span class="o">.</span><span class="n">Galactocentric</span><span class="p">())</span>
+
+
+<span class="o">~/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astropy</span><span class="o">/</span><span class="n">coordinates</span><span class="o">/</span><span class="n">sky_coordinate</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">transform_to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">frame</span><span class="p">,</span> <span class="n">merge_attributes</span><span class="p">)</span>
+    <span class="mi">617</span>         <span class="c1"># Do the transformation, returning a coordinate frame of the desired</span>
+    <span class="mi">618</span>         <span class="c1"># final type (not generic).</span>
+<span class="o">--&gt;</span> <span class="mi">619</span>         <span class="n">new_coord</span> <span class="o">=</span> <span class="n">trans</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">frame</span><span class="p">,</span> <span class="n">generic_frame</span><span class="p">)</span>
+    <span class="mi">620</span>
+    <span class="mi">621</span>         <span class="c1"># Finally make the new SkyCoord object from the `new_coord` and</span>
+
+
+<span class="o">~/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astropy</span><span class="o">/</span><span class="n">coordinates</span><span class="o">/</span><span class="n">transformations</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fromcoord</span><span class="p">,</span> <span class="n">toframe</span><span class="p">)</span>
+   <span class="mi">1421</span>
+   <span class="mi">1422</span>             <span class="n">curr_toframe</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">tosys</span><span class="p">(</span><span class="o">**</span><span class="n">frattrs</span><span class="p">)</span>
+<span class="o">-&gt;</span> <span class="mi">1423</span>             <span class="n">curr_coord</span> <span class="o">=</span> <span class="n">t</span><span class="p">(</span><span class="n">curr_coord</span><span class="p">,</span> <span class="n">curr_toframe</span><span class="p">)</span>
+   <span class="mi">1424</span>
+   <span class="mi">1425</span>         <span class="c1"># this is safe even in the case where self.transforms is empty, because</span>
+
+
+<span class="o">~/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astropy</span><span class="o">/</span><span class="n">coordinates</span><span class="o">/</span><span class="n">transformations</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fromcoord</span><span class="p">,</span> <span class="n">toframe</span><span class="p">)</span>
+   <span class="mi">1239</span>     <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fromcoord</span><span class="p">,</span> <span class="n">toframe</span><span class="p">):</span>
+   <span class="mi">1240</span>
+<span class="o">-&gt;</span> <span class="mi">1241</span>         <span class="n">M</span><span class="p">,</span> <span class="n">vec</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">transform_func</span><span class="p">(</span><span class="n">fromcoord</span><span class="p">,</span> <span class="n">toframe</span><span class="p">)</span>
+   <span class="mi">1242</span>         <span class="n">newrep</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_apply_transform</span><span class="p">(</span><span class="n">fromcoord</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">vec</span><span class="p">)</span>
+   <span class="mi">1243</span>
+
+
+<span class="o">~/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astropy</span><span class="o">/</span><span class="n">coordinates</span><span class="o">/</span><span class="n">builtin_frames</span><span class="o">/</span><span class="n">galactocentric</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">icrs_to_galactocentric</span><span class="p">(</span><span class="n">icrs_coord</span><span class="p">,</span> <span class="n">galactocentric_frame</span><span class="p">)</span>
+    <span class="mi">577</span> <span class="nd">@frame_transform_graph</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">AffineTransform</span><span class="p">,</span> <span class="n">ICRS</span><span class="p">,</span> <span class="n">Galactocentric</span><span class="p">)</span>
+    <span class="mi">578</span> <span class="k">def</span> <span class="nf">icrs_to_galactocentric</span><span class="p">(</span><span class="n">icrs_coord</span><span class="p">,</span> <span class="n">galactocentric_frame</span><span class="p">):</span>
+<span class="o">--&gt;</span> <span class="mi">579</span>     <span class="n">_check_coord_repr_diff_types</span><span class="p">(</span><span class="n">icrs_coord</span><span class="p">)</span>
+    <span class="mi">580</span>     <span class="k">return</span> <span class="n">get_matrix_vectors</span><span class="p">(</span><span class="n">galactocentric_frame</span><span class="p">)</span>
+    <span class="mi">581</span>
+
+
+<span class="o">~/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">astropy</span><span class="o">/</span><span class="n">coordinates</span><span class="o">/</span><span class="n">builtin_frames</span><span class="o">/</span><span class="n">galactocentric</span><span class="o">.</span><span class="n">py</span> <span class="ow">in</span> <span class="n">_check_coord_repr_diff_types</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+    <span class="mi">561</span> <span class="k">def</span> <span class="nf">_check_coord_repr_diff_types</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>
+    <span class="mi">562</span>     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">UnitSphericalRepresentation</span><span class="p">):</span>
+<span class="o">--&gt;</span> <span class="mi">563</span>         <span class="k">raise</span> <span class="n">ConvertError</span><span class="p">(</span><span class="s2">&quot;Transforming to/from a Galactocentric frame &quot;</span>
+    <span class="mi">564</span>                            <span class="s2">&quot;requires a 3D coordinate, e.g. (angle, angle, &quot;</span>
+    <span class="mi">565</span>                            <span class="s2">&quot;distance) or (x, y, z).&quot;</span><span class="p">)</span>
+
+
+<span class="n">ConvertError</span><span class="p">:</span> <span class="n">Transforming</span> <span class="n">to</span><span class="o">/</span><span class="kn">from</span> <span class="nn">a</span> <span class="n">Galactocentric</span> <span class="n">frame</span> <span class="n">requires</span> <span class="n">a</span> <span class="mi">3</span><span class="n">D</span> <span class="n">coordinate</span><span class="p">,</span> <span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span> <span class="p">(</span><span class="n">angle</span><span class="p">,</span> <span class="n">angle</span><span class="p">,</span> <span class="n">distance</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span><span class="o">.</span>
+</pre></div>
+</div>
+</section>
+<section id="evolving-coordinate-positions-between-epochs">
+<h2>Evolving Coordinate Positions Between Epochs<a class="headerlink" href="#evolving-coordinate-positions-between-epochs" title="Permalink to this headline">¶</a></h2>
+<p>For nearby or fast-moving stars, a star’s position could change
+appreciably between two well-spaced observations of the source. For such
+cases, it might be necessary to compute the position of the star at a
+given time using the proper motion or velocity of the star. Let’s
+demonstrate this idea by comparing the sky position of a source as
+measured by <a class="reference external" href="https://www.cosmos.esa.int/web/gaia/dr2">Gaia Data Release
+2</a> (given at the epoch
+J2015.5) to an image near this source from the Digitized Sky Survey
+(DSS; digital scans of photographic plates observed in the 1950s).</p>
+<p>From previous astrometric measurements, we know that the star HD 219829
+has very large proper motion: Close to 0.5 arcsec/year! Between the DSS
+and <em>Gaia</em>, we therefore expect that the position of the star has
+changed by about 0.5 arcmin. Let’s see if this is the case!</p>
+<p>To start, we will query the <em>Gaia</em> catalog to retrieve data for this
+star (skip the cell below if you do not have an internet connection - we
+have provided the table locally as well). We use a large search radius
+so many sources will be returned</p>
+<p><span class="inputnumrole">In[11]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Skip this cell if you are not connected to the internet</span>
+<span class="n">gaia_tbl</span> <span class="o">=</span> <span class="n">Gaia</span><span class="o">.</span><span class="n">query_object</span><span class="p">(</span><span class="n">SkyCoord</span><span class="o">.</span><span class="n">from_name</span><span class="p">(</span><span class="s1">&#39;HD 219829&#39;</span><span class="p">),</span>
+                             <span class="n">radius</span><span class="o">=</span><span class="mi">1</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">arcmin</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="inputnumrole">In[12]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># the .read() below produces some warnings that we can safely ignore</span>
+<span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">():</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="ne">UserWarning</span><span class="p">)</span>
+
+    <span class="n">gaia_tbl</span> <span class="o">=</span> <span class="n">QTable</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;HD_219829_query_results.ecsv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We know that HD 219829 will be the brightest source in this small
+region, so we can extract the row with the smallest G-band magnitude.
+Let’s check the proper motion values for this source to make sure that
+they are large:</p>
+<p><span class="inputnumrole">In[13]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">hd219829_row</span> <span class="o">=</span> <span class="n">gaia_tbl</span><span class="p">[</span><span class="n">gaia_tbl</span><span class="p">[</span><span class="s1">&#39;phot_g_mean_mag&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">argmin</span><span class="p">()]</span>
+<span class="n">hd219829_row</span><span class="p">[</span><span class="s1">&#39;source_id&#39;</span><span class="p">,</span> <span class="s1">&#39;pmra&#39;</span><span class="p">,</span> <span class="s1">&#39;pmdec&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[13]:</span></p>
+<i>Row index=2</i>
+<table id="table139647426137872">
+<thead><tr><th>source_id</th><th>pmra</th><th>pmdec</th></tr></thead>
+<thead><tr><th></th><th>mas / yr</th><th>mas / yr</th></tr></thead>
+<thead><tr><th>int64</th><th>float64</th><th>float64</th></tr></thead>
+<tr><td>2661015540210781568</td><td>483.4165901889734</td><td>-114.8633971841528</td></tr>
+</table><p>Indeed, it looks like this is our source! Let’s construct a <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code>
+object for this source using the data from the <em>Gaia</em> archive:</p>
+<p><em>Note about the Gaia catalog proper motion column names: The names in
+the Gaia archive and other repositories containing Gaia data give Right
+Ascension proper motion values simply as “pmra”. These components
+implicitly contain the ``cos(dec)`` term, so we do</em><strong>not</strong><em>have to
+modify these values in order to pass them in to ``SkyCoord`` as
+``pm_ra_cosdec``</em></p>
+<p><span class="inputnumrole">In[14]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">hd219829_coord</span> <span class="o">=</span> <span class="n">SkyCoord</span><span class="p">(</span>
+    <span class="n">ra</span><span class="o">=</span><span class="n">hd219829_row</span><span class="p">[</span><span class="s1">&#39;ra&#39;</span><span class="p">],</span>
+    <span class="n">dec</span><span class="o">=</span><span class="n">hd219829_row</span><span class="p">[</span><span class="s1">&#39;dec&#39;</span><span class="p">],</span>
+    <span class="n">distance</span><span class="o">=</span><span class="n">Distance</span><span class="p">(</span><span class="n">parallax</span><span class="o">=</span><span class="n">hd219829_row</span><span class="p">[</span><span class="s1">&#39;parallax&#39;</span><span class="p">]),</span>
+    <span class="n">pm_ra_cosdec</span><span class="o">=</span><span class="n">hd219829_row</span><span class="p">[</span><span class="s1">&#39;pmra&#39;</span><span class="p">],</span>
+    <span class="n">pm_dec</span><span class="o">=</span><span class="n">hd219829_row</span><span class="p">[</span><span class="s1">&#39;pmdec&#39;</span><span class="p">],</span>
+    <span class="n">obstime</span><span class="o">=</span><span class="n">Time</span><span class="p">(</span><span class="n">hd219829_row</span><span class="p">[</span><span class="s1">&#39;ref_epoch&#39;</span><span class="p">],</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;jyear&#39;</span><span class="p">))</span>
+
+<span class="n">hd219829_coord</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[14]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">SkyCoord</span> <span class="p">(</span><span class="n">ICRS</span><span class="p">):</span> <span class="p">(</span><span class="n">ra</span><span class="p">,</span> <span class="n">dec</span><span class="p">,</span> <span class="n">distance</span><span class="p">)</span> <span class="ow">in</span> <span class="p">(</span><span class="n">deg</span><span class="p">,</span> <span class="n">deg</span><span class="p">,</span> <span class="n">pc</span><span class="p">)</span>
+    <span class="p">(</span><span class="mf">349.72896716</span><span class="p">,</span> <span class="mf">5.40511585</span><span class="p">,</span> <span class="mf">34.47896069</span><span class="p">)</span>
+ <span class="p">(</span><span class="n">pm_ra_cosdec</span><span class="p">,</span> <span class="n">pm_dec</span><span class="p">)</span> <span class="ow">in</span> <span class="n">mas</span> <span class="o">/</span> <span class="n">yr</span>
+    <span class="p">(</span><span class="mf">483.41659019</span><span class="p">,</span> <span class="o">-</span><span class="mf">114.86339718</span><span class="p">)</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>We now have a <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> representation of the position and proper
+motion of the star HD 219829 as measured by <em>Gaia</em> and reported at the
+epoch J2015.5. What does this mean exactly? <em>Gaia</em> actually measures the
+(time-dependent) position of a star every time it scans the part of the
+sky that contains the source, and this is how <em>Gaia</em> is able to measure
+proper motions of stars. However, if every star is moving and changing
+its sky positions, how do we ever talk about “the sky position” of a
+star as opposed to “the sky trajectory of a star”?! The key is that
+catalogs often only report the position of a source at some reference
+epoch. For a survey that only observes the sky once or a few times
+(e.g., SDSS or 2MASS), this reference epoch might be “the time that the
+star was observed.” But for a mission like <em>Gaia</em>, which scans the sky
+many times, they perform astrometric fits to the individual position
+measurements, which allow them to measure the parallax, proper motion,
+and the reference position at a reference time for each source. For
+<em>Gaia</em> data release 2, the reference time is J2015.5, and the sky
+positions (and other quantities) reported in the catalog for each source
+are at this epoch.</p>
+<p>In <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code>, we specify the “epoch” of an observation using the
+<code class="docutils literal notranslate"><span class="pre">obstime</span></code> argument, as we did above. Now that we have a coordinate
+object for HD 219829, let’s now compare the position of the star as
+measured by <em>Gaia</em> to its apparent position in an image from the DSS.
+Let’s now query the DSS to retrieve a FITS image of the field around
+this star, using the STSCI DSS image cutout service. Skip the cell below
+if you do not have an internet connection (we have provided the image
+locally as well):</p>
+<p><span class="inputnumrole">In[15]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Skip this cell if you are not connected to the internet</span>
+<span class="n">dss_cutout_filename</span> <span class="o">=</span> <span class="n">download_file</span><span class="p">(</span>
+    <span class="sa">f</span><span class="s2">&quot;http://archive.stsci.edu/cgi-bin/dss_search?&quot;</span>
+    <span class="sa">f</span><span class="s2">&quot;f=FITS&amp;ra=</span><span class="si">{</span><span class="n">hd219829_coord</span><span class="o">.</span><span class="n">ra</span><span class="o">.</span><span class="n">degree</span><span class="si">}</span><span class="s2">&amp;dec=</span><span class="si">{</span><span class="n">hd219829_coord</span><span class="o">.</span><span class="n">dec</span><span class="o">.</span><span class="n">degree</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="sa">f</span><span class="s2">&quot;&amp;width=4&amp;height=4&quot;</span><span class="p">)</span>  <span class="c1"># width/height in arcmin</span>
+</pre></div>
+</div>
+<p><span class="inputnumrole">In[16]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dss_cutout_filename</span> <span class="o">=</span> <span class="s1">&#39;dss_hd219829.fits&#39;</span>
+</pre></div>
+</div>
+<p>We can now load the FITS image of the cutout and use
+<code class="docutils literal notranslate"><span class="pre">astropy.visualization</span></code> to display the image using its World
+Coordinate System (WCS) info
+(<a class="reference external" href="http://docs.astropy.org/en/latest/visualization/wcsaxes/index.html">docs</a>).
+By passing in the WCS information (included in the FITS cutout header),
+we can over-plot a marker for the <em>Gaia</em>-measured sky position of HD
+219829:</p>
+<p><span class="inputnumrole">In[17]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">hdu</span> <span class="o">=</span> <span class="n">fits</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">dss_cutout_filename</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">wcs</span> <span class="o">=</span> <span class="n">WCS</span><span class="p">(</span><span class="n">hdu</span><span class="o">.</span><span class="n">header</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+                       <span class="n">subplot_kw</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="n">wcs</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">hdu</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Greys_r&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;RA&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Dec&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_autoscale_on</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">hd219829_coord</span><span class="o">.</span><span class="n">ra</span><span class="o">.</span><span class="n">degree</span><span class="p">,</span>
+           <span class="n">hd219829_coord</span><span class="o">.</span><span class="n">dec</span><span class="o">.</span><span class="n">degree</span><span class="p">,</span>
+           <span class="n">s</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
+           <span class="n">transform</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">get_transform</span><span class="p">(</span><span class="s1">&#39;world&#39;</span><span class="p">),</span>
+           <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:red&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[17]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">collections</span><span class="o">.</span><span class="n">PathCollection</span> <span class="n">at</span> <span class="mh">0x7f02317d1f50</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<img alt="../_images/3-Coordinates-Velocities_30_1.png" src="../_images/3-Coordinates-Velocities_30_1.png" />
+<p>The brighest star (as observed by DSS) in this image is our target, and
+the red circle is where <em>Gaia</em> observed this star. As we excpected, it
+has moved quite a bit since the 1950’s! We can account for this motion
+and predict the position of the star at around the time the DSS plate
+was observed. Let’s assume that this plate was observed in 1950 exactly
+(this is not strictly correct, but should get us close enough).</p>
+<p>To account for the proper motion of the source and evolve the position
+to a new time, we can use the <code class="docutils literal notranslate"><span class="pre">SkyCoord.apply_space_motion()</span></code> method
+(<a class="reference external" href="http://docs.astropy.org/en/latest/api/astropy.coordinates.SkyCoord.html#astropy.coordinates.SkyCoord.apply_space_motion">docs</a>).
+Because we defined the <code class="docutils literal notranslate"><span class="pre">obstime</span></code> when we defined the coordinate object
+for HD 219829, for example:</p>
+<p><span class="inputnumrole">In[18]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">hd219829_coord</span><span class="o">.</span><span class="n">obstime</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[18]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">Time</span> <span class="nb">object</span><span class="p">:</span> <span class="n">scale</span><span class="o">=</span><span class="s1">&#39;tt&#39;</span> <span class="nb">format</span><span class="o">=</span><span class="s1">&#39;jyear&#39;</span> <span class="n">value</span><span class="o">=</span><span class="mf">2015.5</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>We can now use <code class="docutils literal notranslate"><span class="pre">apply_space_motion()</span></code> by passing in a new time,
+<code class="docutils literal notranslate"><span class="pre">new_obstime</span></code>, to compute the coordinates at:</p>
+<p><span class="inputnumrole">In[19]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># this produces some warnings that we can safely ignore</span>
+<span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">():</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="ne">UserWarning</span><span class="p">)</span>
+
+    <span class="n">hd219829_coord_1950</span> <span class="o">=</span> <span class="n">hd219829_coord</span><span class="o">.</span><span class="n">apply_space_motion</span><span class="p">(</span>
+        <span class="n">new_obstime</span><span class="o">=</span><span class="n">Time</span><span class="p">(</span><span class="s1">&#39;J1950&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+<p>Let’s now plot our predicted position for this source as it would appear
+in 1950 based on the <em>Gaia</em> position and proper motion:</p>
+<p><span class="inputnumrole">In[20]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">),</span>
+                       <span class="n">subplot_kw</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="n">wcs</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">hdu</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">origin</span><span class="o">=</span><span class="s1">&#39;lower&#39;</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;Greys_r&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;RA&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Dec&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_autoscale_on</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">hd219829_coord</span><span class="o">.</span><span class="n">ra</span><span class="o">.</span><span class="n">degree</span><span class="p">,</span>
+           <span class="n">hd219829_coord</span><span class="o">.</span><span class="n">dec</span><span class="o">.</span><span class="n">degree</span><span class="p">,</span>
+           <span class="n">s</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
+           <span class="n">transform</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">get_transform</span><span class="p">(</span><span class="s1">&#39;world&#39;</span><span class="p">),</span>
+           <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:red&#39;</span><span class="p">)</span>
+
+<span class="c1"># Plot the predicted (past) position:</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">hd219829_coord_1950</span><span class="o">.</span><span class="n">ra</span><span class="o">.</span><span class="n">degree</span><span class="p">,</span>
+           <span class="n">hd219829_coord_1950</span><span class="o">.</span><span class="n">dec</span><span class="o">.</span><span class="n">degree</span><span class="p">,</span>
+           <span class="n">s</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>
+           <span class="n">transform</span><span class="o">=</span><span class="n">ax</span><span class="o">.</span><span class="n">get_transform</span><span class="p">(</span><span class="s1">&#39;world&#39;</span><span class="p">),</span>
+           <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;tab:blue&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[20]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">collections</span><span class="o">.</span><span class="n">PathCollection</span> <span class="n">at</span> <span class="mh">0x7f02315a0910</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<img alt="../_images/3-Coordinates-Velocities_36_1.png" src="../_images/3-Coordinates-Velocities_36_1.png" />
+<p>The red circle is the same as in the previous image and shows the
+position of the source in the <em>Gaia</em> catalog (in 2015.5). The blue
+circle shows our prediction for the position of the source in 1950 -
+this looks much closer to where the star is in the DSS image!</p>
+<p>In this tutorial, we have introduced how to store and transform velocity
+data along with positional data in <code class="docutils literal notranslate"><span class="pre">astropy.coordinates</span></code>. We also
+demonstrated how to use the velocity of a source to predict its position
+at an earlier or later time.</p>
+<div id="spacer"></div>
+
+<a href="../_static/3-Coordinates-Velocities/3-Coordinates-Velocities.ipynb"><button id="download">Download tutorial notebook</button></a>
+<a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/3-Coordinates-Velocities/3-Coordinates-Velocities.ipynb"><button id="binder">Interactive tutorial notebook</button></a></section>
+</section>
+
+</div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+    &copy; Copyright Astropy.
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

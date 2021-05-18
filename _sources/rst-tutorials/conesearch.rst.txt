@@ -127,8 +127,7 @@ Validation is hosted by Space Telescope Science Institute (STScI).
      'The HST Guide Star Catalog, Version GSC-ACT (Lasker+ 1996-99) 1',
      'The USNO-A2.0 Catalogue (Monet+ 1998) 1',
      'Two Micron All Sky Survey (2MASS) 1',
-     'Two Micron All Sky Survey (2MASS) 2',
-     'USNO-A2 Catalogue 1']
+     'Two Micron All Sky Survey (2MASS) 2']
 
 
 
@@ -150,7 +149,7 @@ Next, let’s pick an astronomical object of interest. For example, M31.
 .. parsed-literal::
 
     <SkyCoord (ICRS): (ra, dec) in deg
-        (10.6847083, 41.26875)>
+        (10.68470833, 41.26875)>
 
 
 By default, a basic Cone Search goes through the list of catalogs and
@@ -182,7 +181,7 @@ table <http://astropy.readthedocs.io/en/stable/table/index.html>`__.
 
 .. parsed-literal::
 
-    WARNING: W50: http://gsss.stsci.edu/webservices/vo/ConeSearch.aspx?CAT=GSC23RA=10.6847083&DEC=41.26875&SR=0.1&VERB=1:154:0: W50: Invalid unit string 'pixel' [astropy.io.votable.tree]
+    WARNING: W50: http://gsss.stsci.edu/webservices/vo/ConeSearch.aspx?CAT=GSC23RA=10.68470833&DEC=41.26875&SR=0.1&VERB=1:154:0: W50: Invalid unit string 'pixel' [astropy.io.votable.tree]
 
 
 
@@ -359,12 +358,12 @@ result above.
                          [LFG93] P3  00 42 44.34 ... 2010ApJ...710..755G
                           NAME M31*  00 42 44.33 ... 1993ApJ...411L.107C
         [K2002] J004244.35+411608.9 00 42 44.351 ... 2002ApJ...577..738K
-                          HD   3969 00 42 44.367 ... 1988A&AS...74..449R
                       [HPH2013] 165  00 42 44.34 ... 2013A&A...555A..65H
                       [HPH2013] 164  00 42 44.30 ... 2013A&A...555A..65H
                          [LFG93] P1  00 42 44.37 ... 2010ApJ...710..755G
         [KPM2002] G121.1741-21.5730  00 42 44.27 ... 2002AJ....124.2990K
                       [O2006] QSS 8 00 42 44.365 ... 2002ApJ...577..738K
+                      [HPH2013] 167  00 42 44.36 ... 2013A&A...555A..65H
                                 ...          ... ...                 ...
             CXOGMP J004244.2+411608   00 42 44.2 ... 2001A&A...365L.195S
                       [HPH2013] 170  00 42 44.40 ... 2013A&A...555A..65H
@@ -376,7 +375,7 @@ result above.
                         [PSC2013] 9 00 42 44.060 ... 2013MNRAS.430.1219P
                        [LGF2011] S1  00 42 44.36 ... 2011ApJ...728L..10L
     NAME Nova Treffers 1993 in M 31     00 42 44 ...                    
-    Length = 25 rows
+    Length = 24 rows
 
 
 Now back to Cone Search… You can extract metadata of this Cone Search
@@ -442,11 +441,11 @@ catalog.
             "W50"
         ],
         "validate_warnings": [
-            "/var/www/astroconda.org/html/aux/vo_databases/daily_20201118/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:154:0: W50: Invalid unit string 'pixel'",
-            "/var/www/astroconda.org/html/aux/vo_databases/daily_20201118/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:154:0: W50: Invalid unit string 'pixel'"
+            "/var/www/astroconda.org/html/aux/vo_databases/daily_20210518/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:154:0: W50: Invalid unit string 'pixel'",
+            "/var/www/astroconda.org/html/aux/vo_databases/daily_20210518/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:154:0: W50: Invalid unit string 'pixel'"
         ],
         "validate_xmllint": true,
-        "validate_xmllint_content": "/var/www/astroconda.org/html/aux/vo_databases/daily_20201118/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml validates\n",
+        "validate_xmllint_content": "/var/www/astroconda.org/html/aux/vo_databases/daily_20210518/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml validates\n",
         "waveband": "optical",
         "wsdl_url": ""
     }
@@ -625,9 +624,8 @@ want to suppress all the VO table warnings and informational messages?
     http://vizier.u-strasbg.fr/viz-bin/conesearch/I/254/out? returned 5 rows
     http://vizier.u-strasbg.fr/viz-bin/conesearch/I/255/out? returned 5 rows
     http://vizier.u-strasbg.fr/viz-bin/conesearch/I/252/out? returned 3 rows
-    http://wfaudata.roe.ac.uk/twomass-dsa/DirectCone?DSACAT=TWOMASS&DSATAB=twomass_psc returned 2008 rows
     http://wfaudata.roe.ac.uk/twomass-dsa/DirectCone?DSACAT=TWOMASS&DSATAB=twomass_xsc returned 25 rows
-    http://astrometry.mit.edu/cgi-bin/vo_cone6.cgi?CAT=USNO-A2 returned 3 rows
+    http://wfaudata.roe.ac.uk/twomass-dsa/DirectCone?DSACAT=TWOMASS&DSATAB=twomass_psc returned 2008 rows
 
 
 
@@ -738,9 +736,8 @@ seconds.
     http://vizier.u-strasbg.fr/viz-bin/conesearch/I/254/out? returned 5 rows
     http://vizier.u-strasbg.fr/viz-bin/conesearch/I/255/out? returned 5 rows
     http://vizier.u-strasbg.fr/viz-bin/conesearch/I/252/out? returned 3 rows
-    http://wfaudata.roe.ac.uk/twomass-dsa/DirectCone?DSACAT=TWOMASS&DSATAB=twomass_psc returned 2008 rows
     http://wfaudata.roe.ac.uk/twomass-dsa/DirectCone?DSACAT=TWOMASS&DSATAB=twomass_xsc returned 25 rows
-    http://astrometry.mit.edu/cgi-bin/vo_cone6.cgi?CAT=USNO-A2 returned 3 rows
+    http://wfaudata.roe.ac.uk/twomass-dsa/DirectCone?DSACAT=TWOMASS&DSATAB=twomass_psc returned 2008 rows
 
 
 Estimating the Search Time
@@ -794,7 +791,7 @@ This might take a while.
 
 .. parsed-literal::
 
-    Predicted run time is 0.4527974902147827 seconds
+    Predicted run time is 1.1745629366183334 seconds
     Predicted number of rows is 2617
 
 
@@ -823,7 +820,7 @@ the service provider.
 
 .. parsed-literal::
 
-    INFO: conesearch_timer took 0.7375738620758057 s on AVERAGE for 1 call(s). [astroquery.utils.timer]
+    INFO: conesearch_timer took 0.9951817989349365 s on AVERAGE for 1 call(s). [astroquery.utils.timer]
 
 
 
@@ -841,7 +838,7 @@ the service provider.
 
 .. parsed-literal::
 
-    Actual run time is 0.7375738620758057 seconds
+    Actual run time is 0.9951817989349365 seconds
     Actual number of rows is 4028
 
 

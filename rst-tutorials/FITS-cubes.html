@@ -2,7 +2,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta charset="utf-8" /><meta content="filterTutorials, filterFits, filterImageManipulation, filterDataCubes, filterRadioAstronomy, filterWcs, filterAstroquery, filterReproject, filterSpectralCube, filterMatplotlib, filterContourPlots, filterColorbar" name="keywords" />
+    <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta content="filterTutorials, filterFits, filterImageManipulation, filterDataCubes, filterRadioAstronomy, filterWcs, filterAstroquery, filterReproject, filterSpectralCube, filterMatplotlib, filterContourPlots, filterColorbar" name="keywords" />
 <meta content="filterTutorials," name="keywords" />
 
     <title>Working with FITS-cubes &#8212; astropy-tutorials v3.0.dev</title>
@@ -117,9 +118,9 @@
   <a href="../_static/FITS-cubes/FITS-cubes.ipynb"><button id="download">Download tutorial notebook</button></a>
 <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/FITS-cubes/FITS-cubes.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
 
-<div id="spacer"></div><div class="section" id="working-with-fits-cubes">
+<div id="spacer"></div><section id="working-with-fits-cubes">
 <span id="fits-cubes"></span><h1>Working with FITS-cubes<a class="headerlink" href="#working-with-fits-cubes" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="authors">
+<section id="authors">
 <h2>Authors<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="http://www.astronomy.dk">Dhanesh Krishnarao (DK)</a>, <a class="reference external" href="http://www.astro.wisc.edu/our-people/post-doctoral-students/shetty-shravan/">Shravan
 Shetty</a>,
@@ -128,8 +129,8 @@ Gonzalez-Casanova</a>,
 <a class="reference external" href="http://www.astro.wisc.edu/our-people/scientists/hernandez-audra/">Audra
 Hernandez</a>,
 Kris Stern, Kelle Cruz, Stephanie Douglas</p>
-</div>
-<div class="section" id="learning-goals">
+</section>
+<section id="learning-goals">
 <h2>Learning Goals<a class="headerlink" href="#learning-goals" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>Find and download data using <code class="docutils literal notranslate"><span class="pre">astroquery</span></code></p></li>
@@ -139,13 +140,13 @@ Kris Stern, Kelle Cruz, Stephanie Douglas</p>
 <code class="docutils literal notranslate"><span class="pre">reproject</span></code></p></li>
 <li><p>Create intensity moment maps / velocity maps with <code class="docutils literal notranslate"><span class="pre">spectral_cube</span></code></p></li>
 </ul>
-</div>
-<div class="section" id="keywords">
+</section>
+<section id="keywords">
 <h2>Keywords<a class="headerlink" href="#keywords" title="Permalink to this headline">¶</a></h2>
 <p>FITS, image manipulation, data cubes, radio astronomy, WCS, astroquery,
 reproject, spectral cube, matplotlib, contour plots, colorbar</p>
-</div>
-<div class="section" id="summary">
+</section>
+<section id="summary">
 <h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
 <p>In this tutorial we will visualize 2D and 3D data sets in Galactic and
 equatorial coordinates.</p>
@@ -186,8 +187,8 @@ images in a multitude of ways.</p>
 <span class="kn">from</span> <span class="nn">reproject</span> <span class="kn">import</span> <span class="n">reproject_interp</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="download-the-hi-data">
+</section>
+<section id="download-the-hi-data">
 <h2>Download the HI Data<a class="headerlink" href="#download-the-hi-data" title="Permalink to this headline">¶</a></h2>
 <p>We’ll be using HI 21 cm emission data from the <a class="reference external" href="http://adsabs.harvard.edu/cgi-bin/bib_query?arXiv:1610.06175">HI4Pi
 survey</a>.
@@ -202,8 +203,8 @@ We have a reduced version of it which will be a FITS data cube in
 Galactic coordinates using the tangential sky projection.</p>
 <p>Sure, we could download this file directly, but why do that when we can
 load it up via one line of code and have it ready to use in our cache?</p>
-</div>
-<div class="section" id="download-the-hi-fits-cube">
+</section>
+<section id="download-the-hi-fits-cube">
 <h2>Download the HI Fits Cube<a class="headerlink" href="#download-the-hi-fits-cube" title="Permalink to this headline">¶</a></h2>
 <p><span class="inputnumrole">In[2]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Downloads the HI data in a fits file format</span>
@@ -245,7 +246,7 @@ out! The first check is to print out the cube.</p>
  <span class="n">n_s</span><span class="p">:</span>    <span class="mi">450</span>  <span class="n">type_s</span><span class="p">:</span> <span class="n">VRAD</span>      <span class="n">unit_s</span><span class="p">:</span> <span class="n">m</span> <span class="o">/</span> <span class="n">s</span>  <span class="nb">range</span><span class="p">:</span>  <span class="o">-</span><span class="mf">598824.534</span> <span class="n">m</span> <span class="o">/</span> <span class="n">s</span><span class="p">:</span>  <span class="mf">600409.133</span> <span class="n">m</span> <span class="o">/</span> <span class="n">s</span>
 </pre></div>
 </div>
-<div class="section" id="some-things-to-pay-attention-to-here">
+<section id="some-things-to-pay-attention-to-here">
 <h3>Some things to pay attention to here:<a class="headerlink" href="#some-things-to-pay-attention-to-here" title="Permalink to this headline">¶</a></h3>
 <p>A data cube has three axes. In this case, there is Galactic Longitude
 (x), Galactic Latitude (y), and a spectral axis in terms of a LSR
@@ -277,8 +278,8 @@ make sure the data isn’t corrupted or is looking at the right region.)</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">WARNING</span><span class="p">:</span> <span class="n">AstropyDeprecationWarning</span><span class="p">:</span> <span class="n">block_reduce</span> <span class="n">was</span> <span class="n">moved</span> <span class="n">to</span> <span class="n">the</span> <span class="n">astropy</span><span class="o">.</span><span class="n">nddata</span><span class="o">.</span><span class="n">blocks</span> <span class="n">module</span><span class="o">.</span>  <span class="n">Please</span> <span class="n">update</span> <span class="n">your</span> <span class="kn">import</span> <span class="nn">statement.</span> <span class="p">[</span><span class="n">astropy</span><span class="o">.</span><span class="n">nddata</span><span class="o">.</span><span class="n">utils</span><span class="p">]</span>
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">INFO</span><span class="p">:</span> <span class="n">Auto</span><span class="o">-</span><span class="n">setting</span> <span class="n">vmin</span> <span class="n">to</span> <span class="o">-</span><span class="mf">1.748e+00</span> <span class="p">[</span><span class="n">aplpy</span><span class="o">.</span><span class="n">core</span><span class="p">]</span>
-<span class="n">INFO</span><span class="p">:</span> <span class="n">Auto</span><span class="o">-</span><span class="n">setting</span> <span class="n">vmax</span> <span class="n">to</span>  <span class="mf">1.808e+01</span> <span class="p">[</span><span class="n">aplpy</span><span class="o">.</span><span class="n">core</span><span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">INFO</span><span class="p">:</span> <span class="n">Auto</span><span class="o">-</span><span class="n">setting</span> <span class="n">vmin</span> <span class="n">to</span> <span class="o">-</span><span class="mf">1.736e+00</span> <span class="p">[</span><span class="n">aplpy</span><span class="o">.</span><span class="n">core</span><span class="p">]</span>
+<span class="n">INFO</span><span class="p">:</span> <span class="n">Auto</span><span class="o">-</span><span class="n">setting</span> <span class="n">vmax</span> <span class="n">to</span>  <span class="mf">1.792e+01</span> <span class="p">[</span><span class="n">aplpy</span><span class="o">.</span><span class="n">core</span><span class="p">]</span>
 </pre></div>
 </div>
 <img alt="../_images/FITS-cubes_11_2.png" src="../_images/FITS-cubes_11_2.png" />
@@ -288,14 +289,14 @@ make sure the data isn’t corrupted or is looking at the right region.)</p>
 </div>
 <p><span class="outputnumrole">Out[6]:</span></p>
 <img alt="../_images/FITS-cubes_12_0.png" src="../_images/FITS-cubes_12_0.png" />
-<div class="section" id="try-messing-around-with-slicing-the-cube-along-different-axes-or-picking-out-different-spectra">
+<section id="try-messing-around-with-slicing-the-cube-along-different-axes-or-picking-out-different-spectra">
 <h4>Try messing around with slicing the cube along different axes, or picking out different spectra<a class="headerlink" href="#try-messing-around-with-slicing-the-cube-along-different-axes-or-picking-out-different-spectra" title="Permalink to this headline">¶</a></h4>
 <p><span class="inputnumrole">In[None]:</span></p>
 <p><span class="inputnumrole">In[None]:</span></p>
-</div>
-</div>
-</div>
-<div class="section" id="make-a-smaller-cube-focusing-on-the-magellanic-clouds">
+</section>
+</section>
+</section>
+<section id="make-a-smaller-cube-focusing-on-the-magellanic-clouds">
 <h2>Make a smaller cube, focusing on the Magellanic Clouds<a class="headerlink" href="#make-a-smaller-cube-focusing-on-the-magellanic-clouds" title="Permalink to this headline">¶</a></h2>
 <p>The HI data cube we downloaded is bigger than we actually need it to be.
 Let’s try zooming in on just the part we need and make a new
@@ -336,8 +337,8 @@ cube</p>
  <span class="n">n_s</span><span class="p">:</span>    <span class="mi">450</span>  <span class="n">type_s</span><span class="p">:</span> <span class="n">VRAD</span>      <span class="n">unit_s</span><span class="p">:</span> <span class="n">m</span> <span class="o">/</span> <span class="n">s</span>  <span class="nb">range</span><span class="p">:</span>  <span class="o">-</span><span class="mf">598824.534</span> <span class="n">m</span> <span class="o">/</span> <span class="n">s</span><span class="p">:</span>  <span class="mf">600409.133</span> <span class="n">m</span> <span class="o">/</span> <span class="n">s</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="cut-along-the-spectral-axis">
+</section>
+<section id="cut-along-the-spectral-axis">
 <h2>Cut along the Spectral Axis:<a class="headerlink" href="#cut-along-the-spectral-axis" title="Permalink to this headline">¶</a></h2>
 <p>We don’t really need data from such a large velocity range so let’s just
 extract a little slab. We can do this in any units that we want using
@@ -355,8 +356,8 @@ the <code class="docutils literal notranslate"><span class="pre">.spectral_slab(
  <span class="n">n_s</span><span class="p">:</span>    <span class="mi">226</span>  <span class="n">type_s</span><span class="p">:</span> <span class="n">VRAD</span>      <span class="n">unit_s</span><span class="p">:</span> <span class="n">m</span> <span class="o">/</span> <span class="n">s</span>  <span class="nb">range</span><span class="p">:</span>  <span class="o">-</span><span class="mf">299683.842</span> <span class="n">m</span> <span class="o">/</span> <span class="n">s</span><span class="p">:</span>  <span class="mf">301268.441</span> <span class="n">m</span> <span class="o">/</span> <span class="n">s</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="moment-maps">
+</section>
+<section id="moment-maps">
 <h2>Moment Maps<a class="headerlink" href="#moment-maps" title="Permalink to this headline">¶</a></h2>
 <p>Moment maps are a useful analysis tool to study data cubes. In short, a
 moment is a weighted integral along an axis (typically the Spectral
@@ -430,7 +431,7 @@ object directly into a matplotlib axis instance.</p>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Galactic Latitude (degrees)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
 
 <span class="c1"># Add a colorbar</span>
-<span class="n">cbar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">pad</span><span class="o">=.</span><span class="mi">07</span><span class="p">)</span>
+<span class="n">cbar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mf">.07</span><span class="p">)</span>
 <span class="n">cbar</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s1">&#39;Velocity (km/s)&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
 
 <span class="c1"># Overlay set of RA/Dec Axes</span>
@@ -445,7 +446,7 @@ object directly into a matplotlib axis instance.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[12]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">contour</span><span class="o">.</span><span class="n">QuadContourSet</span> <span class="n">at</span> <span class="mh">0x7f890b110050</span><span class="o">&gt;</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">contour</span><span class="o">.</span><span class="n">QuadContourSet</span> <span class="n">at</span> <span class="mh">0x7ffa6d8b1510</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <img alt="../_images/FITS-cubes_27_1.png" src="../_images/FITS-cubes_27_1.png" />
@@ -486,7 +487,7 @@ latitude, longitude).</p>
 <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Galactic Longitude (degrees)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
 
 <span class="c1"># Add a colorbar</span>
-<span class="n">cbar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">pad</span><span class="o">=.</span><span class="mi">07</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="s1">&#39;horizontal&#39;</span><span class="p">)</span>
+<span class="n">cbar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mf">.07</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="s1">&#39;horizontal&#39;</span><span class="p">)</span>
 <span class="n">cbar</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s1">&#39;Temperature (K)&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -497,17 +498,17 @@ latitude, longitude).</p>
 </div>
 <img alt="../_images/FITS-cubes_30_1.png" src="../_images/FITS-cubes_30_1.png" />
 <p>As we can see, the SMC seems to be only along positive velocities.</p>
-</div>
-<div class="section" id="try">
+</section>
+<section id="try">
 <h2>Try:<a class="headerlink" href="#try" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="create-a-new-spectral-slab-isolating-just-the-smc-and-slice-along-a-different-dimension-to-create-a-latitude-velocity-diagram">
+<section id="create-a-new-spectral-slab-isolating-just-the-smc-and-slice-along-a-different-dimension-to-create-a-latitude-velocity-diagram">
 <h3>Create a new spectral slab isolating just the SMC and slice along a different dimension to create a latitude-velocity diagram<a class="headerlink" href="#create-a-new-spectral-slab-isolating-just-the-smc-and-slice-along-a-different-dimension-to-create-a-latitude-velocity-diagram" title="Permalink to this headline">¶</a></h3>
 <p><span class="inputnumrole">In[None]:</span></p>
 <p><span class="inputnumrole">In[None]:</span></p>
 <p><span class="inputnumrole">In[None]:</span></p>
-</div>
-</div>
-<div class="section" id="find-and-download-a-herschel-image">
+</section>
+</section>
+<section id="find-and-download-a-herschel-image">
 <h2>Find and Download a Herschel Image<a class="headerlink" href="#find-and-download-a-herschel-image" title="Permalink to this headline">¶</a></h2>
 <p>This is great, but we want to compare the HI emission data with Herschel
 350 micron emission to trace some dust. This can be done with
@@ -571,30 +572,30 @@ filters used for these observations.</p>
 &lt;MaskedColumn name=&apos;filter&apos; dtype=&apos;object&apos; unit=&apos;microns&apos; description=&apos;Filter or filters used&apos; length=28&gt;
 <table>
 <tr><td>70, 160</td></tr>
+<tr><td>250, 350, 500</td></tr>
+<tr><td>100, 160</td></tr>
+<tr><td>70, 160</td></tr>
+<tr><td>70, 160</td></tr>
+<tr><td>70, 160</td></tr>
 <tr><td>70, 160</td></tr>
 <tr><td>250, 350, 500</td></tr>
 <tr><td>100, 160</td></tr>
-<tr><td>250, 350, 500</td></tr>
 <tr><td>70, 160</td></tr>
 <tr><td>70, 160</td></tr>
 <tr><td>70, 160</td></tr>
-<tr><td>70, 160</td></tr>
-<tr><td>70, 160</td></tr>
-<tr><td>70, 160</td></tr>
-<tr><td>250, 350, 500</td></tr>
 <tr><td>...</td></tr>
 <tr><td>100, 160</td></tr>
-<tr><td>250, 350, 500</td></tr>
 <tr><td>70, 160</td></tr>
 <tr><td>100, 160</td></tr>
-<tr><td>100, 160</td></tr>
-<tr><td>70, 160</td></tr>
 <tr><td>70, 160</td></tr>
 <tr><td>250, 350, 500</td></tr>
 <tr><td>70, 160</td></tr>
+<tr><td>250, 350, 500</td></tr>
 <tr><td>100, 160</td></tr>
 <tr><td>70, 160</td></tr>
 <tr><td>70, 160</td></tr>
+<tr><td>70, 160</td></tr>
+<tr><td>250, 350, 500</td></tr>
 </table><p>Luckily for us, there is an observation made with three filters: 250,
 350, and 500 microns. This is the object we will want to download. One
 way to do this is by making a boolean mask to select out the Table entry
@@ -617,19 +618,19 @@ five quite large files. It could take several minutes to complete.</p>
 </div>
 <p><span class="outputnumrole">Out[17]:</span></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>INFO: Starting download of HERSCHEL data. (5 files) [astroquery.esasky.core]
-INFO: Downloading Observation ID: 1342205092 from http://archives.esac.esa.int/hsa/whsa-tap-server/data?RETRIEVAL_TYPE=STANDALONE&amp;observation_oid=8614195&amp;DATA_RETRIEVAL_ORIGIN=UI [astroquery.esasky.core]
+INFO: Downloading Observation ID: 1342198590 from http://archives.esac.esa.int/hsa/whsa-tap-server/data?RETRIEVAL_TYPE=STANDALONE&amp;observation_oid=8634359&amp;DATA_RETRIEVAL_ORIGIN=UI [astroquery.esasky.core]
 INFO: [Done] [astroquery.esasky.core]
 INFO: Downloading Observation ID: 1342205055 from http://archives.esac.esa.int/hsa/whsa-tap-server/data?RETRIEVAL_TYPE=STANDALONE&amp;observation_oid=8614152&amp;DATA_RETRIEVAL_ORIGIN=UI [astroquery.esasky.core]
 INFO: [Done] [astroquery.esasky.core]
-INFO: Downloading Observation ID: 1342198566 from http://archives.esac.esa.int/hsa/whsa-tap-server/data?RETRIEVAL_TYPE=STANDALONE&amp;observation_oid=8634358&amp;DATA_RETRIEVAL_ORIGIN=UI [astroquery.esasky.core]
-INFO: [Done] [astroquery.esasky.core]
 INFO: Downloading Observation ID: 1342198565 from http://archives.esac.esa.int/hsa/whsa-tap-server/data?RETRIEVAL_TYPE=STANDALONE&amp;observation_oid=8613787&amp;DATA_RETRIEVAL_ORIGIN=UI [astroquery.esasky.core]
 INFO: [Done] [astroquery.esasky.core]
-INFO: Downloading Observation ID: 1342198590 from http://archives.esac.esa.int/hsa/whsa-tap-server/data?RETRIEVAL_TYPE=STANDALONE&amp;observation_oid=8634359&amp;DATA_RETRIEVAL_ORIGIN=UI [astroquery.esasky.core]
+INFO: Downloading Observation ID: 1342198566 from http://archives.esac.esa.int/hsa/whsa-tap-server/data?RETRIEVAL_TYPE=STANDALONE&amp;observation_oid=8634358&amp;DATA_RETRIEVAL_ORIGIN=UI [astroquery.esasky.core]
+INFO: [Done] [astroquery.esasky.core]
+INFO: Downloading Observation ID: 1342205092 from http://archives.esac.esa.int/hsa/whsa-tap-server/data?RETRIEVAL_TYPE=STANDALONE&amp;observation_oid=8614195&amp;DATA_RETRIEVAL_ORIGIN=UI [astroquery.esasky.core]
 INFO: [Done] [astroquery.esasky.core]
 INFO: Downloading of HERSCHEL data complete. [astroquery.esasky.core]
 INFO: Maps available at /home/circleci/project/tutorials/notebooks/FITS-cubes/Maps. [astroquery.esasky.core]
-Filename: Maps/HERSCHEL/anonymous1605718158/hspirepmw401_25pxmp_0110_m7303_1342198565_1342198566_1462476888800.fits.gz
+Filename: Maps/HERSCHEL/anonymous1621367381/hspirepmw401_25pxmp_0110_m7303_1342198565_1342198566_1462476888800.fits.gz
 No.    Name      Ver    Type      Cards   Dimensions   Format
   0  PRIMARY       1 PrimaryHDU     184   ()
   1  image         1 ImageHDU        47   (2407, 2141)   float64
@@ -687,7 +688,7 @@ and the <code class="docutils literal notranslate"><span class="pre">LogNorm()</
 <span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">ls</span> <span class="o">=</span> <span class="s1">&#39;dotted&#39;</span><span class="p">,</span> <span class="n">lw</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
 
 <span class="c1"># Add a colorbar</span>
-<span class="n">cbar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">pad</span><span class="o">=.</span><span class="mi">07</span><span class="p">)</span>
+<span class="n">cbar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">im</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mf">.07</span><span class="p">)</span>
 <span class="n">cbar</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="s1">&#39;Herschel 350&#39;</span><span class="sa">r</span><span class="s1">&#39;$\mu$m &#39;</span><span class="p">,</span><span class="s1">&#39;(&#39;</span><span class="p">,</span> <span class="n">herschel_header</span><span class="p">[</span><span class="s1">&#39;BUNIT&#39;</span><span class="p">],</span> <span class="s1">&#39;)&#39;</span><span class="p">]),</span> <span class="n">size</span> <span class="o">=</span> <span class="mi">16</span><span class="p">)</span>
 
 <span class="c1"># Overlay set of Galactic Coordinate Axes</span>
@@ -699,8 +700,8 @@ and the <code class="docutils literal notranslate"><span class="pre">LogNorm()</
 </div>
 <p><span class="outputnumrole">Out[19]:</span></p>
 <img alt="../_images/FITS-cubes_47_0.png" src="../_images/FITS-cubes_47_0.png" />
-</div>
-<div class="section" id="overlay-hi-21-cm-contours-on-the-ir-30-micron-image">
+</section>
+<section id="overlay-hi-21-cm-contours-on-the-ir-30-micron-image">
 <h2>Overlay HI 21 cm Contours on the IR 30 micron Image<a class="headerlink" href="#overlay-hi-21-cm-contours-on-the-ir-30-micron-image" title="Permalink to this headline">¶</a></h2>
 <p>To visually compare the neutral gas and dust as traced by HI 21 cm
 emission and IR 30 micron emission, we can use contours and colorscale
@@ -718,7 +719,7 @@ coordinates. It accepts a string specifying the frame or a WCS object.</p>
 
 <span class="c1"># Display the moment map image</span>
 <span class="n">im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">herschel_data_nonans</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;viridis&#39;</span><span class="p">,</span>
-               <span class="n">norm</span><span class="o">=</span><span class="n">LogNorm</span><span class="p">(),</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=.</span><span class="mi">8</span><span class="p">)</span>
+               <span class="n">norm</span><span class="o">=</span><span class="n">LogNorm</span><span class="p">(),</span> <span class="n">vmin</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">.8</span><span class="p">)</span>
 <span class="c1"># ax.invert_yaxis() # Flips the Y axis</span>
 
 <span class="c1"># Add axes labels</span>
@@ -764,8 +765,8 @@ coordinates. It accepts a string specifying the frame or a WCS object.</p>
 </pre></div>
 </div>
 <img alt="../_images/FITS-cubes_49_1.png" src="../_images/FITS-cubes_49_1.png" />
-</div>
-<div class="section" id="using-reproject-to-match-image-resolutions">
+</section>
+<section id="using-reproject-to-match-image-resolutions">
 <h2>Using reproject to match image resolutions<a class="headerlink" href="#using-reproject-to-match-image-resolutions" title="Permalink to this headline">¶</a></h2>
 <p>The <a class="reference external" href="https://reproject.readthedocs.io/en/stable/">reproject</a> package
 is a powerful tool allowing for image data to be transformed into a
@@ -834,7 +835,7 @@ Galactic rather than RA and Dec.</p>
 
 <span class="c1"># Display the moment map image</span>
 <span class="n">im</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">rescaled_herschel_data_nonans</span><span class="p">,</span> <span class="n">cmap</span> <span class="o">=</span> <span class="s1">&#39;viridis&#39;</span><span class="p">,</span>
-               <span class="n">norm</span> <span class="o">=</span> <span class="n">LogNorm</span><span class="p">(),</span> <span class="n">vmin</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">vmax</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="o">.</span><span class="mi">8</span><span class="p">)</span>
+               <span class="n">norm</span> <span class="o">=</span> <span class="n">LogNorm</span><span class="p">(),</span> <span class="n">vmin</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">vmax</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">.8</span><span class="p">)</span>
 <span class="c1">#im = ax.imshow(rescaled_herschel_imagehdu.data, cmap = &#39;viridis&#39;,</span>
 <span class="c1">#               norm = LogNorm(), vmin = 5, vmax = 50, alpha = .8)</span>
 <span class="n">ax</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span> <span class="c1"># Flips the Y axis</span>
@@ -887,8 +888,8 @@ used to display the data. This is done by creating a WCS object that
 contains a different projection type such as
 <code class="docutils literal notranslate"><span class="pre">CTYPE</span> <span class="pre">:</span> <span class="pre">'RA---CAR'</span>&#160; <span class="pre">'DEC--CAR'</span></code> as opposed to
 <code class="docutils literal notranslate"><span class="pre">CTYPE</span> <span class="pre">:</span> <span class="pre">'RA---TAN'</span>&#160; <span class="pre">'DEC--TAN'</span></code>.</p>
-</div>
-<div class="section" id="challenge">
+</section>
+<section id="challenge">
 <h2>Challenge:<a class="headerlink" href="#challenge" title="Permalink to this headline">¶</a></h2>
 <p>Use <a class="reference external" href="https://reproject.readthedocs.io/en/stable/#">reproject</a> and WCS
 to create a new WCS object in a different map projection and see how
@@ -899,8 +900,8 @@ distortions in the image can change.</p>
 <div id="spacer"></div>
 
 <a href="../_static/FITS-cubes/FITS-cubes.ipynb"><button id="download">Download tutorial notebook</button></a>
-<a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/FITS-cubes/FITS-cubes.ipynb"><button id="binder">Interactive tutorial notebook</button></a></div>
-</div>
+<a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/FITS-cubes/FITS-cubes.ipynb"><button id="binder">Interactive tutorial notebook</button></a></section>
+</section>
 
 </div>
       </div>

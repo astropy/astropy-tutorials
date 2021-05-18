@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta content="filterTutorials, filterCoordinates, filterOop, filterAstroquery, filterGaia" name="keywords" />
+<meta content="filterTutorials," name="keywords" />
+
+    <title>Astronomical Coordinates 4: Cross-matching Catalogs Using astropy.coordinates and astroquery &#8212; astropy-tutorials v3.0.dev</title>
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bootstrap_sandstone.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/astropy.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script src="../_static/js/jquery-fix.js"></script>
+    <script src="../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script src="../_static/bootstrap-sphinx.js"></script>
+    <script src="../_static/searchtools.js"></script>
+    <script src="https://use.fontawesome.com/3168e95f94.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <link rel="shortcut icon" href="../_static/astropy_favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <script type="text/javascript">
+    jQuery(function() { Search.loadIndex("../searchindex.js"); });
+  </script>
+  
+  <script type="text/javascript" id="searchindexloader"></script>
+   
+
+  </head><body>
+
+
+<nav class="navbar navbar-expand-lg bg-navbar">
+  <a class="navbar-brand" href="/" style="padding: 0px 5px;">
+    <img src="../../_static/astropy_logo.png" onerror="this.onerror=null;this.src='../_static/astropy_logo.png';" style="height: 38px;">
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarColor01">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="http://www.astropy.org"/>Astropy<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Modules</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0" action="../search.html" method="get">
+      <div class="input-group-prepend">
+          <button class="input-group-text" style="padding: 0.7rem"><i class="fa fa-search fa-fw"></i></button>
+      </div>
+      <input class="form-control mr-sm-3" name="q" type="text" placeholder="Search the universe" />
+    </form>
+  </div>
+</nav>
+
+
+<div class="container">
+  <div class="row">
+
+    
+    
+    
+
+    
+    <div class="col-md-3">
+      <div id="sidebar" class="bs-sidenav card" role="complementary">
+        <h3>Table of contents</h3>
+        <ul>
+<li><a class="reference internal" href="#">Astronomical Coordinates 4: Cross-matching Catalogs Using astropy.coordinates and astroquery</a><ul>
+<li><a class="reference internal" href="#authors">Authors</a></li>
+<li><a class="reference internal" href="#learning-goals">Learning Goals</a></li>
+<li><a class="reference internal" href="#keywords">Keywords</a></li>
+<li><a class="reference internal" href="#summary">Summary</a></li>
+<li><a class="reference internal" href="#imports">Imports</a></li>
+<li><a class="reference internal" href="#cross-matching-and-comparing-catalogs">Cross-matching and comparing catalogs</a></li>
+</ul>
+</li>
+</ul>
+
+      </div>
+    </div>
+    
+
+    <div class="col-md-9">
+      <div class="content-padding card">
+        <div>
+  <a href="../_static/4-Coordinates-Crossmatch/4-Coordinates-Crossmatch.ipynb"><button id="download">Download tutorial notebook</button></a>
+<a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/4-Coordinates-Crossmatch/4-Coordinates-Crossmatch.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
+
+<div id="spacer"></div><section id="astronomical-coordinates-4-cross-matching-catalogs-using-astropy-coordinates-and-astroquery">
+<span id="coordinates-crossmatch"></span><h1>Astronomical Coordinates 4: Cross-matching Catalogs Using astropy.coordinates and astroquery<a class="headerlink" href="#astronomical-coordinates-4-cross-matching-catalogs-using-astropy-coordinates-and-astroquery" title="Permalink to this headline">¶</a></h1>
+<section id="authors">
+<h2>Authors<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a></h2>
+<p>Adrian Price-Whelan</p>
+</section>
+<section id="learning-goals">
+<h2>Learning Goals<a class="headerlink" href="#learning-goals" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Demonstrate how to retrieve a catalog from Vizier using astroquery</p></li>
+<li><p>Show how to perform positional cross-matches between catalogs of sky
+coordinates</p></li>
+</ul>
+</section>
+<section id="keywords">
+<h2>Keywords<a class="headerlink" href="#keywords" title="Permalink to this headline">¶</a></h2>
+<p>coordinates, OOP, astroquery, gaia</p>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p>In the previous tutorials in this series, we introduced many of the key
+concepts underlying how to represent and transform astronomical
+coordinates using <code class="docutils literal notranslate"><span class="pre">astropy.coordinates</span></code>, including how to work with
+both position and velocity data within the coordinate objects.</p>
+<p>In this tutorial, we will explore how the <code class="docutils literal notranslate"><span class="pre">astropy.coordinates</span></code>
+package can be used to cross-match two catalogs that contain overlapping
+sources that may have been observed at different times. You may find it
+helpful to keep <a class="reference external" href="http://docs.astropy.org/en/stable/coordinates/index.html">the Astropy documentation for the coordinates
+package</a>
+open alongside this tutorial for reference or additional reading. In the
+text below, you may also see some links that look like
+(<a class="reference external" href="http://docs.astropy.org/en/stable/coordinates/index.html">docs</a>).
+These links will take you to parts of the documentation that are
+directly relevant to the cells from which they link.</p>
+<p><em>Note: This is the 4th tutorial in a series of tutorials about
+astropy.coordinates. If you are new to astropy.coordinates, you may want
+to start from the beginning or an earlier tutorial.</em> - <a class="reference external" href="3-Coordinates-Velocities">Previous
+tutorial: Astronomical Coordinates 3: Working with Velocity
+Data</a></p>
+</section>
+<section id="imports">
+<h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h2>
+<p>We start by importing some general packages that we will need below:</p>
+<p><span class="inputnumrole">In[1]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span>
+
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">astropy</span> <span class="kn">import</span> <span class="n">units</span> <span class="k">as</span> <span class="n">u</span>
+<span class="kn">from</span> <span class="nn">astropy.coordinates</span> <span class="kn">import</span> <span class="n">SkyCoord</span><span class="p">,</span> <span class="n">Distance</span>
+<span class="kn">from</span> <span class="nn">astropy.io</span> <span class="kn">import</span> <span class="n">fits</span>
+<span class="kn">from</span> <span class="nn">astropy.table</span> <span class="kn">import</span> <span class="n">QTable</span>
+<span class="kn">from</span> <span class="nn">astropy.time</span> <span class="kn">import</span> <span class="n">Time</span>
+<span class="kn">from</span> <span class="nn">astropy.utils.data</span> <span class="kn">import</span> <span class="n">download_file</span>
+
+<span class="kn">from</span> <span class="nn">astroquery.vizier</span> <span class="kn">import</span> <span class="n">Vizier</span>
+</pre></div>
+</div>
+</section>
+<section id="cross-matching-and-comparing-catalogs">
+<h2>Cross-matching and comparing catalogs<a class="headerlink" href="#cross-matching-and-comparing-catalogs" title="Permalink to this headline">¶</a></h2>
+<p>In this tutorial, we are going to return to a set of data that we
+downloaded from the <em>Gaia</em> archive back in <a class="reference external" href="1-Coordinates-Intro">Tutorial
+1</a> of this series.</p>
+<p>Let’s recap what we did in that tutorial: We defined a <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code>
+object to represent the center of an open cluster (NGC 188), we queried
+the <em>Gaia</em> DR2 catalog to select stars that are close (on the sky) to
+the center of the cluster, and we used the parallax values from <em>Gaia</em>
+to select stars that are near NGC 188 in 3D position. Here, we will
+briefly reproduce those selections so that we can start here with a
+catalog of sources that are likely members of NGC 188 (see <a class="reference external" href="1-Coordinates-Intro">Tutorial
+1</a> for more information):</p>
+<p><span class="inputnumrole">In[2]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ngc188_table</span> <span class="o">=</span> <span class="n">QTable</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;gaia_results.fits&#39;</span><span class="p">)</span>
+<span class="n">ngc188_table</span> <span class="o">=</span> <span class="n">ngc188_table</span><span class="p">[</span><span class="n">ngc188_table</span><span class="p">[</span><span class="s1">&#39;parallax&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.25</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">mas</span><span class="p">]</span>
+
+<span class="n">ngc188_center_3d</span> <span class="o">=</span> <span class="n">SkyCoord</span><span class="p">(</span><span class="mf">12.11</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">deg</span><span class="p">,</span> <span class="mf">85.26</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">deg</span><span class="p">,</span>
+                            <span class="n">distance</span><span class="o">=</span><span class="mf">1.96</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">kpc</span><span class="p">,</span>
+                            <span class="n">pm_ra_cosdec</span><span class="o">=-</span><span class="mf">2.3087</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">mas</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">yr</span><span class="p">,</span>
+                            <span class="n">pm_dec</span><span class="o">=-</span><span class="mf">0.9565</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">mas</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">yr</span><span class="p">)</span>
+
+<span class="n">ngc188_coords_3d</span> <span class="o">=</span> <span class="n">SkyCoord</span><span class="p">(</span>
+    <span class="n">ra</span><span class="o">=</span><span class="n">ngc188_table</span><span class="p">[</span><span class="s1">&#39;ra&#39;</span><span class="p">],</span>
+    <span class="n">dec</span><span class="o">=</span><span class="n">ngc188_table</span><span class="p">[</span><span class="s1">&#39;dec&#39;</span><span class="p">],</span>
+    <span class="n">distance</span><span class="o">=</span><span class="n">Distance</span><span class="p">(</span><span class="n">parallax</span><span class="o">=</span><span class="n">ngc188_table</span><span class="p">[</span><span class="s1">&#39;parallax&#39;</span><span class="p">]),</span>
+    <span class="n">pm_ra_cosdec</span><span class="o">=</span><span class="n">ngc188_table</span><span class="p">[</span><span class="s1">&#39;pmra&#39;</span><span class="p">],</span>
+    <span class="n">pm_dec</span><span class="o">=</span><span class="n">ngc188_table</span><span class="p">[</span><span class="s1">&#39;pmdec&#39;</span><span class="p">],</span>
+    <span class="n">radial_velocity</span><span class="o">=</span><span class="n">ngc188_table</span><span class="p">[</span><span class="s1">&#39;radial_velocity&#39;</span><span class="p">],</span>
+    <span class="n">obstime</span><span class="o">=</span><span class="n">Time</span><span class="p">(</span><span class="s1">&#39;J2015.5&#39;</span><span class="p">))</span>
+
+<span class="n">sep3d</span> <span class="o">=</span> <span class="n">ngc188_coords_3d</span><span class="o">.</span><span class="n">separation_3d</span><span class="p">(</span><span class="n">ngc188_center_3d</span><span class="p">)</span>
+<span class="n">pm_diff</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span>
+    <span class="p">(</span><span class="n">ngc188_table</span><span class="p">[</span><span class="s1">&#39;pmra&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">ngc188_center_3d</span><span class="o">.</span><span class="n">pm_ra_cosdec</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span>
+    <span class="p">(</span><span class="n">ngc188_table</span><span class="p">[</span><span class="s1">&#39;pmdec&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">ngc188_center_3d</span><span class="o">.</span><span class="n">pm_dec</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">ngc188_members_mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">sep3d</span> <span class="o">&lt;</span> <span class="mi">50</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">pc</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">pm_diff</span> <span class="o">&lt;</span> <span class="mf">1.5</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">mas</span><span class="o">/</span><span class="n">u</span><span class="o">.</span><span class="n">yr</span><span class="p">)</span>
+<span class="n">ngc188_members</span> <span class="o">=</span> <span class="n">ngc188_table</span><span class="p">[</span><span class="n">ngc188_members_mask</span><span class="p">]</span>
+<span class="n">ngc188_members_coords</span> <span class="o">=</span> <span class="n">ngc188_coords_3d</span><span class="p">[</span><span class="n">ngc188_members_mask</span><span class="p">]</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">ngc188_members</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[2]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">216</span>
+</pre></div>
+</div>
+<p>From the selections above, the table <code class="docutils literal notranslate"><span class="pre">ngc188_members</span></code> and the
+<code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> instance <code class="docutils literal notranslate"><span class="pre">ngc188_members_coords</span></code> contain 216 sources
+that, based on their 3D positions and proper motions, are consistent
+with being members of the open cluster NGC 188.</p>
+<p>Let’s assume that we now want to cross-match our catalog of candidate
+members of NGC 188 — here, based on <em>Gaia</em> data — to some other catalog.
+In this tutorial, we will demonstrate how to manually cross-match these
+<em>Gaia</em> sources with the 2MASS photometric catalog to retrieve infrared
+magnitudes for these stars, and then we will plot a color–magnitude
+diagram. To do this, we first need to query the 2MASS catalog to
+retrieve all sources in a region around the center of NGC 188, as we did
+for <em>Gaia</em>. Here, we will also take into account the fact that the
+<em>Gaia</em> data release 2 reference epoch is J2015.5, whereas the 2MASS
+coordinates are likely reported at their time of observation (in the
+late 1990’s).</p>
+<p><em>Note that some data archives, like the Gaia science archive, support
+running cross-matches at the database level and even support epoch
+propagation. If you need to perform a large cross-match, it will be much
+more efficient to use these services!</em></p>
+<p>We will again use <code class="docutils literal notranslate"><span class="pre">astroquery</span></code> to execute this query. This will again
+require an internet connection, but we have included the results of this
+query in a file along with this notebook in case you are not connected
+to the internet. To query 2MASS, we will use the <code class="docutils literal notranslate"><span class="pre">astroquery.vizier</span></code>
+module
+(<a class="reference external" href="https://astroquery.readthedocs.io/en/latest/vizier/vizier.html">docs</a>)
+to run a cone search centered on the sky position of NGC 188 with a
+search radius of 0.5º:</p>
+<p><span class="inputnumrole">In[3]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># NOTE: skip this cell if you do not have an internet connection</span>
+
+<span class="c1"># II/246 is the catalog name for the main 2MASS photometric catalog</span>
+<span class="n">v</span> <span class="o">=</span> <span class="n">Vizier</span><span class="p">(</span><span class="n">catalog</span><span class="o">=</span><span class="s2">&quot;II/246&quot;</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="s1">&#39;Date&#39;</span><span class="p">])</span>
+<span class="n">v</span><span class="o">.</span><span class="n">ROW_LIMIT</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">query_region</span><span class="p">(</span><span class="n">ngc188_center_3d</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mf">0.5</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">deg</span><span class="p">)</span>
+<span class="n">tmass_table</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Alternatively, we can read the 2MASS table provided along with this
+tutorial:</p>
+<p><span class="inputnumrole">In[4]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># the .read() below produces some warnings that we can safely ignore</span>
+<span class="k">with</span> <span class="n">warnings</span><span class="o">.</span><span class="n">catch_warnings</span><span class="p">():</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">,</span> <span class="ne">UserWarning</span><span class="p">)</span>
+
+    <span class="n">tmass_table</span> <span class="o">=</span> <span class="n">QTable</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;2MASS_results.ecsv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>As with the <em>Gaia</em> results table, we can now create a single
+<code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> object to represent all of the sources returned from our
+query to the 2MASS catalog. Let’s look at the column names in this table
+by displaying the first few rows:</p>
+<p><span class="inputnumrole">In[5]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tmass_table</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[5]:</span></p>
+<i>QTable length=3</i>
+<table id="table140303872324560" class="table-striped table-bordered table-condensed">
+<thead><tr><th>Date</th><th>RAJ2000</th><th>DEJ2000</th><th>_2MASS</th><th>Jmag</th><th>e_Jmag</th><th>Hmag</th><th>e_Hmag</th><th>Kmag</th><th>e_Kmag</th><th>Qflg</th><th>Rflg</th><th>Bflg</th><th>Cflg</th><th>Xflg</th><th>Aflg</th></tr></thead>
+<thead><tr><th></th><th>deg</th><th>deg</th><th></th><th>mag</th><th>mag</th><th>mag</th><th>mag</th><th>mag</th><th>mag</th><th></th><th></th><th></th><th></th><th></th><th></th></tr></thead>
+<thead><tr><th>str10</th><th>float64</th><th>float64</th><th>str16</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>str3</th><th>str3</th><th>str3</th><th>str3</th><th>uint8</th><th>uint8</th></tr></thead>
+<tr><td>1999-10-19</td><td>9.633532</td><td>84.808350</td><td>00383204+8448300</td><td>13.079</td><td>0.030</td><td>12.742</td><td>0.033</td><td>12.729</td><td>0.035</td><td>AAA</td><td>222</td><td>111</td><td>000</td><td>0</td><td>0</td></tr>
+<tr><td>1999-10-19</td><td>8.562472</td><td>84.873627</td><td>00341499+8452250</td><td>14.459</td><td>0.029</td><td>14.103</td><td>0.041</td><td>14.166</td><td>0.063</td><td>AAA</td><td>222</td><td>111</td><td>000</td><td>0</td><td>0</td></tr>
+<tr><td>1999-10-19</td><td>8.645318</td><td>84.868584</td><td>00343487+8452069</td><td>10.356</td><td>0.026</td><td>10.057</td><td>0.032</td><td>10.000</td><td>0.020</td><td>AAA</td><td>222</td><td>111</td><td>000</td><td>0</td><td>0</td></tr>
+</table><p>From looking at the column names, the two relevant sky coordinate
+columns are <code class="docutils literal notranslate"><span class="pre">RAJ2000</span></code> for <code class="docutils literal notranslate"><span class="pre">ra</span></code> and <code class="docutils literal notranslate"><span class="pre">DEJ2000</span></code> for <code class="docutils literal notranslate"><span class="pre">dec</span></code>:</p>
+<p><span class="inputnumrole">In[6]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tmass_coords</span> <span class="o">=</span> <span class="n">SkyCoord</span><span class="p">(</span><span class="n">tmass_table</span><span class="p">[</span><span class="s1">&#39;RAJ2000&#39;</span><span class="p">],</span>
+                        <span class="n">tmass_table</span><span class="p">[</span><span class="s1">&#39;DEJ2000&#39;</span><span class="p">])</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">tmass_coords</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[6]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">5014</span>
+</pre></div>
+</div>
+<p>Note also that the table contains a “Date” column that specifies the
+epoch of the coordinates. Are all of these epochs the same?</p>
+<p><span class="inputnumrole">In[7]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">tmass_table</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[7]:</span></p>
+&lt;Column name=&apos;Date&apos; dtype=&apos;str10&apos; description=&apos;(date) Observation date&apos; length=1&gt;
+<table>
+<tr><td>1999-10-19</td></tr>
+</table><p>It looks like all of the sources in our 2MASS table have the same epoch,
+so let’s create an <code class="docutils literal notranslate"><span class="pre">astropy.time.Time</span></code> object to represent this date:</p>
+<p><span class="inputnumrole">In[8]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tmass_epoch</span> <span class="o">=</span> <span class="n">Time</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">tmass_table</span><span class="p">[</span><span class="s1">&#39;Date&#39;</span><span class="p">]))</span>
+</pre></div>
+</div>
+<p>We now want to cross-match our <em>Gaia</em>-selected candidate members of NGC
+188, <code class="docutils literal notranslate"><span class="pre">ngc_members_coords</span></code>, with this table of photometry from 2MASS.
+However, as noted previously, the <em>Gaia</em> coordinates are given at a
+different epoch J2015.5, which is nearly ~16 years after the 2MASS epoch
+of the data we downloaded (1999-10-19 or roughly J1999.88). We will
+therefore first use the <code class="docutils literal notranslate"><span class="pre">SkyCoord.apply_space_motion()</span></code> method
+(<a class="reference external" href="http://docs.astropy.org/en/latest/api/astropy.coordinates.SkyCoord.html#astropy.coordinates.SkyCoord.apply_space_motion">docs</a>)
+to transform the <em>Gaia</em> positions back to the 2MASS epoch before we do
+the cross-match:</p>
+<p><span class="inputnumrole">In[9]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># you can ignore the warning raised here</span>
+<span class="n">ngc188_members_coords_1999</span> <span class="o">=</span> <span class="n">ngc188_members_coords</span><span class="o">.</span><span class="n">apply_space_motion</span><span class="p">(</span>
+    <span class="n">tmass_epoch</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[9]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">circleci</span><span class="o">/</span><span class="n">project</span><span class="o">/</span><span class="n">venv</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">python3</span><span class="mf">.7</span><span class="o">/</span><span class="n">site</span><span class="o">-</span><span class="n">packages</span><span class="o">/</span><span class="n">erfa</span><span class="o">/</span><span class="n">core</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">155</span><span class="p">:</span> <span class="n">ErfaWarning</span><span class="p">:</span> <span class="n">ERFA</span> <span class="n">function</span> <span class="s2">&quot;pmsafe&quot;</span> <span class="n">yielded</span> <span class="mi">205</span> <span class="n">of</span> <span class="s2">&quot;excessive velocity (Note 7)&quot;</span>
+  <span class="n">ErfaWarning</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The object <code class="docutils literal notranslate"><span class="pre">ngc188_members_coords_1999</span></code> now contains the coordinate
+information for our <em>Gaia</em>-selected members of NGC 188, as we think they
+would appear if observed on 1999-10-19.</p>
+<p>We can now use the <code class="docutils literal notranslate"><span class="pre">SkyCoord.match_to_catalog_sky</span></code> method to match
+these two catalogs
+(<a class="reference external" href="http://docs.astropy.org/en/latest/coordinates/matchsep.html#astropy-coordinates-matching">docs</a>),
+using the <code class="docutils literal notranslate"><span class="pre">ngc188_members_coords_1999</span></code> as our NGC 188 members
+coordinates.</p>
+<p>Note that order matters with this method: Here we will match <em>Gaia</em> to
+2MASS. <code class="docutils literal notranslate"><span class="pre">SkyCoord.match_to_catalog_sky</span></code> returns three objects: (1) the
+indices into <code class="docutils literal notranslate"><span class="pre">tmass_coords</span></code> that get the closest matches in
+<code class="docutils literal notranslate"><span class="pre">ngc188_members_coords_1999</span></code>, (2) the angular separation between each
+<code class="docutils literal notranslate"><span class="pre">ngc188_members_coords_1999</span></code> coordinate and the closest source in
+<code class="docutils literal notranslate"><span class="pre">tmass_coords</span></code>, and (3) the 3D distance between each
+<code class="docutils literal notranslate"><span class="pre">ngc188_members_coords_1999</span></code> coordinate and the closest source in
+<code class="docutils literal notranslate"><span class="pre">tmass_coords</span></code>. Here, the 3D distances will not be useful because the
+2MASS coordinates do not have associated distance information, so we
+will ignore these quantities:</p>
+<p><span class="inputnumrole">In[10]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">idx_gaia</span><span class="p">,</span> <span class="n">sep2d_gaia</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">ngc188_members_coords_1999</span><span class="o">.</span><span class="n">match_to_catalog_sky</span><span class="p">(</span>
+    <span class="n">tmass_coords</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Let’s now look at the distribution of separations (in arcseconds) for
+all of the cross-matched sources:</p>
+<p><span class="inputnumrole">In[11]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">sep2d_gaia</span><span class="o">.</span><span class="n">arcsec</span><span class="p">,</span> <span class="n">histtype</span><span class="o">=</span><span class="s1">&#39;step&#39;</span><span class="p">,</span>
+         <span class="n">bins</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">logspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mf">2.</span><span class="p">,</span> <span class="mi">64</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;separation [arcsec]&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">yscale</span><span class="p">(</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[11]:</span></p>
+<img alt="../_images/4-Coordinates-Crossmatch_23_0.png" src="../_images/4-Coordinates-Crossmatch_23_0.png" />
+<p>From this, it looks like all of sources in our <em>Gaia</em> NGC 188 member
+list cross-match to another sources within a few arcseconds, so these
+all seem like they are correctly matches to a 2MASS source!</p>
+<p><span class="inputnumrole">In[12]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">sep2d_gaia</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">arcsec</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> <span class="nb">len</span><span class="p">(</span><span class="n">ngc188_members</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[12]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mi">215</span><span class="p">,</span> <span class="mi">216</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>With our cross-match done, we can now make <code class="docutils literal notranslate"><span class="pre">Gaia</span></code>+2MASS
+color–magnitude diagrams of our candidate NGC 188 members using the
+information returned by the cross-match:</p>
+<p><span class="inputnumrole">In[13]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Jmag</span> <span class="o">=</span> <span class="n">tmass_table</span><span class="p">[</span><span class="s1">&#39;Jmag&#39;</span><span class="p">][</span><span class="n">idx_gaia</span><span class="p">]</span>  <span class="c1"># note that we use the index array returned above</span>
+<span class="n">Gmag</span> <span class="o">=</span> <span class="n">ngc188_members</span><span class="p">[</span><span class="s1">&#39;phot_g_mean_mag&#39;</span><span class="p">]</span>
+<span class="n">Bmag</span> <span class="o">=</span> <span class="n">ngc188_members</span><span class="p">[</span><span class="s1">&#39;phot_bp_mean_mag&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p><span class="inputnumrole">In[14]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">Gmag</span> <span class="o">-</span> <span class="n">Jmag</span><span class="p">,</span> <span class="n">Gmag</span><span class="p">,</span>
+           <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span>
+           <span class="n">linewidth</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;$G - J$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$G$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">19</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="c1"># backwards because magnitudes!</span>
+
+<span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">Bmag</span> <span class="o">-</span> <span class="n">Gmag</span><span class="p">,</span> <span class="n">Jmag</span><span class="p">,</span>
+           <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span>
+           <span class="n">linewidth</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;$G_</span><span class="si">{BP}</span><span class="s1"> - G$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$J$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mf">0.2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">17</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span> <span class="c1"># backwards because magnitudes!</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[14]:</span></p>
+<img alt="../_images/4-Coordinates-Crossmatch_28_0.png" src="../_images/4-Coordinates-Crossmatch_28_0.png" />
+<p>Those both look like color-magnitude diagrams of a main sequence + red
+giant branch of an intermediate-age stellar cluster, so it looks like
+our selection and cross-matching has worked!</p>
+<p>For more on what matching options are available, check out the
+<a class="reference external" href="https://astropy.readthedocs.io/en/stable/coordinates/matchsep.html">separation and matching section of the Astropy
+documentation</a>.
+Or for more on what you can do with <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code>, see <a class="reference external" href="http://astropy.readthedocs.org/en/stable/api/astropy.coordinates.SkyCoord.html">its API
+documentation</a>.</p>
+<p><span class="inputnumrole">In[None]:</span></p>
+<div id="spacer"></div>
+
+<a href="../_static/4-Coordinates-Crossmatch/4-Coordinates-Crossmatch.ipynb"><button id="download">Download tutorial notebook</button></a>
+<a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/4-Coordinates-Crossmatch/4-Coordinates-Crossmatch.ipynb"><button id="binder">Interactive tutorial notebook</button></a></section>
+</section>
+
+</div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+    &copy; Copyright Astropy.
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

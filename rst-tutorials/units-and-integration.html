@@ -2,7 +2,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta charset="utf-8" /><meta content="filterTutorials, filterModeling, filterUnits, filterSynphot, filterOop, filterLatex, filterAstrostatistics, filterMatplotlib, filterUnits, filterPhysics" name="keywords" />
+    <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta content="filterTutorials, filterModeling, filterUnits, filterSynphot, filterOop, filterLatex, filterAstrostatistics, filterMatplotlib, filterUnits, filterPhysics" name="keywords" />
 <meta content="filterTutorials," name="keywords" />
 
     <title>Using scipy.integrate &#8212; astropy-tutorials v3.0.dev</title>
@@ -116,13 +117,13 @@
   <a href="../_static/units-and-integration/units-and-integration.ipynb"><button id="download">Download tutorial notebook</button></a>
 <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/units-and-integration/units-and-integration.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
 
-<div id="spacer"></div><div class="section" id="using-scipy-integrate">
+<div id="spacer"></div><section id="using-scipy-integrate">
 <span id="units-and-integration"></span><h1>Using <code class="docutils literal notranslate"><span class="pre">scipy.integrate</span></code><a class="headerlink" href="#using-scipy-integrate" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="authors">
+<section id="authors">
 <h2>Authors<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a></h2>
 <p>Zach Pace, Lia Corrales, Stephanie T. Douglas</p>
-</div>
-<div class="section" id="learning-goals">
+</section>
+<section id="learning-goals">
 <h2>Learning Goals<a class="headerlink" href="#learning-goals" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>perform numerical integration in the <code class="docutils literal notranslate"><span class="pre">astropy</span></code> and scientific
@@ -136,21 +137,21 @@ python context</p></li>
 <li><p>add <span class="math notranslate nohighlight">\(\LaTeX\)</span> labels to <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> figures using the
 <code class="docutils literal notranslate"><span class="pre">latex_inline</span></code> formatter</p></li>
 </ul>
-</div>
-<div class="section" id="keywords">
+</section>
+<section id="keywords">
 <h2>Keywords<a class="headerlink" href="#keywords" title="Permalink to this headline">¶</a></h2>
 <p>modeling, units, synphot, OOP, LaTeX, astrostatistics, matplotlib,
 units, physics</p>
-</div>
-<div class="section" id="companion-content">
+</section>
+<section id="companion-content">
 <h2>Companion Content<a class="headerlink" href="#companion-content" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="http://synphot.readthedocs.io/en/latest/">http://synphot.readthedocs.io/en/latest/</a></p></li>
 <li><p><a class="reference external" href="http://www.astropy.org/astropy-tutorials/rst-tutorials/quantities.html">Using Astropy Quantities for astrophysical
 calculations</a></p></li>
 </ul>
-</div>
-<div class="section" id="summary">
+</section>
+<section id="summary">
 <h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
 <p>In this tutorial, we will use the examples of the Planck function and
 the stellar initial mass function (IMF) to illustrate how to integrate
@@ -170,8 +171,8 @@ figure axis labels easy to read.</p>
 <span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="the-planck-function">
+</section>
+<section id="the-planck-function">
 <h2>The Planck function<a class="headerlink" href="#the-planck-function" title="Permalink to this headline">¶</a></h2>
 <p>The Planck function describes how a black-body radiates energy. We will
 explore how to find bolometric luminosity using the Planck function in
@@ -209,7 +210,7 @@ section of the astropy.units documentation pages.</p>
 </pre></div>
 </div>
 <img alt="../_images/units-and-integration_5_1.png" src="../_images/units-and-integration_5_1.png" />
-<div class="section" id="using-latex-for-axis-labels">
+<section id="using-latex-for-axis-labels">
 <h3>Using <span class="math notranslate nohighlight">\(LaTeX\)</span> for axis labels<a class="headerlink" href="#using-latex-for-axis-labels" title="Permalink to this headline">¶</a></h3>
 <p>Here, we’ve used <span class="math notranslate nohighlight">\(LaTeX\)</span> markup to add nice-looking axis labels.
 To do that, we enclose <span class="math notranslate nohighlight">\(LaTeX\)</span> markup text in dollar signs, within
@@ -261,17 +262,17 @@ gain confidence working with them, consider incorporating them into your
 regular workflow. Read more
 <a class="reference external" href="http://docs.astropy.org/en/stable/units/">here</a> about how to use
 units.</p>
-</div>
-<div class="section" id="how-to-simulate-actual-observations">
+</section>
+<section id="how-to-simulate-actual-observations">
 <h3>How to simulate actual observations<a class="headerlink" href="#how-to-simulate-actual-observations" title="Permalink to this headline">¶</a></h3>
 <p>As of Fall 2017, <code class="docutils literal notranslate"><span class="pre">astropy</span></code> does not explicitly support constructing
 synthetic observations of models like black-body curves. The <a class="reference external" href="https://synphot.readthedocs.io/en/latest/">synphot
 library</a> does allow this.
 You can use <code class="docutils literal notranslate"><span class="pre">synphot</span></code> to perform tasks like turning spectra into
 visual magnitudes by convolving with a filter curve.</p>
-</div>
-</div>
-<div class="section" id="the-stellar-initial-mass-function-imf">
+</section>
+</section>
+<section id="the-stellar-initial-mass-function-imf">
 <h2>The stellar initial mass function (IMF)<a class="headerlink" href="#the-stellar-initial-mass-function-imf" title="Permalink to this headline">¶</a></h2>
 <p>The stellar initial mass function tells us how many of each mass of
 stars are formed. In particular, low-mass stars are much more abundant
@@ -290,22 +291,22 @@ the IMF. Let’s write a little class to help us keep track of that:</p>
         <span class="k">return</span> <span class="n">x</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">B</span>
 </pre></div>
 </div>
-<div class="section" id="the-call-method">
+<section id="the-call-method">
 <h3>The <code class="docutils literal notranslate"><span class="pre">__call__</span></code> method<a class="headerlink" href="#the-call-method" title="Permalink to this headline">¶</a></h3>
 <p>By defining the method <code class="docutils literal notranslate"><span class="pre">__call__</span></code>, we are telling the Python
 interpreter that an instance of the class can be called like a function.
 When called, an instance of this class, takes a single argument, <code class="docutils literal notranslate"><span class="pre">x</span></code>,
 but it uses other attributes of the instance, like <code class="docutils literal notranslate"><span class="pre">gamma</span></code> and <code class="docutils literal notranslate"><span class="pre">B</span></code>.</p>
-</div>
-<div class="section" id="more-about-classes">
+</section>
+<section id="more-about-classes">
 <h3>More about classes<a class="headerlink" href="#more-about-classes" title="Permalink to this headline">¶</a></h3>
 <p>Classes are more advanced data structures, which can help you keep track
 of functionality within your code that all works together. You can learn
 more about classes in <a class="reference external" href="https://www.codecademy.com/ja/courses/learn-python/lessons/introduction-to-classes/exercises/why-use-classes">this
 tutorial</a>.</p>
-</div>
-</div>
-<div class="section" id="integrating-using-gaussian-quadrature">
+</section>
+</section>
+<section id="integrating-using-gaussian-quadrature">
 <h2>Integrating using Gaussian quadrature<a class="headerlink" href="#integrating-using-gaussian-quadrature" title="Permalink to this headline">¶</a></h2>
 <p>In this section, we’ll explore a method of numerical integration that
 does not require having your sampling grid set-up already.
@@ -337,13 +338,13 @@ in 2015.</p>
 </div>
 <p><span class="outputnumrole">Out[7]:</span></p>
 <img alt="../_images/units-and-integration_17_0.png" src="../_images/units-and-integration_17_0.png" />
-<div class="section" id="how-many-more-m-stars-are-there-than-o-stars">
+<section id="how-many-more-m-stars-are-there-than-o-stars">
 <h3>How many more M stars are there than O stars?<a class="headerlink" href="#how-many-more-m-stars-are-there-than-o-stars" title="Permalink to this headline">¶</a></h3>
 <p>Let’s compare the number of M dwarf stars (mass less than 60% solar)
 created by the IMF, to the number of O stars (mass more than 15 times
 solar).</p>
 <p><span class="inputnumrole">In[8]:</span></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n_m</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">integrate</span><span class="o">.</span><span class="n">quad</span><span class="p">(</span><span class="n">salpeter</span><span class="p">,</span> <span class="n">a</span><span class="o">=.</span><span class="mi">01</span><span class="p">,</span> <span class="n">b</span><span class="o">=.</span><span class="mi">6</span><span class="p">)</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">n_m</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">integrate</span><span class="o">.</span><span class="n">quad</span><span class="p">(</span><span class="n">salpeter</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mf">.01</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mf">.6</span><span class="p">)</span>
 <span class="n">n_o</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">integrate</span><span class="o">.</span><span class="n">quad</span><span class="p">(</span><span class="n">salpeter</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mf">15.</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mf">100.</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">n_m</span> <span class="o">/</span> <span class="n">n_o</span><span class="p">)</span>
 </pre></div>
@@ -354,8 +355,8 @@ solar).</p>
 </div>
 <p>There are almost 21000 as many low-mass stars born as there are
 high-mass stars!</p>
-</div>
-<div class="section" id="where-is-all-the-mass">
+</section>
+<section id="where-is-all-the-mass">
 <h3>Where is all the mass?<a class="headerlink" href="#where-is-all-the-mass" title="Permalink to this headline">¶</a></h3>
 <p>Now let’s compute the relative total masses for all O stars and all M
 stars born. To do this, weight the Salpeter IMF by mass (i.e., add an
@@ -377,7 +378,7 @@ by mass. More generally, you find the value of some property
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">IMF_m</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">imf</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">imf</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="o">*</span> <span class="n">m</span>
 
-<span class="n">m_m</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">integrate</span><span class="o">.</span><span class="n">quad</span><span class="p">(</span><span class="n">IMF_m</span><span class="p">,</span> <span class="n">a</span><span class="o">=.</span><span class="mi">01</span><span class="p">,</span> <span class="n">b</span><span class="o">=.</span><span class="mi">6</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">salpeter</span><span class="p">,</span> <span class="p">))</span>
+<span class="n">m_m</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">integrate</span><span class="o">.</span><span class="n">quad</span><span class="p">(</span><span class="n">IMF_m</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mf">.01</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mf">.6</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">salpeter</span><span class="p">,</span> <span class="p">))</span>
 <span class="n">m_o</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">integrate</span><span class="o">.</span><span class="n">quad</span><span class="p">(</span><span class="n">IMF_m</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mf">15.</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mf">100.</span><span class="p">,</span> <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">salpeter</span><span class="p">,</span> <span class="p">))</span>
 
 <span class="n">m_m</span> <span class="o">/</span> <span class="n">m_o</span>
@@ -388,8 +389,8 @@ by mass. More generally, you find the value of some property
 </pre></div>
 </div>
 <p>So about 20 times as much mass is tied up in M stars as in O stars.</p>
-</div>
-<div class="section" id="extras">
+</section>
+<section id="extras">
 <h3>Extras<a class="headerlink" href="#extras" title="Permalink to this headline">¶</a></h3>
 <ul class="simple">
 <li><p>Now compare the total luminosity from all O stars to total luminosity
@@ -411,9 +412,9 @@ inferring stellar masses from the light they produce? If you’re
 interested in learning more, see <a class="reference external" href="https://ned.ipac.caltech.edu/level5/Sept14/Courteau/Courteau_contents.html">this review
 article</a>.</p></li>
 </ul>
-</div>
-</div>
-<div class="section" id="challenge-problems">
+</section>
+</section>
+<section id="challenge-problems">
 <h2>Challenge problems<a class="headerlink" href="#challenge-problems" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>Right now, we aren’t worried about the bounds of the power law, but
@@ -445,8 +446,8 @@ IMF. Perform the same calculations as above.</p></li>
 <div id="spacer"></div>
 
 <a href="../_static/units-and-integration/units-and-integration.ipynb"><button id="download">Download tutorial notebook</button></a>
-<a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/units-and-integration/units-and-integration.ipynb"><button id="binder">Interactive tutorial notebook</button></a></div>
-</div>
+<a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/units-and-integration/units-and-integration.ipynb"><button id="binder">Interactive tutorial notebook</button></a></section>
+</section>
 
 </div>
       </div>

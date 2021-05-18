@@ -230,7 +230,7 @@ MAST <https://archive.stsci.edu/iue/>`__:
     obsTable_spec=obsTable[obsTable['dataproduct_type']=='spectrum']
     obsTable_spec.pprint()
     
-    obsids = ['3000022829']
+    obsids = obsTable_spec[39]['obsid']
     dataProductsByID = Observations.get_product_list(obsids)
     manifest = Observations.download_products(dataProductsByID)
 
@@ -240,46 +240,40 @@ MAST <https://archive.stsci.edu/iue/>`__:
 
 .. parsed-literal::
 
-    intentType obs_collection provenance_name ...   obsid          distance     
-    ---------- -------------- --------------- ... ---------- -------------------
-       science            IUE              -- ... 3500001186                 0.0
-       science            IUE              -- ... 3500001187                 0.0
-       science            IUE              -- ... 3500001188                 0.0
-       science            IUE              -- ... 3500001189                 0.0
-       science            IUE              -- ... 3500001190                 0.0
-       science            IUE              -- ... 3500001191                 0.0
-       science            IUE              -- ... 3500001192                 0.0
-       science            IUE              -- ... 3500001193                 0.0
-       science            IUE              -- ... 3500001194                 0.0
-       science            IUE              -- ... 3500001195                 0.0
-           ...            ...             ... ...        ...                 ...
-       science            IUE              -- ... 3500034898                 0.0
-       science            IUE              -- ... 3500034899                 0.0
-       science            IUE              -- ... 3500034900                 0.0
-       science            HST          CALHRS ... 2003827557  0.1203890194025941
-       science            HST          CALHRS ... 2003834338 0.21145342332150374
-       science            HST          CALHRS ... 2003834339 0.21145342332150374
-       science            HST         CALSTIS ... 2004013275 0.23003273443801767
-       science            HST         CALSTIS ... 2004013276 0.23003273443801767
-       science            HST         CALSTIS ... 2003575848 0.23003273443801767
-       science            HST          CALHRS ... 2003827579  0.7903105443193604
-       science            HST          CALHRS ... 2003827580  0.7903105443193604
-    Length = 114 rows
-    Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:IUE/url/pub/iue/data/lwr/05000/lwr05639.elbll.gz to ./mastDownload/IUE/lwr05639/lwr05639.elbll.gz ... [Done]
-    Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:IUE/url/pub/iue/data/lwr/05000/lwr05639.lilo.gz to ./mastDownload/IUE/lwr05639/lwr05639.lilo.gz ... [Done]
-    Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:IUE/url/pub/iue/data/lwr/05000/lwr05639.melol.gz to ./mastDownload/IUE/lwr05639/lwr05639.melol.gz ... [Done]
-    Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:IUE/url/pub/iue/data/lwr/05000/lwr05639.raw.gz to ./mastDownload/IUE/lwr05639/lwr05639.raw.gz ... [Done]
-    Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:IUE/url/pub/iue/data/lwr/05000/lwr05639.rilo.gz to ./mastDownload/IUE/lwr05639/lwr05639.rilo.gz ... [Done]
-    Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:IUE/url/pub/iue/data/lwr/05000/lwr05639.silo.gz to ./mastDownload/IUE/lwr05639/lwr05639.silo.gz ... [Done]
-    Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:IUE/url/browse/previews/iue/mx/lwr/05000/gif/lwr05639.gif to ./mastDownload/IUE/lwr05639/lwr05639.gif ... [Done]
-    Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:IUE/url/pub/iue/data/lwr/05000/lwr05639.mxlo.gz to ./mastDownload/IUE/lwr05639/lwr05639.mxlo.gz ... [Done]
-    Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:IUE/url/pub/vospectra/iue2/lwr05639mxlo_vo.fits to ./mastDownload/IUE/lwr05639/lwr05639mxlo_vo.fits ... [Done]
-     [Done]
-
-
-.. parsed-literal::
-
-    WARNING: Found cached file ./mastDownload/IUE/lwr05639/lwr05639.gif with size 7406 that is different from expected size 3459 [astroquery.query]
+    intentType obs_collection provenance_name ... srcDen  obsid        distance     
+    ---------- -------------- --------------- ... ------ -------- ------------------
+       science            IUE              -- ... 5885.0   349209                0.0
+       science            IUE              -- ... 5885.0   349210                0.0
+       science            IUE              -- ... 5885.0   349211                0.0
+       science            IUE              -- ... 5885.0   349212                0.0
+       science            IUE              -- ... 5885.0   349213                0.0
+       science            IUE              -- ... 5885.0   349214                0.0
+       science            IUE              -- ... 5885.0   349215                0.0
+       science            IUE              -- ... 5885.0   349216                0.0
+       science            IUE              -- ... 5885.0   349217                0.0
+       science            IUE              -- ... 5885.0   349218                0.0
+           ...            ...             ... ...    ...      ...                ...
+       science            IUE              -- ... 5885.0   382916                0.0
+       science            IUE              -- ... 5885.0   382917                0.0
+       science            IUE              -- ... 5885.0   382918                0.0
+       science            IUE              -- ... 5885.0   382919                0.0
+       science            IUE              -- ... 5885.0   382920                0.0
+       science            IUE              -- ... 5885.0   382921                0.0
+       science            IUE              -- ... 5885.0   382922                0.0
+       science            IUE              -- ... 5885.0   382923                0.0
+       science            HST         CALSTIS ...    nan 24969540 0.5751893673409462
+       science            HST         CALSTIS ...    nan 24969541 0.5751893673409462
+       science            HST         CALSTIS ...    nan 24532244 0.5751893673409462
+    Length = 109 rows
+    Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=http://archive.stsci.edu/pub/iue/data/lwr/05000/lwr05639.elbll.gz to ./mastDownload/IUE/lwr05639/lwr05639.elbll.gz ... [Done]
+    Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=http://archive.stsci.edu/pub/iue/data/lwr/05000/lwr05639.lilo.gz to ./mastDownload/IUE/lwr05639/lwr05639.lilo.gz ... [Done]
+    Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=http://archive.stsci.edu/pub/iue/data/lwr/05000/lwr05639.melol.gz to ./mastDownload/IUE/lwr05639/lwr05639.melol.gz ... [Done]
+    Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=http://archive.stsci.edu/pub/iue/data/lwr/05000/lwr05639.raw.gz to ./mastDownload/IUE/lwr05639/lwr05639.raw.gz ... [Done]
+    Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=http://archive.stsci.edu/pub/iue/data/lwr/05000/lwr05639.rilo.gz to ./mastDownload/IUE/lwr05639/lwr05639.rilo.gz ... [Done]
+    Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=http://archive.stsci.edu/pub/iue/data/lwr/05000/lwr05639.silo.gz to ./mastDownload/IUE/lwr05639/lwr05639.silo.gz ... [Done]
+    Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=http://archive.stsci.edu/browse/previews/iue/mx/lwr/05000/gif/lwr05639.gif to ./mastDownload/IUE/lwr05639/lwr05639.gif ... [Done]
+    Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=http://archive.stsci.edu/pub/iue/data/lwr/05000/lwr05639.mxlo.gz to ./mastDownload/IUE/lwr05639/lwr05639.mxlo.gz ... [Done]
+    Downloading URL https://mast.stsci.edu/api/v0.1/Download/file?uri=http://archive.stsci.edu/pub/vospectra/iue2/lwr05639mxlo_vo.fits to ./mastDownload/IUE/lwr05639/lwr05639mxlo_vo.fits ... [Done]
 
 
 We read the downloaded files into an astropy table:

@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta content="filterTutorials, filterCoordinates, filterOop, filterAstroquery, filterGaia" name="keywords" />
+<meta content="filterTutorials," name="keywords" />
+
+    <title>Astronomical Coordinates 1: Getting Started with astropy.coordinates &#8212; astropy-tutorials v3.0.dev</title>
+    <link rel="stylesheet" href="../_static/bootstrap-sphinx.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/bootstrap_sandstone.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/astropy.css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script src="../_static/js/jquery-1.11.0.min.js"></script>
+    <script src="../_static/js/jquery-fix.js"></script>
+    <script src="../_static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
+    <script src="../_static/bootstrap-sphinx.js"></script>
+    <script src="../_static/searchtools.js"></script>
+    <script src="https://use.fontawesome.com/3168e95f94.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+    <link rel="shortcut icon" href="../_static/astropy_favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta charset='utf-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <script type="text/javascript">
+    jQuery(function() { Search.loadIndex("../searchindex.js"); });
+  </script>
+  
+  <script type="text/javascript" id="searchindexloader"></script>
+   
+
+  </head><body>
+
+
+<nav class="navbar navbar-expand-lg bg-navbar">
+  <a class="navbar-brand" href="/" style="padding: 0px 5px;">
+    <img src="../../_static/astropy_logo.png" onerror="this.onerror=null;this.src='../_static/astropy_logo.png';" style="height: 38px;">
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarColor01">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="http://www.astropy.org"/>Astropy<span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Modules</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0" action="../search.html" method="get">
+      <div class="input-group-prepend">
+          <button class="input-group-text" style="padding: 0.7rem"><i class="fa fa-search fa-fw"></i></button>
+      </div>
+      <input class="form-control mr-sm-3" name="q" type="text" placeholder="Search the universe" />
+    </form>
+  </div>
+</nav>
+
+
+<div class="container">
+  <div class="row">
+
+    
+    
+    
+
+    
+    <div class="col-md-3">
+      <div id="sidebar" class="bs-sidenav card" role="complementary">
+        <h3>Table of contents</h3>
+        <ul>
+<li><a class="reference internal" href="#">Astronomical Coordinates 1: Getting Started with astropy.coordinates</a><ul>
+<li><a class="reference internal" href="#authors">Authors</a></li>
+<li><a class="reference internal" href="#learning-goals">Learning Goals</a></li>
+<li><a class="reference internal" href="#keywords">Keywords</a></li>
+<li><a class="reference internal" href="#summary">Summary</a></li>
+<li><a class="reference internal" href="#imports">Imports</a></li>
+<li><a class="reference internal" href="#representing-on-sky-positions-with-astropy-coordinates">Representing On-sky Positions with <code class="docutils literal notranslate"><span class="pre">astropy.coordinates</span></code></a></li>
+<li><a class="reference internal" href="#querying-the-gaia-archive-to-retrieve-coordinates-of-stars-in-ngc-188">Querying the <em>Gaia</em> Archive to Retrieve Coordinates of Stars in NGC 188</a><ul>
+<li><a class="reference internal" href="#exercises">Exercises</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#more-than-just-sky-positions-including-distance-information-in-skycoord">More Than Just Sky Positions: Including Distance Information in <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code></a><ul>
+<li><a class="reference internal" href="#id1">Exercises</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      </div>
+    </div>
+    
+
+    <div class="col-md-9">
+      <div class="content-padding card">
+        <div>
+  <a href="../_static/1-Coordinates-Intro/1-Coordinates-Intro.ipynb"><button id="download">Download tutorial notebook</button></a>
+<a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/1-Coordinates-Intro/1-Coordinates-Intro.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
+
+<div id="spacer"></div><section id="astronomical-coordinates-1-getting-started-with-astropy-coordinates">
+<span id="coordinates-intro"></span><h1>Astronomical Coordinates 1: Getting Started with astropy.coordinates<a class="headerlink" href="#astronomical-coordinates-1-getting-started-with-astropy-coordinates" title="Permalink to this headline">¶</a></h1>
+<section id="authors">
+<h2>Authors<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a></h2>
+<p>Adrian Price-Whelan</p>
+</section>
+<section id="learning-goals">
+<h2>Learning Goals<a class="headerlink" href="#learning-goals" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Create <code class="docutils literal notranslate"><span class="pre">astropy.coordinates.SkyCoord</span></code> objects using coordinate data
+and object names</p></li>
+<li><p>Use SkyCoord objects to become familiar with object oriented
+programming (OOP)</p></li>
+<li><p>Use a <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> object to query the <em>Gaia</em> archive using
+<code class="docutils literal notranslate"><span class="pre">astroquery</span></code></p></li>
+<li><p>Output coordinate data in different string representations</p></li>
+<li><p>Demonstrate working with 3D sky coordinates (including distance
+information for objects)</p></li>
+</ul>
+</section>
+<section id="keywords">
+<h2>Keywords<a class="headerlink" href="#keywords" title="Permalink to this headline">¶</a></h2>
+<p>coordinates, OOP, astroquery, gaia</p>
+</section>
+<section id="summary">
+<h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
+<p>Astronomers use a wide variety of coordinate systems and formats to
+represent sky coordinates of celestial objects. For example, you may
+have seen terms like “right ascension” and “declination” or “galactic
+latitude and longitude,” and you may have seen angular coordinate
+components represented as “0h39m15.9s,” “00:39:15.9,” or 9.81625º. The
+subpackage <code class="docutils literal notranslate"><span class="pre">astropy.coordinates</span></code> provides tools for representing the
+coordinates of objects and transforming them between different systems.</p>
+<p>In this tutorial, we will explore how the <code class="docutils literal notranslate"><span class="pre">astropy.coordinates</span></code>
+package can be used to work with astronomical coordinates. You may find
+it helpful to keep <a class="reference external" href="http://docs.astropy.org/en/stable/coordinates/index.html">the Astropy documentation for the coordinates
+package</a>
+open alongside this tutorial for reference or additional reading. In the
+text below, you may also see some links that look like
+(<a class="reference external" href="http://docs.astropy.org/en/stable/coordinates/index.html">docs</a>).
+These links will take you to parts of the documentation that are
+directly relevant to the cells from which they link.</p>
+<p><em>Note: This is the 1st tutorial in a series of tutorials about
+astropy.coordinates.</em> - <a class="reference external" href="2-Coordinates-Transforms">Next tutorial: Astronomical Coordinates 2:
+Transforming Coordinate Systems and
+Representations</a></p>
+</section>
+<section id="imports">
+<h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h2>
+<p>We start by importing some packages that we will need below:</p>
+<p><span class="inputnumrole">In[1]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="n">matplotlib</span> <span class="n">inline</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="kn">from</span> <span class="nn">astropy</span> <span class="kn">import</span> <span class="n">units</span> <span class="k">as</span> <span class="n">u</span>
+<span class="kn">from</span> <span class="nn">astropy.coordinates</span> <span class="kn">import</span> <span class="n">SkyCoord</span><span class="p">,</span> <span class="n">Distance</span>
+<span class="kn">from</span> <span class="nn">astropy.io</span> <span class="kn">import</span> <span class="n">fits</span>
+<span class="kn">from</span> <span class="nn">astropy.table</span> <span class="kn">import</span> <span class="n">QTable</span>
+<span class="kn">from</span> <span class="nn">astropy.utils.data</span> <span class="kn">import</span> <span class="n">download_file</span>
+
+<span class="kn">from</span> <span class="nn">astroquery.gaia</span> <span class="kn">import</span> <span class="n">Gaia</span>
+<span class="n">Gaia</span><span class="o">.</span><span class="n">ROW_LIMIT</span> <span class="o">=</span> <span class="mi">10000</span>  <span class="c1"># Set the row limit for returned data</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[1]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Created</span> <span class="n">TAP</span><span class="o">+</span> <span class="p">(</span><span class="n">v20200428</span><span class="mf">.1</span><span class="p">)</span> <span class="o">-</span> <span class="n">Connection</span><span class="p">:</span>
+    <span class="n">Host</span><span class="p">:</span> <span class="n">gea</span><span class="o">.</span><span class="n">esac</span><span class="o">.</span><span class="n">esa</span><span class="o">.</span><span class="n">int</span>
+    <span class="n">Use</span> <span class="n">HTTPS</span><span class="p">:</span> <span class="kc">True</span>
+    <span class="n">Port</span><span class="p">:</span> <span class="mi">443</span>
+    <span class="n">SSL</span> <span class="n">Port</span><span class="p">:</span> <span class="mi">443</span>
+<span class="n">Created</span> <span class="n">TAP</span><span class="o">+</span> <span class="p">(</span><span class="n">v20200428</span><span class="mf">.1</span><span class="p">)</span> <span class="o">-</span> <span class="n">Connection</span><span class="p">:</span>
+    <span class="n">Host</span><span class="p">:</span> <span class="n">gea</span><span class="o">.</span><span class="n">esac</span><span class="o">.</span><span class="n">esa</span><span class="o">.</span><span class="n">int</span>
+    <span class="n">Use</span> <span class="n">HTTPS</span><span class="p">:</span> <span class="kc">True</span>
+    <span class="n">Port</span><span class="p">:</span> <span class="mi">443</span>
+    <span class="n">SSL</span> <span class="n">Port</span><span class="p">:</span> <span class="mi">443</span>
+</pre></div>
+</div>
+</section>
+<section id="representing-on-sky-positions-with-astropy-coordinates">
+<h2>Representing On-sky Positions with <code class="docutils literal notranslate"><span class="pre">astropy.coordinates</span></code><a class="headerlink" href="#representing-on-sky-positions-with-astropy-coordinates" title="Permalink to this headline">¶</a></h2>
+<p>In Astropy, the most common way of representing and working with sky
+coordinates is to use the <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> object
+(<a class="reference external" href="https://docs.astropy.org/en/stable/coordinates/skycoord.html">docs</a>).
+A <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> can be created directly from angles or arrays of angles
+with associated units, as demonstrated below.</p>
+<p>To get started, let’s assume that we want to create a <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code>
+object for the center of the open star cluster NGC 188 so that later we
+can query and retrieve stars that might be members of the cluster. Let’s
+also assume, for now, that we already know the sky coordinates of the
+cluster to be (12.11, 85.26) degrees in the ICRS coordinate frame. The
+ICRS — sometimes referred to as “equatorial” or “J2000” coordinates
+(<a class="reference external" href="https://arxiv.org/abs/astro-ph/0602086">more info about the ICRS</a>)
+— is currently the most common astronomical coordinate frame for stellar
+or extragalactic astronomy, and is the default coordinate frame for
+<code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code>. Since we already know the ICRS position of NGC 188 (see
+above), we can create a <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> object for the cluster by passing
+the data in to the <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> initializer:</p>
+<p><span class="inputnumrole">In[2]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ngc188_center</span> <span class="o">=</span> <span class="n">SkyCoord</span><span class="p">(</span><span class="mf">12.11</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">deg</span><span class="p">,</span> <span class="mf">85.26</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">deg</span><span class="p">)</span>
+<span class="n">ngc188_center</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[2]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">SkyCoord</span> <span class="p">(</span><span class="n">ICRS</span><span class="p">):</span> <span class="p">(</span><span class="n">ra</span><span class="p">,</span> <span class="n">dec</span><span class="p">)</span> <span class="ow">in</span> <span class="n">deg</span>
+    <span class="p">(</span><span class="mf">12.11</span><span class="p">,</span> <span class="mf">85.26</span><span class="p">)</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Even though the default frame is ICRS, it is generally recommended to
+explicitly specify the frame your coordinates are in. In this case, this
+would be an equivalent way of creating our <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> object for NGC
+188:</p>
+<p><span class="inputnumrole">In[3]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ngc188_center</span> <span class="o">=</span> <span class="n">SkyCoord</span><span class="p">(</span><span class="mf">12.11</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">deg</span><span class="p">,</span> <span class="mf">85.26</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">deg</span><span class="p">,</span> <span class="n">frame</span><span class="o">=</span><span class="s1">&#39;icrs&#39;</span><span class="p">)</span>
+<span class="n">ngc188_center</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[3]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">SkyCoord</span> <span class="p">(</span><span class="n">ICRS</span><span class="p">):</span> <span class="p">(</span><span class="n">ra</span><span class="p">,</span> <span class="n">dec</span><span class="p">)</span> <span class="ow">in</span> <span class="n">deg</span>
+    <span class="p">(</span><span class="mf">12.11</span><span class="p">,</span> <span class="mf">85.26</span><span class="p">)</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>As we will see later on in this series, there are many other supported
+coordinate frames, so it helps to get into the habit of passing in the
+name of a coordinate frame.</p>
+<p>In the above initializations, we passed in <code class="docutils literal notranslate"><span class="pre">astropy.units.Quantity</span></code>
+objects with angular units to specify the angular components of our sky
+coordinates. The <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> initializer will also accept
+string-formatted coordinates either as separate strings for Right
+Ascension (RA) and Declination (Dec) or a single string. For example, if
+we have sexagesimal sky coordinate data: In this case, the
+representation of the data includes specifications of the units (the
+“hms” for “hour minute second”, and the “dms” for “degrees minute
+second”</p>
+<p><span class="inputnumrole">In[4]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">SkyCoord</span><span class="p">(</span><span class="s1">&#39;00h48m26.4s&#39;</span><span class="p">,</span> <span class="s1">&#39;85d15m36s&#39;</span><span class="p">,</span> <span class="n">frame</span><span class="o">=</span><span class="s1">&#39;icrs&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[4]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">SkyCoord</span> <span class="p">(</span><span class="n">ICRS</span><span class="p">):</span> <span class="p">(</span><span class="n">ra</span><span class="p">,</span> <span class="n">dec</span><span class="p">)</span> <span class="ow">in</span> <span class="n">deg</span>
+    <span class="p">(</span><span class="mf">12.11</span><span class="p">,</span> <span class="mf">85.26</span><span class="p">)</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Some string representations do not explicitly define units, so it is
+sometimes necessary to specify the units of the string coordinate data
+explicitly if they are not implicitly included:</p>
+<p><span class="inputnumrole">In[5]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">SkyCoord</span><span class="p">(</span><span class="s1">&#39;00:48:26.4 85:15:36&#39;</span><span class="p">,</span> <span class="n">unit</span><span class="o">=</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">hour</span><span class="p">,</span> <span class="n">u</span><span class="o">.</span><span class="n">deg</span><span class="p">),</span>
+         <span class="n">frame</span><span class="o">=</span><span class="s1">&#39;icrs&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[5]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">SkyCoord</span> <span class="p">(</span><span class="n">ICRS</span><span class="p">):</span> <span class="p">(</span><span class="n">ra</span><span class="p">,</span> <span class="n">dec</span><span class="p">)</span> <span class="ow">in</span> <span class="n">deg</span>
+    <span class="p">(</span><span class="mf">12.11</span><span class="p">,</span> <span class="mf">85.26</span><span class="p">)</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>For more information and examples on initializing <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> objects,
+<a class="reference external" href="http://docs.astropy.org/en/latest/coordinates/skycoord.html">see this
+documentation</a>.</p>
+<p>For the <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> initializations demonstrated above, we assumed that
+we already had the coordinate component values ready. If you do not know
+the coordinate values and the object you are interested in is in
+<a class="reference external" href="http://cdsweb.u-strasbg.fr/cgi-bin/Sesame">SESAME</a>, you can also
+automatically look up and load coordinate values from the name of the
+object using the <code class="docutils literal notranslate"><span class="pre">SkyCoord.from_name()</span></code> class method1
+(<a class="reference external" href="http://docs.astropy.org/en/latest/coordinates/index.html#convenience-methods">docs</a>).
+Note, however, that this requires an internet connection. It is safe to
+skip this cell if you are not connected to the internet because we
+already defined the object <code class="docutils literal notranslate"><span class="pre">ngc188_center</span></code> in the cells above.</p>
+<blockquote>
+<div><p>1If you do not know what a class method is, think of it like an</p>
+</div></blockquote>
+<p>alternative constructor for a <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> object — calling
+<code class="docutils literal notranslate"><span class="pre">SkyCoord.from_name()</span></code> with a name gives you a new <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code>
+object. For more detailed background on what class methods are and when
+they’re useful, see <a class="reference external" href="https://julien.danjou.info/blog/2013/guide-python-static-class-abstract-methods">this
+page</a>.</p>
+<p><span class="inputnumrole">In[6]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ngc188_center</span> <span class="o">=</span> <span class="n">SkyCoord</span><span class="o">.</span><span class="n">from_name</span><span class="p">(</span><span class="s1">&#39;NGC 188&#39;</span><span class="p">)</span>
+<span class="n">ngc188_center</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[6]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">SkyCoord</span> <span class="p">(</span><span class="n">ICRS</span><span class="p">):</span> <span class="p">(</span><span class="n">ra</span><span class="p">,</span> <span class="n">dec</span><span class="p">)</span> <span class="ow">in</span> <span class="n">deg</span>
+    <span class="p">(</span><span class="mf">12.10833333</span><span class="p">,</span> <span class="mf">85.255</span><span class="p">)</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> object that we defined now has various ways of
+accessing the coordinate information contained within it. All
+<code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> objects have attributes that allow you to retrieve the
+coordinate component data, but the component names will change depending
+on the coordinate frame of the <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> you have. In our examples we
+have created a <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> in the ICRS frame, so the component names
+are lower-case abbreviations of Right Ascension, <code class="docutils literal notranslate"><span class="pre">.ra</span></code>, and
+Declination, <code class="docutils literal notranslate"><span class="pre">.dec</span></code>:</p>
+<p><span class="inputnumrole">In[7]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ngc188_center</span><span class="o">.</span><span class="n">ra</span><span class="p">,</span> <span class="n">ngc188_center</span><span class="o">.</span><span class="n">dec</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[7]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="o">&lt;</span><span class="n">Longitude</span> <span class="mf">12.10833333</span> <span class="n">deg</span><span class="o">&gt;</span><span class="p">,</span> <span class="o">&lt;</span><span class="n">Latitude</span> <span class="mf">85.255</span> <span class="n">deg</span><span class="o">&gt;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> component attributes (here <code class="docutils literal notranslate"><span class="pre">ra</span></code> and <code class="docutils literal notranslate"><span class="pre">dec</span></code>) return
+specialized <code class="docutils literal notranslate"><span class="pre">Quantity</span></code>-like objects that make working with angular
+data easier. While <code class="docutils literal notranslate"><span class="pre">Quantity</span></code>
+(<a class="reference external" href="http://docs.astropy.org/en/stable/units/index.html">docs</a>) is a
+general class that represents numerical values and physical units of any
+kind, <code class="docutils literal notranslate"><span class="pre">astropy.coordinates</span></code> defines subclasses of <code class="docutils literal notranslate"><span class="pre">Quantity</span></code> that
+are specifically designed for working with angles, such as the <code class="docutils literal notranslate"><span class="pre">Angle</span></code>
+(<a class="reference external" href="http://docs.astropy.org/en/stable/api/astropy.coordinates.Angle.html">docs</a>)
+class. The <code class="docutils literal notranslate"><span class="pre">Angle</span></code> class then has additional, more specialized
+subclasses <code class="docutils literal notranslate"><span class="pre">Latitude</span></code>
+(<a class="reference external" href="http://docs.astropy.org/en/stable/api/astropy.coordinates.Latitude.html">docs</a>)
+and <code class="docutils literal notranslate"><span class="pre">Longitude</span></code>
+(<a class="reference external" href="http://docs.astropy.org/en/stable/api/astropy.coordinates.Longitude.html">docs</a>).
+These objects store angles, provide useful attributes to quickly convert
+to common angular units, and enable formatting the numerical values in
+various formats. For example, in a Jupyter notebook, these objects know
+how to represent themselves using LaTeX:</p>
+<p><span class="inputnumrole">In[8]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ngc188_center</span><span class="o">.</span><span class="n">ra</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[8]:</span></p>
+<div class="math notranslate nohighlight">
+\[12^\circ06{}^\prime30{}^{\prime\prime}\]</div>
+<p><span class="inputnumrole">In[9]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ngc188_center</span><span class="o">.</span><span class="n">dec</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[9]:</span></p>
+<div class="math notranslate nohighlight">
+\[85^\circ15{}^\prime18{}^{\prime\prime}\]</div>
+<p><span class="inputnumrole">In[10]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">ngc188_center</span><span class="o">.</span><span class="n">ra</span><span class="p">),</span> <span class="nb">type</span><span class="p">(</span><span class="n">ngc188_center</span><span class="o">.</span><span class="n">dec</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[10]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">astropy</span><span class="o">.</span><span class="n">coordinates</span><span class="o">.</span><span class="n">angles</span><span class="o">.</span><span class="n">Longitude</span><span class="p">,</span> <span class="n">astropy</span><span class="o">.</span><span class="n">coordinates</span><span class="o">.</span><span class="n">angles</span><span class="o">.</span><span class="n">Latitude</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>With these objects, we can retrieve the coordinate components in
+different units using the <code class="docutils literal notranslate"><span class="pre">Quantity.to()</span></code> method:</p>
+<p><span class="inputnumrole">In[11]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">ngc188_center</span><span class="o">.</span><span class="n">ra</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">hourangle</span><span class="p">),</span>
+ <span class="n">ngc188_center</span><span class="o">.</span><span class="n">ra</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">radian</span><span class="p">),</span>
+ <span class="n">ngc188_center</span><span class="o">.</span><span class="n">ra</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">u</span><span class="o">.</span><span class="n">degree</span><span class="p">))</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[11]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="o">&lt;</span><span class="n">Longitude</span> <span class="mf">0.80722222</span> <span class="n">hourangle</span><span class="o">&gt;</span><span class="p">,</span>
+ <span class="o">&lt;</span><span class="n">Longitude</span> <span class="mf">0.21133028</span> <span class="n">rad</span><span class="o">&gt;</span><span class="p">,</span>
+ <span class="o">&lt;</span><span class="n">Longitude</span> <span class="mf">12.10833333</span> <span class="n">deg</span><span class="o">&gt;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Or using the shorthand attributes, which return only the component
+values:</p>
+<p><span class="inputnumrole">In[12]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">ngc188_center</span><span class="o">.</span><span class="n">ra</span><span class="o">.</span><span class="n">hour</span><span class="p">,</span>
+ <span class="n">ngc188_center</span><span class="o">.</span><span class="n">ra</span><span class="o">.</span><span class="n">radian</span><span class="p">,</span>
+ <span class="n">ngc188_center</span><span class="o">.</span><span class="n">ra</span><span class="o">.</span><span class="n">degree</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[12]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="mf">0.8072222220000002</span><span class="p">,</span> <span class="mf">0.2113302835374691</span><span class="p">,</span> <span class="mf">12.10833333</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We can also format the values into strings with specified units
+(<a class="reference external" href="http://docs.astropy.org/en/latest/coordinates/formatting.html">docs</a>),
+for example:</p>
+<p><span class="inputnumrole">In[13]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ngc188_center</span><span class="o">.</span><span class="n">ra</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">unit</span><span class="o">=</span><span class="n">u</span><span class="o">.</span><span class="n">hourangle</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[13]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;00:48:26&#39;</span>
+</pre></div>
+</div>
+</section>
+<section id="querying-the-gaia-archive-to-retrieve-coordinates-of-stars-in-ngc-188">
+<h2>Querying the <em>Gaia</em> Archive to Retrieve Coordinates of Stars in NGC 188<a class="headerlink" href="#querying-the-gaia-archive-to-retrieve-coordinates-of-stars-in-ngc-188" title="Permalink to this headline">¶</a></h2>
+<p>Now that we have a <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> object for the center of NGC 188, we can
+use this object with the <code class="docutils literal notranslate"><span class="pre">astroquery</span></code> package to query many different
+astronomical databases (see a full list of <a class="reference external" href="https://astroquery.readthedocs.io/en/latest/#available-services">available services in the
+astroquery
+documentation</a>).
+Here, we will use the <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> object <code class="docutils literal notranslate"><span class="pre">ngc188_center</span></code> to select
+sources from the <em>Gaia</em> Data Release 2 catalog around the position of
+the center of NGC 188 to look for stars that might be members of the
+star cluster. To do this, we will use the <code class="docutils literal notranslate"><span class="pre">astroquery.gaia</span></code> subpackage
+(<a class="reference external" href="https://astroquery.readthedocs.io/en/latest/gaia/gaia.html">docs</a>).</p>
+<p>This requires an internet connection, but if it fails, the catalog file
+is included in the repository so you can load it locally (skip the next
+cell if you do not have an internet connection):</p>
+<p><span class="inputnumrole">In[14]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">job</span> <span class="o">=</span> <span class="n">Gaia</span><span class="o">.</span><span class="n">cone_search_async</span><span class="p">(</span><span class="n">ngc188_center</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mf">0.5</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">deg</span><span class="p">)</span>
+<span class="n">ngc188_table</span> <span class="o">=</span> <span class="n">job</span><span class="o">.</span><span class="n">get_results</span><span class="p">()</span>
+
+<span class="c1"># only keep stars brighter than G=19 magnitude</span>
+<span class="n">ngc188_table</span> <span class="o">=</span> <span class="n">ngc188_table</span><span class="p">[</span><span class="n">ngc188_table</span><span class="p">[</span><span class="s1">&#39;phot_g_mean_mag&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">19</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">mag</span><span class="p">]</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[14]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">INFO</span><span class="p">:</span> <span class="n">Query</span> <span class="n">finished</span><span class="o">.</span> <span class="p">[</span><span class="n">astroquery</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">tap</span><span class="o">.</span><span class="n">core</span><span class="p">]</span>
+</pre></div>
+</div>
+<p><span class="inputnumrole">In[15]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;source_id&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;ra&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;dec&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;parallax&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;parallax_error&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;pmra&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;pmdec&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;radial_velocity&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;phot_g_mean_mag&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;phot_bp_mean_mag&#39;</span><span class="p">,</span>
+ <span class="s1">&#39;phot_rp_mean_mag&#39;</span><span class="p">]</span>
+<span class="n">ngc188_table</span><span class="p">[</span><span class="n">cols</span><span class="p">]</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;gaia_results.fits&#39;</span><span class="p">,</span> <span class="n">overwrite</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The above cell may not work if you do not have an internet connection,
+so we have included the results table along with the notebook:</p>
+<p><span class="inputnumrole">In[16]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ngc188_table</span> <span class="o">=</span> <span class="n">QTable</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="s1">&#39;gaia_results.fits&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="inputnumrole">In[17]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">ngc188_table</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[17]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">4938</span>
+</pre></div>
+</div>
+<p>The returned <code class="docutils literal notranslate"><span class="pre">astropy.table</span></code> <code class="docutils literal notranslate"><span class="pre">Table</span></code> object now contains about 5000
+stars from <em>Gaia</em> DR2 around the coordinate position of the center of
+NGC 188. Let’s now construct a <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> object with the results
+table. In the <em>Gaia</em> data archive, the ICRS coordinates of a source are
+given as column names <code class="docutils literal notranslate"><span class="pre">&quot;ra&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">&quot;dec&quot;</span></code>:</p>
+<p><span class="inputnumrole">In[18]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ngc188_table</span><span class="p">[</span><span class="s1">&#39;ra&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[18]:</span></p>
+<div class="math notranslate nohighlight">
+\[[12.09833,~12.146945,~12.054604,~\dots,~6.1584024,~11.711371,~10.891798] \; \mathrm{{}^{\circ}}\]</div>
+<p><span class="inputnumrole">In[19]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ngc188_table</span><span class="p">[</span><span class="s1">&#39;dec&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[19]:</span></p>
+<div class="math notranslate nohighlight">
+\[[85.254431,~85.254751,~85.256369,~\dots,~85.32562,~85.74769,~84.772649] \; \mathrm{{}^{\circ}}\]</div>
+<p>Note that, because the <em>Gaia</em> archive provides data tables with
+associated units, and we read this table using the <code class="docutils literal notranslate"><span class="pre">QTable</span></code> object
+(<a class="reference external" href="http://docs.astropy.org/en/latest/table/mixin_columns.html#quantity-and-qtable">docs</a>),
+the above table columns are represented as <code class="docutils literal notranslate"><span class="pre">Quantity</span></code> objects with
+units of degrees. Note also that these columns contain many (&gt;5000!)
+coordinate values. We can pass these directly in to <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> to get
+a single <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> object to represent all of these coordinates:</p>
+<p><span class="inputnumrole">In[20]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ngc188_gaia_coords</span> <span class="o">=</span> <span class="n">SkyCoord</span><span class="p">(</span><span class="n">ngc188_table</span><span class="p">[</span><span class="s1">&#39;ra&#39;</span><span class="p">],</span> <span class="n">ngc188_table</span><span class="p">[</span><span class="s1">&#39;dec&#39;</span><span class="p">])</span>
+<span class="n">ngc188_gaia_coords</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[20]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">SkyCoord</span> <span class="p">(</span><span class="n">ICRS</span><span class="p">):</span> <span class="p">(</span><span class="n">ra</span><span class="p">,</span> <span class="n">dec</span><span class="p">)</span> <span class="ow">in</span> <span class="n">deg</span>
+    <span class="p">[(</span><span class="mf">12.09832966</span><span class="p">,</span> <span class="mf">85.25443128</span><span class="p">),</span> <span class="p">(</span><span class="mf">12.14694473</span><span class="p">,</span> <span class="mf">85.25475081</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">12.05460389</span><span class="p">,</span> <span class="mf">85.25636896</span><span class="p">),</span> <span class="o">...</span><span class="p">,</span> <span class="p">(</span> <span class="mf">6.15840244</span><span class="p">,</span> <span class="mf">85.32562027</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">11.71137094</span><span class="p">,</span> <span class="mf">85.74769043</span><span class="p">),</span> <span class="p">(</span><span class="mf">10.89179821</span><span class="p">,</span> <span class="mf">84.77264889</span><span class="p">)]</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<section id="exercises">
+<h3>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h3>
+<p>Create a <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> for the center of the open cluster the Pleiades
+(either by looking up the coordinates and passing them in, or by using
+the convenience method we learned about above):</p>
+<p><span class="inputnumrole">In[21]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ngc188_center</span> <span class="o">=</span> <span class="n">SkyCoord</span><span class="o">.</span><span class="n">from_name</span><span class="p">(</span><span class="s1">&#39;NGC 188&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Using only a single method/function call on the <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> object
+representing the center of NGC 188, print a string with the RA/Dec in
+the form ‘HH:MM:SS.S DD:MM:SS.S’. Check your answer against
+<a class="reference external" href="http://simbad.u-strasbg.fr/simbad/">SIMBAD</a>, which will show you
+sexagesimal coordinates for the object.</p>
+<p>(Hint: <code class="docutils literal notranslate"><span class="pre">SkyCoord.to_string()</span></code> might be useful)</p>
+<p><span class="inputnumrole">In[22]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ngc188_center</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">style</span><span class="o">=</span><span class="s2">&quot;hmsdms&quot;</span><span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;:&quot;</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[22]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;00:48:26.0 +85:15:18.0&#39;</span>
+</pre></div>
+</div>
+<p>Using a single method/function call on the <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> object
+containing the results of our <em>Gaia</em> query, compute the angular
+separation between each resulting star and the coordinates of the
+cluster center for NGC 188.</p>
+<p>(Hint: <code class="docutils literal notranslate"><span class="pre">SkyCoord.separation()</span></code> might be useful)</p>
+<p><span class="inputnumrole">In[23]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ngc188_gaia_coords</span><span class="o">.</span><span class="n">separation</span><span class="p">(</span><span class="n">ngc188_center</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[23]:</span></p>
+<div class="math notranslate nohighlight">
+\[[$0^\circ00{}^\prime03.6149{}^{\prime\prime}$
+ $0^\circ00{}^\prime11.5336{}^{\prime\prime}$
+ $0^\circ00{}^\prime16.74{}^{\prime\prime}$ ...
+ $0^\circ29{}^\prime36.1677{}^{\prime\prime}$
+ $0^\circ29{}^\prime37.2132{}^{\prime\prime}$
+ $0^\circ29{}^\prime37.5986{}^{\prime\prime}$]\]</div>
+</section>
+</section>
+<section id="more-than-just-sky-positions-including-distance-information-in-skycoord">
+<h2>More Than Just Sky Positions: Including Distance Information in <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code><a class="headerlink" href="#more-than-just-sky-positions-including-distance-information-in-skycoord" title="Permalink to this headline">¶</a></h2>
+<p>So far, we have used <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> to represent angular sky positions
+(i.e., <code class="docutils literal notranslate"><span class="pre">ra</span></code> and <code class="docutils literal notranslate"><span class="pre">dec</span></code> only). It is sometimes useful to include
+distance information with the sky coordinates of a source, thereby
+specifying the full 3D position of an object. To pass in distance
+information, <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> accepts the keyword argument “<code class="docutils literal notranslate"><span class="pre">distance</span></code>”.
+So, if we knew that the distance to NGC 188 is 1.96 kpc, we could also
+pass in a distance (as a <code class="docutils literal notranslate"><span class="pre">Quantity</span></code> object) using this argument:</p>
+<p><span class="inputnumrole">In[24]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ngc188_center_3d</span> <span class="o">=</span> <span class="n">SkyCoord</span><span class="p">(</span><span class="mf">12.11</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">deg</span><span class="p">,</span> <span class="mf">85.26</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">deg</span><span class="p">,</span>
+                            <span class="n">distance</span><span class="o">=</span><span class="mf">1.96</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">kpc</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>With the table of <em>Gaia</em> data we retrieved above for stars around NGC
+188, <code class="docutils literal notranslate"><span class="pre">ngc188_table</span></code>, we also have parallax measurements for each star.
+For a precisely-measured parallax <span class="math notranslate nohighlight">\(\varpi\)</span>, the distance <span class="math notranslate nohighlight">\(d\)</span>
+to a star can be obtained approximately as <span class="math notranslate nohighlight">\(d \approx 1/\varpi\)</span>.
+This only really works if the parallax error is small relative to the
+parallax (<a class="reference external" href="https://arxiv.org/abs/1507.02105">see discussion in this
+paper</a>), so if we want to use these
+parallaxes to get distances we first have to filter out stars that have
+low signal-to-noise parallaxes:</p>
+<p><span class="inputnumrole">In[25]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">parallax_snr</span> <span class="o">=</span> <span class="n">ngc188_table</span><span class="p">[</span><span class="s1">&#39;parallax&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">ngc188_table</span><span class="p">[</span><span class="s1">&#39;parallax_error&#39;</span><span class="p">]</span>
+<span class="n">ngc188_table_3d</span> <span class="o">=</span> <span class="n">ngc188_table</span><span class="p">[</span><span class="n">parallax_snr</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">]</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">ngc188_table_3d</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[25]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">2053</span>
+</pre></div>
+</div>
+<p>The above selection on <code class="docutils literal notranslate"><span class="pre">parallax_snr</span></code> keeps stars that have a
+~10-sigma parallax measurement, but this is an arbitrary selection
+threshold that you may want to tune or remove in your own use cases.
+This selection removed over half of the stars in our original table, but
+for the remaining stars we can be confident that converting the parallax
+measurements to distances is mostly safe.</p>
+<p>The default way of passing in a distance to a <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> object, as
+above, is to pass in a <code class="docutils literal notranslate"><span class="pre">Quantity</span></code> with a unit of length. However,
+<code class="docutils literal notranslate"><span class="pre">astropy.coordinates</span></code> also provides a specialized object,
+<code class="docutils literal notranslate"><span class="pre">Distance</span></code>, for handling common transformations of different distance
+representations
+(<a class="reference external" href="http://docs.astropy.org/en/latest/coordinates/index.html#distance">docs</a>).
+Among other things, this class supports passing in a parallax value:</p>
+<p><span class="inputnumrole">In[26]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Distance</span><span class="p">(</span><span class="n">parallax</span><span class="o">=</span><span class="mi">1</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">mas</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[26]:</span></p>
+<div class="math notranslate nohighlight">
+\[1000 \; \mathrm{pc}\]</div>
+<p>The catalog of stars we queried from <em>Gaia</em> contains parallax
+information in milliarcsecond units, so we can create a <code class="docutils literal notranslate"><span class="pre">Distance</span></code>
+object directly from these values:</p>
+<p><span class="inputnumrole">In[27]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">gaia_dist</span> <span class="o">=</span> <span class="n">Distance</span><span class="p">(</span><span class="n">parallax</span><span class="o">=</span><span class="n">ngc188_table_3d</span><span class="p">[</span><span class="s1">&#39;parallax&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+<p>We can then create a <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> object to represent the 3D positions
+of all of the <em>Gaia</em> stars by passing in this distance object to the
+<code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> initializer:</p>
+<p><span class="inputnumrole">In[28]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ngc188_coords_3d</span> <span class="o">=</span> <span class="n">SkyCoord</span><span class="p">(</span><span class="n">ra</span><span class="o">=</span><span class="n">ngc188_table_3d</span><span class="p">[</span><span class="s1">&#39;ra&#39;</span><span class="p">],</span>
+                            <span class="n">dec</span><span class="o">=</span><span class="n">ngc188_table_3d</span><span class="p">[</span><span class="s1">&#39;dec&#39;</span><span class="p">],</span>
+                            <span class="n">distance</span><span class="o">=</span><span class="n">gaia_dist</span><span class="p">)</span>
+<span class="n">ngc188_coords_3d</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[28]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">SkyCoord</span> <span class="p">(</span><span class="n">ICRS</span><span class="p">):</span> <span class="p">(</span><span class="n">ra</span><span class="p">,</span> <span class="n">dec</span><span class="p">,</span> <span class="n">distance</span><span class="p">)</span> <span class="ow">in</span> <span class="p">(</span><span class="n">deg</span><span class="p">,</span> <span class="n">deg</span><span class="p">,</span> <span class="n">pc</span><span class="p">)</span>
+    <span class="p">[(</span><span class="mf">12.09832966</span><span class="p">,</span> <span class="mf">85.25443128</span><span class="p">,</span> <span class="mf">1109.14781668</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">12.12843989</span><span class="p">,</span> <span class="mf">85.26076889</span><span class="p">,</span> <span class="mf">1835.66340989</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">12.07705917</span><span class="p">,</span> <span class="mf">85.24631009</span><span class="p">,</span> <span class="mf">1974.19410857</span><span class="p">),</span> <span class="o">...</span><span class="p">,</span>
+     <span class="p">(</span> <span class="mf">6.13894786</span><span class="p">,</span> <span class="mf">85.25954928</span><span class="p">,</span> <span class="mf">2532.64969255</span><span class="p">),</span>
+     <span class="p">(</span> <span class="mf">6.15840244</span><span class="p">,</span> <span class="mf">85.32562027</span><span class="p">,</span> <span class="mf">1795.07434822</span><span class="p">),</span>
+     <span class="p">(</span><span class="mf">11.71137094</span><span class="p">,</span> <span class="mf">85.74769043</span><span class="p">,</span>  <span class="mf">367.13489233</span><span class="p">)]</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p>Let’s now use <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> to plot the sky positions of all of these
+sources, colored by distance to emphasize the cluster stars:</p>
+<p><span class="inputnumrole">In[29]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">6.5</span><span class="p">,</span> <span class="mf">5.2</span><span class="p">),</span>
+                       <span class="n">constrained_layout</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">cs</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">ngc188_coords_3d</span><span class="o">.</span><span class="n">ra</span><span class="o">.</span><span class="n">degree</span><span class="p">,</span>
+                <span class="n">ngc188_coords_3d</span><span class="o">.</span><span class="n">dec</span><span class="o">.</span><span class="n">degree</span><span class="p">,</span>
+                <span class="n">c</span><span class="o">=</span><span class="n">ngc188_coords_3d</span><span class="o">.</span><span class="n">distance</span><span class="o">.</span><span class="n">kpc</span><span class="p">,</span>
+                <span class="n">s</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mf">2.5</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;twilight&#39;</span><span class="p">)</span>
+<span class="n">cb</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">cs</span><span class="p">)</span>
+<span class="n">cb</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;distance [</span><span class="si">{</span><span class="n">u</span><span class="o">.</span><span class="n">kpc</span><span class="si">:</span><span class="s1">latex_inline</span><span class="si">}</span><span class="s1">]&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;RA [deg]&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Dec [deg]&#39;</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Gaia DR2 sources near NGC 188&#39;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[29]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Text</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="s1">&#39;Gaia DR2 sources near NGC 188&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="../_images/1-Coordinates-Intro_56_1.png" src="../_images/1-Coordinates-Intro_56_1.png" />
+<p>Now that we have 3D position information for both the cluster center,
+and for the stars we queried from <em>Gaia</em>, we can compute the 3D
+separation (distance) between all of the <em>Gaia</em> sources and the cluster
+center:</p>
+<p><span class="inputnumrole">In[30]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">sep3d</span> <span class="o">=</span> <span class="n">ngc188_coords_3d</span><span class="o">.</span><span class="n">separation_3d</span><span class="p">(</span><span class="n">ngc188_center_3d</span><span class="p">)</span>
+<span class="n">sep3d</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[30]:</span></p>
+<div class="math notranslate nohighlight">
+\[[850.8522,~124.3366,~14.202196,~\dots,~572.97077,~165.71211,~1592.8815] \; \mathrm{pc}\]</div>
+<section id="id1">
+<h3>Exercises<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>Using the 3D separation values, define a boolean mask to select
+candidate members of the cluster. Select all stars within 50 pc of the
+cluster center. How many candidate members of NGC 188 do we have, based
+on their 3D positions?</p>
+<p><span class="inputnumrole">In[31]:</span></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">ngc188_3d_mask</span> <span class="o">=</span> <span class="n">sep3d</span> <span class="o">&lt;</span> <span class="mi">50</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">pc</span>
+<span class="n">ngc188_3d_mask</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><span class="outputnumrole">Out[31]:</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">193</span>
+</pre></div>
+</div>
+<p>In this tutorial, we have introduced <code class="docutils literal notranslate"><span class="pre">astropy.coordinates</span></code> as a way to
+store and represent astronomical sky coordinates. We used coordinate
+objects, via the <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> class interface, to parse and change
+coordinate representations and units. We also demonstrated how to use a
+<code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> object with the <code class="docutils literal notranslate"><span class="pre">astroquery</span></code> package to query an
+astronomical database, the <em>Gaia</em> science archive. We then created a
+single <code class="docutils literal notranslate"><span class="pre">SkyCoord</span></code> object with the queried data that represents the sky
+coordinates of many objects. Finally, we introduced the concept of using
+<code class="docutils literal notranslate"><span class="pre">astropy.coordinates</span></code> to represent a 3D position of an object or set
+of objects.</p>
+<div id="spacer"></div>
+
+<a href="../_static/1-Coordinates-Intro/1-Coordinates-Intro.ipynb"><button id="download">Download tutorial notebook</button></a>
+<a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/1-Coordinates-Intro/1-Coordinates-Intro.ipynb"><button id="binder">Interactive tutorial notebook</button></a></section>
+</section>
+</section>
+
+</div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+<footer class="footer">
+  <div class="container">
+    <p class="pull-right">
+      <a href="#">Back to top</a>
+      
+    </p>
+    <p>
+    Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+    &copy; Copyright Astropy.
+    </p>
+  </div>
+</footer>
+  </body>
+</html>

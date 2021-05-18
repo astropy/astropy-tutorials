@@ -2,7 +2,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta charset="utf-8" /><meta content="filterTutorials" name="keywords" />
+    <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta content="filterTutorials" name="keywords" />
 <meta content="filterTutorials," name="keywords" />
 
     <title>Analyzing UVES Spectroscopy with Astropy &#8212; astropy-tutorials v3.0.dev</title>
@@ -122,14 +123,14 @@
   <a href="../_static/UVES/UVES.ipynb"><button id="download">Download tutorial notebook</button></a>
 <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/UVES/UVES.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
 
-<div id="spacer"></div><div class="section" id="analyzing-uves-spectroscopy-with-astropy">
+<div id="spacer"></div><section id="analyzing-uves-spectroscopy-with-astropy">
 <span id="uves"></span><h1>Analyzing UVES Spectroscopy with Astropy<a class="headerlink" href="#analyzing-uves-spectroscopy-with-astropy" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="authors">
+<section id="authors">
 <h2>Authors<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a></h2>
 <p>Moritz Guenther, Miguel de Val-Borro, Emily Rice (Learning Goals &amp;
 formatting)</p>
-</div>
-<div class="section" id="learning-goals">
+</section>
+<section id="learning-goals">
 <h2>Learning Goals<a class="headerlink" href="#learning-goals" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p><em>Input/Output</em>: Read in spectral data from a list of FITS files using
@@ -147,13 +148,13 @@ and
 <li><p><em>Visualization</em>: Plot spectral data using
 <a class="reference external" href="https://matplotlib.org/">matplotlib</a></p></li>
 </ul>
-</div>
-<div class="section" id="keywords">
+</section>
+<section id="keywords">
 <h2>Keywords<a class="headerlink" href="#keywords" title="Permalink to this headline">¶</a></h2>
 <p>astropy.io, astropy.wcs, astropy.units, astropy.constants, astropy.time,
 astropy.table, matplotlib, spectra, UVES</p>
-</div>
-<div class="section" id="summary">
+</section>
+<section id="summary">
 <h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
 <p>This tutorial follows our real-life data analysis of MN Lup and the code
 developed below is taken (with only minor modifications) from the code
@@ -164,8 +165,8 @@ below appear in very similar form in the article published in <a class="referenc
 section make use of things calculated in the earlier sections. Thus, if
 you need to restart your python session in the course of this tutorial,
 please execute all the code again.</p>
-</div>
-<div class="section" id="before-you-proceed">
+</section>
+<section id="before-you-proceed">
 <h2>Before you proceed<a class="headerlink" href="#before-you-proceed" title="Permalink to this headline">¶</a></h2>
 <p><span class="inputnumrole">In[1]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set up matplotlib</span>
@@ -187,8 +188,8 @@ want to fill with data files, change the <code class="docutils literal notransla
 <span class="n">f</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">working_dir_path</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="scientific-background">
+</section>
+<section id="scientific-background">
 <h2>Scientific background<a class="headerlink" href="#scientific-background" title="Permalink to this headline">¶</a></h2>
 <p>In this tutorial we analyze data from MN Lup, a T Tauri star in the
 Taurus-Auriga star forming region located at a distance of about 140 pc.
@@ -203,8 +204,8 @@ modulated accretion spot.</p>
 tutorial we analyze (some of) the UVES data to search for rotationally
 modulated features in the emission line profiles, which could be due to
 an accretion spot on the stellar surface.</p>
-</div>
-<div class="section" id="reading-the-data">
+</section>
+<section id="reading-the-data">
 <h2>Reading the data<a class="headerlink" href="#reading-the-data" title="Permalink to this headline">¶</a></h2>
 <p>A previous Astropy tutorial already covered <a class="reference external" href="../FITS-header.html">handling FITS
 files</a> and WCS transformations, so the
@@ -243,7 +244,7 @@ for more details:</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[4]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Filename</span><span class="p">:</span> <span class="o">./</span><span class="n">UVES</span><span class="o">/</span><span class="n">r</span><span class="o">.</span><span class="n">UVES</span><span class="o">.</span><span class="mi">2011</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">11</span><span class="n">T232352</span><span class="o">.</span><span class="mi">266</span><span class="o">-</span><span class="n">A01_0000</span><span class="o">.</span><span class="n">fits</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Filename</span><span class="p">:</span> <span class="o">./</span><span class="n">UVES</span><span class="o">/</span><span class="n">r</span><span class="o">.</span><span class="n">UVES</span><span class="mf">.2011</span><span class="o">-</span><span class="mi">08</span><span class="o">-</span><span class="mi">11</span><span class="n">T232352</span><span class="mf">.266</span><span class="o">-</span><span class="n">A01_0000</span><span class="o">.</span><span class="n">fits</span>
 <span class="n">No</span><span class="o">.</span>    <span class="n">Name</span>      <span class="n">Ver</span>    <span class="n">Type</span>      <span class="n">Cards</span>   <span class="n">Dimensions</span>   <span class="n">Format</span>
   <span class="mi">0</span>  <span class="n">PRIMARY</span>       <span class="mi">1</span> <span class="n">PrimaryHDU</span>     <span class="mi">609</span>   <span class="p">(</span><span class="mi">42751</span><span class="p">,)</span>   <span class="n">float32</span>
 </pre></div>
@@ -271,8 +272,8 @@ it just doesn’t fully conform to the WCS standard.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">flux</span> <span class="o">=</span> <span class="n">sp</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">data</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="making-code-reusable-as-a-function">
+</section>
+<section id="making-code-reusable-as-a-function">
 <h2>Making code reusable as a function<a class="headerlink" href="#making-code-reusable-as-a-function" title="Permalink to this headline">¶</a></h2>
 <p>Now, we don’t want to repeat this process for every single file by hand,
 so let’s define a function that takes the filename as input and returns
@@ -345,7 +346,7 @@ comment every function that is longer than two lines.</p>
     <span class="k">return</span> <span class="n">wavelength</span><span class="p">,</span> <span class="n">flux</span><span class="p">,</span> <span class="n">date_obs</span>
 </pre></div>
 </div>
-<div class="section" id="exercise">
+<section id="exercise">
 <h3>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">¶</a></h3>
 <p>Try to find out how you can read the help for this function from the
 command line.</p>
@@ -377,8 +378,8 @@ read_spec?
     <span class="n">time</span> <span class="n">of</span> <span class="n">observation</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="id3">
+</section>
+<section id="id3">
 <h3>Exercise<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <p>The dataset of UVES spectra should have been taken using all the same
 setup. Write a function that returns the exposure time (<code class="docutils literal notranslate"><span class="pre">EXPTIME</span></code>),
@@ -455,9 +456,9 @@ loop over the list of all filenames and fill this array with data.</p>
     <span class="n">date</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">date_obs</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="units-and-constants-in-astropy">
+</section>
+</section>
+<section id="units-and-constants-in-astropy">
 <h2>Units and constants in astropy<a class="headerlink" href="#units-and-constants-in-astropy" title="Permalink to this headline">¶</a></h2>
 <p>Often, one has to keep track of the units for certain values. Was the
 wavelength given in Angstrom or in nm? In X-ray observations, a common
@@ -574,7 +575,7 @@ wavelength of a spectrum. This is how it can be done:</p>
 <p><span class="outputnumrole">Out[17]:</span></p>
 <div class="math notranslate nohighlight">
 \[[8.0341357 \times 10^{14},~8.0340719 \times 10^{14},~8.0340081 \times 10^{14},~\dots,~5.9971542 \times 10^{14},~5.9971186 \times 10^{14},~5.9970831 \times 10^{14}] \; \mathrm{Hz}\]</div>
-<div class="section" id="id4">
+<section id="id4">
 <h3>Exercise<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
 <p>Spectroscopically, MN Lup is classified as spectral type M0 V, thus the
 gravitational acceleration on the surface <span class="math notranslate nohighlight">\(\log(g)\)</span> should be
@@ -595,8 +596,8 @@ spectroscopically estimated surface gravity.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mf">4.3077338588081275</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="id5">
+</section>
+<section id="id5">
 <h3>Exercise<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
 <p>Write a function that turns a wavelength scale into a velocity scale. We
 want to input a wavelengths array and the rest wavelength of a spectral
@@ -625,8 +626,8 @@ wavelengths relative to <span class="math notranslate nohighlight">\(H_\alpha\)<
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="o">-</span><span class="mf">131.9748242</span>   <span class="o">-</span><span class="mf">86.30879506</span>    <span class="mf">5.0232632</span> <span class="p">]</span> <span class="n">km</span> <span class="o">/</span> <span class="n">s</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="id6">
+</section>
+<section id="id6">
 <h3>Exercise<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
 <p>Write a function that takes a wavelength array and the rest wavelength
 of a spectral line as input, turns it into a Doppler shift (you can use
@@ -647,9 +648,9 @@ make sure the that code below can use it later.</p>
     <span class="k">return</span> <span class="n">v</span> <span class="o">/</span> <span class="n">vsini</span>
 </pre></div>
 </div>
-</div>
-</div>
-<div class="section" id="converting-times">
+</section>
+</section>
+<section id="converting-times">
 <h2>Converting times<a class="headerlink" href="#converting-times" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">`astropy.time</span></code> &lt;<a class="reference external" href="http://docs.astropy.org/en/stable/time/index.html">http://docs.astropy.org/en/stable/time/index.html</a>&gt;`__
 provides methods to convert times and dates between different systems
@@ -703,8 +704,8 @@ have to convert from one to the other explicitly.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">delta_p</span> <span class="o">=</span> <span class="n">delta_t</span><span class="o">.</span><span class="n">value</span> <span class="o">*</span> <span class="n">u</span><span class="o">.</span><span class="n">day</span> <span class="o">/</span> <span class="n">period</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="normalize-the-flux-to-the-local-continuum">
+</section>
+<section id="normalize-the-flux-to-the-local-continuum">
 <h2>Normalize the flux to the local continuum<a class="headerlink" href="#normalize-the-flux-to-the-local-continuum" title="Permalink to this headline">¶</a></h2>
 <p>In this example we want to look at the time evolution of a single
 specific emission line in the spectrum. In order to estimate the
@@ -750,10 +751,10 @@ the flux by this polynomial.</p>
     <span class="p">[[</span><span class="mi">3925</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">AA</span><span class="p">,</span> <span class="mi">3930</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">AA</span><span class="p">],[</span><span class="mi">3938</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">AA</span><span class="p">,</span> <span class="mi">3945</span><span class="o">*</span><span class="n">u</span><span class="o">.</span><span class="n">AA</span><span class="p">]])</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="publication-ready-output">
+</section>
+<section id="publication-ready-output">
 <h2>Publication ready output<a class="headerlink" href="#publication-ready-output" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="tables">
+<section id="tables">
 <h3>Tables<a class="headerlink" href="#tables" title="Permalink to this headline">¶</a></h3>
 <p>We’ll calculate the equivalent width in Angstroms of the emission line
 for the first spectrum.</p>
@@ -793,8 +794,8 @@ code:</p>
 <span class="n">tab</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">working_dir_path</span><span class="p">,</span> <span class="s1">&#39;EWtab.tex&#39;</span><span class="p">),</span> <span class="n">latexdict</span> <span class="o">=</span> <span class="n">ascii</span><span class="o">.</span><span class="n">latexdicts</span><span class="p">[</span><span class="s1">&#39;AA&#39;</span><span class="p">])</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="plots">
+</section>
+<section id="plots">
 <h3>Plots<a class="headerlink" href="#plots" title="Permalink to this headline">¶</a></h3>
 <p>We’ll make two plots. The plotting is done with
 <code class="docutils literal notranslate"><span class="pre">`matplotlib</span></code> &lt;<a class="reference external" href="http://matplotlib.org">http://matplotlib.org</a>&gt;`__, and does not involve Astropy
@@ -828,8 +829,8 @@ rotationally modulated will stick out between -1 and +1.</p>
 </div>
 <p><span class="outputnumrole">Out[33]:</span></p>
 <img alt="../_images/UVES_89_0.png" src="../_images/UVES_89_0.png" />
-</div>
-<div class="section" id="id7">
+</section>
+<section id="id7">
 <h3>Exercise<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
 <p>The plot above shows only a single spectrum. Plot all spectra into a
 single plot and introduce a sensible offset between them, so that we can
@@ -953,8 +954,8 @@ while <code class="docutils literal notranslate"><span class="pre">x</span></cod
 </div>
 <p><span class="outputnumrole">Out[38]:</span></p>
 <img alt="../_images/UVES_101_0.png" src="../_images/UVES_101_0.png" />
-</div>
-<div class="section" id="id8">
+</section>
+<section id="id8">
 <h3>Exercise<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
 <p>Understand the code for the last plot. Some of the commands used are
 already pretty advanced stuff. Remember, any internet search engine can
@@ -962,9 +963,9 @@ be your friend.</p>
 <p>Clearly, we didn’t develop this code for scratch. The <a class="reference external" href="http://matplotlib.org/gallery.html">matplotlib
 gallery</a> is our preferred place
 to look for plotting solutions.</p>
-</div>
-</div>
-<div class="section" id="contributing-to-astropy">
+</section>
+</section>
+<section id="contributing-to-astropy">
 <h2>Contributing to Astropy<a class="headerlink" href="#contributing-to-astropy" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="http://astropy.org">Astropy</a> is an open-source and
 community-developed Python package, which means that is only as good as
@@ -992,8 +993,8 @@ version or Linux version).</p>
 <div id="spacer"></div>
 
 <a href="../_static/UVES/UVES.ipynb"><button id="download">Download tutorial notebook</button></a>
-<a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/UVES/UVES.ipynb"><button id="binder">Interactive tutorial notebook</button></a></div>
-</div>
+<a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/UVES/UVES.ipynb"><button id="binder">Interactive tutorial notebook</button></a></section>
+</section>
 
 </div>
       </div>

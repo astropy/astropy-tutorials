@@ -1,0 +1,767 @@
+.. meta::
+    :keywords: filterTutorials, filterCoordinates, filterOop, filterAstroquery, filterGaia
+
+.. raw:: html
+
+    <a href="../_static/3-Coordinates-Velocities/3-Coordinates-Velocities.ipynb"><button id="download">Download tutorial notebook</button></a>
+    <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/3-Coordinates-Velocities/3-Coordinates-Velocities.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
+
+    <div id="spacer"></div>
+
+.. meta::
+    :keywords: filterTutorials, 
+
+.. role:: inputnumrole
+.. role:: outputnumrole
+
+.. _3-Coordinates-Velocities:
+
+Astronomical Coordinates 3: Working with Velocity Data in astropy.coordinates
+=============================================================================
+
+Authors
+-------
+
+Adrian Price-Whelan
+
+Learning Goals
+--------------
+
+-  Introduce how to represent and transform velocity data in
+   ``SkyCoord`` objects
+-  Demonstrate how to predict the position of a star at a time using its
+   proper motion
+
+Keywords
+--------
+
+coordinates, OOP, astroquery, gaia
+
+Summary
+-------
+
+In the previous tutorial in this series, we showed how astronomical
+*positional* coordinates can be represented and transformed in Python
+using the ``SkyCoord`` object
+(`docs <https://docs.astropy.org/en/stable/coordinates/skycoord.html>`__).
+Many sources, especially stars (thanks to the Gaia mission), have
+measured velocities or measured components of their velocity (e.g., just
+proper motion, or just radial velocity).
+
+In this tutorial, we will explore how the ``astropy.coordinates``
+package can be used to represent and transform astronomical coordinates
+that have associated velocity data. You may find it helpful to keep `the
+Astropy documentation for the coordinates
+package <http://docs.astropy.org/en/stable/coordinates/index.html>`__
+open alongside this tutorial for reference or additional reading. In the
+text below, you may also see some links that look like
+(`docs <http://docs.astropy.org/en/stable/coordinates/index.html>`__).
+These links will take you to parts of the documentation that are
+directly relevant to the cells from which they link.
+
+*Note: This is the 3rd tutorial in a series of tutorials about
+astropy.coordinates. If you are new to astropy.coordinates, you may want
+to start from the beginning or an earlier tutorial.* - `Previous
+tutorial: Astronomical Coordinates 2 - Transforming Coordinate Systems
+and Representations¶ <2-Coordinates-Transforms>`__ - `Next tutorial:
+Astronomical Coordinates 4 - Cross-matching
+Catalogs <4-Coordinates-Crossmatch>`__
+
+Imports
+-------
+
+We start by importing some general packages we will need below:
+
+
+:inputnumrole:`In[1]:`
+
+
+.. code:: python
+
+    import warnings
+    
+    import matplotlib.pyplot as plt
+    %matplotlib inline
+    import numpy as np
+    
+    from astropy import units as u
+    from astropy.coordinates import SkyCoord, Distance, Galactic
+    import astropy.coordinates as coord
+    from astropy.io import fits
+    from astropy.table import QTable
+    from astropy.time import Time
+    from astropy.utils.data import download_file
+    from astropy.wcs import WCS
+    
+    from astroquery.gaia import Gaia
+
+
+:outputnumrole:`Out[1]:`
+
+
+.. parsed-literal::
+
+    Created TAP+ (v20200428.1) - Connection:
+    	Host: gea.esac.esa.int
+    	Use HTTPS: True
+    	Port: 443
+    	SSL Port: 443
+    Created TAP+ (v20200428.1) - Connection:
+    	Host: gea.esac.esa.int
+    	Use HTTPS: True
+    	Port: 443
+    	SSL Port: 443
+
+
+More Than Sky Positions: Including Velocity Data in ``SkyCoord``
+----------------------------------------------------------------
+
+As we have seen in the previous tutorials, the ``SkyCoord`` object can
+be used to store scalars or arrays of positional coordinate information
+and supports transforming between different coordinate frames and
+representations. But ``astropy.coordinates`` also supports representing
+and transforming *velocity* information along with positions
+(`docs <http://docs.astropy.org/en/latest/coordinates/velocities.html>`__).
+
+Passing Velocity Data into ``SkyCoord``
+---------------------------------------
+
+Velocity components are passed in to ``SkyCoord`` in the same way that
+positional components are specified: As arguments to the ``SkyCoord``
+class. For example, to create a ``SkyCoord`` to represent a sky position
+and a proper motion in the (default) ICRS coordinate frame, in addition
+to the position components ``ra``, ``dec``, we can pass in values for
+the proper motion components ``pm_ra_cosdec``, ``pm_dec`` (“pm” for
+“proper motion”):
+
+
+:inputnumrole:`In[2]:`
+
+
+.. code:: python
+
+    SkyCoord(
+        ra=10*u.deg, 
+        dec=20*u.deg,
+        pm_ra_cosdec=1*u.mas/u.yr,
+        pm_dec=2*u.mas/u.yr)
+
+
+:outputnumrole:`Out[2]:`
+
+
+
+
+.. parsed-literal::
+
+    <SkyCoord (ICRS): (ra, dec) in deg
+        (10., 20.)
+     (pm_ra_cosdec, pm_dec) in mas / yr
+        (1., 2.)>
+
+
+
+Here, you may notice that the proper motion in right ascension has
+“cosdec” in the name: This is to explicitly note that the input here is
+expected to be the proper motion scaled by the cosine of the
+declination, which accounts for the fact that a change in longitude
+(right ascension) has different physical length at different latitudes
+(declinations).
+
+Like the examples in previous tutorials demonstrated for positional
+coordinates, we can also create an array-valued ``SkyCoord`` object by
+passing in arrays of data for all of the components:
+
+
+:inputnumrole:`In[3]:`
+
+
+.. code:: python
+
+    SkyCoord(
+        ra=np.linspace(0, 10, 5)*u.deg, 
+        dec=np.linspace(5, 20, 5)*u.deg,
+        pm_ra_cosdec=np.linspace(-5, 5, 5)*u.mas/u.yr,
+        pm_dec=np.linspace(-5, 5, 5)*u.mas/u.yr)
+
+
+:outputnumrole:`Out[3]:`
+
+
+
+
+.. parsed-literal::
+
+    <SkyCoord (ICRS): (ra, dec) in deg
+        [( 0. ,  5.  ), ( 2.5,  8.75), ( 5. , 12.5 ), ( 7.5, 16.25),
+         (10. , 20.  )]
+     (pm_ra_cosdec, pm_dec) in mas / yr
+        [(-5. , -5. ), (-2.5, -2.5), ( 0. ,  0. ), ( 2.5,  2.5), ( 5. ,  5. )]>
+
+
+
+However, for some of the examples below we will continue to use scalar
+values for brevity.
+
+You can also specify radial velocity data with the ``radial_velocity``
+argument:
+
+
+:inputnumrole:`In[4]:`
+
+
+.. code:: python
+
+    velocity_coord = SkyCoord(
+        ra=10*u.deg, 
+        dec=20*u.deg,
+        pm_ra_cosdec=1*u.mas/u.yr,
+        pm_dec=2*u.mas/u.yr,
+        radial_velocity=100*u.km/u.s)
+    velocity_coord
+
+
+:outputnumrole:`Out[4]:`
+
+
+
+
+.. parsed-literal::
+
+    <SkyCoord (ICRS): (ra, dec) in deg
+        (10., 20.)
+     (pm_ra_cosdec, pm_dec, radial_velocity) in (mas / yr, mas / yr, km / s)
+        (1., 2., 100.)>
+
+
+
+The component data can then be accessed using the same names used to
+pass in the velocity components:
+
+
+:inputnumrole:`In[5]:`
+
+
+.. code:: python
+
+    velocity_coord.pm_ra_cosdec
+
+
+:outputnumrole:`Out[5]:`
+
+
+
+
+.. math::
+
+    1 \; \mathrm{\frac{mas}{yr}}
+
+
+
+
+:inputnumrole:`In[6]:`
+
+
+.. code:: python
+
+    velocity_coord.radial_velocity
+
+
+:outputnumrole:`Out[6]:`
+
+
+
+
+.. math::
+
+    100 \; \mathrm{\frac{km}{s}}
+
+
+
+A ``SkyCoord`` object with velocity data can be transformed to other
+frames just like the position-only coordinate objects we used in the
+previous tutorials:
+
+
+:inputnumrole:`In[7]:`
+
+
+.. code:: python
+
+    velocity_coord_gal = velocity_coord.transform_to(Galactic())
+    velocity_coord_gal
+
+
+:outputnumrole:`Out[7]:`
+
+
+
+
+.. parsed-literal::
+
+    <SkyCoord (Galactic): (l, b) in deg
+        (119.26936774, -42.79039286)
+     (pm_l_cosb, pm_b, radial_velocity) in (mas / yr, mas / yr, km / s)
+        (1.11917063, 1.93583499, 100.)>
+
+
+
+Note that, like the position components, which change from
+``ra``,\ ``dec`` to ``l``,\ ``b``, the proper motion component names
+have changed to reflect naming conventions for the component names in a
+given frame: ``pm_ra_cosdec`` and ``pm_dec`` have become ``pm_l_cosb``
+and ``pm_b``:
+
+
+:inputnumrole:`In[8]:`
+
+
+.. code:: python
+
+    velocity_coord_gal.pm_l_cosb
+
+
+:outputnumrole:`Out[8]:`
+
+
+
+
+.. math::
+
+    1.1191706 \; \mathrm{\frac{mas}{yr}}
+
+
+
+
+:inputnumrole:`In[9]:`
+
+
+.. code:: python
+
+    velocity_coord_gal.pm_b
+
+
+:outputnumrole:`Out[9]:`
+
+
+
+
+.. math::
+
+    1.935835 \; \mathrm{\frac{mas}{yr}}
+
+
+
+An important caveat to note when transforming a ``SkyCoord`` object with
+velocity data is that some reference frames require knowing the
+distances, or the full velocity vectors (i.e. proper motion components
+and radial velocity) in order to transform the velocities correctly. For
+example, a ``SkyCoord`` with only sky position and proper motion data
+cannot be transformed to a frame with a positional or velocity offset,
+such as the ``Galactocentric`` frame
+(`docs <https://docs.astropy.org/en/stable/coordinates/galactocentric.html>`__)
+
+
+:inputnumrole:`In[10]:`
+
+
+.. code:: python
+
+    test_coord = SkyCoord(
+        ra=10*u.deg, 
+        dec=20*u.deg,
+        pm_ra_cosdec=1*u.mas/u.yr,
+        pm_dec=2*u.mas/u.yr)
+    
+    # This cell will raise an exception - this is expected!
+    test_coord.transform_to(coord.Galactocentric())
+
+
+:outputnumrole:`Out[10]:`
+
+
+::
+
+
+    
+
+    ConvertErrorTraceback (most recent call last)
+
+    <ipython-input-10-b9856df12370> in <module>
+          6 
+          7 # This cell will raise an exception - this is expected!
+    ----> 8 test_coord.transform_to(coord.Galactocentric())
+    
+
+    ~/project/venv/lib/python3.7/site-packages/astropy/coordinates/sky_coordinate.py in transform_to(self, frame, merge_attributes)
+        617         # Do the transformation, returning a coordinate frame of the desired
+        618         # final type (not generic).
+    --> 619         new_coord = trans(self.frame, generic_frame)
+        620 
+        621         # Finally make the new SkyCoord object from the `new_coord` and
+
+
+    ~/project/venv/lib/python3.7/site-packages/astropy/coordinates/transformations.py in __call__(self, fromcoord, toframe)
+       1421 
+       1422             curr_toframe = t.tosys(**frattrs)
+    -> 1423             curr_coord = t(curr_coord, curr_toframe)
+       1424 
+       1425         # this is safe even in the case where self.transforms is empty, because
+
+
+    ~/project/venv/lib/python3.7/site-packages/astropy/coordinates/transformations.py in __call__(self, fromcoord, toframe)
+       1239     def __call__(self, fromcoord, toframe):
+       1240 
+    -> 1241         M, vec = self.transform_func(fromcoord, toframe)
+       1242         newrep = self._apply_transform(fromcoord, M, vec)
+       1243 
+
+
+    ~/project/venv/lib/python3.7/site-packages/astropy/coordinates/builtin_frames/galactocentric.py in icrs_to_galactocentric(icrs_coord, galactocentric_frame)
+        577 @frame_transform_graph.transform(AffineTransform, ICRS, Galactocentric)
+        578 def icrs_to_galactocentric(icrs_coord, galactocentric_frame):
+    --> 579     _check_coord_repr_diff_types(icrs_coord)
+        580     return get_matrix_vectors(galactocentric_frame)
+        581 
+
+
+    ~/project/venv/lib/python3.7/site-packages/astropy/coordinates/builtin_frames/galactocentric.py in _check_coord_repr_diff_types(c)
+        561 def _check_coord_repr_diff_types(c):
+        562     if isinstance(c.data, r.UnitSphericalRepresentation):
+    --> 563         raise ConvertError("Transforming to/from a Galactocentric frame "
+        564                            "requires a 3D coordinate, e.g. (angle, angle, "
+        565                            "distance) or (x, y, z).")
+
+
+    ConvertError: Transforming to/from a Galactocentric frame requires a 3D coordinate, e.g. (angle, angle, distance) or (x, y, z).
+
+
+Evolving Coordinate Positions Between Epochs
+--------------------------------------------
+
+For nearby or fast-moving stars, a star’s position could change
+appreciably between two well-spaced observations of the source. For such
+cases, it might be necessary to compute the position of the star at a
+given time using the proper motion or velocity of the star. Let’s
+demonstrate this idea by comparing the sky position of a source as
+measured by `Gaia Data Release
+2 <https://www.cosmos.esa.int/web/gaia/dr2>`__ (given at the epoch
+J2015.5) to an image near this source from the Digitized Sky Survey
+(DSS; digital scans of photographic plates observed in the 1950s).
+
+From previous astrometric measurements, we know that the star HD 219829
+has very large proper motion: Close to 0.5 arcsec/year! Between the DSS
+and *Gaia*, we therefore expect that the position of the star has
+changed by about 0.5 arcmin. Let’s see if this is the case!
+
+To start, we will query the *Gaia* catalog to retrieve data for this
+star (skip the cell below if you do not have an internet connection - we
+have provided the table locally as well). We use a large search radius
+so many sources will be returned
+
+
+:inputnumrole:`In[11]:`
+
+
+.. code:: python
+
+    # Skip this cell if you are not connected to the internet
+    gaia_tbl = Gaia.query_object(SkyCoord.from_name('HD 219829'), 
+                                 radius=1*u.arcmin)
+
+
+:inputnumrole:`In[12]:`
+
+
+.. code:: python
+
+    # the .read() below produces some warnings that we can safely ignore
+    with warnings.catch_warnings(): 
+        warnings.simplefilter('ignore', UserWarning)
+        
+        gaia_tbl = QTable.read('HD_219829_query_results.ecsv')
+
+We know that HD 219829 will be the brightest source in this small
+region, so we can extract the row with the smallest G-band magnitude.
+Let’s check the proper motion values for this source to make sure that
+they are large:
+
+
+:inputnumrole:`In[13]:`
+
+
+.. code:: python
+
+    hd219829_row = gaia_tbl[gaia_tbl['phot_g_mean_mag'].argmin()]
+    hd219829_row['source_id', 'pmra', 'pmdec']
+
+
+:outputnumrole:`Out[13]:`
+
+
+
+
+.. raw:: html
+
+    <i>Row index=2</i>
+    <table id="table139647426137872">
+    <thead><tr><th>source_id</th><th>pmra</th><th>pmdec</th></tr></thead>
+    <thead><tr><th></th><th>mas / yr</th><th>mas / yr</th></tr></thead>
+    <thead><tr><th>int64</th><th>float64</th><th>float64</th></tr></thead>
+    <tr><td>2661015540210781568</td><td>483.4165901889734</td><td>-114.8633971841528</td></tr>
+    </table>
+
+
+
+Indeed, it looks like this is our source! Let’s construct a ``SkyCoord``
+object for this source using the data from the *Gaia* archive:
+
+*Note about the Gaia catalog proper motion column names: The names in
+the Gaia archive and other repositories containing Gaia data give Right
+Ascension proper motion values simply as “pmra”. These components
+implicitly contain the ``cos(dec)`` term, so we do*\ **not**\ *have to
+modify these values in order to pass them in to ``SkyCoord`` as
+``pm_ra_cosdec``*
+
+
+:inputnumrole:`In[14]:`
+
+
+.. code:: python
+
+    hd219829_coord = SkyCoord(
+        ra=hd219829_row['ra'], 
+        dec=hd219829_row['dec'],
+        distance=Distance(parallax=hd219829_row['parallax']),
+        pm_ra_cosdec=hd219829_row['pmra'],
+        pm_dec=hd219829_row['pmdec'],
+        obstime=Time(hd219829_row['ref_epoch'], format='jyear'))
+    
+    hd219829_coord
+
+
+:outputnumrole:`Out[14]:`
+
+
+
+
+.. parsed-literal::
+
+    <SkyCoord (ICRS): (ra, dec, distance) in (deg, deg, pc)
+        (349.72896716, 5.40511585, 34.47896069)
+     (pm_ra_cosdec, pm_dec) in mas / yr
+        (483.41659019, -114.86339718)>
+
+
+
+We now have a ``SkyCoord`` representation of the position and proper
+motion of the star HD 219829 as measured by *Gaia* and reported at the
+epoch J2015.5. What does this mean exactly? *Gaia* actually measures the
+(time-dependent) position of a star every time it scans the part of the
+sky that contains the source, and this is how *Gaia* is able to measure
+proper motions of stars. However, if every star is moving and changing
+its sky positions, how do we ever talk about “the sky position” of a
+star as opposed to “the sky trajectory of a star”?! The key is that
+catalogs often only report the position of a source at some reference
+epoch. For a survey that only observes the sky once or a few times
+(e.g., SDSS or 2MASS), this reference epoch might be “the time that the
+star was observed.” But for a mission like *Gaia*, which scans the sky
+many times, they perform astrometric fits to the individual position
+measurements, which allow them to measure the parallax, proper motion,
+and the reference position at a reference time for each source. For
+*Gaia* data release 2, the reference time is J2015.5, and the sky
+positions (and other quantities) reported in the catalog for each source
+are at this epoch.
+
+In ``SkyCoord``, we specify the “epoch” of an observation using the
+``obstime`` argument, as we did above. Now that we have a coordinate
+object for HD 219829, let’s now compare the position of the star as
+measured by *Gaia* to its apparent position in an image from the DSS.
+Let’s now query the DSS to retrieve a FITS image of the field around
+this star, using the STSCI DSS image cutout service. Skip the cell below
+if you do not have an internet connection (we have provided the image
+locally as well):
+
+
+:inputnumrole:`In[15]:`
+
+
+.. code:: python
+
+    # Skip this cell if you are not connected to the internet
+    dss_cutout_filename = download_file(
+        f"http://archive.stsci.edu/cgi-bin/dss_search?"
+        f"f=FITS&ra={hd219829_coord.ra.degree}&dec={hd219829_coord.dec.degree}"
+        f"&width=4&height=4")  # width/height in arcmin
+
+
+:inputnumrole:`In[16]:`
+
+
+.. code:: python
+
+    dss_cutout_filename = 'dss_hd219829.fits'
+
+We can now load the FITS image of the cutout and use
+``astropy.visualization`` to display the image using its World
+Coordinate System (WCS) info
+(`docs <http://docs.astropy.org/en/latest/visualization/wcsaxes/index.html>`__).
+By passing in the WCS information (included in the FITS cutout header),
+we can over-plot a marker for the *Gaia*-measured sky position of HD
+219829:
+
+
+:inputnumrole:`In[17]:`
+
+
+.. code:: python
+
+    hdu = fits.open(dss_cutout_filename)[0]
+    wcs = WCS(hdu.header)
+    
+    fig, ax = plt.subplots(1, 1, figsize=(8, 8), 
+                           subplot_kw=dict(projection=wcs))
+    ax.imshow(hdu.data, origin='lower', cmap='Greys_r')
+    ax.set_xlabel('RA')
+    ax.set_ylabel('Dec')
+    ax.set_autoscale_on(False)
+    
+    ax.scatter(hd219829_coord.ra.degree,
+               hd219829_coord.dec.degree,
+               s=500,
+               transform=ax.get_transform('world'),
+               facecolor='none', linewidth=2, color='tab:red')
+
+
+:outputnumrole:`Out[17]:`
+
+
+
+
+.. parsed-literal::
+
+    <matplotlib.collections.PathCollection at 0x7f02317d1f50>
+
+
+
+
+.. image:: nboutput/3-Coordinates-Velocities_30_1.png
+
+
+
+The brighest star (as observed by DSS) in this image is our target, and
+the red circle is where *Gaia* observed this star. As we excpected, it
+has moved quite a bit since the 1950’s! We can account for this motion
+and predict the position of the star at around the time the DSS plate
+was observed. Let’s assume that this plate was observed in 1950 exactly
+(this is not strictly correct, but should get us close enough).
+
+To account for the proper motion of the source and evolve the position
+to a new time, we can use the ``SkyCoord.apply_space_motion()`` method
+(`docs <http://docs.astropy.org/en/latest/api/astropy.coordinates.SkyCoord.html#astropy.coordinates.SkyCoord.apply_space_motion>`__).
+Because we defined the ``obstime`` when we defined the coordinate object
+for HD 219829, for example:
+
+
+:inputnumrole:`In[18]:`
+
+
+.. code:: python
+
+    hd219829_coord.obstime
+
+
+:outputnumrole:`Out[18]:`
+
+
+
+
+.. parsed-literal::
+
+    <Time object: scale='tt' format='jyear' value=2015.5>
+
+
+
+We can now use ``apply_space_motion()`` by passing in a new time,
+``new_obstime``, to compute the coordinates at:
+
+
+:inputnumrole:`In[19]:`
+
+
+.. code:: python
+
+    # this produces some warnings that we can safely ignore
+    with warnings.catch_warnings(): 
+        warnings.simplefilter('ignore', UserWarning)
+        
+        hd219829_coord_1950 = hd219829_coord.apply_space_motion(
+            new_obstime=Time('J1950'))
+
+Let’s now plot our predicted position for this source as it would appear
+in 1950 based on the *Gaia* position and proper motion:
+
+
+:inputnumrole:`In[20]:`
+
+
+.. code:: python
+
+    fig, ax = plt.subplots(1, 1, figsize=(8, 8), 
+                           subplot_kw=dict(projection=wcs))
+    ax.imshow(hdu.data, origin='lower', cmap='Greys_r')
+    ax.set_xlabel('RA')
+    ax.set_ylabel('Dec')
+    ax.set_autoscale_on(False)
+    
+    ax.scatter(hd219829_coord.ra.degree,
+               hd219829_coord.dec.degree,
+               s=500,
+               transform=ax.get_transform('world'),
+               facecolor='none', linewidth=2, color='tab:red')
+    
+    # Plot the predicted (past) position:
+    ax.scatter(hd219829_coord_1950.ra.degree,
+               hd219829_coord_1950.dec.degree,
+               s=500,
+               transform=ax.get_transform('world'),
+               facecolor='none', linewidth=2, color='tab:blue')
+
+
+:outputnumrole:`Out[20]:`
+
+
+
+
+.. parsed-literal::
+
+    <matplotlib.collections.PathCollection at 0x7f02315a0910>
+
+
+
+
+.. image:: nboutput/3-Coordinates-Velocities_36_1.png
+
+
+
+The red circle is the same as in the previous image and shows the
+position of the source in the *Gaia* catalog (in 2015.5). The blue
+circle shows our prediction for the position of the source in 1950 -
+this looks much closer to where the star is in the DSS image!
+
+In this tutorial, we have introduced how to store and transform velocity
+data along with positional data in ``astropy.coordinates``. We also
+demonstrated how to use the velocity of a source to predict its position
+at an earlier or later time.
+
+
+
+
+
+.. raw:: html
+
+    <div id="spacer"></div>
+
+    <a href="../_static/3-Coordinates-Velocities/3-Coordinates-Velocities.ipynb"><button id="download">Download tutorial notebook</button></a>
+    <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/3-Coordinates-Velocities/3-Coordinates-Velocities.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
+

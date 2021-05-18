@@ -2,7 +2,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta charset="utf-8" /><meta content="filterTutorials, filterFits, filterFileInputOutput, filterTable, filterNumpy, filterMatplotlib, filterHistogram" name="keywords" />
+    <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta content="filterTutorials, filterFits, filterFileInputOutput, filterTable, filterNumpy, filterMatplotlib, filterHistogram" name="keywords" />
 <meta content="filterTutorials," name="keywords" />
 
     <title>Viewing and manipulating data from FITS tables &#8212; astropy-tutorials v3.0.dev</title>
@@ -106,13 +107,13 @@
   <a href="../_static/FITS-tables/FITS-tables.ipynb"><button id="download">Download tutorial notebook</button></a>
 <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/FITS-tables/FITS-tables.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
 
-<div id="spacer"></div><div class="section" id="viewing-and-manipulating-data-from-fits-tables">
+<div id="spacer"></div><section id="viewing-and-manipulating-data-from-fits-tables">
 <span id="fits-tables"></span><h1>Viewing and manipulating data from FITS tables<a class="headerlink" href="#viewing-and-manipulating-data-from-fits-tables" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="authors">
+<section id="authors">
 <h2>Authors<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a></h2>
 <p>Lia Corrales, Kris Stern</p>
-</div>
-<div class="section" id="learning-goals">
+</section>
+<section id="learning-goals">
 <h2>Learning Goals<a class="headerlink" href="#learning-goals" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>Download a FITS table file from a URL</p></li>
@@ -120,12 +121,12 @@
 <li><p>Make a 2D histogram with the table data</p></li>
 <li><p>Close the FITS file after use</p></li>
 </ul>
-</div>
-<div class="section" id="keywords">
+</section>
+<section id="keywords">
 <h2>Keywords<a class="headerlink" href="#keywords" title="Permalink to this headline">¶</a></h2>
 <p>FITS, file input/output, table, numpy, matplotlib, histogram</p>
-</div>
-<div class="section" id="summary">
+</section>
+<section id="summary">
 <h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
 <p>This tutorial demonstrates the use of <code class="docutils literal notranslate"><span class="pre">astropy.utils.data</span></code> to download
 a data file, then uses <code class="docutils literal notranslate"><span class="pre">astropy.io.fits</span></code> and <code class="docutils literal notranslate"><span class="pre">astropy.table</span></code> to open
@@ -159,8 +160,8 @@ information.</p>
                                <span class="n">cache</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="opening-the-fits-file-and-viewing-table-contents">
+</section>
+<section id="opening-the-fits-file-and-viewing-table-contents">
 <h2>Opening the FITS file and viewing table contents<a class="headerlink" href="#opening-the-fits-file-and-viewing-table-contents" title="Permalink to this headline">¶</a></h2>
 <p>Since the file is big, let’s open it with <code class="docutils literal notranslate"><span class="pre">memmap=True</span></code> to prevent RAM
 storage issues.</p>
@@ -233,7 +234,7 @@ cell with the table as the last line:</p>
 </div>
 <p><span class="outputnumrole">Out[8]:</span></p>
 <i>Table length=483964</i>
-<table id="table140486417983952" class="table-striped table-bordered table-condensed">
+<table id="table140119318206864" class="table-striped table-bordered table-condensed">
 <thead><tr><th>time</th><th>ccd_id</th><th>node_id</th><th>expno</th><th>chipx</th><th>chipy</th><th>tdetx</th><th>tdety</th><th>detx</th><th>dety</th><th>x</th><th>y</th><th>pha</th><th>pha_ro</th><th>energy</th><th>pi</th><th>fltgrade</th><th>grade</th><th>status [32]</th></tr></thead>
 <thead><tr><th>float64</th><th>int16</th><th>int16</th><th>int32</th><th>int16</th><th>int16</th><th>int16</th><th>int16</th><th>float32</th><th>float32</th><th>float32</th><th>float32</th><th>int32</th><th>int32</th><th>float32</th><th>int32</th><th>int16</th><th>int16</th><th>bool</th></tr></thead>
 <tr><td>238623220.9093583</td><td>3</td><td>3</td><td>68</td><td>920</td><td>8</td><td>5124</td><td>3981</td><td>5095.641</td><td>4138.995</td><td>4168.0723</td><td>5087.772</td><td>3548</td><td>3534</td><td>13874.715</td><td>951</td><td>16</td><td>4</td><td>False .. False</td></tr>
@@ -266,8 +267,8 @@ a sense for the spectrum (folded with the detector’s efficiency).</p>
 </div>
 <p><span class="outputnumrole">Out[9]:</span></p>
 <img alt="../_images/FITS-tables_18_0.png" src="../_images/FITS-tables_18_0.png" />
-</div>
-<div class="section" id="making-a-2d-histogram-with-some-table-data">
+</section>
+<section id="making-a-2d-histogram-with-some-table-data">
 <h2>Making a 2D histogram with some table data<a class="headerlink" href="#making-a-2d-histogram-with-some-table-data" title="Permalink to this headline">¶</a></h2>
 <p>We’ll make an image by binning the x and y coordinates of the events
 into a 2D histogram.</p>
@@ -283,7 +284,7 @@ ids 0, 1, 2, and 3.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">434858</span>
 </pre></div>
 </div>
-<div class="section" id="method-1-use-numpy-to-make-a-2d-histogram-and-imshow-to-display-it">
+<section id="method-1-use-numpy-to-make-a-2d-histogram-and-imshow-to-display-it">
 <h3>Method 1: Use numpy to make a 2D histogram and imshow to display it<a class="headerlink" href="#method-1-use-numpy-to-make-a-2d-histogram-and-imshow-to-display-it" title="Permalink to this headline">¶</a></h3>
 <p>This method allows us to create an image without stretching:</p>
 <p><span class="inputnumrole">In[11]:</span></p>
@@ -307,8 +308,8 @@ ids 0, 1, 2, and 3.</p>
 </pre></div>
 </div>
 <img alt="../_images/FITS-tables_25_1.png" src="../_images/FITS-tables_25_1.png" />
-</div>
-<div class="section" id="method-2-use-hist2d-with-a-log-normal-color-scheme">
+</section>
+<section id="method-2-use-hist2d-with-a-log-normal-color-scheme">
 <h3>Method 2: Use hist2d with a log-normal color scheme<a class="headerlink" href="#method-2-use-hist2d-with-a-log-normal-color-scheme" title="Permalink to this headline">¶</a></h3>
 <p><span class="inputnumrole">In[12]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">NBINS</span> <span class="o">=</span> <span class="p">(</span><span class="mi">100</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
@@ -327,9 +328,9 @@ ids 0, 1, 2, and 3.</p>
 </pre></div>
 </div>
 <img alt="../_images/FITS-tables_27_1.png" src="../_images/FITS-tables_27_1.png" />
-</div>
-</div>
-<div class="section" id="close-the-fits-file">
+</section>
+</section>
+<section id="close-the-fits-file">
 <h2>Close the FITS file<a class="headerlink" href="#close-the-fits-file" title="Permalink to this headline">¶</a></h2>
 <p>When you’re done using a FITS file, it’s often a good idea to close it.
 That way you can be sure it won’t continue using up excess memory or
@@ -339,8 +340,8 @@ close Python, but you never know how long that might be…)</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">hdu_list</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="exercises">
+</section>
+<section id="exercises">
 <h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
 <p>Make a scatter plot of the same data you histogrammed above. The
 <a class="reference external" href="http://matplotlib.org/api/pyplot_api.html#matplotlib.pyplot.scatter">plt.scatter</a>
@@ -358,8 +359,8 @@ How does the image change with different energy ranges?</p>
 <div id="spacer"></div>
 
 <a href="../_static/FITS-tables/FITS-tables.ipynb"><button id="download">Download tutorial notebook</button></a>
-<a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/FITS-tables/FITS-tables.ipynb"><button id="binder">Interactive tutorial notebook</button></a></div>
-</div>
+<a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/FITS-tables/FITS-tables.ipynb"><button id="binder">Interactive tutorial notebook</button></a></section>
+</section>
 
 </div>
       </div>

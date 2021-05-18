@@ -1,0 +1,962 @@
+.. meta::
+    :keywords: filterTutorials, filterCoordinates, filterOop, filterAstroquery, filterGaia
+
+.. raw:: html
+
+    <a href="../_static/1-Coordinates-Intro/1-Coordinates-Intro.ipynb"><button id="download">Download tutorial notebook</button></a>
+    <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/1-Coordinates-Intro/1-Coordinates-Intro.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
+
+    <div id="spacer"></div>
+
+.. meta::
+    :keywords: filterTutorials, 
+
+.. role:: inputnumrole
+.. role:: outputnumrole
+
+.. _1-Coordinates-Intro:
+
+Astronomical Coordinates 1: Getting Started with astropy.coordinates
+====================================================================
+
+Authors
+-------
+
+Adrian Price-Whelan
+
+Learning Goals
+--------------
+
+-  Create ``astropy.coordinates.SkyCoord`` objects using coordinate data
+   and object names
+-  Use SkyCoord objects to become familiar with object oriented
+   programming (OOP)
+-  Use a ``SkyCoord`` object to query the *Gaia* archive using
+   ``astroquery``
+-  Output coordinate data in different string representations
+-  Demonstrate working with 3D sky coordinates (including distance
+   information for objects)
+
+Keywords
+--------
+
+coordinates, OOP, astroquery, gaia
+
+Summary
+-------
+
+Astronomers use a wide variety of coordinate systems and formats to
+represent sky coordinates of celestial objects. For example, you may
+have seen terms like “right ascension” and “declination” or “galactic
+latitude and longitude,” and you may have seen angular coordinate
+components represented as “0h39m15.9s,” “00:39:15.9,” or 9.81625º. The
+subpackage ``astropy.coordinates`` provides tools for representing the
+coordinates of objects and transforming them between different systems.
+
+In this tutorial, we will explore how the ``astropy.coordinates``
+package can be used to work with astronomical coordinates. You may find
+it helpful to keep `the Astropy documentation for the coordinates
+package <http://docs.astropy.org/en/stable/coordinates/index.html>`__
+open alongside this tutorial for reference or additional reading. In the
+text below, you may also see some links that look like
+(`docs <http://docs.astropy.org/en/stable/coordinates/index.html>`__).
+These links will take you to parts of the documentation that are
+directly relevant to the cells from which they link.
+
+*Note: This is the 1st tutorial in a series of tutorials about
+astropy.coordinates.* - `Next tutorial: Astronomical Coordinates 2:
+Transforming Coordinate Systems and
+Representations <2-Coordinates-Transforms>`__
+
+Imports
+-------
+
+We start by importing some packages that we will need below:
+
+
+:inputnumrole:`In[1]:`
+
+
+.. code:: python
+
+    import matplotlib.pyplot as plt
+    %matplotlib inline
+    import numpy as np
+    
+    from astropy import units as u
+    from astropy.coordinates import SkyCoord, Distance
+    from astropy.io import fits
+    from astropy.table import QTable
+    from astropy.utils.data import download_file
+    
+    from astroquery.gaia import Gaia
+    Gaia.ROW_LIMIT = 10000  # Set the row limit for returned data
+
+
+:outputnumrole:`Out[1]:`
+
+
+.. parsed-literal::
+
+    Created TAP+ (v20200428.1) - Connection:
+    	Host: gea.esac.esa.int
+    	Use HTTPS: True
+    	Port: 443
+    	SSL Port: 443
+    Created TAP+ (v20200428.1) - Connection:
+    	Host: gea.esac.esa.int
+    	Use HTTPS: True
+    	Port: 443
+    	SSL Port: 443
+
+
+Representing On-sky Positions with ``astropy.coordinates``
+----------------------------------------------------------
+
+In Astropy, the most common way of representing and working with sky
+coordinates is to use the ``SkyCoord`` object
+(`docs <https://docs.astropy.org/en/stable/coordinates/skycoord.html>`__).
+A ``SkyCoord`` can be created directly from angles or arrays of angles
+with associated units, as demonstrated below.
+
+To get started, let’s assume that we want to create a ``SkyCoord``
+object for the center of the open star cluster NGC 188 so that later we
+can query and retrieve stars that might be members of the cluster. Let’s
+also assume, for now, that we already know the sky coordinates of the
+cluster to be (12.11, 85.26) degrees in the ICRS coordinate frame. The
+ICRS — sometimes referred to as “equatorial” or “J2000” coordinates
+(`more info about the ICRS <https://arxiv.org/abs/astro-ph/0602086>`__)
+— is currently the most common astronomical coordinate frame for stellar
+or extragalactic astronomy, and is the default coordinate frame for
+``SkyCoord``. Since we already know the ICRS position of NGC 188 (see
+above), we can create a ``SkyCoord`` object for the cluster by passing
+the data in to the ``SkyCoord`` initializer:
+
+
+:inputnumrole:`In[2]:`
+
+
+.. code:: python
+
+    ngc188_center = SkyCoord(12.11*u.deg, 85.26*u.deg)
+    ngc188_center
+
+
+:outputnumrole:`Out[2]:`
+
+
+
+
+.. parsed-literal::
+
+    <SkyCoord (ICRS): (ra, dec) in deg
+        (12.11, 85.26)>
+
+
+
+Even though the default frame is ICRS, it is generally recommended to
+explicitly specify the frame your coordinates are in. In this case, this
+would be an equivalent way of creating our ``SkyCoord`` object for NGC
+188:
+
+
+:inputnumrole:`In[3]:`
+
+
+.. code:: python
+
+    ngc188_center = SkyCoord(12.11*u.deg, 85.26*u.deg, frame='icrs')
+    ngc188_center
+
+
+:outputnumrole:`Out[3]:`
+
+
+
+
+.. parsed-literal::
+
+    <SkyCoord (ICRS): (ra, dec) in deg
+        (12.11, 85.26)>
+
+
+
+As we will see later on in this series, there are many other supported
+coordinate frames, so it helps to get into the habit of passing in the
+name of a coordinate frame.
+
+In the above initializations, we passed in ``astropy.units.Quantity``
+objects with angular units to specify the angular components of our sky
+coordinates. The ``SkyCoord`` initializer will also accept
+string-formatted coordinates either as separate strings for Right
+Ascension (RA) and Declination (Dec) or a single string. For example, if
+we have sexagesimal sky coordinate data: In this case, the
+representation of the data includes specifications of the units (the
+“hms” for “hour minute second”, and the “dms” for “degrees minute
+second”
+
+
+:inputnumrole:`In[4]:`
+
+
+.. code:: python
+
+    SkyCoord('00h48m26.4s', '85d15m36s', frame='icrs')
+
+
+:outputnumrole:`Out[4]:`
+
+
+
+
+.. parsed-literal::
+
+    <SkyCoord (ICRS): (ra, dec) in deg
+        (12.11, 85.26)>
+
+
+
+Some string representations do not explicitly define units, so it is
+sometimes necessary to specify the units of the string coordinate data
+explicitly if they are not implicitly included:
+
+
+:inputnumrole:`In[5]:`
+
+
+.. code:: python
+
+    SkyCoord('00:48:26.4 85:15:36', unit=(u.hour, u.deg), 
+             frame='icrs')
+
+
+:outputnumrole:`Out[5]:`
+
+
+
+
+.. parsed-literal::
+
+    <SkyCoord (ICRS): (ra, dec) in deg
+        (12.11, 85.26)>
+
+
+
+For more information and examples on initializing ``SkyCoord`` objects,
+`see this
+documentation <http://docs.astropy.org/en/latest/coordinates/skycoord.html>`__.
+
+For the ``SkyCoord`` initializations demonstrated above, we assumed that
+we already had the coordinate component values ready. If you do not know
+the coordinate values and the object you are interested in is in
+`SESAME <http://cdsweb.u-strasbg.fr/cgi-bin/Sesame>`__, you can also
+automatically look up and load coordinate values from the name of the
+object using the ``SkyCoord.from_name()`` class method1
+(`docs <http://docs.astropy.org/en/latest/coordinates/index.html#convenience-methods>`__).
+Note, however, that this requires an internet connection. It is safe to
+skip this cell if you are not connected to the internet because we
+already defined the object ``ngc188_center`` in the cells above.
+
+ 1If you do not know what a class method is, think of it like an
+alternative constructor for a ``SkyCoord`` object — calling
+``SkyCoord.from_name()`` with a name gives you a new ``SkyCoord``
+object. For more detailed background on what class methods are and when
+they’re useful, see `this
+page <https://julien.danjou.info/blog/2013/guide-python-static-class-abstract-methods>`__.
+
+
+:inputnumrole:`In[6]:`
+
+
+.. code:: python
+
+    ngc188_center = SkyCoord.from_name('NGC 188')
+    ngc188_center
+
+
+:outputnumrole:`Out[6]:`
+
+
+
+
+.. parsed-literal::
+
+    <SkyCoord (ICRS): (ra, dec) in deg
+        (12.10833333, 85.255)>
+
+
+
+The ``SkyCoord`` object that we defined now has various ways of
+accessing the coordinate information contained within it. All
+``SkyCoord`` objects have attributes that allow you to retrieve the
+coordinate component data, but the component names will change depending
+on the coordinate frame of the ``SkyCoord`` you have. In our examples we
+have created a ``SkyCoord`` in the ICRS frame, so the component names
+are lower-case abbreviations of Right Ascension, ``.ra``, and
+Declination, ``.dec``:
+
+
+:inputnumrole:`In[7]:`
+
+
+.. code:: python
+
+    ngc188_center.ra, ngc188_center.dec
+
+
+:outputnumrole:`Out[7]:`
+
+
+
+
+.. parsed-literal::
+
+    (<Longitude 12.10833333 deg>, <Latitude 85.255 deg>)
+
+
+
+The ``SkyCoord`` component attributes (here ``ra`` and ``dec``) return
+specialized ``Quantity``-like objects that make working with angular
+data easier. While ``Quantity``
+(`docs <http://docs.astropy.org/en/stable/units/index.html>`__) is a
+general class that represents numerical values and physical units of any
+kind, ``astropy.coordinates`` defines subclasses of ``Quantity`` that
+are specifically designed for working with angles, such as the ``Angle``
+(`docs <http://docs.astropy.org/en/stable/api/astropy.coordinates.Angle.html>`__)
+class. The ``Angle`` class then has additional, more specialized
+subclasses ``Latitude``
+(`docs <http://docs.astropy.org/en/stable/api/astropy.coordinates.Latitude.html>`__)
+and ``Longitude``
+(`docs <http://docs.astropy.org/en/stable/api/astropy.coordinates.Longitude.html>`__).
+These objects store angles, provide useful attributes to quickly convert
+to common angular units, and enable formatting the numerical values in
+various formats. For example, in a Jupyter notebook, these objects know
+how to represent themselves using LaTeX:
+
+
+:inputnumrole:`In[8]:`
+
+
+.. code:: python
+
+    ngc188_center.ra
+
+
+:outputnumrole:`Out[8]:`
+
+
+
+
+.. math::
+
+    12^\circ06{}^\prime30{}^{\prime\prime}
+
+
+
+
+:inputnumrole:`In[9]:`
+
+
+.. code:: python
+
+    ngc188_center.dec
+
+
+:outputnumrole:`Out[9]:`
+
+
+
+
+.. math::
+
+    85^\circ15{}^\prime18{}^{\prime\prime}
+
+
+
+
+:inputnumrole:`In[10]:`
+
+
+.. code:: python
+
+    type(ngc188_center.ra), type(ngc188_center.dec)
+
+
+:outputnumrole:`Out[10]:`
+
+
+
+
+.. parsed-literal::
+
+    (astropy.coordinates.angles.Longitude, astropy.coordinates.angles.Latitude)
+
+
+
+With these objects, we can retrieve the coordinate components in
+different units using the ``Quantity.to()`` method:
+
+
+:inputnumrole:`In[11]:`
+
+
+.. code:: python
+
+    (ngc188_center.ra.to(u.hourangle), 
+     ngc188_center.ra.to(u.radian),
+     ngc188_center.ra.to(u.degree))
+
+
+:outputnumrole:`Out[11]:`
+
+
+
+
+.. parsed-literal::
+
+    (<Longitude 0.80722222 hourangle>,
+     <Longitude 0.21133028 rad>,
+     <Longitude 12.10833333 deg>)
+
+
+
+Or using the shorthand attributes, which return only the component
+values:
+
+
+:inputnumrole:`In[12]:`
+
+
+.. code:: python
+
+    (ngc188_center.ra.hour, 
+     ngc188_center.ra.radian, 
+     ngc188_center.ra.degree)
+
+
+:outputnumrole:`Out[12]:`
+
+
+
+
+.. parsed-literal::
+
+    (0.8072222220000002, 0.2113302835374691, 12.10833333)
+
+
+
+We can also format the values into strings with specified units
+(`docs <http://docs.astropy.org/en/latest/coordinates/formatting.html>`__),
+for example:
+
+
+:inputnumrole:`In[13]:`
+
+
+.. code:: python
+
+    ngc188_center.ra.to_string(unit=u.hourangle, sep=':', pad=True)
+
+
+:outputnumrole:`Out[13]:`
+
+
+
+
+.. parsed-literal::
+
+    '00:48:26'
+
+
+
+Querying the *Gaia* Archive to Retrieve Coordinates of Stars in NGC 188
+-----------------------------------------------------------------------
+
+Now that we have a ``SkyCoord`` object for the center of NGC 188, we can
+use this object with the ``astroquery`` package to query many different
+astronomical databases (see a full list of `available services in the
+astroquery
+documentation <https://astroquery.readthedocs.io/en/latest/#available-services>`__).
+Here, we will use the ``SkyCoord`` object ``ngc188_center`` to select
+sources from the *Gaia* Data Release 2 catalog around the position of
+the center of NGC 188 to look for stars that might be members of the
+star cluster. To do this, we will use the ``astroquery.gaia`` subpackage
+(`docs <https://astroquery.readthedocs.io/en/latest/gaia/gaia.html>`__).
+
+This requires an internet connection, but if it fails, the catalog file
+is included in the repository so you can load it locally (skip the next
+cell if you do not have an internet connection):
+
+
+:inputnumrole:`In[14]:`
+
+
+.. code:: python
+
+    job = Gaia.cone_search_async(ngc188_center, radius=0.5*u.deg)
+    ngc188_table = job.get_results()
+    
+    # only keep stars brighter than G=19 magnitude
+    ngc188_table = ngc188_table[ngc188_table['phot_g_mean_mag'] < 19*u.mag]
+
+
+:outputnumrole:`Out[14]:`
+
+
+.. parsed-literal::
+
+    INFO: Query finished. [astroquery.utils.tap.core]
+
+
+
+:inputnumrole:`In[15]:`
+
+
+.. code:: python
+
+    cols = ['source_id',
+     'ra',
+     'dec',
+     'parallax',
+     'parallax_error',
+     'pmra',
+     'pmdec',
+     'radial_velocity',
+     'phot_g_mean_mag',
+     'phot_bp_mean_mag',
+     'phot_rp_mean_mag']
+    ngc188_table[cols].write('gaia_results.fits', overwrite=True)
+
+The above cell may not work if you do not have an internet connection,
+so we have included the results table along with the notebook:
+
+
+:inputnumrole:`In[16]:`
+
+
+.. code:: python
+
+    ngc188_table = QTable.read('gaia_results.fits')
+
+
+:inputnumrole:`In[17]:`
+
+
+.. code:: python
+
+    len(ngc188_table)
+
+
+:outputnumrole:`Out[17]:`
+
+
+
+
+.. parsed-literal::
+
+    4938
+
+
+
+The returned ``astropy.table`` ``Table`` object now contains about 5000
+stars from *Gaia* DR2 around the coordinate position of the center of
+NGC 188. Let’s now construct a ``SkyCoord`` object with the results
+table. In the *Gaia* data archive, the ICRS coordinates of a source are
+given as column names ``"ra"`` and ``"dec"``:
+
+
+:inputnumrole:`In[18]:`
+
+
+.. code:: python
+
+    ngc188_table['ra']
+
+
+:outputnumrole:`Out[18]:`
+
+
+
+
+.. math::
+
+    [12.09833,~12.146945,~12.054604,~\dots,~6.1584024,~11.711371,~10.891798] \; \mathrm{{}^{\circ}}
+
+
+
+
+:inputnumrole:`In[19]:`
+
+
+.. code:: python
+
+    ngc188_table['dec']
+
+
+:outputnumrole:`Out[19]:`
+
+
+
+
+.. math::
+
+    [85.254431,~85.254751,~85.256369,~\dots,~85.32562,~85.74769,~84.772649] \; \mathrm{{}^{\circ}}
+
+
+
+Note that, because the *Gaia* archive provides data tables with
+associated units, and we read this table using the ``QTable`` object
+(`docs <http://docs.astropy.org/en/latest/table/mixin_columns.html#quantity-and-qtable>`__),
+the above table columns are represented as ``Quantity`` objects with
+units of degrees. Note also that these columns contain many (>5000!)
+coordinate values. We can pass these directly in to ``SkyCoord`` to get
+a single ``SkyCoord`` object to represent all of these coordinates:
+
+
+:inputnumrole:`In[20]:`
+
+
+.. code:: python
+
+    ngc188_gaia_coords = SkyCoord(ngc188_table['ra'], ngc188_table['dec'])
+    ngc188_gaia_coords
+
+
+:outputnumrole:`Out[20]:`
+
+
+
+
+.. parsed-literal::
+
+    <SkyCoord (ICRS): (ra, dec) in deg
+        [(12.09832966, 85.25443128), (12.14694473, 85.25475081),
+         (12.05460389, 85.25636896), ..., ( 6.15840244, 85.32562027),
+         (11.71137094, 85.74769043), (10.89179821, 84.77264889)]>
+
+
+
+Exercises
+~~~~~~~~~
+
+Create a ``SkyCoord`` for the center of the open cluster the Pleiades
+(either by looking up the coordinates and passing them in, or by using
+the convenience method we learned about above):
+
+
+:inputnumrole:`In[21]:`
+
+
+.. code:: python
+
+    ngc188_center = SkyCoord.from_name('NGC 188')
+
+Using only a single method/function call on the ``SkyCoord`` object
+representing the center of NGC 188, print a string with the RA/Dec in
+the form ‘HH:MM:SS.S DD:MM:SS.S’. Check your answer against
+`SIMBAD <http://simbad.u-strasbg.fr/simbad/>`__, which will show you
+sexagesimal coordinates for the object.
+
+(Hint: ``SkyCoord.to_string()`` might be useful)
+
+
+:inputnumrole:`In[22]:`
+
+
+.. code:: python
+
+    ngc188_center.to_string(style="hmsdms", sep=":", precision=1)
+
+
+:outputnumrole:`Out[22]:`
+
+
+
+
+.. parsed-literal::
+
+    '00:48:26.0 +85:15:18.0'
+
+
+
+Using a single method/function call on the ``SkyCoord`` object
+containing the results of our *Gaia* query, compute the angular
+separation between each resulting star and the coordinates of the
+cluster center for NGC 188.
+
+(Hint: ``SkyCoord.separation()`` might be useful)
+
+
+:inputnumrole:`In[23]:`
+
+
+.. code:: python
+
+    ngc188_gaia_coords.separation(ngc188_center)
+
+
+:outputnumrole:`Out[23]:`
+
+
+
+
+.. math::
+
+    [$0^\circ00{}^\prime03.6149{}^{\prime\prime}$
+     $0^\circ00{}^\prime11.5336{}^{\prime\prime}$
+     $0^\circ00{}^\prime16.74{}^{\prime\prime}$ ...
+     $0^\circ29{}^\prime36.1677{}^{\prime\prime}$
+     $0^\circ29{}^\prime37.2132{}^{\prime\prime}$
+     $0^\circ29{}^\prime37.5986{}^{\prime\prime}$]
+
+
+
+More Than Just Sky Positions: Including Distance Information in ``SkyCoord``
+----------------------------------------------------------------------------
+
+So far, we have used ``SkyCoord`` to represent angular sky positions
+(i.e., ``ra`` and ``dec`` only). It is sometimes useful to include
+distance information with the sky coordinates of a source, thereby
+specifying the full 3D position of an object. To pass in distance
+information, ``SkyCoord`` accepts the keyword argument “``distance``”.
+So, if we knew that the distance to NGC 188 is 1.96 kpc, we could also
+pass in a distance (as a ``Quantity`` object) using this argument:
+
+
+:inputnumrole:`In[24]:`
+
+
+.. code:: python
+
+    ngc188_center_3d = SkyCoord(12.11*u.deg, 85.26*u.deg,
+                                distance=1.96*u.kpc)
+
+With the table of *Gaia* data we retrieved above for stars around NGC
+188, ``ngc188_table``, we also have parallax measurements for each star.
+For a precisely-measured parallax :math:`\varpi`, the distance :math:`d`
+to a star can be obtained approximately as :math:`d \approx 1/\varpi`.
+This only really works if the parallax error is small relative to the
+parallax (`see discussion in this
+paper <https://arxiv.org/abs/1507.02105>`__), so if we want to use these
+parallaxes to get distances we first have to filter out stars that have
+low signal-to-noise parallaxes:
+
+
+:inputnumrole:`In[25]:`
+
+
+.. code:: python
+
+    parallax_snr = ngc188_table['parallax'] / ngc188_table['parallax_error']
+    ngc188_table_3d = ngc188_table[parallax_snr > 10] 
+    len(ngc188_table_3d)
+
+
+:outputnumrole:`Out[25]:`
+
+
+
+
+.. parsed-literal::
+
+    2053
+
+
+
+The above selection on ``parallax_snr`` keeps stars that have a
+~10-sigma parallax measurement, but this is an arbitrary selection
+threshold that you may want to tune or remove in your own use cases.
+This selection removed over half of the stars in our original table, but
+for the remaining stars we can be confident that converting the parallax
+measurements to distances is mostly safe.
+
+The default way of passing in a distance to a ``SkyCoord`` object, as
+above, is to pass in a ``Quantity`` with a unit of length. However,
+``astropy.coordinates`` also provides a specialized object,
+``Distance``, for handling common transformations of different distance
+representations
+(`docs <http://docs.astropy.org/en/latest/coordinates/index.html#distance>`__).
+Among other things, this class supports passing in a parallax value:
+
+
+:inputnumrole:`In[26]:`
+
+
+.. code:: python
+
+    Distance(parallax=1*u.mas)
+
+
+:outputnumrole:`Out[26]:`
+
+
+
+
+.. math::
+
+    1000 \; \mathrm{pc}
+
+
+
+The catalog of stars we queried from *Gaia* contains parallax
+information in milliarcsecond units, so we can create a ``Distance``
+object directly from these values:
+
+
+:inputnumrole:`In[27]:`
+
+
+.. code:: python
+
+    gaia_dist = Distance(parallax=ngc188_table_3d['parallax'])
+
+We can then create a ``SkyCoord`` object to represent the 3D positions
+of all of the *Gaia* stars by passing in this distance object to the
+``SkyCoord`` initializer:
+
+
+:inputnumrole:`In[28]:`
+
+
+.. code:: python
+
+    ngc188_coords_3d = SkyCoord(ra=ngc188_table_3d['ra'], 
+                                dec=ngc188_table_3d['dec'],
+                                distance=gaia_dist)
+    ngc188_coords_3d
+
+
+:outputnumrole:`Out[28]:`
+
+
+
+
+.. parsed-literal::
+
+    <SkyCoord (ICRS): (ra, dec, distance) in (deg, deg, pc)
+        [(12.09832966, 85.25443128, 1109.14781668),
+         (12.12843989, 85.26076889, 1835.66340989),
+         (12.07705917, 85.24631009, 1974.19410857), ...,
+         ( 6.13894786, 85.25954928, 2532.64969255),
+         ( 6.15840244, 85.32562027, 1795.07434822),
+         (11.71137094, 85.74769043,  367.13489233)]>
+
+
+
+Let’s now use ``matplotlib`` to plot the sky positions of all of these
+sources, colored by distance to emphasize the cluster stars:
+
+
+:inputnumrole:`In[29]:`
+
+
+.. code:: python
+
+    fig, ax = plt.subplots(figsize=(6.5, 5.2),
+                           constrained_layout=True)
+    cs = ax.scatter(ngc188_coords_3d.ra.degree, 
+                    ngc188_coords_3d.dec.degree, 
+                    c=ngc188_coords_3d.distance.kpc, 
+                    s=5, vmin=1.5, vmax=2.5, cmap='twilight')
+    cb = fig.colorbar(cs)
+    cb.set_label(f'distance [{u.kpc:latex_inline}]')
+    
+    ax.set_xlabel('RA [deg]')
+    ax.set_ylabel('Dec [deg]')
+    
+    ax.set_title('Gaia DR2 sources near NGC 188', fontsize=18)
+
+
+:outputnumrole:`Out[29]:`
+
+
+
+
+.. parsed-literal::
+
+    Text(0.5, 1.0, 'Gaia DR2 sources near NGC 188')
+
+
+
+
+.. image:: nboutput/1-Coordinates-Intro_56_1.png
+
+
+
+Now that we have 3D position information for both the cluster center,
+and for the stars we queried from *Gaia*, we can compute the 3D
+separation (distance) between all of the *Gaia* sources and the cluster
+center:
+
+
+:inputnumrole:`In[30]:`
+
+
+.. code:: python
+
+    sep3d = ngc188_coords_3d.separation_3d(ngc188_center_3d)
+    sep3d
+
+
+:outputnumrole:`Out[30]:`
+
+
+
+
+.. math::
+
+    [850.8522,~124.3366,~14.202196,~\dots,~572.97077,~165.71211,~1592.8815] \; \mathrm{pc}
+
+
+
+Exercises
+~~~~~~~~~
+
+Using the 3D separation values, define a boolean mask to select
+candidate members of the cluster. Select all stars within 50 pc of the
+cluster center. How many candidate members of NGC 188 do we have, based
+on their 3D positions?
+
+
+:inputnumrole:`In[31]:`
+
+
+.. code:: python
+
+    ngc188_3d_mask = sep3d < 50*u.pc
+    ngc188_3d_mask.sum()
+
+
+:outputnumrole:`Out[31]:`
+
+
+
+
+.. parsed-literal::
+
+    193
+
+
+
+In this tutorial, we have introduced ``astropy.coordinates`` as a way to
+store and represent astronomical sky coordinates. We used coordinate
+objects, via the ``SkyCoord`` class interface, to parse and change
+coordinate representations and units. We also demonstrated how to use a
+``SkyCoord`` object with the ``astroquery`` package to query an
+astronomical database, the *Gaia* science archive. We then created a
+single ``SkyCoord`` object with the queried data that represents the sky
+coordinates of many objects. Finally, we introduced the concept of using
+``astropy.coordinates`` to represent a 3D position of an object or set
+of objects.
+
+
+
+
+
+.. raw:: html
+
+    <div id="spacer"></div>
+
+    <a href="../_static/1-Coordinates-Intro/1-Coordinates-Intro.ipynb"><button id="download">Download tutorial notebook</button></a>
+    <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/1-Coordinates-Intro/1-Coordinates-Intro.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
+

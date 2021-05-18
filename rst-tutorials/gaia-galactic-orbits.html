@@ -2,7 +2,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta charset="utf-8" /><meta content="filterTutorials" name="keywords" />
+    <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta content="filterTutorials" name="keywords" />
 <meta content="filterTutorials," name="keywords" />
 
     <title>Computing Galactic Orbits of Stars with Gala &#8212; astropy-tutorials v3.0.dev</title>
@@ -106,13 +107,13 @@
   <a href="../_static/gaia-galactic-orbits/gaia-galactic-orbits.ipynb"><button id="download">Download tutorial notebook</button></a>
 <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/gaia-galactic-orbits/gaia-galactic-orbits.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
 
-<div id="spacer"></div><div class="section" id="computing-galactic-orbits-of-stars-with-gala">
+<div id="spacer"></div><section id="computing-galactic-orbits-of-stars-with-gala">
 <span id="gaia-galactic-orbits"></span><h1>Computing Galactic Orbits of Stars with Gala<a class="headerlink" href="#computing-galactic-orbits-of-stars-with-gala" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="authors">
+<section id="authors">
 <h2>Authors<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a></h2>
 <p>Adrian Price-Whelan, Stephanie T. Douglas</p>
-</div>
-<div class="section" id="learning-goals">
+</section>
+<section id="learning-goals">
 <h2>Learning Goals<a class="headerlink" href="#learning-goals" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>Query the Gaia data release 2 catalog to retrieve data for a sample
@@ -123,18 +124,18 @@ selections</p></li>
 Galaxy to show that the typically younger stars (high-mass) have
 smaller vertical excursions</p></li>
 </ul>
-</div>
-<div class="section" id="keywords">
+</section>
+<section id="keywords">
 <h2>Keywords<a class="headerlink" href="#keywords" title="Permalink to this headline">¶</a></h2>
 <p>coordinates, astroquery, gala, galactic dynamics, astrometry,
 matplotlib, scatter plot, histogram</p>
-</div>
-<div class="section" id="companion-content">
+</section>
+<section id="companion-content">
 <h2>Companion Content<a class="headerlink" href="#companion-content" title="Permalink to this headline">¶</a></h2>
 <p>Astropy Docs: <a class="reference external" href="http://docs.astropy.org/en/latest/generated/examples/coordinates/plot_galactocentric-frame.html#sphx-glr-generated-examples-coordinates-plot-galactocentric-frame-py">Description of the Galactocentric frame in astropy
 coordinates</a></p>
-</div>
-<div class="section" id="summary">
+</section>
+<section id="summary">
 <h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
 <p>We will use data from the <a class="reference external" href="https://www.cosmos.esa.int/web/gaia">Gaia
 mission</a> to get sky positions,
@@ -147,16 +148,16 @@ conditions to compute the orbits of these stars in the galaxy using the
 orbits of high-mass main sequence (i.e. young) stars to the orbits of
 lower-mass main sequence stars to show that young stars have smaller
 vertical amplitudes.</p>
-</div>
-<div class="section" id="installing-dependencies">
+</section>
+<section id="installing-dependencies">
 <h2>Installing Dependencies<a class="headerlink" href="#installing-dependencies" title="Permalink to this headline">¶</a></h2>
 <p>This tutorial depends on the Astropy affiliated packages <code class="docutils literal notranslate"><span class="pre">gala</span></code> and
 <code class="docutils literal notranslate"><span class="pre">astroquery</span></code>. Both of these packages can be pip-installed with:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">astro</span><span class="o">-</span><span class="n">gala</span> <span class="n">astroquery</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="imports">
+</section>
+<section id="imports">
 <h2>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h2>
 <p><span class="inputnumrole">In[1]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># astropy imports</span>
@@ -179,20 +180,20 @@ vertical amplitudes.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[1]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Created</span> <span class="n">TAP</span><span class="o">+</span> <span class="p">(</span><span class="n">v20200428</span><span class="o">.</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">Connection</span><span class="p">:</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Created</span> <span class="n">TAP</span><span class="o">+</span> <span class="p">(</span><span class="n">v20200428</span><span class="mf">.1</span><span class="p">)</span> <span class="o">-</span> <span class="n">Connection</span><span class="p">:</span>
     <span class="n">Host</span><span class="p">:</span> <span class="n">gea</span><span class="o">.</span><span class="n">esac</span><span class="o">.</span><span class="n">esa</span><span class="o">.</span><span class="n">int</span>
     <span class="n">Use</span> <span class="n">HTTPS</span><span class="p">:</span> <span class="kc">True</span>
     <span class="n">Port</span><span class="p">:</span> <span class="mi">443</span>
     <span class="n">SSL</span> <span class="n">Port</span><span class="p">:</span> <span class="mi">443</span>
-<span class="n">Created</span> <span class="n">TAP</span><span class="o">+</span> <span class="p">(</span><span class="n">v20200428</span><span class="o">.</span><span class="mi">1</span><span class="p">)</span> <span class="o">-</span> <span class="n">Connection</span><span class="p">:</span>
+<span class="n">Created</span> <span class="n">TAP</span><span class="o">+</span> <span class="p">(</span><span class="n">v20200428</span><span class="mf">.1</span><span class="p">)</span> <span class="o">-</span> <span class="n">Connection</span><span class="p">:</span>
     <span class="n">Host</span><span class="p">:</span> <span class="n">gea</span><span class="o">.</span><span class="n">esac</span><span class="o">.</span><span class="n">esa</span><span class="o">.</span><span class="n">int</span>
     <span class="n">Use</span> <span class="n">HTTPS</span><span class="p">:</span> <span class="kc">True</span>
     <span class="n">Port</span><span class="p">:</span> <span class="mi">443</span>
     <span class="n">SSL</span> <span class="n">Port</span><span class="p">:</span> <span class="mi">443</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="scientific-background">
+</section>
+<section id="scientific-background">
 <h2>Scientific Background<a class="headerlink" href="#scientific-background" title="Permalink to this headline">¶</a></h2>
 <p><a class="reference external" href="https://www.cosmos.esa.int/web/gaia/">The Gaia mission</a> is an ESA
 mission that aims to measure the 3D positions and velocities of a large
@@ -209,8 +210,8 @@ data release 2 or DR2 — which provides a subset of these data to anyone
 with an internet connection. In this tutorial, we will use astrometry,
 radial velocities, and photometry for a small subset of DR2 to study the
 kinematics of different types of stars in the Milky Way.</p>
-</div>
-<div class="section" id="using-astroquery-to-retrieve-gaia-data">
+</section>
+<section id="using-astroquery-to-retrieve-gaia-data">
 <h2>Using <code class="docutils literal notranslate"><span class="pre">astroquery</span></code> to retrieve Gaia data<a class="headerlink" href="#using-astroquery-to-retrieve-gaia-data" title="Permalink to this headline">¶</a></h2>
 <p>We’ll start by querying the <a class="reference external" href="http://gea.esac.esa.int/archive/">Gaia science
 archive</a> to download astrometric
@@ -283,7 +284,7 @@ first four rows of the table:</p>
 </div>
 <p><span class="outputnumrole">Out[5]:</span></p>
 <i>QTable length=4</i>
-<table id="table139847575000976" class="table-striped table-bordered table-condensed">
+<table id="table139789122835600" class="table-striped table-bordered table-condensed">
 <thead><tr><th>ra</th><th>dec</th><th>parallax</th><th>pmra</th><th>pmdec</th><th>radial_velocity</th><th>phot_g_mean_mag</th><th>phot_bp_mean_mag</th><th>phot_rp_mean_mag</th></tr></thead>
 <thead><tr><th>deg</th><th>deg</th><th>mas</th><th>mas / yr</th><th>mas / yr</th><th>km / s</th><th>mag</th><th>mag</th><th>mag</th></tr></thead>
 <thead><tr><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float64</th><th>float32</th><th>float32</th><th>float32</th></tr></thead>
@@ -293,8 +294,8 @@ first four rows of the table:</p>
 <tr><td>330.41287472805976</td><td>51.88897801553169</td><td>13.0756133009657</td><td>-85.30745872006916</td><td>-34.23366534215265</td><td>-28.726469345049587</td><td>12.101919174194336</td><td>13.05264949798584</td><td>11.149785995483398</td></tr>
 </table><p>Note that the table columns already contain units! They are indicated in
 the second row of the header.</p>
-</div>
-<div class="section" id="using-astropy-coordinates-to-represent-and-transform-stellar-positions-and-velocities">
+</section>
+<section id="using-astropy-coordinates-to-represent-and-transform-stellar-positions-and-velocities">
 <h2>Using <code class="docutils literal notranslate"><span class="pre">astropy.coordinates</span></code> to represent and transform stellar positions and velocities<a class="headerlink" href="#using-astropy-coordinates-to-represent-and-transform-stellar-positions-and-velocities" title="Permalink to this headline">¶</a></h2>
 <p>Let’s double check that the farthest star is still within 100 pc, as we
 expect from the parallax selection we did in the query above. To do
@@ -541,8 +542,8 @@ photometry from Gaia to compute absolute magnitudes) to select samples
 of high- and low-mass stars based on their colors.</p>
 <p>In what follows, we’ll compute Galactic orbits for stars in the high-
 and low-mass star selections above and compare.</p>
-</div>
-<div class="section" id="using-gala-to-numerically-integrate-galactic-stellar-orbits">
+</section>
+<section id="using-gala-to-numerically-integrate-galactic-stellar-orbits">
 <h2>Using <code class="docutils literal notranslate"><span class="pre">gala</span></code> to numerically integrate Galactic stellar orbits<a class="headerlink" href="#using-gala-to-numerically-integrate-galactic-stellar-orbits" title="Permalink to this headline">¶</a></h2>
 <p><code class="docutils literal notranslate"><span class="pre">gala</span></code> is an Astropy affiliated package for Galactic dynamics.
 <code class="docutils literal notranslate"><span class="pre">gala</span></code> provides functionality for representing analytic mass models
@@ -732,8 +733,8 @@ reaches above the Galactic midplane and showed that the younger
 plane, consistent with the idea that stars are either born in a
 “thinner” disk and dynamically “heated,” or that older stars formed with
 a larger vertical scale-height.</p>
-</div>
-<div class="section" id="exercises">
+</section>
+<section id="exercises">
 <h2>Exercises<a class="headerlink" href="#exercises" title="Permalink to this headline">¶</a></h2>
 <ol class="arabic simple">
 <li><p>Some of the low-mass star orbits have large vertical excursions from
@@ -753,8 +754,8 @@ of eccentricity values.</p></li>
 <div id="spacer"></div>
 
 <a href="../_static/gaia-galactic-orbits/gaia-galactic-orbits.ipynb"><button id="download">Download tutorial notebook</button></a>
-<a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/gaia-galactic-orbits/gaia-galactic-orbits.ipynb"><button id="binder">Interactive tutorial notebook</button></a></div>
-</div>
+<a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/gaia-galactic-orbits/gaia-galactic-orbits.ipynb"><button id="binder">Interactive tutorial notebook</button></a></section>
+</section>
 
 </div>
       </div>

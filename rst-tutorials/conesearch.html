@@ -2,7 +2,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta charset="utf-8" /><meta content="filterTutorials, filterAstroquery, filterTable, filterCoordinates, filterUnits, filterVo_Conesearch, filterLatex, filterSimbad, filterMatplotlib" name="keywords" />
+    <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta content="filterTutorials, filterAstroquery, filterTable, filterCoordinates, filterUnits, filterVo_Conesearch, filterLatex, filterSimbad, filterMatplotlib" name="keywords" />
 <meta content="filterTutorials," name="keywords" />
 
     <title>Searching major star catalogs and Simbad by position or name with vo_conesearch &#8212; astropy-tutorials v3.0.dev</title>
@@ -103,9 +104,9 @@
   <a href="../_static/conesearch/conesearch.ipynb"><button id="download">Download tutorial notebook</button></a>
 <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/conesearch/conesearch.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
 
-<div id="spacer"></div><div class="section" id="searching-major-star-catalogs-and-simbad-by-position-or-name-with-vo-conesearch">
+<div id="spacer"></div><section id="searching-major-star-catalogs-and-simbad-by-position-or-name-with-vo-conesearch">
 <span id="conesearch"></span><h1>Searching major star catalogs and Simbad by position or name with <code class="docutils literal notranslate"><span class="pre">vo_conesearch</span></code><a class="headerlink" href="#searching-major-star-catalogs-and-simbad-by-position-or-name-with-vo-conesearch" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="authors">
+<section id="authors">
 <h2>Authors<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a></h2>
 <ol class="upperalpha simple" start="16">
 <li><ol class="upperalpha simple" start="12">
@@ -113,8 +114,8 @@
 </ol>
 </li>
 </ol>
-</div>
-<div class="section" id="learning-goals">
+</section>
+<section id="learning-goals">
 <h2>Learning Goals<a class="headerlink" href="#learning-goals" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>Perform a cone search around M31 using a web service.</p></li>
@@ -126,20 +127,20 @@
 asynchronously).</p></li>
 <li><p>Estimate the run time of a cone search.</p></li>
 </ul>
-</div>
-<div class="section" id="keywords">
+</section>
+<section id="keywords">
 <h2>Keywords<a class="headerlink" href="#keywords" title="Permalink to this headline">¶</a></h2>
 <p>astroquery, table, coordinates, units, vo_conesearch, LaTex, SIMBAD,
 matplotlib</p>
-</div>
-<div class="section" id="summary">
+</section>
+<section id="summary">
 <h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
 <p>This tutorial desmonstrates the <a class="reference external" href="http://astroquery.readthedocs.io/en/latest/vo_conesearch/vo_conesearch.html">Cone
 Search</a>
 subpackage, which allows you to query a catalog of astronomical sources
 and obtain those that lie within a cone of a given radius around the
 given position.</p>
-<div class="section" id="imports">
+<section id="imports">
 <h3>Imports<a class="headerlink" href="#imports" title="Permalink to this headline">¶</a></h3>
 <p><span class="inputnumrole">In[1]:</span></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Python standard library</span>
@@ -193,8 +194,7 @@ Validation is hosted by Space Telescope Science Institute (STScI).</p>
  <span class="s1">&#39;The HST Guide Star Catalog, Version GSC-ACT (Lasker+ 1996-99) 1&#39;</span><span class="p">,</span>
  <span class="s1">&#39;The USNO-A2.0 Catalogue (Monet+ 1998) 1&#39;</span><span class="p">,</span>
  <span class="s1">&#39;Two Micron All Sky Survey (2MASS) 1&#39;</span><span class="p">,</span>
- <span class="s1">&#39;Two Micron All Sky Survey (2MASS) 2&#39;</span><span class="p">,</span>
- <span class="s1">&#39;USNO-A2 Catalogue 1&#39;</span><span class="p">]</span>
+ <span class="s1">&#39;Two Micron All Sky Survey (2MASS) 2&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 <p>Next, let’s pick an astronomical object of interest. For example, M31.</p>
@@ -205,7 +205,7 @@ Validation is hosted by Space Telescope Science Institute (STScI).</p>
 </div>
 <p><span class="outputnumrole">Out[4]:</span></p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">SkyCoord</span> <span class="p">(</span><span class="n">ICRS</span><span class="p">):</span> <span class="p">(</span><span class="n">ra</span><span class="p">,</span> <span class="n">dec</span><span class="p">)</span> <span class="ow">in</span> <span class="n">deg</span>
-    <span class="p">(</span><span class="mf">10.6847083</span><span class="p">,</span> <span class="mf">41.26875</span><span class="p">)</span><span class="o">&gt;</span>
+    <span class="p">(</span><span class="mf">10.68470833</span><span class="p">,</span> <span class="mf">41.26875</span><span class="p">)</span><span class="o">&gt;</span>
 </pre></div>
 </div>
 <p>By default, a basic Cone Search goes through the list of catalogs and
@@ -224,7 +224,7 @@ table</a>.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Trying http://gsss.stsci.edu/webservices/vo/ConeSearch.aspx?CAT=GSC23&amp;
 </pre></div>
 </div>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>WARNING: W50: http://gsss.stsci.edu/webservices/vo/ConeSearch.aspx?CAT=GSC23RA=10.6847083&amp;DEC=41.26875&amp;SR=0.1&amp;VERB=1:154:0: W50: Invalid unit string &#39;pixel&#39; [astropy.io.votable.tree]
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>WARNING: W50: http://gsss.stsci.edu/webservices/vo/ConeSearch.aspx?CAT=GSC23RA=10.68470833&amp;DEC=41.26875&amp;SR=0.1&amp;VERB=1:154:0: W50: Invalid unit string &#39;pixel&#39; [astropy.io.votable.tree]
 </pre></div>
 </div>
 <p><span class="inputnumrole">In[6]:</span></p>
@@ -349,28 +349,28 @@ result above.</p>
             <span class="n">MAIN_ID</span>                  <span class="n">RA</span>      <span class="o">...</span>     <span class="n">COO_BIBCODE</span>
                                   <span class="s2">&quot;h:m:s&quot;</span>    <span class="o">...</span>
 <span class="o">-------------------------------</span> <span class="o">------------</span> <span class="o">...</span> <span class="o">-------------------</span>
-               <span class="n">NAME</span> <span class="n">P2B</span> <span class="n">Cluster</span>  <span class="mi">00</span> <span class="mi">42</span> <span class="mf">44.34</span> <span class="o">...</span> <span class="mi">2010</span><span class="n">ApJ</span><span class="o">...</span><span class="mf">710.</span><span class="o">.</span><span class="mi">755</span><span class="n">G</span>
-                     <span class="p">[</span><span class="n">LFG93</span><span class="p">]</span> <span class="n">P3</span>  <span class="mi">00</span> <span class="mi">42</span> <span class="mf">44.34</span> <span class="o">...</span> <span class="mi">2010</span><span class="n">ApJ</span><span class="o">...</span><span class="mf">710.</span><span class="o">.</span><span class="mi">755</span><span class="n">G</span>
-                      <span class="n">NAME</span> <span class="n">M31</span><span class="o">*</span>  <span class="mi">00</span> <span class="mi">42</span> <span class="mf">44.33</span> <span class="o">...</span> <span class="mi">1993</span><span class="n">ApJ</span><span class="o">...</span><span class="mi">411</span><span class="n">L</span><span class="o">.</span><span class="mi">107</span><span class="n">C</span>
-    <span class="p">[</span><span class="n">K2002</span><span class="p">]</span> <span class="n">J004244</span><span class="o">.</span><span class="mi">35</span><span class="o">+</span><span class="mf">411608.9</span> <span class="mi">00</span> <span class="mi">42</span> <span class="mf">44.351</span> <span class="o">...</span> <span class="mi">2002</span><span class="n">ApJ</span><span class="o">...</span><span class="mf">577.</span><span class="o">.</span><span class="mi">738</span><span class="n">K</span>
-                      <span class="n">HD</span>   <span class="mi">3969</span> <span class="mi">00</span> <span class="mi">42</span> <span class="mf">44.367</span> <span class="o">...</span> <span class="mi">1988</span><span class="n">A</span><span class="o">&amp;</span><span class="n">AS</span><span class="o">...</span><span class="mf">74.</span><span class="o">.</span><span class="mi">449</span><span class="n">R</span>
-                  <span class="p">[</span><span class="n">HPH2013</span><span class="p">]</span> <span class="mi">165</span>  <span class="mi">00</span> <span class="mi">42</span> <span class="mf">44.34</span> <span class="o">...</span> <span class="mi">2013</span><span class="n">A</span><span class="o">&amp;</span><span class="n">A</span><span class="o">...</span><span class="mi">555</span><span class="n">A</span><span class="o">..</span><span class="mi">65</span><span class="n">H</span>
-                  <span class="p">[</span><span class="n">HPH2013</span><span class="p">]</span> <span class="mi">164</span>  <span class="mi">00</span> <span class="mi">42</span> <span class="mf">44.30</span> <span class="o">...</span> <span class="mi">2013</span><span class="n">A</span><span class="o">&amp;</span><span class="n">A</span><span class="o">...</span><span class="mi">555</span><span class="n">A</span><span class="o">..</span><span class="mi">65</span><span class="n">H</span>
-                     <span class="p">[</span><span class="n">LFG93</span><span class="p">]</span> <span class="n">P1</span>  <span class="mi">00</span> <span class="mi">42</span> <span class="mf">44.37</span> <span class="o">...</span> <span class="mi">2010</span><span class="n">ApJ</span><span class="o">...</span><span class="mf">710.</span><span class="o">.</span><span class="mi">755</span><span class="n">G</span>
-    <span class="p">[</span><span class="n">KPM2002</span><span class="p">]</span> <span class="n">G121</span><span class="o">.</span><span class="mi">1741</span><span class="o">-</span><span class="mf">21.5730</span>  <span class="mi">00</span> <span class="mi">42</span> <span class="mf">44.27</span> <span class="o">...</span> <span class="mi">2002</span><span class="n">AJ</span><span class="o">....</span><span class="mf">124.2990</span><span class="n">K</span>
-                  <span class="p">[</span><span class="n">O2006</span><span class="p">]</span> <span class="n">QSS</span> <span class="mi">8</span> <span class="mi">00</span> <span class="mi">42</span> <span class="mf">44.365</span> <span class="o">...</span> <span class="mi">2002</span><span class="n">ApJ</span><span class="o">...</span><span class="mf">577.</span><span class="o">.</span><span class="mi">738</span><span class="n">K</span>
+               <span class="n">NAME</span> <span class="n">P2B</span> <span class="n">Cluster</span>  <span class="mi">00</span> <span class="mi">42</span> <span class="mf">44.34</span> <span class="o">...</span> <span class="mi">2010</span><span class="n">ApJ</span><span class="o">..</span><span class="mf">.710</span><span class="o">.</span><span class="mf">.755</span><span class="n">G</span>
+                     <span class="p">[</span><span class="n">LFG93</span><span class="p">]</span> <span class="n">P3</span>  <span class="mi">00</span> <span class="mi">42</span> <span class="mf">44.34</span> <span class="o">...</span> <span class="mi">2010</span><span class="n">ApJ</span><span class="o">..</span><span class="mf">.710</span><span class="o">.</span><span class="mf">.755</span><span class="n">G</span>
+                      <span class="n">NAME</span> <span class="n">M31</span><span class="o">*</span>  <span class="mi">00</span> <span class="mi">42</span> <span class="mf">44.33</span> <span class="o">...</span> <span class="mi">1993</span><span class="n">ApJ</span><span class="o">..</span><span class="mf">.411</span><span class="n">L</span><span class="mf">.107</span><span class="n">C</span>
+    <span class="p">[</span><span class="n">K2002</span><span class="p">]</span> <span class="n">J004244</span><span class="mf">.35</span><span class="o">+</span><span class="mf">411608.9</span> <span class="mi">00</span> <span class="mi">42</span> <span class="mf">44.351</span> <span class="o">...</span> <span class="mi">2002</span><span class="n">ApJ</span><span class="o">..</span><span class="mf">.577</span><span class="o">.</span><span class="mf">.738</span><span class="n">K</span>
+                  <span class="p">[</span><span class="n">HPH2013</span><span class="p">]</span> <span class="mi">165</span>  <span class="mi">00</span> <span class="mi">42</span> <span class="mf">44.34</span> <span class="o">...</span> <span class="mi">2013</span><span class="n">A</span><span class="o">&amp;</span><span class="n">A</span><span class="o">..</span><span class="mf">.555</span><span class="n">A</span><span class="o">.</span><span class="mf">.65</span><span class="n">H</span>
+                  <span class="p">[</span><span class="n">HPH2013</span><span class="p">]</span> <span class="mi">164</span>  <span class="mi">00</span> <span class="mi">42</span> <span class="mf">44.30</span> <span class="o">...</span> <span class="mi">2013</span><span class="n">A</span><span class="o">&amp;</span><span class="n">A</span><span class="o">..</span><span class="mf">.555</span><span class="n">A</span><span class="o">.</span><span class="mf">.65</span><span class="n">H</span>
+                     <span class="p">[</span><span class="n">LFG93</span><span class="p">]</span> <span class="n">P1</span>  <span class="mi">00</span> <span class="mi">42</span> <span class="mf">44.37</span> <span class="o">...</span> <span class="mi">2010</span><span class="n">ApJ</span><span class="o">..</span><span class="mf">.710</span><span class="o">.</span><span class="mf">.755</span><span class="n">G</span>
+    <span class="p">[</span><span class="n">KPM2002</span><span class="p">]</span> <span class="n">G121</span><span class="mf">.1741</span><span class="o">-</span><span class="mf">21.5730</span>  <span class="mi">00</span> <span class="mi">42</span> <span class="mf">44.27</span> <span class="o">...</span> <span class="mi">2002</span><span class="n">AJ</span><span class="o">...</span><span class="mf">.124.2990</span><span class="n">K</span>
+                  <span class="p">[</span><span class="n">O2006</span><span class="p">]</span> <span class="n">QSS</span> <span class="mi">8</span> <span class="mi">00</span> <span class="mi">42</span> <span class="mf">44.365</span> <span class="o">...</span> <span class="mi">2002</span><span class="n">ApJ</span><span class="o">..</span><span class="mf">.577</span><span class="o">.</span><span class="mf">.738</span><span class="n">K</span>
+                  <span class="p">[</span><span class="n">HPH2013</span><span class="p">]</span> <span class="mi">167</span>  <span class="mi">00</span> <span class="mi">42</span> <span class="mf">44.36</span> <span class="o">...</span> <span class="mi">2013</span><span class="n">A</span><span class="o">&amp;</span><span class="n">A</span><span class="o">..</span><span class="mf">.555</span><span class="n">A</span><span class="o">.</span><span class="mf">.65</span><span class="n">H</span>
                             <span class="o">...</span>          <span class="o">...</span> <span class="o">...</span>                 <span class="o">...</span>
-        <span class="n">CXOGMP</span> <span class="n">J004244</span><span class="o">.</span><span class="mi">2</span><span class="o">+</span><span class="mi">411608</span>   <span class="mi">00</span> <span class="mi">42</span> <span class="mf">44.2</span> <span class="o">...</span> <span class="mi">2001</span><span class="n">A</span><span class="o">&amp;</span><span class="n">A</span><span class="o">...</span><span class="mi">365</span><span class="n">L</span><span class="o">.</span><span class="mi">195</span><span class="n">S</span>
-                  <span class="p">[</span><span class="n">HPH2013</span><span class="p">]</span> <span class="mi">170</span>  <span class="mi">00</span> <span class="mi">42</span> <span class="mf">44.40</span> <span class="o">...</span> <span class="mi">2013</span><span class="n">A</span><span class="o">&amp;</span><span class="n">A</span><span class="o">...</span><span class="mi">555</span><span class="n">A</span><span class="o">..</span><span class="mi">65</span><span class="n">H</span>
-        <span class="n">XMMM31</span> <span class="n">J004244</span><span class="o">.</span><span class="mi">1</span><span class="o">+</span><span class="mi">411607</span>  <span class="mi">00</span> <span class="mi">42</span> <span class="mf">44.19</span> <span class="o">...</span> <span class="mi">2005</span><span class="n">A</span><span class="o">&amp;</span><span class="n">A</span><span class="o">...</span><span class="mf">434.</span><span class="o">.</span><span class="mi">483</span><span class="n">P</span>
-                  <span class="p">[</span><span class="n">HPH2013</span><span class="p">]</span> <span class="mi">172</span>  <span class="mi">00</span> <span class="mi">42</span> <span class="mf">44.47</span> <span class="o">...</span> <span class="mi">2013</span><span class="n">A</span><span class="o">&amp;</span><span class="n">A</span><span class="o">...</span><span class="mi">555</span><span class="n">A</span><span class="o">..</span><span class="mi">65</span><span class="n">H</span>
-                  <span class="p">[</span><span class="n">HPH2013</span><span class="p">]</span> <span class="mi">169</span>  <span class="mi">00</span> <span class="mi">42</span> <span class="mf">44.39</span> <span class="o">...</span> <span class="mi">2013</span><span class="n">A</span><span class="o">&amp;</span><span class="n">A</span><span class="o">...</span><span class="mi">555</span><span class="n">A</span><span class="o">..</span><span class="mi">65</span><span class="n">H</span>
-                  <span class="n">M31N</span> <span class="mi">2004</span><span class="o">-</span><span class="mi">09</span><span class="n">b</span>  <span class="mi">00</span> <span class="mi">42</span> <span class="mf">44.45</span> <span class="o">...</span> <span class="mi">2007</span><span class="n">A</span><span class="o">&amp;</span><span class="n">A</span><span class="o">...</span><span class="mf">465.</span><span class="o">.</span><span class="mi">375</span><span class="n">P</span>
-                  <span class="p">[</span><span class="n">HPH2013</span><span class="p">]</span> <span class="mi">166</span> <span class="mi">00</span> <span class="mi">42</span> <span class="mf">44.355</span> <span class="o">...</span> <span class="mi">2002</span><span class="n">ApJ</span><span class="o">...</span><span class="mf">577.</span><span class="o">.</span><span class="mi">738</span><span class="n">K</span>
-                    <span class="p">[</span><span class="n">PSC2013</span><span class="p">]</span> <span class="mi">9</span> <span class="mi">00</span> <span class="mi">42</span> <span class="mf">44.060</span> <span class="o">...</span> <span class="mi">2013</span><span class="n">MNRAS</span><span class="o">.</span><span class="mf">430.1219</span><span class="n">P</span>
-                   <span class="p">[</span><span class="n">LGF2011</span><span class="p">]</span> <span class="n">S1</span>  <span class="mi">00</span> <span class="mi">42</span> <span class="mf">44.36</span> <span class="o">...</span> <span class="mi">2011</span><span class="n">ApJ</span><span class="o">...</span><span class="mi">728</span><span class="n">L</span><span class="o">..</span><span class="mi">10</span><span class="n">L</span>
+        <span class="n">CXOGMP</span> <span class="n">J004244</span><span class="mf">.2</span><span class="o">+</span><span class="mi">411608</span>   <span class="mi">00</span> <span class="mi">42</span> <span class="mf">44.2</span> <span class="o">...</span> <span class="mi">2001</span><span class="n">A</span><span class="o">&amp;</span><span class="n">A</span><span class="o">..</span><span class="mf">.365</span><span class="n">L</span><span class="mf">.195</span><span class="n">S</span>
+                  <span class="p">[</span><span class="n">HPH2013</span><span class="p">]</span> <span class="mi">170</span>  <span class="mi">00</span> <span class="mi">42</span> <span class="mf">44.40</span> <span class="o">...</span> <span class="mi">2013</span><span class="n">A</span><span class="o">&amp;</span><span class="n">A</span><span class="o">..</span><span class="mf">.555</span><span class="n">A</span><span class="o">.</span><span class="mf">.65</span><span class="n">H</span>
+        <span class="n">XMMM31</span> <span class="n">J004244</span><span class="mf">.1</span><span class="o">+</span><span class="mi">411607</span>  <span class="mi">00</span> <span class="mi">42</span> <span class="mf">44.19</span> <span class="o">...</span> <span class="mi">2005</span><span class="n">A</span><span class="o">&amp;</span><span class="n">A</span><span class="o">..</span><span class="mf">.434</span><span class="o">.</span><span class="mf">.483</span><span class="n">P</span>
+                  <span class="p">[</span><span class="n">HPH2013</span><span class="p">]</span> <span class="mi">172</span>  <span class="mi">00</span> <span class="mi">42</span> <span class="mf">44.47</span> <span class="o">...</span> <span class="mi">2013</span><span class="n">A</span><span class="o">&amp;</span><span class="n">A</span><span class="o">..</span><span class="mf">.555</span><span class="n">A</span><span class="o">.</span><span class="mf">.65</span><span class="n">H</span>
+                  <span class="p">[</span><span class="n">HPH2013</span><span class="p">]</span> <span class="mi">169</span>  <span class="mi">00</span> <span class="mi">42</span> <span class="mf">44.39</span> <span class="o">...</span> <span class="mi">2013</span><span class="n">A</span><span class="o">&amp;</span><span class="n">A</span><span class="o">..</span><span class="mf">.555</span><span class="n">A</span><span class="o">.</span><span class="mf">.65</span><span class="n">H</span>
+                  <span class="n">M31N</span> <span class="mi">2004</span><span class="o">-</span><span class="mi">09</span><span class="n">b</span>  <span class="mi">00</span> <span class="mi">42</span> <span class="mf">44.45</span> <span class="o">...</span> <span class="mi">2007</span><span class="n">A</span><span class="o">&amp;</span><span class="n">A</span><span class="o">..</span><span class="mf">.465</span><span class="o">.</span><span class="mf">.375</span><span class="n">P</span>
+                  <span class="p">[</span><span class="n">HPH2013</span><span class="p">]</span> <span class="mi">166</span> <span class="mi">00</span> <span class="mi">42</span> <span class="mf">44.355</span> <span class="o">...</span> <span class="mi">2002</span><span class="n">ApJ</span><span class="o">..</span><span class="mf">.577</span><span class="o">.</span><span class="mf">.738</span><span class="n">K</span>
+                    <span class="p">[</span><span class="n">PSC2013</span><span class="p">]</span> <span class="mi">9</span> <span class="mi">00</span> <span class="mi">42</span> <span class="mf">44.060</span> <span class="o">...</span> <span class="mi">2013</span><span class="n">MNRAS</span><span class="mf">.430.1219</span><span class="n">P</span>
+                   <span class="p">[</span><span class="n">LGF2011</span><span class="p">]</span> <span class="n">S1</span>  <span class="mi">00</span> <span class="mi">42</span> <span class="mf">44.36</span> <span class="o">...</span> <span class="mi">2011</span><span class="n">ApJ</span><span class="o">..</span><span class="mf">.728</span><span class="n">L</span><span class="o">.</span><span class="mf">.10</span><span class="n">L</span>
 <span class="n">NAME</span> <span class="n">Nova</span> <span class="n">Treffers</span> <span class="mi">1993</span> <span class="ow">in</span> <span class="n">M</span> <span class="mi">31</span>     <span class="mi">00</span> <span class="mi">42</span> <span class="mi">44</span> <span class="o">...</span>
-<span class="n">Length</span> <span class="o">=</span> <span class="mi">25</span> <span class="n">rows</span>
+<span class="n">Length</span> <span class="o">=</span> <span class="mi">24</span> <span class="n">rows</span>
 </pre></div>
 </div>
 <p>Now back to Cone Search… You can extract metadata of this Cone Search
@@ -426,11 +426,11 @@ catalog.</p>
         &quot;W50&quot;
     ],
     &quot;validate_warnings&quot;: [
-        &quot;/var/www/astroconda.org/html/aux/vo_databases/daily_20201118/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:154:0: W50: Invalid unit string 'pixel'&quot;,
-        &quot;/var/www/astroconda.org/html/aux/vo_databases/daily_20201118/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:154:0: W50: Invalid unit string 'pixel'&quot;
+        &quot;/var/www/astroconda.org/html/aux/vo_databases/daily_20210518/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:154:0: W50: Invalid unit string 'pixel'&quot;,
+        &quot;/var/www/astroconda.org/html/aux/vo_databases/daily_20210518/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml:154:0: W50: Invalid unit string 'pixel'&quot;
     ],
     &quot;validate_xmllint&quot;: true,
-    &quot;validate_xmllint_content&quot;: &quot;/var/www/astroconda.org/html/aux/vo_databases/daily_20201118/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml validatesn&quot;,
+    &quot;validate_xmllint_content&quot;: &quot;/var/www/astroconda.org/html/aux/vo_databases/daily_20210518/results/91/13/e0bb2f53e1be973136ff8afe5ae9/vo.xml validatesn&quot;,
     &quot;waveband&quot;: &quot;optical&quot;,
     &quot;wsdl_url&quot;: &quot;&quot;
 }</pre>
@@ -480,7 +480,7 @@ catalog.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[16]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>   <span class="n">_r</span>      <span class="n">USNO</span><span class="o">-</span><span class="n">A2</span><span class="o">.</span><span class="mi">0</span>    <span class="n">RAJ2000</span>    <span class="n">DEJ2000</span>   <span class="n">ACTflag</span> <span class="n">Mflag</span> <span class="n">Bmag</span> <span class="n">Rmag</span>  <span class="n">Epoch</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>   <span class="n">_r</span>      <span class="n">USNO</span><span class="o">-</span><span class="n">A2</span><span class="mf">.0</span>    <span class="n">RAJ2000</span>    <span class="n">DEJ2000</span>   <span class="n">ACTflag</span> <span class="n">Mflag</span> <span class="n">Bmag</span> <span class="n">Rmag</span>  <span class="n">Epoch</span>
   <span class="n">deg</span>                     <span class="n">deg</span>        <span class="n">deg</span>                   <span class="n">mag</span>  <span class="n">mag</span>     <span class="n">yr</span>
 <span class="o">--------</span> <span class="o">-------------</span> <span class="o">----------</span> <span class="o">----------</span> <span class="o">-------</span> <span class="o">-----</span> <span class="o">----</span> <span class="o">----</span> <span class="o">--------</span>
 <span class="mf">0.094265</span> <span class="mi">1275</span><span class="o">-</span><span class="mi">00425574</span>  <span class="mf">10.595878</span>  <span class="mf">41.335328</span>               <span class="mf">19.8</span> <span class="mf">17.4</span> <span class="mf">1953.773</span>
@@ -495,7 +495,7 @@ catalog.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[17]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>   <span class="n">_r</span>      <span class="n">USNO</span><span class="o">-</span><span class="n">A2</span><span class="o">.</span><span class="mi">0</span>    <span class="n">RAJ2000</span>    <span class="n">DEJ2000</span>   <span class="n">ACTflag</span> <span class="n">Mflag</span> <span class="n">Bmag</span> <span class="n">Rmag</span>  <span class="n">Epoch</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>   <span class="n">_r</span>      <span class="n">USNO</span><span class="o">-</span><span class="n">A2</span><span class="mf">.0</span>    <span class="n">RAJ2000</span>    <span class="n">DEJ2000</span>   <span class="n">ACTflag</span> <span class="n">Mflag</span> <span class="n">Bmag</span> <span class="n">Rmag</span>  <span class="n">Epoch</span>
   <span class="n">deg</span>                     <span class="n">deg</span>        <span class="n">deg</span>                   <span class="n">mag</span>  <span class="n">mag</span>     <span class="n">yr</span>
 <span class="o">--------</span> <span class="o">-------------</span> <span class="o">----------</span> <span class="o">----------</span> <span class="o">-------</span> <span class="o">-----</span> <span class="o">----</span> <span class="o">----</span> <span class="o">--------</span>
 <span class="mf">0.063280</span> <span class="mi">1275</span><span class="o">-</span><span class="mi">00429939</span>  <span class="mf">10.712834</span>  <span class="mf">41.209109</span>       <span class="n">A</span>       <span class="mf">99.9</span> <span class="mf">11.2</span>       <span class="o">--</span>
@@ -531,9 +531,8 @@ http://vizier.u-strasbg.fr/viz-bin/conesearch/I/220/out? returned 5 rows
 http://vizier.u-strasbg.fr/viz-bin/conesearch/I/254/out? returned 5 rows
 http://vizier.u-strasbg.fr/viz-bin/conesearch/I/255/out? returned 5 rows
 http://vizier.u-strasbg.fr/viz-bin/conesearch/I/252/out? returned 3 rows
-http://wfaudata.roe.ac.uk/twomass-dsa/DirectCone?DSACAT=TWOMASS&amp;DSATAB=twomass_psc returned 2008 rows
 http://wfaudata.roe.ac.uk/twomass-dsa/DirectCone?DSACAT=TWOMASS&amp;DSATAB=twomass_xsc returned 25 rows
-http://astrometry.mit.edu/cgi-bin/vo_cone6.cgi?CAT=USNO-A2 returned 3 rows
+http://wfaudata.roe.ac.uk/twomass-dsa/DirectCone?DSACAT=TWOMASS&amp;DSATAB=twomass_psc returned 2008 rows
 </pre></div>
 </div>
 <p><span class="inputnumrole">In[21]:</span></p>
@@ -554,8 +553,8 @@ http://astrometry.mit.edu/cgi-bin/vo_cone6.cgi?CAT=USNO-A2 returned 3 rows
 <span class="mf">0.082097</span> <span class="mi">0280502180</span>  <span class="mf">10.64539</span>  <span class="mf">41.34535</span>    <span class="mf">0.2</span> <span class="o">...</span>  <span class="mi">0738</span> <span class="mf">1985.877</span>    <span class="n">F</span>  <span class="n">GSC</span><span class="o">-</span><span class="nb">all</span>
 </pre></div>
 </div>
-</div>
-<div class="section" id="asynchronous-searches">
+</section>
+<section id="asynchronous-searches">
 <h3>Asynchronous Searches<a class="headerlink" href="#asynchronous-searches" title="Permalink to this headline">¶</a></h3>
 <p>Asynchronous versions (i.e., search will run in the background) of
 <code class="docutils literal notranslate"><span class="pre">conesearch()</span></code> and <code class="docutils literal notranslate"><span class="pre">search_all()</span></code> are also available. Result can be
@@ -611,13 +610,12 @@ http://vizier.u-strasbg.fr/viz-bin/conesearch/I/220/out? returned 5 rows
 http://vizier.u-strasbg.fr/viz-bin/conesearch/I/254/out? returned 5 rows
 http://vizier.u-strasbg.fr/viz-bin/conesearch/I/255/out? returned 5 rows
 http://vizier.u-strasbg.fr/viz-bin/conesearch/I/252/out? returned 3 rows
-http://wfaudata.roe.ac.uk/twomass-dsa/DirectCone?DSACAT=TWOMASS&amp;DSATAB=twomass_psc returned 2008 rows
 http://wfaudata.roe.ac.uk/twomass-dsa/DirectCone?DSACAT=TWOMASS&amp;DSATAB=twomass_xsc returned 25 rows
-http://astrometry.mit.edu/cgi-bin/vo_cone6.cgi?CAT=USNO-A2 returned 3 rows
+http://wfaudata.roe.ac.uk/twomass-dsa/DirectCone?DSACAT=TWOMASS&amp;DSATAB=twomass_psc returned 2008 rows
 </pre></div>
 </div>
-</div>
-<div class="section" id="estimating-the-search-time">
+</section>
+<section id="estimating-the-search-time">
 <h3>Estimating the Search Time<a class="headerlink" href="#estimating-the-search-time" title="Permalink to this headline">¶</a></h3>
 <p>Let’s predict the run time of performing Cone Search on
 <code class="docutils literal notranslate"><span class="pre">http://gsss.stsci.edu/webservices/vo/ConeSearch.aspx?CAT=GSC23&amp;</span></code> with
@@ -641,7 +639,7 @@ linear model, which might or might not reflect the actual trend.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[25]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Predicted</span> <span class="n">run</span> <span class="n">time</span> <span class="ow">is</span> <span class="mf">0.4527974902147827</span> <span class="n">seconds</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Predicted</span> <span class="n">run</span> <span class="n">time</span> <span class="ow">is</span> <span class="mf">1.1745629366183334</span> <span class="n">seconds</span>
 <span class="n">Predicted</span> <span class="n">number</span> <span class="n">of</span> <span class="n">rows</span> <span class="ow">is</span> <span class="mi">2617</span>
 </pre></div>
 </div>
@@ -659,7 +657,7 @@ the service provider.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[26]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">INFO</span><span class="p">:</span> <span class="n">conesearch_timer</span> <span class="n">took</span> <span class="mf">0.7375738620758057</span> <span class="n">s</span> <span class="n">on</span> <span class="n">AVERAGE</span> <span class="k">for</span> <span class="mi">1</span> <span class="n">call</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">.</span> <span class="p">[</span><span class="n">astroquery</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">timer</span><span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">INFO</span><span class="p">:</span> <span class="n">conesearch_timer</span> <span class="n">took</span> <span class="mf">0.9951817989349365</span> <span class="n">s</span> <span class="n">on</span> <span class="n">AVERAGE</span> <span class="k">for</span> <span class="mi">1</span> <span class="n">call</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">.</span> <span class="p">[</span><span class="n">astroquery</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">timer</span><span class="p">]</span>
 </pre></div>
 </div>
 <p><span class="inputnumrole">In[27]:</span></p>
@@ -668,16 +666,16 @@ the service provider.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[27]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Actual</span> <span class="n">run</span> <span class="n">time</span> <span class="ow">is</span> <span class="mf">0.7375738620758057</span> <span class="n">seconds</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Actual</span> <span class="n">run</span> <span class="n">time</span> <span class="ow">is</span> <span class="mf">0.9951817989349365</span> <span class="n">seconds</span>
 <span class="n">Actual</span> <span class="n">number</span> <span class="n">of</span> <span class="n">rows</span> <span class="ow">is</span> <span class="mi">4028</span>
 </pre></div>
 </div>
 <div id="spacer"></div>
 
 <a href="../_static/conesearch/conesearch.ipynb"><button id="download">Download tutorial notebook</button></a>
-<a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/conesearch/conesearch.ipynb"><button id="binder">Interactive tutorial notebook</button></a></div>
-</div>
-</div>
+<a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/conesearch/conesearch.ipynb"><button id="binder">Interactive tutorial notebook</button></a></section>
+</section>
+</section>
 
 </div>
       </div>

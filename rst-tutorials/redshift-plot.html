@@ -2,7 +2,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
-    <meta charset="utf-8" /><meta content="filterTutorials, filterUnits, filterPhysics, filterCosmology, filterMatplotlib" name="keywords" />
+    <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+<meta content="filterTutorials, filterUnits, filterPhysics, filterCosmology, filterMatplotlib" name="keywords" />
 <meta content="filterTutorials," name="keywords" />
 
     <title>Make a plot with both redshift and universe age axes using astropy.cosmology &#8212; astropy-tutorials v3.0.dev</title>
@@ -99,13 +100,13 @@
   <a href="../_static/redshift-plot/redshift-plot.ipynb"><button id="download">Download tutorial notebook</button></a>
 <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/redshift-plot/redshift-plot.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
 
-<div id="spacer"></div><div class="section" id="make-a-plot-with-both-redshift-and-universe-age-axes-using-astropy-cosmology">
+<div id="spacer"></div><section id="make-a-plot-with-both-redshift-and-universe-age-axes-using-astropy-cosmology">
 <span id="redshift-plot"></span><h1>Make a plot with both redshift and universe age axes using astropy.cosmology<a class="headerlink" href="#make-a-plot-with-both-redshift-and-universe-age-axes-using-astropy-cosmology" title="Permalink to this headline">¶</a></h1>
-<div class="section" id="authors">
+<section id="authors">
 <h2>Authors<a class="headerlink" href="#authors" title="Permalink to this headline">¶</a></h2>
 <p>Neil Crighton, Stephanie T. Douglas</p>
-</div>
-<div class="section" id="learning-goals">
+</section>
+<section id="learning-goals">
 <h2>Learning Goals<a class="headerlink" href="#learning-goals" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
 <li><p>Plot relationships using <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code></p></li>
@@ -113,12 +114,12 @@
 <li><p>Relate distance, redshift, and age for two different types of
 cosmology using <code class="docutils literal notranslate"><span class="pre">astropy.cosmology</span></code></p></li>
 </ul>
-</div>
-<div class="section" id="keywords">
+</section>
+<section id="keywords">
 <h2>Keywords<a class="headerlink" href="#keywords" title="Permalink to this headline">¶</a></h2>
 <p>units, physics, cosmology, matplotlib</p>
-</div>
-<div class="section" id="summary">
+</section>
+<section id="summary">
 <h2>Summary<a class="headerlink" href="#summary" title="Permalink to this headline">¶</a></h2>
 <p>Each redshift corresponds to an age of the universe, so if you’re
 plotting some quantity against redshift, it’s often useful show the
@@ -182,7 +183,7 @@ array of distance values, one for each redshift. Let’s plot them:</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[5]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">lines</span><span class="o">.</span><span class="n">Line2D</span> <span class="n">at</span> <span class="mh">0x7fb267be7d90</span><span class="o">&gt;</span><span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">lines</span><span class="o">.</span><span class="n">Line2D</span> <span class="n">at</span> <span class="mh">0x7f910404a850</span><span class="o">&gt;</span><span class="p">]</span>
 </pre></div>
 </div>
 <img alt="../_images/redshift-plot_8_1.png" src="../_images/redshift-plot_8_1.png" />
@@ -221,17 +222,17 @@ values.</p>
 </pre></div>
 </div>
 <p><span class="outputnumrole">Out[9]:</span></p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">axis</span><span class="o">.</span><span class="n">XTick</span> <span class="n">at</span> <span class="mh">0x7fb2668fdc90</span><span class="o">&gt;</span><span class="p">,</span>
- <span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">axis</span><span class="o">.</span><span class="n">XTick</span> <span class="n">at</span> <span class="mh">0x7fb2668fd290</span><span class="o">&gt;</span><span class="p">,</span>
- <span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">axis</span><span class="o">.</span><span class="n">XTick</span> <span class="n">at</span> <span class="mh">0x7fb2668fd390</span><span class="o">&gt;</span><span class="p">,</span>
- <span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">axis</span><span class="o">.</span><span class="n">XTick</span> <span class="n">at</span> <span class="mh">0x7fb264703950</span><span class="o">&gt;</span><span class="p">,</span>
- <span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">axis</span><span class="o">.</span><span class="n">XTick</span> <span class="n">at</span> <span class="mh">0x7fb264703850</span><span class="o">&gt;</span><span class="p">,</span>
- <span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">axis</span><span class="o">.</span><span class="n">XTick</span> <span class="n">at</span> <span class="mh">0x7fb26470c4d0</span><span class="o">&gt;</span><span class="p">,</span>
- <span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">axis</span><span class="o">.</span><span class="n">XTick</span> <span class="n">at</span> <span class="mh">0x7fb26470c390</span><span class="o">&gt;</span><span class="p">,</span>
- <span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">axis</span><span class="o">.</span><span class="n">XTick</span> <span class="n">at</span> <span class="mh">0x7fb26470ce50</span><span class="o">&gt;</span><span class="p">,</span>
- <span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">axis</span><span class="o">.</span><span class="n">XTick</span> <span class="n">at</span> <span class="mh">0x7fb264703ad0</span><span class="o">&gt;</span><span class="p">,</span>
- <span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">axis</span><span class="o">.</span><span class="n">XTick</span> <span class="n">at</span> <span class="mh">0x7fb264715610</span><span class="o">&gt;</span><span class="p">,</span>
- <span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">axis</span><span class="o">.</span><span class="n">XTick</span> <span class="n">at</span> <span class="mh">0x7fb264715510</span><span class="o">&gt;</span><span class="p">]</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">axis</span><span class="o">.</span><span class="n">XTick</span> <span class="n">at</span> <span class="mh">0x7f909eb360d0</span><span class="o">&gt;</span><span class="p">,</span>
+ <span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">axis</span><span class="o">.</span><span class="n">XTick</span> <span class="n">at</span> <span class="mh">0x7f909eb31150</span><span class="o">&gt;</span><span class="p">,</span>
+ <span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">axis</span><span class="o">.</span><span class="n">XTick</span> <span class="n">at</span> <span class="mh">0x7f909eb315d0</span><span class="o">&gt;</span><span class="p">,</span>
+ <span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">axis</span><span class="o">.</span><span class="n">XTick</span> <span class="n">at</span> <span class="mh">0x7f909eb53d90</span><span class="o">&gt;</span><span class="p">,</span>
+ <span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">axis</span><span class="o">.</span><span class="n">XTick</span> <span class="n">at</span> <span class="mh">0x7f909eb5c350</span><span class="o">&gt;</span><span class="p">,</span>
+ <span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">axis</span><span class="o">.</span><span class="n">XTick</span> <span class="n">at</span> <span class="mh">0x7f909eb5c8d0</span><span class="o">&gt;</span><span class="p">,</span>
+ <span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">axis</span><span class="o">.</span><span class="n">XTick</span> <span class="n">at</span> <span class="mh">0x7f909eb5ce90</span><span class="o">&gt;</span><span class="p">,</span>
+ <span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">axis</span><span class="o">.</span><span class="n">XTick</span> <span class="n">at</span> <span class="mh">0x7f909eae2490</span><span class="o">&gt;</span><span class="p">,</span>
+ <span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">axis</span><span class="o">.</span><span class="n">XTick</span> <span class="n">at</span> <span class="mh">0x7f909eb5c2d0</span><span class="o">&gt;</span><span class="p">,</span>
+ <span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">axis</span><span class="o">.</span><span class="n">XTick</span> <span class="n">at</span> <span class="mh">0x7f909eae27d0</span><span class="o">&gt;</span><span class="p">,</span>
+ <span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">axis</span><span class="o">.</span><span class="n">XTick</span> <span class="n">at</span> <span class="mh">0x7f909eae2e10</span><span class="o">&gt;</span><span class="p">]</span>
 </pre></div>
 </div>
 <img alt="../_images/redshift-plot_16_1.png" src="../_images/redshift-plot_16_1.png" />
@@ -337,8 +338,8 @@ save the figure to a png file.</p>
 <p><code class="docutils literal notranslate"><span class="pre">bbox_inches='tight'</span></code> automatically trims any whitespace from around
 the plot edges.</p>
 <p>And we’re done!</p>
-</div>
-<div class="section" id="exercise">
+</section>
+<section id="exercise">
 <h2>Exercise<a class="headerlink" href="#exercise" title="Permalink to this headline">¶</a></h2>
 <p>Well, almost done. Notice that we calculated the times on the upper axis
 using the original cosmology, not the new cosmology based on the Planck
@@ -353,8 +354,8 @@ for some hints on how to go about this.</p>
 <div id="spacer"></div>
 
 <a href="../_static/redshift-plot/redshift-plot.ipynb"><button id="download">Download tutorial notebook</button></a>
-<a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/redshift-plot/redshift-plot.ipynb"><button id="binder">Interactive tutorial notebook</button></a></div>
-</div>
+<a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/redshift-plot/redshift-plot.ipynb"><button id="binder">Interactive tutorial notebook</button></a></section>
+</section>
 
 </div>
       </div>
