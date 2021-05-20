@@ -4,7 +4,7 @@
 .. raw:: html
 
     <a href="../_static/User-Defined-Model/User-Defined-Model.ipynb"><button id="download">Download tutorial notebook</button></a>
-    <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/User-Defined-Model/User-Defined-Model.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
+    <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/main?filepath=/tutorials/notebooks/User-Defined-Model/User-Defined-Model.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
 
     <div id="spacer"></div>
 
@@ -798,9 +798,9 @@ with ``astropy.modeling``.
     Outputs: ('y',)
     Model set size: 1
     Parameters:
-                a                   b                   c         
-        ------------------ ------------------- -------------------
-        1.9504030483770642 -1.8398757791500562 0.39661660036545365
+                a                  b                   c         
+        ----------------- ------------------- -------------------
+        2.259449945315888 -2.1654807299030803 0.31906231985046585
 
 
 The fit looks good in the plot. Let’s check the parameters and the
@@ -838,7 +838,7 @@ goodness of the fit.
 
 .. parsed-literal::
 
-    0.8677313838678671
+    1.2814301055597643
 
 
 
@@ -987,9 +987,9 @@ of the parameters.
     Outputs: ('y',)
     Model set size: 1
     Parameters:
-                a                  b                  c                 d         
-        ------------------ ------------------ ----------------- ------------------
-        3.3320465362147047 2.0146487146348653 3.697191884938121 0.9264457749692214
+                a                 b                  c                 d        
+        ----------------- ------------------ ----------------- -----------------
+        3.426349686837071 2.0100399661948902 3.723019630141161 0.928160199091644
 
 
 
@@ -1008,7 +1008,7 @@ of the parameters.
 
 .. parsed-literal::
 
-    5.903111000645568
+    6.2361425954572285
 
 
 
@@ -1076,5 +1076,5 @@ the following data.
     <div id="spacer"></div>
 
     <a href="../_static/User-Defined-Model/User-Defined-Model.ipynb"><button id="download">Download tutorial notebook</button></a>
-    <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/User-Defined-Model/User-Defined-Model.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
+    <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/main?filepath=/tutorials/notebooks/User-Defined-Model/User-Defined-Model.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
 

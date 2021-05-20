@@ -4,7 +4,7 @@
 .. raw:: html
 
     <a href="../_static/3-Coordinates-Velocities/3-Coordinates-Velocities.ipynb"><button id="download">Download tutorial notebook</button></a>
-    <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/3-Coordinates-Velocities/3-Coordinates-Velocities.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
+    <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/main?filepath=/tutorials/notebooks/3-Coordinates-Velocities/3-Coordinates-Velocities.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
 
     <div id="spacer"></div>
 
@@ -504,7 +504,7 @@ they are large:
 .. raw:: html
 
     <i>Row index=2</i>
-    <table id="table140083184271760">
+    <table id="table140422235651664">
     <thead><tr><th>source_id</th><th>pmra</th><th>pmdec</th></tr></thead>
     <thead><tr><th></th><th>mas / yr</th><th>mas / yr</th></tr></thead>
     <thead><tr><th>int64</th><th>float64</th><th>float64</th></tr></thead>
@@ -640,7 +640,7 @@ we can over-plot a marker for the *Gaia*-measured sky position of HD
 
 .. parsed-literal::
 
-    <matplotlib.collections.PathCollection at 0x7f67a65cb0d0>
+    <matplotlib.collections.PathCollection at 0x7fb69793b2d0>
 
 
 
@@ -735,7 +735,7 @@ in 1950 based on the *Gaia* position and proper motion:
 
 .. parsed-literal::
 
-    <matplotlib.collections.PathCollection at 0x7f67a63a4b50>
+    <matplotlib.collections.PathCollection at 0x7fb6976a7e10>
 
 
 
@@ -763,5 +763,5 @@ at an earlier or later time.
     <div id="spacer"></div>
 
     <a href="../_static/3-Coordinates-Velocities/3-Coordinates-Velocities.ipynb"><button id="download">Download tutorial notebook</button></a>
-    <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/3-Coordinates-Velocities/3-Coordinates-Velocities.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
+    <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/main?filepath=/tutorials/notebooks/3-Coordinates-Velocities/3-Coordinates-Velocities.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
 

@@ -4,7 +4,7 @@
 .. raw:: html
 
     <a href="../_static/Models-Quick-Fit/Models-Quick-Fit.ipynb"><button id="download">Download tutorial notebook</button></a>
-    <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/Models-Quick-Fit/Models-Quick-Fit.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
+    <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/main?filepath=/tutorials/notebooks/Models-Quick-Fit/Models-Quick-Fit.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
 
     <div id="spacer"></div>
 
@@ -390,9 +390,9 @@ perform fit.
     Model set size: 1
     Degree: 3
     Parameters:
-                c0                c1                 c2                 c3        
-        ----------------- ------------------ ------------------ ------------------
-        -9.43600704678472 13.214544867111632 -6.785578535355531 1.1305916992294565
+                c0                 c1                 c2                 c3        
+        ------------------ ------------------ ------------------ ------------------
+        -8.705226268656702 11.076621901732448 -5.377354860052943 0.8911348213325457
 
 
 What would happend if we use a different fitter (method)? Let’s use the
@@ -439,7 +439,7 @@ same model but with ``SimplexLSQFitter`` as fitter.
     Parameters:
                 c0                 c1                 c2                  c3         
         ------------------ ------------------ ------------------ --------------------
-        -3.741498324304856 0.6039234913368561 1.5779472351698567 -0.35431713098441314
+        -2.488836928337932 1.6458826273320264 0.4515258019104576 -0.15325557654423233
 
 
 Note that we got a warning after using ``SimplexLSQFitter`` to fit the
@@ -500,7 +500,7 @@ times.
 
 .. parsed-literal::
 
-    Reduced Chi Squared with LinearLSQFitter: 1.4030340119692228
+    Reduced Chi Squared with LinearLSQFitter: 1.3772300790370713
 
 
 
@@ -518,7 +518,7 @@ times.
 
 .. parsed-literal::
 
-    Reduced Chi Squared with SimplexLSQFitter: 4.2150341292054705
+    Reduced Chi Squared with SimplexLSQFitter: 4.5759031792577565
 
 
 As we can see, the *Reduced Chi Square* for the first fit is closer to
@@ -548,7 +548,7 @@ We can also compare the two fits visually:
 
 .. parsed-literal::
 
-    <matplotlib.legend.Legend at 0x7f00bb8ed590>
+    <matplotlib.legend.Legend at 0x7f58b5451fd0>
 
 
 
@@ -644,9 +644,9 @@ we need (``Gaussian1D``) is non-linear in the parameters.
     Outputs: ('y',)
     Model set size: 1
     Parameters:
-           amplitude            mean              stddev      
-        ---------------- ------------------ ------------------
-        10.1713209828767 0.1250316661319129 10.022328597719692
+            amplitude             mean              stddev      
+        ----------------- ------------------- ------------------
+        9.905977611601106 -0.5384764806640123 10.067776817056757
 
 
 We can get the `covariance
@@ -691,7 +691,7 @@ parameters using:
 
 .. parsed-literal::
 
-    [0.04838957 0.06260815 0.0628062 ]
+    [0.05357386 0.07373997 0.07399744]
 
 
 Then:
@@ -712,9 +712,9 @@ Then:
 
 .. parsed-literal::
 
-    Amplitude: 10.1713209828767 +\- 0.21997628439790454
-    Mean: 0.1250316661319129 +\- 0.25021621135847477
-    Standard Deviation: 10.022328597719692 +\- 0.2506116614469738
+    Amplitude: 9.905977611601106 +\- 0.23146028101239452
+    Mean: -0.5384764806640123 +\- 0.2715510392300127
+    Standard Deviation: 10.067776817056757 +\- 0.2720247043508051
 
 
 We can apply the same method with ``scipy.optimize.curve_fit``, and
@@ -753,7 +753,7 @@ compare the results using again the *Reduced Chi Square Value*.
 
 .. parsed-literal::
 
-    [10.17131692  0.12503104 10.0223366 ]
+    [ 9.90597567 -0.5384786  10.06778077]
 
 
 
@@ -772,9 +772,9 @@ compare the results using again the *Reduced Chi Square Value*.
 
 .. parsed-literal::
 
-    Amplitude: 10.171316918769138 +\- 0.21997426862532057
-    Mean: 0.12503104171445492 +\- 0.2502209704265038
-    Standard Deviation: 10.022336600819582 +\- 0.25061648792575864
+    Amplitude: 9.905975668125826 +\- 0.23146121330130193
+    Mean: -0.5384785996716939 +\- 0.27154881677149756
+    Standard Deviation: 10.067780766735076 +\- 0.2720224074900323
 
 
 Compare results
@@ -795,7 +795,7 @@ Compare results
 
 .. parsed-literal::
 
-    Reduced Chi Squared using astropy.modeling: 0.9446618273290368
+    Reduced Chi Squared using astropy.modeling: 1.0505121911537985
 
 
 
@@ -813,7 +813,7 @@ Compare results
 
 .. parsed-literal::
 
-    Reduced Chi Squared using scipy: 0.9446618273421556
+    Reduced Chi Squared using scipy: 1.0505121911535082
 
 
 As we can see there is a very small difference in the *Reduced Chi
@@ -844,7 +844,7 @@ us to remember the expression of the function we wanted to use.
 
 .. parsed-literal::
 
-    <matplotlib.legend.Legend at 0x7f00bb7c7f50>
+    <matplotlib.legend.Legend at 0x7f58b532dbd0>
 
 
 
@@ -940,5 +940,5 @@ Compare different options
     <div id="spacer"></div>
 
     <a href="../_static/Models-Quick-Fit/Models-Quick-Fit.ipynb"><button id="download">Download tutorial notebook</button></a>
-    <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/Models-Quick-Fit/Models-Quick-Fit.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
+    <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/main?filepath=/tutorials/notebooks/Models-Quick-Fit/Models-Quick-Fit.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
 

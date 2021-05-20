@@ -102,7 +102,7 @@
 <span id="dev-page"></span><h1>Documentation on tutorials infrastructure<a class="headerlink" href="#documentation-on-tutorials-infrastructure" title="Permalink to this headline">¶</a></h1>
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h2>
-<p>Tutorials are written as Jupyter notebooks on the <code class="docutils literal notranslate"><span class="pre">master</span></code> branch of the
+<p>Tutorials are written as Jupyter notebooks on the <code class="docutils literal notranslate"><span class="pre">main</span></code> branch of the
 <code class="docutils literal notranslate"><span class="pre">astropy/astropy-tutorials</span></code> repository in <code class="docutils literal notranslate"><span class="pre">tutorials/notebooks/</span></code>. These
 notebook files do not contain output in order to simplify version-controlling
 the files.</p>
@@ -113,7 +113,7 @@ produce output, and then convert the notebook files into RST files.</p>
 <p>We use <a class="reference external" href="https://circleci.com">CircleCI</a> to do the Sphinx build, which is then
 pushed to the <code class="docutils literal notranslate"><span class="pre">gh-pages</span></code> branch of the repository and served by GitHub. The
 notebooks are first converted to RST files during the Sphinx build by doing the
-conversion at the end of the <a class="reference external" href="https://github.com/astropy/astropy-tutorials/blob/master/tutorials/conf.py">Sphinx configuration file</a>.</p>
+conversion at the end of the <a class="reference external" href="https://github.com/astropy/astropy-tutorials/blob/main/tutorials/conf.py">Sphinx configuration file</a>.</p>
 </section>
 <section id="why-not-use-nbsphinx">
 <h2>Why not use nbsphinx?<a class="headerlink" href="#why-not-use-nbsphinx" title="Permalink to this headline">¶</a></h2>
@@ -159,7 +159,7 @@ this, just remove the <code class="docutils literal notranslate"><span class="pr
 </section>
 <section id="building-the-tutorials-page-locally">
 <h2>Building the tutorials page locally<a class="headerlink" href="#building-the-tutorials-page-locally" title="Permalink to this headline">¶</a></h2>
-<p>For this, you can use the <a class="reference external" href="https://github.com/astropy/astropy-tutorials/blob/master/Makefile">Makefile</a> at the
+<p>For this, you can use the <a class="reference external" href="https://github.com/astropy/astropy-tutorials/blob/main/Makefile">Makefile</a> at the
 top-level of the tutorials repository. From the root level of the cloned or
 downloaded repository:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">make</span> <span class="n">html</span>
@@ -214,7 +214,7 @@ followed by a revision number that is determined by the number of git commits.</
 <h2>Marking a cell with an intentional error<a class="headerlink" href="#marking-a-cell-with-an-intentional-error" title="Permalink to this headline">¶</a></h2>
 <p>Edit the cell metadata of the cell in which you would like to raise an exception
 and add the following to the top-level JSON: <code class="docutils literal notranslate"><span class="pre">&quot;tags&quot;:</span> <span class="pre">[&quot;raises-exception&quot;]</span></code>
-This tag is recognized by the latest (master) version of nbconvert.</p>
+This tag is recognized by the latest (main) version of nbconvert.</p>
 </section>
 <section id="automatically-strip-output-and-notebook-metadata">
 <h2>Automatically Strip Output and Notebook Metadata<a class="headerlink" href="#automatically-strip-output-and-notebook-metadata" title="Permalink to this headline">¶</a></h2>

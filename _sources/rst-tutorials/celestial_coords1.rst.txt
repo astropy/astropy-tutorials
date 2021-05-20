@@ -4,7 +4,7 @@
 .. raw:: html
 
     <a href="../_static/celestial_coords1/celestial_coords1.ipynb"><button id="download">Download tutorial notebook</button></a>
-    <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/celestial_coords1/celestial_coords1.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
+    <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/main?filepath=/tutorials/notebooks/celestial_coords1/celestial_coords1.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
 
     <div id="spacer"></div>
 
@@ -594,7 +594,7 @@ we plotted the image by itself, the plot axes would show pixel values.
 
 .. parsed-literal::
 
-    <matplotlib.image.AxesImage at 0x7f6c57a49c90>
+    <matplotlib.image.AxesImage at 0x7f7eb4e7ab10>
 
 
 
@@ -741,5 +741,5 @@ angle = 15 degrees.
     <div id="spacer"></div>
 
     <a href="../_static/celestial_coords1/celestial_coords1.ipynb"><button id="download">Download tutorial notebook</button></a>
-    <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/celestial_coords1/celestial_coords1.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
+    <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/main?filepath=/tutorials/notebooks/celestial_coords1/celestial_coords1.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
 

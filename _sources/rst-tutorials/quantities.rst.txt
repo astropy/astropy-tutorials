@@ -4,7 +4,7 @@
 .. raw:: html
 
     <a href="../_static/quantities/quantities.ipynb"><button id="download">Download tutorial notebook</button></a>
-    <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/quantities/quantities.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
+    <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/main?filepath=/tutorials/notebooks/quantities/quantities.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
 
     <div id="spacer"></div>
 
@@ -293,7 +293,7 @@ settings on your ``matplotlib`` session to better handle astropy
 
 .. parsed-literal::
 
-    <astropy.visualization.units.quantity_support.<locals>.MplQuantityConverter at 0x7f44b8769b10>
+    <astropy.visualization.units.quantity_support.<locals>.MplQuantityConverter at 0x7f9b93959850>
 
 
 
@@ -1500,5 +1500,5 @@ masses and distances.
     <div id="spacer"></div>
 
     <a href="../_static/quantities/quantities.ipynb"><button id="download">Download tutorial notebook</button></a>
-    <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/quantities/quantities.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
+    <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/main?filepath=/tutorials/notebooks/quantities/quantities.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
 

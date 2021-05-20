@@ -4,7 +4,7 @@
 .. raw:: html
 
     <a href="../_static/redshift-plot/redshift-plot.ipynb"><button id="download">Download tutorial notebook</button></a>
-    <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/redshift-plot/redshift-plot.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
+    <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/main?filepath=/tutorials/notebooks/redshift-plot/redshift-plot.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
 
     <div id="spacer"></div>
 
@@ -143,7 +143,7 @@ array of distance values, one for each redshift. Let’s plot them:
 
 .. parsed-literal::
 
-    [<matplotlib.lines.Line2D at 0x7f22d6212f90>]
+    [<matplotlib.lines.Line2D at 0x7f0591cd2dd0>]
 
 
 
@@ -223,17 +223,17 @@ values.
 
 .. parsed-literal::
 
-    [<matplotlib.axis.XTick at 0x7f226a4a5210>,
-     <matplotlib.axis.XTick at 0x7f226a4a0110>,
-     <matplotlib.axis.XTick at 0x7f226a4a0810>,
-     <matplotlib.axis.XTick at 0x7f226a4c0d50>,
-     <matplotlib.axis.XTick at 0x7f226a4c9390>,
-     <matplotlib.axis.XTick at 0x7f226a4c9910>,
-     <matplotlib.axis.XTick at 0x7f226a4c9850>,
-     <matplotlib.axis.XTick at 0x7f226a451490>,
-     <matplotlib.axis.XTick at 0x7f226a4c9e90>,
-     <matplotlib.axis.XTick at 0x7f226a451a90>,
-     <matplotlib.axis.XTick at 0x7f226a451290>]
+    [<matplotlib.axis.XTick at 0x7f058dd21410>,
+     <matplotlib.axis.XTick at 0x7f058dd1b250>,
+     <matplotlib.axis.XTick at 0x7f058dd1b990>,
+     <matplotlib.axis.XTick at 0x7f058dd46090>,
+     <matplotlib.axis.XTick at 0x7f058dd466d0>,
+     <matplotlib.axis.XTick at 0x7f058dd46c50>,
+     <matplotlib.axis.XTick at 0x7f058dccb250>,
+     <matplotlib.axis.XTick at 0x7f058dccb810>,
+     <matplotlib.axis.XTick at 0x7f058dccbdd0>,
+     <matplotlib.axis.XTick at 0x7f058dccbf50>,
+     <matplotlib.axis.XTick at 0x7f058dcd5250>]
 
 
 
@@ -431,5 +431,5 @@ for some hints on how to go about this.
     <div id="spacer"></div>
 
     <a href="../_static/redshift-plot/redshift-plot.ipynb"><button id="download">Download tutorial notebook</button></a>
-    <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/redshift-plot/redshift-plot.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
+    <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/main?filepath=/tutorials/notebooks/redshift-plot/redshift-plot.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
 

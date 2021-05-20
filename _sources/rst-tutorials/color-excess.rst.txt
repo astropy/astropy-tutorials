@@ -4,7 +4,7 @@
 .. raw:: html
 
     <a href="../_static/color-excess/color-excess.ipynb"><button id="download">Download tutorial notebook</button></a>
-    <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/color-excess/color-excess.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
+    <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/main?filepath=/tutorials/notebooks/color-excess/color-excess.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
 
     <div id="spacer"></div>
 
@@ -762,5 +762,5 @@ depends on the shape of the background source flux.
     <div id="spacer"></div>
 
     <a href="../_static/color-excess/color-excess.ipynb"><button id="download">Download tutorial notebook</button></a>
-    <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/color-excess/color-excess.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
+    <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/main?filepath=/tutorials/notebooks/color-excess/color-excess.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
 

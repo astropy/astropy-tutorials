@@ -4,7 +4,7 @@
 .. raw:: html
 
     <a href="../_static/synthetic-images/synthetic-images.ipynb"><button id="download">Download tutorial notebook</button></a>
-    <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/synthetic-images/synthetic-images.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
+    <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/main?filepath=/tutorials/notebooks/synthetic-images/synthetic-images.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
 
     <div id="spacer"></div>
 
@@ -202,7 +202,7 @@ proper range (``vmin`` and ``vmax``).
 
 .. parsed-literal::
 
-    <matplotlib.image.AxesImage at 0x7f841d437910>
+    <matplotlib.image.AxesImage at 0x7fb2262534d0>
 
 
 
@@ -403,7 +403,7 @@ pixels by using our pixel scale keyword ``cdelt2`` from above.
 
 .. parsed-literal::
 
-    <matplotlib.image.AxesImage at 0x7f8417132810>
+    <matplotlib.image.AxesImage at 0x7fb21ff33510>
 
 
 
@@ -448,7 +448,7 @@ this, using a 2D Lorentzian
 
 .. parsed-literal::
 
-    <matplotlib.image.AxesImage at 0x7f84170a0650>
+    <matplotlib.image.AxesImage at 0x7fb21fea4390>
 
 
 
@@ -511,7 +511,7 @@ Now let’s take a look at the convolved image.
 
 .. parsed-literal::
 
-    <matplotlib.colorbar.Colorbar at 0x7f8416fc2e10>
+    <matplotlib.colorbar.Colorbar at 0x7fb21fdc5b90>
 
 
 
@@ -600,7 +600,7 @@ Let’s plot the Q and U images.
 
 .. parsed-literal::
 
-    <matplotlib.colorbar.Colorbar at 0x7f84157ecf90>
+    <matplotlib.colorbar.Colorbar at 0x7fb21e5ecdd0>
 
 
 
@@ -675,7 +675,7 @@ vectors along the x/right-ascention axis.
 
 .. parsed-literal::
 
-    <matplotlib.quiver.Quiver at 0x7f84156ce7d0>
+    <matplotlib.quiver.Quiver at 0x7fb21e4d0310>
 
 
 
@@ -708,5 +708,5 @@ take the psf we created earlier, you can convert the data into Jy/beam.
     <div id="spacer"></div>
 
     <a href="../_static/synthetic-images/synthetic-images.ipynb"><button id="download">Download tutorial notebook</button></a>
-    <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/synthetic-images/synthetic-images.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
+    <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/main?filepath=/tutorials/notebooks/synthetic-images/synthetic-images.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
 

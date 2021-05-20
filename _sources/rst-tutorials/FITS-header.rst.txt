@@ -4,7 +4,7 @@
 .. raw:: html
 
     <a href="../_static/FITS-header/FITS-header.ipynb"><button id="download">Download tutorial notebook</button></a>
-    <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/FITS-header/FITS-header.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
+    <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/main?filepath=/tutorials/notebooks/FITS-header/FITS-header.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
 
     <div id="spacer"></div>
 
@@ -238,5 +238,5 @@ Then write the updated header back out to a new file:
     <div id="spacer"></div>
 
     <a href="../_static/FITS-header/FITS-header.ipynb"><button id="download">Download tutorial notebook</button></a>
-    <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/FITS-header/FITS-header.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
+    <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/main?filepath=/tutorials/notebooks/FITS-header/FITS-header.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
 

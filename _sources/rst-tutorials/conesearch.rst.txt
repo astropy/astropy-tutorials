@@ -4,7 +4,7 @@
 .. raw:: html
 
     <a href="../_static/conesearch/conesearch.ipynb"><button id="download">Download tutorial notebook</button></a>
-    <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/conesearch/conesearch.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
+    <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/main?filepath=/tutorials/notebooks/conesearch/conesearch.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
 
     <div id="spacer"></div>
 
@@ -791,7 +791,7 @@ This might take a while.
 
 .. parsed-literal::
 
-    Predicted run time is 0.5890307651533112 seconds
+    Predicted run time is 0.6457472563530922 seconds
     Predicted number of rows is 2617
 
 
@@ -820,7 +820,7 @@ the service provider.
 
 .. parsed-literal::
 
-    INFO: conesearch_timer took 0.9820492267608643 s on AVERAGE for 1 call(s). [astroquery.utils.timer]
+    INFO: conesearch_timer took 1.0648577213287354 s on AVERAGE for 1 call(s). [astroquery.utils.timer]
 
 
 
@@ -838,7 +838,7 @@ the service provider.
 
 .. parsed-literal::
 
-    Actual run time is 0.9820492267608643 seconds
+    Actual run time is 1.0648577213287354 seconds
     Actual number of rows is 4028
 
 
@@ -851,5 +851,5 @@ the service provider.
     <div id="spacer"></div>
 
     <a href="../_static/conesearch/conesearch.ipynb"><button id="download">Download tutorial notebook</button></a>
-    <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/master?filepath=/tutorials/notebooks/conesearch/conesearch.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
+    <a href="https://beta.mybinder.org/v2/gh/astropy/astropy-tutorials/main?filepath=/tutorials/notebooks/conesearch/conesearch.ipynb"><button id="binder">Interactive tutorial notebook</button></a>
 
