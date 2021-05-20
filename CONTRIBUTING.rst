@@ -6,7 +6,7 @@ Overview
 
 Each tutorial is a `Jupyter notebook <http://jupyter.org/>`_ file. Each notebook is saved in a separate directory within the ``tutorials/notebooks``
 subdirectory in this project. For an example, let's look at the source notebook
-of the `FITS-header <https://github.com/astropy/astropy-tutorials/tree/master/tu
+of the `FITS-header <https://github.com/astropy/astropy-tutorials/tree/main/tu
 torials/notebooks/FITS-header/>`_ tutorial. Within
 ``tutorials/notebooks/FITS-header``, there is a single Jupyter notebook file
 that contains the text and code for the tutorial, and any small data files used
@@ -188,7 +188,7 @@ your ``requirements.txt`` file would look like:
     numpy>=1.13
 
 To see an example, have a look at the FITS-header `requirements.txt file <https:
-//github.com/astropy/astropy-tutorials/blob/master/tutorials/notebooks/FITS-head
+//github.com/astropy/astropy-tutorials/blob/main/tutorials/notebooks/FITS-head
 er/requirements.txt>`_.
 
 Push the notebook and other files from your local branch up to your fork of the
@@ -244,7 +244,7 @@ procedure:
 
   If you do this, the only change necessary when merging your notebook will be to set ``tutorialpath`` to  ``'http://data.astropy.org/tutorials/My-tutorial-name/'``.
 
-For larger data files that are bigger than 10 MB in size, we recommend hosting with Zenodo. 
+For larger data files that are bigger than 10 MB in size, we recommend hosting with Zenodo.
 To use this approach, follow these steps:
 
 * You will need to sign up for an account with Zenodo before you can upload a file there.

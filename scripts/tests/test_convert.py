@@ -10,7 +10,7 @@ from ..convert import NBConverter
 tests_path = path.split(path.abspath(__file__))[0]
 
 def test_convert_succeed():
-    # With the current master version of nbconvert, we can allow errors
+    # With the current main version of nbconvert, we can allow errors
     # per-cell. This notebook, even though it raises an exception, should still
     # execute fine:
     nbc = NBConverter(path.join(tests_path, 'test-succeed.ipynb'))
