@@ -504,7 +504,7 @@ they are large:
 .. raw:: html
 
     <i>Row index=2</i>
-    <table id="table139647426137872">
+    <table id="table140083184271760">
     <thead><tr><th>source_id</th><th>pmra</th><th>pmdec</th></tr></thead>
     <thead><tr><th></th><th>mas / yr</th><th>mas / yr</th></tr></thead>
     <thead><tr><th>int64</th><th>float64</th><th>float64</th></tr></thead>
@@ -640,7 +640,7 @@ we can over-plot a marker for the *Gaia*-measured sky position of HD
 
 .. parsed-literal::
 
-    <matplotlib.collections.PathCollection at 0x7f02317d1f50>
+    <matplotlib.collections.PathCollection at 0x7f67a65cb0d0>
 
 
 
@@ -735,7 +735,7 @@ in 1950 based on the *Gaia* position and proper motion:
 
 .. parsed-literal::
 
-    <matplotlib.collections.PathCollection at 0x7f02315a0910>
+    <matplotlib.collections.PathCollection at 0x7f67a63a4b50>
 
 
 
