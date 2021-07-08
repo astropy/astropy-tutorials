@@ -8,7 +8,7 @@ Documentation on tutorials infrastructure
 Overview
 --------
 
-Tutorials are written as Jupyter notebooks on the ``master`` branch of the
+Tutorials are written as Jupyter notebooks on the ``main`` branch of the
 ``astropy/astropy-tutorials`` repository in ``tutorials/notebooks/``. These
 notebook files do not contain output in order to simplify version-controlling
 the files.
@@ -18,15 +18,11 @@ to look like the main documentation. Sphinx requires restructured text (RST)
 files for its build process, so use an intermediate step to run the notebooks to
 produce output, and then convert the notebook files into RST files.
 
-We use our own run-and-convert machinery using ``nbconvert``. We use the same
-script that converts the notebooks to RST to test the notebooks on travis by
-simply executing the notebooks and ignoring the output.
-
 We use `CircleCI <https://circleci.com>`_ to do the Sphinx build, which is then
 pushed to the ``gh-pages`` branch of the repository and served by GitHub. The
 notebooks are first converted to RST files during the Sphinx build by doing the
 conversion at the end of the `Sphinx configuration file
-<https://github.com/astropy/astropy-tutorials/blob/master/tutorials/conf.py>`_.
+<https://github.com/astropy/astropy-tutorials/blob/main/tutorials/conf.py>`_.
 
 Why not use nbsphinx?
 ---------------------
@@ -77,7 +73,7 @@ Building the tutorials page locally
 -----------------------------------
 
 For this, you can use the `Makefile
-<https://github.com/astropy/astropy-tutorials/blob/master/Makefile>`_ at the
+<https://github.com/astropy/astropy-tutorials/blob/main/Makefile>`_ at the
 top-level of the tutorials repository. From the root level of the cloned or
 downloaded repository::
 
@@ -135,7 +131,7 @@ Marking a cell with an intentional error
 
 Edit the cell metadata of the cell in which you would like to raise an exception
 and add the following to the top-level JSON: ``"tags": ["raises-exception"]``
-This tag is recognized by the latest (master) version of nbconvert.
+This tag is recognized by the latest (main) version of nbconvert.
 
 Automatically Strip Output and Notebook Metadata
 ------------------------------------------------
