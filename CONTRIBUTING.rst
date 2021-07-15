@@ -6,7 +6,7 @@ Overview
 
 Each tutorial is a `Jupyter notebook <http://jupyter.org/>`_ file. Each notebook is saved in a separate directory within the ``tutorials/notebooks``
 subdirectory in this project. For an example, let's look at the source notebook
-of the `FITS-header <https://github.com/astropy/astropy-tutorials/tree/master/tu
+of the `FITS-header <https://github.com/astropy/astropy-tutorials/tree/main/tu
 torials/notebooks/FITS-header/>`_ tutorial. Within
 ``tutorials/notebooks/FITS-header``, there is a single Jupyter notebook file
 that contains the text and code for the tutorial, and any small data files used
@@ -188,7 +188,7 @@ your ``requirements.txt`` file would look like:
     numpy>=1.13
 
 To see an example, have a look at the FITS-header `requirements.txt file <https:
-//github.com/astropy/astropy-tutorials/blob/master/tutorials/notebooks/FITS-head
+//github.com/astropy/astropy-tutorials/blob/main/tutorials/notebooks/FITS-head
 er/requirements.txt>`_.
 
 Push the notebook and other files from your local branch up to your fork of the
@@ -211,7 +211,10 @@ If your tutorial includes large data files (where large means >~ 1 MB), we don't
 want to include them in the ``astropy/astropy-tutorials`` git repository, as
 that will drastically slow down cloning the repository. Instead, we encourage
 use of the `astropy.utils.download_files` function, and will host data files on
-the `<http://data.astropy.org>`_ server. To do this, use the following
+the `<http://data.astropy.org>`_ server by opening a PR at the
+`<https://github.com/astropy/astropy-data>`_ repository, or to use Zenodo to host the data files
+if the file concerned is larger than 10 MB.
+To do the former, use the following
 procedure:
 
 * When writing your tutorial, include the files in your tutorial's directory
@@ -241,10 +244,28 @@ procedure:
 
   If you do this, the only change necessary when merging your notebook will be to set ``tutorialpath`` to  ``'http://data.astropy.org/tutorials/My-tutorial-name/'``.
 
+For larger data files that are bigger than 10 MB in size, we recommend hosting with Zenodo.
+To use this approach, follow these steps:
+
+* You will need to sign up for an account with Zenodo before you can upload a file there.
+
+* After a Zenodo account has been properly set up, be sure to log in and do a new upload. Follow
+the Zenodo instructions and complete all the required fields as the bare minimum in order to have
+the data file(s) uploaded to their records. Once this is done you will have a link to share the data.
+
+* With the link to the data file record, which has the format ``https://zenodo.org/api/records/:id``, an example HTTP GET request needed to retrieve the data using the Python package ``requests`` is shown below::
+
+    import requests
+    r = requests.get("https://zenodo.org/api/records/1234)
+
+To use the output as a locally stored file, you would first need to write the file contents to a file, for example::
+
+    with open('./some-data-file.fits', 'wb') as f:
+        f.write(r.content)
+
 If you need information or help with:
 
-* previewing how the rendered Jupyter notebooks will look on the tutorial
-  webpage
+* previewing how the rendered Jupyter notebooks will look on the tutorial webpage
 * marking a cell with an intentional / expected error
 
 please see the :ref:`dev-page`.
