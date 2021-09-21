@@ -36,4 +36,5 @@ jobs:
           nbcollection execute --timeout=600 --flatten --build-path=. -v tutorials
 
       - name: Convert the notebooks to HTML
+        run: |
           nbcollection convert --flatten --build-path=. -v --make-index --index-template=_static/index.tpl tutorials
