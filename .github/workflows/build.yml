@@ -1,0 +1,39 @@
+name: Build tutorials
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  release:
+    types:
+      - published
+
+jobs:
+  notebooks:
+    name: "Execute and convert the notebooks to HTML"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: true
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get install pandoc
+          python -m pip install -U pip
+          python -m pip install -r pip-requirements.txt"
+          python -m pip install git+https://github.com/astropy/nbcollection
+
+      - name: Execute the notebooks
+        run: |
+          nbcollection execute --timeout=600 --flatten --build-path=. -v tutorials
+
+      - name: Convert the notebooks to HTML
+          nbcollection convert --flatten --build-path=. -v --make-index --index-template=_static/index.tpl tutorials
