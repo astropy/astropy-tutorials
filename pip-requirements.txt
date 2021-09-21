@@ -6,7 +6,7 @@ numpy
 jupyter
 scipy
 notebook
-spectral-cube
+git+https://github.com/radio-astro-tools/spectral-cube  # as of: 2021-09-21
 radio-beam
 reproject
 dust_extinction
