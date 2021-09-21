@@ -1,5 +1,4 @@
 astropy
-numpy
-matplotlib
 astroquery
-
+matplotlib
+numpy

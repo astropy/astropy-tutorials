@@ -1,8 +1,6 @@
 astropy
-numpy
+astroquery
+gala
 matplotlib
-astroquery
-IPython
+numpy
 scipy
-astroquery
-astro-gala
