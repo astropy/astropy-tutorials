@@ -28,7 +28,7 @@ jobs:
         run: |
           sudo apt-get install pandoc
           python -m pip install -U pip
-          python -m pip install -r pip-requirements.txt"
+          python -m pip install -r pip-requirements.txt
           python -m pip install git+https://github.com/astropy/nbcollection
 
       - name: Execute the notebooks
