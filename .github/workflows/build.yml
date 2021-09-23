@@ -33,7 +33,7 @@ jobs:
 
       - name: Execute the notebooks
         run: |
-          nbcollection execute --timeout=600 --flatten --build-path=. -v tutorials
+          nbcollection execute --timeout=600 --flatten --build-path=. -v tutorials --exclude=conesearch  # TODO: remove this exclude!
 
       - name: Convert the notebooks to HTML
         run: |
