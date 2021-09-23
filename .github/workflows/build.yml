@@ -38,3 +38,8 @@ jobs:
       - name: Convert the notebooks to HTML
         run: |
           nbcollection convert --flatten --build-path=. -v --make-index --index-template=templates/index.tpl tutorials --exclude=conesearch  # TODO: remove this exclude!
+
+      - uses: actions/upload-artifact@v2
+        with:
+          name: rendered-tutorials-${{ github.sha }}
+          path: _build
