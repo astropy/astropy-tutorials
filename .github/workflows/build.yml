@@ -37,4 +37,4 @@ jobs:
 
       - name: Convert the notebooks to HTML
         run: |
-          nbcollection convert --flatten --build-path=. -v --make-index --index-template=_static/index.tpl tutorials
+          nbcollection convert --flatten --build-path=. -v --make-index --index-template=templates/index.tpl tutorials --exclude=conesearch  # TODO: remove this exclude!
