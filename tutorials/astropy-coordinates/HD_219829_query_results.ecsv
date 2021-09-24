@@ -1,0 +1,525 @@
+# %ECSV 1.0
+# ---
+# datatype:
+# - name: solution_id
+#   datatype: int64
+#   description: Solution Identifier
+#   meta: !!omap
+#   - {ucd: meta.version}
+# - name: designation
+#   datatype: string
+#   description: Unique source designation (unique across all Data Releases)
+#   meta: !!omap
+#   - {ucd: meta.id;meta.main}
+#   - {_votable_string_dtype: char}
+#   subtype: json
+# - name: source_id
+#   datatype: int64
+#   description: Unique source identifier (unique within a particular Data Release)
+#   meta: !!omap
+#   - {ucd: meta.id}
+# - name: random_index
+#   datatype: int64
+#   description: Random index used to select subsets
+#   meta: !!omap
+#   - {ucd: meta.code}
+# - name: ref_epoch
+#   unit: yr
+#   datatype: float64
+#   description: Reference epoch
+#   meta: !!omap
+#   - {ucd: meta.ref;time.epoch}
+# - name: ra
+#   unit: deg
+#   datatype: float64
+#   description: Right ascension
+#   meta: !!omap
+#   - {ucd: pos.eq.ra;meta.main}
+#   - {utype: Char.SpatialAxis.Coverage.Location.Coord.Position2D.Value2.C1}
+# - name: ra_error
+#   unit: mas
+#   datatype: float64
+#   description: Standard error of right ascension
+#   meta: !!omap
+#   - {ucd: stat.error;pos.eq.ra}
+# - name: dec
+#   unit: deg
+#   datatype: float64
+#   description: Declination
+#   meta: !!omap
+#   - {ucd: pos.eq.dec;meta.main}
+#   - {utype: Char.SpatialAxis.Coverage.Location.Coord.Position2D.Value2.C2}
+# - name: dec_error
+#   unit: mas
+#   datatype: float64
+#   description: Standard error of declination
+#   meta: !!omap
+#   - {ucd: stat.error;pos.eq.dec}
+# - name: parallax
+#   unit: mas
+#   datatype: float64
+#   description: Parallax
+#   meta: !!omap
+#   - {ucd: pos.parallax}
+# - name: parallax_error
+#   unit: mas
+#   datatype: float64
+#   description: Standard error of parallax
+#   meta: !!omap
+#   - {ucd: stat.error;pos.parallax}
+# - name: parallax_over_error
+#   datatype: float32
+#   description: Parallax divided by its error
+#   meta: !!omap
+#   - {ucd: arith.ratio}
+# - name: pmra
+#   unit: mas / yr
+#   datatype: float64
+#   description: Proper motion in right ascension direction
+#   meta: !!omap
+#   - {ucd: pos.pm;pos.eq.ra}
+# - name: pmra_error
+#   unit: mas / yr
+#   datatype: float64
+#   description: Standard error of proper motion in right ascension direction
+#   meta: !!omap
+#   - {ucd: stat.error;pos.pm;pos.eq.ra}
+# - name: pmdec
+#   unit: mas / yr
+#   datatype: float64
+#   description: Proper motion in declination direction
+#   meta: !!omap
+#   - {ucd: pos.pm;pos.eq.dec}
+# - name: pmdec_error
+#   unit: mas / yr
+#   datatype: float64
+#   description: Standard error of proper motion in declination direction
+#   meta: !!omap
+#   - {ucd: stat.error;pos.pm;pos.eq.dec}
+# - name: ra_dec_corr
+#   datatype: float32
+#   description: Correlation between right ascension and declination
+#   meta: !!omap
+#   - {ucd: stat.correlation;pos.eq.ra;pos.eq.dec}
+# - name: ra_parallax_corr
+#   datatype: float32
+#   description: Correlation between right ascension and parallax
+#   meta: !!omap
+#   - {ucd: stat.correlation;pos.eq.ra;pos.parallax}
+# - name: ra_pmra_corr
+#   datatype: float32
+#   description: Correlation between right ascension and proper motion in right ascension
+#   meta: !!omap
+#   - {ucd: stat.correlation;pos.eq.ra;pos.pm;pos.eq.ra}
+# - name: ra_pmdec_corr
+#   datatype: float32
+#   description: Correlation between right ascension and proper motion in declination
+#   meta: !!omap
+#   - {ucd: stat.correlation;pos.eq.ra;pos.pm;pos.eq.dec}
+# - name: dec_parallax_corr
+#   datatype: float32
+#   description: Correlation between declination and parallax
+#   meta: !!omap
+#   - {ucd: stat.correlation;pos.eq.dec;pos.parallax}
+# - name: dec_pmra_corr
+#   datatype: float32
+#   description: Correlation between declination and proper motion in right ascension
+#   meta: !!omap
+#   - {ucd: stat.correlation;pos.eq.dec;pos.pm;pos.eq.ra}
+# - name: dec_pmdec_corr
+#   datatype: float32
+#   description: Correlation between declination and proper motion in declination
+#   meta: !!omap
+#   - {ucd: stat.correlation;pos.eq.dec;pos.pm;pos.eq.dec}
+# - name: parallax_pmra_corr
+#   datatype: float32
+#   description: Correlation between parallax and proper motion in right ascension
+#   meta: !!omap
+#   - {ucd: stat.correlation;pos.parallax;pos.pm;pos.eq.ra}
+# - name: parallax_pmdec_corr
+#   datatype: float32
+#   description: Correlation between parallax and proper motion in declination
+#   meta: !!omap
+#   - {ucd: stat.correlation;pos.parallax;pos.pm;pos.eq.dec}
+# - name: pmra_pmdec_corr
+#   datatype: float32
+#   description: Correlation between proper motion in right ascension and proper motion in declination
+#   meta: !!omap
+#   - {ucd: stat.correlation;pos.pm;pos.eq.ra;pos.pm;pos.eq.dec}
+# - name: astrometric_n_obs_al
+#   datatype: int32
+#   description: Total number of observations AL
+#   meta: !!omap
+#   - {ucd: meta.number}
+# - name: astrometric_n_obs_ac
+#   datatype: int32
+#   description: Total number of observations AC
+#   meta: !!omap
+#   - {ucd: meta.number}
+# - name: astrometric_n_good_obs_al
+#   datatype: int32
+#   description: Number of good observations AL
+#   meta: !!omap
+#   - {ucd: meta.number}
+# - name: astrometric_n_bad_obs_al
+#   datatype: int32
+#   description: Number of bad observations AL
+#   meta: !!omap
+#   - {ucd: meta.number}
+# - name: astrometric_gof_al
+#   datatype: float32
+#   description: Goodness of fit statistic of model wrt along-scan observations
+#   meta: !!omap
+#   - {ucd: stat.fit.goodness}
+# - name: astrometric_chi2_al
+#   datatype: float32
+#   description: AL chi-square value
+#   meta: !!omap
+#   - {ucd: stat.fit.chi2}
+# - name: astrometric_excess_noise
+#   unit: mas
+#   datatype: float64
+#   description: Excess noise of the source
+#   meta: !!omap
+#   - {ucd: stat.value}
+# - name: astrometric_excess_noise_sig
+#   datatype: float64
+#   description: Significance of excess noise
+#   meta: !!omap
+#   - {ucd: stat.value}
+# - name: astrometric_params_solved
+#   datatype: int16
+#   description: Which parameters have been solved for?
+#   meta: !!omap
+#   - {ucd: meta.number}
+# - name: astrometric_primary_flag
+#   datatype: bool
+#   description: Primary or seconday
+#   meta: !!omap
+#   - {ucd: meta.code}
+# - name: astrometric_weight_al
+#   unit: 1 / mas2
+#   datatype: float32
+#   description: Mean astrometric weight of the source
+#   meta: !!omap
+#   - {ucd: stat.weight;stat.mean}
+# - name: astrometric_pseudo_colour
+#   unit: 1 / um
+#   datatype: float64
+#   description: Astrometrically determined pseudocolour of the source
+#   meta: !!omap
+#   - {ucd: em.wavenumber}
+# - name: astrometric_pseudo_colour_error
+#   unit: 1 / um
+#   datatype: float64
+#   description: Standard error of the pseudocolour of the source
+#   meta: !!omap
+#   - {ucd: em.wavenumber;stat.error}
+# - name: mean_varpi_factor_al
+#   datatype: float32
+#   description: Mean Parallax factor AL
+#   meta: !!omap
+#   - {ucd: arith.factor;pos.parallax}
+# - name: astrometric_matched_observations
+#   datatype: int16
+#   description: Matched FOV transits used in the AGIS solution
+#   meta: !!omap
+#   - {ucd: meta.number}
+# - name: visibility_periods_used
+#   datatype: int16
+#   description: Number of visibility periods used in Astrometric solution
+#   meta: !!omap
+#   - {ucd: meta.number}
+# - name: astrometric_sigma5d_max
+#   unit: mas
+#   datatype: float32
+#   description: The longest semi-major axis of the 5-d error ellipsoid
+#   meta: !!omap
+#   - {ucd: pos.errorEllipse;stat.max}
+# - name: frame_rotator_object_type
+#   datatype: int32
+#   description: The type of the source mainly used for frame rotation
+#   meta: !!omap
+#   - {ucd: meta.code}
+# - name: matched_observations
+#   datatype: int16
+#   description: Amount of observations matched to this source
+#   meta: !!omap
+#   - {ucd: meta.number}
+# - name: duplicated_source
+#   datatype: bool
+#   description: Source with duplicate sources
+#   meta: !!omap
+#   - {ucd: meta.code.status}
+# - name: phot_g_n_obs
+#   datatype: int32
+#   description: Number of observations contributing to G photometry
+#   meta: !!omap
+#   - {ucd: meta.number}
+# - name: phot_g_mean_flux
+#   unit: electron / s
+#   datatype: float64
+#   description: G-band mean flux
+#   meta: !!omap
+#   - {ucd: phot.flux;stat.mean;em.opt}
+# - name: phot_g_mean_flux_error
+#   unit: electron / s
+#   datatype: float64
+#   description: Error on G-band mean flux
+#   meta: !!omap
+#   - {ucd: stat.error;phot.flux;stat.mean;em.opt}
+# - name: phot_g_mean_flux_over_error
+#   datatype: float32
+#   description: G-band mean flux divided by its error
+#   meta: !!omap
+#   - {ucd: arith.ratio}
+# - name: phot_g_mean_mag
+#   unit: mag
+#   datatype: float32
+#   description: G-band mean magnitude
+#   meta: !!omap
+#   - {ucd: phot.mag;stat.mean;em.opt}
+# - name: phot_bp_n_obs
+#   datatype: int32
+#   description: Number of observations contributing to BP photometry
+#   meta: !!omap
+#   - {ucd: meta.number}
+# - name: phot_bp_mean_flux
+#   unit: electron / s
+#   datatype: float64
+#   description: Integrated BP mean flux
+#   meta: !!omap
+#   - {ucd: phot.flux;stat.mean}
+# - name: phot_bp_mean_flux_error
+#   unit: electron / s
+#   datatype: float64
+#   description: Error on the integrated BP mean flux
+#   meta: !!omap
+#   - {ucd: stat.error;phot.flux;stat.mean}
+# - name: phot_bp_mean_flux_over_error
+#   datatype: float32
+#   description: Integrated BP mean flux divided by its error
+#   meta: !!omap
+#   - {ucd: arith.ratio}
+# - name: phot_bp_mean_mag
+#   unit: mag
+#   datatype: float32
+#   description: Integrated BP mean magnitude
+#   meta: !!omap
+#   - {ucd: phot.mag;stat.mean}
+# - name: phot_rp_n_obs
+#   datatype: int32
+#   description: Number of observations contributing to RP photometry
+#   meta: !!omap
+#   - {ucd: meta.number}
+# - name: phot_rp_mean_flux
+#   unit: electron / s
+#   datatype: float64
+#   description: Integrated RP mean flux
+#   meta: !!omap
+#   - {ucd: phot.flux;stat.mean}
+# - name: phot_rp_mean_flux_error
+#   unit: electron / s
+#   datatype: float64
+#   description: Error on the integrated RP mean flux
+#   meta: !!omap
+#   - {ucd: stat.error;phot.flux}
+# - name: phot_rp_mean_flux_over_error
+#   datatype: float32
+#   description: Integrated RP mean flux divided by its error
+#   meta: !!omap
+#   - {ucd: arith.ratio}
+# - name: phot_rp_mean_mag
+#   unit: mag
+#   datatype: float32
+#   description: Integrated RP mean magnitude
+#   meta: !!omap
+#   - {ucd: phot.mag;stat.mean}
+# - {name: phot_bp_rp_excess_factor, datatype: float32, description: BP/RP excess factor}
+# - {name: phot_proc_mode, datatype: int16, description: Photometry processing mode}
+# - name: bp_rp
+#   unit: mag
+#   datatype: float32
+#   description: BP - RP colour
+#   meta: !!omap
+#   - {ucd: phot.color}
+# - name: bp_g
+#   unit: mag
+#   datatype: float32
+#   description: BP - G colour
+#   meta: !!omap
+#   - {ucd: phot.color}
+# - name: g_rp
+#   unit: mag
+#   datatype: float32
+#   description: G - RP colour
+#   meta: !!omap
+#   - {ucd: phot.color}
+# - name: radial_velocity
+#   unit: km / s
+#   datatype: float64
+#   description: Radial velocity
+#   meta: !!omap
+#   - {ucd: spect.dopplerVeloc.opt}
+# - name: radial_velocity_error
+#   unit: km / s
+#   datatype: float64
+#   description: Radial velocity error
+#   meta: !!omap
+#   - {ucd: stat.error;spect.dopplerVeloc.opt}
+# - name: rv_nb_transits
+#   datatype: int32
+#   description: Number of transits used to compute radial velocity
+#   meta: !!omap
+#   - {ucd: meta.number}
+# - name: rv_template_teff
+#   unit: K
+#   datatype: float32
+#   description: Teff of the template used to compute radial velocity
+#   meta: !!omap
+#   - {ucd: stat.fit.param}
+# - name: rv_template_logg
+#   unit: log(cm.s**-2)
+#   datatype: float32
+#   description: logg of the template used to compute radial velocity
+#   meta: !!omap
+#   - {ucd: stat.fit.param}
+# - name: rv_template_fe_h
+#   unit: dex
+#   datatype: float32
+#   description: Fe/H of the template used to compute radial velocity
+#   meta: !!omap
+#   - {ucd: stat.fit.param}
+# - name: phot_variable_flag
+#   datatype: string
+#   description: Photometric variability flag
+#   meta: !!omap
+#   - {ucd: meta.code;src.var}
+#   - {_votable_string_dtype: char}
+#   subtype: json
+# - name: l
+#   unit: deg
+#   datatype: float64
+#   description: Galactic longitude
+#   meta: !!omap
+#   - {ucd: pos.galactic.lon}
+# - name: b
+#   unit: deg
+#   datatype: float64
+#   description: Galactic latitude
+#   meta: !!omap
+#   - {ucd: pos.galactic.lat}
+# - name: ecl_lon
+#   unit: deg
+#   datatype: float64
+#   description: Ecliptic longitude
+#   meta: !!omap
+#   - {ucd: pos.ecliptic.lon}
+# - name: ecl_lat
+#   unit: deg
+#   datatype: float64
+#   description: Ecliptic latitude
+#   meta: !!omap
+#   - {ucd: pos.ecliptic.lat}
+# - name: priam_flags
+#   datatype: int64
+#   description: flags for the Apsis-Priam results
+#   meta: !!omap
+#   - {ucd: meta.code}
+# - name: teff_val
+#   unit: K
+#   datatype: float32
+#   description: stellar effective temperature
+#   meta: !!omap
+#   - {ucd: phys.temperature.effective}
+# - name: teff_percentile_lower
+#   unit: K
+#   datatype: float32
+#   description: teffVal lower uncertainty
+#   meta: !!omap
+#   - {ucd: phys.temperature.effective;stat.min}
+# - name: teff_percentile_upper
+#   unit: K
+#   datatype: float32
+#   description: teffVal upper uncertainty
+#   meta: !!omap
+#   - {ucd: phys.temperature.effective;stat.max}
+# - name: a_g_val
+#   unit: mag
+#   datatype: float32
+#   description: line-of-sight extinction in the G band, A_G)
+#   meta: !!omap
+#   - {ucd: phys.absorption.gal}
+# - name: a_g_percentile_lower
+#   unit: mag
+#   datatype: float32
+#   description: aGVal lower uncertainty
+#   meta: !!omap
+#   - {ucd: phys.absorption.gal;stat.min}
+# - name: a_g_percentile_upper
+#   unit: mag
+#   datatype: float32
+#   description: aGVal upper uncertainty
+#   meta: !!omap
+#   - {ucd: phys.absorption.gal;stat.max}
+# - {name: e_bp_min_rp_val, unit: mag, datatype: float32, description: line-of-sight reddening E(BP-RP)}
+# - {name: e_bp_min_rp_percentile_lower, unit: mag, datatype: float32, description: eBPminRPVal lower uncertainty}
+# - {name: e_bp_min_rp_percentile_upper, unit: mag, datatype: float32, description: eBPminRPVal upper uncertainty}
+# - name: flame_flags
+#   datatype: int64
+#   description: Flags for the Apsis-FLAME results
+#   meta: !!omap
+#   - {ucd: meta.code}
+# - name: radius_val
+#   unit: Rsun
+#   datatype: float32
+#   description: stellar radius
+#   meta: !!omap
+#   - {ucd: phys.size.radius}
+# - name: radius_percentile_lower
+#   unit: Rsun
+#   datatype: float32
+#   description: radiusVal lower uncertainty
+#   meta: !!omap
+#   - {ucd: phys.size.radius;stat.error}
+# - name: radius_percentile_upper
+#   unit: Rsun
+#   datatype: float32
+#   description: radiusVal upper uncertainty
+#   meta: !!omap
+#   - {ucd: phys.size.radius;stat.error}
+# - name: lum_val
+#   unit: Lsun
+#   datatype: float32
+#   description: stellar luminosity
+#   meta: !!omap
+#   - {ucd: phys.luminosity}
+# - name: lum_percentile_lower
+#   unit: Lsun
+#   datatype: float32
+#   description: lumVal lower uncertainty
+#   meta: !!omap
+#   - {ucd: phys.luminosity;stat.error}
+# - name: lum_percentile_upper
+#   unit: Lsun
+#   datatype: float32
+#   description: lumVal upper uncertainty
+#   meta: !!omap
+#   - {ucd: phys.luminosity;stat.error}
+# - name: datalink_url
+#   datatype: string
+#   description: datalink url
+#   meta: !!omap
+#   - {ucd: meta.ref.url}
+#   - {utype: Acess.reference}
+#   - {_votable_string_dtype: char}
+#   subtype: json
+# - {name: dist, datatype: float64}
+# schema: astropy-2.0
+solution_id designation source_id random_index ref_epoch ra ra_error dec dec_error parallax parallax_error parallax_over_error pmra pmra_error pmdec pmdec_error ra_dec_corr ra_parallax_corr ra_pmra_corr ra_pmdec_corr dec_parallax_corr dec_pmra_corr dec_pmdec_corr parallax_pmra_corr parallax_pmdec_corr pmra_pmdec_corr astrometric_n_obs_al astrometric_n_obs_ac astrometric_n_good_obs_al astrometric_n_bad_obs_al astrometric_gof_al astrometric_chi2_al astrometric_excess_noise astrometric_excess_noise_sig astrometric_params_solved astrometric_primary_flag astrometric_weight_al astrometric_pseudo_colour astrometric_pseudo_colour_error mean_varpi_factor_al astrometric_matched_observations visibility_periods_used astrometric_sigma5d_max frame_rotator_object_type matched_observations duplicated_source phot_g_n_obs phot_g_mean_flux phot_g_mean_flux_error phot_g_mean_flux_over_error phot_g_mean_mag phot_bp_n_obs phot_bp_mean_flux phot_bp_mean_flux_error phot_bp_mean_flux_over_error phot_bp_mean_mag phot_rp_n_obs phot_rp_mean_flux phot_rp_mean_flux_error phot_rp_mean_flux_over_error phot_rp_mean_mag phot_bp_rp_excess_factor phot_proc_mode bp_rp bp_g g_rp radial_velocity radial_velocity_error rv_nb_transits rv_template_teff rv_template_logg rv_template_fe_h phot_variable_flag l b ecl_lon ecl_lat priam_flags teff_val teff_percentile_lower teff_percentile_upper a_g_val a_g_percentile_lower a_g_percentile_upper e_bp_min_rp_val e_bp_min_rp_percentile_lower e_bp_min_rp_percentile_upper flame_flags radius_val radius_percentile_lower radius_percentile_upper lum_val lum_percentile_lower lum_percentile_upper datalink_url dist
+1635721458409799680 """Gaia DR2 2661015604634933376""" 2661015604634933376 1462977265 2015.5 349.71443808314274 0.08378571922869163 5.406350233734066 0.06981455319885849 0.6903548758382615 0.10463774397164591 6.5975704 -2.040609180770594 0.15831024111217917 -6.727220501613464 0.12727204562445724 0.10056114 0.41059625 -0.06951938 -0.29032317 -0.33375117 -0.20685387 -0.05722975 -0.02347639 -0.24349955 0.21937583 166 0 164 2 4.8880634 262.13422 0.2663134487782464 2.171809642664326 31 False 2.8542476 1.5514739804406905 0.016978433426132592 0.05109339 19 10 0.14950746 0 25 False 213 3543.567366333834 4.391155897486671 806.9783 16.814764 22 1556.5689066685113 8.889620901441209 175.09958 17.370968 22 2908.398474069353 12.687689613971845 229.22995 16.102785 1.2600205 0 1.2681828 0.55620384 0.7119789 "" "" 0 "" "" "" """NOT_AVAILABLE""" 84.95495367917219 -50.51155224725024 352.69253586015975 9.041664774111247 100001 4882.8276 4719.0 5395.1875 "" "" "" "" "" "" "" "" "" "" "" "" "" """https://gea.esac.esa.int/data-server/datalink/links?ID=Gaia+DR2+2661015604634933376""" 0.009964971210843544
+1635721458409799680 """Gaia DR2 2661015810793360640""" 2661015810793360640 445528008 2015.5 349.7110402948439 0.16941288934305035 5.412381636738937 0.17384712162982535 0.3185553977267934 0.24882616850465583 1.2802327 -1.3880934756827557 0.33746698300303346 -0.724554720226459 0.3098058592182854 0.094283886 0.34688985 0.045790747 -0.2295854 -0.5191395 0.014803272 0.29463488 -0.22077389 -0.41961917 0.40085238 124 0 122 2 0.6869756 127.12059 0.33455945030732376 0.958805018580522 31 False 0.87546533 1.4437486412836686 0.038719526885210846 0.13986896 14 9 0.34992754 0 22 False 167 1133.0685011406038 2.9375438138606 385.7197 18.052725 17 495.2567304822127 10.441309330782271 47.432434 18.614313 18 939.8572691150545 11.672303749069789 80.52029 17.329266 1.2665731 0 1.2850475 0.5615883 0.72345924 "" "" 0 "" "" "" """NOT_AVAILABLE""" 84.95572883742342 -50.50465462729523 352.69181149042794 9.048542887522542 "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """https://gea.esac.esa.int/data-server/datalink/links?ID=Gaia+DR2+2661015810793360640""" 0.010381105060756268
+1635721458409799680 """Gaia DR2 2661015540210781568""" 2661015540210781568 392933776 2015.5 349.72896715675495 0.3507449262151289 5.405115847648341 0.2754966431973364 29.00319440995681 0.420067397908447 69.04414 483.4165901889734 0.6304528339026761 -114.8633971841528 0.6218405635092622 0.11931643 0.590636 -0.11640657 -0.08865421 -0.16874471 -0.19063891 -0.29583436 0.13647223 0.083452486 0.31626296 175 175 172 3 95.94435 15203.307 1.425635421842276 487.07952921430655 31 True 0.46855804 1.7542147886298571 0.07386439068528583 0.158552 20 9 0.35701492 0 32 False 268 11766095.72548246 63091.9435541105 186.49126 8.011785 31 6864746.194927425 71221.50232088838 96.385864 8.259827 26 10431791.117108675 59648.871202286355 174.88664 7.216023 1.470032 0 1.0438037 0.2480421 0.7957616 "" "" 0 "" "" "" """NOT_AVAILABLE""" 84.97288436651142 -50.52053841797158 352.70548749750327 9.034798992151346 102001 5095.6333 4515.74 5567.135 "" "" "" "" "" "" 200111 0.9924494 0.83145976 1.2637082 0.59827954 0.58807945 0.6084796 """https://gea.esac.esa.int/data-server/datalink/links?ID=Gaia+DR2+2661015540210781568""" 0.011269551575792706
+1635721458409799680 """Gaia DR2 2661015707714189184""" 2661015707714189184 924300071 2015.5 349.7325640762333 0.27531281213241265 5.418079919788587 0.20537475568947308 1.5732410878793706 0.32694739400446454 4.8119087 0.4909678777132653 0.46152746362550745 -5.594393419558784 0.3814540101438963 0.119662344 0.5599697 -0.04842105 -0.3322206 -0.1301056 -0.20511477 -0.13745356 -0.082227394 -0.28557575 0.14430724 148 0 146 2 2.437362 185.21773 0.7263511480432564 1.7663414311099603 31 False 0.33277047 1.3171559769139742 0.055499499275174446 0.034256052 17 10 0.42479882 0 24 False 195 650.8177979952492 2.2851064810512614 284.80853 18.654716 19 167.91547268251236 7.287216794237041 23.042469 19.788662 20 828.841075240713 10.161745901753976 81.56483 17.465742 1.5315447 0 2.3229198 1.1339455 1.1889744 "" "" 0 "" "" "" """NOT_AVAILABLE""" 84.98879753420717 -50.51167813980394 352.7140191392524 9.045282218570865 "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """https://gea.esac.esa.int/data-server/datalink/links?ID=Gaia+DR2+2661015707714189184""" 0.012013284432577832
+1635721458409799680 """Gaia DR2 2661015608930257920""" 2661015608930257920 825796434 2015.5 349.7086448902422 0.07323571711597479 5.4087729260160655 0.05808282683067876 0.19582104254302538 0.08595094040527913 2.2782886 6.635767769631729 0.1395661923983293 -3.842791624074978 0.11951121462516086 0.11297976 0.4498689 -0.02993958 -0.2125153 -0.23179407 -0.19369368 -0.042317882 0.03244135 -0.10013225 0.28470865 161 0 161 0 -0.7516409 142.468 0.0 0.0 31 False 3.8972554 1.6003483589186642 0.01525096333098385 0.05435083 18 10 0.13667808 0 24 False 210 3676.6204656649393 3.6229447195114655 1014.8155 16.774744 22 1949.7530735631422 8.013553975023903 243.30692 17.12644 21 2515.686070709493 10.526838347453003 238.97832 16.260279 1.2145499 0 0.86616135 0.351696 0.51446533 "" "" 0 "" "" "" """NOT_AVAILABLE""" 84.94947620732303 -50.506356276905095 352.6881462604411 9.046174761584277 100001 5783.0 5454.9854 6262.01 "" "" "" "" "" "" "" "" "" "" "" "" "" """https://gea.esac.esa.int/data-server/datalink/links?ID=Gaia+DR2+2661015608930257920""" 0.013557172703677567
+1635721458409799680 """Gaia DR2 2661015913872579200""" 2661015913872579200 410476564 2015.5 349.7150602330541 1.4275506913539715 5.427438298209662 1.0676230144618029 -3.8129011453293926 1.5931269455104502 -2.3933442 8.260768485296449 2.352756770203742 -26.89516888183606 2.1124325560514534 -0.31860068 0.591721 -0.026548184 -0.15503657 -0.4724725 0.04315903 0.10519571 -0.117916964 -0.24485925 0.007941911 84 0 82 2 0.21026266 78.95901 0.0 0.0 31 False 0.0230128 1.732918181172017 0.3190097491902861 -0.08656725 13 9 2.0827143 0 13 False 88 92.72163319146276 1.6588316999681094 55.895744 20.770412 10 68.83626128535741 10.431328180260701 6.598993 20.756845 10 105.87928796587941 7.35504776533965 14.395459 19.699892 1.8843019 0 1.0569534 -0.013566971 1.0705204 "" "" 0 "" "" "" """NOT_AVAILABLE""" 84.97400201557431 -50.494280734717535 352.7015746870559 9.060780518335404 "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" "" """https://gea.esac.esa.int/data-server/datalink/links?ID=Gaia+DR2+2661015913872579200""" 0.015300302229762508
