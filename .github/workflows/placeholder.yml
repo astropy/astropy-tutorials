@@ -1,7 +1,0 @@
-name: Placeholder workflow
-on: [push]
-jobs:
-  testing:
-    runs-on: ubuntu-latest
-    steps:
-      - run: echo "Nothing to see here!"
