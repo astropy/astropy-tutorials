@@ -39,7 +39,21 @@ jobs:
         run: |
           nbcollection convert --flatten --build-path=. -v --make-index --index-template=templates/index.tpl tutorials --exclude=conesearch  # TODO: remove this exclude!
 
+      - name: Name artifact
+        id: nameartifact
+        run: |
+          echo "::set-output name=artifactName::rendered-tutorials-${{ github.sha }}"
+
       - uses: actions/upload-artifact@v2
         with:
-          name: rendered-tutorials-${{ github.sha }}
+          name: ${{ steps.nameartifact.outputs.artifactName }}
           path: _build
+
+      - name: Dispatch Learn Astropy deployment
+        uses: peter-evans/repository-dispatch@v1
+        if: ${{ (github.event_name == 'push') && (github.ref == 'refs/heads/main') }}
+        with:
+          token: ${{ secrets.DISPATCH_GITHUB_TOKEN }}
+          repository: astropy/learn-astropy
+          event-type: tutorials-build
+          client-payload: '{"artifactName": "${{ steps.nameartifact.outputs.artifactName }}", "checkrunid": "${{ github.run_id }}", "repo": "${{ github.repository }}"}'
