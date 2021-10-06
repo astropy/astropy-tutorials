@@ -56,4 +56,4 @@ jobs:
           token: ${{ secrets.DISPATCH_GITHUB_TOKEN }}
           repository: astropy/learn-astropy
           event-type: tutorials-build
-          client-payload: '{"artifactName": "${{ steps.nameartifact.outputs.artifactName }}", "checkrunid": "${{ github.run_id }}", "repo": "${{ github.repository }}"}'
+          client-payload: '{"artifactName": "${{ steps.nameartifact.outputs.artifactName }}", "runid": "${{ github.run_id }}", "repo": "${{ github.repository }}"}'
