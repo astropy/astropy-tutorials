@@ -42,7 +42,7 @@ jobs:
       - name: Name artifact
         id: nameartifact
         run: |
-          echo "::set-output name=artifactName::rendered-tutorials-${{ github.sha }}"
+          echo "::set-output name=artifactName::rendered-tutorials"
 
       - uses: actions/upload-artifact@v2
         with:
