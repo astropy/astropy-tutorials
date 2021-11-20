@@ -6,8 +6,7 @@ Overview
 
 Each tutorial is a `Jupyter notebook <http://jupyter.org/>`_ file. Each notebook is saved in a separate directory within the ``tutorials/notebooks``
 subdirectory in this project. For an example, let's look at the source notebook
-of the `FITS-header <https://github.com/astropy/astropy-tutorials/tree/main/tu
-torials/notebooks/FITS-header/>`_ tutorial. Within
+of the `FITS-header <https://github.com/astropy/astropy-tutorials/tree/main/tutorials/notebooks/FITS-header/>`_ tutorial. Within
 ``tutorials/notebooks/FITS-header``, there is a single Jupyter notebook file
 that contains the text and code for the tutorial, and any small data files used
 in the tutorial (in this case, a single FITS file). The notebook file is
@@ -76,7 +75,7 @@ Code
     * Variable names should be descriptive, e.g., ``galaxy_mass``, ``u_mag``
 * Use the print function explicitly to display information about variables
 * As much as possible, comply with `PEP8 <https://www.python.org/dev/peps/pep-0008/>`_.
-* As much as possible, comply with Jupyter notebook style guides - `STScI style guide <https://github.com/spacetelescope/style-guides/blob/master/guides/jupyter-notebooks.md>`_ and `Official Coding Style <https://jupyter.readthedocs.io/en/latest/development_guide/coding_style.html>`_.
+* As much as possible, comply with Jupyter notebook style guides - `STScI style guide <https://github.com/spacetelescope/style-guides/blob/master/guides/jupyter-notebooks.md>`_ and `Official Coding Style <https://jupyter.readthedocs.io/en/latest/contributing/ipython-dev-guide/coding_style.html>`_.
 * Imports
     * Do not use ``from package import *``; import packages, classes, and
       functions explicitly
@@ -95,8 +94,7 @@ Narrative
 
 * Please read through the other tutorials to get a sense of the desired tone and
   length.
-* Use `Markdown formatting <http://jupyter-notebook.readthedocs.io/en/latest/exa
-  mples/Notebook/Working%20With%20Markdown%20Cells.html>`_ in text cells for
+* Use `Markdown formatting <http://jupyter-notebook.readthedocs.io/en/latest/examples/Notebook/Working%20With%20Markdown%20Cells.html>`_ in text cells for
   formatting, links, latex, and code snippets.
 * Titles should be short yet descriptive and emphasize the learning goals of the
   tutorial. Try to make the title appeal to a broad audience and avoid
@@ -152,8 +150,7 @@ Method Two: Submit a Pull Request
 
 The process for contributing a tutorial involves the `GitHub fork
 <https://help.github.com/articles/working-with-forks/>`_ and ``git`` workflow
-concepts `branch, push, pull request <https://help.github.com/articles/proposing
--changes-to-your-work-with-pull-requests/>`_.
+concepts `branch, push, pull request <https://help.github.com/articles/proposing-changes-to-your-work-with-pull-requests/>`_.
 
 To contribute a new tutorial, first fork the ``astropy-tutorials`` repository.
 Then, clone your fork locally to your machine (replace <GITHUB USERNAME> with
@@ -187,9 +184,7 @@ your ``requirements.txt`` file would look like:
     scipy==1.0
     numpy>=1.13
 
-To see an example, have a look at the FITS-header `requirements.txt file <https:
-//github.com/astropy/astropy-tutorials/blob/main/tutorials/notebooks/FITS-head
-er/requirements.txt>`_.
+To see an example, have a look at the FITS-header `requirements.txt file <https://github.com/astropy/astropy-tutorials/blob/main/tutorials/notebooks/FITS-header/requirements.txt>`_.
 
 Push the notebook and other files from your local branch up to your fork of the
 repository on GitHub (by default, named 'origin')::
