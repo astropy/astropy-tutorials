@@ -37,7 +37,7 @@ jobs:
 
       - name: Convert the notebooks to HTML
         run: |
-          nbcollection convert --flatten --build-path=. -v --make-index --index-template=templates/index.tpl tutorials --exclude=conesearch  # TODO: remove this exclude!
+          nbcollection convert --flatten --build-path=. -v --make-index --preprocessors=nbconvert.preprocessors.ExtractOutputPreprocessor --index-template=templates/index.tpl tutorials --exclude=conesearch  # TODO: remove this exclude!
 
       - name: Name artifact
         id: nameartifact
