@@ -7,7 +7,7 @@ def main(repo_path):
 
     # NOTE: assumes the main branch is named "main"
     files_changed = r.git.diff(
-        f'{str(r.active_branch)}..main',
+        f'{str(r.head.object.hexsha)}..origin/main',
         '--name-only').split("\n")
     files_changed = [f for f in files_changed if f.endswith('.ipynb')]
     print(" ".join(files_changed))

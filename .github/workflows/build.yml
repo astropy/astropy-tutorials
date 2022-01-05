@@ -3,12 +3,11 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
   release:
     types:
       - published
+  schedule:
+    - cron: "0 10 * * 1"  # Mondays @ 6AM Eastern
 
 jobs:
   notebooks:
@@ -16,8 +15,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-        with:
-          submodules: true
 
       - name: Set up Python
         uses: actions/setup-python@v2
