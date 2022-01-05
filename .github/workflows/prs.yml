@@ -42,8 +42,8 @@ jobs:
       - name: Run only modified tutorials
         if: "!contains(github.event.pull_request.labels.*.name, 'Run all tutorials')"
         run: |
-          python .github/get_modified_tutorials.py . # testing
           MODIFIED="$(python .github/get_modified_tutorials.py .)"
+          echo "Modified tutorials: $MODIFIED"
           nbcollection execute --timeout=600 --flatten --build-path=. -v $MODIFIED
           echo "TUTORIALS=$MODIFIED" >> $GITHUB_ENV
 
