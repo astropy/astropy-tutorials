@@ -1,0 +1,56 @@
+name: Build tutorials (pull requests)
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      # We also want this workflow triggered if the 'Run all tutorials' label
+      # is added or present when PR is updated
+      - synchronize
+      - labeled
+
+jobs:
+  notebooks:
+    name: "Execute and convert the notebooks to HTML"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get install pandoc
+          python -m pip install -U pip
+          python -m pip install -r pip-requirements.txt
+          python -m pip install gitpython
+          python -m pip install git+https://github.com/astropy/nbcollection
+
+      # Run all tutorials if the label is present
+      - name: Run all tutorials
+        if: contains(github.event.pull_request.labels.*.name, 'Run all tutorials')
+        run: |
+          echo "TUTORIALS=tutorials" >> $GITHUB_ENV
+
+      # Otherwise, only run tutorials that have been modified
+      - name: Run only modified tutorials
+        if: "!contains(github.event.pull_request.labels.*.name, 'Run all tutorials')"
+        run: |
+          MODIFIED="$(python .github/get_modified_tutorials.py .)"
+          echo "Modified tutorials: $MODIFIED"
+          echo "TUTORIALS=$MODIFIED" >> $GITHUB_ENV
+
+      - name: Execute the tutorials
+        if: env.TUTORIALS != ''
+        run: |
+          nbcollection execute --timeout=600 --flatten --build-path=. -v ${{ env.TUTORIALS }}
+
+      - name: Convert the notebooks to HTML
+        if: env.TUTORIALS != ''
+        run: |
+          nbcollection convert --flatten --build-path=. -v --make-index --index-template=templates/index.tpl ${{ env.TUTORIALS }}
