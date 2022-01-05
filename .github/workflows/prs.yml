@@ -35,7 +35,6 @@ jobs:
       - name: Run all tutorials
         if: contains(github.event.pull_request.labels.*.name, 'Run all tutorials')
         run: |
-          nbcollection execute --timeout=600 --flatten --build-path=. -v tutorials --exclude=conesearch  # TODO: remove this exclude!
           echo "TUTORIALS=tutorials" >> $GITHUB_ENV
 
       # Otherwise, only run tutorials that have been modified
@@ -44,9 +43,14 @@ jobs:
         run: |
           MODIFIED="$(python .github/get_modified_tutorials.py .)"
           echo "Modified tutorials: $MODIFIED"
-          nbcollection execute --timeout=600 --flatten --build-path=. -v $MODIFIED
           echo "TUTORIALS=$MODIFIED" >> $GITHUB_ENV
 
+      - name: Execute the tutorials
+        if: env.TUTORIALS != ''
+        run: |
+          nbcollection execute --timeout=600 --flatten --build-path=. -v ${{ env.TUTORIALS }}
+
       - name: Convert the notebooks to HTML
+        if: env.TUTORIALS != ''
         run: |
           nbcollection convert --flatten --build-path=. -v --make-index --index-template=templates/index.tpl ${{ env.TUTORIALS }}
