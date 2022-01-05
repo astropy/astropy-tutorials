@@ -49,7 +49,7 @@ repository, organized by the names of the tutorials.
 You can also get started with a remote environment to run the tutorial notebooks
 in your browser using [Binder](http://mybinder.org)
 
-[![Binder](http://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/astropy/astropy-tutorials/main?filepath=tutorials/notebooks)
+[![Binder](http://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/astropy/astropy-tutorials/main?filepath=tutorials)
 
 
 Contributing tutorial material
