@@ -10,7 +10,8 @@ def main(repo_path):
         f'{str(r.head.object.hexsha)}..origin/main',
         '--name-only').split("\n")
     files_changed = [f for f in files_changed if f.endswith('.ipynb')]
-    print(" ".join(files_changed))
+    if files_changed:
+        print(" ".join(files_changed))
 
 
 if __name__ == "__main__":
