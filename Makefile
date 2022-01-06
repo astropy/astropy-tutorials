@@ -12,6 +12,6 @@ convert:
 	nbcollection convert --flatten --build-path=. -v --make-index --index-template=templates/index.tpl tutorials
 
 clean:
-	rm -rf build
+	rm -rf _build
 
 .PHONY: all clean execute convert
