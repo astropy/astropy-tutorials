@@ -27,21 +27,19 @@ To run the tutorials locally, you should start by cloning this repository with
 have [Jupyter notebook](http://jupyter.org/) and IPython installed and will need
 to install the tutorial dependencies specified in `pip-requirements.txt`:
 
-    pip install -r pip-requirements.txt
+    python -m pip install -r pip-requirements.txt
 
 To check that your environment is set up to run the tutorials, you can use the
-Python standard library `pkg_resources` package. In a Python shell:
+Makefile provided in this repository with the custom `envcheck` command:
 
-    >>> import pkg_resources
-    >>> pkg_resources.require(open('pip-requirements.txt', mode='r'))
+    make envcheck
 
-If this line fails, your environment is missing packages. You can also run this
-as a one-liner from the command line:
-
-    python -c "import pkg_resources; pkg_resources.require(open('pip-requirements.txt', mode='r')); print('Your environment is all set!')"
+If this line fails, your environment is missing packages, and you should run the
+pip install line shown above.
 
 The notebook files themselves live in the `tutorials` directory of this
-repository, organized by the names of the tutorials.
+repository, organized by the names of the tutorials. These can be opened with
+Jupyter notebook as with any other notebook files.
 
 
 ## Run the tutorials on Binder
