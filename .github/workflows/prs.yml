@@ -35,22 +35,14 @@ jobs:
       - name: Run all tutorials
         if: contains(github.event.pull_request.labels.*.name, 'Run all tutorials')
         run: |
-          echo "TUTORIALS=tutorials" >> $GITHUB_ENV
+          export TUTORIALS_MAIN_BRANCH=origin/main
+          make executeall
+          make convertall
 
       # Otherwise, only run tutorials that have been modified
       - name: Run only modified tutorials
         if: "!contains(github.event.pull_request.labels.*.name, 'Run all tutorials')"
         run: |
-          MODIFIED="$(python .github/get_modified_tutorials.py .)"
-          echo "Modified tutorials: $MODIFIED"
-          echo "TUTORIALS=$MODIFIED" >> $GITHUB_ENV
-
-      - name: Execute the tutorials
-        if: env.TUTORIALS != ''
-        run: |
-          nbcollection execute --timeout=600 --flatten --build-path=. -v ${{ env.TUTORIALS }}
-
-      - name: Convert the notebooks to HTML
-        if: env.TUTORIALS != ''
-        run: |
-          nbcollection convert --flatten --build-path=. -v --make-index --index-template=templates/index.tpl ${{ env.TUTORIALS }}
+          export TUTORIALS_MAIN_BRANCH=origin/main
+          make execute
+          make convert
