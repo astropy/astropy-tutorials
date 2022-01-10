@@ -54,8 +54,9 @@ Contributing tutorial material
 ------------------------------
 
 We are always interested in incorporating new tutorials into Learn Astropy and
-the Astropy Tutorials series. If you have Astropy or Astropy affiliated
-package-related tutorials that you would like to contribute to this repository,
+the Astropy Tutorials series. We welcome tutorials covering astro-relevant topics and they do not 
+necessarily need to use the Astropy package in order to be hosted or indexed here.
+If you have astronomy tutorials that you would like to contribute to this repository,
 or if you have a separate tutorial series that you would like indexed by the
 Learn Astropy website, please see the [Contributing
 Guide](https://learn.astropy.org/contributing) on the Learn Astropy website for
