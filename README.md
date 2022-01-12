@@ -25,9 +25,9 @@ below.
 To run the tutorials locally, you should start by cloning this repository with
 `git` or downloading an archive of this repository from GitHub. You will need to
 have [Jupyter notebook](http://jupyter.org/) and IPython installed and will need
-to install the tutorial dependencies specified in `pip-requirements.txt`:
+to install the tutorial dependencies specified in `requirements.txt`:
 
-    python -m pip install -r pip-requirements.txt
+    python -m pip install -r requirements.txt
 
 To check that your environment is set up to run the tutorials, you can use the
 Makefile provided in this repository with the custom `envcheck` command:
@@ -54,7 +54,7 @@ Contributing tutorial material
 ------------------------------
 
 We are always interested in incorporating new tutorials into Learn Astropy and
-the Astropy Tutorials series. We welcome tutorials covering astro-relevant topics and they do not 
+the Astropy Tutorials series. We welcome tutorials covering astro-relevant topics and they do not
 necessarily need to use the Astropy package in order to be hosted or indexed here.
 If you have astronomy tutorials that you would like to contribute to this repository,
 or if you have a separate tutorial series that you would like indexed by the

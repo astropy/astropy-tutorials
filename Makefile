@@ -7,7 +7,7 @@ build: envcheck execute convert
 buildall: envcheck executeall convertall
 
 envcheck:
-	python -c "import pkg_resources; pkg_resources.require(open('pip-requirements.txt', mode='r')); print('Your environment is all set!')"
+	python -c "import pkg_resources; pkg_resources.require(open('requirements.txt', mode='r')); print('Your environment is all set!')"
 
 execute:
 	nbcollection execute --timeout=600 --flatten --build-path=. -v ${MODIFIED}
