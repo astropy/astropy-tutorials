@@ -3,7 +3,7 @@ on:
   pull_request:
     branches:
       - main
-  types:
+    types:
       # We want this workflow triggered if the 'infrastructure' label is added
       # or present when PR is updated
       - opened
