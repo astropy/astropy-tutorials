@@ -6,6 +6,8 @@ on:
   types:
       # We want this workflow triggered if the 'infrastructure' label is added
       # or present when PR is updated
+      - opened
+      - reopened
       - synchronize
       - labeled
 
@@ -15,6 +17,7 @@ jobs:
     # get_modified_tutorials.py
     name: "Test get_modified_tutorials.py script"
     runs-on: ubuntu-latest
+    if: contains(github.event.pull_request.labels.*.name, 'infrastructure')
     steps:
       - uses: actions/checkout@v2
         with:
