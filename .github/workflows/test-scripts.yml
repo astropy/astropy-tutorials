@@ -32,7 +32,7 @@ jobs:
           MODIFIED=$(python .github/get_modified_tutorials.py --main-branch origin/main)
           echo "$MODIFIED"
           [ ! -z "$MODIFIED" ] && exit 1 || echo "Success!"
-          git checkout tutorials/FITS-header/FITS-header.ipynb
+          git reset --hard HEAD
 
       - name: Test 2 - no modified if a file is removed and committed
         run: |
@@ -41,3 +41,4 @@ jobs:
           echo "$MODIFIED"
           MODIFIED=$(python .github/get_modified_tutorials.py --main-branch origin/main)
           [ ! -z "$MODIFIED" ] && exit 1 || echo "Success!"
+          git reset --hard HEAD~1
