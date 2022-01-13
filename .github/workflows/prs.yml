@@ -6,6 +6,8 @@ on:
     types:
       # We also want this workflow triggered if the 'Run all tutorials' label
       # is added or present when PR is updated
+      - opened
+      - reopened
       - synchronize
       - labeled
 
