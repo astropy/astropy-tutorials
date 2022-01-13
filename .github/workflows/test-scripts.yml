@@ -1,0 +1,39 @@
+name: Test utility scripts
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  notebooks:
+
+    # get_modified_tutorials.py
+    name: "Test get_modified_tutorials.py script"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get install pandoc
+          python -m pip install -U pip
+          python -m pip install gitpython
+
+      - name: Test 1 - no modified if a file is removed
+        run: |
+          git rm tutorials/FITS-header/FITS-header.ipynb
+          MODIFIED=$(python .github/get_modified_tutorials.py --main-branch origin/main)
+          [ ! -z "$MODIFIED" ] && exit 1 || echo "Success!"
+          git checkout tutorials/FITS-header/FITS-header.ipynb
+
+      - name: Test 2 - no modified if a file is removed and committed
+        run: |
+          git rm tutorials/FITS-header/FITS-header.ipynb
+          git commit -m "REMOVE THIS COMMIT"
+          MODIFIED=$(python .github/get_modified_tutorials.py --main-branch origin/main)
+          [ ! -z "$MODIFIED" ] && exit 1 || echo "Success!"
