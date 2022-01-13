@@ -1,15 +1,22 @@
-import sys
 from git import Repo
 
 
 def main(repo_path, main_branch, **kw):
-    r = Repo(repo_path)
+    repo = Repo(repo_path)
 
-    # NOTE: assumes the main branch is named "main"
-    files_changed = r.git.diff(
-        f'{str(r.head.object.hexsha)}..{main_branch}',
+    # Check committed changes on this branch against the main branch:
+    files_changed = repo.git.diff(
+        f'{str(repo.head.object.hexsha)}..{main_branch}',
         '--name-only').split("\n")
-    files_changed = [f for f in files_changed if f.endswith('.ipynb')]
+    files_changed = set([f for f in files_changed if f.endswith('.ipynb')])
+
+    # Now check the staging area and unstaged changes:
+    files_changed = files_changed.union([
+        diff.b_path for diff in repo.index.diff("HEAD") + repo.index.diff(None)
+        if diff.change_type in ['M', 'A', 'R']  # modified, added, renamed
+        and diff.b_path.endswith('.ipynb')
+    ])
+
     if files_changed:
         print(" ".join(files_changed))
 
