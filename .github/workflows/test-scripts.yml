@@ -3,6 +3,11 @@ on:
   pull_request:
     branches:
       - main
+  types:
+      # We want this workflow triggered if the 'infrastructure' label is added
+      # or present when PR is updated
+      - synchronize
+      - labeled
 
 jobs:
   notebooks:
