@@ -81,19 +81,12 @@ jobs:
       - name: Test 3a - created and staged
         run: |
           touch tutorials/FITS-header/FITS-header2.ipynb
-          MODIFIED=$(python .github/get_modified_tutorials.py --main-branch origin/main)
-          [ "$MODIFIED" != "tutorials/FITS-header/FITS-header2.ipynb" ] && exit 1 || echo "Success!"
-          rm tutorials/FITS-header/FITS-header2.ipynb
-
-      - name: Test 3b - created and staged
-        run: |
-          touch tutorials/FITS-header/FITS-header2.ipynb
           git add tutorials/FITS-header/FITS-header2.ipynb
           MODIFIED=$(python .github/get_modified_tutorials.py --main-branch origin/main)
           [ "$MODIFIED" != "tutorials/FITS-header/FITS-header2.ipynb" ] && exit 1 || echo "Success!"
           git reset --hard HEAD
 
-      - name: Test 3c - created and committed
+      - name: Test 3b - created and committed
         run: |
           touch tutorials/FITS-header/FITS-header2.ipynb
           git add tutorials/FITS-header/FITS-header2.ipynb
