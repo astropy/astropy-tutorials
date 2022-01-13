@@ -20,25 +20,51 @@ jobs:
         with:
           python-version: 3.9
 
-      - name: Install dependencies
+      - name: Install dependencies and setup
         run: |
           sudo apt-get install pandoc
           python -m pip install -U pip
           python -m pip install gitpython
+          git config --global user.email "bot@robot.com"
+          git config --global user.name "Botty McBotface"
 
-      - name: Test 1 - no modified if a file is removed
+      # Make sure if a file is removed, it does not appear in the modified list:
+      - name: Test 1a - removed (staged)
         run: |
           git rm tutorials/FITS-header/FITS-header.ipynb
           MODIFIED=$(python .github/get_modified_tutorials.py --main-branch origin/main)
-          echo "$MODIFIED"
           [ ! -z "$MODIFIED" ] && exit 1 || echo "Success!"
           git reset --hard HEAD
 
-      - name: Test 2 - no modified if a file is removed and committed
+      - name: Test 1b - removed and committed
         run: |
           git rm tutorials/FITS-header/FITS-header.ipynb
           git commit -m "TEST COMMIT"
-          echo "$MODIFIED"
           MODIFIED=$(python .github/get_modified_tutorials.py --main-branch origin/main)
           [ ! -z "$MODIFIED" ] && exit 1 || echo "Success!"
+          git reset --hard HEAD~1
+
+      # Make sure if a file is modified, it appears in the modified list:
+      - name: Test 2a - edited
+        run: |
+          cat "TEST" >> tutorials/FITS-header/FITS-header.ipynb
+          MODIFIED=$(python .github/get_modified_tutorials.py --main-branch origin/main)
+          [ "$MODIFIED" -ne "tutorials/FITS-header/FITS-header.ipynb" ] && exit 1 || echo "Success!"
+          git reset --hard HEAD
+
+      - name: Test 2b - edited and staged
+        run: |
+          cat "TEST" >> tutorials/FITS-header/FITS-header.ipynb
+          git add tutorials/FITS-header/FITS-header.ipynb
+          MODIFIED=$(python .github/get_modified_tutorials.py --main-branch origin/main)
+          [ "$MODIFIED" -ne "tutorials/FITS-header/FITS-header.ipynb" ] && exit 1 || echo "Success!"
+          git reset --hard HEAD
+
+      - name: Test 2c - edited and committed
+        run: |
+          cat "TEST" >> tutorials/FITS-header/FITS-header.ipynb
+          git add tutorials/FITS-header/FITS-header.ipynb
+          git commit -m "TEST COMMIT"
+          MODIFIED=$(python .github/get_modified_tutorials.py --main-branch origin/main)
+          [ "$MODIFIED" -ne "tutorials/FITS-header/FITS-header.ipynb" ] && exit 1 || echo "Success!"
           git reset --hard HEAD~1
