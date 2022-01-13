@@ -47,14 +47,14 @@ jobs:
       # Make sure if a file is modified, it appears in the modified list:
       - name: Test 2a - edited
         run: |
-          cat "TEST" >> tutorials/FITS-header/FITS-header.ipynb
+          echo "TEST" >> tutorials/FITS-header/FITS-header.ipynb
           MODIFIED=$(python .github/get_modified_tutorials.py --main-branch origin/main)
           [ "$MODIFIED" -ne "tutorials/FITS-header/FITS-header.ipynb" ] && exit 1 || echo "Success!"
           git reset --hard HEAD
 
       - name: Test 2b - edited and staged
         run: |
-          cat "TEST" >> tutorials/FITS-header/FITS-header.ipynb
+          echo "TEST" >> tutorials/FITS-header/FITS-header.ipynb
           git add tutorials/FITS-header/FITS-header.ipynb
           MODIFIED=$(python .github/get_modified_tutorials.py --main-branch origin/main)
           [ "$MODIFIED" -ne "tutorials/FITS-header/FITS-header.ipynb" ] && exit 1 || echo "Success!"
@@ -62,9 +62,11 @@ jobs:
 
       - name: Test 2c - edited and committed
         run: |
-          cat "TEST" >> tutorials/FITS-header/FITS-header.ipynb
+          echo "TEST" >> tutorials/FITS-header/FITS-header.ipynb
           git add tutorials/FITS-header/FITS-header.ipynb
           git commit -m "TEST COMMIT"
           MODIFIED=$(python .github/get_modified_tutorials.py --main-branch origin/main)
           [ "$MODIFIED" -ne "tutorials/FITS-header/FITS-header.ipynb" ] && exit 1 || echo "Success!"
           git reset --hard HEAD~1
+
+      # Make sure if a file is added, it appears in the modified list:
