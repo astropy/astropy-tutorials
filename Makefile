@@ -3,6 +3,9 @@ default: build
 TUTORIALS_MAIN_BRANCH ?= main
 MODIFIED := $(shell python .github/get_modified_tutorials.py --main-branch $(TUTORIALS_MAIN_BRANCH))
 
+FLAGS = --flatten --build-path=. -v
+CONVERTFLAGS = --make-index --preprocessors=nbconvert.preprocessors.ExtractOutputPreprocessor --index-template=templates/index.tpl
+
 build: envcheck execute convert
 buildall: envcheck executeall convertall
 
@@ -10,16 +13,16 @@ envcheck:
 	python -c "import pkg_resources; pkg_resources.require(open('requirements.txt', mode='r')); print('Your environment is all set!')"
 
 execute:
-	nbcollection execute --timeout=600 --flatten --build-path=. -v ${MODIFIED}
+	nbcollection execute --timeout=600 ${FLAGS} ${MODIFIED}
 
 convert:
-	nbcollection convert --flatten --build-path=. -v --make-index --index-template=templates/index.tpl ${MODIFIED}
+	nbcollection convert ${CONVERTFLAGS} ${FLAGS} ${MODIFIED}
 
 executeall:
-	nbcollection execute --timeout=600 --flatten --build-path=. -v tutorials
+	nbcollection execute --timeout=600 ${FLAGS} tutorials
 
 convertall:
-	nbcollection convert --flatten --build-path=. -v --make-index --index-template=templates/index.tpl tutorials
+	nbcollection convert ${CONVERTFLAGS} ${FLAGS} tutorials
 
 clean:
 	rm -rf _build
