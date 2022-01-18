@@ -12,4 +12,8 @@ reproject
 dust_extinction
 gala
 synphot
+<<<<<<< HEAD
 pyvo==1.2.0
+=======
+pvextractor
+>>>>>>> a911f0e... add pvextractor to reqs
