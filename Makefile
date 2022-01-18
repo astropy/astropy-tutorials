@@ -6,6 +6,10 @@ MODIFIED := $(shell python .github/get_modified_tutorials.py --main-branch $(TUT
 FLAGS = --flatten --build-path=. -v
 CONVERTFLAGS = --make-index --preprocessors=nbconvert.preprocessors.ExtractOutputPreprocessor --index-template=templates/index.tpl
 
+init:
+	python -m pip install -U -r requirements-dev.txt
+	pre-commit install
+
 build: envcheck execute convert
 buildall: envcheck executeall convertall
 
@@ -27,4 +31,4 @@ convertall:
 clean:
 	rm -rf _build
 
-.PHONY: all clean execute convert executeall convertall build buildall
+.PHONY: init all clean execute convert executeall convertall build buildall
