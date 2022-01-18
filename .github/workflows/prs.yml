@@ -29,9 +29,7 @@ jobs:
         run: |
           sudo apt-get install pandoc
           python -m pip install -U pip
-          python -m pip install -r requirements.txt
-          python -m pip install gitpython
-          python -m pip install git+https://github.com/astropy/nbcollection
+          python -m pip install -r requirements-dev.txt
 
       # Run all tutorials if the label is present
       - name: Run all tutorials

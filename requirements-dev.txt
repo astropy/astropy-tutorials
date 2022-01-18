@@ -1,0 +1,4 @@
+-r requirements.txt
+gitpython
+git+https://github.com/astropy/nbcollection
+pre-commit
