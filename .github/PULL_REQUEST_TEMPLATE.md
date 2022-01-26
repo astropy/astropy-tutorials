@@ -1,0 +1,10 @@
+- [ ] Check the box to confirm that you are familiar with the [contributing
+  guidelines](https://learn.astropy.org/contributing/how-to-contribute) and/or
+  indicate (check the box) that you are familiar with our contributing workflow.
+- [ ] Confirm that any contributed tutorials contain a complete Introduction
+  which includes an Author list, Learning Goals, Keywords, Companion Content (if
+  applicable), and a Summary.
+- [ ] Check the box to confirm that you are familiar with the Astropy community
+  [code of
+  conduct](https://github.com/astropy/astropy/blob/main/CODE_OF_CONDUCT.md) and
+  you agree to follow the CoC.
