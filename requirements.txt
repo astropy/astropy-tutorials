@@ -12,3 +12,4 @@ reproject
 dust_extinction
 gala
 synphot
+pyvo==1.2.0
