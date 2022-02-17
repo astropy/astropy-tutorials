@@ -29,11 +29,11 @@ jobs:
 
       - name: Execute the notebooks
         run: |
-          nbcollection execute --timeout=600 --flatten --build-path=. -v tutorials --exclude=conesearch  # TODO: remove this exclude!
+          make executeall
 
       - name: Convert the notebooks to HTML
         run: |
-          nbcollection convert --flatten --build-path=. -v --make-index --index-template=templates/index.tpl tutorials --exclude=conesearch  # TODO: remove this exclude!
+          make convertall
 
       - name: Name artifact
         id: nameartifact
@@ -47,7 +47,7 @@ jobs:
 
       - name: Dispatch Learn Astropy deployment
         uses: peter-evans/repository-dispatch@0e8ca8c8a5ca5e28d25af2c27fc5aa40f16cffca
-        if: ${{ (github.event_name == 'push') && (github.ref == 'refs/heads/main') }}
+        if: ${{ (github.event_name == 'push') && (github.ref == 'refs/heads/main') && (github.repository == 'astropy/astropy-tutorials')}}
         with:
           token: ${{ secrets.DISPATCH_GITHUB_TOKEN }}
           repository: astropy/learn-astropy
