@@ -40,7 +40,7 @@ jobs:
         run: |
           echo "::set-output name=artifactName::rendered-tutorials"
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         with:
           name: ${{ steps.nameartifact.outputs.artifactName }}
           path: _build
