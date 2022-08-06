@@ -1,0 +1,16 @@
+astropy
+astroquery
+IPython
+matplotlib
+numpy
+jupyter
+scipy
+notebook
+spectral-cube @ git+https://github.com/radio-astro-tools/spectral-cube  # as of: 2021-09-21
+radio-beam
+reproject
+dust_extinction
+gala
+synphot
+pyvo==1.2.0
+pvextractor
