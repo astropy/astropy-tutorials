@@ -15,4 +15,4 @@ repos:
     rev: 0.6.0
     hooks:
     -   id: nbstripout
-        args: ["--extra-keys=metadata.kernelspec metadata.language_info.version metadata.toc metadata.language_info.codemirror_mode.version metadata.language_info.pygments_lexer metadata.notify_time metadata.varInspector metadata.colab cell.metadata.colab cell.metadata.outputId cell.metadata.id"]
+        args: ["--extra-keys=metadata.kernelspec metadata.language_info.version metadata.toc metadata.language_info.codemirror_mode.version metadata.language_info.pygments_lexer metadata.notify_time metadata.varInspector metadata.colab cell.metadata.colab cell.metadata.colab_type cell.metadata.outputId cell.metadata.id"]
