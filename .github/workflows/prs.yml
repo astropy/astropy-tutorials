@@ -46,3 +46,13 @@ jobs:
           export TUTORIALS_MAIN_BRANCH=origin/main
           make execute
           make convert
+
+      - name: Name artifact
+        id: nameartifact
+        run: |
+          echo "::set-output name=artifactName::rendered-tutorials"
+
+      - uses: actions/upload-artifact@v3
+        with:
+          name: ${{ steps.nameartifact.outputs.artifactName }}
+          path: _build
