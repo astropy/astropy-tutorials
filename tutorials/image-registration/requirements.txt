@@ -1,0 +1,9 @@
+numpy
+requests
+json
+matplotlib
+astropy
+astroquery
+photutils
+reproject
+ccdproc
