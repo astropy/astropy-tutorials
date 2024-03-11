@@ -12,5 +12,8 @@ reproject
 dust_extinction
 gala
 synphot
-pyvo==1.2.0
+pyvo
 pvextractor
+photutils
+requests
+ccdproc
