@@ -8,4 +8,5 @@ IPython-*
 *.pyc
 *.tex
 exec*.ipynb
+.python-version
 .DS_Store
