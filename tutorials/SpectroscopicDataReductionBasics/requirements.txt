@@ -1,0 +1,6 @@
+astropy
+astroquery
+IPython
+numpy
+PIL
+pylab
