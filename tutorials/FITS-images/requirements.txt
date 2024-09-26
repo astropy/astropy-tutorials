@@ -1,0 +1,3 @@
+astropy
+matplotlib
+numpy
