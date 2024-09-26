@@ -38,8 +38,8 @@ jobs:
       - name: Name artifact
         id: nameartifact
         run: |
-          echo "::set-output name=artifactName::rendered-tutorials"
-
+          echo "::set-output {artifactName}::{rendered-tutorials}" >> $GITHUB_OUTPUT
+          
       - uses: actions/upload-artifact@v4
         with:
           name: ${{ steps.nameartifact.outputs.artifactName }}
