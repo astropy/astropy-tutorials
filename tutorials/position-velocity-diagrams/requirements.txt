@@ -1,0 +1,5 @@
+astropy
+numpy
+pvextractor
+pylab
+spectral_cube
