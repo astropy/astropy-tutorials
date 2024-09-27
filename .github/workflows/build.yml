@@ -46,7 +46,7 @@ jobs:
           path: _build
 
       - name: Dispatch Learn Astropy deployment
-        uses: peter-evans/repository-dispatch@26b39ed245ab8f31526069329e112ab2fb224588
+        uses: peter-evans/repository-dispatch@v3
         if: ${{ (github.event_name == 'push') && (github.ref == 'refs/heads/main') && (github.repository == 'astropy/astropy-tutorials')}}
         with:
           token: ${{ secrets.DISPATCH_GITHUB_TOKEN }}
