@@ -1,5 +1,5 @@
 astropy
 dask
-numpy
+numpy==1.26.4 # pinned on 09-27-24; can remove pin when https://github.com/radio-astro-tools/spectral-cube/pull/917 is merged
 radio_beam
 spectral-cube
