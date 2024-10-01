@@ -8,7 +8,6 @@ CONVERTFLAGS = --make-index --preprocessors=nbconvert.preprocessors.ExtractOutpu
 
 init:
 	python -m pip install -U -r requirements-dev.txt
-	pre-commit install
 
 build: execute convert
 buildall: executeall convertall
