@@ -1,7 +1,11 @@
 default: build
 
 TUTORIALS_MAIN_BRANCH ?= main
-MODIFIED := $(shell python .github/get_modified_tutorials.py --main-branch $(TUTORIALS_MAIN_BRANCH))
+MODIFIED_NOTEBOOKS := $(shell python .github/get_modified_tutorials.py --main-branch $(TUTORIALS_MAIN_BRANCH))
+# MODIFIED_RQT_PATHS is a string of the paths to the individual requirements.txt files
+# in the directories in which 1+ notebooks have been modified
+MODIFIED_RQT_PATHS := $(foreach var,$(MODIFIED_NOTEBOOKS),$(addsuffix requirements.txt,$(dir $(var))))
+
 
 FLAGS = --flatten --build-path=. -v
 CONVERTFLAGS = --make-index --preprocessors=nbconvert.preprocessors.ExtractOutputPreprocessor --index-template=templates/index.tpl
