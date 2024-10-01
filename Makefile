@@ -10,11 +10,8 @@ init:
 	python -m pip install -U -r requirements-dev.txt
 	pre-commit install
 
-build: envcheck execute convert
-buildall: envcheck executeall convertall
-
-envcheck:
-	python -c "import pkg_resources; pkg_resources.require(open('requirements.txt', mode='r')); print('Your environment is all set!')"
+build: execute convert
+buildall: executeall convertall
 
 execute:
 	nbcollection execute --timeout=600 ${FLAGS} ${MODIFIED}
