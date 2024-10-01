@@ -17,10 +17,23 @@ build: execute convert
 buildall: executeall convertall
 
 execute:
-	nbcollection execute --timeout=600 ${FLAGS} ${MODIFIED}
+	i=0; \
+	_paths=($(MODIFIED_RQT_PATHS)); \
+	for notebook in ${MODIFIED_NOTEBOOKS}; do \
+		echo $${_paths[i]}; \
+		python -m pip install --force-reinstall -r $${_paths[i]}; \
+		nbcollection execute --timeout=600 ${FLAGS} $$notebook; \
+		i=$$((i+1)); \
+	done
 
 convert:
-	nbcollection convert ${CONVERTFLAGS} ${FLAGS} ${MODIFIED}
+	i=0; \
+	_paths=($(MODIFIED_RQT_PATHS)); \
+	for notebook in ${MODIFIED_NOTEBOOKS}; do \
+		echo $${_paths[i]}; \
+		nbcollection convert ${CONVERTFLAGS} ${FLAGS} $$notebook; \
+		i=$$((i+1)); \
+	done
 
 executeall:
 	nbcollection execute --timeout=600 ${FLAGS} tutorials
