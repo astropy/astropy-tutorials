@@ -2,5 +2,5 @@ astropy
 astroquery>=0.4.8.dev9474  # 2024-09-24 pinned for Gaia column capitalization issue
 IPython
 numpy
-PIL
-pylab
+pillow
+matplotlib

@@ -1,5 +1,5 @@
 astropy
 numpy
 pvextractor
-pylab
+matplotlib
 spectral_cube
