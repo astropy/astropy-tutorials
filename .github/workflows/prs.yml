@@ -38,6 +38,7 @@ jobs:
           export TUTORIALS_MAIN_BRANCH=origin/main
           make executeall
           make convertall
+        shell: bash
 
       # Otherwise, only run tutorials that have been modified
       - name: Run only modified tutorials
@@ -46,6 +47,7 @@ jobs:
           export TUTORIALS_MAIN_BRANCH=origin/main
           make execute
           make convert
+        shell: bash
 
       - name: Name artifact
         id: nameartifact

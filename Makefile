@@ -40,7 +40,7 @@ convert:
 
 executeall:
 	i=0; \
-	_paths=${ALL_RQT_PATHS}; \
+	_paths=(${ALL_RQT_PATHS}); \
 	for notebook in ${ALL_NOTEBOOKS}; do \
 		echo $${_paths[i]}; \
 		python -m pip install --force-reinstall -r $${_paths[i]}; \
