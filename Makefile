@@ -13,7 +13,7 @@ ALL_NOTEBOOKS := $(shell python .github/get_modified_tutorials.py --main-branch 
 ALL_RQT_PATHS := $(foreach var,$(ALL_NOTEBOOKS),$(addsuffix requirements.txt,$(dir $(var))))
 
 FLAGS = --flatten --build-path=. -v
-CONVERTFLAGS = --make-index --preprocessors=nbconvert.preprocessors.ExtractOutputPreprocessor --index-template=templates/index.tpl --overwrite=True
+CONVERTFLAGS = --make-index --preprocessors=nbconvert.preprocessors.ExtractOutputPreprocessor --index-template=templates/index.tpl --overwrite=true
 
 init:
 	python -m pip install -U -r requirements-dev.txt
