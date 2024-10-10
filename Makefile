@@ -37,7 +37,7 @@ convert:
 	for notebook in ${MODIFIED_NOTEBOOKS}; do \
 		echo Installing requirements from $${_paths[i]}; \
 		python -m pip install --force-reinstall -r $${_paths[i]} > /dev/null; \
-		nbcollection convert --timeout=600 ${CONVERTFLAGS} ${FLAGS} $$notebook; \
+		nbcollection convert ${CONVERTFLAGS} ${FLAGS} $$notebook; \
 		i=$$((i+1)); \
 	done
 
@@ -57,7 +57,7 @@ convertall:
 	for notebook in ${ALL_NOTEBOOKS}; do \
 		echo Installing requirements from $${_paths[i]}; \
 		python -m pip install --force-reinstall -r $${_paths[i]} > /dev/null; \
-		nbcollection convert --timeout=600 ${CONVERTFLAGS} ${FLAGS} $$notebook; \
+		nbcollection convert ${CONVERTFLAGS} ${FLAGS} $$notebook; \
 		i=$$((i+1)); \
 	done
 
