@@ -3,3 +3,4 @@
 gitpython
 git+https://github.com/astropy/nbcollection
 pre-commit
+ipykernel
