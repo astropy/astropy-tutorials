@@ -25,8 +25,8 @@ execute:
 	i=0; \
 	_paths=($(MODIFIED_RQT_PATHS)); \
 	for notebook in ${MODIFIED_NOTEBOOKS}; do \
-		echo $${_paths[i]}; \
-		python -m pip install --force-reinstall -r $${_paths[i]}; \
+		echo Installing requirements from $${_paths[i]}; \
+		python -m pip install --force-reinstall -r $${_paths[i]} > /dev/null; \
 		nbcollection execute --timeout=600 ${FLAGS} $$notebook; \
 		i=$$((i+1)); \
 	done
@@ -35,7 +35,7 @@ convert:
 	i=0; \
 	_paths=($(MODIFIED_RQT_PATHS)); \
 	for notebook in ${MODIFIED_NOTEBOOKS}; do \
-		echo $${_paths[i]}; \
+		echo Installing requirements from $${_paths[i]}; \
 		nbcollection convert ${CONVERTFLAGS} ${FLAGS} $$notebook; \
 		i=$$((i+1)); \
 	done
@@ -44,8 +44,8 @@ executeall:
 	i=0; \
 	_paths=(${ALL_RQT_PATHS}); \
 	for notebook in ${ALL_NOTEBOOKS}; do \
-		echo $${_paths[i]}; \
-		python -m pip install --force-reinstall -r $${_paths[i]}; \
+		echo Installing requirements from $${_paths[i]}; \
+		python -m pip install --force-reinstall -r $${_paths[i]} > /dev/null; \
 		nbcollection execute --timeout=600 ${FLAGS} $$notebook; \
 		i=$$((i+1)); \
 	done
@@ -54,7 +54,7 @@ convertall:
 	i=0; \
 	_paths=($(ALL_RQT_PATHS)); \
 	for notebook in ${ALL_NOTEBOOKS}; do \
-		echo $${_paths[i]}; \
+		echo Installing requirements from $${_paths[i]}; \
 		nbcollection convert ${CONVERTFLAGS} ${FLAGS} $$notebook; \
 		i=$$((i+1)); \
 	done
