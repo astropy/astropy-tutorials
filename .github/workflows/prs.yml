@@ -36,16 +36,17 @@ jobs:
         if: contains(github.event.pull_request.labels.*.name, 'Run all tutorials')
         run: |
           export TUTORIALS_MAIN_BRANCH=origin/main
-          make executeall
-          make convertall
+          make clean
+          make buildall
+        shell: bash
 
       # Otherwise, only run tutorials that have been modified
       - name: Run only modified tutorials
         if: "!contains(github.event.pull_request.labels.*.name, 'Run all tutorials')"
         run: |
           export TUTORIALS_MAIN_BRANCH=origin/main
-          make execute
-          make convert
+          make build
+        shell: bash
 
       - name: Name artifact
         id: nameartifact

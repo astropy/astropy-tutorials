@@ -30,10 +30,12 @@ jobs:
       - name: Execute the notebooks
         run: |
           make executeall
+        shell: bash
 
       - name: Convert the notebooks to HTML
         run: |
           make convertall
+        shell: bash
 
       - name: Name artifact
         id: nameartifact

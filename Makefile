@@ -1,32 +1,65 @@
 default: build
 
+SHELL := /bin/bash
+
 TUTORIALS_MAIN_BRANCH ?= main
-MODIFIED := $(shell python .github/get_modified_tutorials.py --main-branch $(TUTORIALS_MAIN_BRANCH))
+
+# paths to the individual notebooks that have been modified
+MODIFIED_NOTEBOOKS := $(shell python .github/get_modified_tutorials.py --main-branch $(TUTORIALS_MAIN_BRANCH))
+# paths to the individual requirements.txt files in the directories in which 1+ notebooks have been modified
+MODIFIED_RQT_PATHS := $(foreach var,$(MODIFIED_NOTEBOOKS),$(addsuffix requirements.txt,$(dir $(var))))
+
+ALL_NOTEBOOKS := $(shell python .github/get_modified_tutorials.py --main-branch $(TUTORIALS_MAIN_BRANCH) --return_all true)
+ALL_RQT_PATHS := $(foreach var,$(ALL_NOTEBOOKS),$(addsuffix requirements.txt,$(dir $(var))))
 
 FLAGS = --flatten --build-path=. -v
-CONVERTFLAGS = --make-index --preprocessors=nbconvert.preprocessors.ExtractOutputPreprocessor --index-template=templates/index.tpl
+CONVERTFLAGS = --make-index --preprocessors=nbconvert.preprocessors.ExtractOutputPreprocessor --index-template=templates/index.tpl --overwrite
 
 init:
 	python -m pip install -U -r requirements-dev.txt
-	pre-commit install
 
-build: envcheck execute convert
-buildall: envcheck executeall convertall
-
-envcheck:
-	python -c "import pkg_resources; pkg_resources.require(open('requirements.txt', mode='r')); print('Your environment is all set!')"
+build: convert
+buildall: convertall
 
 execute:
-	nbcollection execute --timeout=600 ${FLAGS} ${MODIFIED}
+	i=0; \
+	_paths=($(MODIFIED_RQT_PATHS)); \
+	for notebook in ${MODIFIED_NOTEBOOKS}; do \
+		echo Installing requirements from $${_paths[i]}; \
+		python -m pip install --force-reinstall -r $${_paths[i]} > /dev/null; \
+		nbcollection execute --timeout=600 ${FLAGS} $$notebook; \
+		i=$$((i+1)); \
+	done
 
 convert:
-	nbcollection convert ${CONVERTFLAGS} ${FLAGS} ${MODIFIED}
+	i=0; \
+	_paths=($(MODIFIED_RQT_PATHS)); \
+	for notebook in ${MODIFIED_NOTEBOOKS}; do \
+		echo Installing requirements from $${_paths[i]}; \
+		python -m pip install --force-reinstall -r $${_paths[i]} > /dev/null; \
+		nbcollection convert ${CONVERTFLAGS} ${FLAGS} $$notebook; \
+		i=$$((i+1)); \
+	done
 
 executeall:
-	nbcollection execute --timeout=600 ${FLAGS} tutorials
+	i=0; \
+	_paths=(${ALL_RQT_PATHS}); \
+	for notebook in ${ALL_NOTEBOOKS}; do \
+		echo Installing requirements from $${_paths[i]}; \
+		python -m pip install --force-reinstall -r $${_paths[i]} > /dev/null; \
+		nbcollection execute --timeout=600 ${FLAGS} $$notebook; \
+		i=$$((i+1)); \
+	done
 
 convertall:
-	nbcollection convert ${CONVERTFLAGS} ${FLAGS} tutorials
+	i=0; \
+	_paths=($(ALL_RQT_PATHS)); \
+	for notebook in ${ALL_NOTEBOOKS}; do \
+		echo Installing requirements from $${_paths[i]}; \
+		python -m pip install --force-reinstall -r $${_paths[i]} > /dev/null; \
+		nbcollection convert ${CONVERTFLAGS} ${FLAGS} $$notebook; \
+		i=$$((i+1)); \
+	done
 
 clean:
 	rm -rf _build

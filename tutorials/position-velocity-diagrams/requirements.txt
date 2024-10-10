@@ -1,6 +1,5 @@
 astropy
-astroquery>=0.4.8.dev9474  # 2024-09-24 pinned for Gaia column capitalization issue
-matplotlib
 numpy
-reproject
+pvextractor
+matplotlib
 spectral_cube @ git+https://github.com/radio-astro-tools/spectral-cube  # as of: 2024-10-10 for issue with 'distutils'
