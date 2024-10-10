@@ -1,5 +1,7 @@
 default: build
 
+SHELL := /bin/bash
+
 TUTORIALS_MAIN_BRANCH ?= main
 
 # paths to the individual notebooks that have been modified
@@ -45,7 +47,7 @@ executeall:
 		echo $${_paths[i]}; \
 		python -m pip install --force-reinstall -r $${_paths[i]}; \
 		nbcollection execute --timeout=600 ${FLAGS} $$notebook; \
-		i=$$(i+1); \
+		i=$$((i+1)); \
 	done
 
 convertall:
