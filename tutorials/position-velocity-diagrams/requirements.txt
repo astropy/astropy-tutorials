@@ -2,4 +2,4 @@ astropy
 numpy
 pvextractor
 matplotlib
-spectral_cube
+spectral_cube @ git+https://github.com/radio-astro-tools/spectral-cube  # as of: 2021-09-21
