@@ -65,7 +65,7 @@ convertall:
 	for notebook in ${ALL_NOTEBOOKS}; do \
 		echo Installing requirements from $${_paths[i]}; \
 		python -m pip install --force-reinstall -r $${_paths[i]} > /dev/null; \
-		nbcollection convert ${CONVERTFLAGS} ${FLAGS} $$notebook; \
+		nbcollection convert --blah ${CONVERTFLAGS} ${FLAGS} $$notebook; \
 		i=$$((i+1)); \
 	done
 
