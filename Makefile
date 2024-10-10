@@ -17,6 +17,8 @@ CONVERTFLAGS = --make-index --preprocessors=nbconvert.preprocessors.ExtractOutpu
 
 init:
 	python -m pip install -U -r requirements-dev.txt
+	pip install --upgrade ipython ipykernel
+	ipython kernel install --name "python3" --user
 
 build: execute convert
 buildall: executeall convertall
