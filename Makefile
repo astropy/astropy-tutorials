@@ -18,8 +18,8 @@ CONVERTFLAGS = --make-index --preprocessors=nbconvert.preprocessors.ExtractOutpu
 init:
 	python -m pip install -U -r requirements-dev.txt
 
-build: execute convert
-buildall: executeall convertall
+build: convert
+buildall: convertall
 
 execute:
 	i=0; \
@@ -36,7 +36,8 @@ convert:
 	_paths=($(MODIFIED_RQT_PATHS)); \
 	for notebook in ${MODIFIED_NOTEBOOKS}; do \
 		echo Installing requirements from $${_paths[i]}; \
-		nbcollection convert ${CONVERTFLAGS} ${FLAGS} $$notebook; \
+		python -m pip install --force-reinstall -r $${_paths[i]} > /dev/null; \
+		nbcollection convert --timeout=600 ${CONVERTFLAGS} ${FLAGS} $$notebook; \
 		i=$$((i+1)); \
 	done
 
@@ -55,7 +56,8 @@ convertall:
 	_paths=($(ALL_RQT_PATHS)); \
 	for notebook in ${ALL_NOTEBOOKS}; do \
 		echo Installing requirements from $${_paths[i]}; \
-		nbcollection convert ${CONVERTFLAGS} ${FLAGS} $$notebook; \
+		python -m pip install --force-reinstall -r $${_paths[i]} > /dev/null; \
+		nbcollection convert --timeout=600 ${CONVERTFLAGS} ${FLAGS} $$notebook; \
 		i=$$((i+1)); \
 	done
 
