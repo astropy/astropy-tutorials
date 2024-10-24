@@ -42,12 +42,12 @@ repository, organized by the names of the tutorials. These can be opened with
 Jupyter notebook as with any other notebook files.
 
 
-## Run the tutorials on Binder
+## Run the tutorials on Google Colab
 
-You can also get started with a remote environment to run the tutorial notebooks
-in your browser using [Binder](http://mybinder.org)
+You can also get started with a by running the tutorial notebooks
+in your browser using Google Colab:
 
-[![Binder](http://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/astropy/astropy-tutorials/main?filepath=tutorials)
+[![Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/astropy/astropy-tutorials)
 
 
 Contributing tutorial material
