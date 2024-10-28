@@ -14,7 +14,7 @@ more structured and exhaustive view of the Astropy core package.
 To see the tutorials rendered as static web pages, see the [Learn Astropy
 website](https://learn.astropy.org).
 
-To execute the tutorials interactively, either use Google Colab to run the tutorials
+To execute the tutorials interactively, either use Binder to run the tutorials
 remotely or clone this repository to your local machine.
 
 ### Run the tutorials in your browser with Binder
