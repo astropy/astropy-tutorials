@@ -47,7 +47,7 @@ Jupyter notebook as with any other notebook files.
 You can also get started with a remote environment to run the tutorial notebooks
 in your browser using [Binder](http://mybinder.org)
 
-[![Binder](http://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/jeffjennings/astropy-tutorials/binder_build?filepath=tutorials)
+[![Binder](http://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/astropy/astropy-tutorials/main?filepath=tutorials)
 
 
 Contributing tutorial material
