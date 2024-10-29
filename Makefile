@@ -18,10 +18,15 @@ CONVERTFLAGS = --make-index --preprocessors=nbconvert.preprocessors.ExtractOutpu
 init:
 	python -m pip install -U -r requirements-dev.txt
 
+# nbcollection 'convert' also runs 'execute', so just calling 'convert' here
 build: convert
 buildall: convertall
 
+# 'set -e' is used to cause the bash loop to immediately exit on a failure.
+# without this, the github actions workflow can succeed even if commands in these
+# bash loops (installing packages, executing notebooks, converting notebooks) fail
 execute:
+	set -e; \
 	i=0; \
 	_paths=($(MODIFIED_RQT_PATHS)); \
 	for notebook in ${MODIFIED_NOTEBOOKS}; do \
@@ -32,6 +37,7 @@ execute:
 	done
 
 convert:
+	set -e; \
 	i=0; \
 	_paths=($(MODIFIED_RQT_PATHS)); \
 	for notebook in ${MODIFIED_NOTEBOOKS}; do \
@@ -42,6 +48,7 @@ convert:
 	done
 
 executeall:
+	set -e; \
 	i=0; \
 	_paths=(${ALL_RQT_PATHS}); \
 	for notebook in ${ALL_NOTEBOOKS}; do \
@@ -52,6 +59,7 @@ executeall:
 	done
 
 convertall:
+	set -e; \
 	i=0; \
 	_paths=($(ALL_RQT_PATHS)); \
 	for notebook in ${ALL_NOTEBOOKS}; do \
