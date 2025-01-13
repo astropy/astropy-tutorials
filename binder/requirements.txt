@@ -3,9 +3,11 @@ astroquery>=0.4.8.dev9474  # 2024-09-24 pinned for Gaia column capitalization is
 dask
 dust_extinction
 gala
+ipydatagrid
 IPython
 matplotlib
 numpy
+pandas
 pillow
 pvextractor
 radio_beam
