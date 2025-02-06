@@ -1,6 +1,6 @@
 # Astropy Tutorials
 
-This repository contains tutorial IPython notebooks for the
+This repository contains tutorial Jupyter notebooks for the
 [Astropy](http://astropy.org) project. These are typically longer-form,
 narrative presentations of functionality in the [Astropy core
 package](https://github.com/astropy/astropy) and any [affiliated
