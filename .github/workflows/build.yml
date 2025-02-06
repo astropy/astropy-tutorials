@@ -27,10 +27,11 @@ jobs:
           python -m pip install -U pip
           python -m pip install -r requirements-dev.txt
 
-      - name: Execute the notebooks
-        run: |
-          make executeall
-        shell: bash
+      # 'make convertall' also executes the notebooks, so this call is redundant
+      # - name: Execute the notebooks
+      #   run: |
+      #     make executeall
+      #   shell: bash
 
       - name: Convert the notebooks to HTML
         run: |
