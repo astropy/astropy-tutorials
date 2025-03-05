@@ -1,0 +1,6 @@
+astropy=4.2.1
+specutils=1.1
+numpy=1.20.2
+matplotlib=3.3.4
+astroquery=0.4.3
+ipython=7.22.0
