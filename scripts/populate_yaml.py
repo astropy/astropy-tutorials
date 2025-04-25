@@ -2,15 +2,18 @@ import yaml
 
 with open("AUTHORS.md", "r") as f:
     authors = f.read().replace("\n", " ").strip(" ")
+print('authors', authors)
 
 with open("metadata.yaml", "r") as f:
     meta = yaml.load(f, Loader=yaml.SafeLoader)
+print('meta["slug"]', meta['slug'])
 
 # update _config with tutorial-specific metadata
 with open("_config.yaml") as f:
     cfg = yaml.load(f, Loader=yaml.SafeLoader)
 
 cfg["title"] = meta["title"]
+print('cfg["title"]', cfg["title"])
 cfg["author"] = authors
 cfg["repository"]["url"] = f"https://github.com/astropy-learn/{meta['source']}"
 cfg["launch_buttons"]["binderhub_url"] = (
