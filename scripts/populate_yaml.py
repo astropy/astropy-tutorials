@@ -14,7 +14,7 @@ cfg["title"] = meta["title"]
 cfg["author"] = authors
 cfg["repository"]["url"] = f"https://github.com/astropy-learn/{meta['source']}"
 cfg["launch_buttons"]["binderhub_url"] = (
-    f"https://mybinder.org/v2/gh/astropy-learn/{meta['source']}/main?urlpath=%2Fdoc%2Ftree%2F{meta['title']}.ipynb"
+    f"https://mybinder.org/v2/gh/astropy-learn/{meta['source']}/main?urlpath=%2Fdoc%2Ftree%2F{meta['slug']}.ipynb"
 )
 
 # '_config.yaml' will be saved in the target repo, keeping the unmodified template in astropy-tutorials
