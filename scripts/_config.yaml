@@ -1,0 +1,16 @@
+title: 
+author: 
+logo: logo.svg
+execute:
+  execute_notebooks: force
+repository:
+  url: 
+  branch: main/
+html:
+  use_repository_button: true
+  use_issues_button: true
+  use_edit_page_button: true
+launch_buttons:
+  notebook_interface: classic
+  thebe: true
+  binderhub_url: 
