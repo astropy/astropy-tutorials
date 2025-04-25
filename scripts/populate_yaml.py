@@ -17,16 +17,9 @@ cfg["launch_buttons"]["binderhub_url"] = (
     f"https://mybinder.org/v2/gh/astropy-learn/{meta['source']}/main?urlpath=%2Fdoc%2Ftree%2F{meta['title']}.ipynb"
 )
 
+# '_config.yaml' will be saved in the target repo, keeping the unmodified template in astropy-tutorials
 with open("_config.yaml", "w") as f:
     cfg = yaml.dump(cfg, stream=f, default_flow_style=False, sort_keys=False)
 
 # print str for use by execute_convert action
 print(meta["slug"])
-# update github action with metadata
-# with open(".github/workflows/execute_convert.yaml", "w") as f:
-#     wrkflw = yaml.load(f, Loader=yaml.SafeLoader)
-
-# wrkflw['env']['TUTORIAL-SLUG'] = meta["slug"]
-
-# with open(".github/workflows/execute_convert.yaml", "w") as f:
-#     wrkflw = yaml.dump(wrkflw, stream=f, default_flow_style=False, sort_keys=False)
