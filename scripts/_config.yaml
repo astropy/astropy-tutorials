@@ -1,5 +1,5 @@
-title: 
-author: 
+title:
+author:
 logo: logo.svg
 execute:
   execute_notebooks: force
@@ -10,7 +10,9 @@ html:
   use_repository_button: true
   use_issues_button: true
   use_edit_page_button: true
-launch_buttons:
-  notebook_interface: classic
+  analytics:
+    google_analytics_id: "G-ZBXC3EFGGJ"
+launch_buttons: 
+  notebook_interface: jupyterlab
   thebe: true
   binderhub_url: 
