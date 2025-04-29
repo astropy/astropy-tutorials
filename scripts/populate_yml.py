@@ -21,5 +21,5 @@ cfg["launch_buttons"]["binderhub_url"] = (
 with open("_config.yml", "w") as f:
     cfg = yaml.dump(cfg, stream=f, default_flow_style=False, sort_keys=False)
 
-# print str for use by execute_convert action
+# print str for use by subsequent job
 print(meta["slug"])
