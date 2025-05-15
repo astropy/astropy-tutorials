@@ -15,3 +15,6 @@ html:
 launch_buttons: 
   notebook_interface: jupyterlab
   thebe: true
+sphinx:
+  config:
+    html_show_copyright: false
