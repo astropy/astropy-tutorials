@@ -4,7 +4,7 @@ import sys
 slug = sys.argv[1]
 
 book = False
-if os.exists("index.md"):
+if os.exists("index.md") and os.path.getsize("index.md") > 0:
     book = True
 
 if book is True:
