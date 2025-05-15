@@ -15,4 +15,3 @@ html:
 launch_buttons: 
   notebook_interface: jupyterlab
   thebe: true
-  binderhub_url: 
