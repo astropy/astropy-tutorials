@@ -1,6 +1,4 @@
-# Note: these are the requirements *in addition to* those listed in the unique
-# requirements for each set of notebooks - see astropy-tutorials/tutorials/*/requirements.txt
-gitpython
-git+https://github.com/astropy/nbcollection
+jupyter-book
 pre-commit
-ipykernel
+playwright
+pyppeteer
