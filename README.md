@@ -1,12 +1,5 @@
 # Astropy Tutorials
 
-## Contributing tutorial material
+This repo is used for discussion of topics relating to Learn Astropy, but not specific to a single tutorial. Please open an issue to raise a topic. If you would instead like to raise an issue about a specific tutorial, please do so in that tutorial's `tutorial--*` respository. If you would like to contribute a new tutorial, see the [contribution guide](https://learn.astropy.org/contributing/).
 
-We are always interested in incorporating new tutorials into Learn Astropy and
-the Astropy Tutorials series. We welcome tutorials covering astro-relevant topics; they
-do not need to use the Astropy package in order to be hosted or indexed here.
-If you have astronomy tutorials that you would like to contribute,
-or if you have a separate tutorial series that you would like indexed by the
-Learn Astropy website, see the [Contributing
-Guide](https://learn.astropy.org/contributing) on the Learn Astropy website for
-information on how to get started.
+For developers, this repo also contains scripts and resources used across all tutorials - see the [dev guide](https://github.com/astropy-learn/dev-guide). 
