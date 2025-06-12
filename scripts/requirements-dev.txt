@@ -1,4 +1,5 @@
 jupyter-book
 pre-commit
 playwright
+pre-commit
 pyppeteer
